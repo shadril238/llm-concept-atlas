@@ -1,0 +1,29 @@
+---
+title: Transformer
+description: The architecture behind many modern language models.
+kind: concept
+conceptId: transformer
+chapter: 3
+part: foundations
+summary: A transformer processes token representations through repeated attention and feed-forward layers.
+parent: chapter-03
+prerequisites: [token-embedding]
+related: [attention, decoder-only, encoder-only]
+level: intermediate
+tags: [architecture]
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+
+<ConceptPrimer id="transformer" />
+
+## Picture it
+
+Token vectors enter a stack of blocks. In each block, tokens exchange information through attention and then pass through further numerical transformations.
+
+## Why it matters
+
+Understanding the flow through one block makes many model features less mysterious, including context, generation, and caching.
+
+<ConceptConnections id="transformer" />

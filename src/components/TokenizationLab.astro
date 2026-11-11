@@ -1,0 +1,106 @@
+<section class="token-lab" data-token-lab aria-labelledby="token-lab-title">
+  <div class="token-lab-head">
+    <div>
+      <span class="eyebrow">Try it yourself</span>
+      <h3 id="token-lab-title">Change the text. Watch the pieces.</h3>
+    </div>
+    <button class="token-lab-reset" type="button" data-reset>Reset example</button>
+  </div>
+  <p class="token-lab-intro">These are three <strong>teaching rules</strong>, not trained tokenizers. Compare how the same text can become a different number of pieces. The IDs below are invented locally.</p>
+
+  <label class="token-lab-label" for="token-lab-input">Text to split</label>
+  <textarea id="token-lab-input" data-input rows="2" maxlength="120" spellcheck="false">Language models learn patterns.</textarea>
+
+  <fieldset class="token-lab-modes">
+    <legend>Choose a splitting rule</legend>
+    <label><input type="radio" name="token-lab-mode" value="words" checked /> <span>Word-like</span></label>
+    <label><input type="radio" name="token-lab-mode" value="subwords" /> <span>Toy subword</span></label>
+    <label><input type="radio" name="token-lab-mode" value="characters" /> <span>Characters</span></label>
+  </fieldset>
+
+  <p class="token-lab-rule" data-rule>Word-like rule: groups letters and numbers; punctuation becomes a separate piece.</p>
+  <div class="token-lab-result" aria-live="polite" aria-atomic="true">
+    <p class="token-lab-count" data-count></p>
+    <div class="token-lab-pieces" data-pieces></div>
+  </div>
+  <p class="token-lab-foot">Spaces are hidden in the word-like and toy subword views. The character view shows them as <code>␠</code>. Real tokenizers use learned vocabularies and can split this text differently.</p>
+</section>
+
+<script>
+  const sample = 'Language models learn patterns.';
+  const rules = {
+    words: 'Word-like rule: groups letters and numbers; punctuation becomes a separate piece.',
+    subwords: 'Toy subword rule: first makes word-like pieces, then splits long words into smaller chunks. ## marks a continuation.',
+    characters: 'Character rule: shows one Unicode code point per piece, including visible space markers.',
+  };
+
+  function wordPieces(input: string): string[] {
+    return input.match(/[\p{L}\p{N}]+|[^\s]/gu) ?? [];
+  }
+
+  function splitToySubwords(input: string): string[] {
+    return wordPieces(input).flatMap((piece) => {
+      const letters = Array.from(piece);
+      if (letters.length <= 6 || !/^[\p{L}\p{N}]+$/u.test(piece)) return [piece];
+      const chunks = [letters.slice(0, 4).join('')];
+      for (let i = 4; i < letters.length; i += 3) {
+        chunks.push(`##${letters.slice(i, i + 3).join('')}`);
+      }
+      return chunks;
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-token-lab]').forEach((lab) => {
+    const input = lab.querySelector<HTMLTextAreaElement>('[data-input]');
+    const pieces = lab.querySelector<HTMLElement>('[data-pieces]');
+    const count = lab.querySelector<HTMLElement>('[data-count]');
+    const rule = lab.querySelector<HTMLElement>('[data-rule]');
+    const reset = lab.querySelector<HTMLButtonElement>('[data-reset]');
+    if (!input || !pieces || !count || !rule || !reset) return;
+
+    function render() {
+      const mode = lab.querySelector<HTMLInputElement>('input[name="token-lab-mode"]:checked')?.value ?? 'words';
+      const result = mode === 'subwords'
+        ? splitToySubwords(input!.value)
+        : mode === 'characters'
+          ? Array.from(input!.value).map((character) => character === ' ' ? '␠' : character === '\n' ? '↵' : character)
+          : wordPieces(input!.value);
+
+      rule!.textContent = rules[mode as keyof typeof rules];
+      count!.textContent = `${result.length} illustrative ${result.length === 1 ? 'piece' : 'pieces'}`;
+      pieces!.replaceChildren();
+
+      if (!result.length) {
+        const empty = document.createElement('span');
+        empty.className = 'token-lab-empty';
+        empty.textContent = 'Type some text to see its pieces.';
+        pieces!.append(empty);
+        return;
+      }
+
+      const ids = new Map<string, number>();
+      for (const piece of result) {
+        if (!ids.has(piece)) ids.set(piece, 1000 + ids.size);
+        const chip = document.createElement('span');
+        chip.className = 'token-lab-chip';
+        const label = document.createElement('strong');
+        label.textContent = piece;
+        const id = document.createElement('small');
+        id.textContent = String(ids.get(piece));
+        chip.append(label, id);
+        pieces!.append(chip);
+      }
+    }
+
+    input.addEventListener('input', render);
+    lab.querySelectorAll<HTMLInputElement>('input[name="token-lab-mode"]').forEach((radio) => radio.addEventListener('change', render));
+    reset.addEventListener('click', () => {
+      input.value = sample;
+      const first = lab.querySelector<HTMLInputElement>('input[name="token-lab-mode"][value="words"]');
+      if (first) first.checked = true;
+      render();
+      input.focus();
+    });
+    render();
+  });
+</script>

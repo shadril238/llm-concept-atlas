@@ -1,0 +1,29 @@
+---
+title: Token Embedding
+description: A learned vector associated with a token ID.
+kind: concept
+conceptId: token-embedding
+chapter: 2
+part: foundations
+summary: A token embedding is a learned vector that gives a token ID a starting numerical representation.
+parent: chapter-02
+prerequisites: [token, vocabulary]
+related: [text-embedding, transformer]
+level: beginner
+tags: [embeddings, tokens]
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+
+<ConceptPrimer id="token-embedding" />
+
+## Picture it
+
+The token ID is like an index into a table. Looking up that row returns a vector of numbers that the model can process.
+
+## Why it matters
+
+This is the bridge from symbolic text pieces to numerical computation. Later transformer layers change the representation using context.
+
+<ConceptConnections id="token-embedding" />

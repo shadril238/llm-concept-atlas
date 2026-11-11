@@ -1,0 +1,29 @@
+---
+title: Representation Model
+description: A language model that turns input into useful features or vectors.
+kind: concept
+conceptId: representation-model
+chapter: 1
+part: foundations
+summary: A representation model encodes language into features useful for tasks such as classification and search.
+parent: llm
+prerequisites: [llm]
+related: [encoder-only, text-embedding, generative-model]
+level: beginner
+tags: [models, embeddings]
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+
+<ConceptPrimer id="representation-model" />
+
+## Picture it
+
+Instead of writing a reply, the model reads “The film was delightful” and returns a vector or a sentiment label. The output describes the input in a form another system can use.
+
+## Why it matters
+
+Many language tasks need a good representation, not generated prose. Classification, clustering, and retrieval often start here.
+
+<ConceptConnections id="representation-model" />

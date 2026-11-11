@@ -1,0 +1,29 @@
+---
+title: Self-Attention
+description: Attention within a single sequence of tokens.
+kind: concept
+conceptId: self-attention
+chapter: 3
+part: foundations
+summary: Self-attention lets positions in one sequence use information from other positions in that sequence.
+parent: attention
+prerequisites: [attention]
+related: [query-key-value, transformer]
+level: intermediate
+tags: [architecture, attention]
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+
+<ConceptPrimer id="self-attention" />
+
+## Picture it
+
+Each token position produces signals that help determine which other positions contribute to its updated representation.
+
+## Why it matters
+
+This is a central mechanism inside transformer blocks. In a decoder, a causal mask restricts which positions a token may use during generation.
+
+<ConceptConnections id="self-attention" />

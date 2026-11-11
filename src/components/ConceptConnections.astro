@@ -1,0 +1,25 @@
+---
+import { getAtlasGraph, type AtlasNode } from '../lib/atlas';
+const { id } = Astro.props;
+const graph = await getAtlasGraph();
+const node = graph.nodes.find((item) => item.id === id);
+if (!node || node.kind !== 'concept') throw new Error(`Concept page ${id} is not in the atlas`);
+const getNode = (key: string): AtlasNode => {
+  const found = graph.nodes.find((item) => item.id === key);
+  if (!found) throw new Error(`Unknown concept connection: ${key}`);
+  return found;
+};
+const children = graph.nodes.filter((item) => item.parent === id);
+const prerequisites = node.prerequisites.map(getNode);
+const seen = new Set([id, ...children.map((item) => item.id), ...prerequisites.map((item) => item.id)]);
+const related = node.related.filter((key) => !seen.has(key)).map(getNode);
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const url = (path: string) => base + path.replace(/^\/+/, '');
+---
+
+<aside class="concept-connections" aria-label="Concept connections">
+  <div class="connections-heading"><span class="eyebrow">Where to go next</span><a href={url('atlas/')}>View the map ↗</a></div>
+  {prerequisites.length > 0 && <div class="connection-row"><span>Learn before</span><div>{prerequisites.map((item) => <a href={url(item.href)}>{item.title}</a>)}</div></div>}
+  {children.length > 0 && <div class="connection-row"><span>Go deeper</span><div>{children.map((item) => <a href={url(item.href)}>{item.title}</a>)}</div></div>}
+  {related.length > 0 && <div class="connection-row"><span>Also explore</span><div>{related.map((item) => <a href={url(item.href)}>{item.title}</a>)}</div></div>}
+</aside>

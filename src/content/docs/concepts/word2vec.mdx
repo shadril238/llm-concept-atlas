@@ -1,0 +1,29 @@
+---
+title: Word2vec
+description: A family of methods for learning vectors for words.
+kind: concept
+conceptId: word2vec
+chapter: 2
+part: foundations
+summary: Word2vec learns word vectors from patterns of neighboring words in text.
+parent: chapter-02
+prerequisites: [token-embedding]
+related: [text-embedding, representation-model]
+level: intermediate
+tags: [embeddings, training]
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+
+<ConceptPrimer id="word2vec" />
+
+## Picture it
+
+Words that occur in similar contexts are trained to have related vectors. The same learned vector is then used for a word across different sentences.
+
+## Why it matters
+
+Word2vec is a useful step in the history of embeddings. It also shows why later context-aware models were needed: a single word can have several meanings.
+
+<ConceptConnections id="word2vec" />

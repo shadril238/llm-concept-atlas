@@ -1,0 +1,29 @@
+---
+title: Text Embedding
+description: A vector representing a sentence or document.
+kind: concept
+conceptId: text-embedding
+chapter: 2
+part: foundations
+summary: A text embedding represents an entire piece of text as a vector that can be compared with other vectors.
+parent: chapter-02
+prerequisites: [token-embedding]
+related: [representation-model, word2vec, semantic-search]
+level: beginner
+tags: [embeddings, retrieval]
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+
+<ConceptPrimer id="text-embedding" />
+
+## Picture it
+
+Embed a question and several documents. Documents with nearby vectors may be good candidates to answer the question, even when they use different words.
+
+## Why it matters
+
+Text embeddings support semantic search, clustering, recommendations, and other comparison tasks.
+
+<ConceptConnections id="text-embedding" />

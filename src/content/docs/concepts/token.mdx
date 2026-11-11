@@ -1,0 +1,28 @@
+---
+title: Token
+description: A unit of text represented by a tokenizer's vocabulary.
+kind: concept
+conceptId: token
+chapter: 2
+part: foundations
+summary: A token is a unit of text that a tokenizer maps to an ID for a model to process.
+parent: chapter-02
+related: [tokenization, vocabulary, token-embedding]
+level: beginner
+tags: [tokens, foundations]
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+
+<ConceptPrimer id="token" />
+
+## Picture it
+
+The sentence “LLMs are useful” may become several token pieces. Those pieces depend on the tokenizer: a token is not always one word.
+
+## Why it matters
+
+Models receive token IDs, not raw letters. Token counts affect context length, speed, and cost in many applications.
+
+<ConceptConnections id="token" />

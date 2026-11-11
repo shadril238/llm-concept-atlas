@@ -1,0 +1,29 @@
+---
+title: Generative Model
+description: A model that produces new content from a prompt or context.
+kind: concept
+conceptId: generative-model
+chapter: 1
+part: foundations
+summary: A generative language model produces new text by predicting a sequence of output tokens.
+parent: llm
+prerequisites: [llm]
+related: [decoder-only, decoding, representation-model]
+level: beginner
+tags: [models, generation]
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+
+<ConceptPrimer id="generative-model" />
+
+## Picture it
+
+Start with “Write a two-line summary of this review.” The model repeatedly chooses a next token until it reaches a stopping point.
+
+## Why it matters
+
+Generation powers drafting, summarization, and question answering. Its output is shaped by both the prompt and the decoding method.
+
+<ConceptConnections id="generative-model" />

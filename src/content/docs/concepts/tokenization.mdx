@@ -1,0 +1,155 @@
+---
+title: Tokenization
+description: The process of splitting text into model-readable units.
+kind: concept
+conceptId: tokenization
+chapter: 2
+part: foundations
+summary: Tokenization turns text into a sequence of token IDs using a particular vocabulary and set of rules.
+parent: chapter-02
+prerequisites: [token]
+related: [vocabulary, token-embedding, language-ai]
+level: beginner
+lessonStatus: full
+tags: [tokens, foundations]
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import TokenDiagram from '../../../components/TokenDiagram.astro';
+import TokenizationLab from '../../../components/TokenizationLab.astro';
+
+<ConceptPrimer id="tokenization" />
+
+**Before you start:** know what a [token](/llm-concept-atlas/concepts/token/) is. You can return here after reading that short introduction.
+
+## The idea in plain language
+
+Imagine a model receiving the sentence **“Language models learn patterns.”** It cannot work directly with the letters on the page. A tokenizer first turns that text into a sequence of pieces, then assigns each piece a number called a **token ID**. The model looks up those IDs to begin its numerical calculations.
+
+A token might be a whole word, part of a word, a punctuation mark, or a byte-like piece. **One token does not always equal one word.** The split depends on the tokenizer paired with the model.
+
+The two directions are useful to keep in mind:
+
+```text
+Input:   text → token pieces → token IDs → model
+Output:  model's token IDs → token pieces → readable text
+```
+
+## See a worked example
+
+<TokenDiagram />
+
+The colored pieces and IDs above are **invented for teaching**. They show the stages, not the output of a trained tokenizer. A real tokenizer might split “Language” into several pieces or combine a space with the piece after it.
+
+Here is what to trace in the diagram:
+
+1. **Text enters.** The input is still a normal string that a person can read.
+2. **The tokenizer chooses pieces.** It follows its own vocabulary and rules. Punctuation and spaces may be represented differently by different tokenizers.
+3. **Each piece receives an ID.** The model receives integers, not the visible colored blocks.
+4. **The model uses those IDs.** An embedding table turns the IDs into vectors. Later layers use those vectors together with context.
+
+Generation runs the last step in reverse: the model predicts an ID, and the tokenizer decodes IDs back into visible text. This is why you often see generated text appear piece by piece.
+
+### Try changing the split
+
+<TokenizationLab />
+
+Type a longer word such as **unbelievableness**, switch between the three rules, and watch the number of pieces change. In the toy subword view, `##` means “continue the same word”; the displayed IDs simply label pieces in this demo. The real BERT tokenizer in the code exercise below has its own learned vocabulary and IDs.
+
+## How tokenization works
+
+A tokenizer has two parts that are easy to confuse. **Training a tokenizer** chooses its vocabulary and splitting rules from a text collection. **Using a trained tokenizer** applies those fixed choices to new text. The vocabulary can reflect the data it was trained on: a tokenizer built around English prose, programming code, or several languages may split the same input differently.
+
+The path from text to model input usually includes these operations, although their order and details vary by tokenizer:
+
+| Stage | What happens | Why it matters |
+| --- | --- | --- |
+| Normalization | Text may be lowercased or otherwise standardized. Some tokenizers preserve the original form. | An uncased tokenizer may treat `Apple` and `apple` alike. |
+| Segmentation | The text is divided into pieces from a learned vocabulary. | Common strings may be one piece; rare strings may need several. |
+| ID lookup | Every chosen piece is replaced with its vocabulary ID. | These are the integers given to the model. |
+| Special tokens | Task markers may be added, such as start, end, separator, or padding tokens. | They tell the model where text or task boundaries are. |
+
+Most modern language models use **subword** pieces. This is a useful compromise: frequent words can be compact, while less familiar words can be assembled from smaller pieces. Three common subword algorithms are **byte pair encoding (BPE)**, **WordPiece**, and **Unigram**. They differ in how they learn and select pieces; knowing the exact algorithm is less important at first than understanding the shared goal. A model's tokenizer also has a vocabulary size, special tokens, and training data that shape its behavior. [Hugging Face's tokenizer overview](https://huggingface.co/docs/transformers/en/tokenizer_summary) explains the algorithms in more depth.
+
+### Why not split on spaces?
+
+Space splitting fails on punctuation, unfamiliar words, languages without spaces between words, and formatting such as code. It also cannot tell a model what numerical ID to use for each piece. A trained tokenizer solves a more specific problem: it represents text with a vocabulary the paired model learned to use.
+
+| Unit | Simple intuition | Main trade-off |
+| --- | --- | --- |
+| Word | One known word per piece | Unseen words are difficult to represent with a fixed word vocabulary. |
+| Subword | Frequent words and reusable word parts | The split can look surprising and depends on training data. |
+| Character | One character per piece | Sequences become longer, so the model must process more positions. |
+| Byte | Represent text through encoded bytes | Can cover many characters, but a visible character may need several pieces. |
+
+## Implement it with a real tokenizer
+
+This example downloads **only a tokenizer**, not the BERT model weights. It runs on a CPU. Install the library once, then save and run the Python code:
+
+```bash
+python -m pip install transformers
+```
+
+```python
+from transformers import AutoTokenizer
+
+model_id = "google-bert/bert-base-uncased"
+tokenizer = AutoTokenizer.from_pretrained(model_id)
+
+for text in ["Language models learn patterns.", "unbelievableness"]:
+    encoded = tokenizer(text)
+    ids = encoded["input_ids"]
+    pieces = tokenizer.convert_ids_to_tokens(ids)
+
+    print(f"\nInput: {text}")
+    print("Pieces and IDs:", list(zip(pieces, ids)))
+    print("Token count:", len(ids))
+    print("Decoded:", tokenizer.decode(ids, skip_special_tokens=True))
+```
+
+Look for three things in the output. BERT adds boundary markers such as `[CLS]` and `[SEP]`; the `uncased` tokenizer lowercases input; and the unusual second word is likely to split into multiple pieces. Pieces beginning with `##` continue the same word in BERT's WordPiece display. The printed IDs are specific to this tokenizer. [The model card](https://huggingface.co/google-bert/bert-base-uncased) and [AutoTokenizer documentation](https://huggingface.co/docs/transformers/model_doc/auto) describe the tokenizer used here.
+
+`AutoTokenizer.from_pretrained` loads the tokenizer paired with the named model. Calling `tokenizer(text)` produces an encoded result; `input_ids` is the sequence the model would use. `convert_ids_to_tokens` lets you inspect the visible pieces, and `decode` turns IDs back into readable text. The count includes BERT's special tokens, so it can be larger than the number of visible word pieces in the original sentence.
+
+Change the inputs to a sentence in another language, a line of Python, and text with emoji. Compare the number and appearance of the pieces. This small experiment reveals why tokenizer choice affects different kinds of text differently.
+
+## Why it matters
+
+Tokenization is a practical design decision, not only a preprocessing detail:
+
+- **Context limits:** a model's context size is measured in tokens. Two passages with the same number of words can use different numbers of tokens, so count tokens before trimming or chunking long input.
+- **Retrieval and RAG:** a retrieved passage must fit alongside the user's question and any instructions. Token counts help decide how much evidence can be included.
+- **Code and multilingual text:** whitespace, punctuation, emoji, and different scripts can split differently. Inspect the actual tokenizer before making assumptions about length or coverage.
+- **Model compatibility:** use the tokenizer associated with the model. The same integer ID can mean a different piece in another vocabulary.
+- **Output interpretation:** generated text arrives as token IDs before it becomes readable text. Several output tokens can make one visible word.
+
+## Limits and common mistakes
+
+- **“One token is one word.”** A token can be a word, subword, punctuation piece, or other unit.
+- **“The colored diagram is an exact tokenizer output.”** It is a teaching model. Use the code above to inspect actual output.
+- **“Decoding always reconstructs the exact original string.”** Normalization and unknown-token behavior can discard distinctions, such as capitalization in an uncased tokenizer.
+- **“Fewer tokens always means a better model.”** Token count is one factor. Model quality also depends on architecture, training, data, and the task.
+
+## Check your understanding
+
+<details>
+  <summary>Why can two tokenizers give different token counts for the same sentence?</summary>
+  <p>They can use different algorithms, vocabulary sizes, special tokens, and training data. Each of those choices can change the pieces selected for the same text.</p>
+</details>
+
+<details>
+  <summary>What does the model receive: the original text, token pieces, or token IDs?</summary>
+  <p>The tokenizer supplies token IDs. The model then looks up numerical representations for those IDs.</p>
+</details>
+
+<details>
+  <summary>Why might a RAG system count tokens before sending retrieved passages to a model?</summary>
+  <p>The question, instructions, and passages share a finite context window. Counting tokens helps the system choose evidence that fits.</p>
+</details>
+
+## Continue learning
+
+Next, explore the [vocabulary](/llm-concept-atlas/concepts/vocabulary/) that maps pieces to IDs, then [token embeddings](/llm-concept-atlas/concepts/token-embedding/) that turn IDs into starting vectors. Chapter 2 of *Hands-On Large Language Models* develops both ideas and provides [official runnable notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter02). The atlas explanation and diagram here are original.
+
+<ConceptConnections id="tokenization" />

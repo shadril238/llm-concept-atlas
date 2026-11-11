@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import { chapters, parts } from '../data/book-map';
+const { number } = Astro.props;
+const chapter = chapters.find((item) => item.number === number);
+if (!chapter) throw new Error(`Unknown chapter: ${number}`);
+const part = parts.find((item) => item.id === chapter.part);
+const entries = await getCollection('docs');
+const concepts = entries.filter((entry) => entry.data.kind === 'concept' && entry.data.chapter === number).sort((a,b) => a.data.title.localeCompare(b.data.title));
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<div class={`chapter-intro part-${chapter.part}`}>
+  <span class="eyebrow">Part {part?.number} · Chapter {String(number).padStart(2, '0')}</span>
+  <p>{chapter.summary}</p>
+  <a href={`${base}parts/${chapter.part}/`}>← Back to {part?.shortTitle}</a>
+</div>
+
+<section class="chapter-section">
+  <div class="section-heading"><span class="eyebrow">Concepts to explore</span><h2>Start with the essentials</h2></div>
+  {concepts.length > 0 ? <div class="concept-card-grid">
+    {concepts.map((entry) => <a class="concept-card" href={`${base}concepts/${entry.data.conceptId}/`}>
+      <span class="concept-card-kind">Concept</span><h3>{entry.data.title}</h3><p>{entry.data.summary}</p><span class="text-arrow">Read the note →</span>
+    </a>)}
+  </div> : <p class="quiet-note">Concept notes for this chapter are being developed. Use the topic map below as a reading guide.</p>}
+</section>
+
+<section class="chapter-section">
+  <div class="section-heading"><span class="eyebrow">Chapter map</span><h2>Topics in this chapter</h2></div>
+  <ol class="topic-list">{chapter.topics.map((topic) => <li>{topic}</li>)}</ol>
+</section>
+
+<div class="source-note">This is an independent study guide. For the full treatment and runnable chapter notebook, see <em>Hands-On Large Language Models</em> and the <a href={`https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter${String(number).padStart(2, '0')}`}>authors' official code</a>.</div>

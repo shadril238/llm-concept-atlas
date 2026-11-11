@@ -1,0 +1,29 @@
+---
+title: Decoder-Only Model
+description: A transformer model that generates a sequence from left to right.
+kind: concept
+conceptId: decoder-only
+chapter: 1
+part: foundations
+summary: A decoder-only model uses earlier tokens to predict the next token in a sequence.
+parent: generative-model
+prerequisites: [generative-model]
+related: [encoder-only, decoding, kv-cache]
+level: intermediate
+tags: [architecture, generation]
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+
+<ConceptPrimer id="decoder-only" />
+
+## Picture it
+
+Given “The cat sat on the,” the model estimates a distribution over possible next tokens. It cannot use a future token that has not been generated yet.
+
+## Why it matters
+
+This next-token process is the core of many text-generation systems.
+
+<ConceptConnections id="decoder-only" />

@@ -1,0 +1,29 @@
+---
+title: Decoding and Sampling
+description: Choosing output tokens from a model's predictions.
+kind: concept
+conceptId: decoding
+chapter: 3
+part: foundations
+summary: Decoding turns a model's next-token probability distribution into a selected token.
+parent: chapter-03
+prerequisites: [generative-model, transformer]
+related: [decoder-only, kv-cache]
+level: intermediate
+tags: [generation]
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+
+<ConceptPrimer id="decoding" />
+
+## Picture it
+
+The model may assign different probabilities to “cat,” “dog,” and “bird” as the next token. A decoding rule determines which token is chosen.
+
+## Why it matters
+
+Changing the selection rule changes how predictable or varied generated text can be, even with the same model and prompt.
+
+<ConceptConnections id="decoding" />

@@ -1,0 +1,29 @@
+---
+title: Attention
+description: How a token weighs information from other positions.
+kind: concept
+conceptId: attention
+chapter: 3
+part: foundations
+summary: Attention lets a token combine information from other relevant token positions.
+parent: transformer
+prerequisites: [transformer]
+related: [self-attention, query-key-value, kv-cache]
+level: intermediate
+tags: [architecture, attention]
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+
+<ConceptPrimer id="attention" />
+
+## Picture it
+
+In “The dog chased the ball because it was excited,” attention can help the representation of “it” use information from earlier words. A heatmap can show the relative weights for one head in one layer.
+
+## Why it matters
+
+Attention is one way transformer tokens exchange context. A bright heatmap cell is a weight in a computation, not a complete explanation of a model's reasoning.
+
+<ConceptConnections id="attention" />

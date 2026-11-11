@@ -1,0 +1,29 @@
+---
+title: Vocabulary
+description: The set of token IDs a tokenizer knows how to produce.
+kind: concept
+conceptId: vocabulary
+chapter: 2
+part: foundations
+summary: A tokenizer's vocabulary is its inventory of token pieces and their assigned IDs.
+parent: tokenization
+prerequisites: [tokenization]
+related: [token, token-embedding]
+level: beginner
+tags: [tokens]
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+
+<ConceptPrimer id="vocabulary" />
+
+## Picture it
+
+Imagine a dictionary where each entry is a text piece paired with an integer. The tokenizer looks up a sequence of pieces, and the model receives their integer IDs.
+
+## Why it matters
+
+The vocabulary determines which pieces are readily available. Different tokenizers can represent the same text with different numbers of tokens.
+
+<ConceptConnections id="vocabulary" />

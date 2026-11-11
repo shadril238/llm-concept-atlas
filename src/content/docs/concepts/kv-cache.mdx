@@ -1,0 +1,29 @@
+---
+title: KV Cache
+description: Reuse of past attention calculations during generation.
+kind: concept
+conceptId: kv-cache
+chapter: 3
+part: foundations
+summary: A KV cache stores earlier key and value vectors so generation need not recompute them for every new token.
+parent: transformer
+prerequisites: [attention]
+related: [query-key-value, decoding, decoder-only]
+level: intermediate
+tags: [architecture, generation]
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+
+<ConceptPrimer id="kv-cache" />
+
+## Picture it
+
+After generating one token, a decoder keeps the keys and values from earlier positions. On the next step it computes only what is new and consults the stored vectors.
+
+## Why it matters
+
+Caching speeds up repeated decoding steps, while using memory that grows with the context kept for generation.
+
+<ConceptConnections id="kv-cache" />

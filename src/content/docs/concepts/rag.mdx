@@ -1,0 +1,29 @@
+---
+title: Retrieval-Augmented Generation
+description: Generating an answer using retrieved source material.
+kind: concept
+conceptId: rag
+chapter: 8
+part: applications
+summary: RAG retrieves relevant information and supplies it as context for a model's generated answer.
+parent: chapter-08
+prerequisites: [semantic-search]
+related: [generative-model, text-embedding]
+level: beginner
+tags: [retrieval, generation, applications]
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+
+<ConceptPrimer id="rag" />
+
+## Picture it
+
+For a question about a company's policy, the system first retrieves relevant policy passages. The generator then answers using those passages as context, ideally showing sources the reader can inspect.
+
+## Why it matters
+
+RAG connects a model to information outside its training data. Its quality depends on retrieval, context selection, generation, and evaluation together.
+
+<ConceptConnections id="rag" />

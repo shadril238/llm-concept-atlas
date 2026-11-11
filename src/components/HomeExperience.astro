@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import { parts } from '../data/book-map';
+const entries = await getCollection('docs');
+const conceptCount = entries.filter((entry) => entry.data.kind === 'concept').length;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<div class="atlas-home">
+  <section class="home-hero" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <span class="hero-kicker"><span class="kicker-mark"></span> An illustrated field guide to language models</span>
+      <h1 id="hero-title">Find the idea.<br /><em>See how it works.</em></h1>
+      <p>Move from unfamiliar terms to a clear mental model. Follow a learning path, inspect a visual, and see how each idea connects to the next.</p>
+      <div class="hero-actions"><a class="primary-button" href={`${base}concepts/tokenization/`}>Start with tokenization <span aria-hidden="true">↗</span></a><a class="secondary-button" href={`${base}atlas/`}>Explore the atlas <span aria-hidden="true">→</span></a></div>
+      <div class="hero-facts"><span><strong>3</strong> parts</span><i></i><span><strong>12</strong> chapters</span><i></i><span><strong>{conceptCount}</strong> concept notes</span></div>
+    </div>
+    <div class="hero-visual" aria-label="A visual path from text through tokens and vectors to an answer">
+      <div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div>
+      <div class="visual-card visual-input"><small>01 / INPUT</small><strong>“The moon is…”</strong><span>Natural language</span></div>
+      <div class="visual-flow flow-a" aria-hidden="true">······→</div>
+      <div class="visual-card visual-tokens"><small>02 / TOKENS</small><div class="visual-pills"><b>The</b><b>moon</b><b>is</b></div><span>Pieces become IDs</span></div>
+      <div class="visual-flow flow-b" aria-hidden="true">······→</div>
+      <div class="visual-card visual-output"><small>03 / MODEL</small><strong>bright <span>✦</span></strong><span>Context shapes the next token</span></div>
+      <div class="visual-annotation">Zoom in on any step<br /><span>to understand the whole.</span></div>
+    </div>
+  </section>
+
+  <section class="home-section" aria-labelledby="path-heading">
+    <div class="home-section-heading"><div><span class="eyebrow">Choose your route</span><h2 id="path-heading">A map for every starting point.</h2></div><p>Begin with the mechanism, jump to an application, or follow the training story. Each route keeps the next idea in sight.</p></div>
+    <div class="route-grid">
+      {parts.map((part) => <a class={`route-card part-${part.id}`} href={`${base}parts/${part.id}/`}>
+        <span class="route-index">PART {part.number} <span>↗</span></span><div class="route-symbol" aria-hidden="true">{part.id === 'foundations' ? '◎' : part.id === 'applications' ? '⌁' : '✳'}</div>
+        <h3>{part.shortTitle}</h3><p>{part.summary}</p><small>{part.chapters.length} chapters <span>·</span> Explore pathway</small>
+      </a>)}
+    </div>
+  </section>
+
+  <section class="story-panel" aria-labelledby="story-heading">
+    <div class="story-lead"><span class="eyebrow">One sentence, many ideas</span><h2 id="story-heading">What happens when a model reads?</h2><p>Take a short sentence and trace its journey. The same chain introduces the terms you will see throughout the book.</p><a href={`${base}chapters/foundations/02/`}>Explore the foundations <span aria-hidden="true">→</span></a></div>
+    <div class="story-steps">
+      <a href={`${base}concepts/tokenization/`}><b>01</b><span><strong>Split the text</strong><small>Tokenization</small></span><i>↗</i></a>
+      <a href={`${base}concepts/token-embedding/`}><b>02</b><span><strong>Give pieces a shape</strong><small>Token embeddings</small></span><i>↗</i></a>
+      <a href={`${base}concepts/attention/`}><b>03</b><span><strong>Use the context</strong><small>Attention</small></span><i>↗</i></a>
+      <a href={`${base}concepts/decoding/`}><b>04</b><span><strong>Choose what comes next</strong><small>Decoding</small></span><i>↗</i></a>
+    </div>
+  </section>
+
+  <section class="home-footer-callout"><div><span class="eyebrow">The big picture</span><h2>Every concept has a place.</h2><p>Browse the atlas to see the book's hierarchy and the first set of connected concepts.</p></div><a class="primary-button" href={`${base}atlas/`}>Open the concept atlas <span aria-hidden="true">↗</span></a></section>
+  <p class="independent-note">An independent learning companion inspired by <em>Hands-On Large Language Models</em> by Jay Alammar and Maarten Grootendorst. <a href="https://github.com/HandsOnLLM/Hands-On-Large-Language-Models">Visit the authors' official notebooks ↗</a></p>
+</div>

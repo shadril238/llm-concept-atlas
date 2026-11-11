@@ -1,0 +1,29 @@
+---
+title: Queries, Keys, and Values
+description: The three vector roles used in an attention calculation.
+kind: concept
+conceptId: query-key-value
+chapter: 3
+part: foundations
+summary: Queries and keys determine attention weights; values provide the information combined using those weights.
+parent: self-attention
+prerequisites: [self-attention]
+related: [attention, kv-cache]
+level: intermediate
+tags: [architecture, attention]
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+
+<ConceptPrimer id="query-key-value" />
+
+## Picture it
+
+A query from one position is compared with keys from available positions. Those scores become weights, which are used to combine the corresponding value vectors.
+
+## Why it matters
+
+Separating the three roles makes the attention calculation easier to trace and explains what a KV cache stores.
+
+<ConceptConnections id="query-key-value" />

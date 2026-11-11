@@ -1,0 +1,29 @@
+---
+title: Encoder-Only Model
+description: A transformer model built to form contextual representations of input text.
+kind: concept
+conceptId: encoder-only
+chapter: 1
+part: foundations
+summary: An encoder-only model reads an input sequence to build context-aware representations of its tokens.
+parent: representation-model
+prerequisites: [representation-model]
+related: [decoder-only, text-embedding]
+level: intermediate
+tags: [architecture, models]
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+
+<ConceptPrimer id="encoder-only" />
+
+## Picture it
+
+In “The bank is beside the river,” the representation of “bank” can use words on both sides to express the intended meaning.
+
+## Why it matters
+
+Encoder-style models are well suited to tasks that inspect or compare input text, such as classification and search.
+
+<ConceptConnections id="encoder-only" />
