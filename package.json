@@ -14,6 +14,7 @@
   "dependencies": {
     "@astrojs/starlight": "^0.42.10",
     "astro": "^7.3.6",
+    "cytoscape": "3.34.4",
     "sharp": "^0.35.3"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 # llm-concept-atlas — implementation plan
 
-**Status (2026-11-11): Phase 1 implemented locally.** The repository contains the Starlight site, chapter map, one full tokenization lesson with an interactive teaching demo, 19 introductory concept notes, a static atlas preview, and graph validation. The remaining introductory notes are content scaffolding; they are not the finished lessons. Phases 2–5 remain on the roadmap.
+**Status (2026-11-11): Phases 1 and 2 implemented locally.** The repository contains the Starlight site, chapter map, one full tokenization lesson with an interactive teaching demo, 19 introductory concept notes, an interactive atlas graph, and graph validation. The remaining introductory notes are content scaffolding; they are not the finished lessons. Phases 3–5 remain on the roadmap.
 
 ## 1. Goal
 

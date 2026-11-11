@@ -1,0 +1,112 @@
+---
+import { getAtlasGraph } from '../lib/atlas';
+import { parts, chapters } from '../data/book-map';
+
+const graph = await getAtlasGraph();
+const concepts = graph.nodes.filter((node) => node.kind === 'concept');
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const url = (path: string) => base + path.replace(/^\/+/, '');
+---
+
+<div class="atlas-explorer" data-atlas-root data-base={base}>
+  <header class="atlas-explorer-head">
+    <div>
+      <span class="eyebrow">Interactive concept atlas</span>
+      <h2>See how the ideas connect.</h2>
+      <p>Start with a chapter, then follow the concepts it contains. Select any topic to see what comes before it and where to go next.</p>
+    </div>
+    <div class="atlas-head-stats" aria-label="Atlas coverage">
+      <span><strong>{parts.length}</strong> parts</span>
+      <span><strong>{chapters.length}</strong> chapters</span>
+      <span><strong>{concepts.length}</strong> concepts</span>
+    </div>
+  </header>
+
+  <div class="atlas-workspace">
+    <aside class="atlas-controls" aria-labelledby="atlas-controls-title">
+      <div class="atlas-panel-heading"><span class="eyebrow">Navigate</span><h2 id="atlas-controls-title">Explore the map</h2></div>
+      <label class="atlas-control-label" for="atlas-search">Find a topic</label>
+      <input id="atlas-search" data-search type="search" placeholder="Try attention, RAG, tokens…" autocomplete="off" />
+      <ul class="atlas-search-results" data-search-results aria-label="Topic matches" hidden></ul>
+
+      <label class="atlas-control-label" for="atlas-part-filter">Part</label>
+      <select id="atlas-part-filter" data-filter-part>
+        <option value="all">All parts</option>
+        {parts.map((part) => <option value={part.id}>Part {part.number} · {part.shortTitle}</option>)}
+      </select>
+
+      <label class="atlas-control-label" for="atlas-chapter-filter">Chapter</label>
+      <select id="atlas-chapter-filter" data-filter-chapter>
+        <option value="all">All chapters</option>
+        {chapters.map((chapter) => <option value={String(chapter.number)} data-part={chapter.part}>Chapter {chapter.number} · {chapter.title}</option>)}
+      </select>
+
+      <label class="atlas-control-label" for="atlas-level-filter">Difficulty</label>
+      <select id="atlas-level-filter" data-filter-level>
+        <option value="all">All levels</option>
+        <option value="beginner">Beginner</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="advanced">Advanced</option>
+      </select>
+
+      <fieldset class="atlas-edge-controls">
+        <legend>Show connections</legend>
+        <label><input data-edge-prerequisite type="checkbox" checked /> <span class="atlas-edge-key key-prerequisite"></span> Learn before</label>
+        <label><input data-edge-related type="checkbox" checked /> <span class="atlas-edge-key key-related"></span> Related</label>
+      </fieldset>
+      <p class="atlas-controls-note">Part → chapter → concept links are always shown. Other links appear when you focus a concept.</p>
+    </aside>
+
+    <section class="atlas-map-panel" aria-label="Concept graph">
+      <div class="atlas-map-toolbar">
+        <div><span class="atlas-view-dot" aria-hidden="true"></span><strong data-view-label>Chapter overview</strong><small data-view-detail>Choose a chapter to reveal its concepts</small></div>
+        <div class="atlas-map-actions" aria-label="Map view controls">
+          <button type="button" data-overview title="Return to all chapters">Overview</button>
+          <button type="button" data-zoom-out aria-label="Zoom out">−</button>
+          <button type="button" data-zoom-in aria-label="Zoom in">+</button>
+          <button type="button" data-fit aria-label="Fit visible topics">Fit</button>
+        </div>
+      </div>
+      <div class="atlas-canvas-wrap">
+        <div class="atlas-canvas" data-canvas role="img" aria-label="Interactive concept graph. Select nodes with a pointer, or use the complete topic directory after the graph for keyboard navigation."></div>
+        <p class="atlas-graph-message" data-graph-message role="status">Loading the topic map…</p>
+      </div>
+      <div class="atlas-map-foot"><span>Drag to pan · scroll or pinch to zoom · select a node to inspect it</span><span class="atlas-map-legend"><i class="edge-contains"></i> Contains <i class="edge-prerequisite"></i> Learn before <i class="edge-related"></i> Related</span></div>
+    </section>
+
+    <aside class="atlas-inspector" aria-labelledby="atlas-inspector-title">
+      <div class="atlas-panel-heading"><span class="eyebrow">Selected topic</span><h2 id="atlas-inspector-title">The next connection</h2></div>
+      <div data-inspector aria-live="polite">
+        <div class="atlas-inspector-empty"><span aria-hidden="true">◎</span><h3>Select a node</h3><p>Open a chapter or choose a concept to see its definition and relationships.</p></div>
+      </div>
+      <button class="atlas-copy-link" type="button" data-copy-link hidden>Copy link to this topic ↗</button>
+      <p class="atlas-copy-status" data-copy-status role="status"></p>
+    </aside>
+  </div>
+
+  <section class="atlas-directory" aria-labelledby="atlas-directory-title">
+    <div class="atlas-directory-heading"><div><span class="eyebrow">Every topic, in text</span><h2 id="atlas-directory-title">Browse the complete hierarchy</h2><p>This list offers the same destinations as the graph and works with a keyboard or screen reader.</p></div><span>{graph.nodes.length} linked pages</span></div>
+    <div class="atlas-directory-grid">
+      {parts.map((part) => <details class={`atlas-directory-part part-${part.id}`} open>
+        <summary><span>Part {part.number}</span><strong>{part.shortTitle}</strong><small>{part.chapters.length} chapters</small></summary>
+        <div class="atlas-directory-part-actions"><button type="button" data-focus-id={part.id} aria-label={`Show ${part.shortTitle} on the graph`}>Locate this part ◎</button><a href={url(`parts/${part.id}/`)}>Open part overview ↗</a></div>
+        <div class="atlas-directory-chapters">
+          {chapters.filter((chapter) => chapter.part === part.id).map((chapter) => {
+            const chapterId = `chapter-${String(chapter.number).padStart(2, '0')}`;
+            const chapterConcepts = concepts.filter((node) => node.chapter === chapter.number);
+            return <div class="atlas-directory-chapter">
+              <div class="atlas-directory-chapter-head"><button type="button" data-focus-id={chapterId} aria-label={`Show chapter ${chapter.number} on the graph`}>{String(chapter.number).padStart(2, '0')}</button><a href={url(`chapters/${part.id}/${String(chapter.number).padStart(2, '0')}/`)}>{chapter.title}</a></div>
+              {chapterConcepts.length > 0 && <ul>{chapterConcepts.map((node) => <li><button type="button" data-focus-id={node.id} aria-label={`Show ${node.title} on the graph`}>◎</button><a href={url(node.href)}>{node.title}</a>{node.lessonStatus === 'full' && <span class="atlas-lesson-badge">Full lesson</span>}</li>)}</ul>}
+              {chapterConcepts.length === 0 && <p>Chapter outline available; concept lessons to follow.</p>}
+            </div>;
+          })}
+        </div>
+      </details>)}
+    </div>
+  </section>
+  <noscript><p class="quiet-note">The graph needs JavaScript. The complete hierarchy above still links to every available page.</p></noscript>
+</div>
+
+<script>
+  import '../scripts/atlas-explorer';
+</script>

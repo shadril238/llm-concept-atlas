@@ -2,7 +2,7 @@
 
 **See it. Try it. Understand it.** An independent visual companion to *Hands-On Large Language Models* by Jay Alammar and Maarten Grootendorst.
 
-This repository is currently at **Phase 1** of [the implementation plan](./plan.md): a Starlight foundation, an outline of all 12 chapters, one full tokenization lesson, 19 introductory concept notes, a static atlas preview, and build-time relationship validation. The tokenization lesson includes a small interactive teaching demo. The other notes will become full lessons in Phase 3; the interactive atlas graph is planned for Phase 2.
+This repository has completed **Phases 1 and 2** of [the implementation plan](./plan.md): a Starlight foundation, an outline of all 12 chapters, an interactive concept atlas, one full tokenization lesson, 19 introductory concept notes, and build-time relationship validation. The other notes will become full lessons in Phase 3.
 
 ## Run locally
 
@@ -26,7 +26,8 @@ npm run build
 - `src/data/book-map.ts` records the book's three parts, 12 chapters, and chapter topic outlines.
 - `src/content/docs/concepts/*.mdx` contains concept pages. Its frontmatter supplies the concept ID, chapter, parent, prerequisites, and related links.
 - `src/lib/graph.js` combines the book map and concept pages into the atlas data. It rejects duplicate IDs, missing targets, and relationship cycles during the production build.
-- `src/pages/atlas-data.json.ts` exposes the validated graph as static JSON for the future interactive view.
+- `src/pages/atlas-data.json.ts` exposes the validated graph as static JSON for the interactive view.
+- `src/components/AtlasExplorer.astro` and `src/scripts/atlas-explorer.ts` provide the graph, filters, search-to-focus, topic inspector, shareable `?focus=` links, and a keyboard-accessible topic directory. The graph opens on a chapter overview on wide screens and a simpler part overview on narrow screens.
 
 The book and its artwork are copyrighted. This project uses original explanations and visuals and links to the [authors' official notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models). It is not affiliated with the authors or publisher.
 
