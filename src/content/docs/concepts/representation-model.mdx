@@ -11,19 +11,75 @@ prerequisites: [llm]
 related: [encoder-only, text-embedding, generative-model]
 level: beginner
 tags: [models, embeddings]
+lessonStatus: full
+lastReviewed: 2026-11-12
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
 
 <ConceptPrimer id="representation-model" />
 
-## Picture it
+## Definition and intuition
 
-Instead of writing a reply, the model reads “The film was delightful” and returns a vector or a sentiment label. The output describes the input in a form another system can use.
+A **representation model** turns input into numbers that preserve useful information about it. A vector can be compared with other vectors, or sent to a classifier. Its primary product is a representation, rather than a paragraph of generated text.
 
-## Why it matters
+Imagine shelving books by subject. The model is learning a compact coordinate system so related items are easier to find. Different training objectives produce different notions of “related.”
 
-Many language tasks need a good representation, not generated prose. Classification, clustering, and retrieval often start here.
+## Before you start
+
+Read [llm](/llm-concept-atlas/concepts/llm/) first; return here when the key terms feel familiar.
+
+## How it works
+
+1. Tokenize the input and look up vectors.
+2. Let encoder layers incorporate surrounding context into each position.
+3. Combine token outputs or use a trained pooled output to represent the whole input.
+4. Compare vectors or train a task head, such as a sentiment classifier.
+
+A generic encoder output is not automatically a good sentence embedding. Pooling choice and contrastive training matter. The book distinguishes representation models from generation models because they answer different product questions: “what is this?” versus “what should come next?”
+
+## Worked example
+
+“The movie was charming” and “I enjoyed the film” use different words but express similar sentiment. A well-trained text embedding model may place them near each other. A sentiment head could classify both as positive, but vector proximity alone does not provide a calibrated label.
+
+<LessonFlow steps={['Input sentence', 'Contextual token vectors', 'Pool or select vector', 'Compare or classify']} caption="A simplified flow for representation model. Follow each labeled step from left to right." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+
+```python
+from math import sqrt
+vectors = {'charming film': (0.9, 0.2), 'enjoyed movie': (0.8, 0.3), 'late bus': (-0.4, 0.7)}
+a, b = vectors['charming film'], vectors['enjoyed movie']
+cosine = sum(x*y for x,y in zip(a,b)) / (sqrt(sum(x*x for x in a))*sqrt(sum(y*y for y in b)))
+print(round(cosine, 3))
+```
+
+**Expected behavior:** A cosine score near 1 for the two invented, similarly directed vectors.
+
+The vectors are hand-chosen. The code shows the comparison operation; a real encoder learns the coordinates from training data. See the [embedding lab](/llm-concept-atlas/concepts/text-embedding/) for an interactive version.
+
+## When to use it
+
+- Use representations for semantic search, clustering, deduplication, and classification.
+- Use a generator when the required output is new text; pair the two in RAG when retrieval must inform generation.
+
+## Limits and common mistakes
+
+- A vector is a task-dependent summary, not a complete record of meaning.
+- Similarity does not prove two statements are equivalent or true.
+
+## Check your understanding
+
+<details><summary>Does any encoder vector work well for sentence search?</summary><p>No. Pooling and training objective strongly affect sentence-level similarity.</p></details>
+
+<details><summary>What is the output of a representation model?</summary><p>Numerical features or vectors that another operation can use.</p></details>
+
+## Connections and sources
+
+This lesson follows the topic sequence in chapter 1 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter01) and [this primary technical reference](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter01).
 
 <ConceptConnections id="representation-model" />

@@ -11,19 +11,73 @@ prerequisites: [language-ai]
 related: [representation-model, generative-model, transformer]
 level: beginner
 tags: [foundations, models]
+lessonStatus: full
+lastReviewed: 2026-11-12
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
 
 <ConceptPrimer id="llm" />
 
-## Picture it
+## Definition and intuition
 
-Give a model the start of a sentence. A generative LLM predicts a plausible continuation, one token at a time. Other language models make useful representations of the sentence instead.
+A **large language model** is a neural model trained on substantial language data so its parameters capture patterns useful for predicting, representing, or generating text. “Large” does not set a fixed size cutoff. What matters for a task is the model’s training objective, architecture, data, context limit, and evaluated behavior.
 
-## Why it matters
+An LLM is not a lookup table of answers. Given token IDs, it performs numerical calculations and produces either useful internal representations or probabilities for possible next tokens.
 
-The word “large” is a moving description. Architecture, training, and the task you give a model are more useful than size alone when choosing one.
+## Before you start
+
+Read [language ai](/llm-concept-atlas/concepts/language-ai/) first; return here when the key terms feel familiar.
+
+## How it works
+
+A training example supplies a learning signal. In next-token training, the model sees a prefix and learns to assign more probability to the actual next token. Its parameters are adjusted over many examples. In masked-token training, part of a sentence is hidden and the model predicts the missing part.
+
+At use time, a tokenizer maps text to IDs, an embedding table creates starting vectors, transformer blocks mix context, and an output head produces task-specific values. Generation repeats this process as each selected token extends the context. Training can produce broad capabilities, but the model still needs task-specific evaluation and sometimes retrieval or fine-tuning.
+
+## Worked example
+
+For “The sky is”, a generative model might assign illustrative probabilities `blue: 0.55`, `clear: 0.20`, and other tokens the remaining mass. A decoding rule picks one token; the new prefix becomes “The sky is blue”. These are invented numbers, not a model prediction.
+
+<LessonFlow steps={['Text', 'Tokenizer IDs', 'Embedding vectors', 'Transformer blocks', 'Output scores']} caption="A simplified flow for llm. Follow each labeled step from left to right." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+
+```python
+from math import exp
+logits = {'blue': 2.0, 'clear': 1.0, 'other': 0.0}
+normalizer = sum(exp(x) for x in logits.values())
+probs = {word: round(exp(x)/normalizer, 3) for word,x in logits.items()}
+print(probs)
+```
+
+**Expected behavior:** A probability dictionary whose values sum to about 1 (for example `blue` is highest).
+
+`logits` are unnormalized scores. Softmax exponentiates and normalizes them. A real LLM calculates thousands of scores from context; these three numbers only make the output stage inspectable.
+
+## When to use it
+
+- A generation model can draft, summarize, or answer questions.
+- A representation model can classify, cluster, or retrieve text without writing prose.
+- Choose using measured task performance, latency, context, cost, and deployment constraints.
+
+## Limits and common mistakes
+
+- “Large” does not guarantee accuracy or reasoning.
+- A next-token probability is conditional on the provided context, not a confidence that a statement is true.
+
+## Check your understanding
+
+<details><summary>What does a tokenizer produce for the model?</summary><p>Token IDs, which index the model’s learned embedding table.</p></details>
+
+<details><summary>Why is fluent text insufficient evidence of accuracy?</summary><p>The generation objective rewards plausible continuations; facts need independent checking or grounding.</p></details>
+
+## Connections and sources
+
+This lesson follows the topic sequence in chapter 1 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter01) and [this primary technical reference](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter01).
 
 <ConceptConnections id="llm" />

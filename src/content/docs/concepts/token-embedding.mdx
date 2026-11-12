@@ -11,19 +11,71 @@ prerequisites: [token, vocabulary]
 related: [text-embedding, transformer]
 level: beginner
 tags: [embeddings, tokens]
+lessonStatus: full
+lastReviewed: 2026-11-12
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
 
 <ConceptPrimer id="token-embedding" />
 
-## Picture it
+## Definition and intuition
 
-The token ID is like an index into a table. Looking up that row returns a vector of numbers that the model can process.
+A **token embedding** is the learned vector associated with a token ID before the model incorporates the surrounding sentence. An embedding table is a matrix with one row per token ID and one column per feature dimension. Looking up an ID selects its row.
 
-## Why it matters
+The row is a starting representation. Later transformer layers change the representation using position and context, so the same token can contribute differently in different sentences.
 
-This is the bridge from symbolic text pieces to numerical computation. Later transformer layers change the representation using context.
+## Before you start
+
+Read [token](/llm-concept-atlas/concepts/token/), [vocabulary](/llm-concept-atlas/concepts/vocabulary/) first; return here when the key terms feel familiar.
+
+## How it works
+
+Let the embedding matrix `E` have shape `V × d`, where `V` is vocabulary size and `d` is vector width. For token ID `i`, lookup returns `E[i]`. A sequence of `n` IDs becomes an `n × d` array. Position information is added or otherwise incorporated before or inside transformer blocks. During training, gradient updates adjust the rows that help reduce the task loss.
+
+The coordinates are not hand-written traits such as “animal” or “happy.” They are learned numbers. Their geometry can be useful, but raw token embeddings are not the same as sentence embeddings produced by an encoder.
+
+## Worked example
+
+For IDs `[2, 0]` and a toy table `[[0.1, 0.9], [0.5, 0.2], [0.8, 0.3]]`, lookup yields `[[0.8, 0.3], [0.1, 0.9]]`. The sequence has two positions and two dimensions. A real model has far more rows and dimensions.
+
+<LessonFlow steps={['Token IDs', 'Embedding table lookup', 'Initial vectors', 'Contextual transformer layers']} caption="A simplified flow for token embedding. Follow each labeled step from left to right." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+
+```python
+table = [[0.1, 0.9], [0.5, 0.2], [0.8, 0.3]]
+ids = [2, 0]
+vectors = [table[token_id] for token_id in ids]
+print(vectors)
+```
+
+**Expected behavior:** `[[0.8, 0.3], [0.1, 0.9]]`
+
+The list index is the token ID. No network or library is required for this teaching version. A real model loads a trained matrix and combines these vectors with position and subsequent layers.
+
+## When to use it
+
+- Embedding lookup is the first numerical step in neural language models.
+- Inspect table shapes when debugging vocabulary mismatch or model architecture.
+
+## Limits and common mistakes
+
+- A token embedding does not by itself encode the whole sentence.
+- Do not assign a human-readable meaning to an individual vector coordinate without evidence.
+
+## Check your understanding
+
+<details><summary>What shape results from n IDs with width d?</summary><p>An n × d array of vectors.</p></details>
+
+<details><summary>Why can the same token mean something different later?</summary><p>Contextual layers mix information from neighboring positions.</p></details>
+
+## Connections and sources
+
+This lesson follows the topic sequence in chapter 2 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter02) and [this primary technical reference](https://pytorch.org/docs/stable/generated/torch.nn.Embedding.html).
 
 <ConceptConnections id="token-embedding" />

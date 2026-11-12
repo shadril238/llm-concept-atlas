@@ -11,19 +11,74 @@ prerequisites: [token-embedding]
 related: [text-embedding, representation-model]
 level: intermediate
 tags: [embeddings, training]
+lessonStatus: full
+lastReviewed: 2026-11-12
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
 
 <ConceptPrimer id="word2vec" />
 
-## Picture it
+## Definition and intuition
 
-Words that occur in similar contexts are trained to have related vectors. The same learned vector is then used for a word across different sentences.
+**Word2vec** names two related training approaches, skip-gram and continuous bag of words (CBOW), that learn a vector for each word from neighboring-word patterns. It helped show that useful geometric relationships can emerge from a prediction task over text.
 
-## Why it matters
+Its key limitation is also instructive: a word usually has one learned vector no matter which sentence it appears in. “Bank” beside a river and “bank” beside a loan share the same static row.
 
-Word2vec is a useful step in the history of embeddings. It also shows why later context-aware models were needed: a single word can have several meanings.
+## Before you start
+
+Read [token embedding](/llm-concept-atlas/concepts/token-embedding/) first; return here when the key terms feel familiar.
+
+## How it works
+
+In skip-gram, the center word is used to predict surrounding words within a context window. In CBOW, surrounding words help predict the center. Training adjusts word vectors so observed combinations score better than alternatives; negative sampling is one efficient way to provide contrasting examples.
+
+The context window changes what “similar” means. Narrow windows emphasize local syntactic behavior; wider windows can reflect broader topics. The trained table can initialize or inform other tasks, but it does not read a new sentence and change a word vector using that sentence the way a contextual encoder does.
+
+## Worked example
+
+In “the cat chased the mouse,” skip-gram can treat `chased` as the center and `cat` and `mouse` as nearby targets. Repeated examples encourage words with similar contexts to receive related vectors. The training signal is co-occurrence, not a hand-labeled definition.
+
+<LessonFlow steps={['Corpus and context window', 'Center/context pairs', 'Prediction training', 'Static word vectors']} caption="A simplified flow for word2vec. Follow each labeled step from left to right." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+
+```python
+sentence = 'the cat chased the mouse'.split()
+window = 1
+pairs = [(sentence[i], sentence[j])
+         for i in range(len(sentence))
+         for j in range(max(0,i-window), min(len(sentence),i+window+1))
+         if i != j]
+print(pairs[:4])
+```
+
+**Expected behavior:** A list of center/context word pairs, beginning with neighbors of `the` and `cat`.
+
+The code constructs training pairs only; it does not fit vectors. A real word2vec implementation adds an objective, negative examples, and optimization. These pairs show what supervision can come from raw text.
+
+## When to use it
+
+- Word2vec is useful for learning why vector geometry can reflect usage patterns.
+- Prefer contextual encoders for polysemy and most current sentence-level tasks.
+
+## Limits and common mistakes
+
+- Similar contexts do not imply identical meaning; antonyms can occur in similar positions.
+- Static vectors cannot distinguish multiple senses of the same word in new sentences.
+
+## Check your understanding
+
+<details><summary>What is predicted in skip-gram?</summary><p>Nearby context words from a center word.</p></details>
+
+<details><summary>Why can one “bank” vector be limiting?</summary><p>It cannot adapt to river and finance contexts in separate sentences.</p></details>
+
+## Connections and sources
+
+This lesson follows the topic sequence in chapter 2 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter02) and [this primary technical reference](https://arxiv.org/abs/1301.3781).
 
 <ConceptConnections id="word2vec" />

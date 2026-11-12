@@ -11,19 +11,77 @@ prerequisites: [transformer]
 related: [self-attention, query-key-value, kv-cache]
 level: intermediate
 tags: [architecture, attention]
+lessonStatus: full
+lastReviewed: 2026-11-12
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { AttentionLab } from '../../../components/simulations/LearningLabs';
 
 <ConceptPrimer id="attention" />
 
-## Picture it
+## Definition and intuition
 
-In “The dog chased the ball because it was excited,” attention can help the representation of “it” use information from earlier words. A heatmap can show the relative weights for one head in one layer.
+**Attention** is a weighted combination of information from available positions. For one target position, a query scores keys from other positions; normalized scores become weights; the weights combine value vectors. It is a computation that helps tokens exchange context, not a literal spotlight revealing the model’s full reasoning.
 
-## Why it matters
+A heatmap can show the weights for one head and one layer, but another head or layer may use a different pattern.
 
-Attention is one way transformer tokens exchange context. A bright heatmap cell is a weight in a computation, not a complete explanation of a model's reasoning.
+## Before you start
+
+Read [transformer](/llm-concept-atlas/concepts/transformer/) first; return here when the key terms feel familiar.
+
+## How it works
+
+For target position `i`, compute a score against each allowed key `j`: `score(i,j) = q_i · k_j / √d`, where `d` is key width. Apply a mask to disallowed positions, then softmax across the remaining scores to obtain weights summing to one. The output is `Σ_j weight(i,j) × v_j`. Learned projections produce queries, keys, and values from hidden states.
+
+Scaling by `√d` keeps dot products from becoming too large as vector width grows. Multi-head attention repeats this calculation with different learned projections and combines the results. Causal attention masks future positions; encoder attention commonly allows the full input.
+
+## Worked example
+
+Suppose a query has two available scores, `2` and `1`. Softmax gives about `0.73` and `0.27`. If their scalar values are `10` and `0`, the weighted output is about `7.3`. The higher-scored position contributes more, but the lower one still contributes.
+
+<LessonFlow steps={['Target query', 'Score available keys', 'Softmax weights', 'Weighted values', 'Updated state']} caption="A simplified flow for attention. Follow each labeled step from left to right." />
+
+## Try the attention lab
+
+<AttentionLab client:visible />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+
+```python
+from math import exp
+scores = [2.0, 1.0]
+weights = [exp(x)/sum(exp(y) for y in scores) for x in scores]
+values = [10.0, 0.0]
+print([round(w, 2) for w in weights], round(sum(w*v for w,v in zip(weights,values)),2))
+```
+
+**Expected behavior:** Weights around `[0.73, 0.27]` and output around `7.31`.
+
+The example uses precomputed scores to isolate softmax and weighted summation. In a transformer, the model first computes those scores from query and key vectors. Try the lab to change the target token and mask.
+
+## When to use it
+
+- Attention helps transformers incorporate context for translation, classification, and generation.
+- Inspect weights to debug mechanics, while using stronger methods to evaluate model behavior.
+
+## Limits and common mistakes
+
+- A large attention weight is not proof of causal importance or correct interpretation.
+- The weights are conditional on one position, head, and layer; there is no single global attention map.
+
+## Check your understanding
+
+<details><summary>Why do attention weights sum to one across allowed keys?</summary><p>Softmax normalizes the scores.</p></details>
+
+<details><summary>What is combined after scoring?</summary><p>Value vectors, weighted by the normalized scores.</p></details>
+
+## Connections and sources
+
+This lesson follows the topic sequence in chapter 3 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter03) and [this primary technical reference](https://arxiv.org/abs/1706.03762).
 
 <ConceptConnections id="attention" />

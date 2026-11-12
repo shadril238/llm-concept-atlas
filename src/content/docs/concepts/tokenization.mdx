@@ -12,6 +12,7 @@ related: [vocabulary, token-embedding, language-ai]
 level: beginner
 lessonStatus: full
 tags: [tokens, foundations]
+lastReviewed: 2026-11-12
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
@@ -21,7 +22,7 @@ import TokenizationLab from '../../../components/TokenizationLab.astro';
 
 <ConceptPrimer id="tokenization" />
 
-**Before you start:** know what a [token](/llm-concept-atlas/concepts/token/) is. You can return here after reading that short introduction.
+**Before you start:** know what a [token](/llm-concept-atlas/concepts/token/) is. You can return here after reading that lesson.
 
 ## The idea in plain language
 
@@ -56,6 +57,8 @@ Generation runs the last step in reverse: the model predicts an ID, and the toke
 <TokenizationLab />
 
 Type a longer word such as **unbelievableness**, switch between the three rules, and watch the number of pieces change. In the toy subword view, `##` means “continue the same word”; the displayed IDs simply label pieces in this demo. The real BERT tokenizer in the code exercise below has its own learned vocabulary and IDs.
+
+The comparison row shows all three counts at once. Change the illustrative context budget to see why the same text may fit under one splitting rule but exceed another. This is a teaching budget; use the actual model tokenizer to plan a real context window.
 
 ## How tokenization works
 

@@ -1,0 +1,73 @@
+---
+title: RAG question answering
+description: Retrieve relevant passages, then generate an answer with source evidence.
+kind: use-case
+lastReviewed: 2026-11-12
+---
+
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { RagLab } from '../../../components/simulations/LearningLabs';
+
+**Problem:** People ask questions about a changing library policy collection. The answer should reflect the documents and cite the passage used. [Semantic search](/llm-concept-atlas/concepts/semantic-search/) finds candidate passages; [retrieval-augmented generation](/llm-concept-atlas/concepts/rag/) makes them available to a generator.
+
+<LessonFlow steps={['Prepare passages', 'Retrieve and rank', 'Select context', 'Generate answer', 'Check support and cite']} caption="A RAG workflow from source documents to a checked answer." />
+
+## See each stage
+
+<RagLab client:visible />
+
+The lab uses fixed answers so the effect of changing evidence is clear. A real generator can still produce unsupported claims even with the right passage present. Keeping source IDs in the prompt and checking the result are product requirements, not optional decoration.
+
+## Run a small local pipeline
+
+This example downloads a compact embedding model and a small text generator on first run. It runs on a CPU, though generation may take time. Install:
+
+```bash
+python -m pip install sentence-transformers transformers torch
+```
+
+```python
+from sentence_transformers import SentenceTransformer, util
+from transformers import pipeline
+
+passages = [
+    ("hours", "The library closes at 5 p.m. on Saturday."),
+    ("loans", "Members may borrow laptops for three days."),
+    ("cafe", "The café serves coffee and tea."),
+]
+question = "When does the library close on Saturday?"
+
+embedder = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+document_vectors = embedder.encode([text for _, text in passages], convert_to_tensor=True)
+query_vector = embedder.encode(question, convert_to_tensor=True)
+scores = util.cos_sim(query_vector, document_vectors)[0]
+best_index = int(scores.argmax())
+source_id, evidence = passages[best_index]
+print("Retrieved:", source_id, evidence)
+
+prompt = (
+    "Answer using only the source. If it does not answer the question, say "
+    "'I cannot answer from this source.'\n"
+    f"Source [{source_id}]: {evidence}\nQuestion: {question}\nAnswer:"
+)
+generator = pipeline("text2text-generation", model="google/flan-t5-small")
+answer = generator(prompt, max_new_tokens=60)[0]["generated_text"]
+print("Draft answer:", answer)
+print("Source to inspect:", source_id)
+```
+
+The retrieved passage should be `hours`; the generated wording can vary. `encode` creates comparable vectors, `cos_sim` ranks candidates, and `pipeline` drafts from the selected passage. The printed source ID is a pointer for verification, **not proof** that every generated claim is supported. A production system should check support before displaying a citation.
+
+## Decide when this fits
+
+Use RAG when answers must track a document collection that changes independently of model training, and when readers need inspectable sources. If users simply need the relevant page, return search results instead. If the evidence is a tiny structured table, a direct database query may be clearer.
+
+Improve the pipeline by chunking long documents, storing titles and URLs, retrieving several candidates, reranking, fitting passages within the context window, and measuring both retrieval recall and answer support on real questions. Add a safe “not found” response when no evidence is adequate.
+
+## Check your understanding
+
+<details><summary>What if the right passage was never indexed?</summary><p>The retriever cannot return it. Fix document coverage or ingestion before changing the generator.</p></details>
+
+<details><summary>What if the right passage is retrieved but the answer invents a different closing time?</summary><p>Retrieval worked; grounding and answer verification failed. Inspect the prompt, generation, and support check.</p></details>
+
+The [official chapter 8 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter08) covers semantic search and RAG in more depth. The [Sentence Transformers semantic search guide](https://www.sbert.net/examples/sentence_transformer/applications/semantic-search/README.html) documents retrieval; this page’s scenario and code are original.

@@ -11,19 +11,71 @@ prerequisites: [generative-model]
 related: [encoder-only, decoding, kv-cache]
 level: intermediate
 tags: [architecture, generation]
+lessonStatus: full
+lastReviewed: 2026-11-12
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
 
 <ConceptPrimer id="decoder-only" />
 
-## Picture it
+## Definition and intuition
 
-Given “The cat sat on the,” the model estimates a distribution over possible next tokens. It cannot use a future token that has not been generated yet.
+A **decoder-only model** is built to continue a sequence from its earlier tokens. At each position it can attend to earlier positions and itself, but a causal mask blocks future positions. This makes the same architecture suitable for next-token training and left-to-right generation.
 
-## Why it matters
+The word “decoder” names an architectural family. It does not mean the model merely reverses an encoder.
 
-This next-token process is the core of many text-generation systems.
+## Before you start
+
+Read [generative model](/llm-concept-atlas/concepts/generative-model/) first; return here when the key terms feel familiar.
+
+## How it works
+
+The input prefix is tokenized and embedded. Each transformer block applies causal self-attention, then a feed-forward transformation. A final projection produces scores across the vocabulary for the next position. Decoding chooses a token, which is appended to the prefix. At the next step, the model processes the extended context, often using cached keys and values to avoid repeating earlier work.
+
+During training, many positions can be scored in parallel because the full training sequence is known; masking still prevents each position from seeing later target tokens. During generation, new tokens are chosen sequentially.
+
+## Worked example
+
+For `A cat sat on the`, the fifth position can use `A`, `cat`, `sat`, `on`, and `the`. It cannot use the next word, because that word has not yet been selected. The model might assign a high score to `mat`; this is a prediction, not retrieval from a sentence database.
+
+<LessonFlow steps={['Prefix token IDs', 'Causal transformer blocks', 'Vocabulary scores', 'Choose next ID', 'Extend prefix']} caption="A simplified flow for decoder only. Follow each labeled step from left to right." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+
+```python
+prefix = ['A', 'cat', 'sat', 'on', 'the']
+for position, token in enumerate(prefix):
+    visible = prefix[:position + 1]
+    print(token, '<-', ' '.join(visible))
+```
+
+**Expected behavior:** Five lines; each token sees only the prefix through its own position.
+
+The slice models a causal visibility rule, not a neural network. It makes the mask concrete: token at index `position` cannot use `prefix[position+1:]`. Use the [attention lab](/llm-concept-atlas/concepts/attention/) to toggle that mask.
+
+## When to use it
+
+- Use for interactive writing, chat, code completion, and other sequence generation.
+- If you only need a stable label for a sentence, a classifier can be simpler and cheaper.
+
+## Limits and common mistakes
+
+- Causal masking prevents future-token leakage during prediction; it does not guarantee truth.
+- The context window and cache consume resources as a prompt grows.
+
+## Check your understanding
+
+<details><summary>Why does generation proceed one token at a time?</summary><p>Each new token depends on the tokens selected before it.</p></details>
+
+<details><summary>Can an early position read a later one under a causal mask?</summary><p>No. Future positions are excluded from its attention computation.</p></details>
+
+## Connections and sources
+
+This lesson follows the topic sequence in chapter 1 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter01) and [this primary technical reference](https://huggingface.co/docs/transformers/model_doc/gpt2).
 
 <ConceptConnections id="decoder-only" />

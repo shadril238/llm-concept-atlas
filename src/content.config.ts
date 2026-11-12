@@ -8,7 +8,7 @@ export const collections = {
     loader: docsLoader(),
     schema: docsSchema({
       extend: z.object({
-        kind: z.enum(["part", "chapter", "concept", "atlas"]).optional(),
+        kind: z.enum(["part", "chapter", "concept", "atlas", "path", "use-case"]).optional(),
         conceptId: z
           .string()
           .regex(/^[a-z0-9-]+$/)

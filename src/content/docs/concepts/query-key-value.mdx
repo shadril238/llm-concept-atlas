@@ -11,19 +11,77 @@ prerequisites: [self-attention]
 related: [attention, kv-cache]
 level: intermediate
 tags: [architecture, attention]
+lessonStatus: full
+lastReviewed: 2026-11-12
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { AttentionLab } from '../../../components/simulations/LearningLabs';
 
 <ConceptPrimer id="query-key-value" />
 
-## Picture it
+## Definition and intuition
 
-A query from one position is compared with keys from available positions. Those scores become weights, which are used to combine the corresponding value vectors.
+**Queries, keys, and values** are three learned vector roles in attention. A query says what a target position is looking for; keys are compared with that query; values carry the information that will be mixed into the output. This analogy helps, but the vectors are numerical projections learned for a task, not readable database fields.
 
-## Why it matters
+Separating the roles explains why a high match score controls *how much* a position contributes, while its value vector controls *what* is contributed.
 
-Separating the three roles makes the attention calculation easier to trace and explains what a KV cache stores.
+## Before you start
+
+Read [self attention](/llm-concept-atlas/concepts/self-attention/) first; return here when the key terms feel familiar.
+
+## How it works
+
+Given hidden state `x_i`, a head computes `q_i = x_i W_Q`, `k_i = x_i W_K`, and `v_i = x_i W_V`, with learned matrices `W_Q`, `W_K`, and `W_V`. For target `i`, dot products of `q_i` with available `k_j` are scaled, masked, and normalized. The output is the sum of `v_j` weighted by those normalized scores.
+
+A decoder’s KV cache stores earlier keys and values because later queries need to compare with them. The new token still produces a new query. Multi-head attention gives several sets of projection matrices, so the same token can participate in several relationships.
+
+## Worked example
+
+For a one-dimensional toy example, query `2` meets keys `[1, 3]`, producing raw scores `[2, 6]`. Softmax favors the second key. If values are `[10, 0]`, the output lies closer to zero even though the first value is larger; matching controls the weights, not the value magnitude.
+
+<LessonFlow steps={['Hidden state', 'Three learned projections', 'Query–key match', 'Weight values', 'Context vector']} caption="A simplified flow for query key value. Follow each labeled step from left to right." />
+
+## Try the attention lab
+
+<AttentionLab client:visible />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+
+```python
+from math import exp
+query, keys, values = 2, [1,3], [10,0]
+scores = [query*key for key in keys]
+weights = [exp(s)/sum(exp(x) for x in scores) for s in scores]
+print(round(sum(w*v for w,v in zip(weights,values)),2))
+```
+
+**Expected behavior:** A value near `0.18`, because the second key receives most weight.
+
+This omits dimension scaling because the vectors have one component. It shows why Q/K matching and V content are separate. Real heads use learned high-dimensional vectors.
+
+## When to use it
+
+- Use the Q/K/V distinction to trace attention equations and KV cache behavior.
+- In analysis, look at both weights and values rather than equating a high weight with a large output effect.
+
+## Limits and common mistakes
+
+- Q, K, and V are not necessarily different token types; all are projections of states.
+- The “query asks a question” analogy does not imply interpretable natural-language questions.
+
+## Check your understanding
+
+<details><summary>Which vectors determine the attention weights?</summary><p>Queries and keys.</p></details>
+
+<details><summary>Which vectors are averaged with those weights?</summary><p>Values.</p></details>
+
+## Connections and sources
+
+This lesson follows the topic sequence in chapter 3 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter03) and [this primary technical reference](https://arxiv.org/abs/1706.03762).
 
 <ConceptConnections id="query-key-value" />

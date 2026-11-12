@@ -10,19 +10,78 @@ parent: chapter-01
 related: [llm, tokenization]
 level: beginner
 tags: [foundations]
+lessonStatus: full
+lastReviewed: 2026-11-12
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
 
 <ConceptPrimer id="language-ai" />
 
-## Picture it
+## Definition and intuition
 
-A spam filter reads an email and assigns a label. A translation system turns one sentence into another language. A language model continues a paragraph. These are different tasks within the same field.
+**Language AI** is the design of systems that work with human language: reading it, searching it, labeling it, or producing it. The task comes first. An email spam detector needs a label; a search engine needs a ranked list; a translator needs a new sentence. All three operate on language, but their outputs and success measures differ.
 
-## Why it matters
+Think of language AI as a toolbox rather than one model. Rules, keyword search, statistical classifiers, representation models, and generators each solve different parts of a language problem.
 
-“Language AI” names the broad problem space. A large language model is one kind of tool within it, not the whole field.
+## Before you start
+
+No prior model knowledge is required. Start with the example and follow linked terms as you need them.
+
+## How it works
+
+1. **Choose an input and output.** For classification the input is text and the output is a fixed label. For generation both input and output can be text.
+2. **Represent text.** Simple systems count words; neural systems tokenize text and turn token IDs into vectors.
+3. **Learn or define a decision.** A rule can be handwritten; a model learns parameters from examples.
+4. **Evaluate the real task.** Accuracy, retrieval relevance, and answer quality measure different things. A fluent answer may still be wrong.
+
+The book starts with this history because tokenization, embeddings, and transformers solve different bottlenecks in that pipeline.
+
+## Worked example
+
+Suppose a support team receives “I cannot sign in.” A keyword rule can route messages containing “sign in” to account support. A classifier might learn that “login failed” means the same thing even without that phrase. A generator could draft a reply, but should not be used as the sole authority for account policy.
+
+<LessonFlow steps={['Incoming message', 'Represent words or tokens', 'Choose task: label, find, or write', 'Evaluate the result']} caption="A simplified flow for language ai. Follow each labeled step from left to right." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+
+```python
+def route(message):
+    text = message.lower()
+    if 'sign in' in text or 'login' in text:
+        return 'account support'
+    return 'general support'
+
+print(route('I cannot sign in'))
+```
+
+**Expected behavior:** `account support`
+
+This is a deliberately small rule system. `lower()` normalizes case; the two phrase checks define a decision boundary. It needs no model download and exposes where a rule fails: “my password is broken” would be missed.
+
+## When to use it
+
+- Use a rule when the wording is stable and the consequence is easy to inspect.
+- Use a trained classifier when many varied expressions map to a fixed set of labels.
+- Use retrieval when the answer is in a document; use generation when you need new wording, ideally grounded in that document.
+
+## Limits and common mistakes
+
+- Language AI is broader than LLMs. A simple rule can be the right tool.
+- Fluent output is not proof of understanding or factual correctness; evaluation must match the task.
+
+## Check your understanding
+
+<details><summary>Why would a spam filter and a chatbot need different metrics?</summary><p>One assigns a fixed label, while the other produces open-ended text; label accuracy does not measure answer quality.</p></details>
+
+<details><summary>What fails in the keyword rule above?</summary><p>It misses paraphrases such as “my password is broken.”</p></details>
+
+## Connections and sources
+
+This lesson follows the topic sequence in chapter 1 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter01) and [this primary technical reference](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter01).
 
 <ConceptConnections id="language-ai" />

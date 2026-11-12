@@ -11,19 +11,72 @@ prerequisites: [generative-model, transformer]
 related: [decoder-only, kv-cache]
 level: intermediate
 tags: [generation]
+lessonStatus: full
+lastReviewed: 2026-11-12
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
 
 <ConceptPrimer id="decoding" />
 
-## Picture it
+## Definition and intuition
 
-The model may assign different probabilities to “cat,” “dog,” and “bird” as the next token. A decoding rule determines which token is chosen.
+**Decoding** is the rule that turns a language model’s scores for possible next tokens into an actual next token. The same model and prompt can produce different text under different decoding settings. Greedy decoding always chooses the highest-scoring token; sampling draws from a probability distribution.
 
-## Why it matters
+The model predicts a distribution. The decoding rule determines which path through that distribution the output takes.
 
-Changing the selection rule changes how predictable or varied generated text can be, even with the same model and prompt.
+## Before you start
+
+Read [generative model](/llm-concept-atlas/concepts/generative-model/), [transformer](/llm-concept-atlas/concepts/transformer/) first; return here when the key terms feel familiar.
+
+## How it works
+
+First, model logits are converted or adjusted to probabilities. Temperature scales logits before softmax: lower values sharpen the distribution, while higher values flatten it. Top-k sampling keeps a fixed number of leading candidates; nucleus (top-p) sampling keeps the smallest leading set whose cumulative probability reaches a threshold. The chosen token is appended, and the process repeats until a stop condition.
+
+These controls change diversity, not factual reliability. For reproducible comparisons, fix a random seed where the library supports it. Different tokenizers and stop markers also affect visible output.
+
+## Worked example
+
+Suppose next-token probabilities are `cat 0.6`, `dog 0.3`, `bird 0.1`. Greedy always picks `cat`. Sampling can choose `dog`; top-k with `k=2` removes `bird` and renormalizes the remaining two. A lower temperature would emphasize `cat` further.
+
+<LessonFlow steps={['Model logits', 'Adjust distribution', 'Filter candidates', 'Choose token', 'Repeat or stop']} caption="A simplified flow for decoding. Follow each labeled step from left to right." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+
+```python
+from random import Random
+options = ['cat','dog','bird']
+weights = [0.6,0.3,0.1]
+print('greedy:', options[weights.index(max(weights))])
+print('sampled:', Random(7).choices(options, weights=weights)[0])
+```
+
+**Expected behavior:** `greedy: cat`; the sampled line is repeatable for this Python version and seed.
+
+The code compares a deterministic maximum with a seeded weighted draw. A real generator computes fresh probabilities after each selected token. The seed helps reproduce a demo, but outputs can differ across libraries and hardware.
+
+## When to use it
+
+- Use greedy or low-variance settings when consistency matters.
+- Use sampling when diverse drafts are useful, then evaluate output quality separately.
+
+## Limits and common mistakes
+
+- High temperature does not make a model more creative in a guaranteed or uniformly useful way.
+- Sampling cannot fix missing evidence; RAG or verification may be needed.
+
+## Check your understanding
+
+<details><summary>What changes when top-k is reduced to one?</summary><p>Only the highest-scoring candidate remains, equivalent to greedy choice for that step.</p></details>
+
+<details><summary>Does temperature change the model’s learned parameters?</summary><p>No. It changes how current logits are turned into selection probabilities.</p></details>
+
+## Connections and sources
+
+This lesson follows the topic sequence in chapter 3 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter03) and [this primary technical reference](https://huggingface.co/docs/transformers/main/generation_strategies).
 
 <ConceptConnections id="decoding" />

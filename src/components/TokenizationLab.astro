@@ -23,6 +23,17 @@
     <p class="token-lab-count" data-count></p>
     <div class="token-lab-pieces" data-pieces></div>
   </div>
+  <div class="token-lab-compare">
+    <h4>Compare all three rules</h4>
+    <div class="token-lab-counts" data-comparison aria-live="polite"></div>
+    <label for="token-lab-budget">Illustrative context budget</label>
+    <select id="token-lab-budget" data-budget>
+      <option value="8">8 pieces</option>
+      <option value="16" selected>16 pieces</option>
+      <option value="32">32 pieces</option>
+    </select>
+    <p data-budget-message aria-live="polite"></p>
+  </div>
   <p class="token-lab-foot">Spaces are hidden in the word-like and toy subword views. The character view shows them as <code>␠</code>. Real tokenizers use learned vocabularies and can split this text differently.</p>
 </section>
 
@@ -56,7 +67,10 @@
     const count = lab.querySelector<HTMLElement>('[data-count]');
     const rule = lab.querySelector<HTMLElement>('[data-rule]');
     const reset = lab.querySelector<HTMLButtonElement>('[data-reset]');
-    if (!input || !pieces || !count || !rule || !reset) return;
+    const comparison = lab.querySelector<HTMLElement>('[data-comparison]');
+    const budget = lab.querySelector<HTMLSelectElement>('[data-budget]');
+    const budgetMessage = lab.querySelector<HTMLElement>('[data-budget-message]');
+    if (!input || !pieces || !count || !rule || !reset || !comparison || !budget || !budgetMessage) return;
 
     function render() {
       const mode = lab.querySelector<HTMLInputElement>('input[name="token-lab-mode"]:checked')?.value ?? 'words';
@@ -68,6 +82,25 @@
 
       rule!.textContent = rules[mode as keyof typeof rules];
       count!.textContent = `${result.length} illustrative ${result.length === 1 ? 'piece' : 'pieces'}`;
+      const counts = {
+        'Word-like': wordPieces(input!.value).length,
+        'Toy subword': splitToySubwords(input!.value).length,
+        'Characters': Array.from(input!.value).length,
+      };
+      comparison!.replaceChildren();
+      for (const [name, value] of Object.entries(counts)) {
+        const item = document.createElement('span');
+        const number = document.createElement('strong');
+        number.textContent = String(value);
+        const label = document.createElement('small');
+        label.textContent = name;
+        item.append(number, label);
+        comparison!.append(item);
+      }
+      const limit = Number(budget!.value);
+      budgetMessage!.textContent = result.length > limit
+        ? `This toy split exceeds the ${limit}-piece budget by ${result.length - limit}. A real model needs its own tokenizer and context limit.`
+        : `${limit - result.length} of ${limit} illustrative positions remain for the selected rule. Real context also includes instructions and output.`;
       pieces!.replaceChildren();
 
       if (!result.length) {
@@ -94,10 +127,12 @@
 
     input.addEventListener('input', render);
     lab.querySelectorAll<HTMLInputElement>('input[name="token-lab-mode"]').forEach((radio) => radio.addEventListener('change', render));
+    budget.addEventListener('change', render);
     reset.addEventListener('click', () => {
       input.value = sample;
       const first = lab.querySelector<HTMLInputElement>('input[name="token-lab-mode"][value="words"]');
       if (first) first.checked = true;
+      budget.value = '16';
       render();
       input.focus();
     });

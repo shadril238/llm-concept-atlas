@@ -11,19 +11,73 @@ prerequisites: [representation-model]
 related: [decoder-only, text-embedding]
 level: intermediate
 tags: [architecture, models]
+lessonStatus: full
+lastReviewed: 2026-11-12
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
 
 <ConceptPrimer id="encoder-only" />
 
-## Picture it
+## Definition and intuition
 
-In “The bank is beside the river,” the representation of “bank” can use words on both sides to express the intended meaning.
+An **encoder-only model** builds context-aware representations of an input sequence. In a bidirectional encoder such as BERT, a token can use information from positions on both sides. The output is useful for understanding or labeling text, rather than directly continuing a prompt token by token.
 
-## Why it matters
+“Bank” in “river bank” and “bank account” begins as the same written word, but the surrounding words help the encoder produce different contextual states.
 
-Encoder-style models are well suited to tasks that inspect or compare input text, such as classification and search.
+## Before you start
+
+Read [representation model](/llm-concept-atlas/concepts/representation-model/) first; return here when the key terms feel familiar.
+
+## How it works
+
+Token IDs enter an embedding layer with position information. Repeated encoder blocks apply self-attention across the allowed input positions and a feed-forward transformation. The final hidden states contain contextual information. A task head can read a designated pooled position or token states to classify a sequence or label tokens.
+
+BERT-style pretraining hides some tokens and asks the model to recover them using context. For a real task, a classifier head usually needs task training; raw encoder states are not automatically sentiment labels.
+
+## Worked example
+
+Input: “The bank near the river flooded.” For the `bank` position, `river` and `flooded` are available context. In “The bank approved the loan,” `loan` pushes toward the financial sense. This does not mean every attention weight directly names the model’s interpretation.
+
+<LessonFlow steps={['Full input sequence', 'Bidirectional self-attention', 'Contextual states', 'Task head']} caption="A simplified flow for encoder only. Follow each labeled step from left to right." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+
+```python
+# A tiny context rule, not a neural encoder
+sentences = ['The bank flooded by the river', 'The bank approved a loan']
+for sentence in sentences:
+    words = sentence.lower().split()
+    sense = 'river edge' if 'river' in words else 'financial institution'
+    print(sense)
+```
+
+**Expected behavior:** `river edge` followed by `financial institution`.
+
+This explicit rule shows why context changes an interpretation. A trained encoder learns its context-dependent features from data rather than using this `if` statement. For a real classifier, follow the [classification use case](/llm-concept-atlas/use-cases/text-classification/).
+
+## When to use it
+
+- Use encoder-style models for classification, entity labeling, and representation tasks.
+- Use a decoder-style model when direct left-to-right generation is the goal.
+
+## Limits and common mistakes
+
+- “Bidirectional” describes available context in the encoder, not perfect language understanding.
+- An encoder model can be adapted into a generator in other architectures, but the basic encoder-only setup is not an autoregressive text generator.
+
+## Check your understanding
+
+<details><summary>Can a BERT-style encoder read a later token while representing an earlier one?</summary><p>Yes, in its standard bidirectional self-attention setup.</p></details>
+
+<details><summary>Why is a task head needed?</summary><p>Hidden states are vectors; the head maps them to the task’s labels or values.</p></details>
+
+## Connections and sources
+
+This lesson follows the topic sequence in chapter 1 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter01) and [this primary technical reference](https://huggingface.co/docs/transformers/model_doc/bert).
 
 <ConceptConnections id="encoder-only" />

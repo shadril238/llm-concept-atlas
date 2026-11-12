@@ -1,0 +1,62 @@
+---
+title: Text classification
+description: Turn a sentence into a fixed label with a pretrained classifier.
+kind: use-case
+lastReviewed: 2026-11-12
+---
+
+import LessonFlow from '../../../components/LessonFlow.astro';
+
+**Problem:** A product team wants to route feedback by sentiment. The input is a review; the output is one label from a known set. This is a classification task, not open-ended text generation. Chapter 4 of *Hands-On Large Language Models* develops several classification approaches.
+
+<LessonFlow steps={['Review text', 'Tokenizer and encoder', 'Classification head', 'Label and score', 'Human review for uncertain cases']} caption="A text classification workflow with a review step." />
+
+## Understand the decision
+
+The tokenizer maps a review to IDs. A [representation model](/llm-concept-atlas/concepts/representation-model/) builds contextual features. A trained classification head maps those features to scores for the model’s labels. The largest score determines the predicted label in a simple pipeline. A returned score reflects the model’s output for its label set; it is not a universal probability that the review is correctly interpreted.
+
+The example below uses a pretrained **English positive/negative sentiment** model. It is appropriate for a first experiment, not a ready-made router for every kind of product feedback. If your labels are “billing,” “bug,” and “feature request,” collect representative labeled examples and train or choose a classifier for those labels.
+
+## Run a real model
+
+Install dependencies, then run the script. The first run downloads model files; later runs can use the local cache.
+
+```bash
+python -m pip install transformers torch
+```
+
+```python
+from transformers import pipeline
+
+classifier = pipeline(
+    task="text-classification",
+    model="distilbert/distilbert-base-uncased-finetuned-sst-2-english",
+)
+reviews = [
+    "The setup was simple and the result was excellent.",
+    "The app crashes every time I open it.",
+]
+for review, prediction in zip(reviews, classifier(reviews)):
+    print(review, "=>", prediction["label"], round(prediction["score"], 3))
+```
+
+The first review should receive a positive label and the second a negative label; exact scores can vary by package and model version. `pipeline` loads the model and tokenizer together. The model returns label scores; it does not explain why a review was written.
+
+## Make it useful in a product
+
+1. Define labels with examples and clear boundaries. “Bug” and “negative sentiment” are different label schemes.
+2. Keep a held-out evaluation set covering short messages, negation, sarcasm, languages, and changing product terms. Inspect a confusion matrix, not only overall accuracy.
+3. Choose a review rule for uncertain or high-impact cases. Capture examples of mistakes for future improvements.
+4. Compare a simple keyword or linear baseline with the neural model. Complexity is useful only if it improves the relevant metric enough to justify it.
+
+## Limits and questions
+
+- A positive/negative model cannot supply labels it was not trained to predict.
+- A high output score can still accompany an error, especially on unfamiliar data.
+- Do not treat a label as an explanation of the customer’s intent; keep the original text available for review.
+
+<details><summary>Why is a generation model unnecessary here?</summary><p>The required output is a fixed label. A classifier maps directly to that label set and is easier to evaluate for this task.</p></details>
+
+<details><summary>What would you change to classify bug reports versus feature requests?</summary><p>Define and collect examples for those labels, then choose or train a classifier for that specific scheme.</p></details>
+
+Read the [official chapter 4 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter04) for the book’s broader treatment and the [Transformers pipeline reference](https://huggingface.co/docs/transformers/en/main_classes/pipelines) for current API behavior. This page’s workflow and examples are original.

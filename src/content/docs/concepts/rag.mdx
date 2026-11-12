@@ -11,19 +11,78 @@ prerequisites: [semantic-search]
 related: [generative-model, text-embedding]
 level: beginner
 tags: [retrieval, generation, applications]
+lessonStatus: full
+lastReviewed: 2026-11-12
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { RagLab } from '../../../components/simulations/LearningLabs';
 
 <ConceptPrimer id="rag" />
 
-## Picture it
+## Definition and intuition
 
-For a question about a company's policy, the system first retrieves relevant policy passages. The generator then answers using those passages as context, ideally showing sources the reader can inspect.
+**Retrieval-augmented generation (RAG)** combines a retriever with a text generator. The retriever finds source passages relevant to a question; the system puts selected passages into the generator’s context; the generator writes an answer using that evidence. The source material can change without retraining the generator.
 
-## Why it matters
+Think of a librarian handing a writer a small packet of documents. The packet improves the writer’s access to facts, but the writer can still misread it, omit a caveat, or invent a claim.
 
-RAG connects a model to information outside its training data. Its quality depends on retrieval, context selection, generation, and evaluation together.
+## Before you start
+
+Read [semantic search](/llm-concept-atlas/concepts/semantic-search/) first; return here when the key terms feel familiar.
+
+## How it works
+
+A practical RAG pipeline has distinct stages: ingest and chunk documents; embed and index them; retrieve candidates for a question; optionally rerank and choose passages; assemble a prompt with source IDs; generate an answer; verify that claims are supported by cited passages. If retrieval misses the right passage, generation cannot recover it from the supplied context. If the relevant passage is found but truncated, context selection fails.
+
+Evaluation should separate retrieval quality from grounded answer quality. Check whether relevant evidence appears in the top k, whether the answer addresses the question, and whether each claim is supported. A refusal such as “I cannot answer from these passages” is better than unsupported confidence when evidence is absent.
+
+## Worked example
+
+Question: “When does the library close on Saturday?” Retriever returns a library-hours passage saying “Saturday: 5 p.m.” and an unrelated café menu. A grounded answer is “5 p.m. [Library hours].” If the hours passage is removed, the system should withhold the answer rather than guess.
+
+<LessonFlow steps={['Question', 'Retrieve and rank passages', 'Select context with source IDs', 'Generate grounded answer', 'Check citations']} caption="A simplified flow for rag. Follow each labeled step from left to right." />
+
+## Try the RAG lab
+
+<RagLab client:visible />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+
+```python
+question = 'When does the library close on Saturday?'
+passages = {'hours': 'The library closes at 5 p.m. on Saturday.',
+            'cafe': 'The café serves coffee and tea.'}
+selected = ['hours']
+answer = passages['hours'] + ' [hours]' if 'hours' in selected else 'No supported answer.'
+print(answer)
+```
+
+**Expected behavior:** `The library closes at 5 p.m. on Saturday. [hours]`
+
+This is the evidence-selection boundary, not a live LLM. The code makes source dependence visible. Follow the [RAG use case](/llm-concept-atlas/use-cases/rag-question-answering/) for a real embedding retriever and prompt assembly. Try removing the source in the lab above.
+
+## When to use it
+
+- Use RAG for answers that must reflect a changing document collection and show sources.
+- Use direct classification or search when the user needs only a label or document list.
+
+## Limits and common mistakes
+
+- Retrieved context does not force a model to obey it. Verify citations and support.
+- RAG quality depends on document freshness, chunking, retrieval, context limits, and generation together.
+
+## Check your understanding
+
+<details><summary>What happens if the retriever misses the answer passage?</summary><p>The generator lacks that evidence and should avoid unsupported claims.</p></details>
+
+<details><summary>Why evaluate retrieval separately from generation?</summary><p>They fail in different ways and need different fixes.</p></details>
+
+## Connections and sources
+
+This lesson follows the topic sequence in chapter 8 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter08) and the [original RAG paper](https://arxiv.org/abs/2005.11401).
 
 <ConceptConnections id="rag" />

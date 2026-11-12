@@ -1,0 +1,14 @@
+---
+interface Props {
+  steps: string[];
+  caption: string;
+}
+const { steps, caption } = Astro.props;
+---
+
+<figure class="lesson-flow">
+  <ol aria-label={caption}>
+    {steps.map((step) => <li>{step}</li>)}
+  </ol>
+  <figcaption>{caption}</figcaption>
+</figure>

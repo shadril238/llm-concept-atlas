@@ -1,0 +1,52 @@
+---
+title: How an LLM processes a sentence
+description: A guided route from readable text to a model output.
+kind: path
+lastReviewed: 2026-11-12
+---
+
+import LessonFlow from '../../../components/LessonFlow.astro';
+
+This path follows one sentence through the concepts in chapters 1–3 of *Hands-On Large Language Models*. Allow about 45–60 minutes for the lessons and three short experiments. Every stop is a full lesson; you can return to the [atlas graph](/llm-concept-atlas/atlas/) to see how the ideas connect.
+
+<LessonFlow steps={['Readable sentence', 'Token IDs', 'Embedding vectors', 'Contextual transformer states', 'Output scores', 'Selected output']} caption="The stages of a language model, from text input to output." />
+
+## 1. Decide what the system should do
+
+Start with [Language AI](/llm-concept-atlas/concepts/language-ai/) and [large language models](/llm-concept-atlas/concepts/llm/). A sentence can be classified, searched for, or continued. Those are different tasks. Read [representation models](/llm-concept-atlas/concepts/representation-model/) and [generative models](/llm-concept-atlas/concepts/generative-model/) to see why the same input can lead to a vector, a label, or new text.
+
+**Try:** For “The film was wonderful,” decide whether a review sorting tool needs a label or a paragraph. The sorting tool needs a label; a review-writing assistant needs generated text.
+
+## 2. Make the sentence model-readable
+
+Read [tokens](/llm-concept-atlas/concepts/token/), [tokenization](/llm-concept-atlas/concepts/tokenization/), and [vocabulary](/llm-concept-atlas/concepts/vocabulary/). In the tokenization lab, enter **“The film was wonderful!”** and switch between word-like, subword, and character rules. Notice that the number of positions changes even though the visible sentence is the same. The toy IDs are labels; the real-tokenizer code on the lesson page shows an actual model vocabulary.
+
+**Checkpoint:** A model receives token IDs. It does not directly calculate on the letters you typed.
+
+## 3. Turn IDs into vectors
+
+Open [token embeddings](/llm-concept-atlas/concepts/token-embedding/) and [text embeddings](/llm-concept-atlas/concepts/text-embedding/). An ID selects a learned row in an embedding table. A sentence-level embedding is a later representation of the whole text, useful for comparison. In the vector lab, select `cat` and `car`; observe which examples have similar directions. The 2D positions are invented to show the comparison mechanism.
+
+**Checkpoint:** A token embedding and a whole-sentence embedding answer different questions. One starts computation at a token position; the other summarizes text for a task.
+
+## 4. Add context in a transformer
+
+Read [transformer](/llm-concept-atlas/concepts/transformer/), [attention](/llm-concept-atlas/concepts/attention/), [self-attention](/llm-concept-atlas/concepts/self-attention/), and [queries, keys, and values](/llm-concept-atlas/concepts/query-key-value/). In the attention lab, select each token and toggle the causal mask. Follow the score → softmax → weighted value calculation. The displayed percentages are a toy head, not an explanation of a real model’s reasoning.
+
+Now compare [encoder-only](/llm-concept-atlas/concepts/encoder-only/) and [decoder-only](/llm-concept-atlas/concepts/decoder-only/) models. An encoder can use both sides of a complete input; a causal decoder predicts from earlier tokens.
+
+## 5. Produce the output
+
+Read [decoding and sampling](/llm-concept-atlas/concepts/decoding/) to see how scores become chosen tokens. Then read [KV cache](/llm-concept-atlas/concepts/kv-cache/) to see why earlier keys and values can be reused as a decoder adds new tokens.
+
+For a fixed-label problem, follow the [text classification use case](/llm-concept-atlas/use-cases/text-classification/). For answers from a document collection, continue to [semantic search](/llm-concept-atlas/concepts/semantic-search/), [RAG](/llm-concept-atlas/concepts/rag/), and the [RAG question-answering use case](/llm-concept-atlas/use-cases/rag-question-answering/).
+
+## Test your mental model
+
+<details><summary>What changes if a tokenizer splits one word into three pieces?</summary><p>The model receives three positions and IDs for that word rather than one. Its embedding lookup and later sequence processing operate on those positions.</p></details>
+
+<details><summary>Can a causal decoder use a word it has not generated yet?</summary><p>No. The causal mask excludes future positions from each prediction.</p></details>
+
+<details><summary>Does the highest attention weight prove which input caused an answer?</summary><p>No. It is one weight from one head and layer in a larger computation.</p></details>
+
+The progression follows the first three book chapters; the sequence, examples, and diagrams on this site are original. Continue with the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models).

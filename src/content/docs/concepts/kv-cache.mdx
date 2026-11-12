@@ -11,19 +11,73 @@ prerequisites: [attention]
 related: [query-key-value, decoding, decoder-only]
 level: intermediate
 tags: [architecture, generation]
+lessonStatus: full
+lastReviewed: 2026-11-12
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
 
 <ConceptPrimer id="kv-cache" />
 
-## Picture it
+## Definition and intuition
 
-After generating one token, a decoder keeps the keys and values from earlier positions. On the next step it computes only what is new and consults the stored vectors.
+A **key–value (KV) cache** stores the attention keys and values already computed for previous tokens during autoregressive generation. When a new token is added, the decoder can reuse those stored vectors instead of recomputing them at every earlier position.
 
-## Why it matters
+Think of it as keeping the reusable work from previous steps. It speeds repeated generation steps, while consuming memory that grows with kept context, layers, and heads.
 
-Caching speeds up repeated decoding steps, while using memory that grows with the context kept for generation.
+## Before you start
+
+Read [attention](/llm-concept-atlas/concepts/attention/) first; return here when the key terms feel familiar.
+
+## How it works
+
+At step `t`, the decoder creates a query, key, and value for the new position in each attention layer. It appends the new key and value to that layer’s cache. The new query scores all keys that the causal mask permits, including cached ones, and combines the corresponding values. Because earlier causal states cannot depend on later tokens, their keys and values remain reusable.
+
+The cache is normally an inference optimization. Training often scores many positions together and has different memory and gradient needs. Cache policy matters with sliding windows, long contexts, and batched requests.
+
+## Worked example
+
+Generate “cats” and then “sleep.” Without caching, a naive implementation reprocesses the prefix for the second step. With caching, the keys and values for “cats” are retained and only the new position’s projections are added. The next query still attends across the allowed history.
+
+<LessonFlow steps={['Prompt prefill', 'Store K and V per layer', 'Compute new Q/K/V', 'Append new K/V', 'Reuse history']} caption="A simplified flow for kv cache. Follow each labeled step from left to right." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+
+```python
+cache = {'keys': [], 'values': []}
+for token in ['cats', 'sleep']:
+    key, value = len(token), token.upper()  # invented stand-ins
+    cache['keys'].append(key)
+    cache['values'].append(value)
+    print(token, 'can use', len(cache['keys']), 'stored positions')
+```
+
+**Expected behavior:** `cats can use 1 stored positions` then `sleep can use 2 stored positions`.
+
+The strings and lengths are placeholders, not neural vectors. The append operation is the important idea. Actual caches hold tensors for every layer and attention head.
+
+## When to use it
+
+- Enable cache for interactive generation when the framework supports it.
+- Consider cache memory when serving many users or very long contexts.
+
+## Limits and common mistakes
+
+- The cache does not remember across unrelated requests unless deliberately retained.
+- Caching improves compute reuse; it does not improve answer quality or add knowledge.
+
+## Check your understanding
+
+<details><summary>Why can previous causal keys and values be reused?</summary><p>Earlier positions could not depend on future tokens.</p></details>
+
+<details><summary>What resource grows as more history is cached?</summary><p>Memory for stored key and value tensors.</p></details>
+
+## Connections and sources
+
+This lesson follows the topic sequence in chapter 3 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter03) and [this primary technical reference](https://huggingface.co/docs/transformers/main/cache_explanation).
 
 <ConceptConnections id="kv-cache" />

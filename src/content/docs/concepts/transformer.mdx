@@ -11,19 +11,73 @@ prerequisites: [token-embedding]
 related: [attention, decoder-only, encoder-only]
 level: intermediate
 tags: [architecture]
+lessonStatus: full
+lastReviewed: 2026-11-12
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
 
 <ConceptPrimer id="transformer" />
 
-## Picture it
+## Definition and intuition
 
-Token vectors enter a stack of blocks. In each block, tokens exchange information through attention and then pass through further numerical transformations.
+A **transformer** processes a sequence of vectors through repeated blocks that combine information across positions with attention and transform each position with a feed-forward network. The architecture underlies many language models, but “transformer” does not specify whether a model is an encoder, decoder, or encoder-decoder.
 
-## Why it matters
+Picture a sentence entering several layers. Each layer gives each position another chance to use context. The final representation is therefore more than a static token lookup.
 
-Understanding the flow through one block makes many model features less mysterious, including context, generation, and caching.
+## Before you start
+
+Read [token embedding](/llm-concept-atlas/concepts/token-embedding/) first; return here when the key terms feel familiar.
+
+## How it works
+
+A basic block receives a matrix of token states. Self-attention makes new states by weighting value vectors from allowed positions. A feed-forward network then transforms each position independently. Residual connections preserve an information path around each sublayer, and layer normalization stabilizes computation. Position information lets the model distinguish order. Repeating blocks builds increasingly contextual features.
+
+An encoder may let positions attend across the whole input. A decoder uses a causal mask when predicting future tokens. Real variants differ in normalization order, position encoding, attention pattern, and other details, so a single diagram is a map of common roles rather than every model’s exact implementation.
+
+## Worked example
+
+For “birds fly south,” the starting vector for `fly` is a lookup row. After attention it can combine signals from `birds` and `south`; after the feed-forward step it is transformed again. A second block can repeat the process on these updated states. The exact numerical values are learned.
+
+<LessonFlow steps={['Token + position vectors', 'Self-attention', 'Residual + normalization', 'Feed-forward network', 'Repeat block']} caption="A simplified flow for transformer. Follow each labeled step from left to right." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+
+```python
+# Toy one-block data flow, without learned weights
+states = [1.0, 2.0, 3.0]
+context = sum(states) / len(states)
+attention_mix = [0.7*x + 0.3*context for x in states]
+feed_forward = [max(0, 2*x - 1) for x in attention_mix]
+print([round(x, 2) for x in feed_forward])
+```
+
+**Expected behavior:** A three-number list of transformed states.
+
+The shared average stands in for context exchange, and the last expression stands in for a position-wise transform. Real attention is query-dependent and multi-headed; this tiny calculation only shows the order of operations.
+
+## When to use it
+
+- Transformer encoders are useful for representations and classification.
+- Causal transformer decoders are useful for autoregressive generation.
+
+## Limits and common mistakes
+
+- The architecture itself does not make a model truthful or up to date.
+- Attention is one sublayer; feed-forward networks, position signals, residual paths, and training also matter.
+
+## Check your understanding
+
+<details><summary>Which operation exchanges information across token positions?</summary><p>Self-attention.</p></details>
+
+<details><summary>Which operation transforms each position after attention?</summary><p>The feed-forward sublayer.</p></details>
+
+## Connections and sources
+
+This lesson follows the topic sequence in chapter 3 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter03) and [this primary technical reference](https://arxiv.org/abs/1706.03762).
 
 <ConceptConnections id="transformer" />

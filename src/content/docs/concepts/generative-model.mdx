@@ -11,19 +11,71 @@ prerequisites: [llm]
 related: [decoder-only, decoding, representation-model]
 level: beginner
 tags: [models, generation]
+lessonStatus: full
+lastReviewed: 2026-11-12
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
 
 <ConceptPrimer id="generative-model" />
 
-## Picture it
+## Definition and intuition
 
-Start with “Write a two-line summary of this review.” The model repeatedly chooses a next token until it reaches a stopping point.
+A **generative language model** produces new text conditioned on a prompt. It estimates which token can follow the current context, selects one, appends it, and repeats. The resulting sentence is built one step at a time.
 
-## Why it matters
+This is why a prompt matters: it changes the context in every prediction. A model can produce a helpful summary, a plausible mistake, or an unsupported claim from the same style of computation.
 
-Generation powers drafting, summarization, and question answering. Its output is shaped by both the prompt and the decoding method.
+## Before you start
+
+Read [llm](/llm-concept-atlas/concepts/llm/) first; return here when the key terms feel familiar.
+
+## How it works
+
+For an autoregressive generator, the probability of a sequence factors into next-token probabilities: `P(t1, t2, …, tn) = P(t1) × P(t2|t1) × … × P(tn|t1…t(n−1))`. Each term depends on the preceding tokens. The model returns a score for each token in its vocabulary; a decoding strategy chooses one. A stop token or length limit ends generation.
+
+A transformer decoder applies causal masking so a position cannot look at future positions during prediction. During inference, a KV cache can reuse earlier attention keys and values. Neither mechanism supplies fresh facts by itself; retrieval can add external context.
+
+## Worked example
+
+Given “Complete the sentence: The cup is on the”, a model may rank `table` above `moon`. If sampling selects `table`, the next step conditions on the longer prompt ending in `table`. Repetition can continue until an end marker appears.
+
+<LessonFlow steps={['Prompt tokens', 'Next-token scores', 'Selection rule', 'Append chosen token', 'Repeat']} caption="A simplified flow for generative model. Follow each labeled step from left to right." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+
+```python
+choices = {'table': 0.7, 'floor': 0.2, 'moon': 0.1}
+context = 'The cup is on the'
+next_token = max(choices, key=choices.get)
+print(context + ' ' + next_token)
+```
+
+**Expected behavior:** `The cup is on the table`
+
+This toy chooses the highest-scoring token (greedy decoding). A real model computes scores from context and can sample instead. The table of scores is invented to isolate the selection step.
+
+## When to use it
+
+- Drafting, summarization, translation, and conversational answers need new text.
+- Use classification or retrieval instead when the required output is a fixed label or a document list.
+
+## Limits and common mistakes
+
+- A coherent continuation can still be factually wrong.
+- The model’s learned parameters do not update automatically when a document changes; external context may be needed.
+
+## Check your understanding
+
+<details><summary>Why does the next prediction change after one token is chosen?</summary><p>The chosen token becomes part of the context for the next prediction.</p></details>
+
+<details><summary>What does greedy decoding choose?</summary><p>The highest-scoring next token at each step.</p></details>
+
+## Connections and sources
+
+This lesson follows the topic sequence in chapter 1 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter01) and [this primary technical reference](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter01).
 
 <ConceptConnections id="generative-model" />

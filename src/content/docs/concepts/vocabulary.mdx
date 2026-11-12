@@ -11,19 +11,71 @@ prerequisites: [tokenization]
 related: [token, token-embedding]
 level: beginner
 tags: [tokens]
+lessonStatus: full
+lastReviewed: 2026-11-12
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
 
 <ConceptPrimer id="vocabulary" />
 
-## Picture it
+## Definition and intuition
 
-Imagine a dictionary where each entry is a text piece paired with an integer. The tokenizer looks up a sequence of pieces, and the model receives their integer IDs.
+A tokenizer’s **vocabulary** is the inventory of token pieces and their assigned IDs. It defines which pieces can be emitted and which embedding row each ID points to in a paired model. Think of it as a numbered parts catalog, not a dictionary of complete words.
 
-## Why it matters
+Special tokens, such as start or separator markers, are usually entries too. A vocabulary can contain common words, word fragments, punctuation, and byte-level pieces.
 
-The vocabulary determines which pieces are readily available. Different tokenizers can represent the same text with different numbers of tokens.
+## Before you start
+
+Read [tokenization](/llm-concept-atlas/concepts/tokenization/) first; return here when the key terms feel familiar.
+
+## How it works
+
+A tokenizer is often trained on a text collection to choose useful pieces. Frequent sequences may receive compact entries; rarer strings can be assembled from smaller pieces. At inference time, the vocabulary is fixed for a given tokenizer. The tokenizer segments incoming text and returns the corresponding IDs. The model’s embedding matrix has a row for each allowed ID.
+
+A model and tokenizer are therefore a matched pair. Replacing only the vocabulary can change what a given ID means while leaving the model’s learned embedding row unchanged. Even if both systems use integer IDs, the mapping is not interchangeable.
+
+## Worked example
+
+Suppose ID `42` means `cat` in vocabulary A, but `##ing` in vocabulary B. The same embedding row is loaded for ID `42`. Using B with a model trained on A would feed the wrong learned signal for that row.
+
+<LessonFlow steps={['Corpus statistics', 'Chosen token inventory', 'Piece → ID map', 'ID → model row']} caption="A simplified flow for vocabulary. Follow each labeled step from left to right." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+
+```python
+vocabulary = {'cat': 42, '##s': 17, '[SEP]': 2}
+ids = [vocabulary[p] for p in ['cat', '##s', '[SEP]']]
+reverse = {number: piece for piece, number in vocabulary.items()}
+print(ids, [reverse[number] for number in ids])
+```
+
+**Expected behavior:** The IDs `[42, 17, 2]`, followed by the three original pieces.
+
+The forward map encodes pieces; the reverse map helps inspect IDs. A production tokenizer also applies segmentation, normalization, and decoding rules—this dictionary alone is insufficient.
+
+## When to use it
+
+- Keep tokenizer artifacts with model weights when deploying.
+- Inspect vocabulary and special-token IDs when debugging surprising input lengths or decoding.
+
+## Limits and common mistakes
+
+- A large vocabulary does not automatically mean better quality; it trades sequence length against embedding size and coverage.
+- A vocabulary entry can be a fragment, not a semantic concept.
+
+## Check your understanding
+
+<details><summary>Why can ID 42 not be interpreted without a tokenizer?</summary><p>Its piece assignment depends on that tokenizer’s vocabulary.</p></details>
+
+<details><summary>What connects a token ID to the model?</summary><p>The ID indexes a learned row in the embedding table.</p></details>
+
+## Connections and sources
+
+This lesson follows the topic sequence in chapter 2 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter02) and [this primary technical reference](https://huggingface.co/docs/transformers/en/tokenizer_summary).
 
 <ConceptConnections id="vocabulary" />

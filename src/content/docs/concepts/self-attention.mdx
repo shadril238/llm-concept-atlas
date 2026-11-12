@@ -11,19 +11,79 @@ prerequisites: [attention]
 related: [query-key-value, transformer]
 level: intermediate
 tags: [architecture, attention]
+lessonStatus: full
+lastReviewed: 2026-11-12
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { AttentionLab } from '../../../components/simulations/LearningLabs';
 
 <ConceptPrimer id="self-attention" />
 
-## Picture it
+## Definition and intuition
 
-Each token position produces signals that help determine which other positions contribute to its updated representation.
+**Self-attention** means the queries, keys, and values all come from positions in the same input sequence. Each position can build an updated representation from other positions it is allowed to inspect. “Self” names the source sequence; it does not mean a token attends only to itself.
 
-## Why it matters
+The allowed positions depend on the architecture. A bidirectional encoder can inspect both sides of a word, while a causal decoder cannot inspect future positions.
 
-This is a central mechanism inside transformer blocks. In a decoder, a causal mask restricts which positions a token may use during generation.
+## Before you start
+
+Read [attention](/llm-concept-atlas/concepts/attention/) first; return here when the key terms feel familiar.
+
+## How it works
+
+Start with an `n × d` matrix of token states. Learned projections create query, key, and value matrices. For each query row, dot products against key rows make scores. A mask removes forbidden key positions, softmax produces weights, and matrix multiplication with values produces updated states. A multi-head layer performs this in several learned subspaces before merging outputs.
+
+Without position information, the operation alone cannot distinguish all ordering relationships. Without a mask, a decoder training position could peek at a future answer. Both design choices matter alongside the attention equation.
+
+## Worked example
+
+In “The bank approved the loan,” the `bank` position can use `loan` in a bidirectional encoder. If a decoder is predicting `loan` from the prefix ending at `the`, its earlier positions cannot use that future word. Toggle the causal mask in the attention lab to see the eligible set change.
+
+<LessonFlow steps={['One sequence of states', 'Q, K, V from that sequence', 'Score and mask', 'Weighted context per position']} caption="A simplified flow for self attention. Follow each labeled step from left to right." />
+
+## Try the attention lab
+
+<AttentionLab client:visible />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+
+```python
+tokens = ['The', 'bank', 'approved', 'the', 'loan']
+for i, token in enumerate(tokens):
+    encoder_visible = tokens
+    decoder_visible = tokens[:i+1]
+    if token == 'bank':
+        print('encoder:', encoder_visible)
+        print('decoder:', decoder_visible)
+```
+
+**Expected behavior:** Two lists: the encoder list includes `loan`; the decoder list stops at `bank`.
+
+This code models allowed positions, not learned weights. It clarifies a common source of confusion: self-attention can be bidirectional or causal depending on its mask.
+
+## When to use it
+
+- Use bidirectional self-attention to encode a complete input.
+- Use causal self-attention for left-to-right next-token prediction.
+
+## Limits and common mistakes
+
+- Self-attention does not eliminate the need for positional information.
+- A visible connection does not imply equal importance; learned scores determine the mixture.
+
+## Check your understanding
+
+<details><summary>Where do Q, K, and V come from in self-attention?</summary><p>From learned projections of the same sequence of hidden states.</p></details>
+
+<details><summary>Why mask future positions in a decoder?</summary><p>To prevent a position from using tokens it must predict later.</p></details>
+
+## Connections and sources
+
+This lesson follows the topic sequence in chapter 3 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter03) and [this primary technical reference](https://arxiv.org/abs/1706.03762).
 
 <ConceptConnections id="self-attention" />

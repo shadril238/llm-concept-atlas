@@ -9,12 +9,18 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
-    "test:graph": "node --test tests/graph.test.mjs"
+    "test:graph": "node --test tests/graph.test.mjs",
+    "test:content": "node --test tests/content.test.mjs"
   },
   "dependencies": {
+    "@astrojs/react": "^7.1.8",
     "@astrojs/starlight": "^0.42.10",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "astro": "^7.3.6",
     "cytoscape": "3.34.4",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "sharp": "^0.35.3"
   },
   "devDependencies": {

@@ -11,19 +11,78 @@ prerequisites: [token-embedding]
 related: [representation-model, word2vec, semantic-search]
 level: beginner
 tags: [embeddings, retrieval]
+lessonStatus: full
+lastReviewed: 2026-11-12
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { EmbeddingLab } from '../../../components/simulations/LearningLabs';
 
 <ConceptPrimer id="text-embedding" />
 
-## Picture it
+## Definition and intuition
 
-Embed a question and several documents. Documents with nearby vectors may be good candidates to answer the question, even when they use different words.
+A **text embedding** is a vector representing a whole phrase, sentence, passage, or document. It lets software compare texts numerically. A useful embedding model aims to place texts relevant to the same task near each other, even if they use different words.
 
-## Why it matters
+Imagine placing short passages on a map where distance roughly reflects similarity. That map is learned and task-dependent; it is not a universal map of all meanings.
 
-Text embeddings support semantic search, clustering, recommendations, and other comparison tasks.
+## Before you start
+
+Read [token embedding](/llm-concept-atlas/concepts/token-embedding/) first; return here when the key terms feel familiar.
+
+## How it works
+
+An embedding model tokenizes text, computes contextual representations, then pools or otherwise selects information into one vector. Many sentence embedding models use training pairs so related texts receive higher similarity than unrelated ones. A common comparison is cosine similarity: `cos(a,b) = (a·b) / (||a|| ||b||)`, with `a·b` the dot product and `||a||` a vector length.
+
+For search, embed documents in advance, embed the query at request time, and rank documents by similarity. Query and document representations may use different prompts or encoders. The embedding model and its version should remain consistent across indexing and querying.
+
+## Worked example
+
+A query “reduce energy use” may rank a passage “tips for using less electricity” above a passage about “energy drinks.” Keyword overlap alone can make that distinction harder. Similarity still needs evaluation against actual relevant results.
+
+<LessonFlow steps={['Text', 'Contextual encoder', 'One vector per text', 'Similarity ranking']} caption="A simplified flow for text embedding. Follow each labeled step from left to right." />
+
+## Try the vector lab
+
+<EmbeddingLab client:visible />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+
+```python
+from math import sqrt
+vectors = {'query': (0.8, 0.5), 'electricity tip': (0.7, 0.6), 'energy drink': (-0.2, 0.9)}
+def cosine(a,b):
+    return sum(x*y for x,y in zip(a,b))/(sqrt(sum(x*x for x in a))*sqrt(sum(y*y for y in b)))
+for name, vector in vectors.items():
+    if name != 'query': print(name, round(cosine(vectors['query'],vector),2))
+```
+
+**Expected behavior:** The invented electricity-tip vector ranks above the drink vector.
+
+This code implements similarity for hand-chosen vectors, not embedding training. Use the [interactive embedding lab above](#try-the-vector-lab) to see the geometry, then the official chapter notebook for a real encoder.
+
+## When to use it
+
+- Semantic search, clustering, recommendations, and deduplication all use text-level vectors.
+- Use keyword or hybrid search when exact identifiers and rare names matter.
+
+## Limits and common mistakes
+
+- High cosine similarity does not prove factual entailment or truth.
+- A two-dimensional illustration cannot show the full geometry of a real embedding space.
+
+## Check your understanding
+
+<details><summary>Why embed documents before search requests?</summary><p>Their vectors can be reused; only a new query needs encoding.</p></details>
+
+<details><summary>What does cosine similarity compare?</summary><p>The alignment of two vector directions.</p></details>
+
+## Connections and sources
+
+This lesson follows the topic sequence in chapter 2 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter02) and [this primary technical reference](https://www.sbert.net/docs/sentence_transformer/usage/semantic_textual_similarity.html).
 
 <ConceptConnections id="text-embedding" />

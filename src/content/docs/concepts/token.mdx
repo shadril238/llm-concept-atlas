@@ -10,19 +10,71 @@ parent: chapter-02
 related: [tokenization, vocabulary, token-embedding]
 level: beginner
 tags: [tokens, foundations]
+lessonStatus: full
+lastReviewed: 2026-11-12
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
 
 <ConceptPrimer id="token" />
 
-## Picture it
+## Definition and intuition
 
-The sentence “LLMs are useful” may become several token pieces. Those pieces depend on the tokenizer: a token is not always one word.
+A **token** is a unit in the sequence that a particular tokenizer maps to an integer ID. It might be a whole word, a word fragment, punctuation, a byte-like piece, or a special marker. The model’s context length is measured in these units.
 
-## Why it matters
+A token is therefore an interface between readable text and the model’s numeric vocabulary. It is not the same thing as a linguistic word. The exact boundary comes from the tokenizer paired with the model.
 
-Models receive token IDs, not raw letters. Token counts affect context length, speed, and cost in many applications.
+## Before you start
+
+No prior model knowledge is required. Start with the example and follow linked terms as you need them.
+
+## How it works
+
+A tokenizer chooses a sequence of pieces that covers an input according to its rules and vocabulary. It maps each piece to an ID; special IDs may mark sequence boundaries or padding. The model looks up an embedding vector for each ID. During generation, the model predicts an ID and the tokenizer turns the resulting ID sequence back into text.
+
+The number of tokens matters because attention operates over positions and a model accepts only a finite context. Long or unfamiliar strings often use more pieces than familiar ones. Count with the actual model tokenizer when planning a prompt or document chunk.
+
+## Worked example
+
+The text `unhappiness!` might become `un`, `happiness`, `!` in one invented tokenizer and `unhappy`, `ness`, `!` in another. Both sequences represent the same visible text but have different IDs and potentially different lengths.
+
+<LessonFlow steps={['Readable text', 'Tokenizer pieces', 'Integer token IDs', 'Embedding lookup']} caption="A simplified flow for token. Follow each labeled step from left to right." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+
+```python
+# Invented vocabulary: a mechanics example, not a trained tokenizer
+vocab = {'un': 12, 'happiness': 48, '!': 7}
+pieces = ['un', 'happiness', '!']
+print([vocab[piece] for piece in pieces])
+```
+
+**Expected behavior:** `[12, 48, 7]`
+
+A dictionary lookup maps each known piece to an ID. Real tokenizers also decide *which* pieces to use. The [tokenization lesson](/llm-concept-atlas/concepts/tokenization/) contains a real tokenizer example.
+
+## When to use it
+
+- Count tokens before sending long prompts or retrieved passages.
+- Inspect pieces when a model handles code, names, or unfamiliar languages poorly.
+
+## Limits and common mistakes
+
+- One token is not one word, and visible character count is not a reliable token count.
+- IDs have meaning only with their matching vocabulary and model.
+
+## Check your understanding
+
+<details><summary>Can punctuation be its own token?</summary><p>Yes, depending on the tokenizer.</p></details>
+
+<details><summary>Why should an application use the model’s tokenizer to count length?</summary><p>Different vocabularies and rules can split the same text differently.</p></details>
+
+## Connections and sources
+
+This lesson follows the topic sequence in chapter 2 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter02) and [this primary technical reference](https://huggingface.co/docs/transformers/en/tokenizer_summary).
 
 <ConceptConnections id="token" />

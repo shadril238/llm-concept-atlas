@@ -11,19 +11,78 @@ prerequisites: [text-embedding]
 related: [rag, representation-model]
 level: beginner
 tags: [retrieval, applications]
+lessonStatus: full
+lastReviewed: 2026-11-12
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { EmbeddingLab } from '../../../components/simulations/LearningLabs';
 
 <ConceptPrimer id="semantic-search" />
 
-## Picture it
+## Definition and intuition
 
-A user searches for “how to lower power use.” A relevant document titled “Energy efficiency tips” may still match well even though it uses different words.
+**Semantic search** ranks documents by a representation of meaning, not just exact word overlap. A query and candidate passages are embedded into vectors, then compared. This can retrieve a relevant passage even when it uses a paraphrase of the question.
 
-## Why it matters
+It is a retrieval method, not a guarantee that the top result answers the question. A practical system must prepare documents, evaluate ranking quality, and often combine dense and keyword search.
 
-Dense retrieval can find related meaning, while keyword matching remains useful for exact names and terms. Many practical search systems combine methods.
+## Before you start
+
+Read [text embedding](/llm-concept-atlas/concepts/text-embedding/) first; return here when the key terms feel familiar.
+
+## How it works
+
+First divide source material into passages with usable titles and provenance. Encode each passage using an embedding model and store its vector. At query time, encode the question in a compatible way, compare it with indexed vectors, and return the top candidates. A reranker may then compare each query–passage pair more deeply before presenting results.
+
+Cosine similarity or dot product can rank dense vectors; approximate nearest-neighbor indexes accelerate large collections. Keyword methods can outperform dense retrieval for exact IDs, names, or quoted phrases, so hybrid retrieval is often useful. Evaluate with labeled queries using recall at k or ranking metrics, not only a few satisfying examples.
+
+## Worked example
+
+Query: “How can I reduce my electric bill?” Passage A: “Ways to use less power at home.” Passage B: “How electricity prices are set.” Both are related, but A better satisfies the implied request for actions. A semantic retriever might surface both; a reranker can improve their order.
+
+<LessonFlow steps={['Chunk and label documents', 'Embed and index passages', 'Embed query', 'Rank candidates', 'Inspect or rerank']} caption="A simplified flow for semantic search. Follow each labeled step from left to right." />
+
+## Try the vector lab
+
+<EmbeddingLab client:visible />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+
+```python
+from math import sqrt
+query = (0.9,0.3)
+docs = {'power-saving tips':(0.8,0.4), 'billing policy':(0.4,0.8)}
+def cos(a,b):
+    return sum(x*y for x,y in zip(a,b))/(sqrt(sum(x*x for x in a))*sqrt(sum(y*y for y in b)))
+print(sorted(docs, key=lambda name: cos(query,docs[name]), reverse=True))
+```
+
+**Expected behavior:** `power-saving tips` ranks first for these invented vectors.
+
+The vectors are illustrative, so the code tests ranking mechanics only. The [official chapter 8 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter08) uses embedding models. For a real system, encode both documents and queries with a compatible model and retain source IDs.
+
+## When to use it
+
+- Search knowledge bases with varied phrasing; retrieve candidate context for RAG.
+- Add keyword retrieval when exact identifiers or rare names are critical.
+
+## Limits and common mistakes
+
+- Similarity can rank a related but unhelpful passage above the answer.
+- A corpus cannot return information it never contained; document quality and chunking matter.
+
+## Check your understanding
+
+<details><summary>What is stored before a user searches?</summary><p>Passage embeddings plus source metadata.</p></details>
+
+<details><summary>Why might keyword search still be valuable?</summary><p>Exact names, IDs, and quoted terms can be matched reliably.</p></details>
+
+## Connections and sources
+
+This lesson follows the topic sequence in chapter 8 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter08) and [this primary technical reference](https://www.sbert.net/examples/sentence_transformer/applications/semantic-search/README.html).
 
 <ConceptConnections id="semantic-search" />
