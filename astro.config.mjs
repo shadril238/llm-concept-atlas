@@ -21,6 +21,8 @@ export default defineConfig({
             { label: "Overview", slug: "index" },
             { label: "Explore the atlas", slug: "atlas" },
             { label: "How an LLM processes a sentence", slug: "paths/how-an-llm-processes-a-sentence" },
+            { label: "From semantic search to RAG", slug: "paths/from-semantic-search-to-rag" },
+            { label: "About and sources", slug: "about-and-sources" },
           ],
         },
         {

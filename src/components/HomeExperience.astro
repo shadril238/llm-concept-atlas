@@ -46,6 +46,11 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     </div>
   </section>
 
+  <section class="path-next" aria-labelledby="rag-path-heading">
+    <div><span class="eyebrow">Guided path · chapter 8</span><h2 id="rag-path-heading">From search to a sourced answer.</h2><p>Trace how passages become a ranked result, selected evidence, and a checked RAG answer.</p></div>
+    <a class="secondary-button" href={`${base}paths/from-semantic-search-to-rag/`}>Explore the RAG path <span aria-hidden="true">↗</span></a>
+  </section>
+
   <section class="home-footer-callout"><div><span class="eyebrow">The big picture</span><h2>Every concept has a place.</h2><p>Browse the atlas to see the book's hierarchy and the first set of connected concepts.</p></div><a class="primary-button" href={`${base}atlas/`}>Open the concept atlas <span aria-hidden="true">↗</span></a></section>
-  <p class="independent-note">An independent learning companion inspired by <em>Hands-On Large Language Models</em> by Jay Alammar and Maarten Grootendorst. <a href="https://github.com/HandsOnLLM/Hands-On-Large-Language-Models">Visit the authors' official notebooks ↗</a></p>
+  <p class="independent-note">An independent learning companion inspired by <em>Hands-On Large Language Models</em> by Jay Alammar and Maarten Grootendorst. <a href={`${base}about-and-sources/`}>About this project and its sources ↗</a></p>
 </div>

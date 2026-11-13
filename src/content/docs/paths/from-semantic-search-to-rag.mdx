@@ -1,0 +1,63 @@
+---
+title: From semantic search to RAG
+description: A guided route from finding a passage to answering with evidence.
+kind: path
+lastReviewed: 2026-11-13
+---
+
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { RagLab } from '../../../components/simulations/LearningLabs';
+
+This path follows chapter 8 of *Hands-On Large Language Models*. You will build a mental model of two related systems: **search**, which returns useful passages, and **RAG**, which asks a generator to answer from selected passages. Allow about 30–40 minutes. Each linked concept is a full lesson with an example, code, and self-checks.
+
+<LessonFlow steps={['Prepare passages', 'Embed question and passages', 'Retrieve candidates', 'Select evidence', 'Generate and verify']} caption="A question moves from retrieval to a supported answer. Each stage can fail independently." />
+
+## 1. Start with a question and a document collection
+
+Imagine a visitor asking, **“When does the library close on Saturday?”** The library has three short documents: an hours page, a laptop-loan policy, and a café menu. Search cannot return a fact that the collection does not contain, so document coverage and freshness come before model choice.
+
+Read [text embeddings](/llm-concept-atlas/concepts/text-embedding/) to understand how a passage becomes a vector. Then read [semantic search](/llm-concept-atlas/concepts/semantic-search/) for the complete indexing and query flow. In the embedding lab, compare two nearby words and notice that a vector score is a ranking signal, not proof that a passage answers a question.
+
+**Checkpoint:** If the hours page was never indexed, would a better generator fix the system? No. The evidence is missing from retrieval.
+
+## 2. Retrieve and rank candidates
+
+Split long documents into passages and keep a source ID, title, and URL with each one. An embedding model encodes the passages ahead of time and the question at request time. Similarity brings back candidates; a reranker can examine the question and each candidate together. Exact names, dates, or document IDs may benefit from keyword or hybrid search.
+
+For our question, a sensible ranking places **Library hours** before **Laptop loans**. The top result is still only a candidate. Read the passage: does it actually state Saturday’s closing time? If the passage only described weekday hours, a high similarity score would not justify an answer.
+
+**Try:** Follow the [semantic search code example](/llm-concept-atlas/concepts/semantic-search/#implement-it), then change one document vector. Observe how the ranking changes without changing the user’s question.
+
+## 3. Select evidence that fits the context
+
+Read [tokenization](/llm-concept-atlas/concepts/tokenization/) if you need a reminder that a generator’s context is limited in **tokens**, not words. The question, instructions, and retrieved passages all share that space. Include the passage’s source ID so the answer can point back to something a reader can inspect. A context selector may choose fewer, better passages instead of filling every available position.
+
+**Failure to recognize:** The relevant hours passage appears among candidates but is omitted or truncated before generation. Retrieval succeeded; context selection failed.
+
+## 4. Generate and inspect the answer
+
+Read [retrieval-augmented generation](/llm-concept-atlas/concepts/rag/) for the full pipeline. The generator receives the question and selected passages. It may draft “The library closes at 5 p.m. on Saturday [Library hours].” A citation is useful only if that source really supports the claim. If the selected context has no Saturday hours, the system should say it cannot answer from those passages.
+
+<RagLab client:visible />
+
+Remove the **Library hours** card, then switch to the laptop question and remove **Laptop loans**. Watch the answer change. The lab uses fixed teaching rules so you can isolate evidence selection; a real generator still needs a support check.
+
+## 5. Evaluate the two halves separately
+
+Use retrieval questions with known relevant passages to measure whether the correct evidence appears in the top results. Then inspect generated answers for correctness, completeness, and source support. These checks tell you where to improve the system:
+
+| Observation | Likely stage to investigate |
+| --- | --- |
+| The right passage is absent from the top results | Ingestion, chunking, embedding, or ranking |
+| The right passage was retrieved but not sent to the model | Context selection or token budget |
+| The right passage was supplied, but the answer invents a time | Prompting, generation, or support verification |
+
+Run the [RAG question-answering use case](/llm-concept-atlas/use-cases/rag-question-answering/) when you are ready to try real embedding and generation models. The [official chapter 8 notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter08) go further into the book’s implementation. The route and library example here are original.
+
+## Check your understanding
+
+<details><summary>What is the difference between semantic search and RAG?</summary><p>Semantic search ranks and returns passages. RAG uses selected passages as context for a generator that writes an answer.</p></details>
+
+<details><summary>Why should a RAG answer keep source IDs?</summary><p>They let a reader inspect the evidence and make it possible to check whether each claim is supported.</p></details>
+
+<details><summary>Does adding more passages always improve an answer?</summary><p>No. Irrelevant or truncated passages can waste context and confuse generation. Select and evaluate evidence for the task.</p></details>
