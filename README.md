@@ -2,7 +2,9 @@
 
 **See it. Try it. Understand it.** An independent visual companion to *Hands-On Large Language Models* by Jay Alammar and Maarten Grootendorst.
 
-This repository has completed **Phases 1–3** of [the implementation plan](./plan.md) and includes the Phase 4 release workflow: a Starlight foundation, an outline of all 12 chapters, an interactive concept atlas, 20 full lessons, four interactive teaching demos, two guided learning paths, and classification and RAG use-case pages. The current full lessons cover chapters 1–3 and 8; the remaining chapter outlines are a roadmap for later content.
+This repository has completed **Phases 1–4** of [the implementation plan](./plan.md): a published Starlight site, an outline of all 12 chapters, an interactive concept atlas, 20 full lessons, four interactive teaching demos, two guided learning paths, and classification and RAG use-case pages. The current full lessons cover chapters 1–3 and 8; the remaining chapter outlines are a roadmap for Phase 5.
+
+**Read the site:** [llm-concept-atlas on GitHub Pages](https://shadril238.github.io/llm-concept-atlas/).
 
 ## Run locally
 
@@ -35,7 +37,7 @@ The book and its artwork are copyrighted. This project uses original explanation
 
 ## GitHub Pages
 
-The site is configured for `https://shadril238.github.io/llm-concept-atlas/`. The [deployment workflow](./.github/workflows/deploy.yml) builds on pushes to `main`, runs the release checks, and publishes the static site. The repository’s **Settings → Pages → Build and deployment → Source** must be set to **GitHub Actions**.
+The site is published at `https://shadril238.github.io/llm-concept-atlas/`. The [deployment workflow](./.github/workflows/deploy.yml) builds on pushes to `main`, runs the release checks, and publishes the static site. The repository’s **Settings → Pages → Build and deployment → Source** is set to **GitHub Actions**.
 
 ## License
 

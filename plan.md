@@ -1,6 +1,6 @@
 # llm-concept-atlas — implementation plan
 
-**Status (2026-11-12): Phases 1–3 implemented locally.** The repository contains the Starlight site, chapter map, 20 full concept lessons, four teaching simulations, an interactive atlas graph, the first guided path, and classification and RAG use cases. Content and graph validation pass. Phases 4–5 remain on the roadmap.
+**Status (2026-11-13): Phases 1–4 complete and published.** The [public site](https://shadril238.github.io/llm-concept-atlas/) contains the Starlight foundation, chapter map, 20 full concept lessons, four teaching simulations, an interactive atlas graph, two guided paths, and classification and RAG use cases. The release build and link checks pass in GitHub Actions. Phase 5 remains on the roadmap.
 
 ## 1. Goal
 
