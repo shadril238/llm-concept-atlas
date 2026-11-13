@@ -1,0 +1,90 @@
+---
+title: Masked language modeling
+description: Masked language modeling trains an encoder to predict hidden tokens from surrounding context.
+kind: concept
+conceptId: masked-language-modeling
+chapter: 11
+part: training
+summary: Masked language modeling trains an encoder to predict hidden tokens from surrounding context.
+parent: chapter-11
+prerequisites: [encoder-only]
+related: [setfit, named-entity-recognition]
+level: advanced
+tags: [training, chapter-11]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+
+<ConceptPrimer id="masked-language-modeling" />
+
+## Definition and intuition
+
+Masked language modeling trains an encoder to predict hidden tokens from surrounding context.
+
+Chapter 11 adapts an encoder to labeled tasks. Data splits, frozen versus trainable weights, and task-specific heads change both cost and generalization.
+
+## Before you start
+
+Read [Encoder-Only Model](/llm-concept-atlas/concepts/encoder-only/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **masked language modeling** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Replace selected input tokens with masks according to the training scheme
+2. **Transform:** Predict the original tokens using both left and right context
+3. **Inspect:** Update the encoder and assess transfer to downstream tasks.
+
+### The important distinction
+
+A masked encoder can use tokens on both sides of the missing position, unlike a causal decoder predicting only from the prefix. The mask is a training device; downstream inference often uses the resulting contextual representations without literal mask tokens. Whole-document classification needs an additional head or pooling rule.
+
+## Worked example
+
+“The cat [MASK] on the mat” may lead to “sat”. The task teaches contextual representations, but predicting the missing word is not the same as classifying a whole document. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Replace selected input tokens with masks according to the training scheme", "Predict the original tokens using both left and right context", "Update the encoder and assess transfer to downstream tasks."]} caption="A teaching diagram for Masked language modeling. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+tokens = ["the", "model", "reads"]
+target = tokens[1]
+masked = tokens.copy(); masked[1] = "[MASK]"
+print(masked, "target:", target)
+```
+
+**Expected output:**
+
+```text
+['the', '[MASK]', 'reads'] target: model
+```
+
+**What the code shows:** One token is replaced by `[MASK]` and the original token is kept as the training target. The example isolates data preparation, not the neural prediction. The [official chapter 11 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter11) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use it for encoder pretraining or continued pretraining on a relevant corpus. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- The masking objective differs from many downstream tasks and can learn corpus artifacts.
+- **Failure to look for:** Continued pretraining on stale internal text improves token prediction but hurts current classification.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First replace selected input tokens with masks according to the training scheme Then predict the original tokens using both left and right context Finally update the encoder and assess transfer to downstream tasks.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>Continued pretraining on stale internal text improves token prediction but hurts current classification.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 11 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 11 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter11). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="masked-language-modeling" />

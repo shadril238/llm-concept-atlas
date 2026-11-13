@@ -1,0 +1,91 @@
+---
+title: Windowed memory
+description: Windowed memory keeps only a recent slice of messages in the next prompt.
+kind: concept
+conceptId: windowed-memory
+chapter: 7
+part: applications
+summary: Windowed memory keeps only a recent slice of messages in the next prompt.
+parent: chapter-07
+prerequisites: [conversation-memory]
+related: [conversation-memory, summarized-memory]
+level: intermediate
+tags: [applications, chapter-07]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+
+<ConceptPrimer id="windowed-memory" />
+
+## Definition and intuition
+
+Windowed memory keeps only a recent slice of messages in the next prompt.
+
+Chapter 7 combines model calls with templates, memory, and tools. Trace the inputs and outputs of each step so an error can be located rather than hidden inside a chain.
+
+## Before you start
+
+Read [Conversation memory](/llm-concept-atlas/concepts/conversation-memory/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **windowed memory** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Choose a window length measured in turns or tokens
+2. **Transform:** Include the newest relevant messages within that limit
+3. **Inspect:** Check whether essential older facts were lost.
+
+### The important distinction
+
+A fixed last-N-turn window is simple but can cut a user constraint exactly at the boundary. Token-aware windows handle variable message length better than turn counts, though they still need a policy for durable facts. Test long conversations with corrections and changes of goal.
+
+## Worked example
+
+A six-turn chat retains only the last two turns. The answer uses recent context but forgets a constraint stated at the start unless it is separately preserved. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Choose a window length measured in turns or tokens", "Include the newest relevant messages within that limit", "Check whether essential older facts were lost."]} caption="A teaching diagram for Windowed memory. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+history = [("user", "My name is Sam"), ("assistant", "Hello Sam")]
+history.append(("user", "What is my name?"))
+print("\n".join(f"{role}: {text}" for role, text in history[-3:]))
+```
+
+**Expected output:**
+
+```text
+user: My name is Sam
+assistant: Hello Sam
+user: What is my name?
+```
+
+**What the code shows:** The slice keeps the last three messages and formats them for a future request. Earlier messages are absent unless the application explicitly stores and reinserts them. The [official chapter 7 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter07) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use it when recent exchanges matter most and context cost must stay bounded. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- It can drop persistent constraints or facts that remain important.
+- **Failure to look for:** The assistant forgets a dietary restriction because it fell outside the window.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First choose a window length measured in turns or tokens Then include the newest relevant messages within that limit Finally check whether essential older facts were lost.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>The assistant forgets a dietary restriction because it fell outside the window.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 7 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 7 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter07). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="windowed-memory" />

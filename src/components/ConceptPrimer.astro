@@ -10,6 +10,7 @@ const chapter = chapterByNumber(Number(node.chapter));
 if (!chapter) throw new Error(`Concept ${id} has an unknown chapter`);
 const part = parts.find((item) => item.id === node.part);
 const parent = graph.nodes.find((item) => item.id === node.parent);
+const fullLessonCount = graph.nodes.filter((item) => item.kind === 'concept' && item.lessonStatus === 'full').length;
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const url = (path: string) => base + path.replace(/^\/+/, '');
 ---
@@ -23,4 +24,41 @@ const url = (path: string) => base + path.replace(/^\/+/, '');
     {parent?.kind === 'concept' && <><a href={url(parent.href)}>{parent.title}</a><span>→</span></>}
     <strong>{node.title}</strong>
   </div>
+  <div class="lesson-progress" data-lesson-progress data-concept-id={id} data-total={fullLessonCount}>
+    <button type="button" aria-pressed="false">Mark lesson complete</button>
+    <span class="lesson-progress-count" aria-live="polite"></span>
+    <small>Progress is saved only in this browser.</small>
+  </div>
 </div>
+
+<script>
+  const storageKey = 'llm-concept-atlas-progress-v1';
+  document.querySelectorAll<HTMLElement>('[data-lesson-progress]').forEach((root) => {
+    const button = root.querySelector<HTMLButtonElement>('button');
+    const count = root.querySelector<HTMLElement>('.lesson-progress-count');
+    const id = root.dataset.conceptId;
+    const total = Number(root.dataset.total);
+    if (!button || !count || !id) return;
+    const read = (): string[] => {
+      try {
+        const parsed = JSON.parse(localStorage.getItem(storageKey) ?? '[]');
+        return Array.isArray(parsed) ? parsed.filter((value): value is string => typeof value === 'string') : [];
+      } catch { return []; }
+    };
+    const render = () => {
+      const completed = read();
+      const done = completed.includes(id);
+      button.setAttribute('aria-pressed', String(done));
+      button.textContent = done ? 'Completed ✓' : 'Mark lesson complete';
+      count.textContent = `${Math.min(completed.length, total)} of ${total} lessons completed`;
+    };
+    button.addEventListener('click', () => {
+      const completed = new Set(read());
+      if (completed.has(id)) completed.delete(id);
+      else completed.add(id);
+      try { localStorage.setItem(storageKey, JSON.stringify([...completed])); } catch { /* Reading still works when storage is unavailable. */ }
+      render();
+    });
+    render();
+  });
+</script>

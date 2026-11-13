@@ -1,0 +1,91 @@
+---
+title: Quantized models
+description: Quantized models store or compute with lower-precision representations of weights or activations to reduce resource use.
+kind: concept
+conceptId: quantized-models
+chapter: 7
+part: applications
+summary: Quantized models store or compute with lower-precision representations of weights or activations to reduce resource use.
+parent: chapter-07
+prerequisites: [generative-model]
+related: [prompt-templates]
+level: intermediate
+tags: [applications, chapter-07]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+
+<ConceptPrimer id="quantized-models" />
+
+## Definition and intuition
+
+Quantized models store or compute with lower-precision representations of weights or activations to reduce resource use.
+
+Chapter 7 combines model calls with templates, memory, and tools. Trace the inputs and outputs of each step so an error can be located rather than hidden inside a chain.
+
+## Before you start
+
+Read [Generative Model](/llm-concept-atlas/concepts/generative-model/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **quantized models** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Choose a bit width and scale for a set of values
+2. **Transform:** Map continuous values to a smaller discrete set
+3. **Inspect:** Measure memory, speed, and quality on the target hardware.
+
+### The important distinction
+
+Quantization often stores an integer code plus a scale and sometimes a zero point for each group of weights. Smaller groups can preserve quality but add metadata. Compare actual memory and throughput on deployment hardware; a compressed file size alone does not predict request latency.
+
+## Worked example
+
+Weights 0.12 and 0.48 become integer bins under a 0.1 scale, then are approximately reconstructed. Tiny rounding errors can accumulate differently across layers. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Choose a bit width and scale for a set of values", "Map continuous values to a smaller discrete set", "Measure memory, speed, and quality on the target hardware."]} caption="A teaching diagram for Quantized models. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+weights = [0.12, 0.48, -0.31]
+scale = 0.1
+integers = [round(weight / scale) for weight in weights]
+restored = [value * scale for value in integers]
+print(integers, restored)
+```
+
+**Expected output:**
+
+```text
+[1, 5, -3] [0.1, 0.5, -0.30000000000000004]
+```
+
+**What the code shows:** Dividing by the scale and rounding creates integer codes; multiplication approximately restores the values. The difference is quantization error. The [official chapter 7 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter07) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use quantization when memory or throughput blocks a useful model from running. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Lower bit width does not always increase speed; kernels and hardware matter.
+- **Failure to look for:** A model fits memory after quantization but fails an important accuracy test ignored during deployment.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First choose a bit width and scale for a set of values Then map continuous values to a smaller discrete set Finally measure memory, speed, and quality on the target hardware.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>A model fits memory after quantization but fails an important accuracy test ignored during deployment.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 7 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 7 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter07). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="quantized-models" />

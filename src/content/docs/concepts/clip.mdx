@@ -1,0 +1,98 @@
+---
+title: CLIP
+description: CLIP learns aligned image and text embeddings from paired examples using a contrastive objective.
+kind: concept
+conceptId: clip
+chapter: 9
+part: applications
+summary: CLIP learns aligned image and text embeddings from paired examples using a contrastive objective.
+parent: chapter-09
+prerequisites: [multimodal-embeddings]
+related: [multimodal-embeddings, openclip]
+level: intermediate
+tags: [applications, chapter-09]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { MultimodalLab } from '../../../components/simulations/PhaseFiveLabs';
+
+<ConceptPrimer id="clip" />
+
+## Definition and intuition
+
+CLIP learns aligned image and text embeddings from paired examples using a contrastive objective.
+
+Chapter 9 connects images and language. A shared vector space supports matching, while a generation model needs an additional path from visual features to text tokens.
+
+## Before you start
+
+Read [Multimodal embeddings](/llm-concept-atlas/concepts/multimodal-embeddings/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **CLIP** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Encode a batch of images and captions into two sets of vectors
+2. **Transform:** Increase similarity for matched pairs relative to mismatched pairs
+3. **Inspect:** Use the trained encoders for zero-shot matching or retrieval.
+
+### The important distinction
+
+CLIP uses separate image and text encoders, so candidate captions can be encoded and compared efficiently. Its contrastive loss makes matched pairs score higher within a batch. Zero-shot classification works by comparing an image with text descriptions of candidate classes, which makes prompt wording consequential.
+
+## Worked example
+
+Given an image of a bicycle and candidate captions “a bicycle” and “a dog,” the matched caption should score higher. The model is comparing candidates, not composing a detailed explanation. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Encode a batch of images and captions into two sets of vectors", "Increase similarity for matched pairs relative to mismatched pairs", "Use the trained encoders for zero-shot matching or retrieval."]} caption="A teaching diagram for CLIP. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Try the interactive lab
+
+<MultimodalLab client:visible />
+
+Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+from math import sqrt
+image = (0.8, 0.6)
+captions = {"a dog": (0.7, 0.7), "a car": (-0.6, 0.8)}
+score = lambda a,b: sum(x*y for x,y in zip(a,b)) / (sqrt(sum(x*x for x in a))*sqrt(sum(y*y for y in b)))
+print(max(captions, key=lambda text: score(image, captions[text])))
+```
+
+**Expected output:**
+
+```text
+a dog
+```
+
+**What the code shows:** The toy image vector is compared with caption vectors using cosine similarity. The highest score wins among the offered candidates; no image pixels are processed. The [official chapter 9 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter09) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use CLIP-style models for cross-modal search or label scoring without task-specific classifier training. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Performance depends on training data and candidate wording; ranking is not grounded scene understanding.
+- **Failure to look for:** A spurious background cue makes an incorrect caption score above the true object.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First encode a batch of images and captions into two sets of vectors Then increase similarity for matched pairs relative to mismatched pairs Finally use the trained encoders for zero-shot matching or retrieval.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>A spurious background cue makes an incorrect caption score above the true object.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 9 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 9 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter09). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="clip" />

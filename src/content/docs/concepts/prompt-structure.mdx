@@ -1,0 +1,100 @@
+---
+title: Prompt structure
+description: Prompt structure arranges task instructions, context, examples, and output requirements so their roles are clear.
+kind: concept
+conceptId: prompt-structure
+chapter: 6
+part: applications
+summary: Prompt structure arranges task instructions, context, examples, and output requirements so their roles are clear.
+parent: chapter-06
+prerequisites: [generative-model]
+related: [instruction-prompting]
+level: intermediate
+tags: [applications, chapter-06]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { PromptLab } from '../../../components/simulations/PhaseFiveLabs';
+
+<ConceptPrimer id="prompt-structure" />
+
+## Definition and intuition
+
+Prompt structure arranges task instructions, context, examples, and output requirements so their roles are clear.
+
+Chapter 6 treats a prompt as a task specification. A prompt can guide output, but it does not change model weights or guarantee that an answer is correct.
+
+## Before you start
+
+Read [Generative Model](/llm-concept-atlas/concepts/generative-model/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **prompt structure** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** State the task and permitted source material
+2. **Transform:** Separate examples from the new input with consistent delimiters
+3. **Inspect:** Specify output shape and inspect whether the response follows it.
+
+### The important distinction
+
+Separate trusted task instructions from untrusted source material with explicit roles or delimiters. This does not make the source harmless, but it clarifies which text is evidence and which text defines the task. Inspect the fully rendered prompt during development because a correct template can still be filled incorrectly.
+
+## Worked example
+
+A support prompt gives a labeling rule, two labeled examples, then one new message. If the new message is not separated, the model may treat it as part of an example. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["State the task and permitted source material", "Separate examples from the new input with consistent delimiters", "Specify output shape and inspect whether the response follows it."]} caption="A teaching diagram for Prompt structure. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Try the interactive lab
+
+<PromptLab client:visible />
+
+Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+instruction = "Return one label: positive or negative."
+example = "Text: I loved it. Label: positive"
+query = "Text: The ending was dull. Label:"
+prompt = "\n".join([instruction, example, query])
+print(prompt)
+```
+
+**Expected output:**
+
+```text
+Return one label: positive or negative.
+Text: I loved it. Label: positive
+Text: The ending was dull. Label:
+```
+
+**What the code shows:** The final string contains the instruction, demonstration, and new query in that order. Inspect the rendered string before sending it to a real generator. The [official chapter 6 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter06) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use a stable structure when prompts become reused, tested, or assembled from multiple inputs. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- A well-formatted prompt cannot guarantee truth or protect against every malicious instruction in retrieved text.
+- **Failure to look for:** A retrieved document is inserted as if it were a trusted instruction and changes the assistant's task.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First state the task and permitted source material Then separate examples from the new input with consistent delimiters Finally specify output shape and inspect whether the response follows it.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>A retrieved document is inserted as if it were a trusted instruction and changes the assistant's task.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 6 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 6 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter06). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="prompt-structure" />

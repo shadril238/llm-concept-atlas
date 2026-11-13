@@ -1,0 +1,59 @@
+---
+title: From applications to fine-tuning
+description: A guided route through classification, clustering, prompting, multimodal models, and model adaptation.
+kind: path
+---
+
+This route connects the book's later chapters. Follow it after [the sentence path](/llm-concept-atlas/paths/how-an-llm-processes-a-sentence/) and [the search-to-RAG path](/llm-concept-atlas/paths/from-semantic-search-to-rag/), or start at the chapter that matches your question. Plan on several sessions: each linked concept is a full lesson with a diagram, runnable toy code, and self-checks. The [concept directory](/llm-concept-atlas/concept-directory/) lists all 96 lessons.
+
+## 1. Turn text into decisions — chapter 4
+
+Start with [sentiment analysis](/llm-concept-atlas/concepts/sentiment-analysis/) and decide what a label actually means. A review that praises the camera but criticizes the battery shows why labels need a unit of analysis. Compare [supervised classification](/llm-concept-atlas/concepts/supervised-classification/), [embedding-based classification](/llm-concept-atlas/concepts/embeddings-for-classification/), [zero-shot classification](/llm-concept-atlas/concepts/zero-shot-classification/), and [generative classification](/llm-concept-atlas/concepts/generative-classification/). In the classification lab, move the decision threshold and watch a fixed score become a different label.
+
+**Checkpoint:** Which change requires new labeled training data: moving a decision threshold, rewriting a prompt, or fine-tuning a task-specific model? Only the last one necessarily updates weights from labeled examples. A threshold change can be evaluated with labeled data but does not retrain the model.
+
+## 2. Discover themes without labels — chapter 5
+
+Read [document embeddings](/llm-concept-atlas/concepts/document-embeddings/), then [dimensionality reduction](/llm-concept-atlas/concepts/dimensionality-reduction/) and [clustering](/llm-concept-atlas/concepts/clustering/). Move the borderline document in the clustering lab. The color can change even though the document's words have not; a cluster is a result of representation and method choices. [Cluster inspection](/llm-concept-atlas/concepts/cluster-inspection/) and [topic representations](/llm-concept-atlas/concepts/topic-representations/) show how people turn those groups into trustworthy descriptions. [BERTopic](/llm-concept-atlas/concepts/bertopic/) combines the stages.
+
+**Checkpoint:** Why is a visually separate island in a 2D plot insufficient evidence for a real topic? The projection can distort original-space distances, and a label needs to fit sampled documents, including outliers.
+
+## 3. Specify and verify generation — chapter 6
+
+Begin with [prompt structure](/llm-concept-atlas/concepts/prompt-structure/) and [instruction prompting](/llm-concept-atlas/concepts/instruction-prompting/). Toggle examples and output format in the prompt lab; inspect the exact prompt text rather than assuming what a template produced. [In-context learning](/llm-concept-atlas/concepts/in-context-learning/) uses examples without weight updates. [Chain prompting](/llm-concept-atlas/concepts/chain-prompting/) separates work into steps, while [output verification](/llm-concept-atlas/concepts/output-verification/) checks syntax and evidence after generation.
+
+**Checkpoint:** If a generated answer is valid JSON but cites an invented date, which check failed? The shape check passed; factual support verification failed.
+
+## 4. Compose model calls — chapter 7
+
+[Prompt templates](/llm-concept-atlas/concepts/prompt-templates/) make inputs repeatable. [Chains](/llm-concept-atlas/concepts/chains/) pass outputs from one step to the next; [conversation memory](/llm-concept-atlas/concepts/conversation-memory/) selects prior information to include in a new request. An [agent](/llm-concept-atlas/concepts/agents/) chooses actions from observations, and [ReAct](/llm-concept-atlas/concepts/react/) gives a way to reason about that loop. At each stage ask: what evidence did the system actually obtain, and what action really happened?
+
+**Checkpoint:** A tool returns no result, but the agent says it completed the task. The claim is unsupported. Inspect tool output and stop conditions before changing the prompt.
+
+## 5. Join images and language — chapter 9
+
+[Vision transformers](/llm-concept-atlas/concepts/vision-transformers/) create image patch representations. [Multimodal embeddings](/llm-concept-atlas/concepts/multimodal-embeddings/) and [CLIP](/llm-concept-atlas/concepts/clip/) place images and text in comparable spaces. Change the scene in the multimodal lab and see which caption vector ranks highest. [BLIP-2](/llm-concept-atlas/concepts/blip-2/) bridges visual features to a generator; [image captioning](/llm-concept-atlas/concepts/image-captioning/) produces text. Matching and generation are related tasks with different failure modes.
+
+**Checkpoint:** Does the top CLIP caption prove every detail in that sentence is visible? No. Similarity ranks candidates and must be checked against the image.
+
+## 6. Train useful embeddings — chapter 10
+
+[Contrastive learning](/llm-concept-atlas/concepts/contrastive-learning/) defines positives and negatives, then moves vector relationships. Adjust pair scores in the contrastive lab and watch the loss change. [SBERT](/llm-concept-atlas/concepts/sbert/) creates reusable sentence vectors, while [embedding evaluation](/llm-concept-atlas/concepts/embedding-evaluation/) asks whether those vectors help the target task. [Domain adaptation](/llm-concept-atlas/concepts/domain-adaptation/) should be judged on new domain examples, not just a lower training loss.
+
+**Checkpoint:** What happens when a true answer passage is mislabeled as a negative? The objective can push an answer-bearing passage away from the query.
+
+## 7. Adapt encoders — chapter 11
+
+[BERT fine-tuning](/llm-concept-atlas/concepts/bert-fine-tuning/) updates an encoder and task head. [Frozen layers](/llm-concept-atlas/concepts/frozen-layers/) trade adaptation capacity for lower training cost. With very few examples, compare [few-shot classification](/llm-concept-atlas/concepts/few-shot-classification/) and [SetFit](/llm-concept-atlas/concepts/setfit/). [Named-entity recognition](/llm-concept-atlas/concepts/named-entity-recognition/) adds a token-level labeling task, where span boundaries matter as much as the entity type.
+
+**Checkpoint:** Why can a head-only classifier fail even after many training steps? The frozen encoder may not separate the classes in its fixed features.
+
+## 8. Adapt generators — chapter 12
+
+Distinguish [pretraining and supervised fine-tuning](/llm-concept-atlas/concepts/pretraining-and-sft/), then study [PEFT](/llm-concept-atlas/concepts/peft/), [LoRA](/llm-concept-atlas/concepts/lora/), and [QLoRA](/llm-concept-atlas/concepts/qlora/). Change rank and frozen-base precision in the adapter lab; the two controls affect different memory costs. [Generative evaluation](/llm-concept-atlas/concepts/generative-evaluation/) checks whether behavior actually improves. [Reward models](/llm-concept-atlas/concepts/reward-models/), [RLHF](/llm-concept-atlas/concepts/rlhf/), and [DPO](/llm-concept-atlas/concepts/dpo/) use preference data in different ways. The preference lab isolates one small DPO calculation.
+
+**Checkpoint:** Does a lower preference-training loss prove that answers are more useful? No. The preference labels, reference model, unseen prompts, and human evaluation all matter.
+
+## Keep the ideas connected
+
+Return to the [atlas graph](/llm-concept-atlas/atlas/) after each chapter. Follow the prerequisite links into a concept, then its child and related links outward. Mark a lesson complete when you can explain its mechanism, predict a lab change, and name one failure mode without looking at the page. Progress is stored locally in your browser; no account is needed.

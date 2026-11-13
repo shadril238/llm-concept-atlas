@@ -1,0 +1,121 @@
+{
+  "1": {
+    "Language AI": "language-ai",
+    "Bag-of-words": "bag-of-words",
+    "Dense vector embeddings": "text-embedding",
+    "Attention": "attention",
+    "Encoder-only models": "encoder-only",
+    "Decoder-only models": "decoder-only",
+    "Representation models": "representation-model",
+    "Generative models": "generative-model",
+    "Pretraining": "pretraining",
+    "Responsible use": "responsible-use"
+  },
+  "2": {
+    "Tokenization": "tokenization",
+    "Vocabulary": "vocabulary",
+    "Word and subword tokens": "word-and-subword-tokens",
+    "Token embeddings": "token-embedding",
+    "Contextualized embeddings": "contextualized-embeddings",
+    "Text embeddings": "text-embedding",
+    "Word2vec": "word2vec",
+    "Contrastive training": "contrastive-training",
+    "Recommendation embeddings": "recommendation-embeddings"
+  },
+  "3": {
+    "Transformer forward pass": "transformer",
+    "Sampling and decoding": "decoding",
+    "Context size": "context-size",
+    "KV cache": "kv-cache",
+    "Self-attention": "self-attention",
+    "Queries, keys, and values": "query-key-value",
+    "Transformer block": "transformer-block",
+    "Efficient attention": "efficient-attention",
+    "Positional embeddings and RoPE": "positional-embeddings-and-rope"
+  },
+  "4": {
+    "Sentiment analysis": "sentiment-analysis",
+    "Task-specific models": "task-specific-models",
+    "Embeddings for classification": "embeddings-for-classification",
+    "Supervised classification": "supervised-classification",
+    "Zero-shot classification": "zero-shot-classification",
+    "Generative classification": "generative-classification"
+  },
+  "5": {
+    "Document embeddings": "document-embeddings",
+    "Dimensionality reduction": "dimensionality-reduction",
+    "Clustering": "clustering",
+    "Cluster inspection": "cluster-inspection",
+    "Topic modeling": "topic-modeling",
+    "BERTopic": "bertopic",
+    "Topic representations": "topic-representations"
+  },
+  "6": {
+    "Prompt structure": "prompt-structure",
+    "Instruction prompting": "instruction-prompting",
+    "In-context learning": "in-context-learning",
+    "Few-shot examples": "few-shot-examples",
+    "Chain prompting": "chain-prompting",
+    "Self-consistency": "self-consistency",
+    "Output verification": "output-verification",
+    "Constrained sampling": "constrained-sampling"
+  },
+  "7": {
+    "Quantized models": "quantized-models",
+    "Prompt templates": "prompt-templates",
+    "Chains": "chains",
+    "Conversation memory": "conversation-memory",
+    "Windowed memory": "windowed-memory",
+    "Summarized memory": "summarized-memory",
+    "Agents": "agents",
+    "ReAct": "react"
+  },
+  "8": {
+    "Semantic search": "semantic-search",
+    "Dense retrieval": "dense-retrieval",
+    "Reranking": "reranking",
+    "Retrieval metrics": "retrieval-metrics",
+    "RAG": "rag",
+    "Grounded generation": "grounded-generation",
+    "Local-model RAG": "local-model-rag",
+    "RAG evaluation": "rag-evaluation"
+  },
+  "9": {
+    "Vision transformers": "vision-transformers",
+    "Multimodal embeddings": "multimodal-embeddings",
+    "CLIP": "clip",
+    "OpenCLIP": "openclip",
+    "BLIP-2": "blip-2",
+    "Image captioning": "image-captioning",
+    "Multimodal chat": "multimodal-chat"
+  },
+  "10": {
+    "Contrastive learning": "contrastive-learning",
+    "SBERT": "sbert",
+    "Contrastive examples": "contrastive-examples",
+    "Embedding evaluation": "embedding-evaluation",
+    "Loss functions": "loss-functions",
+    "Fine-tuning embeddings": "fine-tuning-embeddings",
+    "TSDAE": "tsdae",
+    "Domain adaptation": "domain-adaptation"
+  },
+  "11": {
+    "BERT fine-tuning": "bert-fine-tuning",
+    "Frozen layers": "frozen-layers",
+    "Few-shot classification": "few-shot-classification",
+    "SetFit": "setfit",
+    "Masked language modeling": "masked-language-modeling",
+    "Named-entity recognition": "named-entity-recognition"
+  },
+  "12": {
+    "Pretraining and SFT": "pretraining-and-sft",
+    "PEFT": "peft",
+    "LoRA": "lora",
+    "QLoRA": "qlora",
+    "Quantization": "quantization",
+    "Generative evaluation": "generative-evaluation",
+    "Reward models": "reward-models",
+    "RLHF": "rlhf",
+    "DPO": "dpo"
+  }
+}

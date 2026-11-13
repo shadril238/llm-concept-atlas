@@ -1,0 +1,91 @@
+---
+title: Local-model RAG
+description: Local-model RAG performs retrieval and generation with models run under the user's own infrastructure.
+kind: concept
+conceptId: local-model-rag
+chapter: 8
+part: applications
+summary: Local-model RAG performs retrieval and generation with models run under the user's own infrastructure.
+parent: chapter-08
+prerequisites: [rag]
+related: [grounded-generation, rag-evaluation]
+level: intermediate
+tags: [applications, chapter-08]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+
+<ConceptPrimer id="local-model-rag" />
+
+## Definition and intuition
+
+Local-model RAG performs retrieval and generation with models run under the user's own infrastructure.
+
+Chapter 8 separates finding evidence from using evidence. Evaluate retrieval and answer support independently because a fluent answer can still lack a trustworthy source.
+
+## Before you start
+
+Read [Retrieval-Augmented Generation](/llm-concept-atlas/concepts/rag/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **local-model rag** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Build and query a local passage index
+2. **Transform:** Assemble evidence within the generator's context budget
+3. **Inspect:** Run a local model and validate answer support.
+
+### The important distinction
+
+Local deployment can keep inference under organizational control, but it does not remove the need for document permissions. The retriever must filter sources by the current user's access before passages reach the generator. Model size, context budget, and index freshness become operational design constraints.
+
+## Worked example
+
+A small team indexes internal manuals on its server and uses a local generator to answer policy questions. The team still needs access control and document updates. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Build and query a local passage index", "Assemble evidence within the generator's context budget", "Run a local model and validate answer support."]} caption="A teaching diagram for Local-model RAG. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+def retrieve(question): return "Library closes at 5 pm Saturday."
+def format_prompt(question, source): return f"Question: {question}\nSource: {source}"
+question = "When does the library close?"
+print(format_prompt(question, retrieve(question)))
+```
+
+**Expected output:**
+
+```text
+Question: When does the library close?
+Source: Library closes at 5 pm Saturday.
+```
+
+**What the code shows:** The output of `retrieve` becomes an argument to `format_prompt`. Replace that returned passage with irrelevant text to see why downstream fluency cannot fix retrieval. The [official chapter 8 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter08) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use it when data location, offline operation, or deployment control makes local inference attractive. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Hardware limits, model quality, and maintenance can be significant.
+- **Failure to look for:** A stale local index returns an old policy while the generator speaks confidently.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First build and query a local passage index Then assemble evidence within the generator's context budget Finally run a local model and validate answer support.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>A stale local index returns an old policy while the generator speaks confidently.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 8 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 8 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter08). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="local-model-rag" />

@@ -1,0 +1,99 @@
+---
+title: Contrastive examples
+description: Contrastive examples specify which pairs should match and which should be separated during embedding training.
+kind: concept
+conceptId: contrastive-examples
+chapter: 10
+part: training
+summary: Contrastive examples specify which pairs should match and which should be separated during embedding training.
+parent: chapter-10
+prerequisites: [contrastive-learning]
+related: [sbert, embedding-evaluation]
+level: advanced
+tags: [training, chapter-10]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { ContrastiveLab } from '../../../components/simulations/PhaseFiveLabs';
+
+<ConceptPrimer id="contrastive-examples" />
+
+## Definition and intuition
+
+Contrastive examples specify which pairs should match and which should be separated during embedding training.
+
+Chapter 10 trains representations by choosing which examples should be close or far apart. The construction of positive and negative pairs is part of the learning objective.
+
+## Before you start
+
+Read [Contrastive learning](/llm-concept-atlas/concepts/contrastive-learning/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **contrastive examples** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Collect or generate positive pairs with a clear task definition
+2. **Transform:** Choose informative negatives and remove accidental positives
+3. **Inspect:** Audit pair quality before training and measure on unseen queries.
+
+### The important distinction
+
+Positive examples may come from duplicate questions, paraphrases, or query-answer pairs; each source defines a different notion of similarity. Random negatives are easy but can be uninformative, while near-miss negatives teach finer distinctions. Audit for false negatives before interpreting a lower training loss as progress.
+
+## Worked example
+
+For a returns FAQ, the question “Can I return this?” and its policy paragraph are positive. A different paragraph about shipping may be an easy negative; a near-miss refund policy is harder. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Collect or generate positive pairs with a clear task definition", "Choose informative negatives and remove accidental positives", "Audit pair quality before training and measure on unseen queries."]} caption="A teaching diagram for Contrastive examples. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Try the interactive lab
+
+<ContrastiveLab client:visible />
+
+Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+from math import exp, log
+positive_similarity = 0.8
+negative_similarities = [0.2, 0.4]
+all_scores = [positive_similarity, *negative_similarities]
+loss = -log(exp(all_scores[0]) / sum(exp(x) for x in all_scores))
+print(round(loss, 3))
+```
+
+**Expected output:**
+
+```text
+0.797
+```
+
+**What the code shows:** The positive score competes with two negative scores inside a softmax. The negative logarithm is smaller when the positive takes more of the probability mass. The [official chapter 10 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter10) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use them when training or adapting an embedding model to a particular domain. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Synthetic pairs can encode the generator's mistakes and duplicate leakage.
+- **Failure to look for:** A “negative” passage also answers the question, so training penalizes the behavior the application needs.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First collect or generate positive pairs with a clear task definition Then choose informative negatives and remove accidental positives Finally audit pair quality before training and measure on unseen queries.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>A “negative” passage also answers the question, so training penalizes the behavior the application needs.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 10 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 10 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter10). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="contrastive-examples" />

@@ -1,0 +1,100 @@
+---
+title: Clustering
+description: Clustering groups unlabeled items according to a chosen representation and distance or density rule.
+kind: concept
+conceptId: clustering
+chapter: 5
+part: applications
+summary: Clustering groups unlabeled items according to a chosen representation and distance or density rule.
+parent: chapter-05
+prerequisites: [dimensionality-reduction]
+related: [dimensionality-reduction, cluster-inspection]
+level: intermediate
+tags: [applications, chapter-05]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { ClusteringLab } from '../../../components/simulations/PhaseFiveLabs';
+
+<ConceptPrimer id="clustering" />
+
+## Definition and intuition
+
+Clustering groups unlabeled items according to a chosen representation and distance or density rule.
+
+Chapter 5 explores unlabeled collections. A cluster is a geometric grouping, while a useful topic also needs an interpretable description and inspection by a person.
+
+## Before you start
+
+Read [Dimensionality reduction](/llm-concept-atlas/concepts/dimensionality-reduction/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **Clustering** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Embed documents in a consistent space
+2. **Transform:** Choose a grouping method and tune its assumptions
+3. **Inspect:** Inspect representative members and outliers rather than trusting cluster IDs.
+
+### The important distinction
+
+K-means assigns points to a fixed number of centers and assumes roughly compact groups. Density methods can identify irregular groups and mark noise but introduce their own sensitivity to scale and neighborhood settings. The choice of embedding and distance often matters more than a small change in clustering code.
+
+## Worked example
+
+Three notes about pets and two about vehicles may form two clusters in a toy 2D space. A borderline note about a pet in a car could move as the representation changes. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Embed documents in a consistent space", "Choose a grouping method and tune its assumptions", "Inspect representative members and outliers rather than trusting cluster IDs."]} caption="A teaching diagram for Clustering. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Try the interactive lab
+
+<ClusteringLab client:visible />
+
+Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+points = {"a": (0, 0), "b": (1, 0), "c": (8, 8)}
+centers = {"near": (0, 0), "far": (8, 8)}
+for name, point in points.items():
+    group = min(centers, key=lambda k: sum((x-y)**2 for x,y in zip(point, centers[k])))
+    print(name, group)
+```
+
+**Expected output:**
+
+```text
+a near
+b near
+c far
+```
+
+**What the code shows:** Each point is assigned to the nearest fixed center by squared Euclidean distance. Moving a point or center can change the group even though the documents remain the same. The [official chapter 5 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter05) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use it to explore collections before labels exist or to find candidate segments for review. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Cluster IDs have no intrinsic meaning, and changing the embedding changes the grouping.
+- **Failure to look for:** A cluster is named “health” from one example even though most members are about insurance billing.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First embed documents in a consistent space Then choose a grouping method and tune its assumptions Finally inspect representative members and outliers rather than trusting cluster IDs.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>A cluster is named “health” from one example even though most members are about insurance billing.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 5 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 5 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter05). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="clustering" />

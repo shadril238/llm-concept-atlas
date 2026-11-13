@@ -1,0 +1,92 @@
+---
+title: SetFit
+description: SetFit fine-tunes sentence embeddings using small labeled datasets, then trains a lightweight classifier.
+kind: concept
+conceptId: setfit
+chapter: 11
+part: training
+summary: SetFit fine-tunes sentence embeddings using small labeled datasets, then trains a lightweight classifier.
+parent: few-shot-classification
+prerequisites: [few-shot-classification]
+related: [few-shot-classification, masked-language-modeling]
+level: advanced
+tags: [training, chapter-11]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+
+<ConceptPrimer id="setfit" />
+
+## Definition and intuition
+
+SetFit fine-tunes sentence embeddings using small labeled datasets, then trains a lightweight classifier.
+
+Chapter 11 adapts an encoder to labeled tasks. Data splits, frozen versus trainable weights, and task-specific heads change both cost and generalization.
+
+## Before you start
+
+Read [Few-shot classification](/llm-concept-atlas/concepts/few-shot-classification/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **SetFit** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Create contrastive sentence pairs from a few labeled examples
+2. **Transform:** Adapt the sentence encoder so same-class items are closer
+3. **Inspect:** Train a classification head and evaluate on held-out items.
+
+### The important distinction
+
+SetFit expands a small labeled set into sentence pairs, fine-tunes a sentence encoder contrastively, then fits a lightweight classification head. This can be data-efficient, but duplicated or mislabeled examples affect many pairs. Evaluate on untouched documents from the real target distribution.
+
+## Worked example
+
+Five complaint and five compliment messages can generate multiple pairs. The tuned encoder can separate their meanings before a simple head assigns labels. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Create contrastive sentence pairs from a few labeled examples", "Adapt the sentence encoder so same-class items are closer", "Train a classification head and evaluate on held-out items."]} caption="A teaching diagram for SetFit. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+from math import exp, log
+positive_similarity = 0.8
+negative_similarities = [0.2, 0.4]
+all_scores = [positive_similarity, *negative_similarities]
+loss = -log(exp(all_scores[0]) / sum(exp(x) for x in all_scores))
+print(round(loss, 3))
+```
+
+**Expected output:**
+
+```text
+0.797
+```
+
+**What the code shows:** The positive score competes with two negative scores inside a softmax. The negative logarithm is smaller when the positive takes more of the probability mass. The [official chapter 11 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter11) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use it for few-shot text classification when full task fine-tuning is expensive. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Pair generation can amplify label mistakes and does not remove the need for representative examples.
+- **Failure to look for:** A mislabeled support message creates many wrong pairs and distorts the embedding space.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First create contrastive sentence pairs from a few labeled examples Then adapt the sentence encoder so same-class items are closer Finally train a classification head and evaluate on held-out items.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>A mislabeled support message creates many wrong pairs and distorts the embedding space.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 11 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 11 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter11). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="setfit" />

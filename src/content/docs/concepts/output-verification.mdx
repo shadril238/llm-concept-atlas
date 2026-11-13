@@ -1,0 +1,98 @@
+---
+title: Output verification
+description: Output verification checks that a generated result meets schema, evidence, and task constraints.
+kind: concept
+conceptId: output-verification
+chapter: 6
+part: applications
+summary: Output verification checks that a generated result meets schema, evidence, and task constraints.
+parent: chapter-06
+prerequisites: [instruction-prompting]
+related: [self-consistency, constrained-sampling]
+level: intermediate
+tags: [applications, chapter-06]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { PromptLab } from '../../../components/simulations/PhaseFiveLabs';
+
+<ConceptPrimer id="output-verification" />
+
+## Definition and intuition
+
+Output verification checks that a generated result meets schema, evidence, and task constraints.
+
+Chapter 6 treats a prompt as a task specification. A prompt can guide output, but it does not change model weights or guarantee that an answer is correct.
+
+## Before you start
+
+Read [Instruction prompting](/llm-concept-atlas/concepts/instruction-prompting/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **output verification** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Specify measurable requirements before generation
+2. **Transform:** Validate syntax and factual support separately
+3. **Inspect:** Reject, retry, or hand off failures with a clear reason.
+
+### The important distinction
+
+Validation has layers: parse the structure, check allowed values, test task logic, and verify factual support against sources. Passing one layer does not imply passing the next. A retry loop should have a cap and preserve the reason for rejection so failures remain visible.
+
+## Worked example
+
+A generated label must be one of three permitted strings. Passing that parser proves shape only; a reviewer still needs examples to assess whether the label is correct. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Specify measurable requirements before generation", "Validate syntax and factual support separately", "Reject, retry, or hand off failures with a clear reason."]} caption="A teaching diagram for Output verification. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Try the interactive lab
+
+<PromptLab client:visible />
+
+Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+allowed = {"positive", "negative"}
+candidate = "positive"
+print(candidate in allowed)
+print("retry or flag" if candidate not in allowed else "accept shape")
+```
+
+**Expected output:**
+
+```text
+True
+accept shape
+```
+
+**What the code shows:** Membership in an allowed set checks the shape of one output. It does not determine whether the label was the right one for a particular text. The [official chapter 6 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter06) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use it whenever model output drives code, citations, decisions, or published text. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Syntactic validity and factual correctness are different tests.
+- **Failure to look for:** Valid JSON contains a fabricated date and passes the parser without a source check.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First specify measurable requirements before generation Then validate syntax and factual support separately Finally reject, retry, or hand off failures with a clear reason.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>Valid JSON contains a fabricated date and passes the parser without a source check.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 6 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 6 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter06). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="output-verification" />

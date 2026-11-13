@@ -51,6 +51,11 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     <a class="secondary-button" href={`${base}paths/from-semantic-search-to-rag/`}>Explore the RAG path <span aria-hidden="true">↗</span></a>
   </section>
 
-  <section class="home-footer-callout"><div><span class="eyebrow">The big picture</span><h2>Every concept has a place.</h2><p>Browse the atlas to see the book's hierarchy and the first set of connected concepts.</p></div><a class="primary-button" href={`${base}atlas/`}>Open the concept atlas <span aria-hidden="true">↗</span></a></section>
+  <section class="path-next" aria-labelledby="full-path-heading">
+    <div><span class="eyebrow">Guided path · chapters 4–12</span><h2 id="full-path-heading">From applications to fine-tuning.</h2><p>Connect classification, clustering, prompting, multimodal models, and training decisions in one guided route.</p></div>
+    <a class="secondary-button" href={`${base}paths/from-applications-to-fine-tuning/`}>Follow the full route <span aria-hidden="true">↗</span></a>
+  </section>
+
+  <section class="home-footer-callout"><div><span class="eyebrow">The big picture</span><h2>Every concept has a place.</h2><p>Browse the atlas to see the book's hierarchy and connected concept lessons across all 12 chapters.</p></div><a class="primary-button" href={`${base}atlas/`}>Open the concept atlas <span aria-hidden="true">↗</span></a></section>
   <p class="independent-note">An independent learning companion inspired by <em>Hands-On Large Language Models</em> by Jay Alammar and Maarten Grootendorst. <a href={`${base}about-and-sources/`}>About this project and its sources ↗</a></p>
 </div>

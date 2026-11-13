@@ -1,0 +1,90 @@
+---
+title: Grounded generation
+description: Grounded generation asks a model to make claims supported by supplied source material.
+kind: concept
+conceptId: grounded-generation
+chapter: 8
+part: applications
+summary: Grounded generation asks a model to make claims supported by supplied source material.
+parent: chapter-08
+prerequisites: [rag]
+related: [rag, local-model-rag]
+level: intermediate
+tags: [applications, chapter-08]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+
+<ConceptPrimer id="grounded-generation" />
+
+## Definition and intuition
+
+Grounded generation asks a model to make claims supported by supplied source material.
+
+Chapter 8 separates finding evidence from using evidence. Evaluate retrieval and answer support independently because a fluent answer can still lack a trustworthy source.
+
+## Before you start
+
+Read [Retrieval-Augmented Generation](/llm-concept-atlas/concepts/rag/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **grounded generation** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Select relevant passages with source IDs
+2. **Transform:** Generate an answer under an explicit evidence constraint
+3. **Inspect:** Check each claim against its cited passage and abstain when evidence is absent.
+
+### The important distinction
+
+Grounding requires the source to support each claim, not merely share keywords with it. Keep stable source IDs and quote or link the relevant passage when possible. If retrieved evidence conflicts or is absent, abstention or a qualified answer is a better result than an invented resolution.
+
+## Worked example
+
+An hours passage says the library closes at 5 p.m. Saturday. A grounded answer can cite it; a claim about Sunday hours cannot be justified by the same passage. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Select relevant passages with source IDs", "Generate an answer under an explicit evidence constraint", "Check each claim against its cited passage and abstain when evidence is absent."]} caption="A teaching diagram for Grounded generation. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+query = {"saturday", "hours"}
+docs = {"A": {"saturday", "hours", "library"}, "B": {"laptop", "loans"}}
+scores = {name: len(query & words) for name, words in docs.items()}
+print(sorted(scores, key=scores.get, reverse=True))
+```
+
+**Expected output:**
+
+```text
+['A', 'B']
+```
+
+**What the code shows:** The set intersection produces a simple keyword-overlap score for each document. A dense retriever replaces these sets with learned vectors and a suitable similarity measure. The [official chapter 8 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter08) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use it for answers that readers must verify against a known corpus. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Citations can be fabricated or point to a source that does not support the claim.
+- **Failure to look for:** The model cites a relevant-looking page but invents a time not present on that page.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First select relevant passages with source IDs Then generate an answer under an explicit evidence constraint Finally check each claim against its cited passage and abstain when evidence is absent.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>The model cites a relevant-looking page but invents a time not present on that page.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 8 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 8 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter08). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="grounded-generation" />

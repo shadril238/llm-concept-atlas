@@ -1,0 +1,99 @@
+---
+title: Domain adaptation
+description: Domain adaptation adjusts a model trained on one distribution to perform better on another.
+kind: concept
+conceptId: domain-adaptation
+chapter: 10
+part: training
+summary: Domain adaptation adjusts a model trained on one distribution to perform better on another.
+parent: chapter-10
+prerequisites: [fine-tuning-embeddings]
+related: [tsdae]
+level: advanced
+tags: [training, chapter-10]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { ContrastiveLab } from '../../../components/simulations/PhaseFiveLabs';
+
+<ConceptPrimer id="domain-adaptation" />
+
+## Definition and intuition
+
+Domain adaptation adjusts a model trained on one distribution to perform better on another.
+
+Chapter 10 trains representations by choosing which examples should be close or far apart. The construction of positive and negative pairs is part of the learning objective.
+
+## Before you start
+
+Read [Fine-tuning embeddings](/llm-concept-atlas/concepts/fine-tuning-embeddings/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **domain adaptation** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Identify the target domain's vocabulary and failure modes
+2. **Transform:** Adapt with domain text, pairs, or labels while keeping a held-out set
+3. **Inspect:** Compare target gains and general-domain regressions.
+
+### The important distinction
+
+Domain-specific vocabulary can change both tokenization and relevance judgments. Continued pretraining on raw text, contrastive pairs, or supervised labels solve different adaptation problems. Establish a source-domain baseline and a target-domain test set so improvement is not just memorization of local examples.
+
+## Worked example
+
+A general text encoder knows “refund” but misses internal abbreviation “RMA”. Domain examples can improve matching, but tests should include unfamiliar future product names. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Identify the target domain's vocabulary and failure modes", "Adapt with domain text, pairs, or labels while keeping a held-out set", "Compare target gains and general-domain regressions."]} caption="A teaching diagram for Domain adaptation. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Try the interactive lab
+
+<ContrastiveLab client:visible />
+
+Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+from math import exp, log
+positive_similarity = 0.8
+negative_similarities = [0.2, 0.4]
+all_scores = [positive_similarity, *negative_similarities]
+loss = -log(exp(all_scores[0]) / sum(exp(x) for x in all_scores))
+print(round(loss, 3))
+```
+
+**Expected output:**
+
+```text
+0.797
+```
+
+**What the code shows:** The positive score competes with two negative scores inside a softmax. The negative logarithm is smaller when the positive takes more of the probability mass. The [official chapter 10 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter10) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use it when source-domain performance is insufficient on real target documents. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- A domain corpus can contain stale rules, noise, and privacy constraints.
+- **Failure to look for:** Fine-tuning improves a small internal benchmark while harming common queries the site still receives.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First identify the target domain's vocabulary and failure modes Then adapt with domain text, pairs, or labels while keeping a held-out set Finally compare target gains and general-domain regressions.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>Fine-tuning improves a small internal benchmark while harming common queries the site still receives.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 10 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 10 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter10). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="domain-adaptation" />

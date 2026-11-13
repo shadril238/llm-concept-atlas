@@ -1,0 +1,98 @@
+---
+title: Multimodal embeddings
+description: Multimodal embeddings place representations of different media in a space where matched items can be compared.
+kind: concept
+conceptId: multimodal-embeddings
+chapter: 9
+part: applications
+summary: Multimodal embeddings place representations of different media in a space where matched items can be compared.
+parent: chapter-09
+prerequisites: [text-embedding]
+related: [vision-transformers, clip]
+level: intermediate
+tags: [applications, chapter-09]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { MultimodalLab } from '../../../components/simulations/PhaseFiveLabs';
+
+<ConceptPrimer id="multimodal-embeddings" />
+
+## Definition and intuition
+
+Multimodal embeddings place representations of different media in a space where matched items can be compared.
+
+Chapter 9 connects images and language. A shared vector space supports matching, while a generation model needs an additional path from visual features to text tokens.
+
+## Before you start
+
+Read [Text Embedding](/llm-concept-atlas/concepts/text-embedding/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **multimodal embeddings** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Encode each modality with its own input pipeline
+2. **Transform:** Train compatible vectors using paired examples
+3. **Inspect:** Compare vectors for retrieval and validate cross-modal matches.
+
+### The important distinction
+
+Contrastive image-text training treats matched pairs as positives and other batch pairs as negatives. At inference, one image vector can be compared with many text vectors. A similarity score is relative to the candidates and training distribution, not a calibrated probability that a caption is true.
+
+## Worked example
+
+A picture of a dog and the phrase “a dog running” are close in a shared space. A visually similar wolf photo may also score highly, so scores need task-specific interpretation. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Encode each modality with its own input pipeline", "Train compatible vectors using paired examples", "Compare vectors for retrieval and validate cross-modal matches."]} caption="A teaching diagram for Multimodal embeddings. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Try the interactive lab
+
+<MultimodalLab client:visible />
+
+Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+from math import sqrt
+image = (0.8, 0.6)
+captions = {"a dog": (0.7, 0.7), "a car": (-0.6, 0.8)}
+score = lambda a,b: sum(x*y for x,y in zip(a,b)) / (sqrt(sum(x*x for x in a))*sqrt(sum(y*y for y in b)))
+print(max(captions, key=lambda text: score(image, captions[text])))
+```
+
+**Expected output:**
+
+```text
+a dog
+```
+
+**What the code shows:** The toy image vector is compared with caption vectors using cosine similarity. The highest score wins among the offered candidates; no image pixels are processed. The [official chapter 9 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter09) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use them for image-to-text search, text-to-image search, and cross-modal ranking. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- A shared space does not prove factual equivalence or make a caption generator by itself.
+- **Failure to look for:** The top text match describes a common object but misses a crucial color or action.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First encode each modality with its own input pipeline Then train compatible vectors using paired examples Finally compare vectors for retrieval and validate cross-modal matches.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>The top text match describes a common object but misses a crucial color or action.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 9 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 9 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter09). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="multimodal-embeddings" />

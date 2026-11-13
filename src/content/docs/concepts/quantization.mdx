@@ -1,0 +1,98 @@
+---
+title: Quantization
+description: Quantization maps high-precision model values into fewer discrete levels to reduce storage or computation.
+kind: concept
+conceptId: quantization
+chapter: 12
+part: training
+summary: Quantization maps high-precision model values into fewer discrete levels to reduce storage or computation.
+parent: chapter-12
+prerequisites: [quantized-models]
+related: [qlora, generative-evaluation]
+level: advanced
+tags: [training, chapter-12]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { AdapterLab } from '../../../components/simulations/PhaseFiveLabs';
+
+<ConceptPrimer id="quantization" />
+
+## Definition and intuition
+
+Quantization maps high-precision model values into fewer discrete levels to reduce storage or computation.
+
+Chapter 12 distinguishes pretraining, instruction tuning, and preference optimization. Efficient adapters change a subset of parameters; evaluation still decides whether behavior improved.
+
+## Before you start
+
+Read [Quantized models](/llm-concept-atlas/concepts/quantized-models/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **Quantization** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Choose the quantization granularity, scale, and bit width
+2. **Transform:** Encode and reconstruct values approximately for computation
+3. **Inspect:** Measure memory, latency, and task quality on actual hardware.
+
+### The important distinction
+
+Uniform quantization approximates a real weight w as an integer code times a scale, possibly with a zero point. Group-wise scales often preserve small ranges better than one global scale. Quality losses can be uneven across layers and tasks, so evaluate the model after quantization rather than inferring performance from bit width.
+
+## Worked example
+
+A weight of 0.48 may become integer 5 under a 0.1 scale and reconstruct as 0.5. Across millions of weights, small errors can affect output differently by layer. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Choose the quantization granularity, scale, and bit width", "Encode and reconstruct values approximately for computation", "Measure memory, latency, and task quality on actual hardware."]} caption="A teaching diagram for Quantization. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Try the interactive lab
+
+<AdapterLab client:visible />
+
+Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+weights = [0.12, 0.48, -0.31]
+scale = 0.1
+integers = [round(weight / scale) for weight in weights]
+restored = [value * scale for value in integers]
+print(integers, restored)
+```
+
+**Expected output:**
+
+```text
+[1, 5, -3] [0.1, 0.5, -0.30000000000000004]
+```
+
+**What the code shows:** Dividing by the scale and rounding creates integer codes; multiplication approximately restores the values. The difference is quantization error. The [official chapter 12 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter12) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use it when a model is otherwise too large or costly to serve. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Quantization can reduce quality, and hardware support determines speed.
+- **Failure to look for:** A lower-bit model passes a generic benchmark but misclassifies rare domain examples.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First choose the quantization granularity, scale, and bit width Then encode and reconstruct values approximately for computation Finally measure memory, latency, and task quality on actual hardware.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>A lower-bit model passes a generic benchmark but misclassifies rare domain examples.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 12 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 12 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter12). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="quantization" />

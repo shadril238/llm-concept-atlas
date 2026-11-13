@@ -1,0 +1,92 @@
+---
+title: Contrastive training
+description: Contrastive training shapes an embedding space by bringing selected positive pairs closer and separating negatives.
+kind: concept
+conceptId: contrastive-training
+chapter: 2
+part: foundations
+summary: Contrastive training shapes an embedding space by bringing selected positive pairs closer and separating negatives.
+parent: chapter-02
+prerequisites: [word2vec]
+related: [word2vec, recommendation-embeddings]
+level: beginner
+tags: [foundations, chapter-02]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+
+<ConceptPrimer id="contrastive-training" />
+
+## Definition and intuition
+
+Contrastive training shapes an embedding space by bringing selected positive pairs closer and separating negatives.
+
+Chapter 2 follows text into tokens and vectors. The shape and training objective of a representation determine which comparisons are meaningful.
+
+## Before you start
+
+Read [Word2vec](/llm-concept-atlas/concepts/word2vec/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **contrastive training** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Construct positive and negative pairs for the task
+2. **Transform:** Encode each item and compute similarities
+3. **Inspect:** Update the encoder to reward the intended ordering.
+
+### The important distinction
+
+A common objective uses a softmax over one positive and several negatives, then takes the negative log probability of selecting the positive. Temperature controls how sharply similarity differences matter. Batch construction is crucial: an unlabeled positive accidentally used as a negative teaches an incorrect distinction.
+
+## Worked example
+
+Two paraphrases of “the store is closed” can be a positive pair, while an unrelated café menu is a negative. The loss becomes smaller when the paraphrases score higher. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Construct positive and negative pairs for the task", "Encode each item and compute similarities", "Update the encoder to reward the intended ordering."]} caption="A teaching diagram for Contrastive training. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+from math import exp, log
+positive_similarity = 0.8
+negative_similarities = [0.2, 0.4]
+all_scores = [positive_similarity, *negative_similarities]
+loss = -log(exp(all_scores[0]) / sum(exp(x) for x in all_scores))
+print(round(loss, 3))
+```
+
+**Expected output:**
+
+```text
+0.797
+```
+
+**What the code shows:** The positive score competes with two negative scores inside a softmax. The negative logarithm is smaller when the positive takes more of the probability mass. The [official chapter 2 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter02) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use it when similarity or retrieval should reflect task-specific relationships rather than exact wording. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Poor negatives or false positives can teach the wrong geometry; pair labels matter as much as model size.
+- **Failure to look for:** Treating two documents on the same broad topic as interchangeable positives may hide different answers.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First construct positive and negative pairs for the task Then encode each item and compute similarities Finally update the encoder to reward the intended ordering.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>Treating two documents on the same broad topic as interchangeable positives may hide different answers.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 2 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 2 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter02). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="contrastive-training" />

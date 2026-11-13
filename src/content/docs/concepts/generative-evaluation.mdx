@@ -1,0 +1,97 @@
+---
+title: Generative evaluation
+description: Generative evaluation measures whether produced text meets task goals, including correctness, usefulness, and support.
+kind: concept
+conceptId: generative-evaluation
+chapter: 12
+part: training
+summary: Generative evaluation measures whether produced text meets task goals, including correctness, usefulness, and support.
+parent: chapter-12
+prerequisites: [generative-model]
+related: [quantization, reward-models]
+level: advanced
+tags: [training, chapter-12]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { PreferenceLab } from '../../../components/simulations/PhaseFiveLabs';
+
+<ConceptPrimer id="generative-evaluation" />
+
+## Definition and intuition
+
+Generative evaluation measures whether produced text meets task goals, including correctness, usefulness, and support.
+
+Chapter 12 distinguishes pretraining, instruction tuning, and preference optimization. Efficient adapters change a subset of parameters; evaluation still decides whether behavior improved.
+
+## Before you start
+
+Read [Generative Model](/llm-concept-atlas/concepts/generative-model/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **generative evaluation** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Define criteria and representative prompts before comparing models
+2. **Transform:** Use automatic metrics, human review, or both with clear rubrics
+3. **Inspect:** Inspect disagreements and failure slices rather than one average.
+
+### The important distinction
+
+Exact-match or word-overlap scores are useful for narrow tasks but can penalize valid paraphrases. Human rubrics can score correctness, completeness, and safety, while model-based graders need calibration and bias checks. Include adversarial and rare prompts, not only average benchmark examples.
+
+## Worked example
+
+Two summaries may use different wording yet contain the same facts, so exact word overlap can underrate a good answer. A fluent invented detail needs a separate factuality check. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Define criteria and representative prompts before comparing models", "Use automatic metrics, human review, or both with clear rubrics", "Inspect disagreements and failure slices rather than one average."]} caption="A teaching diagram for Generative evaluation. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Try the interactive lab
+
+<PreferenceLab client:visible />
+
+Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+references = ["cat", "dog", "bird"]
+predictions = ["cat", "dog", "car"]
+accuracy = sum(a == b for a,b in zip(references,predictions)) / len(references)
+print(round(accuracy, 3))
+```
+
+**Expected output:**
+
+```text
+0.667
+```
+
+**What the code shows:** The code compares predictions with references and reports exact-match accuracy. Generative tasks often need additional criteria because two valid answers can use different words. The [official chapter 12 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter12) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use it after fine-tuning, prompt changes, or model swaps before relying on outputs. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Automatic metrics can reward surface form while missing unsupported claims or user value.
+- **Failure to look for:** A model wins on a benchmark but consistently omits the caveat readers need.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First define criteria and representative prompts before comparing models Then use automatic metrics, human review, or both with clear rubrics Finally inspect disagreements and failure slices rather than one average.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>A model wins on a benchmark but consistently omits the caveat readers need.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 12 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 12 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter12). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="generative-evaluation" />

@@ -1,0 +1,89 @@
+---
+title: Named-entity recognition
+description: Named-entity recognition assigns spans or token labels to names of people, places, organizations, or other defined entities.
+kind: concept
+conceptId: named-entity-recognition
+chapter: 11
+part: training
+summary: Named-entity recognition assigns spans or token labels to names of people, places, organizations, or other defined entities.
+parent: chapter-11
+prerequisites: [bert-fine-tuning]
+related: [masked-language-modeling]
+level: advanced
+tags: [training, chapter-11]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+
+<ConceptPrimer id="named-entity-recognition" />
+
+## Definition and intuition
+
+Named-entity recognition assigns spans or token labels to names of people, places, organizations, or other defined entities.
+
+Chapter 11 adapts an encoder to labeled tasks. Data splits, frozen versus trainable weights, and task-specific heads change both cost and generalization.
+
+## Before you start
+
+Read [BERT fine-tuning](/llm-concept-atlas/concepts/bert-fine-tuning/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **named-entity recognition** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Define entity types and annotation boundaries
+2. **Transform:** Predict token or span tags from contextual text
+3. **Inspect:** Merge tags into entities and evaluate both boundaries and types.
+
+### The important distinction
+
+BIO tags encode whether a token begins, continues, or lies outside an entity span. Evaluation should require both correct type and correct boundaries for a strict match. Annotation policy matters: “New York Times” could be one organization span, while “New York” alone is a place in another context.
+
+## Worked example
+
+In “Ada works at Acme,” Ada is a person and Acme an organization. A tagger might label the first tokens correctly but split a multiword organization incorrectly. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Define entity types and annotation boundaries", "Predict token or span tags from contextual text", "Merge tags into entities and evaluate both boundaries and types."]} caption="A teaching diagram for Named-entity recognition. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+tokens = ["Ada", "works", "at", "Acme"]
+tags = ["B-PER", "O", "O", "B-ORG"]
+print(list(zip(tokens, tags)))
+```
+
+**Expected output:**
+
+```text
+[('Ada', 'B-PER'), ('works', 'O'), ('at', 'O'), ('Acme', 'B-ORG')]
+```
+
+**What the code shows:** Each token is paired with a BIO tag: `B` begins an entity and `O` marks outside. A real tagger predicts these labels and must handle multi-token spans. The [official chapter 11 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter11) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use it to extract structured entities from documents when types and boundaries are specified. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Ambiguous names, nested entities, and domain-specific terminology remain difficult.
+- **Failure to look for:** A model marks “Apple” as a company in a sentence about fruit because it ignores context.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First define entity types and annotation boundaries Then predict token or span tags from contextual text Finally merge tags into entities and evaluate both boundaries and types.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>A model marks “Apple” as a company in a sentence about fruit because it ignores context.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 11 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 11 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter11). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="named-entity-recognition" />

@@ -1,0 +1,91 @@
+---
+title: Conversation memory
+description: Conversation memory selects prior interaction information to include in a later model request.
+kind: concept
+conceptId: conversation-memory
+chapter: 7
+part: applications
+summary: Conversation memory selects prior interaction information to include in a later model request.
+parent: chapter-07
+prerequisites: [chains]
+related: [chains, windowed-memory]
+level: intermediate
+tags: [applications, chapter-07]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+
+<ConceptPrimer id="conversation-memory" />
+
+## Definition and intuition
+
+Conversation memory selects prior interaction information to include in a later model request.
+
+Chapter 7 combines model calls with templates, memory, and tools. Trace the inputs and outputs of each step so an error can be located rather than hidden inside a chain.
+
+## Before you start
+
+Read [Chains](/llm-concept-atlas/concepts/chains/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **conversation memory** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Store messages or summaries outside the model
+2. **Transform:** Choose what history fits the current context and privacy rules
+3. **Inspect:** Insert selected history and verify references in the response.
+
+### The important distinction
+
+A language model sees the conversation only when previous turns are sent again or summarized into a new request. Store messages with timestamps and consent boundaries, then select what is relevant. Memory design is therefore an application data-management decision as much as a prompting choice.
+
+## Worked example
+
+After a user says “My name is Sam,” a later prompt can include that message so the model can answer “Sam.” Without supplying history, the model has no persistent memory of it. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Store messages or summaries outside the model", "Choose what history fits the current context and privacy rules", "Insert selected history and verify references in the response."]} caption="A teaching diagram for Conversation memory. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+history = [("user", "My name is Sam"), ("assistant", "Hello Sam")]
+history.append(("user", "What is my name?"))
+print("\n".join(f"{role}: {text}" for role, text in history[-3:]))
+```
+
+**Expected output:**
+
+```text
+user: My name is Sam
+assistant: Hello Sam
+user: What is my name?
+```
+
+**What the code shows:** The slice keeps the last three messages and formats them for a future request. Earlier messages are absent unless the application explicitly stores and reinserts them. The [official chapter 7 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter07) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use it in multi-turn assistants when prior context is needed to answer or maintain preferences. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- A memory store can contain stale or private data and consumes context.
+- **Failure to look for:** An old preference overrides the user's explicit correction in a newer message.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First store messages or summaries outside the model Then choose what history fits the current context and privacy rules Finally insert selected history and verify references in the response.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>An old preference overrides the user's explicit correction in a newer message.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 7 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 7 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter07). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="conversation-memory" />

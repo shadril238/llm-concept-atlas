@@ -1,0 +1,99 @@
+---
+title: Topic modeling
+description: Topic modeling discovers recurring themes and gives them interpretable descriptions from a document collection.
+kind: concept
+conceptId: topic-modeling
+chapter: 5
+part: applications
+summary: Topic modeling discovers recurring themes and gives them interpretable descriptions from a document collection.
+parent: chapter-05
+prerequisites: [clustering]
+related: [cluster-inspection, bertopic]
+level: intermediate
+tags: [applications, chapter-05]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { ClusteringLab } from '../../../components/simulations/PhaseFiveLabs';
+
+<ConceptPrimer id="topic-modeling" />
+
+## Definition and intuition
+
+Topic modeling discovers recurring themes and gives them interpretable descriptions from a document collection.
+
+Chapter 5 explores unlabeled collections. A cluster is a geometric grouping, while a useful topic also needs an interpretable description and inspection by a person.
+
+## Before you start
+
+Read [Clustering](/llm-concept-atlas/concepts/clustering/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **topic modeling** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Embed or represent documents
+2. **Transform:** Group or decompose them into recurring patterns
+3. **Inspect:** Extract words and representative documents to name and validate topics.
+
+### The important distinction
+
+A topic model adds interpretation to grouping by ranking characteristic words or passages. In BERTopic, class-based TF-IDF helps identify words distinctive for each cluster. High-scoring words are candidate descriptions, not a semantic proof; human review decides whether they form a useful topic.
+
+## Worked example
+
+A set of support tickets may yield shipping delays and refund questions as two themes. One ticket could mention both, so a single hard label is only an approximation. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Embed or represent documents", "Group or decompose them into recurring patterns", "Extract words and representative documents to name and validate topics."]} caption="A teaching diagram for Topic modeling. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Try the interactive lab
+
+<ClusteringLab client:visible />
+
+Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+documents = ["rain storm cloud", "sun warm beach", "cloud rain wind"]
+groups = [0, 1, 0]
+for group in sorted(set(groups)):
+    words = [word for text, label in zip(documents, groups) if label == group for word in text.split()]
+    print(group, sorted(set(words), key=lambda word: (-words.count(word), word))[:3])
+```
+
+**Expected output:**
+
+```text
+0 ['cloud', 'rain', 'storm']
+1 ['beach', 'sun', 'warm']
+```
+
+**What the code shows:** Documents are grouped first, then common words are counted within each group. Real topic pipelines use more careful term weighting and human inspection. The [official chapter 5 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter05) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use it to summarize large unlabeled corpora and track broad themes over time. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Topic count and labels depend on preprocessing, model settings, and human interpretation.
+- **Failure to look for:** A high-frequency boilerplate word dominates the label even though it does not describe the underlying issue.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First embed or represent documents Then group or decompose them into recurring patterns Finally extract words and representative documents to name and validate topics.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>A high-frequency boilerplate word dominates the label even though it does not describe the underlying issue.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 5 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 5 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter05). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="topic-modeling" />

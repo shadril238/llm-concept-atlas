@@ -1,0 +1,91 @@
+---
+title: Few-shot classification
+description: Few-shot classification learns or applies a label rule from only a handful of labeled examples per class.
+kind: concept
+conceptId: few-shot-classification
+chapter: 11
+part: training
+summary: Few-shot classification learns or applies a label rule from only a handful of labeled examples per class.
+parent: chapter-11
+prerequisites: [supervised-classification]
+related: [frozen-layers, setfit]
+level: advanced
+tags: [training, chapter-11]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+
+<ConceptPrimer id="few-shot-classification" />
+
+## Definition and intuition
+
+Few-shot classification learns or applies a label rule from only a handful of labeled examples per class.
+
+Chapter 11 adapts an encoder to labeled tasks. Data splits, frozen versus trainable weights, and task-specific heads change both cost and generalization.
+
+## Before you start
+
+Read [Supervised classification](/llm-concept-atlas/concepts/supervised-classification/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **few-shot classification** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Select representative examples and define the label set
+2. **Transform:** Use a suitable embedding, prompt, or efficient tuning method
+3. **Inspect:** Evaluate carefully across multiple small sample choices.
+
+### The important distinction
+
+Few-shot results are unusually sensitive to which examples were selected. Evaluate across multiple sampled support sets, not only one favorable draw. Prototype methods, prompts, and adapter methods use the examples differently, so compare them under the same held-out cases and label definitions.
+
+## Worked example
+
+With five examples each of billing and shipping tickets, a simple embedding prototype may work. Results can swing if the five examples omit common edge cases. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Select representative examples and define the label set", "Use a suitable embedding, prompt, or efficient tuning method", "Evaluate carefully across multiple small sample choices."]} caption="A teaching diagram for Few-shot classification. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+examples = ["a wonderful film", "a dull film"]
+labels = ["positive", "negative"]
+def classify(text):
+    return "positive" if "wonderful" in text else "negative"
+print([(text, classify(text)) for text in examples])
+```
+
+**Expected output:**
+
+```text
+[('a wonderful film', 'positive'), ('a dull film', 'negative')]
+```
+
+**What the code shows:** The function uses one word as a simple classification baseline. Change the rule or input text and compare the predicted label with the intended label. The [official chapter 11 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter11) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use it when annotation is expensive and a modest classifier is needed quickly. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Few examples make variance and label bias large; report more than one random split.
+- **Failure to look for:** A model appears accurate because the evaluation set shares wording with the tiny training set.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First select representative examples and define the label set Then use a suitable embedding, prompt, or efficient tuning method Finally evaluate carefully across multiple small sample choices.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>A model appears accurate because the evaluation set shares wording with the tiny training set.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 11 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 11 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter11). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="few-shot-classification" />

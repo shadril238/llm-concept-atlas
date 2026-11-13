@@ -1,0 +1,91 @@
+---
+title: BERT fine-tuning
+description: BERT fine-tuning updates an encoder and task head on labeled examples for a downstream prediction task.
+kind: concept
+conceptId: bert-fine-tuning
+chapter: 11
+part: training
+summary: BERT fine-tuning updates an encoder and task head on labeled examples for a downstream prediction task.
+parent: chapter-11
+prerequisites: [encoder-only]
+related: [frozen-layers]
+level: advanced
+tags: [training, chapter-11]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+
+<ConceptPrimer id="bert-fine-tuning" />
+
+## Definition and intuition
+
+BERT fine-tuning updates an encoder and task head on labeled examples for a downstream prediction task.
+
+Chapter 11 adapts an encoder to labeled tasks. Data splits, frozen versus trainable weights, and task-specific heads change both cost and generalization.
+
+## Before you start
+
+Read [Encoder-Only Model](/llm-concept-atlas/concepts/encoder-only/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **bert fine-tuning** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Start with a pretrained encoder and attach a classification or token head
+2. **Transform:** Train on labeled examples with validation monitoring
+3. **Inspect:** Evaluate on a held-out split and inspect class or entity errors.
+
+### The important distinction
+
+A classification head can read a pooled sequence representation, while token classification uses a prediction at each token position. Full fine-tuning updates the encoder as well as the head; freezing some layers changes the training budget. Use a validation set for early stopping and report a separate test score only once model choices are fixed.
+
+## Worked example
+
+A pretrained BERT encoder is adapted to label support tickets as billing or shipping. The classification head learns the labels while encoder weights may shift toward ticket language. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Start with a pretrained encoder and attach a classification or token head", "Train on labeled examples with validation monitoring", "Evaluate on a held-out split and inspect class or entity errors."]} caption="A teaching diagram for BERT fine-tuning. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+weight = 0.2
+for target in [1.0, 1.0, 0.0]:
+    prediction = weight
+    weight -= 0.1 * 2 * (prediction - target)
+print(round(weight, 3))
+```
+
+**Expected output:**
+
+```text
+0.39
+```
+
+**What the code shows:** The toy loop measures a squared-error gradient for one scalar weight and applies a small update. Actual pretraining uses many parameters, batches, and a token-level objective. The [official chapter 11 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter11) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use it when a stable task and representative labeled data justify the training cost. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Small datasets can overfit, and full tuning can forget useful general behavior.
+- **Failure to look for:** Validation accuracy rises on duplicated templates but drops on real unseen tickets.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First start with a pretrained encoder and attach a classification or token head Then train on labeled examples with validation monitoring Finally evaluate on a held-out split and inspect class or entity errors.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>Validation accuracy rises on duplicated templates but drops on real unseen tickets.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 11 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 11 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter11). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="bert-fine-tuning" />

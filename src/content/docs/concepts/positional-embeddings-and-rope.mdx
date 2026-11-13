@@ -1,0 +1,92 @@
+---
+title: Positional embeddings and RoPE
+description: Positional information lets a transformer distinguish token order; RoPE rotates query and key features according to position.
+kind: concept
+conceptId: positional-embeddings-and-rope
+chapter: 3
+part: foundations
+summary: Positional information lets a transformer distinguish token order; RoPE rotates query and key features according to position.
+parent: chapter-03
+prerequisites: [attention]
+related: [efficient-attention]
+level: beginner
+tags: [foundations, chapter-03]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+
+<ConceptPrimer id="positional-embeddings-and-rope" />
+
+## Definition and intuition
+
+**Positional embeddings and RoPE**: Positional information lets a transformer distinguish token order; RoPE rotates query and key features according to position.
+
+Chapter 3 traces a transformer forward pass. Distinguish the computation performed for a fixed input from the repeated loop used to generate new tokens.
+
+## Before you start
+
+Read [Attention](/llm-concept-atlas/concepts/attention/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **positional embeddings and rope** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Assign or compute a position signal for each token
+2. **Transform:** Combine that signal with token states or attention queries and keys
+3. **Inspect:** Check behavior when order changes or sequences extend beyond training lengths.
+
+### The important distinction
+
+Self-attention without position information is insensitive to a permutation of input tokens. RoPE rotates pairs of query and key coordinates by a position-dependent angle; their dot product then reflects relative offset. This helps encode order, but length behavior still depends on training and scaling choices.
+
+## Worked example
+
+“Dog chased cat” and “Cat chased dog” share words but reverse roles. Position-aware attention can distinguish the sequences, while a pure bag of token vectors cannot. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Assign or compute a position signal for each token", "Combine that signal with token states or attention queries and keys", "Check behavior when order changes or sequences extend beyond training lengths."]} caption="A teaching diagram for Positional embeddings and RoPE. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+from math import exp
+scores = [1.2, 0.4, -0.3]
+weights = [exp(x) for x in scores]
+weights = [x / sum(weights) for x in weights]
+values = [2.0, 0.0, 1.0]
+print(round(sum(w*v for w, v in zip(weights, values)), 3))
+```
+
+**Expected output:**
+
+```text
+1.329
+```
+
+**What the code shows:** Exponentiating scores and dividing by their total forms softmax weights. The final line combines the values using those weights, which is the central attention operation. The [official chapter 3 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter03) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use positional methods whenever order matters in attention-based sequence modeling. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Length extrapolation behavior depends on the specific positional method and training setup.
+- **Failure to look for:** Ignoring positions makes two reordered sentences look equivalent to a model that should distinguish them.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First assign or compute a position signal for each token Then combine that signal with token states or attention queries and keys Finally check behavior when order changes or sequences extend beyond training lengths.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>Ignoring positions makes two reordered sentences look equivalent to a model that should distinguish them.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 3 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 3 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter03). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="positional-embeddings-and-rope" />

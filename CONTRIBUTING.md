@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-The site uses the `/llm-concept-atlas/` base path. Run `npm run release:build` before opening a pull request. That command checks the concept graph, lesson completeness, Astro types, the production build, and internal links.
+The site uses the `/llm-concept-atlas/` base path. Run `npm run release:build` before opening a pull request. That command checks the concept graph, lesson completeness, runnable Python examples, Astro types, the production build, and internal links.
 
 ## Add or improve a concept lesson
 
@@ -25,7 +25,7 @@ A complete lesson should include:
 4. An original labeled visual; add a simulation when changing an input teaches the mechanism.
 5. Runnable code with setup instructions, expected behavior, and an explanation of the important lines.
 6. Use cases, decisions, limits, common misconceptions, and at least two self-checks with answers.
-7. The relevant book chapter, the authors’ notebook, and a primary technical reference.
+7. The relevant book chapter and the authors’ notebook; add a primary paper or official documentation when it supports a technical detail.
 
 Label invented vectors, token IDs, probabilities, and fixed-answer demos as **illustrative**. Do not present them as the output of a trained model. Check code snippets by running them, and keep external model examples compatible with their documented APIs. Use `lessonStatus: full` only when the lesson meets this standard.
 

@@ -316,7 +316,8 @@ async function startAtlas(root: HTMLElement) {
     const children = graph.nodes.filter((item) => item.parent === node.id).map((item) => item.id);
     const next = edgeRecords.filter((edge) => edge.type === 'prerequisite' && edge.source === node.id).map((edge) => edge.target);
     const related = edgeRecords.filter((edge) => edge.type === 'related' && (edge.source === node.id || edge.target === node.id))
-      .map((edge) => edge.source === node.id ? edge.target : edge.source);
+      .map((edge) => edge.source === node.id ? edge.target : edge.source)
+      .filter((id, index, all) => id !== node.parent && !children.includes(id) && !node.prerequisites.includes(id) && !next.includes(id) && all.indexOf(id) === index);
     const groups = [
       node.parent ? relationGroup('Inside', [node.parent]) : null,
       relationGroup('Contains', children),

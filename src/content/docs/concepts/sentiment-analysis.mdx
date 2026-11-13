@@ -1,0 +1,98 @@
+---
+title: Sentiment analysis
+description: Sentiment analysis assigns a polarity or more detailed attitude label to text according to a defined target.
+kind: concept
+conceptId: sentiment-analysis
+chapter: 4
+part: applications
+summary: Sentiment analysis assigns a polarity or more detailed attitude label to text according to a defined target.
+parent: chapter-04
+prerequisites: [representation-model]
+related: [task-specific-models]
+level: beginner
+tags: [applications, chapter-04]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { ClassificationLab } from '../../../components/simulations/PhaseFiveLabs';
+
+<ConceptPrimer id="sentiment-analysis" />
+
+## Definition and intuition
+
+Sentiment analysis assigns a polarity or more detailed attitude label to text according to a defined target.
+
+Chapter 4 compares classification with specialized encoders, reusable embeddings, and generators. Label definitions, labeled data, and evaluation examples determine which approach fits.
+
+## Before you start
+
+Read [Representation Model](/llm-concept-atlas/concepts/representation-model/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **sentiment analysis** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Define the label set and whose opinion is being measured
+2. **Transform:** Encode the text and predict or score each label
+3. **Inspect:** Inspect ambiguous examples and evaluate against annotated cases.
+
+### The important distinction
+
+Decide whether the unit is a whole review, a sentence, or an aspect such as battery life. The same text can legitimately have mixed or neutral sentiment; forcing it into binary labels creates annotation noise. Report class-specific precision and recall when one kind of mistake matters more than another.
+
+## Worked example
+
+“The camera is light, but the battery is awful” contains both praise and criticism. A whole-review label may be negative while an aspect-level label splits camera and battery. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Define the label set and whose opinion is being measured", "Encode the text and predict or score each label", "Inspect ambiguous examples and evaluate against annotated cases."]} caption="A teaching diagram for Sentiment analysis. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Try the interactive lab
+
+<ClassificationLab client:visible />
+
+Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+examples = ["a wonderful film", "a dull film"]
+labels = ["positive", "negative"]
+def classify(text):
+    return "positive" if "wonderful" in text else "negative"
+print([(text, classify(text)) for text in examples])
+```
+
+**Expected output:**
+
+```text
+[('a wonderful film', 'positive'), ('a dull film', 'negative')]
+```
+
+**What the code shows:** The function uses one word as a simple classification baseline. Change the rule or input text and compare the predicted label with the intended label. The [official chapter 4 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter04) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use it for review triage or trend analysis when labels are clearly defined and errors are monitored. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Sarcasm, mixed opinions, and domain shifts complicate simple positive versus negative labels.
+- **Failure to look for:** A model treats “not bad” as negative because it matches the word “bad” without handling negation.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First define the label set and whose opinion is being measured Then encode the text and predict or score each label Finally inspect ambiguous examples and evaluate against annotated cases.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>A model treats “not bad” as negative because it matches the word “bad” without handling negation.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 4 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 4 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter04). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="sentiment-analysis" />

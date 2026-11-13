@@ -1,0 +1,98 @@
+---
+title: Multimodal chat
+description: Multimodal chat uses a conversational model that conditions on both text and other inputs such as images.
+kind: concept
+conceptId: multimodal-chat
+chapter: 9
+part: applications
+summary: Multimodal chat uses a conversational model that conditions on both text and other inputs such as images.
+parent: chapter-09
+prerequisites: [blip-2]
+related: [image-captioning]
+level: intermediate
+tags: [applications, chapter-09]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { MultimodalLab } from '../../../components/simulations/PhaseFiveLabs';
+
+<ConceptPrimer id="multimodal-chat" />
+
+## Definition and intuition
+
+Multimodal chat uses a conversational model that conditions on both text and other inputs such as images.
+
+Chapter 9 connects images and language. A shared vector space supports matching, while a generation model needs an additional path from visual features to text tokens.
+
+## Before you start
+
+Read [BLIP-2](/llm-concept-atlas/concepts/blip-2/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **multimodal chat** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Preprocess each media item with the appropriate encoder
+2. **Transform:** Place its representation and the conversation in the model's context
+3. **Inspect:** Generate a response and verify claims against the input.
+
+### The important distinction
+
+A vision-language chat system must bind a user's question to the right image region or visual feature. Multi-turn references such as “What color is the other one?” need conversation state as well as image context. Test small text, occlusion, and misleading surrounding prompts separately.
+
+## Worked example
+
+A user uploads a chart and asks for its highest bar. The system must identify the bar in the visual data and answer the question; generic chart knowledge is insufficient. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Preprocess each media item with the appropriate encoder", "Place its representation and the conversation in the model's context", "Generate a response and verify claims against the input."]} caption="A teaching diagram for Multimodal chat. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Try the interactive lab
+
+<MultimodalLab client:visible />
+
+Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+features = {"animal": 0.9, "road": 0.1}
+if features["animal"] > features["road"]:
+    print("An animal is in the picture.")
+else:
+    print("A road is in the picture.")
+```
+
+**Expected output:**
+
+```text
+An animal is in the picture.
+```
+
+**What the code shows:** The two hand-written feature scores choose a fixed sentence. This makes the feature-to-text decision visible, but a real captioner learns visual features and token generation. The [official chapter 9 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter09) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use it for interactive visual question answering and mixed-media assistance. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Small text, image quality, and grounding failures can make answers unreliable.
+- **Failure to look for:** The assistant reports a value it inferred from the chart title rather than reading the bars.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First preprocess each media item with the appropriate encoder Then place its representation and the conversation in the model's context Finally generate a response and verify claims against the input.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>The assistant reports a value it inferred from the chart title rather than reading the bars.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 9 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 9 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter09). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="multimodal-chat" />

@@ -11,8 +11,9 @@
     "check": "astro check",
     "test:graph": "node --test tests/graph.test.mjs",
     "test:content": "node --test tests/content.test.mjs",
+    "check:examples": "node scripts/check-code-examples.mjs",
     "check:links": "node scripts/check-internal-links.mjs",
-    "release:build": "npm run test:graph && npm run test:content && npm run check && npm run build && npm run check:links"
+    "release:build": "npm run test:graph && npm run test:content && npm run check:examples && npm run check && npm run build && npm run check:links"
   },
   "dependencies": {
     "@astrojs/react": "^7.1.8",

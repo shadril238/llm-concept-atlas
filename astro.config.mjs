@@ -20,8 +20,10 @@ export default defineConfig({
           items: [
             { label: "Overview", slug: "index" },
             { label: "Explore the atlas", slug: "atlas" },
+            { label: "Concept directory", slug: "concept-directory" },
             { label: "How an LLM processes a sentence", slug: "paths/how-an-llm-processes-a-sentence" },
             { label: "From semantic search to RAG", slug: "paths/from-semantic-search-to-rag" },
+            { label: "From applications to fine-tuning", slug: "paths/from-applications-to-fine-tuning" },
             { label: "About and sources", slug: "about-and-sources" },
           ],
         },
@@ -52,10 +54,6 @@ export default defineConfig({
             { slug: "parts/training" },
             { autogenerate: { directory: "chapters/training" } },
           ],
-        },
-        {
-          label: "Concepts",
-          items: [{ autogenerate: { directory: "concepts" } }],
         },
       ],
     }),

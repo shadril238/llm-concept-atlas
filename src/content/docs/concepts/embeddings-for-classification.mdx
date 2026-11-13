@@ -1,0 +1,98 @@
+---
+title: Embeddings for classification
+description: Embedding-based classification first maps text to vectors, then trains or applies a separate decision rule.
+kind: concept
+conceptId: embeddings-for-classification
+chapter: 4
+part: applications
+summary: Embedding-based classification first maps text to vectors, then trains or applies a separate decision rule.
+parent: chapter-04
+prerequisites: [text-embedding]
+related: [task-specific-models, supervised-classification]
+level: beginner
+tags: [applications, chapter-04]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { ClassificationLab } from '../../../components/simulations/PhaseFiveLabs';
+
+<ConceptPrimer id="embeddings-for-classification" />
+
+## Definition and intuition
+
+**Embeddings for classification**: Embedding-based classification first maps text to vectors, then trains or applies a separate decision rule.
+
+Chapter 4 compares classification with specialized encoders, reusable embeddings, and generators. Label definitions, labeled data, and evaluation examples determine which approach fits.
+
+## Before you start
+
+Read [Text Embedding](/llm-concept-atlas/concepts/text-embedding/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **embeddings for classification** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Encode examples with one consistent embedding model
+2. **Transform:** Fit a simple classifier or compare class prototypes
+3. **Inspect:** Test on held-out texts and inspect confused classes.
+
+### The important distinction
+
+A prototype classifier averages vectors from each class and assigns the nearest prototype. A learned linear head can instead fit a boundary over fixed embeddings. Both are cheaper to train than changing the encoder, but neither can recover task distinctions absent from the vector representation.
+
+## Worked example
+
+With support and billing messages, average example vectors for each class and assign a new message to the closer prototype. This can work with fewer labeled examples than end-to-end tuning. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Encode examples with one consistent embedding model", "Fit a simple classifier or compare class prototypes", "Test on held-out texts and inspect confused classes."]} caption="A teaching diagram for Embeddings for classification. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Try the interactive lab
+
+<ClassificationLab client:visible />
+
+Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+from math import sqrt
+a, b = (0.8, 0.6), (0.7, 0.7)
+dot = sum(x*y for x, y in zip(a, b))
+cosine = dot / (sqrt(sum(x*x for x in a)) * sqrt(sum(y*y for y in b)))
+print(round(cosine, 3))
+```
+
+**Expected output:**
+
+```text
+0.99
+```
+
+**What the code shows:** The code takes a dot product, divides by both vector lengths, and prints a cosine score. Change a coordinate to see how the direction changes the comparison. The [official chapter 4 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter04) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use it when reusable embeddings already exist or labeled data and compute are limited. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- A generic embedding may miss the exact distinction needed by the labels.
+- **Failure to look for:** Two complaints with similar wording but different responsible departments collapse into one class.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First encode examples with one consistent embedding model Then fit a simple classifier or compare class prototypes Finally test on held-out texts and inspect confused classes.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>Two complaints with similar wording but different responsible departments collapse into one class.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 4 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 4 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter04). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="embeddings-for-classification" />

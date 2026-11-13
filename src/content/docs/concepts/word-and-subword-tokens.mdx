@@ -1,0 +1,90 @@
+---
+title: Word and subword tokens
+description: Word and subword tokenization trade vocabulary size against how flexibly unfamiliar strings can be represented.
+kind: concept
+conceptId: word-and-subword-tokens
+chapter: 2
+part: foundations
+summary: Word and subword tokenization trade vocabulary size against how flexibly unfamiliar strings can be represented.
+parent: chapter-02
+prerequisites: [tokenization]
+related: [vocabulary]
+level: beginner
+tags: [foundations, chapter-02]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+
+<ConceptPrimer id="word-and-subword-tokens" />
+
+## Definition and intuition
+
+**Word and subword tokens**: Word and subword tokenization trade vocabulary size against how flexibly unfamiliar strings can be represented.
+
+Chapter 2 follows text into tokens and vectors. The shape and training objective of a representation determine which comparisons are meaningful.
+
+## Before you start
+
+Read [Tokenization](/llm-concept-atlas/concepts/tokenization/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **word and subword tokens** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Choose a unit such as whole words, word pieces, characters, or bytes
+2. **Transform:** Segment the input using the tokenizer's learned rules and vocabulary
+3. **Inspect:** Inspect token IDs and lengths for rare names, languages, and code.
+
+### The important distinction
+
+A fixed word vocabulary needs an unknown-word strategy; subword vocabularies reuse pieces across rare words. Byte-level methods can represent arbitrary input bytes but may use many tokens for some scripts or unusual strings. Token count affects cost and truncation, so always inspect the tokenizer used by the target model.
+
+## Worked example
+
+“unhappiness” might be one word token, several reusable subwords, or many characters. A rare product name can cost more context tokens than a common word of the same length. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Choose a unit such as whole words, word pieces, characters, or bytes", "Segment the input using the tokenizer's learned rules and vocabulary", "Inspect token IDs and lengths for rare names, languages, and code."]} caption="A teaching diagram for Word and subword tokens. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+tokens = ["The", "cat", "slept"]
+position = 1
+visible = tokens[:position + 1]
+print("query token:", tokens[position], "visible context:", visible)
+```
+
+**Expected output:**
+
+```text
+query token: cat visible context: ['The', 'cat']
+```
+
+**What the code shows:** The slice keeps only tokens through the selected position. It illustrates a causal visibility rule or a context budget, not a complete transformer computation. The [official chapter 2 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter02) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use subword units when a bounded vocabulary must handle unfamiliar words and spelling variations. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Token boundaries are model-specific and need not align with human word or morpheme boundaries.
+- **Failure to look for:** Assuming one word equals one token underestimates context usage and truncates important passages.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First choose a unit such as whole words, word pieces, characters, or bytes Then segment the input using the tokenizer's learned rules and vocabulary Finally inspect token IDs and lengths for rare names, languages, and code.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>Assuming one word equals one token underestimates context usage and truncates important passages.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 2 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 2 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter02). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="word-and-subword-tokens" />

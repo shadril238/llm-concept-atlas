@@ -1,0 +1,100 @@
+---
+title: DPO
+description: Direct Preference Optimization updates a policy from preferred and rejected responses relative to a reference policy without training a separate reward model.
+kind: concept
+conceptId: dpo
+chapter: 12
+part: training
+summary: Direct Preference Optimization updates a policy from preferred and rejected responses relative to a reference policy without training a separate reward model.
+parent: rlhf
+prerequisites: [rlhf]
+related: [rlhf]
+level: advanced
+tags: [training, chapter-12]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { PreferenceLab } from '../../../components/simulations/PhaseFiveLabs';
+
+<ConceptPrimer id="dpo" />
+
+## Definition and intuition
+
+**DPO**: Direct Preference Optimization updates a policy from preferred and rejected responses relative to a reference policy without training a separate reward model.
+
+Chapter 12 distinguishes pretraining, instruction tuning, and preference optimization. Efficient adapters change a subset of parameters; evaluation still decides whether behavior improved.
+
+## Before you start
+
+Read [RLHF](/llm-concept-atlas/concepts/rlhf/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **DPO** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Collect prompt, chosen response, and rejected response triples
+2. **Transform:** Compare their policy log-probability gap with the reference gap
+3. **Inspect:** Optimize the preference loss and evaluate on unseen prompts.
+
+### The important distinction
+
+DPO uses the difference between chosen and rejected log-probabilities under the policy, adjusted by the same difference under a reference model. A logistic loss pushes the policy toward the preferred response relative to that reference. No separate reward-model training loop is required, but preference labels and validation still determine quality.
+
+## Worked example
+
+For one prompt, reviewers prefer a cited answer over an invented one. DPO increases the relative likelihood of the preferred answer, subject to the reference comparison. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Collect prompt, chosen response, and rejected response triples", "Compare their policy log-probability gap with the reference gap", "Optimize the preference loss and evaluate on unseen prompts."]} caption="A teaching diagram for DPO. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Try the interactive lab
+
+<PreferenceLab client:visible />
+
+Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+from math import log, exp
+chosen_logprob, rejected_logprob = -0.4, -1.1
+reference_gap = 0.2
+beta = 0.5
+gap = beta * ((chosen_logprob - rejected_logprob) - reference_gap)
+loss = log(1 + exp(-gap))
+print(round(loss, 3))
+```
+
+**Expected output:**
+
+```text
+0.576
+```
+
+**What the code shows:** The loss compares the policy preference gap with a reference gap, scales it by beta, and applies a logistic penalty. A lower toy loss does not validate the preference labels. The [official chapter 12 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter12) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use it when reliable preference pairs exist and a simpler alternative to reward-model reinforcement learning is suitable. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Pair quality, reference choice, and overoptimization still matter.
+- **Failure to look for:** A model learns superficial wording from chosen responses while missing the preference for evidence.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First collect prompt, chosen response, and rejected response triples Then compare their policy log-probability gap with the reference gap Finally optimize the preference loss and evaluate on unseen prompts.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>A model learns superficial wording from chosen responses while missing the preference for evidence.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 12 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 12 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter12). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="dpo" />

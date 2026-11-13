@@ -1,0 +1,98 @@
+---
+title: Task-specific models
+description: A task-specific model is trained or adapted to produce one target kind of output, such as sentiment labels.
+kind: concept
+conceptId: task-specific-models
+chapter: 4
+part: applications
+summary: A task-specific model is trained or adapted to produce one target kind of output, such as sentiment labels.
+parent: chapter-04
+prerequisites: [encoder-only]
+related: [sentiment-analysis, embeddings-for-classification]
+level: beginner
+tags: [applications, chapter-04]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { ClassificationLab } from '../../../components/simulations/PhaseFiveLabs';
+
+<ConceptPrimer id="task-specific-models" />
+
+## Definition and intuition
+
+**Task-specific models**: A task-specific model is trained or adapted to produce one target kind of output, such as sentiment labels.
+
+Chapter 4 compares classification with specialized encoders, reusable embeddings, and generators. Label definitions, labeled data, and evaluation examples determine which approach fits.
+
+## Before you start
+
+Read [Encoder-Only Model](/llm-concept-atlas/concepts/encoder-only/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **task-specific models** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Choose a model whose output head matches the task
+2. **Transform:** Prepare labeled examples in the expected format
+3. **Inspect:** Fine-tune or apply the model and measure task performance.
+
+### The important distinction
+
+A classifier head commonly maps one pooled encoder representation to class logits, then softmax turns logits into relative probabilities. Those probabilities may be badly calibrated after domain shift. Compare latency and task quality with a simpler embedding classifier before choosing full model adaptation.
+
+## Worked example
+
+A sentiment encoder with a two-class head returns positive or negative scores directly. It may outperform a general text generator on a stable, narrow labeling task. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Choose a model whose output head matches the task", "Prepare labeled examples in the expected format", "Fine-tune or apply the model and measure task performance."]} caption="A teaching diagram for Task-specific models. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Try the interactive lab
+
+<ClassificationLab client:visible />
+
+Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+examples = ["a wonderful film", "a dull film"]
+labels = ["positive", "negative"]
+def classify(text):
+    return "positive" if "wonderful" in text else "negative"
+print([(text, classify(text)) for text in examples])
+```
+
+**Expected output:**
+
+```text
+[('a wonderful film', 'positive'), ('a dull film', 'negative')]
+```
+
+**What the code shows:** The function uses one word as a simple classification baseline. Change the rule or input text and compare the predicted label with the intended label. The [official chapter 4 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter04) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use a specialized model when labels are stable, latency matters, and relevant training data exists. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- It may not transfer to new labels or domains without retraining or recalibration.
+- **Failure to look for:** A movie-review model is deployed on medical feedback and misreads domain-specific terms.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First choose a model whose output head matches the task Then prepare labeled examples in the expected format Finally fine-tune or apply the model and measure task performance.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>A movie-review model is deployed on medical feedback and misreads domain-specific terms.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 4 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 4 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter04). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="task-specific-models" />

@@ -1,0 +1,90 @@
+---
+title: Dense retrieval
+description: Dense retrieval ranks passages by similarity between learned query and document vectors.
+kind: concept
+conceptId: dense-retrieval
+chapter: 8
+part: applications
+summary: Dense retrieval ranks passages by similarity between learned query and document vectors.
+parent: chapter-08
+prerequisites: [semantic-search]
+related: [reranking]
+level: intermediate
+tags: [applications, chapter-08]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+
+<ConceptPrimer id="dense-retrieval" />
+
+## Definition and intuition
+
+Dense retrieval ranks passages by similarity between learned query and document vectors.
+
+Chapter 8 separates finding evidence from using evidence. Evaluate retrieval and answer support independently because a fluent answer can still lack a trustworthy source.
+
+## Before you start
+
+Read [Semantic Search](/llm-concept-atlas/concepts/semantic-search/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **dense retrieval** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Encode and index documents using a compatible embedding model
+2. **Transform:** Encode a query and search nearest vectors
+3. **Inspect:** Inspect top passages and metadata for answer relevance.
+
+### The important distinction
+
+A bi-encoder can precompute document vectors once, making nearest-neighbor search fast at query time. That efficiency means the query and passage do not interact token by token during the first-stage score. Reranking can recover some precision if the correct passage survives candidate retrieval.
+
+## Worked example
+
+A user asks “When can I return a device?” and a passage titled “Laptop loan policy” ranks highly despite few shared words. The passage still needs reading to confirm the actual return rule. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Encode and index documents using a compatible embedding model", "Encode a query and search nearest vectors", "Inspect top passages and metadata for answer relevance."]} caption="A teaching diagram for Dense retrieval. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+query = {"saturday", "hours"}
+docs = {"A": {"saturday", "hours", "library"}, "B": {"laptop", "loans"}}
+scores = {name: len(query & words) for name, words in docs.items()}
+print(sorted(scores, key=scores.get, reverse=True))
+```
+
+**Expected output:**
+
+```text
+['A', 'B']
+```
+
+**What the code shows:** The set intersection produces a simple keyword-overlap score for each document. A dense retriever replaces these sets with learned vectors and a suitable similarity measure. The [official chapter 8 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter08) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use it when paraphrases and semantic similarity matter more than exact matching alone. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Dense similarity can miss rare names, IDs, or exact phrases; hybrid search may help.
+- **Failure to look for:** A top result discusses a related policy but does not contain the requested deadline.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First encode and index documents using a compatible embedding model Then encode a query and search nearest vectors Finally inspect top passages and metadata for answer relevance.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>A top result discusses a related policy but does not contain the requested deadline.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 8 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 8 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter08). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="dense-retrieval" />

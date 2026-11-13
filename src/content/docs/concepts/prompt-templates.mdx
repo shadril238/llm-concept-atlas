@@ -1,0 +1,93 @@
+---
+title: Prompt templates
+description: Prompt templates insert changing task data into a tested prompt structure.
+kind: concept
+conceptId: prompt-templates
+chapter: 7
+part: applications
+summary: Prompt templates insert changing task data into a tested prompt structure.
+parent: chapter-07
+prerequisites: [prompt-structure]
+related: [quantized-models, chains]
+level: intermediate
+tags: [applications, chapter-07]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+
+<ConceptPrimer id="prompt-templates" />
+
+## Definition and intuition
+
+Prompt templates insert changing task data into a tested prompt structure.
+
+Chapter 7 combines model calls with templates, memory, and tools. Trace the inputs and outputs of each step so an error can be located rather than hidden inside a chain.
+
+## Before you start
+
+Read [Prompt structure](/llm-concept-atlas/concepts/prompt-structure/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **prompt templates** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Define fixed instructions and named input fields
+2. **Transform:** Escape or separate inserted content from trusted instructions
+3. **Inspect:** Render the template and inspect the full resulting prompt.
+
+### The important distinction
+
+Named slots make it clear which fields must be supplied. Keep the rendered prompt as a test artifact so changes in upstream retrieval or formatting are visible. Treat inserted documents as data and avoid placing them where the model could mistake them for developer instructions.
+
+## Worked example
+
+A support template has `{question}` and `{source}` slots. Filling the source with an unrelated page should be visible before a model call, not hidden by the template API. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Define fixed instructions and named input fields", "Escape or separate inserted content from trusted instructions", "Render the template and inspect the full resulting prompt."]} caption="A teaching diagram for Prompt templates. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+instruction = "Return one label: positive or negative."
+example = "Text: I loved it. Label: positive"
+query = "Text: The ending was dull. Label:"
+prompt = "\n".join([instruction, example, query])
+print(prompt)
+```
+
+**Expected output:**
+
+```text
+Return one label: positive or negative.
+Text: I loved it. Label: positive
+Text: The ending was dull. Label:
+```
+
+**What the code shows:** The final string contains the instruction, demonstration, and new query in that order. Inspect the rendered string before sending it to a real generator. The [official chapter 7 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter07) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use templates to keep repeated prompts consistent and reviewable. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Templates do not sanitize untrusted content or guarantee output quality.
+- **Failure to look for:** A user-provided string is concatenated into an instruction slot and changes the intended task.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First define fixed instructions and named input fields Then escape or separate inserted content from trusted instructions Finally render the template and inspect the full resulting prompt.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>A user-provided string is concatenated into an instruction slot and changes the intended task.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 7 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 7 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter07). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="prompt-templates" />

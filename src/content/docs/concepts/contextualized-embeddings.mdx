@@ -1,0 +1,91 @@
+---
+title: Contextualized embeddings
+description: A contextualized embedding represents a token after information from its surrounding tokens has been mixed in.
+kind: concept
+conceptId: contextualized-embeddings
+chapter: 2
+part: foundations
+summary: A contextualized embedding represents a token after information from its surrounding tokens has been mixed in.
+parent: chapter-02
+prerequisites: [token-embedding]
+related: [text-embedding]
+level: beginner
+tags: [foundations, chapter-02]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+
+<ConceptPrimer id="contextualized-embeddings" />
+
+## Definition and intuition
+
+**Contextualized embeddings**: A contextualized embedding represents a token after information from its surrounding tokens has been mixed in.
+
+Chapter 2 follows text into tokens and vectors. The shape and training objective of a representation determine which comparisons are meaningful.
+
+## Before you start
+
+Read [Token Embedding](/llm-concept-atlas/concepts/token-embedding/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **contextualized embeddings** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Start with the same token embedding for a repeated word
+2. **Transform:** Apply attention and layer transformations to incorporate context
+3. **Inspect:** Compare the resulting vectors in different sentences.
+
+### The important distinction
+
+At layer zero, a repeated token starts from the same learned lookup vector plus positional information. Later attention and feed-forward layers transform it using neighboring tokens. A layer's hidden state is therefore conditional on the full visible context, and pooling those states into a sentence vector is a separate design choice.
+
+## Worked example
+
+“Bank” in “river bank” and “bank loan” starts from the same token identity but receives different contextual information. Their later hidden vectors can differ even though the spelling is identical. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Start with the same token embedding for a repeated word", "Apply attention and layer transformations to incorporate context", "Compare the resulting vectors in different sentences."]} caption="A teaching diagram for Contextualized embeddings. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+from math import sqrt
+a, b = (0.8, 0.6), (0.7, 0.7)
+dot = sum(x*y for x, y in zip(a, b))
+cosine = dot / (sqrt(sum(x*x for x in a)) * sqrt(sum(y*y for y in b)))
+print(round(cosine, 3))
+```
+
+**Expected output:**
+
+```text
+0.99
+```
+
+**What the code shows:** The code takes a dot product, divides by both vector lengths, and prints a cosine score. Change a coordinate to see how the direction changes the comparison. The [official chapter 2 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter02) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use contextual vectors for tasks needing the meaning of a word in a particular sentence. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- A hidden vector is shaped by model layer and objective; it is not a fixed dictionary definition.
+- **Failure to look for:** Comparing vectors from incompatible layers or models as if they share one space yields a misleading similarity.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First start with the same token embedding for a repeated word Then apply attention and layer transformations to incorporate context Finally compare the resulting vectors in different sentences.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>Comparing vectors from incompatible layers or models as if they share one space yields a misleading similarity.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 2 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 2 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter02). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="contextualized-embeddings" />

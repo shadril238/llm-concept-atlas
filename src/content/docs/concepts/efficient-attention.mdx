@@ -1,0 +1,92 @@
+---
+title: Efficient attention
+description: Efficient attention reduces the memory or compute cost of connecting tokens across a long sequence.
+kind: concept
+conceptId: efficient-attention
+chapter: 3
+part: foundations
+summary: Efficient attention reduces the memory or compute cost of connecting tokens across a long sequence.
+parent: chapter-03
+prerequisites: [attention]
+related: [transformer-block, positional-embeddings-and-rope]
+level: beginner
+tags: [foundations, chapter-03]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+
+<ConceptPrimer id="efficient-attention" />
+
+## Definition and intuition
+
+Efficient attention reduces the memory or compute cost of connecting tokens across a long sequence.
+
+Chapter 3 traces a transformer forward pass. Distinguish the computation performed for a fixed input from the repeated loop used to generate new tokens.
+
+## Before you start
+
+Read [Attention](/llm-concept-atlas/concepts/attention/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **efficient attention** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Identify the expensive score or memory operation in ordinary attention
+2. **Transform:** Use a kernel, sparsity pattern, cache, or approximation to avoid redundant work
+3. **Inspect:** Check speed and accuracy at the target sequence length.
+
+### The important distinction
+
+Ordinary attention compares many query-key pairs, so storing a dense score matrix grows roughly with sequence length squared. FlashAttention-style kernels reduce memory traffic without discarding the exact softmax result, whereas sparse or approximate methods change which interactions are computed. Compare the resource actually saved: memory, latency, or both.
+
+## Worked example
+
+A long document produces many token-to-token scores. A memory-efficient kernel can avoid materializing the full score matrix while preserving the intended attention result. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Identify the expensive score or memory operation in ordinary attention", "Use a kernel, sparsity pattern, cache, or approximation to avoid redundant work", "Check speed and accuracy at the target sequence length."]} caption="A teaching diagram for Efficient attention. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+from math import exp
+scores = [1.2, 0.4, -0.3]
+weights = [exp(x) for x in scores]
+weights = [x / sum(weights) for x in weights]
+values = [2.0, 0.0, 1.0]
+print(round(sum(w*v for w, v in zip(weights, values)), 3))
+```
+
+**Expected output:**
+
+```text
+1.329
+```
+
+**What the code shows:** Exponentiating scores and dividing by their total forms softmax weights. The final line combines the values using those weights, which is the central attention operation. The [official chapter 3 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter03) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use it when long contexts or generation throughput are constrained by attention cost. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Different methods save different resources and may change outputs or require specialized hardware.
+- **Failure to look for:** A method looks faster on a short toy sequence but slows the actual workload after overhead is included.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First identify the expensive score or memory operation in ordinary attention Then use a kernel, sparsity pattern, cache, or approximation to avoid redundant work Finally check speed and accuracy at the target sequence length.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>A method looks faster on a short toy sequence but slows the actual workload after overhead is included.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 3 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 3 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter03). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="efficient-attention" />

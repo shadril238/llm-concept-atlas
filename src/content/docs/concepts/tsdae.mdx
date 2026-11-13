@@ -1,0 +1,97 @@
+---
+title: TSDAE
+description: Transformer-based Sequential Denoising Auto-Encoder training reconstructs original text from a corrupted version to adapt sentence representations without labels.
+kind: concept
+conceptId: tsdae
+chapter: 10
+part: training
+summary: Transformer-based Sequential Denoising Auto-Encoder training reconstructs original text from a corrupted version to adapt sentence representations without labels.
+parent: chapter-10
+prerequisites: [sbert]
+related: [fine-tuning-embeddings, domain-adaptation]
+level: advanced
+tags: [training, chapter-10]
+lessonStatus: full
+lastReviewed: 2026-11-13
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import LessonFlow from '../../../components/LessonFlow.astro';
+import { ContrastiveLab } from '../../../components/simulations/PhaseFiveLabs';
+
+<ConceptPrimer id="tsdae" />
+
+## Definition and intuition
+
+**TSDAE**: Transformer-based Sequential Denoising Auto-Encoder training reconstructs original text from a corrupted version to adapt sentence representations without labels.
+
+Chapter 10 trains representations by choosing which examples should be close or far apart. The construction of positive and negative pairs is part of the learning objective.
+
+## Before you start
+
+Read [SBERT](/llm-concept-atlas/concepts/sbert/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **TSDAE** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+
+## Theory: how it works
+
+1. **Prepare:** Corrupt a sentence by deleting or masking tokens
+2. **Transform:** Encode the damaged text and decode toward the original
+3. **Inspect:** Update the encoder and evaluate downstream similarity or retrieval.
+
+### The important distinction
+
+TSDAE corrupts a sentence and trains a sequential decoder to reconstruct it from an encoded representation. This creates a self-supervised adaptation signal without explicit similarity labels. The learned embedding still needs downstream evaluation because reconstruction can reward details irrelevant to retrieval.
+
+## Worked example
+
+“The payment arrived yesterday” might become “payment arrived”. The model learns a representation useful for reconstructing the full sentence, even though no positive pair label was provided. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+
+<LessonFlow steps={["Corrupt a sentence by deleting or masking tokens", "Encode the damaged text and decode toward the original", "Update the encoder and evaluate downstream similarity or retrieval."]} caption="A teaching diagram for TSDAE. Read the three labeled stages from left to right; each stage is described in the text above." />
+
+## Try the interactive lab
+
+<ContrastiveLab client:visible />
+
+Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+
+## Implement it
+
+**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+
+```python
+tokens = ["the", "model", "reads"]
+target = tokens[1]
+masked = tokens.copy(); masked[1] = "[MASK]"
+print(masked, "target:", target)
+```
+
+**Expected output:**
+
+```text
+['the', '[MASK]', 'reads'] target: model
+```
+
+**What the code shows:** One token is replaced by `[MASK]` and the original token is kept as the training target. The example isolates data preparation, not the neural prediction. The [official chapter 10 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter10) develops the corresponding model-based implementation.
+
+## When to use it
+
+Use it for unsupervised domain adaptation when raw text is plentiful but labels are scarce. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+
+## Limits and common mistakes
+
+- Reconstruction quality does not automatically imply better retrieval for the target task.
+- **Failure to look for:** The model gets good at filling common words but still confuses two policy passages with different answers.
+
+A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+
+## Check your understanding
+
+<details><summary>What are the three stages in this example?</summary><p>First corrupt a sentence by deleting or masking tokens Then encode the damaged text and decode toward the original Finally update the encoder and evaluate downstream similarity or retrieval.</p></details>
+
+<details><summary>What would make the result misleading?</summary><p>The model gets good at filling common words but still confuses two policy passages with different answers.</p></details>
+
+## Connections and sources
+
+This independent lesson follows the topic order of chapter 10 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 10 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter10). Continue through the linked prerequisites and nearby concepts below.
+
+<ConceptConnections id="tsdae" />
