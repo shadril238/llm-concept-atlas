@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-word2vec",
+  "status": "passed",
+  "date": "2026-11-19T17:56:56.642888+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/word2vec.py"
+  ],
+  "sourceSha256": "fc60e70abb2da2778d33e7e8b18523692ae38c78b176648bac7c5595bf8c72b7",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "289d92b34225906b71734391207143afedc56097c137290cb8b589e6112afb2c",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "[('the', 'cat'), ('cat', 'the'), ('cat', 'sleeps'), ('sleeps', 'cat')]\n",
+  "stderr": "",
+  "error": null
+}

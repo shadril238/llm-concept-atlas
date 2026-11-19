@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-context-size",
+  "status": "passed",
+  "date": "2026-11-19T17:56:57.464318+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/context_size.py"
+  ],
+  "sourceSha256": "081f52669b863747b577757657dbc7adff7184758daf1c82a000ec00fbb1a231",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "45cd73d1fac23751f7c8e0872ef0efa13330d13fda9f1950feba689230dd1478",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.008,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "output budget: 21\n",
+  "stderr": "",
+  "error": null
+}

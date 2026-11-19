@@ -13,7 +13,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     const concepts = entries.filter((entry) => entry.data.chapter === chapter.number).sort((a, b) => a.data.title.localeCompare(b.data.title));
     return <section class="directory-chapter" id={`directory-chapter-${chapter.number}`} data-chapter>
       <div class="directory-chapter-head"><div><span class="eyebrow">Chapter {String(chapter.number).padStart(2, '0')} · {parts.find((part) => part.id === chapter.part)?.shortTitle}</span><h2>{chapter.title}</h2></div><a href={`${base}chapters/${chapter.part}/${String(chapter.number).padStart(2, '0')}/`}>Chapter overview ↗</a></div>
-      <div class="directory-grid">{concepts.map((entry) => <a class="directory-card" data-title={entry.data.title.toLowerCase()} data-summary={entry.data.summary?.toLowerCase()} href={`${base}concepts/${entry.data.conceptId}/`}><strong>{entry.data.title}</strong><span>{entry.data.summary}</span><small>Read lesson ↗</small></a>)}</div>
+      <div class="directory-grid">{concepts.map((entry) => <a class="directory-card" data-title={entry.data.title.toLowerCase()} data-summary={entry.data.summary?.toLowerCase()} data-aliases={entry.data.aliases.join(" ").toLowerCase()} href={`${base}concepts/${entry.data.conceptId}/`}><strong>{entry.data.title}</strong><span>{entry.data.summary}</span><small>Read lesson ↗</small></a>)}</div>
     </section>;
   })}
 </div>
@@ -29,7 +29,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       const query = input.value.trim().toLowerCase();
       let visible = 0;
       cards.forEach((card) => {
-        const match = !query || `${card.dataset.title} ${card.dataset.summary}`.includes(query);
+        const match = !query || `${card.dataset.title} ${card.dataset.summary} ${card.dataset.aliases}`.includes(query);
         card.hidden = !match;
         if (match) visible++;
       });

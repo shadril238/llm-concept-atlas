@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "cache-equivalence",
+  "status": "passed",
+  "date": "2026-11-19T17:59:57.961804+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/training/reference/src/atlas_reference/e3/cache.py"
+  ],
+  "sourceSha256": "7e0140ab664368016fb8fe649cdf2579978334e9ca1d2517cc7128899e60d893",
+  "lockSha256": "d4b64636a97fdd81593972dc4241059dc1edf5178dec89bf5c1cf6601d7f5615",
+  "contractSha256": "f5d5b21ee1c55a90504418bbaf1738bde5d3463c50776d2168346f9389db6ef4",
+  "fixtureSha256": null,
+  "models": [
+    {
+      "id": "EleutherAI/pythia-14m",
+      "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac"
+    }
+  ],
+  "python": "3.11.18",
+  "packages": {
+    "numpy": "2.2.6",
+    "packaging": "26.3",
+    "requests": "2.34.2",
+    "certifi": "2026.10.23",
+    "networkx": "3.6.1",
+    "torch": "2.8.0",
+    "filelock": "4.2.12",
+    "accelerate": "1.16.0",
+    "sympy": "1.14.0",
+    "huggingface_hub": "0.36.2",
+    "safetensors": "0.8.0",
+    "tqdm": "4.70.1",
+    "urllib3": "2.8.0",
+    "mpmath": "1.3.0",
+    "PyYAML": "6.0.3",
+    "fsspec": "2026.9.0",
+    "peft": "0.17.0",
+    "Jinja2": "3.1.6",
+    "regex": "2026.11.19",
+    "transformers": "4.57.1",
+    "typing_extensions": "4.16.0",
+    "MarkupSafe": "3.0.4",
+    "hf-xet": "1.8.0",
+    "tokenizers": "0.22.2",
+    "psutil": "7.2.2",
+    "charset-normalizer": "3.5.2",
+    "idna": "3.20"
+  },
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 1.471,
+  "peakMemoryMiB": 627.9,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "{\"max_logit_error\": 3.907985046680551e-14, \"cache_shape\": [1, 4, 12, 32], \"layers\": 6, \"cache_bytes\": 147456, \"positions\": 12, \"forced_tokens\": 7, \"dtype\": \"float64\", \"cpu_seconds\": {\"uncached\": [0.029474374998244457, 0.028857208002591506, 0.02917270800389815], \"cached\": [0.01563745799649041, 0.01555637500132434, 0.015638624994608108]}, \"correctness_checked\": true, \"memory_checked\": true, \"measurement\": \"CPU float64 correctness/timing demonstration, not a production-precision benchmark; warm-up then three same-token runs including prompt prefill. Tiny workloads can be slower with caching.\"}\n",
+  "stderr": "",
+  "error": null,
+  "artifactSha256": "5f56ae067bafe608096275891cdf84b4e32a6dbeae54e26d900655048dbc2998"
+}

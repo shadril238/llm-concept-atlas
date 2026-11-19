@@ -1,0 +1,10 @@
+---
+import VerifiedRun from './VerifiedRun.astro';
+import manifest from '../../examples/manifest.json';
+const {id}=Astro.props as {id:string};
+const entry=manifest.examples.find(example=>example.id===id);
+if(!entry)throw new Error(`Unknown foundation workflow ${id}`);
+const anchors:Record<string,string>={'first-generation':'l01-first-generation','representation-inspection':'l03-representations','playlist-embeddings':'l04-learned-playlist-recommendations','transparent-transformer':'l05-transparent-transformer','cache-equivalence':'l06-decoding-and-kv-cache'};
+---
+<div class="reference-brief"><strong>Run the connected workflow: {entry.title}</strong><p><a href={`/llm-concept-atlas/labs/foundations/#${anchors[id]}`}>Open setup, results, and failure analysis ↗</a></p><p>Command: <code>python3 scripts/run-examples.py --id {id}{entry.network==='offline'?'':' --offline'}</code>. For an initial model download, use <code>--allow-network</code> explicitly.</p></div>
+<VerifiedRun id={id} />

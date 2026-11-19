@@ -1,91 +1,102 @@
 ---
 title: Contextualized embeddings
-description: A contextualized embedding represents a token after information from its surrounding tokens has been mixed in.
+description: "A contextualized token embedding is a vector for one token occurrence after a model has combined its initial representation with permitted context and position information. The same vocabulary item can therefore receive different states in different sentences."
 kind: concept
 conceptId: contextualized-embeddings
 chapter: 2
 part: foundations
-summary: A contextualized embedding represents a token after information from its surrounding tokens has been mixed in.
+summary: "A contextualized token embedding is a vector for one token occurrence after a model has combined its initial representation with permitted context and position information. The same vocabulary item can therefore receive different states in different sentences."
 parent: chapter-02
 prerequisites: [token-embedding]
 related: [text-embedding]
 level: beginner
 tags: [foundations, chapter-02]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e3-foundations-author-review-2026-11-20
+exampleIds: ["foundation-contextualized-embeddings", "representation-inspection"]
+bookSections: ["book-ch02-contextual-embeddings"]
+aliases: ["contextual token states", "hidden states"]
+learningObjectives: ["Explain the input/output contract of Contextualized embeddings.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: If two bank occurrences have different final states, must their initial vocabulary IDs differ?"]
+labHref: /labs/foundations/
+relationshipReasons: {"token-embedding": "The learned lookup row is the starting state before context changes it."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import FoundationEvidence from '../../../components/FoundationEvidence.astro';
+import { AttentionStepper, PositionExplorer, DecodingExplorer, CacheExplorer, PlaylistExplorer, ArchitectureMap, RepresentationExplorer } from '../../../components/simulations/FoundationLabs';
 
 <ConceptPrimer id="contextualized-embeddings" />
 
 ## Definition and intuition
 
-**Contextualized embeddings**: A contextualized embedding represents a token after information from its surrounding tokens has been mixed in.
+A contextualized token embedding is a vector for one token occurrence after a model has combined its initial representation with permitted context and position information. The same vocabulary item can therefore receive different states in different sentences.
 
-Chapter 2 follows text into tokens and vectors. The shape and training objective of a representation determine which comparisons are meaningful.
+The word “bank” appears near “loan” in one sentence and near “flooded” in another. A static word row cannot itself distinguish those uses; contextual processing can change the occurrence-level representation.
 
-## Before you start
+<ReferenceBrief objectives={["Explain the input/output contract of Contextualized embeddings.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: If two bank occurrences have different final states, must their initial vocabulary IDs differ?"]} prerequisites="Use the linked prerequisites below. Distinguish an input, a learned parameter, and a result before following the trace." scope="An explicit teaching calculation plus a linked verified CPU workflow. Illustrative values and recorded model outputs are labeled separately." />
 
-Read [Token Embedding](/llm-concept-atlas/concepts/token-embedding/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **contextualized embeddings** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+An input lookup starts from a vocabulary row. Each transformer block mixes information through attention and applies position-wise transformations, so a later hidden state depends on the available input and the model’s mask.
 
-1. **Prepare:** Start with the same token embedding for a repeated word
-2. **Transform:** Apply attention and layer transformations to incorporate context
-3. **Inspect:** Compare the resulting vectors in different sentences.
+The layer and position are part of the representation’s identity. Comparing a first-layer state with a final-layer state, or averaging pieces without a policy, can mix different quantities. Record the tokenizer, word-to-piece mapping, selected layer, and pooling rule.
+
+Contextual difference is not proof that a model has perfectly disambiguated meaning. A cosine comparison quantifies direction in a learned space; whether that space separates the distinctions your application needs must be evaluated. Raw contextual states are not automatically a high-quality sentence-retrieval embedding.
 
 ### The important distinction
 
-At layer zero, a repeated token starts from the same learned lookup vector plus positional information. Later attention and feed-forward layers transform it using neighboring tokens. A layer's hidden state is therefore conditional on the full visible context, and pooling those states into a sentence vector is a separate design choice.
+A projected point moving on a chart does not reveal a model’s full reasoning.
 
 ## Worked example
 
-“Bank” in “river bank” and “bank loan” starts from the same token identity but receives different contextual information. Their later hidden vectors can differ even though the spelling is identical. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+The representation lab locates the actual bank token ID in two tokenized sentences. It asserts that the initial lookup rows are exactly equal and the final hidden states are not equal. It reports the contextual cosine instead of inventing two convenient vectors.
 
-<LessonFlow steps={["Start with the same token embedding for a repeated word", "Apply attention and layer transformations to incorporate context", "Compare the resulting vectors in different sentences."]} caption="A teaching diagram for Contextualized embeddings. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
+
+<RepresentationExplorer client:visible />
+
+
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+Run the small mechanism from the repository root with `python3 scripts/run-examples.py --id foundation-contextualized-embeddings`. Its values are illustrative; it isolates the stated operation rather than pretending to load a trained model.
+
+{/* example:foundation-contextualized-embeddings:start */}
 
 ```python
-from math import sqrt
-a, b = (0.8, 0.6), (0.7, 0.7)
-dot = sum(x*y for x, y in zip(a, b))
-cosine = dot / (sqrt(sum(x*x for x in a)) * sqrt(sum(y*y for y in b)))
-print(round(cosine, 3))
+same_lookup = [0.2, 0.7]
+loan_state, river_state = [0.9, 0.1], [0.1, 0.9]
+print("initial row reused:", same_lookup)
+print("invented contextual states:", loan_state, river_state)
+print("These numbers illustrate the distinction; L03 records real states.")
 ```
 
-**Expected output:**
+{/* example:foundation-contextualized-embeddings:end */}
 
-```text
-0.99
-```
+<FoundationEvidence id="representation-inspection" />
 
-**What the code shows:** The code takes a dot product, divides by both vector lengths, and prints a cosine score. Change a coordinate to see how the direction changes the comparison. The [official chapter 2 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter02) develops the corresponding model-based implementation.
+The [foundation lab guide](/llm-concept-atlas/labs/foundations/) supplies setup, pinned artifacts, full source, recorded outputs, and the practical workflow. The mechanism snippet and the model lab serve different learning purposes: use the former to check a calculation and the latter to inspect actual library/model behavior.
 
 ## When to use it
 
-Use contextual vectors for tasks needing the meaning of a word in a particular sentence. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use contextual states for token classification, span extraction, or inspecting how an encoder processes a specific input. Use a suitably trained sentence encoder when your application needs whole-sentence similarity. Keep an exact-token baseline when names/codes matter.
 
 ## Limits and common mistakes
 
-- A hidden vector is shaped by model layer and objective; it is not a fixed dictionary definition.
-- **Failure to look for:** Comparing vectors from incompatible layers or models as if they share one space yields a misleading similarity.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+A projected point moving on a chart does not reveal a model’s full reasoning. Truncating context can remove the disambiguating word. An uncased tokenizer may discard capitalization, and a multi-piece word needs an explicit aggregation or selection policy.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First start with the same token embedding for a repeated word Then apply attention and layer transformations to incorporate context Finally compare the resulting vectors in different sentences.</p></details>
+<details><summary>If two bank occurrences have different final states, must their initial vocabulary IDs differ?</summary><p>No. That is precisely the distinction: the same ID can start from the same row and later differ because the surrounding tokens, positions, and visibility pattern differ. The lab checks both stages separately.</p></details>
 
-<details><summary>What would make the result misleading?</summary><p>Comparing vectors from incompatible layers or models as if they share one space yields a misleading similarity.</p></details>
+<details><summary>A long input is truncated before “loan”. How might that alter a bank state?</summary><p>The disambiguating context is absent, so the contextual state can change or become less useful for the intended sense. Inspect the actual retained tokens, not just the original text.</p></details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 2 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 2 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter02). Continue through the linked prerequisites and nearby concepts below.
+Book source locations: Chapter 2, printed pp. 58–61. Precise section IDs and mappings are recorded in the [coverage inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The small CPU model, original playlist data, and transparent numerical traces are atlas teaching choices. Read the [authors' official chapter 2 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter02) and the [E3 execution/source guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/E3.md) for the original workflow and supported implementation details.
 
 <ConceptConnections id="contextualized-embeddings" />

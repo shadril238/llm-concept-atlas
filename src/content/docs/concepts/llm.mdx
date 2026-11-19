@@ -1,83 +1,101 @@
 ---
 title: Large Language Model
-description: A model trained on substantial text data to learn patterns of language.
+description: "A large language model is a language model with substantial learned capacity, commonly built from transformer layers and trained on broad text. \u201cLarge\u201d is a relative historical description, not a fixed parameter threshold or a guarantee of capability."
 kind: concept
 conceptId: llm
 chapter: 1
 part: foundations
-summary: A large language model learns statistical patterns in language from extensive training data.
+summary: "A large language model is a language model with substantial learned capacity, commonly built from transformer layers and trained on broad text. \u201cLarge\u201d is a relative historical description, not a fixed parameter threshold or a guarantee of capability."
 parent: language-ai
 prerequisites: [language-ai]
 related: [representation-model, generative-model, transformer]
 level: beginner
 tags: [foundations, models]
 lessonStatus: full
-lastReviewed: 2026-11-12
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e3-foundations-author-review-2026-11-20
+exampleIds: ["foundation-llm", "first-generation"]
+bookSections: ["book-ch01-llm-definition", "book-ch03-lm-head"]
+aliases: ["LLM", "large language models"]
+learningObjectives: ["Explain the input/output contract of Large Language Model.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Does adding a document to the prompt permanently teach the model its contents?"]
+labHref: /labs/foundations/
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import FoundationEvidence from '../../../components/FoundationEvidence.astro';
+import { AttentionStepper, PositionExplorer, DecodingExplorer, CacheExplorer, PlaylistExplorer, ArchitectureMap, RepresentationExplorer } from '../../../components/simulations/FoundationLabs';
 
 <ConceptPrimer id="llm" />
 
 ## Definition and intuition
 
-A **large language model** is a neural model trained on substantial language data so its parameters capture patterns useful for predicting, representing, or generating text. “Large” does not set a fixed size cutoff. What matters for a task is the model’s training objective, architecture, data, context limit, and evaluated behavior.
+A large language model is a language model with substantial learned capacity, commonly built from transformer layers and trained on broad text. “Large” is a relative historical description, not a fixed parameter threshold or a guarantee of capability.
 
-An LLM is not a lookup table of answers. Given token IDs, it performs numerical calculations and produces either useful internal representations or probabilities for possible next tokens.
+A team proposes a “larger model” for document search. Before comparing parameter counts, ask whether the required output is an embedding, a label, or generated text, and what improvement would justify additional memory and latency.
 
-## Before you start
-
-Read [language ai](/llm-concept-atlas/concepts/language-ai/) first; return here when the key terms feel familiar.
+<ReferenceBrief objectives={["Explain the input/output contract of Large Language Model.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Does adding a document to the prompt permanently teach the model its contents?"]} prerequisites="Use the linked prerequisites below. Distinguish an input, a learned parameter, and a result before following the trace." scope="An explicit teaching calculation plus a linked verified CPU workflow. Illustrative values and recorded model outputs are labeled separately." />
 
 ## How it works
 
-A training example supplies a learning signal. In next-token training, the model sees a prefix and learns to assign more probability to the actual next token. Its parameters are adjusted over many examples. In masked-token training, part of a sentence is hidden and the model predicts the missing part.
+A causal language model estimates a distribution for the next token given earlier tokens. Training repeatedly adjusts parameters to make observed continuations more likely. The learned distribution captures statistical structure and can support useful tasks, but the objective is not a direct truth-verification procedure.
 
-At use time, a tokenizer maps text to IDs, an embedding table creates starting vectors, transformer blocks mix context, and an output head produces task-specific values. Generation repeats this process as each selected token extends the context. Training can produce broad capabilities, but the model still needs task-specific evaluation and sometimes retrieval or fine-tuning.
+Parameters are stored numeric values. Hyperparameters such as temperature, context budget, and learning rate control a procedure; they are not interchangeable with learned weights. Context supplies information during a run without necessarily changing any parameter.
+
+Parameter count, architecture, training data, objective, adaptation, and inference configuration all affect behavior. A small base model may be ideal for inspecting mechanics while producing poor instructions. Our pinned Pythia-14m example is deliberately small and is not presented as a capable assistant.
+
+### The important distinction
+
+More parameters do not imply a longer supported context or current factual knowledge.
 
 ## Worked example
 
-For “The sky is”, a generative model might assign illustrative probabilities `blue: 0.55`, `clear: 0.20`, and other tokens the remaining mass. A decoding rule picks one token; the new prefix becomes “The sky is blue”. These are invented numbers, not a model prediction.
+A next-token head can output logits [2, 1, 0] for three candidate IDs. Softmax converts these to approximately [0.665, 0.245, 0.090]. Greedy decoding chooses the first ID. This local probability comparison says nothing about whether the resulting sentence is factually correct.
 
-<LessonFlow steps={['Text', 'Tokenizer IDs', 'Embedding vectors', 'Transformer blocks', 'Output scores']} caption="A simplified flow for llm. Follow each labeled step from left to right." />
+## Try the experiment
+
+<ArchitectureMap client:visible />
+
+
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+Run the small mechanism from the repository root with `python3 scripts/run-examples.py --id foundation-llm`. Its values are illustrative; it isolates the stated operation rather than pretending to load a trained model.
+
+{/* example:foundation-llm:start */}
 
 ```python
 from math import exp
-logits = {'blue': 2.0, 'clear': 1.0, 'other': 0.0}
-normalizer = sum(exp(x) for x in logits.values())
-probs = {word: round(exp(x)/normalizer, 3) for word,x in logits.items()}
-print(probs)
+
+logits = [2.0, 1.0, 0.0]
+weights = [exp(x - max(logits)) for x in logits]
+print([round(x / sum(weights), 3) for x in weights])
 ```
 
-**Expected behavior:** A probability dictionary whose values sum to about 1 (for example `blue` is highest).
+{/* example:foundation-llm:end */}
 
-`logits` are unnormalized scores. Softmax exponentiates and normalizes them. A real LLM calculates thousands of scores from context; these three numbers only make the output stage inspectable.
+<FoundationEvidence id="first-generation" />
+
+The [foundation lab guide](/llm-concept-atlas/labs/foundations/) supplies setup, pinned artifacts, full source, recorded outputs, and the practical workflow. The mechanism snippet and the model lab serve different learning purposes: use the former to check a calculation and the latter to inspect actual library/model behavior.
 
 ## When to use it
 
-- A generation model can draft, summarize, or answer questions.
-- A representation model can classify, cluster, or retrieve text without writing prose.
-- Choose using measured task performance, latency, context, cost, and deployment constraints.
+Choose a model through task evidence, hardware requirements, data-handling needs, and reproducibility. For a learning exercise, a small accessible model is often better than a model that cannot run on the declared device. For deployment, measure the real workload and error costs.
 
 ## Limits and common mistakes
 
-- “Large” does not guarantee accuracy or reasoning.
-- A next-token probability is conditional on the provided context, not a confidence that a statement is true.
+More parameters do not imply a longer supported context or current factual knowledge. A model can assign high probability to a common false statement. A prompt can elicit confident prose even when the source data needed to answer is absent.
 
 ## Check your understanding
 
-<details><summary>What does a tokenizer produce for the model?</summary><p>Token IDs, which index the model’s learned embedding table.</p></details>
+<details><summary>Does adding a document to the prompt permanently teach the model its contents?</summary><p>Usually no: ordinary inference conditions on the document for that run. Parameter updates require a training/adaptation process. Retrieval and persistent application storage can make the document available again without rewriting model weights.</p></details>
 
-<details><summary>Why is fluent text insufficient evidence of accuracy?</summary><p>The generation objective rewards plausible continuations; facts need independent checking or grounding.</p></details>
+<details><summary>Why might a 14M model be the better choice for the first local lab?</summary><p>It has a bounded download/memory footprint and exposes the same tokenizer→states→logits loop. Its weaker output quality must remain visible; resource accessibility is not a capability ranking.</p></details>
 
 ## Connections and sources
 
-This lesson follows the topic sequence in chapter 1 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter01) and [this primary technical reference](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter01).
+Book source locations: Chapter 1, printed pp. 25–25; Chapter 3, printed pp. 78–80. Precise section IDs and mappings are recorded in the [coverage inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The small CPU model, original playlist data, and transparent numerical traces are atlas teaching choices. Read the [authors' official chapter 1 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter01) and the [E3 execution/source guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/E3.md) for the original workflow and supported implementation details.
 
 <ConceptConnections id="llm" />

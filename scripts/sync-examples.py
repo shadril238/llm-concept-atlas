@@ -38,6 +38,11 @@ for family, eid in [
     ("reference", "lora-tiny-training"),
     ("reference", "lora-pretrained"),
     ("reference", "ner-training"),
+    ("reference", "first-generation"),
+    ("reference", "representation-inspection"),
+    ("reference", "playlist-embeddings"),
+    ("reference", "transparent-transformer"),
+    ("reference", "cache-equivalence"),
 ]:
     entry = next(e for e in manifest["examples"] if e["id"] == eid)
     directory = ROOT / manifest["environments"][family]["project"]
@@ -48,9 +53,16 @@ for family, eid in [
         "lora-tiny-training": "atlas_reference.lora_tiny",
         "lora-pretrained": "atlas_reference.lora_model",
         "ner-training": "atlas_reference.ner_model",
+        "first-generation": "atlas_reference.e3.generation",
+        "representation-inspection": "atlas_reference.e3.representations",
+        "playlist-embeddings": "atlas_reference.e3.playlists",
+        "transparent-transformer": "atlas_reference.e3.transformer",
+        "cache-equivalence": "atlas_reference.e3.cache",
     }[eid]
     # Generated notebooks import the same source used by the CLI; no copied algorithm.
     code = f'import sys\nfrom pathlib import Path\nproject = Path.cwd()\nif project.name == "notebooks": project = project.parent\nsys.path.insert(0, str(project / "src"))\nfrom {module} import main\nmain()'
+    if eid == "playlist-embeddings":
+        code = code.rsplit("main()",1)[0] + "main([])"
     notebook = {
         "nbformat": 4,
         "nbformat_minor": 5,
@@ -103,6 +115,21 @@ if not args.check:
         )
         outputs["src/data/reference-results.json"] = (
             json.dumps(results, indent=2, ensure_ascii=False) + "\n"
+        )
+if not args.check:
+    names = ["generation", "representations", "playlists", "transformer", "cache"]
+    paths = {
+        name: ROOT / "examples/artifacts" / f"e3-{name}" / "results.json"
+        for name in names
+    }
+    if all(path.exists() for path in paths.values()):
+        outputs["src/data/foundation-results.json"] = (
+            json.dumps(
+                {name: json.loads(path.read_text()) for name, path in paths.items()},
+                indent=2,
+                ensure_ascii=False,
+            )
+            + "\n"
         )
 # Replace only explicit source regions; surrounding explanations stay authored.
 for entry in manifest["examples"]:

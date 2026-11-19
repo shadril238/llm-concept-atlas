@@ -1,81 +1,102 @@
 ---
 title: Token Embedding
-description: A learned vector associated with a token ID.
+description: "A token embedding is the learned vector selected from an embedding table by a token ID. It is the model\u2019s numeric starting representation for that token occurrence before later contextual processing."
 kind: concept
 conceptId: token-embedding
 chapter: 2
 part: foundations
-summary: A token embedding is a learned vector that gives a token ID a starting numerical representation.
+summary: "A token embedding is the learned vector selected from an embedding table by a token ID. It is the model\u2019s numeric starting representation for that token occurrence before later contextual processing."
 parent: chapter-02
 prerequisites: [token, vocabulary]
 related: [text-embedding, transformer]
 level: beginner
 tags: [embeddings, tokens]
 lessonStatus: full
-lastReviewed: 2026-11-12
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e3-foundations-author-review-2026-11-20
+exampleIds: ["foundation-token-embedding", "representation-inspection"]
+bookSections: ["book-ch01-embedding-types", "book-ch02-token-embeddings", "book-ch02-embedding-table", "book-ch03-forward-pass"]
+aliases: ["embedding lookup", "embedding matrix"]
+learningObjectives: ["Explain the input/output contract of Token embedding.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: How many positions and coordinates result from 12 IDs and a width-128 table?"]
+labHref: /labs/foundations/
+relationshipReasons: {"token": "Token identity and positions are needed before tracking an encoding.", "vocabulary": "A shared ID-to-row mapping is required for a meaningful lookup."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import FoundationEvidence from '../../../components/FoundationEvidence.astro';
+import { AttentionStepper, PositionExplorer, DecodingExplorer, CacheExplorer, PlaylistExplorer, ArchitectureMap, RepresentationExplorer } from '../../../components/simulations/FoundationLabs';
 
 <ConceptPrimer id="token-embedding" />
 
 ## Definition and intuition
 
-A **token embedding** is the learned vector associated with a token ID before the model incorporates the surrounding sentence. An embedding table is a matrix with one row per token ID and one column per feature dimension. Looking up an ID selects its row.
+A token embedding is the learned vector selected from an embedding table by a token ID. It is the model’s numeric starting representation for that token occurrence before later contextual processing.
 
-The row is a starting representation. Later transformer layers change the representation using position and context, so the same token can contribute differently in different sentences.
+Your tokenizer returns [7, 12, 7], but matrix multiplication needs vectors rather than vocabulary addresses. An embedding lookup turns those three IDs into three rows of fixed width.
 
-## Before you start
-
-Read [token](/llm-concept-atlas/concepts/token/), [vocabulary](/llm-concept-atlas/concepts/vocabulary/) first; return here when the key terms feel familiar.
+<ReferenceBrief objectives={["Explain the input/output contract of Token embedding.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: How many positions and coordinates result from 12 IDs and a width-128 table?"]} prerequisites="Use the linked prerequisites below. Distinguish an input, a learned parameter, and a result before following the trace." scope="An explicit teaching calculation plus a linked verified CPU workflow. Illustrative values and recorded model outputs are labeled separately." />
 
 ## How it works
 
-Let the embedding matrix `E` have shape `V × d`, where `V` is vocabulary size and `d` is vector width. For token ID `i`, lookup returns `E[i]`. A sequence of `n` IDs becomes an `n × d` array. Position information is added or otherwise incorporated before or inside transformer blocks. During training, gradient updates adjust the rows that help reduce the task loss.
+For an embedding table E with shape [V, d] and input IDs with shape [batch, T], lookup produces [batch, T, d]. The same ID selects the same row before position/context processing, regardless of its surrounding words.
 
-The coordinates are not hand-written traits such as “animal” or “happy.” They are learned numbers. Their geometry can be useful, but raw token embeddings are not the same as sentence embeddings produced by an encoder.
+The table values are learned with the model’s objective; they are not handwritten dictionary definitions. Gradient updates modify rows involved in training and may also update an output table if weights are tied. Input/output weight tying is an architecture choice, not a requirement of embeddings.
+
+Position information and transformer blocks turn initial rows into contextual states. Some models add absolute position vectors; others encode positions through operations such as RoPE on Q/K. Do not describe every model as adding the same type of position embedding at the input.
+
+### The important distinction
+
+Changing ID mappings while retaining weights changes meaning silently.
 
 ## Worked example
 
-For IDs `[2, 0]` and a toy table `[[0.1, 0.9], [0.5, 0.2], [0.8, 0.3]]`, lookup yields `[[0.8, 0.3], [0.1, 0.9]]`. The sequence has two positions and two dimensions. A real model has far more rows and dimensions.
+A table with four rows and width two receives IDs [2, 0, 2]. The result has three rows: E[2], E[0], E[2]. The first and third rows initially match. L03 verifies this on an actual pretrained bank row and then shows later hidden states differ between contexts.
 
-<LessonFlow steps={['Token IDs', 'Embedding table lookup', 'Initial vectors', 'Contextual transformer layers']} caption="A simplified flow for token embedding. Follow each labeled step from left to right." />
+## Try the experiment
+
+<RepresentationExplorer client:visible />
+
+
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+Run the small mechanism from the repository root with `python3 scripts/run-examples.py --id foundation-token-embedding`. Its values are illustrative; it isolates the stated operation rather than pretending to load a trained model.
+
+{/* example:foundation-token-embedding:start */}
 
 ```python
-table = [[0.1, 0.9], [0.5, 0.2], [0.8, 0.3]]
-ids = [2, 0]
-vectors = [table[token_id] for token_id in ids]
+table = [[0.1, 0.9], [0.5, 0.2], [0.8, 0.3], [0.0, 0.0]]
+ids = [2, 0, 2]
+vectors = [table[index] for index in ids]
 print(vectors)
+assert vectors[0] == vectors[2]
 ```
 
-**Expected behavior:** `[[0.8, 0.3], [0.1, 0.9]]`
+{/* example:foundation-token-embedding:end */}
 
-The list index is the token ID. No network or library is required for this teaching version. A real model loads a trained matrix and combines these vectors with position and subsequent layers.
+<FoundationEvidence id="representation-inspection" />
+
+The [foundation lab guide](/llm-concept-atlas/labs/foundations/) supplies setup, pinned artifacts, full source, recorded outputs, and the practical workflow. The mechanism snippet and the model lab serve different learning purposes: use the former to check a calculation and the latter to inspect actual library/model behavior.
 
 ## When to use it
 
-- Embedding lookup is the first numerical step in neural language models.
-- Inspect table shapes when debugging vocabulary mismatch or model architecture.
+Use embedding lookup when categorical IDs need learned numeric features. The same principle applies to song IDs in a recommender. Distinguish this table from a pretrained sentence encoder whose output already incorporates context and pooling.
 
 ## Limits and common mistakes
 
-- A token embedding does not by itself encode the whole sentence.
-- Do not assign a human-readable meaning to an individual vector coordinate without evidence.
+Changing ID mappings while retaining weights changes meaning silently. A random new embedding row is not trained knowledge. A 2D drawing of vectors usually omits many dimensions; its geometry should not be treated as the original model space.
 
 ## Check your understanding
 
-<details><summary>What shape results from n IDs with width d?</summary><p>An n × d array of vectors.</p></details>
+<details><summary>How many positions and coordinates result from 12 IDs and a width-128 table?</summary><p>There are 12 positions with 128 coordinates each: [12, 128], or [batch, 12, 128] when batched. The vocabulary row count determines storage, not the number of positions in this input.</p></details>
 
-<details><summary>Why can the same token mean something different later?</summary><p>Contextual layers mix information from neighboring positions.</p></details>
+<details><summary>A table has 7 rows and width 4; input shape is [2,3]. What is lookup output shape?</summary><p>[2,3,4]. Each of six token positions selects a four-coordinate row; the seven-row vocabulary is storage, not input length.</p></details>
 
 ## Connections and sources
 
-This lesson follows the topic sequence in chapter 2 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter02) and [this primary technical reference](https://pytorch.org/docs/stable/generated/torch.nn.Embedding.html).
+Book source locations: Chapter 1, printed pp. 10–11; Chapter 2, printed pp. 57–61; Chapter 2, printed pp. 57–58; Chapter 3, printed pp. 76–79. Precise section IDs and mappings are recorded in the [coverage inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The small CPU model, original playlist data, and transparent numerical traces are atlas teaching choices. Read the [authors' official chapter 2 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter02) and the [E3 execution/source guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/E3.md) for the original workflow and supported implementation details.
 
 <ConceptConnections id="token-embedding" />

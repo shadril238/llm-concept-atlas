@@ -206,6 +206,9 @@
           },
           "resultArtifact": {
             "type": "string"
+          },
+          "resultFile": {
+            "type": "string"
           }
         }
       }

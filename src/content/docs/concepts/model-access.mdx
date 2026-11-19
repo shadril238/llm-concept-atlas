@@ -1,0 +1,114 @@
+---
+title: "Model access: local and hosted"
+description: "Model access is the operational route by which software uses a model: a hosted interface/API, a downloaded local artifact, or a deployment you control. Access, licensing, and openness describe different properties."
+kind: concept
+conceptId: model-access
+chapter: 1
+part: foundations
+summary: "Model access is the operational route by which software uses a model: a hosted interface/API, a downloaded local artifact, or a deployment you control. Access, licensing, and openness describe different properties."
+parent: llm
+prerequisites: ["llm"]
+related: ["generative-model", "responsible-use"]
+level: beginner
+tags: [foundations]
+lessonStatus: full
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e3-foundations-author-review-2026-11-20
+exampleIds: ["foundation-model-access", "first-generation"]
+bookSections: ["book-ch01-limited-resources", "book-ch01-interfaces", "book-ch01-proprietary", "book-ch01-open-models", "book-ch01-frameworks"]
+aliases: ["open weights", "hosted model", "local model", "model hub"]
+learningObjectives: ["Explain the input/output contract of Model access: local and hosted.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Which route should you choose for an offline learning exercise with no API key?"]
+labHref: /labs/foundations/
+relationshipReasons: {"llm": "Model inputs, outputs, and resources must be understood before choosing access."}
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import FoundationEvidence from '../../../components/FoundationEvidence.astro';
+import { AttentionStepper, PositionExplorer, DecodingExplorer, CacheExplorer, PlaylistExplorer, ArchitectureMap, RepresentationExplorer } from '../../../components/simulations/FoundationLabs';
+
+<ConceptPrimer id="model-access" />
+
+## Definition and intuition
+
+Model access is the operational route by which software uses a model: a hosted interface/API, a downloaded local artifact, or a deployment you control. Access, licensing, and openness describe different properties.
+
+A student has a laptop and wants to reproduce a generation example without entering an API key. A team with confidential documents has a different set of requirements. Both need to know where computation and data actually go.
+
+<ReferenceBrief objectives={["Explain the input/output contract of Model access: local and hosted.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Which route should you choose for an offline learning exercise with no API key?"]} prerequisites="Use the linked prerequisites below. Distinguish an input, a learned parameter, and a result before following the trace." scope="An explicit teaching calculation plus a linked verified CPU workflow. Illustrative values and recorded model outputs are labeled separately." />
+
+## How it works
+
+A model hub stores artifacts and metadata; an inference library loads and executes a supported architecture; a workflow framework connects components such as retrieval and generation. These roles can coexist, but installing a framework does not download a trained model or provide compute by itself.
+
+Downloadable weights provide local access subject to their license. They do not necessarily include the training corpus, preprocessing, training code, or enough resources to reproduce training. “Open weights” and fully open development are therefore not synonyms.
+
+Hosted access can reduce local hardware requirements, while introducing provider-specific authentication, availability, versioning, data handling, and usage accounting. Local access gives direct artifact control but makes installation, memory, updates, and service operation your responsibility. A browser interface and an API can expose the same remote model through different contracts.
+
+### The important distinction
+
+A local model can exceed RAM even if its download is small: weights, activations, temporary tensors, and cache all consume memory.
+
+## Worked example
+
+L01 uses a pinned 14M decoder and matching tokenizer on CPU. The download happens over the network, but subsequent cached inference can run with network access disabled for the model loader. The page displays the actual repeated continuation so that small resource requirements are not mistaken for strong assistant quality.
+
+## Try the experiment
+
+<ArchitectureMap client:visible />
+
+### Access decision table
+
+| Need | Starting route | What to verify |
+| --- | --- | --- |
+| Reproduce a small lesson offline | Pinned CPU artifact + local inference | Cache contents, environment, model/tokenizer pair |
+| No local compute for a larger workload | Hosted API or managed runtime | Service version, data path, usage limits, task results |
+| Customize and control deployment | Downloadable weights | Model license, memory, architecture support, operations |
+| Reproduce training research | Open training resources plus compute | Data access, code, configuration, budget, evaluation |
+
+These are operational tradeoffs, not rankings of current providers. Product capabilities and terms change; use the provider's current primary documentation when implementing a hosted route.
+
+## Implement it
+
+Run the small mechanism from the repository root with `python3 scripts/run-examples.py --id foundation-model-access`. Its values are illustrative; it isolates the stated operation rather than pretending to load a trained model.
+
+{/* example:foundation-model-access:start */}
+
+```python
+weights = 14_000_000
+for bytes_per_value in [4, 2]:
+    print(
+        bytes_per_value,
+        "bytes/weight:",
+        round(weights * bytes_per_value / 2**20, 1),
+        "MiB for weights only",
+    )
+```
+
+{/* example:foundation-model-access:end */}
+
+<FoundationEvidence id="first-generation" />
+
+The [foundation lab guide](/llm-concept-atlas/labs/foundations/) supplies setup, pinned artifacts, full source, recorded outputs, and the practical workflow. The mechanism snippet and the model lab serve different learning purposes: use the former to check a calculation and the latter to inspect actual library/model behavior.
+
+## When to use it
+
+Choose through a table of task quality, supported hardware, model/data license, data path, reproducibility, and operational effort. The default atlas route is local and account-free. Hosted API work is optional; this phase does not provision credentials or make paid requests.
+
+## Limits and common mistakes
+
+A local model can exceed RAM even if its download is small: weights, activations, temporary tensors, and cache all consume memory. A model file’s license can differ from the repository code license. A pinned name without a revision can still resolve to changed artifacts.
+
+## Check your understanding
+
+<details><summary>Which route should you choose for an offline learning exercise with no API key?</summary><p>Start with the verified small CPU model and cached artifacts. Check exact environment and model revisions, then run the offline command. If you need stronger outputs later, compare a supported larger model rather than relabeling the tiny model as capable.</p></details>
+
+<details><summary>Estimate float32 weight storage for 14 million parameters, then name two omitted costs.</summary><p>14,000,000×4 bytes is about 53.4 MiB. Activations, KV cache, framework state, and temporary tensors are additional; training also adds gradients and optimizer state.</p></details>
+
+## Connections and sources
+
+Book source locations: Chapter 1, printed pp. 28–29; Chapter 1, printed pp. 29–32; Chapter 1, printed pp. 29–30; Chapter 1, printed pp. 30–31; Chapter 1, printed pp. 31–32. Precise section IDs and mappings are recorded in the [coverage inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The small CPU model, original playlist data, and transparent numerical traces are atlas teaching choices. Read the [authors' official chapter 1 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter01) and the [E3 execution/source guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/E3.md) for the original workflow and supported implementation details.
+
+<ConceptConnections id="model-access" />

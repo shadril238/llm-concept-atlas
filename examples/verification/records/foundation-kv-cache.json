@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-kv-cache",
+  "status": "passed",
+  "date": "2026-11-19T17:56:57.757046+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/kv_cache.py"
+  ],
+  "sourceSha256": "67a90555f2740e60203e40fd7681a8a6da90cf7f82f1aac977e083f9ea1b490e",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "cef682a48276820bc889fb6cb6c19322ed4f8ea42380486bcd2ef86699b52f00",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "cache bytes: 2560\ndoubling positions: 5120\n",
+  "stderr": "",
+  "error": null
+}

@@ -10,9 +10,15 @@
       "placement": "subsection",
       "parentConceptId": "language-ai",
       "aliases": ["language AI timeline"],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E3",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/concepts/language-ai.mdx",
+        "anchor": "historical-context-not-a-market-leaderboard"
+      },
+      "exampleIds": ["foundation-language-ai"],
+      "reviewRecord": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "sequence-to-sequence",
@@ -25,9 +31,15 @@
       "placement": "standalone",
       "parentConceptId": "encoder-only",
       "aliases": ["seq2seq", "encoder-decoder"],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E3",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/concepts/sequence-to-sequence.mdx",
+        "anchor": "how-it-works"
+      },
+      "exampleIds": ["foundation-sequence-to-sequence"],
+      "reviewRecord": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "model-access",
@@ -43,9 +55,15 @@
       "placement": "standalone",
       "parentConceptId": "llm",
       "aliases": ["open weights", "hosted models", "local models"],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E3",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/concepts/model-access.mdx",
+        "anchor": "how-it-works"
+      },
+      "exampleIds": ["foundation-model-access"],
+      "reviewRecord": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "first-text-generation",
@@ -59,9 +77,15 @@
       "placement": "lab",
       "parentConceptId": "generative-model",
       "aliases": ["first generation"],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E3",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/concepts/generative-model.mdx",
+        "anchor": "implement-it"
+      },
+      "exampleIds": ["first-generation", "foundation-generative-model"],
+      "reviewRecord": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "tokenizer-comparison",
@@ -89,9 +113,19 @@
       "placement": "subsection",
       "parentConceptId": "word2vec",
       "aliases": ["GloVe"],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E3",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/concepts/word2vec.mdx",
+        "anchor": "pretrained-word-embeddings"
+      },
+      "exampleIds": [
+        "representation-inspection",
+        "playlist-embeddings",
+        "foundation-word2vec"
+      ],
+      "reviewRecord": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "song-recommendations",
@@ -104,9 +138,18 @@
       "placement": "lab",
       "parentConceptId": "recommendation-embeddings",
       "aliases": ["playlist embeddings"],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E3",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/concepts/recommendation-embeddings.mdx",
+        "anchor": "implement-it"
+      },
+      "exampleIds": [
+        "playlist-embeddings",
+        "foundation-recommendation-embeddings"
+      ],
+      "reviewRecord": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "architecture-research-directions",
@@ -116,9 +159,19 @@
       "placement": "subsection",
       "parentConceptId": "transformer",
       "aliases": [],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E3",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/concepts/transformer.mdx",
+        "anchor": "research-directions-in-the-book"
+      },
+      "exampleIds": [
+        "first-generation",
+        "transparent-transformer",
+        "foundation-transformer"
+      ],
+      "reviewRecord": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "classification-model-selection",
@@ -379,9 +432,15 @@
       "placement": "standalone",
       "parentConceptId": "attention",
       "aliases": [],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E3",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/concepts/cross-attention.mdx",
+        "anchor": "how-it-works"
+      },
+      "exampleIds": ["foundation-cross-attention"],
+      "reviewRecord": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "grouped-query-attention",
@@ -391,9 +450,15 @@
       "placement": "subsection",
       "parentConceptId": "efficient-attention",
       "aliases": ["GQA", "MQA", "multi-query attention"],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E3",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/concepts/efficient-attention.mdx",
+        "anchor": "grouped-query-attention"
+      },
+      "exampleIds": ["cache-equivalence", "foundation-efficient-attention"],
+      "reviewRecord": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "normalization-and-residuals",
@@ -403,9 +468,15 @@
       "placement": "subsection",
       "parentConceptId": "transformer-block",
       "aliases": ["RMSNorm", "LayerNorm", "residual connection"],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E3",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/concepts/transformer-block.mdx",
+        "anchor": "normalization-and-residuals"
+      },
+      "exampleIds": ["transparent-transformer", "foundation-transformer-block"],
+      "reviewRecord": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "feedforward-activations",
@@ -415,9 +486,15 @@
       "placement": "subsection",
       "parentConceptId": "transformer-block",
       "aliases": ["SwiGLU"],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E3",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/concepts/transformer-block.mdx",
+        "anchor": "feedforward-activations"
+      },
+      "exampleIds": ["transparent-transformer", "foundation-transformer-block"],
+      "reviewRecord": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "sequence-packing",
@@ -427,9 +504,15 @@
       "placement": "standalone",
       "parentConceptId": "context-size",
       "aliases": ["packing"],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E3",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/concepts/sequence-packing.mdx",
+        "anchor": "how-it-works"
+      },
+      "exampleIds": ["foundation-sequence-packing"],
+      "reviewRecord": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "class-based-tf-idf",

@@ -1,81 +1,101 @@
 ---
 title: Vocabulary
-description: The set of token IDs a tokenizer knows how to produce.
+description: "A tokenizer vocabulary is the finite mapping between its permitted token units and IDs. A model\u2019s input embedding table uses those IDs as row addresses, so the mapping is part of the model contract."
 kind: concept
 conceptId: vocabulary
 chapter: 2
 part: foundations
-summary: A tokenizer's vocabulary is its inventory of token pieces and their assigned IDs.
+summary: "A tokenizer vocabulary is the finite mapping between its permitted token units and IDs. A model\u2019s input embedding table uses those IDs as row addresses, so the mapping is part of the model contract."
 parent: tokenization
 prerequisites: [tokenization]
 related: [token, token-embedding]
 level: beginner
 tags: [tokens]
 lessonStatus: full
-lastReviewed: 2026-11-12
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e3-foundations-author-review-2026-11-20
+exampleIds: ["foundation-vocabulary", "representation-inspection"]
+bookSections: ["book-ch02-prepare-inputs", "book-ch02-tokenizer-properties", "book-ch02-embedding-table", "book-ch02-special-tokens"]
+aliases: ["tokenizer vocabulary", "embedding row"]
+learningObjectives: ["Explain the input/output contract of Vocabulary.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: A table has 30,000 rows and width 128. Does a 20-token input create a 30,000-token sequence?"]
+labHref: /labs/foundations/
+relationshipReasons: {"tokenization": "Actual tokenizer IDs and masks determine the positions this operation receives."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import FoundationEvidence from '../../../components/FoundationEvidence.astro';
+import { AttentionStepper, PositionExplorer, DecodingExplorer, CacheExplorer, PlaylistExplorer, ArchitectureMap, RepresentationExplorer } from '../../../components/simulations/FoundationLabs';
 
 <ConceptPrimer id="vocabulary" />
 
 ## Definition and intuition
 
-A tokenizer’s **vocabulary** is the inventory of token pieces and their assigned IDs. It defines which pieces can be emitted and which embedding row each ID points to in a paired model. Think of it as a numbered parts catalog, not a dictionary of complete words.
+A tokenizer vocabulary is the finite mapping between its permitted token units and IDs. A model’s input embedding table uses those IDs as row addresses, so the mapping is part of the model contract.
 
-Special tokens, such as start or separator markers, are usually entries too. A vocabulary can contain common words, word fragments, punctuation, and byte-level pieces.
+You swap in a tokenizer with the same number of entries and the model still runs. Shape compatibility hides the error: an ID that used to mean one piece may now select the row associated with another piece.
 
-## Before you start
-
-Read [tokenization](/llm-concept-atlas/concepts/tokenization/) first; return here when the key terms feel familiar.
+<ReferenceBrief objectives={["Explain the input/output contract of Vocabulary.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: A table has 30,000 rows and width 128. Does a 20-token input create a 30,000-token sequence?"]} prerequisites="Use the linked prerequisites below. Distinguish an input, a learned parameter, and a result before following the trace." scope="An explicit teaching calculation plus a linked verified CPU workflow. Illustrative values and recorded model outputs are labeled separately." />
 
 ## How it works
 
-A tokenizer is often trained on a text collection to choose useful pieces. Frequent sequences may receive compact entries; rarer strings can be assembled from smaller pieces. At inference time, the vocabulary is fixed for a given tokenizer. The tokenizer segments incoming text and returns the corresponding IDs. The model’s embedding matrix has a row for each allowed ID.
+Vocabulary construction trades compact representations of frequent patterns against coverage and sequence length. Whole-word vocabularies need a policy for unseen words; subword vocabularies compose rarer forms; byte-based schemes can represent encodable text through smaller units.
 
-A model and tokenizer are therefore a matched pair. Replacing only the vocabulary can change what a given ID means while leaving the model’s learned embedding row unchanged. Even if both systems use integer IDs, the mapping is not interchangeable.
+A vocabulary size V and embedding width d give an input table with V × d learned values. Vocabulary size affects both lookup storage and, for many generators, output-head width. The number of active input positions T is a different quantity from V.
+
+Adding a token to a tokenizer changes the encoding mapping. A neural model may also need its embedding/output tables resized and the new rows learned. Merely inventing an ID outside the model’s table can cause an index error; allocating a new row does not supply its meaning.
+
+### The important distinction
+
+Unknown-token behavior can discard information; byte coverage can lengthen sequences.
 
 ## Worked example
 
-Suppose ID `42` means `cat` in vocabulary A, but `##ing` in vocabulary B. The same embedding row is loaded for ID `42`. Using B with a model trained on A would feed the wrong learned signal for that row.
+With vocabulary [cat, dog, [PAD]] and a 2D table [[1, 0], [0, 1], [0, 0]], ID 0 selects [1, 0]. If another tokenizer maps ID 0 to dog, the old model still selects the cat row. Nothing about the integer itself detects the mismatch.
 
-<LessonFlow steps={['Corpus statistics', 'Chosen token inventory', 'Piece → ID map', 'ID → model row']} caption="A simplified flow for vocabulary. Follow each labeled step from left to right." />
+## Try the experiment
+
+<RepresentationExplorer client:visible />
+
+
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+Run the small mechanism from the repository root with `python3 scripts/run-examples.py --id foundation-vocabulary`. Its values are illustrative; it isolates the stated operation rather than pretending to load a trained model.
+
+{/* example:foundation-vocabulary:start */}
 
 ```python
-vocabulary = {'cat': 42, '##s': 17, '[SEP]': 2}
-ids = [vocabulary[p] for p in ['cat', '##s', '[SEP]']]
-reverse = {number: piece for piece, number in vocabulary.items()}
-print(ids, [reverse[number] for number in ids])
+table = [[1.0, 0.0], [0.0, 1.0], [0.0, 0.0]]
+ids = [0, 1, 0]
+print("table shape:", (len(table), len(table[0])))
+print("selected rows:", [table[index] for index in ids])
 ```
 
-**Expected behavior:** The IDs `[42, 17, 2]`, followed by the three original pieces.
+{/* example:foundation-vocabulary:end */}
 
-The forward map encodes pieces; the reverse map helps inspect IDs. A production tokenizer also applies segmentation, normalization, and decoding rules—this dictionary alone is insufficient.
+<FoundationEvidence id="representation-inspection" />
+
+The [foundation lab guide](/llm-concept-atlas/labs/foundations/) supplies setup, pinned artifacts, full source, recorded outputs, and the practical workflow. The mechanism snippet and the model lab serve different learning purposes: use the former to check a calculation and the latter to inspect actual library/model behavior.
 
 ## When to use it
 
-- Keep tokenizer artifacts with model weights when deploying.
-- Inspect vocabulary and special-token IDs when debugging surprising input lengths or decoding.
+Store tokenizer files and revision beside model artifacts. Check special-token IDs and table shapes before custom training or reload. For multilingual text, inspect coverage and normalization on real inputs rather than assuming a large vocabulary covers every task well.
 
 ## Limits and common mistakes
 
-- A large vocabulary does not automatically mean better quality; it trades sequence length against embedding size and coverage.
-- A vocabulary entry can be a fragment, not a semantic concept.
+Unknown-token behavior can discard information; byte coverage can lengthen sequences. Similar numeric IDs need not correspond to similar words. Frequency-based vocabulary decisions can reflect corpus biases and make underrepresented scripts less compact.
 
 ## Check your understanding
 
-<details><summary>Why can ID 42 not be interpreted without a tokenizer?</summary><p>Its piece assignment depends on that tokenizer’s vocabulary.</p></details>
+<details><summary>A table has 30,000 rows and width 128. Does a 20-token input create a 30,000-token sequence?</summary><p>No. The input selects 20 rows, giving [20, 128] before batching. The table stores all vocabulary rows; the sequence length counts only the encoded positions for this input.</p></details>
 
-<details><summary>What connects a token ID to the model?</summary><p>The ID indexes a learned row in the embedding table.</p></details>
+<details><summary>You add one token to a 30,000-row tokenizer but keep a 30,000-row model table. What can fail?</summary><p>The new ID can reference a nonexistent row. Resize the appropriate tables under the architecture’s contract and train the added row; allocation alone does not learn its meaning.</p></details>
 
 ## Connections and sources
 
-This lesson follows the topic sequence in chapter 2 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter02) and [this primary technical reference](https://huggingface.co/docs/transformers/en/tokenizer_summary).
+Book source locations: Chapter 2, printed pp. 38–39; Chapter 2, printed pp. 55–57; Chapter 2, printed pp. 57–58. Precise section IDs and mappings are recorded in the [coverage inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The small CPU model, original playlist data, and transparent numerical traces are atlas teaching choices. Read the [authors' official chapter 2 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter02) and the [E3 execution/source guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/E3.md) for the original workflow and supported implementation details.
 
 <ConceptConnections id="vocabulary" />

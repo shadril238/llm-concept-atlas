@@ -442,7 +442,7 @@ export function validateCoverage(data, root = process.cwd()) {
   const aliases = new Map();
   for (const proposal of planned.values()) {
     check(
-      !lessons.has(proposal.id),
+      proposal.status === "implemented" || !lessons.has(proposal.id),
       `${proposal.id}: proposal duplicates a canonical concept`,
     );
     check(

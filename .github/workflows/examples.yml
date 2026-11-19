@@ -11,6 +11,10 @@ on:
         description: Run the E2 tokenizer and CPU training reference workflows
         type: boolean
         default: false
+      e3:
+        description: Run the E3 CPU foundation labs (downloads public models and GloVe)
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
@@ -60,3 +64,24 @@ jobs:
             examples/verification/records/lora-*.json
             examples/verification/records/tokenizer-comparison*.json
             examples/artifacts/*/results.json
+  e3:
+    if: github.event_name == 'workflow_dispatch' && inputs.e3
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+        with:
+          version: "0.13.9"
+      - run: uv sync --locked --project examples/training/reference
+      - run: python3 scripts/run-examples.py --id first-generation --id representation-inspection --id playlist-embeddings --id transparent-transformer --id cache-equivalence --allow-network --record
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: e3-foundation-verification
+          path: |
+            examples/verification/records/first-generation*.json
+            examples/verification/records/representation-inspection*.json
+            examples/verification/records/playlist-embeddings*.json
+            examples/verification/records/transparent-transformer*.json
+            examples/verification/records/cache-equivalence*.json
+            examples/artifacts/e3-*/results.json

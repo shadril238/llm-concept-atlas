@@ -1,80 +1,99 @@
 ---
 title: Token
-description: A unit of text represented by a tokenizer's vocabulary.
+description: "A token is one unit from a tokenizer\u2019s vocabulary at a particular sequence position. It may represent a word, part of a word, punctuation, a byte-related piece, or a special task marker."
 kind: concept
 conceptId: token
 chapter: 2
 part: foundations
-summary: A token is a unit of text that a tokenizer maps to an ID for a model to process.
+summary: "A token is one unit from a tokenizer\u2019s vocabulary at a particular sequence position. It may represent a word, part of a word, punctuation, a byte-related piece, or a special task marker."
 parent: chapter-02
 related: [tokenization, vocabulary, token-embedding]
 level: beginner
 tags: [tokens, foundations]
 lessonStatus: full
-lastReviewed: 2026-11-12
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e3-foundations-author-review-2026-11-20
+exampleIds: ["foundation-token", "representation-inspection"]
+bookSections: ["book-ch02-tokenization"]
+aliases: ["token ID", "subtoken"]
+learningObjectives: ["Explain the input/output contract of Token.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Two \u201cbank\u201d occurrences share an ID. Must their final vectors be identical?"]
+labHref: /labs/foundations/
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import FoundationEvidence from '../../../components/FoundationEvidence.astro';
+import { AttentionStepper, PositionExplorer, DecodingExplorer, CacheExplorer, PlaylistExplorer, ArchitectureMap, RepresentationExplorer } from '../../../components/simulations/FoundationLabs';
 
 <ConceptPrimer id="token" />
 
 ## Definition and intuition
 
-A **token** is a unit in the sequence that a particular tokenizer maps to an integer ID. It might be a whole word, a word fragment, punctuation, a byte-like piece, or a special marker. The model’s context length is measured in these units.
+A token is one unit from a tokenizer’s vocabulary at a particular sequence position. It may represent a word, part of a word, punctuation, a byte-related piece, or a special task marker.
 
-A token is therefore an interface between readable text and the model’s numeric vocabulary. It is not the same thing as a linguistic word. The exact boundary comes from the tokenizer paired with the model.
+A reader counts five words and assumes the model uses five positions. A rare word, emoji, or boundary marker can change that count, so a word-based budget can overflow even on a short passage.
 
-## Before you start
-
-No prior model knowledge is required. Start with the example and follow linked terms as you need them.
+<ReferenceBrief objectives={["Explain the input/output contract of Token.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Two \u201cbank\u201d occurrences share an ID. Must their final vectors be identical?"]} prerequisites="Use the linked prerequisites below. Distinguish an input, a learned parameter, and a result before following the trace." scope="An explicit teaching calculation plus a linked verified CPU workflow. Illustrative values and recorded model outputs are labeled separately." />
 
 ## How it works
 
-A tokenizer chooses a sequence of pieces that covers an input according to its rules and vocabulary. It maps each piece to an ID; special IDs may mark sequence boundaries or padding. The model looks up an embedding vector for each ID. During generation, the model predicts an ID and the tokenizer turns the resulting ID sequence back into text.
+A token string is the tokenizer’s readable notation for a vocabulary entry; a token ID is the integer supplied to the model. The ID selects an embedding row. Its magnitude does not measure importance, frequency, or semantic closeness.
 
-The number of tokens matters because attention operates over positions and a model accepts only a finite context. Long or unfamiliar strings often use more pieces than familiar ones. Count with the actual model tokenizer when planning a prompt or document chunk.
+A token occurrence has a position in the sequence. Two occurrences can share an ID while receiving different contextual states later. Conversely, one visible character can require several byte-based tokens. Always distinguish vocabulary identity, occurrence position, and later representation.
+
+Special tokens can indicate boundaries, padding, unknown input, masking, or roles. Their behavior is tokenizer/model-specific. A visible string that resembles a special marker is not necessarily encoded as that marker under every tokenizer configuration.
+
+### The important distinction
+
+Joining piece strings manually can mishandle whitespace and byte fragments.
 
 ## Worked example
 
-The text `unhappiness!` might become `un`, `happiness`, `!` in one invented tokenizer and `unhappy`, `ness`, `!` in another. Both sequences represent the same visible text but have different IDs and potentially different lengths.
+In the E2 recorded BERT encoding, “Language models learn patterns.” has seven positions, including [CLS] and [SEP]. The content is not seven words. In the Korean-plus-emoji GPT-2 case, multiple pieces share one visible character span; the full ID sequence still round-trips.
 
-<LessonFlow steps={['Readable text', 'Tokenizer pieces', 'Integer token IDs', 'Embedding lookup']} caption="A simplified flow for token. Follow each labeled step from left to right." />
+## Try the experiment
+
+<RepresentationExplorer client:visible />
+
+
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+Run the small mechanism from the repository root with `python3 scripts/run-examples.py --id foundation-token`. Its values are illustrative; it isolates the stated operation rather than pretending to load a trained model.
+
+{/* example:foundation-token:start */}
 
 ```python
-# Invented vocabulary: a mechanics example, not a trained tokenizer
-vocab = {'un': 12, 'happiness': 48, '!': 7}
-pieces = ['un', 'happiness', '!']
-print([vocab[piece] for piece in pieces])
+vocabulary = {"cat": 42, "##s": 17, "[SEP]": 2}
+pieces = ["cat", "##s", "[SEP]"]
+print("IDs:", [vocabulary[piece] for piece in pieces])
+print("positions:", list(enumerate(pieces)))
 ```
 
-**Expected behavior:** `[12, 48, 7]`
+{/* example:foundation-token:end */}
 
-A dictionary lookup maps each known piece to an ID. Real tokenizers also decide *which* pieces to use. The [tokenization lesson](/llm-concept-atlas/concepts/tokenization/) contains a real tokenizer example.
+<FoundationEvidence id="representation-inspection" />
+
+The [foundation lab guide](/llm-concept-atlas/labs/foundations/) supplies setup, pinned artifacts, full source, recorded outputs, and the practical workflow. The mechanism snippet and the model lab serve different learning purposes: use the former to check a calculation and the latter to inspect actual library/model behavior.
 
 ## When to use it
 
-- Count tokens before sending long prompts or retrieved passages.
-- Inspect pieces when a model handles code, names, or unfamiliar languages poorly.
+Count tokens with the actual paired tokenizer after adding templates and markers. Use character/word counts only as estimates. When building an annotation task, retain a mapping to original words or character offsets so output positions can be interpreted.
 
 ## Limits and common mistakes
 
-- One token is not one word, and visible character count is not a reliable token count.
-- IDs have meaning only with their matching vocabulary and model.
+Joining piece strings manually can mishandle whitespace and byte fragments. Decoding one token at a time may display incomplete characters. A token count measures an encoding, not a model’s language competence or correctness.
 
 ## Check your understanding
 
-<details><summary>Can punctuation be its own token?</summary><p>Yes, depending on the tokenizer.</p></details>
+<details><summary>Two “bank” occurrences share an ID. Must their final vectors be identical?</summary><p>No. The initial lookup can be identical, but the model combines each occurrence with its context and position. The representations lab compares the same bank ID in a loan sentence and a river sentence.</p></details>
 
-<details><summary>Why should an application use the model’s tokenizer to count length?</summary><p>Different vocabularies and rules can split the same text differently.</p></details>
+<details><summary>Why can a byte-tokenized emoji require several IDs while still decoding correctly?</summary><p>The visible character has a multi-byte encoding, and vocabulary pieces may cover only portions of those bytes. Full-sequence decoding reconstructs the complete encoded character.</p></details>
 
 ## Connections and sources
 
-This lesson follows the topic sequence in chapter 2 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter02) and [this primary technical reference](https://huggingface.co/docs/transformers/en/tokenizer_summary).
+Book source locations: Chapter 2, printed pp. 38–57. Precise section IDs and mappings are recorded in the [coverage inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The small CPU model, original playlist data, and transparent numerical traces are atlas teaching choices. Read the [authors' official chapter 2 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter02) and the [E3 execution/source guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/E3.md) for the original workflow and supported implementation details.
 
 <ConceptConnections id="token" />

@@ -1,82 +1,107 @@
 ---
 title: Decoding and Sampling
-description: Choosing output tokens from a model's predictions.
+description: "Decoding is the procedure that turns a model\u2019s output scores into selected tokens and an eventual output sequence. Greedy selection and probabilistic sampling use the same model logits through different decision rules."
 kind: concept
 conceptId: decoding
 chapter: 3
 part: foundations
-summary: Decoding turns a model's next-token probability distribution into a selected token.
+summary: "Decoding is the procedure that turns a model\u2019s output scores into selected tokens and an eventual output sequence. Greedy selection and probabilistic sampling use the same model logits through different decision rules."
 parent: chapter-03
 prerequisites: [generative-model, transformer]
 related: [decoder-only, kv-cache]
 level: intermediate
 tags: [generation]
 lessonStatus: full
-lastReviewed: 2026-11-12
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e3-foundations-author-review-2026-11-20
+exampleIds: ["foundation-decoding", "cache-equivalence"]
+bookSections: ["book-ch03-decoding", "book-ch06-output-controls"]
+aliases: ["temperature", "top-k", "top-p", "nucleus sampling", "greedy decoding"]
+learningObjectives: ["Explain the input/output contract of Decoding and sampling.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Why must top-p include the token that crosses its probability threshold?"]
+labHref: /labs/foundations/
+relationshipReasons: {"transformer": "The block and head flow explains where this operation sits in the model."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import FoundationEvidence from '../../../components/FoundationEvidence.astro';
+import { AttentionStepper, PositionExplorer, DecodingExplorer, CacheExplorer, PlaylistExplorer, ArchitectureMap, RepresentationExplorer } from '../../../components/simulations/FoundationLabs';
 
 <ConceptPrimer id="decoding" />
 
 ## Definition and intuition
 
-**Decoding** is the rule that turns a language model’s scores for possible next tokens into an actual next token. The same model and prompt can produce different text under different decoding settings. Greedy decoding always chooses the highest-scoring token; sampling draws from a probability distribution.
+Decoding is the procedure that turns a model’s output scores into selected tokens and an eventual output sequence. Greedy selection and probabilistic sampling use the same model logits through different decision rules.
 
-The model predicts a distribution. The decoding rule determines which path through that distribution the output takes.
+A model assigns scores to many possible continuations. You must decide whether to choose the maximum, sample, restrict candidates, or stop. Changing that procedure changes outputs without retraining the model.
 
-## Before you start
-
-Read [generative model](/llm-concept-atlas/concepts/generative-model/), [transformer](/llm-concept-atlas/concepts/transformer/) first; return here when the key terms feel familiar.
+<ReferenceBrief objectives={["Explain the input/output contract of Decoding and sampling.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Why must top-p include the token that crosses its probability threshold?"]} prerequisites="Use the linked prerequisites below. Distinguish an input, a learned parameter, and a result before following the trace." scope="An explicit teaching calculation plus a linked verified CPU workflow. Illustrative values and recorded model outputs are labeled separately." />
 
 ## How it works
 
-First, model logits are converted or adjusted to probabilities. Temperature scales logits before softmax: lower values sharpen the distribution, while higher values flatten it. Top-k sampling keeps a fixed number of leading candidates; nucleus (top-p) sampling keeps the smallest leading set whose cumulative probability reaches a threshold. The chosen token is appended, and the process repeats until a stop condition.
+For temperature T>0, softmax uses exp((logit−max_logit)/T) and normalizes the results. Lower T sharpens a nonuniform distribution; higher T flattens it. Greedy decoding is implemented by argmax; a literal softmax temperature of zero would divide by zero.
 
-These controls change diversity, not factual reliability. For reproducible comparisons, fix a random seed where the library supports it. Different tokenizers and stop markers also affect visible output.
+Top-k retains the k highest-probability candidates. Top-p retains the smallest sorted prefix whose cumulative probability reaches a threshold, including the crossing token. Renormalize after filtering. If combining top-k and top-p, state the order because it affects the result.
+
+A seeded random draw supports repeatability for a declared implementation. It does not make an answer correct or guarantee byte-identical behavior across devices and library versions. Stop rules such as EOS, token limits, or application constraints belong to the generation contract.
+
+### The important distinction
+
+Do not compare decoding runs while silently changing prompts, weights, or stop budgets.
 
 ## Worked example
 
-Suppose next-token probabilities are `cat 0.6`, `dog 0.3`, `bird 0.1`. Greedy always picks `cat`. Sampling can choose `dog`; top-k with `k=2` removes `bird` and renormalizes the remaining two. A lower temperature would emphasize `cat` further.
+Logits [2,1,0] at T=1 give about [0.665,0.245,0.090]. With top-p=0.8, the first two candidates are retained because the first alone sums to less than 0.8. Renormalization gives about [0.731,0.269,0]. Top-k=1 instead makes selection deterministic for this example.
 
-<LessonFlow steps={['Model logits', 'Adjust distribution', 'Filter candidates', 'Choose token', 'Repeat or stop']} caption="A simplified flow for decoding. Follow each labeled step from left to right." />
+## Try the experiment
+
+<DecodingExplorer client:visible />
+
+
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+Run the small mechanism from the repository root with `python3 scripts/run-examples.py --id foundation-decoding`. Its values are illustrative; it isolates the stated operation rather than pretending to load a trained model.
+
+{/* example:foundation-decoding:start */}
 
 ```python
-from random import Random
-options = ['cat','dog','bird']
-weights = [0.6,0.3,0.1]
-print('greedy:', options[weights.index(max(weights))])
-print('sampled:', Random(7).choices(options, weights=weights)[0])
+from math import exp
+
+logits = [2.0, 1.0, 0.0]
+p = [exp(x - max(logits)) for x in logits]
+p = [x / sum(p) for x in p]
+kept = [0, 1]
+print(
+    "top-p .8:",
+    [round(p[i] / sum(p[j] for j in kept), 3) if i in kept else 0 for i in range(3)],
+)
 ```
 
-**Expected behavior:** `greedy: cat`; the sampled line is repeatable for this Python version and seed.
+{/* example:foundation-decoding:end */}
 
-The code compares a deterministic maximum with a seeded weighted draw. A real generator computes fresh probabilities after each selected token. The seed helps reproduce a demo, but outputs can differ across libraries and hardware.
+<FoundationEvidence id="cache-equivalence" />
+
+The [foundation lab guide](/llm-concept-atlas/labs/foundations/) supplies setup, pinned artifacts, full source, recorded outputs, and the practical workflow. The mechanism snippet and the model lab serve different learning purposes: use the former to check a calculation and the latter to inspect actual library/model behavior.
 
 ## When to use it
 
-- Use greedy or low-variance settings when consistency matters.
-- Use sampling when diverse drafts are useful, then evaluate output quality separately.
+Use greedy decoding when a reproducible local choice is helpful, and sampling when varied candidates are useful. Evaluate task quality and format validity under the chosen settings. Diversity is not a substitute for evidence, and a high-temperature setting cannot repair a missing knowledge source.
 
 ## Limits and common mistakes
 
-- High temperature does not make a model more creative in a guaranteed or uniformly useful way.
-- Sampling cannot fix missing evidence; RAG or verification may be needed.
+Do not compare decoding runs while silently changing prompts, weights, or stop budgets. Temperature is not confidence calibration. Filtering after a draw is not equivalent to sampling from the filtered distribution. A fluent or diverse result can still be wrong.
 
 ## Check your understanding
 
-<details><summary>What changes when top-k is reduced to one?</summary><p>Only the highest-scoring candidate remains, equivalent to greedy choice for that step.</p></details>
+<details><summary>Why must top-p include the token that crosses its probability threshold?</summary><p>The intended retained set is the smallest sorted prefix with cumulative probability at least p. Dropping the crossing token leaves a prefix below the declared mass and changes the algorithm.</p></details>
 
-<details><summary>Does temperature change the model’s learned parameters?</summary><p>No. It changes how current logits are turned into selection probabilities.</p></details>
+<details><summary>Probabilities are [0.6,0.3,0.1]. Which tokens survive top-p 0.8?</summary><p>The first two: 0.6 alone is below 0.8; adding 0.3 crosses the threshold. Renormalized probabilities are [2/3,1/3,0].</p></details>
 
 ## Connections and sources
 
-This lesson follows the topic sequence in chapter 3 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter03) and [this primary technical reference](https://huggingface.co/docs/transformers/main/generation_strategies).
+Book source locations: Chapter 3, printed pp. 79–81; Chapter 6, printed pp. 170–173. Precise section IDs and mappings are recorded in the [coverage inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The small CPU model, original playlist data, and transparent numerical traces are atlas teaching choices. Read the [authors' official chapter 3 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter03) and the [E3 execution/source guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/E3.md) for the original workflow and supported implementation details.
 
 <ConceptConnections id="decoding" />

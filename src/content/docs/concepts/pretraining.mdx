@@ -1,91 +1,101 @@
 ---
 title: Pretraining
-description: Pretraining adjusts model weights on a broad objective before adaptation to a narrower task.
+description: "Pretraining fits a model\u2019s parameters on a broad learning objective before a narrower task adaptation. In causal language modeling, it increases the likelihood of observed next tokens across a text corpus."
 kind: concept
 conceptId: pretraining
 chapter: 1
 part: foundations
-summary: Pretraining adjusts model weights on a broad objective before adaptation to a narrower task.
+summary: "Pretraining fits a model\u2019s parameters on a broad learning objective before a narrower task adaptation. In causal language modeling, it increases the likelihood of observed next tokens across a text corpus."
 parent: chapter-01
 prerequisites: [llm]
 related: [generative-model, responsible-use]
 level: beginner
 tags: [foundations, chapter-01]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e3-foundations-author-review-2026-11-20
+exampleIds: ["foundation-pretraining", "first-generation"]
+bookSections: ["book-ch01-training-paradigm"]
+aliases: ["causal pretraining", "masked pretraining"]
+learningObjectives: ["Explain the input/output contract of Pretraining.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Does successful next-token training certify a model as an instruction-following assistant?"]
+labHref: /labs/foundations/
+relationshipReasons: {"llm": "Model inputs, outputs, and resources must be understood before choosing access."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import FoundationEvidence from '../../../components/FoundationEvidence.astro';
+import { AttentionStepper, PositionExplorer, DecodingExplorer, CacheExplorer, PlaylistExplorer, ArchitectureMap, RepresentationExplorer } from '../../../components/simulations/FoundationLabs';
 
 <ConceptPrimer id="pretraining" />
 
 ## Definition and intuition
 
-Pretraining adjusts model weights on a broad objective before adaptation to a narrower task.
+Pretraining fits a model’s parameters on a broad learning objective before a narrower task adaptation. In causal language modeling, it increases the likelihood of observed next tokens across a text corpus.
 
-Chapter 1 separates ways to represent language from ways to generate it. Ask what information a representation keeps and what it throws away before choosing a model family.
+You cannot label every possible downstream task in advance. Pretraining supplies reusable statistical representations, after which adaptation or prompting can target a particular behavior. The choice of data and objective shapes what is reusable.
 
-## Before you start
+<ReferenceBrief objectives={["Explain the input/output contract of Pretraining.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Does successful next-token training certify a model as an instruction-following assistant?"]} prerequisites="Use the linked prerequisites below. Distinguish an input, a learned parameter, and a result before following the trace." scope="An explicit teaching calculation plus a linked verified CPU workflow. Illustrative values and recorded model outputs are labeled separately." />
 
-Read [Large Language Model](/llm-concept-atlas/concepts/llm/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **Pretraining** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+For a causal sequence x1…xT, the objective sums negative log probabilities of xt given the earlier prefix. A lower training loss means the observed tokens became more likely under that objective. It does not directly measure truthfulness, fairness, or instruction-following quality.
 
-1. **Prepare:** Choose a broad corpus and an objective such as predicting hidden or next tokens
-2. **Transform:** Update model weights repeatedly from prediction errors
-3. **Inspect:** Evaluate transfer to new tasks and inspect data and compute costs.
+BERT-style masked prediction instead selects hidden positions and predicts them using available bidirectional context. Tokenizer vocabulary learning is a separate process from fitting the language model’s embeddings and transformer weights.
+
+Supervised task tuning uses task examples and labels or desired responses; preference tuning uses comparisons or rewards under a specified method. In-context examples change the prompt without optimizer updates. Keep corpus construction, validation selection, and a final evaluation suite separate to avoid measuring memorization of test cases.
 
 ### The important distinction
 
-For a causal language model, the training target at position t is the next token given the earlier prefix; an encoder can instead learn from masked positions. The loss is averaged over many examples and updates shared weights. Transfer emerges because those weights encode reusable statistical patterns, not because the model stored a reliable encyclopedia.
+A model can memorize repeated text.
 
 ## Worked example
 
-A model exposed to many documents learns language patterns before a sentiment dataset is available. It may complete text fluently yet still need task instruction or labeled examples. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+If the correct next token has probability 0.25, its negative log-likelihood is −ln(0.25) ≈ 1.386 nats. Raising that probability to 0.5 reduces the contribution to about 0.693. Neither number tells you whether a completed paragraph is medically or historically correct.
 
-<LessonFlow steps={["Choose a broad corpus and an objective such as predicting hidden or next tokens", "Update model weights repeatedly from prediction errors", "Evaluate transfer to new tasks and inspect data and compute costs."]} caption="A teaching diagram for Pretraining. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
+
+<ArchitectureMap client:visible />
+
+
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+Run the small mechanism from the repository root with `python3 scripts/run-examples.py --id foundation-pretraining`. Its values are illustrative; it isolates the stated operation rather than pretending to load a trained model.
+
+{/* example:foundation-pretraining:start */}
 
 ```python
-weight = 0.2
-for target in [1.0, 1.0, 0.0]:
-    prediction = weight
-    weight -= 0.1 * 2 * (prediction - target)
-print(round(weight, 3))
+from math import log
+
+for probability in [0.25, 0.5]:
+    print("probability", probability, "loss", round(-log(probability), 3))
 ```
 
-**Expected output:**
+{/* example:foundation-pretraining:end */}
 
-```text
-0.39
-```
+<FoundationEvidence id="first-generation" />
 
-**What the code shows:** The toy loop measures a squared-error gradient for one scalar weight and applies a small update. Actual pretraining uses many parameters, batches, and a token-level objective. The [official chapter 1 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter01) develops the corresponding model-based implementation.
+The [foundation lab guide](/llm-concept-atlas/labs/foundations/) supplies setup, pinned artifacts, full source, recorded outputs, and the practical workflow. The mechanism snippet and the model lab serve different learning purposes: use the former to check a calculation and the latter to inspect actual library/model behavior.
 
 ## When to use it
 
-Use a pretrained model as a starting point when training from scratch would require far more data and compute. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Pretraining from scratch is useful for research into objectives or for sufficiently resourced domains. For a learning project, inspect a small pretrained model and train tiny controlled tasks before attempting a broad corpus run. Adaptation is usually a more accessible starting point.
 
 ## Limits and common mistakes
 
-- Broad exposure does not ensure factual accuracy, fairness, or expertise in a specific domain.
-- **Failure to look for:** Treating a fluent base model as a ready-made domain classifier without task evaluation produces unreliable labels.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+A model can memorize repeated text. Evaluation data that appears in the training corpus can inflate apparent generalization. A published parameter count does not describe the corpus, filtering, compute, or full reproducibility of training.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First choose a broad corpus and an objective such as predicting hidden or next tokens Then update model weights repeatedly from prediction errors Finally evaluate transfer to new tasks and inspect data and compute costs.</p></details>
+<details><summary>Does successful next-token training certify a model as an instruction-following assistant?</summary><p>No. The objective rewards observed continuation probabilities. Instruction data, preference procedures, application constraints, and task-specific evaluation address additional behaviors; each requires its own evidence.</p></details>
 
-<details><summary>What would make the result misleading?</summary><p>Treating a fluent base model as a ready-made domain classifier without task evaluation produces unreliable labels.</p></details>
+<details><summary>The correct-token probability falls from 0.5 to 0.25. What happens to its loss?</summary><p>Negative log-likelihood increases from about 0.693 to 1.386 nats. This objective change is distinct from a task-specific factuality score.</p></details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 1 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 1 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter01). Continue through the linked prerequisites and nearby concepts below.
+Book source locations: Chapter 1, printed pp. 25–27. Precise section IDs and mappings are recorded in the [coverage inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The small CPU model, original playlist data, and transparent numerical traces are atlas teaching choices. Read the [authors' official chapter 1 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter01) and the [E3 execution/source guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/E3.md) for the original workflow and supported implementation details.
 
 <ConceptConnections id="pretraining" />

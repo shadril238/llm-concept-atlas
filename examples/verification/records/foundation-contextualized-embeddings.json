@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-contextualized-embeddings",
+  "status": "passed",
+  "date": "2026-11-19T17:56:56.484159+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/contextualized_embeddings.py"
+  ],
+  "sourceSha256": "71327f04195d44654983a6d0e2d1faa4c0dedb73a2646def837d44e32267f5e3",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "8826e8006cf4c2fbaf2f8cca386a8a3c67e5a9e51f5d7683d75a3e7113cf6ae4",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "initial row reused: [0.2, 0.7]\ninvented contextual states: [0.9, 0.1] [0.1, 0.9]\nThese numbers illustrate the distinction; L03 records real states.\n",
+  "stderr": "",
+  "error": null
+}

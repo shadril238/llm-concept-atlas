@@ -1,90 +1,101 @@
 ---
 title: Context size
-description: Context size is the maximum token span a model can condition on during a request or generation step.
+description: "Context size is the supported token budget for a model invocation or sequence-processing regime. It counts encoded positions, including task/template content, rather than visible words, and does not by itself establish reliable use of every position."
 kind: concept
 conceptId: context-size
 chapter: 3
 part: foundations
-summary: Context size is the maximum token span a model can condition on during a request or generation step.
+summary: "Context size is the supported token budget for a model invocation or sequence-processing regime. It counts encoded positions, including task/template content, rather than visible words, and does not by itself establish reliable use of every position."
 parent: chapter-03
 prerequisites: [transformer]
 related: [decoding, kv-cache]
 level: beginner
 tags: [foundations, chapter-03]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e3-foundations-author-review-2026-11-20
+exampleIds: ["foundation-context-size", "cache-equivalence"]
+bookSections: ["book-ch03-parallel-context"]
+aliases: ["context window", "token budget"]
+learningObjectives: ["Explain the input/output contract of Context size.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Does doubling context length leave cache memory unchanged because the model weights are fixed?"]
+labHref: /labs/foundations/
+relationshipReasons: {"transformer": "The block and head flow explains where this operation sits in the model."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import FoundationEvidence from '../../../components/FoundationEvidence.astro';
+import { AttentionStepper, PositionExplorer, DecodingExplorer, CacheExplorer, PlaylistExplorer, ArchitectureMap, RepresentationExplorer } from '../../../components/simulations/FoundationLabs';
 
 <ConceptPrimer id="context-size" />
 
 ## Definition and intuition
 
-Context size is the maximum token span a model can condition on during a request or generation step.
+Context size is the supported token budget for a model invocation or sequence-processing regime. It counts encoded positions, including task/template content, rather than visible words, and does not by itself establish reliable use of every position.
 
-Chapter 3 traces a transformer forward pass. Distinguish the computation performed for a fixed input from the repeated loop used to generate new tokens.
+A document assistant must fit instructions, a question, retrieved passages, and room for its answer. Trimming only the document to the advertised maximum can leave no space for the rest of the request.
 
-## Before you start
+<ReferenceBrief objectives={["Explain the input/output contract of Context size.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Does doubling context length leave cache memory unchanged because the model weights are fixed?"]} prerequisites="Use the linked prerequisites below. Distinguish an input, a learned parameter, and a result before following the trace." scope="An explicit teaching calculation plus a linked verified CPU workflow. Illustrative values and recorded model outputs are labeled separately." />
 
-Read [Transformer](/llm-concept-atlas/concepts/transformer/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **context size** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+Tokenize the final model-ready input with the paired tokenizer. For a decoder, distinguish input length from the maximum newly generated tokens. The effective supported total depends on the model and inference API contract; do not assume every service parameter has identical semantics.
 
-1. **Prepare:** Tokenize the prompt and any retrieved passages
-2. **Transform:** Reserve room for generated tokens and check the model's limit
-3. **Inspect:** Choose, summarize, or truncate material before inference.
+Longer prefixes require more activation and cache memory. Dense attention also compares many query/key pairs during prefill. A model accepting an input length is a weaker claim than accurate retrieval or reasoning over the entire input.
+
+Truncation is an application policy. Removing the beginning can delete an instruction; removing the end can cut an answer source or entity. Sliding windows and document chunking preserve different information and need explicit source-offset/evaluation handling.
 
 ### The important distinction
 
-Context is measured after tokenization, and the generated continuation must fit alongside the prompt. A retrieval system should budget for instructions, the question, citations, and output tokens before selecting passages. A long-context model may accept a large prompt while still failing to use a critical middle passage reliably.
+A longer supported context does not mean perfect memory.
 
 ## Worked example
 
-A 4,000-token request cannot fit into a 2,000-token context. Trimming the beginning might remove the instruction, while trimming the end might remove the evidence needed to answer. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+With a 128-position teaching limit, 90 encoded passage tokens, 15 instruction/question tokens, and 2 markers leave 21 positions for output under a total-budget contract. A 30-token answer request would exceed that budget. These are invented counts; the real tokenizer determines the actual values.
 
-<LessonFlow steps={["Tokenize the prompt and any retrieved passages", "Reserve room for generated tokens and check the model's limit", "Choose, summarize, or truncate material before inference."]} caption="A teaching diagram for Context size. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
+
+<CacheExplorer client:visible />
+
+
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+Run the small mechanism from the repository root with `python3 scripts/run-examples.py --id foundation-context-size`. Its values are illustrative; it isolates the stated operation rather than pretending to load a trained model.
+
+{/* example:foundation-context-size:start */}
 
 ```python
-tokens = ["The", "cat", "slept"]
-position = 1
-visible = tokens[:position + 1]
-print("query token:", tokens[position], "visible context:", visible)
+limit, passage, prompt, markers = 128, 90, 15, 2
+remaining = limit - passage - prompt - markers
+print("output budget:", remaining)
+assert remaining == 21
 ```
 
-**Expected output:**
+{/* example:foundation-context-size:end */}
 
-```text
-query token: cat visible context: ['The', 'cat']
-```
+<FoundationEvidence id="cache-equivalence" />
 
-**What the code shows:** The slice keeps only tokens through the selected position. It illustrates a causal visibility rule or a context budget, not a complete transformer computation. The [official chapter 3 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter03) develops the corresponding model-based implementation.
+The [foundation lab guide](/llm-concept-atlas/labs/foundations/) supplies setup, pinned artifacts, full source, recorded outputs, and the practical workflow. The mechanism snippet and the model lab serve different learning purposes: use the former to check a calculation and the latter to inspect actual library/model behavior.
 
 ## When to use it
 
-Plan retrieval and conversation memory around token budgets, especially for long documents. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Choose a context policy through token measurements, memory limits, source coverage, and task evaluation. Use retrieval or summarization when the full corpus does not fit, while checking whether relevant evidence was lost. For independent documents, see sequence packing and its boundary masks.
 
 ## Limits and common mistakes
 
-- A larger window does not guarantee equal use of every position or correct reasoning over all content.
-- **Failure to look for:** An answer cites a passage that was actually truncated from the model input.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+A longer supported context does not mean perfect memory. A KV cache accelerates repeated prefixes but still grows with retained positions. Tokenizer differences can change the budget even when word counts match.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First tokenize the prompt and any retrieved passages Then reserve room for generated tokens and check the model's limit Finally choose, summarize, or truncate material before inference.</p></details>
+<details><summary>Does doubling context length leave cache memory unchanged because the model weights are fixed?</summary><p>No. The weights can stay fixed while cached key/value tensors gain sequence positions. For fixed layer/head widths and precision, ordinary cache storage grows linearly with retained tokens.</p></details>
 
-<details><summary>What would make the result misleading?</summary><p>An answer cites a passage that was actually truncated from the model input.</p></details>
+<details><summary>A 128-token total budget contains 90 passage tokens, 15 prompt tokens, and 2 markers. Can you request 30 new tokens?</summary><p>Not under that total-budget contract: only 21 positions remain. Shorten the retained input or answer budget and verify the final tokenizer encoding.</p></details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 3 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 3 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter03). Continue through the linked prerequisites and nearby concepts below.
+Book source locations: Chapter 3, printed pp. 81–83. Precise section IDs and mappings are recorded in the [coverage inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The small CPU model, original playlist data, and transparent numerical traces are atlas teaching choices. Read the [authors' official chapter 3 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter03) and the [E3 execution/source guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/E3.md) for the original workflow and supported implementation details.
 
 <ConceptConnections id="context-size" />

@@ -1,84 +1,107 @@
 ---
 title: Word2vec
-description: A family of methods for learning vectors for words.
+description: "Word2vec learns word representations from local co-occurrence patterns. In skip-gram training, a center item is used to predict nearby context items; negative sampling provides an efficient binary discrimination objective."
 kind: concept
 conceptId: word2vec
 chapter: 2
 part: foundations
-summary: Word2vec learns word vectors from patterns of neighboring words in text.
+summary: "Word2vec learns word representations from local co-occurrence patterns. In skip-gram training, a center item is used to predict nearby context items; negative sampling provides an efficient binary discrimination objective."
 parent: chapter-02
 prerequisites: [token-embedding]
 related: [text-embedding, representation-model]
 level: intermediate
 tags: [embeddings, training]
 lessonStatus: full
-lastReviewed: 2026-11-12
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e3-foundations-author-review-2026-11-20
+exampleIds: ["foundation-word2vec", "playlist-embeddings"]
+bookSections: ["book-ch01-dense-vectors", "book-ch02-word-embeddings", "book-ch02-pretrained-word-vectors", "book-ch02-word2vec-training", "book-ch02-negative-sampling"]
+aliases: ["skip-gram", "negative sampling", "GloVe"]
+learningObjectives: ["Explain the input/output contract of Word2vec and static word vectors.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Does printing center/context pairs establish that a Word2vec model was trained?"]
+labHref: /labs/foundations/
+relationshipReasons: {"token-embedding": "The learned lookup row is the starting state before context changes it."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import FoundationEvidence from '../../../components/FoundationEvidence.astro';
+import { AttentionStepper, PositionExplorer, DecodingExplorer, CacheExplorer, PlaylistExplorer, ArchitectureMap, RepresentationExplorer } from '../../../components/simulations/FoundationLabs';
 
 <ConceptPrimer id="word2vec" />
 
 ## Definition and intuition
 
-**Word2vec** names two related training approaches, skip-gram and continuous bag of words (CBOW), that learn a vector for each word from neighboring-word patterns. It helped show that useful geometric relationships can emerge from a prediction task over text.
+Word2vec learns word representations from local co-occurrence patterns. In skip-gram training, a center item is used to predict nearby context items; negative sampling provides an efficient binary discrimination objective.
 
-Its key limitation is also instructive: a word usually has one learned vector no matter which sentence it appears in. “Bank” beside a river and “bank” beside a loan share the same static row.
+You want a vector space in which words that occur in similar contexts have related representations. Counting all vocabulary outputs for every pair is expensive, so training can contrast observed center/context pairs with sampled alternatives.
 
-## Before you start
-
-Read [token embedding](/llm-concept-atlas/concepts/token-embedding/) first; return here when the key terms feel familiar.
+<ReferenceBrief objectives={["Explain the input/output contract of Word2vec and static word vectors.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Does printing center/context pairs establish that a Word2vec model was trained?"]} prerequisites="Use the linked prerequisites below. Distinguish an input, a learned parameter, and a result before following the trace." scope="An explicit teaching calculation plus a linked verified CPU workflow. Illustrative values and recorded model outputs are labeled separately." />
 
 ## How it works
 
-In skip-gram, the center word is used to predict surrounding words within a context window. In CBOW, surrounding words help predict the center. Training adjusts word vectors so observed combinations score better than alternatives; negative sampling is one efficient way to provide contrasting examples.
+A context window creates positive pairs. For “the cat sleeps” with radius one, pairs include (cat, the) and (cat, sleeps), but not a self-pair at the same position. Window size changes the training signal: local syntax and broader topical co-occurrence need not produce identical neighborhoods.
 
-The context window changes what “similar” means. Narrow windows emphasize local syntactic behavior; wider windows can reflect broader topics. The trained table can initialize or inform other tasks, but it does not read a new sentence and change a word vector using that sentence the way a contextual encoder does.
+Skip-gram negative sampling uses separate input and context tables. For center vector u, observed context v+, and sampled negatives v−, minimize softplus(−u·v+) plus the sum of softplus(u·v−). An optimizer changes those learned vectors; constructing pairs alone is not training.
+
+The negative distribution commonly emphasizes frequent items with a smoothed frequency rule. A sampled negative is not a logically false statement, and it can accidentally be a plausible context. Static vectors assign one row to a word, so polysemy and corpus biases remain.
+
+### The important distinction
+
+A nearest neighbor can be an antonym because antonyms occur in similar contexts.
 
 ## Worked example
 
-In “the cat chased the mouse,” skip-gram can treat `chased` as the center and `cat` and `mouse` as nearby targets. Repeated examples encourage words with similar contexts to receive related vectors. The training signal is co-occurrence, not a hand-labeled definition.
+With u=[1,0], v+=[1,0], and v−=[0,1], the positive dot product is 1 and the negative dot product is 0. Their softplus losses are about 0.313 and 0.693, totaling 1.006. Increasing the positive score and decreasing the negative score lowers this objective.
 
-<LessonFlow steps={['Corpus and context window', 'Center/context pairs', 'Prediction training', 'Static word vectors']} caption="A simplified flow for word2vec. Follow each labeled step from left to right." />
+## Try the experiment
+
+<PlaylistExplorer client:visible />
+
+### Pretrained word embeddings
+
+L03 loads the official `glove-wiki-gigaword-50` artifact: 400,000 rows with 50 coordinates. Its release bytes are SHA-256 checked before use. Neighbor search excludes the query word itself and uses original 50D cosine values. The browser's eight-word PCA view is a separate reduced projection with a reported retained-variance fraction. In particular, inspect the actual neighbors of “good”: contextual similarity is not a synonym certificate.
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+Run the small mechanism from the repository root with `python3 scripts/run-examples.py --id foundation-word2vec`. Its values are illustrative; it isolates the stated operation rather than pretending to load a trained model.
+
+{/* example:foundation-word2vec:start */}
 
 ```python
-sentence = 'the cat chased the mouse'.split()
-window = 1
-pairs = [(sentence[i], sentence[j])
-         for i in range(len(sentence))
-         for j in range(max(0,i-window), min(len(sentence),i+window+1))
-         if i != j]
-print(pairs[:4])
+items = "the cat sleeps".split()
+pairs = [
+    (items[i], items[j])
+    for i in range(len(items))
+    for j in range(max(0, i - 1), min(len(items), i + 2))
+    if i != j
+]
+print(pairs)
 ```
 
-**Expected behavior:** A list of center/context word pairs, beginning with neighbors of `the` and `cat`.
+{/* example:foundation-word2vec:end */}
 
-The code constructs training pairs only; it does not fit vectors. A real word2vec implementation adds an objective, negative examples, and optimization. These pairs show what supervision can come from raw text.
+<FoundationEvidence id="playlist-embeddings" />
+
+The [foundation lab guide](/llm-concept-atlas/labs/foundations/) supplies setup, pinned artifacts, full source, recorded outputs, and the practical workflow. The mechanism snippet and the model lab serve different learning purposes: use the former to check a calculation and the latter to inspect actual library/model behavior.
 
 ## When to use it
 
-- Word2vec is useful for learning why vector geometry can reflect usage patterns.
-- Prefer contextual encoders for polysemy and most current sentence-level tasks.
+Use static vectors as a compact baseline and inspect neighbors before using them as task features. The playlist lab applies the same learned co-occurrence principle to song IDs, while L03 loads actual pretrained GloVe rows for static-word inspection. GloVe is a different training method from Word2vec; sharing a vector interface does not make their objectives identical.
 
 ## Limits and common mistakes
 
-- Similar contexts do not imply identical meaning; antonyms can occur in similar positions.
-- Static vectors cannot distinguish multiple senses of the same word in new sentences.
+A nearest neighbor can be an antonym because antonyms occur in similar contexts. Word2vec does not verify facts or provide sentence-level reasoning. No-interaction or out-of-vocabulary items need a fallback rather than a meaningful-looking random row.
 
 ## Check your understanding
 
-<details><summary>What is predicted in skip-gram?</summary><p>Nearby context words from a center word.</p></details>
+<details><summary>Does printing center/context pairs establish that a Word2vec model was trained?</summary><p>No. Training requires learned parameters, a loss, optimizer updates, and evaluation. The source snippet isolates pair construction; the linked playlist workflow performs actual updates and reports held-out rankings against a baseline.</p></details>
 
-<details><summary>Why can one “bank” vector be limiting?</summary><p>It cannot adapt to river and finance contexts in separate sentences.</p></details>
+<details><summary>Why can “good” and “bad” be close in a static word space?</summary><p>They can occur in similar linguistic contexts. Distributional relatedness is not a guarantee of synonymy or shared sentiment; evaluate the relation your task needs.</p></details>
 
 ## Connections and sources
 
-This lesson follows the topic sequence in chapter 2 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter02) and [this primary technical reference](https://arxiv.org/abs/1301.3781).
+Book source locations: Chapter 1, printed pp. 8–10; Chapter 2, printed pp. 63–67; Chapter 2, printed pp. 63–64; Chapter 2, printed pp. 64–67. Precise section IDs and mappings are recorded in the [coverage inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The small CPU model, original playlist data, and transparent numerical traces are atlas teaching choices. Read the [authors' official chapter 2 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter02) and the [E3 execution/source guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/E3.md) for the original workflow and supported implementation details.
 
 <ConceptConnections id="word2vec" />

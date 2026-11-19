@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-recommendation-embeddings",
+  "status": "passed",
+  "date": "2026-11-19T17:56:56.803959+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/recommendation_embeddings.py"
+  ],
+  "sourceSha256": "0be2873abe97de9285de71a1f9f19de77b10a672b82198df9cbdaeff8b59c8b3",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "d9be250bd653d6f3fa80e0c78797aaeead76fd7b2c45ba2b13bbf4f8928236ea",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "eligible: ['song-c', 'song-d'] recall@3: 1 reciprocal rank: 0.5\n",
+  "stderr": "",
+  "error": null
+}

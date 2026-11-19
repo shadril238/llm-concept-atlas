@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-text-embedding",
+  "status": "passed",
+  "date": "2026-11-19T17:56:56.563269+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/text_embedding.py"
+  ],
+  "sourceSha256": "f6143c10e6259e7d97a33eee29e2da069123856dd44c06780b30ee532b60e880",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "27c4f6c65360b25239415f9f5a4994062f1bca436bfcdccc006d178dc71e665e",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "masked mean: [0.5, 0.5]\n",
+  "stderr": "",
+  "error": null
+}

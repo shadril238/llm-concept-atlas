@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-self-attention",
+  "status": "passed",
+  "date": "2026-11-19T17:56:57.073166+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/self_attention.py"
+  ],
+  "sourceSha256": "081f27a7ae258e1474915044e7c49a7c40ec9b74869561d46aaa39eb8b0c80a8",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "73284343eb1a24bff32006a006208142e033a24e65766bd935c2bc375784926a",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "[1, 0, 0]\n[1, 1, 0]\n[1, 1, 1]\n",
+  "stderr": "",
+  "error": null
+}

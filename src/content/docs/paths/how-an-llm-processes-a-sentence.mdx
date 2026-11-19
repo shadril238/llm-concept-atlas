@@ -1,52 +1,68 @@
 ---
 title: How an LLM processes a sentence
-description: A guided route from readable text to a model output.
+description: Trace real tokens, lookup rows, contextual states, vocabulary logits, decoding, and cache reuse.
 kind: path
-lastReviewed: 2026-11-12
+lastReviewed: 2026-11-20
 ---
 
 import LessonFlow from '../../../components/LessonFlow.astro';
 
-This path follows one sentence through the concepts in chapters 1–3 of *Hands-On Large Language Models*. Allow about 45–60 minutes for the lessons and three short experiments. Each stop introduces a concept with illustrative examples; you can return to the [atlas graph](/llm-concept-atlas/atlas/) to see how the ideas connect.
+Follow one input from text to output, then test which quantities change. You need basic lists/vectors and matrix shapes. If those are unfamiliar, start with [token embeddings](/llm-concept-atlas/concepts/token-embedding/) and the worked examples before running Python. This route follows Chapters 1–3; completion time remains provisional until reader testing.
 
-<LessonFlow steps={['Readable sentence', 'Token IDs', 'Embedding vectors', 'Contextual transformer states', 'Output scores', 'Selected output']} caption="The stages of a language model, from text input to output." />
+<LessonFlow steps={['Task and access choice','Actual token IDs','Lookup rows','Contextual transformer states','Vocabulary logits','Selection and cache reuse']} caption="A generation pipeline. Representation tasks may stop at states or a different task head." />
 
-## 1. Decide what the system should do
+## 1. Choose the task and access route
 
-Start with [Language AI](/llm-concept-atlas/concepts/language-ai/) and [large language models](/llm-concept-atlas/concepts/llm/). A sentence can be classified, searched for, or continued. Those are different tasks. Read [representation models](/llm-concept-atlas/concepts/representation-model/) and [generative models](/llm-concept-atlas/concepts/generative-model/) to see why the same input can lead to a vector, a label, or new text.
+Read [Language AI](/llm-concept-atlas/concepts/language-ai/), [model access](/llm-concept-atlas/concepts/model-access/), and [generative models](/llm-concept-atlas/concepts/generative-model/). Decide whether your output should be a label, a retrieved document, a vector, or newly generated text. The architecture map distinguishes encoder, decoder, and [encoder-decoder](/llm-concept-atlas/concepts/sequence-to-sequence/) contracts.
 
-**Try:** For “The film was wonderful,” decide whether a review sorting tool needs a label or a paragraph. The sorting tool needs a label; a review-writing assistant needs generated text.
+**Artifact:** a one-sentence task specification and a local/remote data-path choice. For an account-free CPU exercise, use L01's pinned small decoder. Its repetitive output is an honest learning observation, not a capable-assistant demonstration.
 
-## 2. Make the sentence model-readable
+## 2. Inspect actual tokenization
 
-Read [tokens](/llm-concept-atlas/concepts/token/), [tokenization](/llm-concept-atlas/concepts/tokenization/), and [vocabulary](/llm-concept-atlas/concepts/vocabulary/). In the tokenization lab, enter **“The film was wonderful!”** and switch between word-like, subword, and character rules. Notice that the number of positions changes even though the visible sentence is the same. The toy IDs are labels; the real-tokenizer code on the lesson page shows an actual model vocabulary.
+Open the [tokenization reference](/llm-concept-atlas/concepts/tokenization/). Select the same recorded input under BERT and GPT-2; inspect pieces, IDs, special markers, and offsets. The explorer offers fixed real cases, not a text box that pretends to run an arbitrary tokenizer in the browser.
 
-**Checkpoint:** A model receives token IDs. It does not directly calculate on the letters you typed.
+Read [word/subword units](/llm-concept-atlas/concepts/word-and-subword-tokens/) and [vocabulary](/llm-concept-atlas/concepts/vocabulary/). Predict whether the full decoded string must preserve case under BERT uncased.
 
-## 3. Turn IDs into vectors
+**Checkpoint:** explain why an ID is an address and why one visible character can occupy several byte-based pieces. If confused, return to the token lesson and compare the full decoded sequence.
 
-Open [token embeddings](/llm-concept-atlas/concepts/token-embedding/) and [text embeddings](/llm-concept-atlas/concepts/text-embedding/). An ID selects a learned row in an embedding table. A sentence-level embedding is a later representation of the whole text, useful for comparison. In the vector lab, select `cat` and `car`; observe which examples have similar directions. The 2D positions are invented to show the comparison mechanism.
+## 3. Separate three kinds of vector
 
-**Checkpoint:** A token embedding and a whole-sentence embedding answer different questions. One starts computation at a token position; the other summarizes text for a task.
+Run [L03 representations](/llm-concept-atlas/labs/foundations/#l03-representations), then read [token lookup](/llm-concept-atlas/concepts/token-embedding/), [contextual states](/llm-concept-atlas/concepts/contextualized-embeddings/), and [text embeddings](/llm-concept-atlas/concepts/text-embedding/).
 
-## 4. Add context in a transformer
+**Artifact:** note the lookup, hidden-state, and pooled-sentence shapes. Compare the same bank ID in loan and river contexts. Explain why its initial row matches but later states differ. Inspect the actual static-word neighbors and the separately labeled PCA view.
 
-Read [transformer](/llm-concept-atlas/concepts/transformer/), [attention](/llm-concept-atlas/concepts/attention/), [self-attention](/llm-concept-atlas/concepts/self-attention/), and [queries, keys, and values](/llm-concept-atlas/concepts/query-key-value/). In the attention lab, select each token and toggle the causal mask. Follow the score → softmax → weighted value calculation. The displayed percentages are a toy head, not an explanation of a real model’s reasoning.
+**Recovery:** matching coordinate counts do not make different model spaces compatible. Pooling needs a mask and task-appropriate training/evaluation.
 
-Now compare [encoder-only](/llm-concept-atlas/concepts/encoder-only/) and [decoder-only](/llm-concept-atlas/concepts/decoder-only/) models. An encoder can use both sides of a complete input; a causal decoder predicts from earlier tokens.
+## 4. Trace the masked computation
 
-## 5. Produce the output
+Read [Q/K/V](/llm-concept-atlas/concepts/query-key-value/), [attention](/llm-concept-atlas/concepts/attention/), and the [transformer block](/llm-concept-atlas/concepts/transformer-block/). Run [L05](/llm-concept-atlas/labs/foundations/#l05-transparent-transformer), which uses random weights to expose every stage and checks attention against PyTorch.
 
-Read [decoding and sampling](/llm-concept-atlas/concepts/decoding/) to see how scores become chosen tokens. Then read [KV cache](/llm-concept-atlas/concepts/kv-cache/) to see why earlier keys and values can be reused as a decoder adds new tokens.
+**Artifact:** a shape trace from [T,d_model] through heads, masked weights, residual/MLP states, and vocabulary logits. Toggle the browser mask and predict which outputs may change. Then inspect [RoPE rotations](/llm-concept-atlas/concepts/positional-embeddings-and-rope/) and [packing boundaries](/llm-concept-atlas/concepts/sequence-packing/).
 
-For a fixed-label problem, follow the [text classification use case](/llm-concept-atlas/use-cases/text-classification/). For answers from a document collection, continue to [semantic search](/llm-concept-atlas/concepts/semantic-search/), [RAG](/llm-concept-atlas/concepts/rag/), and the [RAG question-answering use case](/llm-concept-atlas/use-cases/rag-question-answering/).
+**Checkpoint:** future values cannot influence earlier causal outputs; a packed document boundary requires more than an ordinary separator token. Neither a heatmap nor a random forward pass establishes language understanding.
+
+## 5. Generate and compare cache paths
+
+Run [L01 generation](/llm-concept-atlas/labs/foundations/#l01-first-generation), inspect the prompt prefix and newly selected IDs, then read [decoding](/llm-concept-atlas/concepts/decoding/) and [KV cache](/llm-concept-atlas/concepts/kv-cache/). Operate temperature/top-k/top-p controls without confusing them with confidence calibration.
+
+Run [L06](/llm-concept-atlas/labs/foundations/#l06-decoding-and-kv-cache). Compare cached and uncached logits for the same forced tokens before interpreting warmed timings. Note the actual float64 CPU configuration and distinguish cache tensor bytes from total process memory.
+
+**Artifact:** prompt versus continuation IDs, a next-token distribution, and a cache shape/byte calculation. Explain a repeated or truncated output from the real small model.
+
+## 6. Transfer the embedding idea to a new task
+
+Read [Word2vec](/llm-concept-atlas/concepts/word2vec/) and [recommendation embeddings](/llm-concept-atlas/concepts/recommendation-embeddings/). Run [L04](/llm-concept-atlas/labs/foundations/#l04-learned-playlist-recommendations) and inspect one target the model misses. Compare with train-only popularity, excluding observed songs.
+
+**Final task:** explain why song IDs can have learned vectors without representing audio. Propose a cold-start fallback and a leakage-aware split for a larger dataset. Report the denominator of eligible ranking queries and the limits of synthetic themes.
 
 ## Test your mental model
 
-<details><summary>What changes if a tokenizer splits one word into three pieces?</summary><p>The model receives three positions and IDs for that word rather than one. Its embedding lookup and later sequence processing operate on those positions.</p></details>
+<details><summary>A tokenizer splits one word into three pieces. Which shapes change?</summary><p>The token sequence gains positions, so lookup and later state tensors gain positions. Embedding width and vocabulary size do not change merely because this input used more pieces.</p></details>
 
-<details><summary>Can a causal decoder use a word it has not generated yet?</summary><p>No. The causal mask excludes future positions from each prediction.</p></details>
+<details><summary>The model's last state has width 128. Is that already a vocabulary distribution?</summary><p>No. The LM head maps it to one logit per vocabulary item; softmax and decoding are later operations. A classifier or embedding model may use a different head.</p></details>
 
-<details><summary>Does the highest attention weight prove which input caused an answer?</summary><p>No. It is one weight from one head and layer in a larger computation.</p></details>
+<details><summary>Cache timings look faster, but logits differ substantially. What is the conclusion?</summary><p>Correctness is unresolved. Inspect masks, positions, cache reuse, dtype, and model state before calling it a valid optimization. Compare the same forced continuation and record tolerances.</p></details>
 
-The progression follows the first three book chapters; the sequence, examples, and diagrams on this site are original. Continue with the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models).
+<details><summary>A recommendation target is an input song. Can it count as a successful unseen-item prediction?</summary><p>No. Repair the target/query construction. Success must follow the declared candidate and held-out interaction contract.</p></details>
+
+Use the [atlas graph](/llm-concept-atlas/atlas/) to inspect prerequisites and the [glossary](/llm-concept-atlas/glossary/) for aliases such as QKV, GQA, and nucleus sampling. Continue to the [semantic-search route](/llm-concept-atlas/paths/from-semantic-search-to-rag/) when you can explain the difference between a representation and a generated answer.

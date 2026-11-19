@@ -50,3 +50,5 @@ For corrections, please describe what a reader could misunderstand and how your 
 Follow [examples/README.md](./examples/README.md). Register every Python block, use named source regions for new examples, run the declared locked environment, and regenerate synchronized lessons/notebooks. Ordinary site builds execute the foundation suite; CPU model runs are explicit. Preserve the legacy exact-output validations while migrating examples. Passing execution does not resolve an E0 teaching finding or award editorial acceptance.
 
 Use the [reference lesson template](./docs/templates/reference-lesson.md) and [E2 author review](./docs/reviews/e2-reference-lessons.md) when expanding lessons. Keep author review, independent editorial acceptance, and execution verification distinct.
+
+The [E3 packet](./docs/reviews/e3-foundations.md) adds shared foundation mechanisms and source-to-browser parity tests. When changing a numeric explorer, update/test the Python and browser contracts together, and rerun only affected model workflows before refreshing evidence. Aliases belong to canonical pages; relationship reasons must describe actual prerequisite/related/parent links.

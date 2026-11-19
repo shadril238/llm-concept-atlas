@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-word-and-subword-tokens",
+  "status": "passed",
+  "date": "2026-11-19T17:56:56.321839+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/word_and_subword_tokens.py"
+  ],
+  "sourceSha256": "7173423623de139f9995369f514e5cf355e5668130348d4157a7672e2c289c34",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "6e995f2987f6c414ede935b4fff50fd147d97a05b38fcb0eb056ac12c8acbf82",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "whitespace: ['cats', '\ud83d\udc4b']\ncharacters: ['c', 'a', 't', 's', ' ', '\ud83d\udc4b']\nUTF-8 bytes: [99, 97, 116, 115, 32, 240, 159, 145, 139]\n",
+  "stderr": "",
+  "error": null
+}

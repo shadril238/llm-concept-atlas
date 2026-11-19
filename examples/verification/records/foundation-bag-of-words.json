@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-bag-of-words",
+  "status": "passed",
+  "date": "2026-11-19T17:56:55.364966+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/bag_of_words.py"
+  ],
+  "sourceSha256": "c2dc65b1ff58400eb2ca8eba13dbb6f7bc9cc6c5b863767b6c8200ade94b08b3",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "b6d40fc24b8f4ae867eb77dcffef34a83400ca664f0aedf1d84ea8fe8fc4458f",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "dog bites cat [1, 1, 1]\ncat bites dog [1, 1, 1]\ndog dog [0, 2, 0]\n",
+  "stderr": "",
+  "error": null
+}

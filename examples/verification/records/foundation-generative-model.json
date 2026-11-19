@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-generative-model",
+  "status": "passed",
+  "date": "2026-11-19T17:56:55.606281+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/generative_model.py"
+  ],
+  "sourceSha256": "9b7c613ef4ab1a026e297b3b3e73cc8fb64c95fe02885d492e6bb25bdc337912",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "08fe10a3fdf66c0d05bbed8335cafca6952c85169e9a13c9e518c19fe22d64c1",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "new IDs: [40, 50]\n",
+  "stderr": "",
+  "error": null
+}

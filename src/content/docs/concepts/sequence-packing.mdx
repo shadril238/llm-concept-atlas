@@ -1,0 +1,104 @@
+---
+title: Sequence packing
+description: "Sequence packing places several shorter examples into a shared token block to reduce unused padding. It requires explicit attention, position, and loss-boundary policies so unrelated examples do not silently become one training sequence."
+kind: concept
+conceptId: sequence-packing
+chapter: 3
+part: foundations
+summary: "Sequence packing places several shorter examples into a shared token block to reduce unused padding. It requires explicit attention, position, and loss-boundary policies so unrelated examples do not silently become one training sequence."
+parent: context-size
+prerequisites: ["context-size", "self-attention"]
+related: ["positional-embeddings-and-rope"]
+level: beginner
+tags: [foundations]
+lessonStatus: full
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e3-foundations-author-review-2026-11-20
+exampleIds: ["foundation-sequence-packing", "transparent-transformer"]
+bookSections: ["book-ch03-packing"]
+aliases: ["packing", "packed sequences", "cross-document leakage"]
+learningObjectives: ["Explain the input/output contract of Sequence packing.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Why is a causal mask insufficient for independent packed documents?"]
+labHref: /labs/foundations/
+relationshipReasons: {"context-size": "Token budgets and retained positions determine the packing or cache constraints.", "self-attention": "The visibility rule is required before reasoning about positions or packed documents."}
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import FoundationEvidence from '../../../components/FoundationEvidence.astro';
+import { AttentionStepper, PositionExplorer, DecodingExplorer, CacheExplorer, PlaylistExplorer, ArchitectureMap, RepresentationExplorer } from '../../../components/simulations/FoundationLabs';
+
+<ConceptPrimer id="sequence-packing" />
+
+## Definition and intuition
+
+Sequence packing places several shorter examples into a shared token block to reduce unused padding. It requires explicit attention, position, and loss-boundary policies so unrelated examples do not silently become one training sequence.
+
+Three short training documents each occupy only a fraction of a fixed-size batch block. Packing can improve utilization, but a simple concatenation can allow the second document to read the first when that is not the intended task.
+
+<ReferenceBrief objectives={["Explain the input/output contract of Sequence packing.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Why is a causal mask insufficient for independent packed documents?"]} prerequisites="Use the linked prerequisites below. Distinguish an input, a learned parameter, and a result before following the trace." scope="An explicit teaching calculation plus a linked verified CPU workflow. Illustrative values and recorded model outputs are labeled separately." />
+
+## How it works
+
+Padding fills unused positions; a padding mask excludes them as appropriate. Packing instead fills more positions with real examples. It changes the batch layout and may need segment IDs or an equivalent boundary-aware attention representation.
+
+For independent causal documents, a position may attend only to earlier/current positions within its own segment. A separator token alone does not enforce that rule: a normal causal mask still allows earlier documents. Loss labels at boundaries may also need masking, depending on whether predicting the next document is intended.
+
+Position indices can reset per independent segment under an implementation that supports that convention. The mask and positional scheme must agree. A packed kernel’s behavior should be tested against separate-example outputs before claiming no cross-contamination.
+
+### The important distinction
+
+A separator is content, not a security or attention boundary.
+
+## Worked example
+
+Pack [A0,A1] and [B0,B1]. A plain lower-triangular mask lets B0 read A0/A1. The independent-document mask uses rows [1,0,0,0], [1,1,0,0], [0,0,1,0], [0,0,1,1]. The zeros across segments enforce a different contract.
+
+## Try the experiment
+
+<AttentionStepper client:visible />
+
+
+
+## Implement it
+
+Run the small mechanism from the repository root with `python3 scripts/run-examples.py --id foundation-sequence-packing`. Its values are illustrative; it isolates the stated operation rather than pretending to load a trained model.
+
+{/* example:foundation-sequence-packing:start */}
+
+```python
+segments = [0, 0, 1, 1]
+mask = [
+    [int(j <= i and segments[i] == segments[j]) for j in range(4)] for i in range(4)
+]
+for row in mask:
+    print(row)
+assert mask[2][0] == 0 and mask[3][2] == 1
+```
+
+{/* example:foundation-sequence-packing:end */}
+
+<FoundationEvidence id="transparent-transformer" />
+
+The [foundation lab guide](/llm-concept-atlas/labs/foundations/) supplies setup, pinned artifacts, full source, recorded outputs, and the practical workflow. The mechanism snippet and the model lab serve different learning purposes: use the former to check a calculation and the latter to inspect actual library/model behavior.
+
+## When to use it
+
+Use packing when many short examples waste substantial padding and the training stack supports boundary-aware computation. Measure actual utilization and verify equivalent outputs for independent examples. Do not introduce packing into a tiny exercise merely to add complexity.
+
+## Limits and common mistakes
+
+A separator is content, not a security or attention boundary. Reusing one absolute position sequence across examples may differ from separate processing. A visually efficient layout can still implement the wrong loss if boundary targets are not inspected.
+
+## Check your understanding
+
+<details><summary>Why is a causal mask insufficient for independent packed documents?</summary><p>It blocks future positions but permits all earlier positions, including a previous document. Add a same-segment constraint when independent examples must not interact, and test that changing document A cannot change document B’s independent result.</p></details>
+
+<details><summary>In segments [0,0,1,1], should position 3 attend to position 1 for independent documents?</summary><p>No, even though 1 is earlier than 3. Causality and same-segment visibility must both hold. Position 3 may attend to 2 and 3 within its segment.</p></details>
+
+## Connections and sources
+
+Book source locations: Chapter 3, printed pp. 102–103. Precise section IDs and mappings are recorded in the [coverage inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The small CPU model, original playlist data, and transparent numerical traces are atlas teaching choices. Read the [authors' official chapter 3 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter03) and the [E3 execution/source guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/E3.md) for the original workflow and supported implementation details.
+
+<ConceptConnections id="sequence-packing" />

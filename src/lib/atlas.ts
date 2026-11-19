@@ -16,6 +16,9 @@ export interface AtlasNode {
   level?: string;
   lessonStatus?: "primer" | "full";
   tags?: string[];
+  aliases?: string[];
+  relationshipReasons?: Record<string, string>;
+  labHref?: string;
 }
 
 export interface AtlasGraph {

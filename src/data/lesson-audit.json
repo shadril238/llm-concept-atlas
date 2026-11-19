@@ -33,11 +33,11 @@
       "conceptId": "attention",
       "chapter": 3,
       "path": "src/content/docs/concepts/attention.mdx",
-      "sourceSha256": "1b50c9e1234f587603a0bae3da4cd02105d13915158ade3cb3123dbc4be30afb",
+      "sourceSha256": "4825e60d5a1b6b5d69fda2e94cd4e227d723f65a4754509357877c14e0c106d7",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch03-block",
@@ -45,45 +45,45 @@
         "book-ch03-multi-head"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The weighted-value calculation is relevant; extend to actual Q/K projections, dimensions, masking, and stable softmax.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "d956432c9d8273f1a3ef7e4b2150f1e3b429792d42fcc11426fb5b6c8f026617",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "710f27812c715ccaacd3c549a8fd8f34ac70974d2cf6305af5bdf510632728aa",
       "codeFirstLine": "from math import exp",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
-        "Trace projections, attention, feedforward, residual, and normalization calculations with shapes.",
-        "Compute matrix Q/K/V projections, masking, scaling, normalization, and weighted outputs.",
-        "Show several projected heads and their concatenation/output projection."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "bag-of-words",
       "chapter": 1,
       "path": "src/content/docs/concepts/bag-of-words.mdx",
-      "sourceSha256": "0c563337c72392f4fe0b8fe7a142fdc3838d52cfb47b405d9d3cc82871101256",
+      "sourceSha256": "4b4242382d52252341044e43f2c657840eb62f93dba4a45b57cdbde747ac72fe",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": ["book-ch01-bag-of-words"],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The Counter example is relevant; extend to consistent corpus vocabulary and aligned document vectors.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "e2017d067242190c0c1f0555f3284f5f62190b71e404329bc423e3798493b618",
-      "codeFirstLine": "from collections import Counter",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "9ced68ef6f3d53d098ce0dcc751dc1db9ede674c5bd160d1c91c68161159c22e",
+      "codeFirstLine": "vocabulary = [\"cat\", \"dog\", \"bites\"]",
       "sharedExampleWith": [],
-      "genericExercise": true,
+      "genericExercise": false,
       "requiredWork": [
-        "Build vocabulary-aligned document count vectors and demonstrate loss of word order."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "bert-fine-tuning",
@@ -102,7 +102,7 @@
       "exampleKind": "illustrative-python",
       "codeSha256": "ad52b94d6779d81e4a1b52f22f023710c4d0002fdeb8dc45a04dff92046ccabb",
       "codeFirstLine": "weight = 0.2",
-      "sharedExampleWith": ["pretraining-and-sft", "pretraining"],
+      "sharedExampleWith": ["pretraining-and-sft"],
       "genericExercise": true,
       "requiredWork": [
         "Compare frozen feature extraction with adaptation of the encoder and task head.",
@@ -343,56 +343,53 @@
       "conceptId": "context-size",
       "chapter": 3,
       "path": "src/content/docs/concepts/context-size.mdx",
-      "sourceSha256": "e04ea613ba67bd08f5aff7950608d3b3fc50c647c45159ecaaee3f96ebad2012",
+      "sourceSha256": "127eabbbe4581850444342d9a1545fbfedbb964fac828bfa259ec66d39412c01",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": ["book-ch03-parallel-context"],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "A prefix slice illustrates causal visibility, not a tokenizer-aware prompt/output budget.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "2b2c22532b5a58cdc3a8eb9224279a46a7337ae5bf0d0f02b3f6655ba6cc7a6e",
-      "codeFirstLine": "tokens = [\"The\", \"cat\", \"slept\"]",
-      "sharedExampleWith": ["word-and-subword-tokens"],
-      "genericExercise": true,
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "4991ac8a3e098f4761fdf05f980a110ad686854c9e784f629c075530989cfe87",
+      "codeFirstLine": "limit, passage, prompt, markers = 128, 90, 15, 2",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Separate parallel processing of existing positions from sequential generation and token budgets."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "contextualized-embeddings",
       "chapter": 2,
       "path": "src/content/docs/concepts/contextualized-embeddings.mdx",
-      "sourceSha256": "3ccbca138a8ed954130d355847581913c87c7c4765e61b59ecdad205c123c085",
+      "sourceSha256": "a59ed7a23e120dceac33d4f8232908c40affae07b3474325af215abf6af156d9",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": ["book-ch02-contextual-embeddings"],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "Cosine similarity of fixed vectors does not extract context-dependent states for a repeated word.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "1d303f69fda272102a43cb998219dab761a5d61eb43e7306c32de785f165f684",
-      "codeFirstLine": "from math import sqrt",
-      "sharedExampleWith": [
-        "document-embeddings",
-        "embeddings-for-classification",
-        "recommendation-embeddings",
-        "sbert"
-      ],
-      "genericExercise": true,
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "4917844edd3fa5c85cc5dae183a24dde1f46826db950768f60c07afb961a0041",
+      "codeFirstLine": "same_lookup = [0.2, 0.7]",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Extract real hidden states for the same word in different contexts with aligned tokens."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "contrastive-examples",
@@ -416,7 +413,6 @@
       "codeFirstLine": "from math import exp, log",
       "sharedExampleWith": [
         "contrastive-learning",
-        "contrastive-training",
         "domain-adaptation",
         "fine-tuning-embeddings",
         "loss-functions",
@@ -453,7 +449,6 @@
       "codeFirstLine": "from math import exp, log",
       "sharedExampleWith": [
         "contrastive-examples",
-        "contrastive-training",
         "domain-adaptation",
         "fine-tuning-embeddings",
         "loss-functions",
@@ -472,37 +467,30 @@
       "conceptId": "contrastive-training",
       "chapter": 2,
       "path": "src/content/docs/concepts/contrastive-training.mdx",
-      "sourceSha256": "7a917c01a0c2debdc8cae90a23327efab7cc779839d7b0f7d7fbb0da6d381614",
+      "sourceSha256": "f12276a46f9dcb792fee4be91bc0b4bbade5423217b7bd7b222034e307efb28e",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch02-word2vec-training",
         "book-ch02-negative-sampling"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The fixed-score loss lacks word2vec pair scoring, sampled negatives, and parameter updates.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "a43674310c5ab749c015b65c7938820679a79a20d569eeb73873c187797ca945",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "fd471c66109efba91635a34156f2c16950190831dbbd5157903b602d52349607",
       "codeFirstLine": "from math import exp, log",
-      "sharedExampleWith": [
-        "contrastive-examples",
-        "contrastive-learning",
-        "domain-adaptation",
-        "fine-tuning-embeddings",
-        "loss-functions",
-        "setfit"
-      ],
-      "genericExercise": true,
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Connect center/context pairs and negative sampling to parameter updates, not just pair creation.",
-        "Show center/context pairs, negative sampling, a binary objective, and an update."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "conversation-memory",
@@ -531,59 +519,85 @@
       "nextPhase": "E5"
     },
     {
-      "conceptId": "decoder-only",
+      "conceptId": "cross-attention",
       "chapter": 1,
-      "path": "src/content/docs/concepts/decoder-only.mdx",
-      "sourceSha256": "20367ffa09a722d411a19cb12d49490441576051caca2bed162759d7ac7fbfe4",
+      "path": "src/content/docs/concepts/cross-attention.mdx",
+      "sourceSha256": "ecd3a200543f170795552ed1f7a2c96b240c86bc54e2a2c68d4b5dd322048f6c",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
+      "reviewRecord": "e0-static-audit-2026-11-19",
+      "sourceSectionIds": ["book-ch01-cross-attention"],
+      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "6125fa1bce63fd54004fa5ffb1588861677fda8dff365a9f790c3a90c8b21ef2",
+      "codeFirstLine": "target_queries, source_keys = 2, 3",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
+      ],
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
+    },
+    {
+      "conceptId": "decoder-only",
+      "chapter": 1,
+      "path": "src/content/docs/concepts/decoder-only.mdx",
+      "sourceSha256": "44b94e6cfe0955a2963eae5d8cdfeff2f368ece6161b5c998625cd0e12510628",
+      "legacyStatus": "full",
+      "reviewStatus": "changes-required",
+      "auditStatus": "assessed",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch01-decoder-models",
         "book-ch03-parallel-context"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The visibility trace is useful; add a real causal-model input/output and training-versus-generation comparison.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "bba0e7dae7d65603e91cd6bf156308c4e48f17179752427f345122a4c2115557",
-      "codeFirstLine": "prefix = ['A', 'cat', 'sat', 'on', 'the']",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "5bed1aea8dcfb252b6acc8f637de2bc1278b09e405d2b3260329542168ca5b3a",
+      "codeFirstLine": "ids = [\"A\", \"B\", \"C\"]",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
-        "Trace causal pretraining and generation with a real model and compare base versus instruction behavior.",
-        "Separate parallel processing of existing positions from sequential generation and token budgets."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "decoding",
       "chapter": 3,
       "path": "src/content/docs/concepts/decoding.mdx",
-      "sourceSha256": "16861d820667b1c9ea4639b3955585c1c6ee6270c1523f8a537f92b54cd9d8f2",
+      "sourceSha256": "467d2119632b15f977f7b132a9eada9777cf19aef8379b3c7cf1cebc468e9620",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": ["book-ch03-decoding", "book-ch06-output-controls"],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "Greedy and seeded choice are useful; temperature and top-k/top-p described in the text are not implemented.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "bc921c3639cc665a61d87966e1e6411b74bc20ddfa863cca98ea6e2589c9d79c",
-      "codeFirstLine": "from random import Random",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "a3e3868a968dd947b8e5f1a684ea75248c3533cb89ac5d9e2890b6616153e670",
+      "codeFirstLine": "from math import exp",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
-        "Implement probability conversion, temperature, top-k/top-p, and a verified token selection.",
-        "Run controlled generation comparisons with fixed inputs, seeds, and output budgets."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "dense-retrieval",
@@ -657,12 +671,7 @@
       "exampleKind": "illustrative-python",
       "codeSha256": "1d303f69fda272102a43cb998219dab761a5d61eb43e7306c32de785f165f684",
       "codeFirstLine": "from math import sqrt",
-      "sharedExampleWith": [
-        "contextualized-embeddings",
-        "embeddings-for-classification",
-        "recommendation-embeddings",
-        "sbert"
-      ],
+      "sharedExampleWith": ["embeddings-for-classification", "sbert"],
       "genericExercise": true,
       "requiredWork": [
         "Produce document embeddings from real text and retain source IDs."
@@ -690,7 +699,6 @@
       "sharedExampleWith": [
         "contrastive-examples",
         "contrastive-learning",
-        "contrastive-training",
         "fine-tuning-embeddings",
         "loss-functions",
         "setfit"
@@ -743,38 +751,33 @@
       "conceptId": "efficient-attention",
       "chapter": 3,
       "path": "src/content/docs/concepts/efficient-attention.mdx",
-      "sourceSha256": "3cf10884ebd181e88b803ca78914095ebbca446f2d0171e0d6ecf8de0eb15cf0",
+      "sourceSha256": "0255a4048cbae2432ae32f3e2cbf7a922d9e57d65615c936134d876e4dbabf80",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch03-architecture-improvements",
         "book-ch03-efficient-attention",
         "book-ch03-local-attention",
+        "book-ch03-shared-kv",
         "book-ch03-flash-attention"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "An ordinary weighted sum demonstrates no sparse pattern, shared KV heads, or memory-efficient algorithm.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "6f9979031f8857a24349f427ea5c23c3d3a97a3ff8ce27baadc6b7d0ef28e02a",
-      "codeFirstLine": "from math import exp",
-      "sharedExampleWith": [
-        "positional-embeddings-and-rope",
-        "transformer-block",
-        "vision-transformers"
-      ],
-      "genericExercise": true,
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "f46146ac5913e7cbb0cb84061dc68543ec62f7d96bd77c0d86c68e457934b96f",
+      "codeFirstLine": "layers, positions, width, bytes_per_value = 4, 100, 8, 2",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Organize architectural versus implementation changes without treating them as the same optimization.",
-        "Compare local attention, shared KV heads, and memory-efficient exact attention.",
-        "Compare actual allowed-position masks and the information each pattern removes.",
-        "Explain exact tiled attention and memory traffic separately from sparse attention."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "embedding-evaluation",
@@ -822,12 +825,7 @@
       "exampleKind": "illustrative-python",
       "codeSha256": "1d303f69fda272102a43cb998219dab761a5d61eb43e7306c32de785f165f684",
       "codeFirstLine": "from math import sqrt",
-      "sharedExampleWith": [
-        "contextualized-embeddings",
-        "document-embeddings",
-        "recommendation-embeddings",
-        "sbert"
-      ],
+      "sharedExampleWith": ["document-embeddings", "sbert"],
       "genericExercise": true,
       "requiredWork": [
         "Compare a trained task head with a separate classifier over fixed embeddings.",
@@ -841,26 +839,27 @@
       "conceptId": "encoder-only",
       "chapter": 1,
       "path": "src/content/docs/concepts/encoder-only.mdx",
-      "sourceSha256": "d42ad7534b12a7d43b9b366dfcbdb68125c9ef7c9f160ff4ad6c9f41c11b9477",
+      "sourceSha256": "d5375b7d479838894ad0cb9804ee08b0745b6c9d0b84c3acf7ebe937034550e6",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": ["book-ch01-encoder-models"],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The disambiguation rule is explicitly illustrative; add actual contextual encoder states.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "e5a38cf5bb2747298e68b8892bcbf80f55899e01f4d236b9c606c4c14004cf8b",
-      "codeFirstLine": "# A tiny context rule, not a neural encoder",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "f43a5816403b24a4f25e3b96832c0e7677ed2431d3be73d01c611cc2de3bef29",
+      "codeFirstLine": "positions = range(3)",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
-        "Connect bidirectional context and masked pretraining to real representation tasks."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "few-shot-classification",
@@ -950,7 +949,6 @@
       "sharedExampleWith": [
         "contrastive-examples",
         "contrastive-learning",
-        "contrastive-training",
         "domain-adaptation",
         "loss-functions",
         "setfit"
@@ -1044,7 +1042,7 @@
       "exampleKind": "illustrative-python",
       "codeSha256": "eece17d98999c9dd05ece2f2a8885639c5333864de2535b5662a10bc3c0fee2f",
       "codeFirstLine": "references = [\"cat\", \"dog\", \"bird\"]",
-      "sharedExampleWith": ["responsible-use", "self-consistency"],
+      "sharedExampleWith": ["self-consistency"],
       "genericExercise": true,
       "requiredWork": [
         "Select complementary metrics and explain disagreements and blind spots.",
@@ -1059,34 +1057,35 @@
       "conceptId": "generative-model",
       "chapter": 1,
       "path": "src/content/docs/concepts/generative-model.mdx",
-      "sourceSha256": "21bdbeca2923806f90d5acc95f5b1833739033b3700e69bed0ecfe40a89eac80",
+      "sourceSha256": "0966160d0dafef11b0b94e12069a16dfe224e6ac6f731626873e87ff95ef620f",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch01-decoder-models",
+        "book-ch01-first-generation",
+        "book-ch02-run-llm",
         "book-ch03-inputs-outputs",
         "book-ch06-generation-models",
+        "book-ch06-model-loading",
         "book-ch03-lm-head"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "Greedy selection from supplied probabilities is useful; add actual model scoring and multi-step generation.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "86da36cafd54664c880cd9775585a1e7461ef1347dcc766fd57eedb0ca6fca87",
-      "codeFirstLine": "choices = {'table': 0.7, 'floor': 0.2, 'moon': 0.1}",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "8778ee21ae7b373aa75c9778337c03af3f7f80b752603bd9c9e2a50e38035d0c",
+      "codeFirstLine": "prompt_ids = [10, 20, 30]",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
-        "Trace causal pretraining and generation with a real model and compare base versus instruction behavior.",
-        "Inspect real input IDs, output logits, and newly generated tokens.",
-        "Explain model loading, message formatting, and controlled generation in one workflow.",
-        "Show the hidden-state to vocabulary projection and distinguish logits from probabilities."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "grounded-generation",
@@ -1204,78 +1203,84 @@
       "conceptId": "kv-cache",
       "chapter": 3,
       "path": "src/content/docs/concepts/kv-cache.mdx",
-      "sourceSha256": "ba14ab5619b89235c66b27abbc6d5cd13bc2c3e21ccc17e487de90d707851737",
+      "sourceSha256": "37b30d7c06701c22cf3639a64738e75b888125a38650444c2a799fcfe5413675",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": ["book-ch03-kv-cache"],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The append-only list illustrates storage but not real cached keys/values or correctness/speed comparison.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "2c1f7462484770a6fb24ea69ad01fe48f90ac2f49d739477f5cf335e07146651",
-      "codeFirstLine": "cache = {'keys': [], 'values': []}",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "8fb0cf1397ddfa53f3df307b31366977872882618890ff1bf02de788706dfbed",
+      "codeFirstLine": "layers, batch, kv_heads, positions, head_width, bytes_per_value = 4, 1, 2, 10, 8, 2",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
-        "Compare cached and uncached real logits before measuring generation time and cache memory."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "language-ai",
       "chapter": 1,
       "path": "src/content/docs/concepts/language-ai.mdx",
-      "sourceSha256": "1920e450e25f04fa19f33082ffb558e456d404d99a6a4a1e964c7167d6f39916",
+      "sourceSha256": "c96e36d33060f301ff90a9b8881a7b097035048f8928de0baa168fb7bed3e115",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch01-language-ai", "book-ch01-applications"],
+      "sourceSectionIds": [
+        "book-ch01-language-ai",
+        "book-ch01-history",
+        "book-ch01-generative-ai-year",
+        "book-ch01-applications"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The routing rule motivates tasks well; add a comparative decision exercise with task-appropriate evaluation.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "858dc1f48423fbcac3a9501ea30833302b916f438a77a79ca49f3f25eab9b20e",
-      "codeFirstLine": "def route(message):",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "bb1e1139723c4e1f5cc793577ad190dfa57d3f0d182ba2a8857b9b31bf342b72",
+      "codeFirstLine": "tasks = {\"route\": \"fixed label\", \"search\": \"existing document\", \"draft\": \"new text\"}",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
-        "Distinguish labeling, searching, and generating by their inputs, outputs, and evaluation.",
-        "Match task types to model families and appropriate success criteria."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "llm",
       "chapter": 1,
       "path": "src/content/docs/concepts/llm.mdx",
-      "sourceSha256": "602532c15b99c79ed041d9385bba2973f69c526b9ce96867c19c4e35bbac6a76",
+      "sourceSha256": "d050503e5a1b1cda3841e6cae339de3b405f5ebdac6f772db26076003b8ba685",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": ["book-ch01-llm-definition", "book-ch03-lm-head"],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The small softmax supports the definition; connect it to real model inputs and output-head shapes.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "565e391823fc1e91c4d19108dc780aa8c4b35f75aa46f88a6ce6a0670d0b0d71",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "62df9ac09719db6b9651fc9ce0337ad1d119886653c920b5e530149375209499",
       "codeFirstLine": "from math import exp",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
-        "Explain why size alone is not a stable model-family definition.",
-        "Show the hidden-state to vocabulary projection and distinguish logits from probabilities."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "local-model-rag",
@@ -1352,7 +1357,6 @@
       "sharedExampleWith": [
         "contrastive-examples",
         "contrastive-learning",
-        "contrastive-training",
         "domain-adaptation",
         "fine-tuning-embeddings",
         "setfit"
@@ -1390,6 +1394,38 @@
       ],
       "executionStatus": "real-model-workflow-not-verified",
       "nextPhase": "E7"
+    },
+    {
+      "conceptId": "model-access",
+      "chapter": 1,
+      "path": "src/content/docs/concepts/model-access.mdx",
+      "sourceSha256": "3b40a9028199d1c4dd605fcc5629c625a15d35cc0f325ca576eb5f8578181d5b",
+      "legacyStatus": "full",
+      "reviewStatus": "changes-required",
+      "auditStatus": "assessed",
+      "priority": "P2",
+      "reviewRecord": "e0-static-audit-2026-11-19",
+      "sourceSectionIds": [
+        "book-ch01-limited-resources",
+        "book-ch01-interfaces",
+        "book-ch01-proprietary",
+        "book-ch01-open-models",
+        "book-ch01-frameworks"
+      ],
+      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "cfc6544776cc053d42a147a1ef1c9f717528b805fac1c4fcc6e7590e619aa7e6",
+      "codeFirstLine": "weights = 14_000_000",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
+      ],
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "multimodal-chat",
@@ -1561,30 +1597,53 @@
       "conceptId": "positional-embeddings-and-rope",
       "chapter": 3,
       "path": "src/content/docs/concepts/positional-embeddings-and-rope.mdx",
-      "sourceSha256": "d98b35489c65f3bd2e39c90fade64148b812e6b0a480cd3aa8e1f8e370db68da",
+      "sourceSha256": "5a33ea2bc3107de4881f3208557ea54f68c3cbfaf16e8d651dd337ac628a5872",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P0",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": ["book-ch03-rope"],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The snippet has no position values or rotations; it repeats an attention weighted sum.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "6f9979031f8857a24349f427ea5c23c3d3a97a3ff8ce27baadc6b7d0ef28e02a",
-      "codeFirstLine": "from math import exp",
-      "sharedExampleWith": [
-        "efficient-attention",
-        "transformer-block",
-        "vision-transformers"
-      ],
-      "genericExercise": true,
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "08351b6115bef7c2107961d50890f38ca878a3640a75498b135572e68fcf3ea9",
+      "codeFirstLine": "from math import cos, sin, pi",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Compute actual paired-coordinate rotations of queries and keys and explain relative offsets."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
+    },
+    {
+      "conceptId": "pretraining",
+      "chapter": 1,
+      "path": "src/content/docs/concepts/pretraining.mdx",
+      "sourceSha256": "f55476e27ff1947bc9ea2b288e79195d6ec53776b926d925c6ba6ccff24fc30c",
+      "legacyStatus": "full",
+      "reviewStatus": "changes-required",
+      "auditStatus": "assessed",
+      "priority": "P2",
+      "reviewRecord": "e0-static-audit-2026-11-19",
+      "sourceSectionIds": ["book-ch01-training-paradigm"],
+      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "fd0eb73c9c199cb2dad586e004cae61b748f40c3012cd4242403e4660f640a15",
+      "codeFirstLine": "from math import log",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
+      ],
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "pretraining-and-sft",
@@ -1607,7 +1666,7 @@
       "exampleKind": "illustrative-python",
       "codeSha256": "ad52b94d6779d81e4a1b52f22f023710c4d0002fdeb8dc45a04dff92046ccabb",
       "codeFirstLine": "weight = 0.2",
-      "sharedExampleWith": ["bert-fine-tuning", "pretraining"],
+      "sharedExampleWith": ["bert-fine-tuning"],
       "genericExercise": true,
       "requiredWork": [
         "Trace pretraining, task adaptation, and preference tuning with distinct data and objectives.",
@@ -1616,31 +1675,6 @@
       ],
       "executionStatus": "real-model-workflow-not-verified",
       "nextPhase": "E8"
-    },
-    {
-      "conceptId": "pretraining",
-      "chapter": 1,
-      "path": "src/content/docs/concepts/pretraining.mdx",
-      "sourceSha256": "da00806bfaf506f01138dae4c3d334c8aa592d6517606e2e2c5aaf83588511fe",
-      "legacyStatus": "full",
-      "reviewStatus": "changes-required",
-      "auditStatus": "assessed",
-      "priority": "P1",
-      "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch01-training-paradigm"],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The scalar update illustrates optimization, but not token prediction, batches, or model pretraining.",
-      "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "ad52b94d6779d81e4a1b52f22f023710c4d0002fdeb8dc45a04dff92046ccabb",
-      "codeFirstLine": "weight = 0.2",
-      "sharedExampleWith": ["bert-fine-tuning", "pretraining-and-sft"],
-      "genericExercise": true,
-      "requiredWork": [
-        "Trace pretraining, task adaptation, and preference tuning with distinct data and objectives."
-      ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
     },
     {
       "conceptId": "prompt-structure",
@@ -1805,55 +1839,30 @@
       "conceptId": "query-key-value",
       "chapter": 3,
       "path": "src/content/docs/concepts/query-key-value.mdx",
-      "sourceSha256": "357fbb5a59ca96b4ba0078f973db82966cfc6889bcd3d2080c3ea61f520e3015",
+      "sourceSha256": "52353b39c53e1b1c5df01deb0a48742f2751a4da2764801ebf240f735743ed0b",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch03-block",
         "book-ch03-attention-calculation"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "A scalar query/key/value calculation is relevant; add learned matrix projections, shapes, and masks.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "b7f8477332b4dc04ea0ab6c57277125bbd48ccdc515511d154e507fb6ad111ca",
-      "codeFirstLine": "from math import exp",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "6449c7b2a9037e6343505de84bbc5d1893ecd20e704bb2ced14247ab21c2b93d",
+      "codeFirstLine": "from math import exp, sqrt",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
-        "Trace projections, attention, feedforward, residual, and normalization calculations with shapes.",
-        "Compute matrix Q/K/V projections, masking, scaling, normalization, and weighted outputs."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
-    },
-    {
-      "conceptId": "rag-evaluation",
-      "chapter": 8,
-      "path": "src/content/docs/concepts/rag-evaluation.mdx",
-      "sourceSha256": "9f33324544568241445c1c3444aece05bb1bb3eb2dfd73989a514471b5943593",
-      "legacyStatus": "full",
-      "reviewStatus": "changes-required",
-      "auditStatus": "assessed",
-      "priority": "P1",
-      "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch08-rag-evaluation"],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "Retrieval recall alone does not evaluate answer support, citations, relevance, or faithfulness.",
-      "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "ef8c9cbade5661effcc5c81ab3970e0530a077dc56b619db58e85b4dfa29cf58",
-      "codeFirstLine": "relevant = {\"A\", \"C\"}",
-      "sharedExampleWith": ["embedding-evaluation", "retrieval-metrics"],
-      "genericExercise": true,
-      "requiredWork": [
-        "Evaluate answer support, citation precision/recall, usefulness, and faithfulness separately from retrieval recall."
-      ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E6"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "rag",
@@ -1887,6 +1896,31 @@
       "nextPhase": "E6"
     },
     {
+      "conceptId": "rag-evaluation",
+      "chapter": 8,
+      "path": "src/content/docs/concepts/rag-evaluation.mdx",
+      "sourceSha256": "9f33324544568241445c1c3444aece05bb1bb3eb2dfd73989a514471b5943593",
+      "legacyStatus": "full",
+      "reviewStatus": "changes-required",
+      "auditStatus": "assessed",
+      "priority": "P1",
+      "reviewRecord": "e0-static-audit-2026-11-19",
+      "sourceSectionIds": ["book-ch08-rag-evaluation"],
+      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
+      "finding": "Retrieval recall alone does not evaluate answer support, citations, relevance, or faithfulness.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "illustrative-python",
+      "codeSha256": "ef8c9cbade5661effcc5c81ab3970e0530a077dc56b619db58e85b4dfa29cf58",
+      "codeFirstLine": "relevant = {\"A\", \"C\"}",
+      "sharedExampleWith": ["embedding-evaluation", "retrieval-metrics"],
+      "genericExercise": true,
+      "requiredWork": [
+        "Evaluate answer support, citation precision/recall, usefulness, and faithfulness separately from retrieval recall."
+      ],
+      "executionStatus": "real-model-workflow-not-verified",
+      "nextPhase": "E6"
+    },
+    {
       "conceptId": "react",
       "chapter": 7,
       "path": "src/content/docs/concepts/react.mdx",
@@ -1915,56 +1949,57 @@
       "conceptId": "recommendation-embeddings",
       "chapter": 2,
       "path": "src/content/docs/concepts/recommendation-embeddings.mdx",
-      "sourceSha256": "5092a959bda3b702e1b456dd9cbb17e40dd5017611d3782f1b935e5c5133913a",
+      "sourceSha256": "e050853f9e6d3312f637d460cf9211ebd1216c8d29967c8dd4c031c2e0f5389f",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch02-recommendations"],
+      "sourceSectionIds": [
+        "book-ch02-recommendations",
+        "book-ch02-song-recommendations",
+        "book-ch02-song-training"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "Two fixed vectors do not train playlist embeddings, retrieve songs, or evaluate recommendations.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "1d303f69fda272102a43cb998219dab761a5d61eb43e7306c32de785f165f684",
-      "codeFirstLine": "from math import sqrt",
-      "sharedExampleWith": [
-        "contextualized-embeddings",
-        "document-embeddings",
-        "embeddings-for-classification",
-        "sbert"
-      ],
-      "genericExercise": true,
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "d4eabc20e17276199a9b53f6666ac3ba7b6699939ae47a142aec37420dee3c00",
+      "codeFirstLine": "observed = {\"song-a\", \"song-b\"}",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Explain why item co-occurrence can train useful representations and what it cannot establish."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "representation-model",
       "chapter": 1,
       "path": "src/content/docs/concepts/representation-model.mdx",
-      "sourceSha256": "f81ea2396376d2b30f2cb6fbe8d8a28d1cc760606cfb573bc3d973d94b2e98d2",
+      "sourceSha256": "a09dff3c6df64ab588e519458a24a541f1dc1c54b61dff7872b4823b74cdb38f",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": ["book-ch01-encoder-models"],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "Cosine similarity on invented vectors is useful; add real encoder pooling and task distinctions.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "acf009d6991ba312b386fd2a3e2d1deea2f7a6576d3c504d41e2dfa449bdba1d",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "e1c7c2627b88a317ee4ffc3ce64dbda36146c140c932e95f399be9e0c4d1a1dc",
       "codeFirstLine": "from math import sqrt",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
-        "Connect bidirectional context and masked pretraining to real representation tasks."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "reranking",
@@ -1999,26 +2034,27 @@
       "conceptId": "responsible-use",
       "chapter": 1,
       "path": "src/content/docs/concepts/responsible-use.mdx",
-      "sourceSha256": "21a4a24cfd2b1be7f9abde07e448c651000514ede3a63eaff27b824e0ff427dc",
+      "sourceSha256": "4312b915e9e22e53e3b952b0304e7b9d262cc094028994ed76b3d1c6b2098139",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": ["book-ch01-responsible-use"],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "Generic label accuracy is not a harm analysis or task-specific responsible-use decision exercise.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "eece17d98999c9dd05ece2f2a8885639c5333864de2535b5662a10bc3c0fee2f",
-      "codeFirstLine": "references = [\"cat\", \"dog\", \"bird\"]",
-      "sharedExampleWith": ["generative-evaluation", "self-consistency"],
-      "genericExercise": true,
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "45d1bd93fd41acaf16a567fc21d5b922e5029c3271c5dee61fb2c1562dfcd8bf",
+      "codeFirstLine": "source = {\"Saturday\": \"10:00\u201316:00\"}",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Apply an explicit harm and validation exercise rather than generic label accuracy."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "retrieval-metrics",
@@ -2129,10 +2165,8 @@
       "codeSha256": "1d303f69fda272102a43cb998219dab761a5d61eb43e7306c32de785f165f684",
       "codeFirstLine": "from math import sqrt",
       "sharedExampleWith": [
-        "contextualized-embeddings",
         "document-embeddings",
-        "embeddings-for-classification",
-        "recommendation-embeddings"
+        "embeddings-for-classification"
       ],
       "genericExercise": true,
       "requiredWork": [
@@ -2147,30 +2181,30 @@
       "conceptId": "self-attention",
       "chapter": 3,
       "path": "src/content/docs/concepts/self-attention.mdx",
-      "sourceSha256": "5aff65e5e7b7918dc8bc4a631b2d4dfb2194af4f9765bd51e2fc27edcb6e8154",
+      "sourceSha256": "4369926a8125b80f8efc1a638f0da2f71c580f9eb8cd07fe8067a1732dead217",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch03-block",
         "book-ch03-attention-calculation"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The mask visibility printout is relevant; add the actual self-attention matrix computation.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "06426cf70faf876fad99385ce3224cfe624ac2f680e911db66ebdf930a2f0744",
-      "codeFirstLine": "tokens = ['The', 'bank', 'approved', 'the', 'loan']",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "0fe969f2d6256e8fa9112a1352c69b43c4b56ef292edb35fd0d3092ce3c74963",
+      "codeFirstLine": "length = 3",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
-        "Trace projections, attention, feedforward, residual, and normalization calculations with shapes.",
-        "Compute matrix Q/K/V projections, masking, scaling, normalization, and weighted outputs."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "self-consistency",
@@ -2189,7 +2223,7 @@
       "exampleKind": "illustrative-python",
       "codeSha256": "eece17d98999c9dd05ece2f2a8885639c5333864de2535b5662a10bc3c0fee2f",
       "codeFirstLine": "references = [\"cat\", \"dog\", \"bird\"]",
-      "sharedExampleWith": ["generative-evaluation", "responsible-use"],
+      "sharedExampleWith": ["generative-evaluation"],
       "genericExercise": true,
       "requiredWork": [
         "Sample candidate answers, normalize final answers, and aggregate votes with failure analysis."
@@ -2253,6 +2287,61 @@
       "nextPhase": "E4"
     },
     {
+      "conceptId": "sequence-packing",
+      "chapter": 3,
+      "path": "src/content/docs/concepts/sequence-packing.mdx",
+      "sourceSha256": "13f8b019f724f6df05b412d7df6eb2077067b314d362670338a1fafabce84c65",
+      "legacyStatus": "full",
+      "reviewStatus": "changes-required",
+      "auditStatus": "assessed",
+      "priority": "P2",
+      "reviewRecord": "e0-static-audit-2026-11-19",
+      "sourceSectionIds": ["book-ch03-packing"],
+      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "49a3c0fcba48aaf330c8d242b9babedd6044fa17b13e338140ad3d45e041829c",
+      "codeFirstLine": "segments = [0, 0, 1, 1]",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
+      ],
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
+    },
+    {
+      "conceptId": "sequence-to-sequence",
+      "chapter": 1,
+      "path": "src/content/docs/concepts/sequence-to-sequence.mdx",
+      "sourceSha256": "9e7c0fd5e0dfd9cce2b0fbb79168da99dd71efab48c64ab896e6d3ffae8c1b35",
+      "legacyStatus": "full",
+      "reviewStatus": "changes-required",
+      "auditStatus": "assessed",
+      "priority": "P2",
+      "reviewRecord": "e0-static-audit-2026-11-19",
+      "sourceSectionIds": [
+        "book-ch01-sequence-attention",
+        "book-ch01-recurrent-context"
+      ],
+      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "a744aae8cedbb4ecdd6252a7b33ff5c84a671343d216a725200b59cfda53d92c",
+      "codeFirstLine": "target_length, source_length, value_width = 2, 3, 4",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
+      ],
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
+    },
+    {
       "conceptId": "setfit",
       "chapter": 11,
       "path": "src/content/docs/concepts/setfit.mdx",
@@ -2272,7 +2361,6 @@
       "sharedExampleWith": [
         "contrastive-examples",
         "contrastive-learning",
-        "contrastive-training",
         "domain-adaptation",
         "fine-tuning-embeddings",
         "loss-functions"
@@ -2380,11 +2468,11 @@
       "conceptId": "text-embedding",
       "chapter": 2,
       "path": "src/content/docs/concepts/text-embedding.mdx",
-      "sourceSha256": "ab59b97ded391a3ca71785fb9dff08b05a96ea86dbb729fbf48d311740973145",
+      "sourceSha256": "6887faa63fc24b5d77a985e1aba7be126402d18c84a412460c7edbb014d62fbb",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch01-dense-vectors",
@@ -2393,31 +2481,55 @@
         "book-ch10-embedding-models"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "Invented-vector similarity is relevant; add actual sentence encoding and pooling/normalization inspection.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "e7f2b2ed91a2a1b854277cddc337d6f8cd9fcde6de2a6632130778232f7fcb21",
-      "codeFirstLine": "from math import sqrt",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "0841250d1297e40b158782816306d1c60864b010074beb5ced761f879e743621",
+      "codeFirstLine": "states = [[1.0, 0.0], [0.0, 1.0], [9.0, 9.0]]",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
-        "Explain learned dense coordinates and compare them with sparse counts using an actual embedding.",
-        "Compare word, sentence, document, and image representations without treating their spaces as interchangeable.",
-        "Encode real texts and explain pooling, shape, normalization, and similarity.",
-        "Define task-dependent similarity and representation objectives."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
+    },
+    {
+      "conceptId": "token",
+      "chapter": 2,
+      "path": "src/content/docs/concepts/token.mdx",
+      "sourceSha256": "8ca1f8e5ca614d2faff0b3e4e2a5134b1414fb25585193d24fe89350c214505d",
+      "legacyStatus": "full",
+      "reviewStatus": "changes-required",
+      "auditStatus": "assessed",
+      "priority": "P2",
+      "reviewRecord": "e0-static-audit-2026-11-19",
+      "sourceSectionIds": ["book-ch02-tokenization"],
+      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "fe38d4b811acb6b9460ac91642e14223199d89eb0b7dc856da70d7af3b10f43d",
+      "codeFirstLine": "vocabulary = {\"cat\": 42, \"##s\": 17, \"[SEP]\": 2}",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
+      ],
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "token-embedding",
       "chapter": 2,
       "path": "src/content/docs/concepts/token-embedding.mdx",
-      "sourceSha256": "7e403fd3722702a9b27430d6757dd8b3800e9fc802bf0f95cfe0a054a4662a29",
+      "sourceSha256": "28b4ff2a0c71845936069b25c4b64cb6363584ff7a9842b1cd341238cd286d10",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch01-embedding-types",
@@ -2426,46 +2538,19 @@
         "book-ch03-forward-pass"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The lookup table correctly illustrates ID-to-row mapping; add a real model matrix and shape inspection.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "13417c0a7e9d749025cb0e60a5122b5d9f4c4740c26639aa5a8f8e2cbe701779",
-      "codeFirstLine": "table = [[0.1, 0.9], [0.5, 0.2], [0.8, 0.3]]",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "eebecd95ab74738f4432326eda2f6c7221c83234baa3a7447663dd2fac9dcad5",
+      "codeFirstLine": "table = [[0.1, 0.9], [0.5, 0.2], [0.8, 0.3], [0.0, 0.0]]",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
-        "Compare word, sentence, document, and image representations without treating their spaces as interchangeable.",
-        "Distinguish learned lookup rows from later contextual states and sentence vectors.",
-        "Inspect the actual embedding matrix shape and row lookup for tokenizer IDs.",
-        "Show model modules and intermediate tensor shapes including the language-model head."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
-    },
-    {
-      "conceptId": "token",
-      "chapter": 2,
-      "path": "src/content/docs/concepts/token.mdx",
-      "sourceSha256": "442b44eeb23682ba544581eb0eb017461f95f8e0d4e529645aebe6fe6b9d34d5",
-      "legacyStatus": "full",
-      "reviewStatus": "changes-required",
-      "auditStatus": "assessed",
-      "priority": "P1",
-      "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch02-tokenization"],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The invented vocabulary correctly demonstrates piece-to-ID lookup; link a verified real tokenizer run.",
-      "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "1650d69f3322fac45847878b7fbc47be00ab81a4718d93c4634c4244a9a771a5",
-      "codeFirstLine": "# Invented vocabulary: a mechanics example, not a trained tokenizer",
-      "sharedExampleWith": [],
-      "genericExercise": false,
-      "requiredWork": [
-        "Connect segmentation, token IDs, and model input with a complete trace."
-      ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "tokenization",
@@ -2557,70 +2642,67 @@
       "nextPhase": "E4"
     },
     {
-      "conceptId": "transformer-block",
-      "chapter": 3,
-      "path": "src/content/docs/concepts/transformer-block.mdx",
-      "sourceSha256": "97a98d3b751636895173008d31460006ff9841e4d7efe171b14a45f964accbac",
-      "legacyStatus": "full",
-      "reviewStatus": "changes-required",
-      "auditStatus": "assessed",
-      "priority": "P1",
-      "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": [
-        "book-ch03-block",
-        "book-ch03-modern-block",
-        "book-ch03-feedforward"
-      ],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "Only the weighted sum is computed; feedforward, residual, and normalization operations are absent.",
-      "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "6f9979031f8857a24349f427ea5c23c3d3a97a3ff8ce27baadc6b7d0ef28e02a",
-      "codeFirstLine": "from math import exp",
-      "sharedExampleWith": [
-        "efficient-attention",
-        "positional-embeddings-and-rope",
-        "vision-transformers"
-      ],
-      "genericExercise": true,
-      "requiredWork": [
-        "Trace projections, attention, feedforward, residual, and normalization calculations with shapes.",
-        "Explain pre-normalization, RMSNorm, and SwiGLU with numerical or shape-level traces.",
-        "Trace a position-wise feedforward transformation with explicit shapes and activation."
-      ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
-    },
-    {
       "conceptId": "transformer",
       "chapter": 3,
       "path": "src/content/docs/concepts/transformer.mdx",
-      "sourceSha256": "b275fd67bfe037da68269b6239633a62db49a41e24a52030bae6a3b03ee42449",
+      "sourceSha256": "2e944b3bd06434976c27c5b46bafda88c598e79b61c8eec6a1dd7efed439607c",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch01-transformer-history",
         "book-ch03-transformer-overview",
-        "book-ch03-forward-pass"
+        "book-ch03-forward-pass",
+        "book-ch03-research-directions"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The explicitly simplified data flow is useful; add real projections, residual paths, normalization, and tensor shapes.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "672258438508188fb3eeaedc51b7f6d939fa99386bfdc44ba4ac490444a79b54",
-      "codeFirstLine": "# Toy one-block data flow, without learned weights",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "40108b8a7bf8b82021df2640b76ae79d09c5a05251e46a1c94c649f10cae5540",
+      "codeFirstLine": "batch, tokens, width, vocabulary = 1, 3, 4, 7",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
-        "Explain the original encoder-decoder transformer and its cross-attention, not only decoder blocks.",
-        "Trace a real model from tokenizer through blocks and the language-model head.",
-        "Show model modules and intermediate tensor shapes including the language-model head."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
+    },
+    {
+      "conceptId": "transformer-block",
+      "chapter": 3,
+      "path": "src/content/docs/concepts/transformer-block.mdx",
+      "sourceSha256": "e67904802557659d88c6c279978259a05d64c9ffaad4868dd6f6dc63cb08fb9f",
+      "legacyStatus": "full",
+      "reviewStatus": "changes-required",
+      "auditStatus": "assessed",
+      "priority": "P2",
+      "reviewRecord": "e0-static-audit-2026-11-19",
+      "sourceSectionIds": [
+        "book-ch03-block",
+        "book-ch03-modern-block",
+        "book-ch03-feedforward",
+        "book-ch03-normalization",
+        "book-ch03-swiglu"
+      ],
+      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "7ddab048e241a363ea741127120c8a2350fa32aef722762c0746f052a022aa6b",
+      "codeFirstLine": "from math import sqrt",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
+      ],
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "tsdae",
@@ -2673,11 +2755,7 @@
       "exampleKind": "illustrative-python",
       "codeSha256": "6f9979031f8857a24349f427ea5c23c3d3a97a3ff8ce27baadc6b7d0ef28e02a",
       "codeFirstLine": "from math import exp",
-      "sharedExampleWith": [
-        "efficient-attention",
-        "positional-embeddings-and-rope",
-        "transformer-block"
-      ],
+      "sharedExampleWith": [],
       "genericExercise": true,
       "requiredWork": [
         "Patch real image pixels and trace projected patches, positions, and model inputs.",
@@ -2690,11 +2768,11 @@
       "conceptId": "vocabulary",
       "chapter": 2,
       "path": "src/content/docs/concepts/vocabulary.mdx",
-      "sourceSha256": "6adda91a73e17cb4c96f6cccc081d263973374317135125f0fff611b49667442",
+      "sourceSha256": "e5d45d58f7b9397d404ea7db9d67ff04457b445505bc2185e105005d42641021",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch02-prepare-inputs",
@@ -2703,21 +2781,19 @@
         "book-ch02-special-tokens"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The dictionary correctly illustrates mappings; inspect real special tokens and tokenizer/model compatibility.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "ba7c545a5afd838ac76458c946fbf997e9ccd9b240c44c79cfb912224ac9e8f1",
-      "codeFirstLine": "vocabulary = {'cat': 42, '##s': 17, '[SEP]': 2}",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "1092107ddc8459d2ff00279c4656447d7bd7e20342df17345afac84527d226f1",
+      "codeFirstLine": "table = [[1.0, 0.0], [0.0, 1.0], [0.0, 0.0]]",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
-        "Show input IDs, boundary markers, masks, and the vocabulary-to-embedding connection.",
-        "Separate algorithm, corpus, parameters, special markers, and model compatibility.",
-        "Inspect the actual embedding matrix shape and row lookup for tokenizer IDs.",
-        "Inspect role/boundary tokens, padding, and task markers in a real tokenizer."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "windowed-memory",
@@ -2748,59 +2824,59 @@
       "conceptId": "word-and-subword-tokens",
       "chapter": 2,
       "path": "src/content/docs/concepts/word-and-subword-tokens.mdx",
-      "sourceSha256": "f6a59142136725041b8cf777e223d6fe1c0785747f7e3dd9a53752e331aa7258",
+      "sourceSha256": "d6d51c9dfc6dbebbfaddb012038be97154313aa5059926be1b37ce1a05f25464",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P0",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": ["book-ch02-token-units"],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The example slices visible context and performs no word/subword tokenization.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "2b2c22532b5a58cdc3a8eb9224279a46a7337ae5bf0d0f02b3f6655ba6cc7a6e",
-      "codeFirstLine": "tokens = [\"The\", \"cat\", \"slept\"]",
-      "sharedExampleWith": ["context-size"],
-      "genericExercise": true,
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "664de99e680172346ee0fc0caffafec72568b63e49380b335475a3ec65cf539c",
+      "codeFirstLine": "text = \"cats \ud83d\udc4b\"",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Replace the causal-slicing snippet with an actual comparison of segmentation units."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "word2vec",
       "chapter": 2,
       "path": "src/content/docs/concepts/word2vec.mdx",
-      "sourceSha256": "950dceacd54246d8ee35f0cde02255126dce0f4f369d1926b93bdd0c8444f73c",
+      "sourceSha256": "bf18099f28b403f9f505cffcaf0a9db0624f0822f8811f5a484a2efea7fefdbd",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch01-dense-vectors",
         "book-ch02-word-embeddings",
+        "book-ch02-pretrained-word-vectors",
         "book-ch02-word2vec-training",
         "book-ch02-negative-sampling"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The training-pair construction is relevant; implement sampled-negative scoring, optimization, and learned neighbors.",
+      "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "feb8f17d193f1aa469f8640fbad6f53077ec5f60f86691228ef52617ce50a24f",
-      "codeFirstLine": "sentence = 'the cat chased the mouse'.split()",
+      "exampleKind": "foundation-reference-workflow",
+      "codeSha256": "cbc9ea10c37054e6039907abd2ac80545090210ab0a7950de13b57f358c9780b",
+      "codeFirstLine": "items = \"the cat sleeps\".split()",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
-        "Explain learned dense coordinates and compare them with sparse counts using an actual embedding.",
-        "Distinguish static word vectors from contextual language-model representations.",
-        "Connect center/context pairs and negative sampling to parameter updates, not just pair creation.",
-        "Show center/context pairs, negative sampling, a binary objective, and an update."
+        "Independent technical/editorial review and beginner feedback; optional larger-data/hardware routes need their own run records."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E3"
+      "executionStatus": "cpu-foundation-reference-verified",
+      "nextPhase": "E3",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "conceptId": "zero-shot-classification",

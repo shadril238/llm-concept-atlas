@@ -79,10 +79,7 @@
       "entrypoint": "examples/legacy/legacy-attention.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/attention.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -118,10 +115,7 @@
       "entrypoint": "examples/legacy/legacy-bag-of-words.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/bag-of-words.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -526,10 +520,7 @@
       "entrypoint": "examples/legacy/legacy-context-size.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/context-size.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -566,10 +557,7 @@
       "entrypoint": "examples/legacy/legacy-contextualized-embeddings.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/contextualized-embeddings.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -690,10 +678,7 @@
       "entrypoint": "examples/legacy/legacy-contrastive-training.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/contrastive-training.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -772,10 +757,7 @@
       "entrypoint": "examples/legacy/legacy-decoder-only.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/decoder-only.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -812,10 +794,7 @@
       "entrypoint": "examples/legacy/legacy-decoding.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/decoding.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -1061,10 +1040,7 @@
       "entrypoint": "examples/legacy/legacy-efficient-attention.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/efficient-attention.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -1183,10 +1159,7 @@
       "entrypoint": "examples/legacy/legacy-encoder-only.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/encoder-only.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -1474,10 +1447,7 @@
       "entrypoint": "examples/legacy/legacy-generative-model.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/generative-model.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -1673,10 +1643,7 @@
       "entrypoint": "examples/legacy/legacy-kv-cache.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/kv-cache.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -1713,10 +1680,7 @@
       "entrypoint": "examples/legacy/legacy-language-ai.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/language-ai.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -1753,10 +1717,7 @@
       "entrypoint": "examples/legacy/legacy-llm.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/llm.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -2197,10 +2158,7 @@
       "entrypoint": "examples/legacy/legacy-positional-embeddings-and-rope.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/positional-embeddings-and-rope.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -2279,10 +2237,7 @@
       "entrypoint": "examples/legacy/legacy-pretraining.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/pretraining.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -2528,10 +2483,7 @@
       "entrypoint": "examples/legacy/legacy-query-key-value.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/query-key-value.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -2688,10 +2640,7 @@
       "entrypoint": "examples/legacy/legacy-recommendation-embeddings.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/recommendation-embeddings.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -2728,10 +2677,7 @@
       "entrypoint": "examples/legacy/legacy-representation-model.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/representation-model.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -2808,10 +2754,7 @@
       "entrypoint": "examples/legacy/legacy-responsible-use.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/responsible-use.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3017,10 +2960,7 @@
       "entrypoint": "examples/legacy/legacy-self-attention.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/self-attention.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3342,10 +3282,7 @@
       "entrypoint": "examples/legacy/legacy-text-embedding.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/text-embedding.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3384,10 +3321,7 @@
       "entrypoint": "examples/legacy/legacy-token-embedding.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/token-embedding.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3423,10 +3357,7 @@
       "entrypoint": "examples/legacy/legacy-token.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/token.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3586,10 +3517,7 @@
       "entrypoint": "examples/legacy/legacy-transformer-block.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/transformer-block.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3628,10 +3556,7 @@
       "entrypoint": "examples/legacy/legacy-transformer.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/transformer.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3753,10 +3678,7 @@
       "entrypoint": "examples/legacy/legacy-vocabulary.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/vocabulary.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3832,10 +3754,7 @@
       "entrypoint": "examples/legacy/legacy-word-and-subword-tokens.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/word-and-subword-tokens.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3875,10 +3794,7 @@
       "entrypoint": "examples/legacy/legacy-word2vec.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/word2vec.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -4410,6 +4326,1706 @@
       ],
       "resultKey": "ner",
       "resultArtifact": "examples/artifacts/ner-model/results.json"
+    },
+    {
+      "id": "first-generation",
+      "title": "First Generation",
+      "concepts": [
+        "generative-model",
+        "llm",
+        "transformer",
+        "language-ai",
+        "decoder-only",
+        "pretraining",
+        "model-access",
+        "responsible-use"
+      ],
+      "sourceSections": [
+        "book-ch01-applications",
+        "book-ch01-decoder-models",
+        "book-ch01-first-generation",
+        "book-ch01-frameworks",
+        "book-ch01-generative-ai-year",
+        "book-ch01-history",
+        "book-ch01-interfaces",
+        "book-ch01-language-ai",
+        "book-ch01-limited-resources",
+        "book-ch01-llm-definition",
+        "book-ch01-open-models",
+        "book-ch01-proprietary",
+        "book-ch01-responsible-use",
+        "book-ch01-training-paradigm",
+        "book-ch01-transformer-history",
+        "book-ch02-run-llm",
+        "book-ch03-forward-pass",
+        "book-ch03-inputs-outputs",
+        "book-ch03-lm-head",
+        "book-ch03-parallel-context",
+        "book-ch03-transformer-overview",
+        "book-ch06-generation-models",
+        "book-ch06-model-loading"
+      ],
+      "level": "B",
+      "kind": "pretrained-inspection",
+      "entrypoint": "examples/training/reference/src/atlas_reference/e3/generation.py",
+      "environment": "reference",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/foundations.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [
+        {
+          "id": "EleutherAI/pythia-14m",
+          "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac"
+        }
+      ],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 600,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "prompt_preserved": true,
+          "lm_head_checked": true
+        }
+      },
+      "verificationRecord": "examples/verification/records/first-generation.json",
+      "troubleshooting": "See examples/training/reference/E3.md. Only declared CPU configurations are verified.",
+      "resultKey": "generation",
+      "resultFile": "src/data/foundation-results.json",
+      "resultArtifact": "examples/artifacts/e3-generation/results.json"
+    },
+    {
+      "id": "representation-inspection",
+      "title": "Representation Inspection",
+      "concepts": [
+        "word2vec",
+        "token-embedding",
+        "contextualized-embeddings",
+        "text-embedding",
+        "bag-of-words",
+        "encoder-only",
+        "word-and-subword-tokens",
+        "token",
+        "vocabulary",
+        "representation-model"
+      ],
+      "sourceSections": [
+        "book-ch01-bag-of-words",
+        "book-ch01-dense-vectors",
+        "book-ch01-embedding-types",
+        "book-ch01-encoder-models",
+        "book-ch02-contextual-embeddings",
+        "book-ch02-embedding-table",
+        "book-ch02-negative-sampling",
+        "book-ch02-prepare-inputs",
+        "book-ch02-special-tokens",
+        "book-ch02-text-embeddings",
+        "book-ch02-token-embeddings",
+        "book-ch02-token-units",
+        "book-ch02-tokenization",
+        "book-ch02-tokenizer-properties",
+        "book-ch02-word-embeddings",
+        "book-ch02-word2vec-training",
+        "book-ch03-forward-pass",
+        "book-ch10-embedding-models"
+      ],
+      "level": "B",
+      "kind": "pretrained-inspection",
+      "entrypoint": "examples/training/reference/src/atlas_reference/e3/representations.py",
+      "environment": "reference",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/foundations.mdx",
+        "block": 1
+      },
+      "region": null,
+      "models": [
+        {
+          "id": "prajjwal1/bert-tiny",
+          "revision": "6f75de8b60a9f8a2fdf7b69cbd86d9e64bcb3837"
+        },
+        {
+          "id": "google-bert/bert-base-uncased",
+          "revision": "86b5e0934494bd15c9632b12f734a8a67f723594"
+        },
+        {
+          "id": "sentence-transformers/paraphrase-MiniLM-L3-v2",
+          "revision": "4ca70771034acceecb2e72475f72050fcdde4ddc"
+        },
+        {
+          "id": "GloVe/wiki-gigaword-50",
+          "revision": "bd93f51f7536dbf84f194cd8a81c0644b7b95b41"
+        }
+      ],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 600,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "same_lookup": true,
+          "different_context": true
+        }
+      },
+      "verificationRecord": "examples/verification/records/representation-inspection.json",
+      "troubleshooting": "See examples/training/reference/E3.md. Only declared CPU configurations are verified.",
+      "resultKey": "representations",
+      "resultFile": "src/data/foundation-results.json",
+      "resultArtifact": "examples/artifacts/e3-representations/results.json"
+    },
+    {
+      "id": "playlist-embeddings",
+      "title": "Playlist Embeddings",
+      "concepts": [
+        "recommendation-embeddings",
+        "word2vec",
+        "contrastive-training"
+      ],
+      "sourceSections": [
+        "book-ch01-dense-vectors",
+        "book-ch02-negative-sampling",
+        "book-ch02-pretrained-word-vectors",
+        "book-ch02-recommendations",
+        "book-ch02-song-recommendations",
+        "book-ch02-song-training",
+        "book-ch02-word-embeddings",
+        "book-ch02-word2vec-training"
+      ],
+      "level": "A",
+      "kind": "learned-item-embeddings",
+      "entrypoint": "examples/training/reference/src/atlas_reference/e3/playlists.py",
+      "environment": "reference",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/foundations.mdx",
+        "block": 2
+      },
+      "region": null,
+      "models": [],
+      "dataset": "examples/data/manifests/playlists.json",
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 600,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "learned_vectors": true,
+          "reload_checked": true
+        }
+      },
+      "verificationRecord": "examples/verification/records/playlist-embeddings.json",
+      "troubleshooting": "See examples/training/reference/E3.md. Only declared CPU configurations are verified.",
+      "resultKey": "playlists",
+      "resultFile": "src/data/foundation-results.json",
+      "resultArtifact": "examples/artifacts/e3-playlists/results.json"
+    },
+    {
+      "id": "transparent-transformer",
+      "title": "Transparent Transformer",
+      "concepts": [
+        "transformer",
+        "attention",
+        "self-attention",
+        "query-key-value",
+        "transformer-block",
+        "cross-attention",
+        "sequence-to-sequence",
+        "positional-embeddings-and-rope",
+        "sequence-packing"
+      ],
+      "sourceSections": [
+        "book-ch01-cross-attention",
+        "book-ch01-recurrent-context",
+        "book-ch01-sequence-attention",
+        "book-ch01-transformer-history",
+        "book-ch03-attention-calculation",
+        "book-ch03-block",
+        "book-ch03-feedforward",
+        "book-ch03-forward-pass",
+        "book-ch03-modern-block",
+        "book-ch03-multi-head",
+        "book-ch03-normalization",
+        "book-ch03-packing",
+        "book-ch03-research-directions",
+        "book-ch03-rope",
+        "book-ch03-swiglu",
+        "book-ch03-transformer-overview"
+      ],
+      "level": "A",
+      "kind": "random-weight-mechanism",
+      "entrypoint": "examples/training/reference/src/atlas_reference/e3/transformer.py",
+      "environment": "reference",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/foundations.mdx",
+        "block": 3
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 600,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "future_masked": true,
+          "future_perturbation_checked": true
+        }
+      },
+      "verificationRecord": "examples/verification/records/transparent-transformer.json",
+      "troubleshooting": "See examples/training/reference/E3.md. Only declared CPU configurations are verified.",
+      "resultKey": "transformer",
+      "resultFile": "src/data/foundation-results.json",
+      "resultArtifact": "examples/artifacts/e3-transformer/results.json"
+    },
+    {
+      "id": "cache-equivalence",
+      "title": "Cache Equivalence",
+      "concepts": [
+        "kv-cache",
+        "decoding",
+        "efficient-attention",
+        "context-size"
+      ],
+      "sourceSections": [
+        "book-ch03-architecture-improvements",
+        "book-ch03-decoding",
+        "book-ch03-efficient-attention",
+        "book-ch03-flash-attention",
+        "book-ch03-kv-cache",
+        "book-ch03-local-attention",
+        "book-ch03-parallel-context",
+        "book-ch03-shared-kv",
+        "book-ch06-output-controls"
+      ],
+      "level": "B",
+      "kind": "pretrained-inspection",
+      "entrypoint": "examples/training/reference/src/atlas_reference/e3/cache.py",
+      "environment": "reference",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/foundations.mdx",
+        "block": 4
+      },
+      "region": null,
+      "models": [
+        {
+          "id": "EleutherAI/pythia-14m",
+          "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac"
+        }
+      ],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 600,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "correctness_checked": true,
+          "memory_checked": true
+        }
+      },
+      "verificationRecord": "examples/verification/records/cache-equivalence.json",
+      "troubleshooting": "See examples/training/reference/E3.md. Only declared CPU configurations are verified.",
+      "resultKey": "cache",
+      "resultFile": "src/data/foundation-results.json",
+      "resultArtifact": "examples/artifacts/e3-cache/results.json"
+    },
+    {
+      "id": "foundation-mechanics",
+      "title": "Transparent foundation calculations",
+      "concepts": [
+        "attention",
+        "decoding",
+        "positional-embeddings-and-rope",
+        "kv-cache"
+      ],
+      "sourceSections": [
+        "book-ch03-inputs-outputs",
+        "book-ch03-forward-pass",
+        "book-ch03-decoding",
+        "book-ch03-parallel-context",
+        "book-ch03-kv-cache",
+        "book-ch03-research-directions",
+        "book-ch03-lm-head",
+        "book-ch03-feedforward",
+        "book-ch03-attention-calculation",
+        "book-ch03-multi-head",
+        "book-ch03-local-attention",
+        "book-ch03-shared-kv",
+        "book-ch03-flash-attention",
+        "book-ch03-normalization",
+        "book-ch03-swiglu",
+        "book-ch03-packing"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/mechanics.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": null,
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Behavioral invariants checked in source and tests"
+      },
+      "verificationRecord": "examples/verification/records/foundation-mechanics.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-language-ai",
+      "title": "Language AI mechanism",
+      "concepts": [
+        "language-ai"
+      ],
+      "sourceSections": [
+        "book-ch01-applications",
+        "book-ch01-generative-ai-year",
+        "book-ch01-history",
+        "book-ch01-language-ai"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/language_ai.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/language-ai.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-language-ai.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-bag-of-words",
+      "title": "Bag-of-words mechanism",
+      "concepts": [
+        "bag-of-words"
+      ],
+      "sourceSections": [
+        "book-ch01-bag-of-words"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/bag_of_words.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/bag-of-words.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-bag-of-words.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-llm",
+      "title": "Large Language Model mechanism",
+      "concepts": [
+        "llm"
+      ],
+      "sourceSections": [
+        "book-ch01-llm-definition",
+        "book-ch03-lm-head"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/llm.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/llm.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-llm.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-representation-model",
+      "title": "Representation model mechanism",
+      "concepts": [
+        "representation-model"
+      ],
+      "sourceSections": [
+        "book-ch01-encoder-models"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/representation_model.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/representation-model.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-representation-model.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-generative-model",
+      "title": "Generative model mechanism",
+      "concepts": [
+        "generative-model"
+      ],
+      "sourceSections": [
+        "book-ch01-decoder-models",
+        "book-ch01-first-generation",
+        "book-ch02-run-llm",
+        "book-ch03-inputs-outputs",
+        "book-ch03-lm-head",
+        "book-ch06-generation-models",
+        "book-ch06-model-loading"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/generative_model.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/generative-model.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-generative-model.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-encoder-only",
+      "title": "Encoder-only model mechanism",
+      "concepts": [
+        "encoder-only"
+      ],
+      "sourceSections": [
+        "book-ch01-encoder-models"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/encoder_only.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/encoder-only.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-encoder-only.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-decoder-only",
+      "title": "Decoder-only model mechanism",
+      "concepts": [
+        "decoder-only"
+      ],
+      "sourceSections": [
+        "book-ch01-decoder-models",
+        "book-ch03-parallel-context"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/decoder_only.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/decoder-only.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-decoder-only.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-pretraining",
+      "title": "Pretraining mechanism",
+      "concepts": [
+        "pretraining"
+      ],
+      "sourceSections": [
+        "book-ch01-training-paradigm"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/pretraining.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/pretraining.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-pretraining.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-responsible-use",
+      "title": "Responsible use mechanism",
+      "concepts": [
+        "responsible-use"
+      ],
+      "sourceSections": [
+        "book-ch01-responsible-use"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/responsible_use.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/responsible-use.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-responsible-use.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-model-access",
+      "title": "Model access: local and hosted mechanism",
+      "concepts": [
+        "model-access"
+      ],
+      "sourceSections": [
+        "book-ch01-frameworks",
+        "book-ch01-interfaces",
+        "book-ch01-limited-resources",
+        "book-ch01-open-models",
+        "book-ch01-proprietary"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/model_access.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/model-access.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-model-access.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-sequence-to-sequence",
+      "title": "Sequence-to-sequence models mechanism",
+      "concepts": [
+        "sequence-to-sequence"
+      ],
+      "sourceSections": [
+        "book-ch01-recurrent-context",
+        "book-ch01-sequence-attention"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/sequence_to_sequence.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/sequence-to-sequence.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-sequence-to-sequence.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-token",
+      "title": "Token mechanism",
+      "concepts": [
+        "token"
+      ],
+      "sourceSections": [
+        "book-ch02-tokenization"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/token.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/token.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-token.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-vocabulary",
+      "title": "Vocabulary mechanism",
+      "concepts": [
+        "vocabulary"
+      ],
+      "sourceSections": [
+        "book-ch02-embedding-table",
+        "book-ch02-prepare-inputs",
+        "book-ch02-special-tokens",
+        "book-ch02-tokenizer-properties"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/vocabulary.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/vocabulary.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-vocabulary.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-word-and-subword-tokens",
+      "title": "Word and subword tokens mechanism",
+      "concepts": [
+        "word-and-subword-tokens"
+      ],
+      "sourceSections": [
+        "book-ch02-token-units"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/word_and_subword_tokens.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/word-and-subword-tokens.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-word-and-subword-tokens.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-token-embedding",
+      "title": "Token embedding mechanism",
+      "concepts": [
+        "token-embedding"
+      ],
+      "sourceSections": [
+        "book-ch01-embedding-types",
+        "book-ch02-embedding-table",
+        "book-ch02-token-embeddings",
+        "book-ch03-forward-pass"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/token_embedding.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/token-embedding.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-token-embedding.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-contextualized-embeddings",
+      "title": "Contextualized embeddings mechanism",
+      "concepts": [
+        "contextualized-embeddings"
+      ],
+      "sourceSections": [
+        "book-ch02-contextual-embeddings"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/contextualized_embeddings.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/contextualized-embeddings.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-contextualized-embeddings.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-text-embedding",
+      "title": "Text embedding mechanism",
+      "concepts": [
+        "text-embedding"
+      ],
+      "sourceSections": [
+        "book-ch01-dense-vectors",
+        "book-ch01-embedding-types",
+        "book-ch02-text-embeddings",
+        "book-ch10-embedding-models"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/text_embedding.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/text-embedding.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-text-embedding.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-word2vec",
+      "title": "Word2vec and static word vectors mechanism",
+      "concepts": [
+        "word2vec"
+      ],
+      "sourceSections": [
+        "book-ch01-dense-vectors",
+        "book-ch02-negative-sampling",
+        "book-ch02-pretrained-word-vectors",
+        "book-ch02-word-embeddings",
+        "book-ch02-word2vec-training"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/word2vec.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/word2vec.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-word2vec.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-contrastive-training",
+      "title": "Contrastive training mechanism",
+      "concepts": [
+        "contrastive-training"
+      ],
+      "sourceSections": [
+        "book-ch02-negative-sampling",
+        "book-ch02-word2vec-training"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/contrastive_training.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/contrastive-training.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-contrastive-training.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-recommendation-embeddings",
+      "title": "Recommendation embeddings mechanism",
+      "concepts": [
+        "recommendation-embeddings"
+      ],
+      "sourceSections": [
+        "book-ch02-recommendations",
+        "book-ch02-song-recommendations",
+        "book-ch02-song-training"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/recommendation_embeddings.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/recommendation-embeddings.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-recommendation-embeddings.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-transformer",
+      "title": "Transformer mechanism",
+      "concepts": [
+        "transformer"
+      ],
+      "sourceSections": [
+        "book-ch01-transformer-history",
+        "book-ch03-forward-pass",
+        "book-ch03-research-directions",
+        "book-ch03-transformer-overview"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/transformer.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/transformer.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-transformer.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-attention",
+      "title": "Attention mechanism",
+      "concepts": [
+        "attention"
+      ],
+      "sourceSections": [
+        "book-ch03-attention-calculation",
+        "book-ch03-block",
+        "book-ch03-multi-head"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/attention.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/attention.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-attention.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-self-attention",
+      "title": "Self-attention mechanism",
+      "concepts": [
+        "self-attention"
+      ],
+      "sourceSections": [
+        "book-ch03-attention-calculation",
+        "book-ch03-block"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/self_attention.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/self-attention.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-self-attention.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-query-key-value",
+      "title": "Queries, keys, and values mechanism",
+      "concepts": [
+        "query-key-value"
+      ],
+      "sourceSections": [
+        "book-ch03-attention-calculation",
+        "book-ch03-block"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/query_key_value.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/query-key-value.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-query-key-value.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-cross-attention",
+      "title": "Cross-attention mechanism",
+      "concepts": [
+        "cross-attention"
+      ],
+      "sourceSections": [
+        "book-ch01-cross-attention"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/cross_attention.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/cross-attention.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-cross-attention.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-transformer-block",
+      "title": "Transformer block mechanism",
+      "concepts": [
+        "transformer-block"
+      ],
+      "sourceSections": [
+        "book-ch03-block",
+        "book-ch03-feedforward",
+        "book-ch03-modern-block",
+        "book-ch03-normalization",
+        "book-ch03-swiglu"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/transformer_block.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/transformer-block.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-transformer-block.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-positional-embeddings-and-rope",
+      "title": "Positional embeddings and RoPE mechanism",
+      "concepts": [
+        "positional-embeddings-and-rope"
+      ],
+      "sourceSections": [
+        "book-ch03-rope"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/positional_embeddings_and_rope.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/positional-embeddings-and-rope.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-positional-embeddings-and-rope.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-context-size",
+      "title": "Context size mechanism",
+      "concepts": [
+        "context-size"
+      ],
+      "sourceSections": [
+        "book-ch03-parallel-context"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/context_size.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/context-size.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-context-size.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-sequence-packing",
+      "title": "Sequence packing mechanism",
+      "concepts": [
+        "sequence-packing"
+      ],
+      "sourceSections": [
+        "book-ch03-packing"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/sequence_packing.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/sequence-packing.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-sequence-packing.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-efficient-attention",
+      "title": "Efficient attention mechanism",
+      "concepts": [
+        "efficient-attention"
+      ],
+      "sourceSections": [
+        "book-ch03-architecture-improvements",
+        "book-ch03-efficient-attention",
+        "book-ch03-flash-attention",
+        "book-ch03-local-attention",
+        "book-ch03-shared-kv"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/efficient_attention.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/efficient-attention.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-efficient-attention.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-decoding",
+      "title": "Decoding and sampling mechanism",
+      "concepts": [
+        "decoding"
+      ],
+      "sourceSections": [
+        "book-ch03-decoding",
+        "book-ch06-output-controls"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/decoding.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/decoding.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-decoding.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "foundation-kv-cache",
+      "title": "KV cache mechanism",
+      "concepts": [
+        "kv-cache"
+      ],
+      "sourceSections": [
+        "book-ch03-kv-cache"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e3/lesson_snippets/kv_cache.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/kv-cache.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 11,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exit-success",
+        "origin": "Mechanism assertions plus behavioral tests; no trained-model claim"
+      },
+      "verificationRecord": "examples/verification/records/foundation-kv-cache.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
     }
   ]
 }

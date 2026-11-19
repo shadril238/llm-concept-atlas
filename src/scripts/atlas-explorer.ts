@@ -313,6 +313,13 @@ async function startAtlas(root: HTMLElement) {
     link.href = `${base}${node.href.replace(/^\/+/, '')}`;
     link.textContent = node.kind === 'concept' ? node.lessonStatus === 'full' ? 'Read lesson ↗' : 'Read introductory note ↗' : 'Open overview ↗';
     card.append(kicker, heading, summary, link);
+    if (node.labHref) {
+      const lab = document.createElement('a'); lab.href = `${base}${node.labHref.replace(/^\/+/, '')}`; lab.textContent = 'Run connected foundation labs ↗'; card.append(lab);
+    }
+    for (const prerequisite of node.prerequisites) {
+      const reason = node.relationshipReasons?.[prerequisite];
+      if(reason) { const text=document.createElement('p');text.className='quiet-note';text.textContent=reason;card.append(text); }
+    }
     const children = graph.nodes.filter((item) => item.parent === node.id).map((item) => item.id);
     const next = edgeRecords.filter((edge) => edge.type === 'prerequisite' && edge.source === node.id).map((edge) => edge.target);
     const related = edgeRecords.filter((edge) => edge.type === 'related' && (edge.source === node.id || edge.target === node.id))
@@ -371,7 +378,7 @@ async function startAtlas(root: HTMLElement) {
       return;
     }
     const matches = graph.nodes.filter(matchesFilters).filter((node) =>
-      `${node.title} ${node.summary} ${(node.tags ?? []).join(' ')} ${node.chapter ? `chapter ${node.chapter}` : ''}`.toLocaleLowerCase().includes(query),
+      `${node.title} ${node.summary} ${(node.tags ?? []).join(' ')} ${(node.aliases ?? []).join(' ')} ${node.chapter ? `chapter ${node.chapter}` : ''}`.toLocaleLowerCase().includes(query),
     ).slice(0, 8);
     if (!matches.length) {
       const item = document.createElement('li');

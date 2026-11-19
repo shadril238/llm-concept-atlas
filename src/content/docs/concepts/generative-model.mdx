@@ -1,81 +1,101 @@
 ---
 title: Generative Model
-description: A model that produces new content from a prompt or context.
+description: "A generative language model assigns probabilities to token sequences and can produce a continuation by repeatedly selecting the next token. It produces new text rather than simply returning an existing document."
 kind: concept
 conceptId: generative-model
 chapter: 1
 part: foundations
-summary: A generative language model produces new text by predicting a sequence of output tokens.
+summary: "A generative language model assigns probabilities to token sequences and can produce a continuation by repeatedly selecting the next token. It produces new text rather than simply returning an existing document."
 parent: llm
 prerequisites: [llm]
 related: [decoder-only, decoding, representation-model]
 level: beginner
 tags: [models, generation]
 lessonStatus: full
-lastReviewed: 2026-11-12
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e3-foundations-author-review-2026-11-20
+exampleIds: ["foundation-generative-model", "first-generation"]
+bookSections: ["book-ch01-decoder-models", "book-ch01-first-generation", "book-ch02-run-llm", "book-ch03-inputs-outputs", "book-ch06-generation-models", "book-ch06-model-loading", "book-ch03-lm-head"]
+aliases: ["autoregressive generation", "text generation"]
+learningObjectives: ["Explain the input/output contract of Generative model.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Why must you slice generated IDs rather than remove the prompt by string replacement?"]
+labHref: /labs/foundations/
+relationshipReasons: {"llm": "Model inputs, outputs, and resources must be understood before choosing access."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import FoundationEvidence from '../../../components/FoundationEvidence.astro';
+import { AttentionStepper, PositionExplorer, DecodingExplorer, CacheExplorer, PlaylistExplorer, ArchitectureMap, RepresentationExplorer } from '../../../components/simulations/FoundationLabs';
 
 <ConceptPrimer id="generative-model" />
 
 ## Definition and intuition
 
-A **generative language model** produces new text conditioned on a prompt. It estimates which token can follow the current context, selects one, appends it, and repeats. The resulting sentence is built one step at a time.
+A generative language model assigns probabilities to token sequences and can produce a continuation by repeatedly selecting the next token. It produces new text rather than simply returning an existing document.
 
-This is why a prompt matters: it changes the context in every prediction. A model can produce a helpful summary, a plausible mistake, or an unsupported claim from the same style of computation.
+You need a draft explanation rather than a fixed category. The model must produce a variable-length sequence, and the surrounding application must decide when to stop and how to check its claims.
 
-## Before you start
-
-Read [llm](/llm-concept-atlas/concepts/llm/) first; return here when the key terms feel familiar.
+<ReferenceBrief objectives={["Explain the input/output contract of Generative model.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Why must you slice generated IDs rather than remove the prompt by string replacement?"]} prerequisites="Use the linked prerequisites below. Distinguish an input, a learned parameter, and a result before following the trace." scope="An explicit teaching calculation plus a linked verified CPU workflow. Illustrative values and recorded model outputs are labeled separately." />
 
 ## How it works
 
-For an autoregressive generator, the probability of a sequence factors into next-token probabilities: `P(t1, t2, …, tn) = P(t1) × P(t2|t1) × … × P(tn|t1…t(n−1))`. Each term depends on the preceding tokens. The model returns a score for each token in its vocabulary; a decoding strategy chooses one. A stop token or length limit ends generation.
+The tokenizer converts a prompt to IDs. The neural network processes the available prefix and the LM head produces one logit per vocabulary item. A decoding policy chooses a token; the loop appends it and repeats until a stopping condition.
 
-A transformer decoder applies causal masking so a position cannot look at future positions during prediction. During inference, a KV cache can reuse earlier attention keys and values. Neither mechanism supplies fresh facts by itself; retrieval can add external context.
+A base model is trained primarily to continue text under its pretraining objective. An instruction-tuned model has undergone additional adaptation to prompts and responses. A chat template is part of a particular instruction model’s contract; attaching arbitrary role text to a base model does not transform it into an instruction-tuned assistant.
+
+Generation controls belong to the sampling procedure: max_new_tokens bounds the continuation, greedy selection chooses a maximum, and seeded sampling introduces controlled randomness. Determinism on one software/device configuration is a reproducibility observation, not a universal cross-platform promise.
+
+### The important distinction
+
+Text can be grammatical but false or repetitive.
 
 ## Worked example
 
-Given “Complete the sentence: The cup is on the”, a model may rank `table` above `moon`. If sampling selects `table`, the next step conditions on the longer prompt ending in `table`. Repetition can continue until an end marker appears.
+L01 runs the actual prompt “The sun rises in the” through a pinned small decoder. The recorded continuation repeats “sun.” We display that failure rather than substituting a polished example. The prompt IDs remain at the beginning of generated output; slicing at the prompt length isolates only newly generated IDs.
 
-<LessonFlow steps={['Prompt tokens', 'Next-token scores', 'Selection rule', 'Append chosen token', 'Repeat']} caption="A simplified flow for generative model. Follow each labeled step from left to right." />
+## Try the experiment
+
+<ArchitectureMap client:visible />
+
+
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+Run the small mechanism from the repository root with `python3 scripts/run-examples.py --id foundation-generative-model`. Its values are illustrative; it isolates the stated operation rather than pretending to load a trained model.
+
+{/* example:foundation-generative-model:start */}
 
 ```python
-choices = {'table': 0.7, 'floor': 0.2, 'moon': 0.1}
-context = 'The cup is on the'
-next_token = max(choices, key=choices.get)
-print(context + ' ' + next_token)
+prompt_ids = [10, 20, 30]
+generated_ids = [10, 20, 30, 40, 50]
+assert generated_ids[: len(prompt_ids)] == prompt_ids
+print("new IDs:", generated_ids[len(prompt_ids) :])
 ```
 
-**Expected behavior:** `The cup is on the table`
+{/* example:foundation-generative-model:end */}
 
-This toy chooses the highest-scoring token (greedy decoding). A real model computes scores from context and can sample instead. The table of scores is invented to isolate the selection step.
+<FoundationEvidence id="first-generation" />
+
+The [foundation lab guide](/llm-concept-atlas/labs/foundations/) supplies setup, pinned artifacts, full source, recorded outputs, and the practical workflow. The mechanism snippet and the model lab serve different learning purposes: use the former to check a calculation and the latter to inspect actual library/model behavior.
 
 ## When to use it
 
-- Drafting, summarization, translation, and conversational answers need new text.
-- Use classification or retrieval instead when the required output is a fixed label or a document list.
+Use generation for drafting, transformation, or structured outputs whose correctness you can evaluate. If the user needs an exact known source, retrieval may be the primary operation. For constrained labels, compare with a classifier and validate the returned format.
 
 ## Limits and common mistakes
 
-- A coherent continuation can still be factually wrong.
-- The model’s learned parameters do not update automatically when a document changes; external context may be needed.
+Text can be grammatical but false or repetitive. A short token limit can cut a word or thought. EOS is a learned special token, while a max-token cutoff is a software limit. Treat quoted documents as data; do not allow their embedded instructions to override the application’s task.
 
 ## Check your understanding
 
-<details><summary>Why does the next prediction change after one token is chosen?</summary><p>The chosen token becomes part of the context for the next prediction.</p></details>
+<details><summary>Why must you slice generated IDs rather than remove the prompt by string replacement?</summary><p>Token boundaries and normalization can make string matching unreliable. The generated tensor includes a known prefix length; slicing by that length identifies the actual continuation without deleting repeated words that happen to match the prompt.</p></details>
 
-<details><summary>What does greedy decoding choose?</summary><p>The highest-scoring next token at each step.</p></details>
+<details><summary>Your generated text stops after exactly 16 new IDs without EOS. What should you inspect?</summary><p>Inspect max_new_tokens and the generated-ID count. A software cutoff can stop a continuation mid-sentence; it does not establish that the model judged the response complete.</p></details>
 
 ## Connections and sources
 
-This lesson follows the topic sequence in chapter 1 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter01) and [this primary technical reference](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter01).
+Book source locations: Chapter 1, printed pp. 20–23; Chapter 1, printed pp. 32–34; Chapter 2, printed pp. 39–43; Chapter 3, printed pp. 74–76; Chapter 6, printed pp. 167–173; Chapter 6, printed pp. 168–170; Chapter 3, printed pp. 78–80. Precise section IDs and mappings are recorded in the [coverage inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The small CPU model, original playlist data, and transparent numerical traces are atlas teaching choices. Read the [authors' official chapter 1 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter01) and the [E3 execution/source guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/E3.md) for the original workflow and supported implementation details.
 
 <ConceptConnections id="generative-model" />

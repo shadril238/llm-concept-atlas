@@ -1,85 +1,108 @@
 ---
 title: Representation Model
-description: A language model that turns input into useful features or vectors.
+description: "A representation model encodes an input into numeric features intended for another task, such as comparison, classification, or clustering. Its output representation and training objective determine which comparisons are meaningful."
 kind: concept
 conceptId: representation-model
 chapter: 1
 part: foundations
-summary: A representation model encodes language into features useful for tasks such as classification and search.
+summary: "A representation model encodes an input into numeric features intended for another task, such as comparison, classification, or clustering. Its output representation and training objective determine which comparisons are meaningful."
 parent: llm
 prerequisites: [llm]
 related: [encoder-only, text-embedding, generative-model]
 level: beginner
 tags: [models, embeddings]
 lessonStatus: full
-lastReviewed: 2026-11-12
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e3-foundations-author-review-2026-11-20
+exampleIds: ["foundation-representation-model", "representation-inspection"]
+bookSections: ["book-ch01-encoder-models"]
+aliases: ["encoder representation"]
+learningObjectives: ["Explain the input/output contract of Representation model.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Why is a token-level BERT state not automatically interchangeable with a sentence embedding?"]
+labHref: /labs/foundations/
+relationshipReasons: {"llm": "Model inputs, outputs, and resources must be understood before choosing access."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import FoundationEvidence from '../../../components/FoundationEvidence.astro';
+import { AttentionStepper, PositionExplorer, DecodingExplorer, CacheExplorer, PlaylistExplorer, ArchitectureMap, RepresentationExplorer } from '../../../components/simulations/FoundationLabs';
 
 <ConceptPrimer id="representation-model" />
 
 ## Definition and intuition
 
-A **representation model** turns input into numbers that preserve useful information about it. A vector can be compared with other vectors, or sent to a classifier. Its primary product is a representation, rather than a paragraph of generated text.
+A representation model encodes an input into numeric features intended for another task, such as comparison, classification, or clustering. Its output representation and training objective determine which comparisons are meaningful.
 
-Imagine shelving books by subject. The model is learning a compact coordinate system so related items are easier to find. Different training objectives produce different notions of “related.”
+You want to find support messages similar in intent even when they use different words. A representation can make that comparison efficient, but only if the space was trained or validated for your notion of similarity.
 
-## Before you start
-
-Read [llm](/llm-concept-atlas/concepts/llm/) first; return here when the key terms feel familiar.
+<ReferenceBrief objectives={["Explain the input/output contract of Representation model.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Why is a token-level BERT state not automatically interchangeable with a sentence embedding?"]} prerequisites="Use the linked prerequisites below. Distinguish an input, a learned parameter, and a result before following the trace." scope="An explicit teaching calculation plus a linked verified CPU workflow. Illustrative values and recorded model outputs are labeled separately." />
 
 ## How it works
 
-1. Tokenize the input and look up vectors.
-2. Let encoder layers incorporate surrounding context into each position.
-3. Combine token outputs or use a trained pooled output to represent the whole input.
-4. Compare vectors or train a task head, such as a sentiment classifier.
+An encoder reads token IDs and produces a vector at each position. A pooling rule or task head may turn these into one vector per sentence or one label distribution. The shapes differ: [batch, tokens, hidden] is not the same output contract as [batch, embedding_width].
 
-A generic encoder output is not automatically a good sentence embedding. Pooling choice and contrastive training matter. The book distinguishes representation models from generation models because they answer different product questions: “what is this?” versus “what should come next?”
+Static word vectors give a word one context-independent row. Contextual token states depend on surrounding input. A sentence embedding pools or otherwise aggregates information and is often trained with sentence-level pairs. Averaging arbitrary token states is a computation, not proof of strong semantic retrieval.
+
+Cosine similarity compares directions after accounting for vector norms. A score is relative to a representation space and task; it is not automatically a calibrated probability of relevance. Compare candidates encoded with compatible model revisions and preprocessing.
+
+### The important distinction
+
+Embedding spaces from different models cannot generally be mixed coordinate by coordinate.
+
+### Word, sentence, document, and image spaces
+
+Word and token representations describe smaller units; sentence/document representations require an aggregation and task objective. An image encoder can also output a vector. Those coordinate spaces are not interchangeable merely because each output is called an embedding. Cross-modal retrieval requires a deliberately aligned image/text space and evaluation; a text-only encoder does not acquire image understanding by accepting an array of the same length.
 
 ## Worked example
 
-“The movie was charming” and “I enjoyed the film” use different words but express similar sentiment. A well-trained text embedding model may place them near each other. A sentiment head could classify both as positive, but vector proximity alone does not provide a calibrated label.
+The representations lab encodes two uses of “bank”: a loan context and a flooded river context. The initial bank lookup row is identical in both; the later hidden states differ. A separate sentence-embedding model compares the complete sentences with a paraphrase about a lender.
 
-<LessonFlow steps={['Input sentence', 'Contextual token vectors', 'Pool or select vector', 'Compare or classify']} caption="A simplified flow for representation model. Follow each labeled step from left to right." />
+## Try the experiment
+
+<ArchitectureMap client:visible />
+
+
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+Run the small mechanism from the repository root with `python3 scripts/run-examples.py --id foundation-representation-model`. Its values are illustrative; it isolates the stated operation rather than pretending to load a trained model.
+
+{/* example:foundation-representation-model:start */}
 
 ```python
 from math import sqrt
-vectors = {'charming film': (0.9, 0.2), 'enjoyed movie': (0.8, 0.3), 'late bus': (-0.4, 0.7)}
-a, b = vectors['charming film'], vectors['enjoyed movie']
-cosine = sum(x*y for x,y in zip(a,b)) / (sqrt(sum(x*x for x in a))*sqrt(sum(y*y for y in b)))
-print(round(cosine, 3))
+
+a, b = [1.0, 2.0], [2.0, 4.0]
+cosine = sum(x * y for x, y in zip(a, b)) / sqrt(
+    sum(x * x for x in a) * sum(x * x for x in b)
+)
+print("same direction:", round(cosine, 3))
 ```
 
-**Expected behavior:** A cosine score near 1 for the two invented, similarly directed vectors.
+{/* example:foundation-representation-model:end */}
 
-The vectors are hand-chosen. The code shows the comparison operation; a real encoder learns the coordinates from training data. See the [embedding lab](/llm-concept-atlas/concepts/text-embedding/) for an interactive version.
+<FoundationEvidence id="representation-inspection" />
+
+The [foundation lab guide](/llm-concept-atlas/labs/foundations/) supplies setup, pinned artifacts, full source, recorded outputs, and the practical workflow. The mechanism snippet and the model lab serve different learning purposes: use the former to check a calculation and the latter to inspect actual library/model behavior.
 
 ## When to use it
 
-- Use representations for semantic search, clustering, deduplication, and classification.
-- Use a generator when the required output is new text; pair the two in RAG when retrieval must inform generation.
+Use representations for efficient repeated comparisons or as inputs to a simple supervised head. Keep a lexical baseline for exact names and codes. Evaluate positives that use different wording and negatives that share many words but mean something different.
 
 ## Limits and common mistakes
 
-- A vector is a task-dependent summary, not a complete record of meaning.
-- Similarity does not prove two statements are equivalent or true.
+Embedding spaces from different models cannot generally be mixed coordinate by coordinate. A two-dimensional projection can distort distances. Domain change, truncation, and pooling choices can change rankings even when vector dimensions stay the same.
 
 ## Check your understanding
 
-<details><summary>Does any encoder vector work well for sentence search?</summary><p>No. Pooling and training objective strongly affect sentence-level similarity.</p></details>
+<details><summary>Why is a token-level BERT state not automatically interchangeable with a sentence embedding?</summary><p>It represents a particular position under a particular objective. Sentence-level comparison needs a defined aggregation and suitable training/evaluation. Matching the number of coordinates does not match the meaning of those coordinates.</p></details>
 
-<details><summary>What is the output of a representation model?</summary><p>Numerical features or vectors that another operation can use.</p></details>
+<details><summary>A query was encoded with model A and documents with model B of the same width. Can cosine rankings be trusted?</summary><p>No. Equal width does not align spaces. Re-encode with a compatible model/pooling/revision or use an explicitly trained alignment and evaluate it.</p></details>
 
 ## Connections and sources
 
-This lesson follows the topic sequence in chapter 1 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter01) and [this primary technical reference](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter01).
+Book source locations: Chapter 1, printed pp. 18–20. Precise section IDs and mappings are recorded in the [coverage inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The small CPU model, original playlist data, and transparent numerical traces are atlas teaching choices. Read the [authors' official chapter 1 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter01) and the [E3 execution/source guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/E3.md) for the original workflow and supported implementation details.
 
 <ConceptConnections id="representation-model" />

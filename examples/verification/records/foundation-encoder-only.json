@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-encoder-only",
+  "status": "passed",
+  "date": "2026-11-19T17:56:55.686657+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/encoder_only.py"
+  ],
+  "sourceSha256": "9e5e8b770f4b5be040034e3bd36c857679149f909d84c63df22e3ed07980f13d",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "709643c49592483a5222aa32fff420ec8f086ad2f9284b99865634d8d5841976",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "encoder: [[1, 1, 1], [1, 1, 1], [1, 1, 1]]\ncausal: [[1, 0, 0], [1, 1, 0], [1, 1, 1]]\n",
+  "stderr": "",
+  "error": null
+}

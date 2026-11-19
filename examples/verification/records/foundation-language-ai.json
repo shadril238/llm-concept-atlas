@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-language-ai",
+  "status": "passed",
+  "date": "2026-11-19T17:56:55.287896+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/language_ai.py"
+  ],
+  "sourceSha256": "db2e5de5f0122ad9946da3d89d59c3e6a5250817678522a50647ddd6ccc44d0f",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "dfbf9f05d0c71fd08299f725d0e866760b8a92bbb9f02a314e3187fda4bf1c23",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "route -> fixed label\nsearch -> existing document\ndraft -> new text\n",
+  "stderr": "",
+  "error": null
+}

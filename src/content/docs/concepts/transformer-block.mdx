@@ -1,92 +1,111 @@
 ---
 title: Transformer block
-description: A transformer block combines attention with a position-wise feed-forward transformation and residual paths.
+description: "A transformer block combines attention, a position-wise feedforward network, residual connections, and normalization. The arrangement and activation vary by architecture, so the exact forward equations should be stated."
 kind: concept
 conceptId: transformer-block
 chapter: 3
 part: foundations
-summary: A transformer block combines attention with a position-wise feed-forward transformation and residual paths.
+summary: "A transformer block combines attention, a position-wise feedforward network, residual connections, and normalization. The arrangement and activation vary by architecture, so the exact forward equations should be stated."
 parent: chapter-03
 prerequisites: [attention]
 related: [query-key-value, efficient-attention]
 level: beginner
 tags: [foundations, chapter-03]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e3-foundations-author-review-2026-11-20
+exampleIds: ["foundation-transformer-block", "transparent-transformer"]
+bookSections: ["book-ch03-block", "book-ch03-modern-block", "book-ch03-feedforward", "book-ch03-normalization", "book-ch03-swiglu"]
+aliases: ["LayerNorm", "RMSNorm", "residual", "SwiGLU", "MLP", "pre-norm", "feedforward"]
+learningObjectives: ["Explain the input/output contract of Transformer block.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Why must the attention output be projected back to d_model before residual addition?"]
+labHref: /labs/foundations/
+relationshipReasons: {"attention": "Scoring, masking, and value mixing are the core operations extended here."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import FoundationEvidence from '../../../components/FoundationEvidence.astro';
+import { AttentionStepper, PositionExplorer, DecodingExplorer, CacheExplorer, PlaylistExplorer, ArchitectureMap, RepresentationExplorer } from '../../../components/simulations/FoundationLabs';
 
 <ConceptPrimer id="transformer-block" />
 
 ## Definition and intuition
 
-**Transformer block**: A transformer block combines attention with a position-wise feed-forward transformation and residual paths.
+A transformer block combines attention, a position-wise feedforward network, residual connections, and normalization. The arrangement and activation vary by architecture, so the exact forward equations should be stated.
 
-Chapter 3 traces a transformer forward pass. Distinguish the computation performed for a fixed input from the repeated loop used to generate new tokens.
+A diagram labels a box “transformer” without showing which operations mix positions and which only transform coordinates at one position. That distinction is essential for debugging causality and understanding model variants.
 
-## Before you start
+<ReferenceBrief objectives={["Explain the input/output contract of Transformer block.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Why must the attention output be projected back to d_model before residual addition?"]} prerequisites="Use the linked prerequisites below. Distinguish an input, a learned parameter, and a result before following the trace." scope="An explicit teaching calculation plus a linked verified CPU workflow. Illustrative values and recorded model outputs are labeled separately." />
 
-Read [Attention](/llm-concept-atlas/concepts/attention/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **transformer block** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+In a simplified pre-normalized block, H = X + Attention(Norm(X)); Y = H + MLP(Norm(H)). Attention mixes permitted positions. The MLP applies shared parameters independently at each position. Residual additions require matching shapes.
 
-1. **Prepare:** Normalize and project the incoming hidden states
-2. **Transform:** Mix information across token positions using attention
-3. **Inspect:** Apply a feed-forward transformation and add residual information.
+A feedforward expansion can map d_model to a wider hidden width, apply a nonlinearity, then project back. The transparent random-weight lab uses a ReLU MLP. The book also discusses SwiGLU: SiLU(XW_gate) multiplied elementwise by XW_up, followed by W_down. This gating changes the computation and parameter shapes.
+
+Normalization controls activation scale; it does not normalize a probability distribution. LayerNorm subtracts a coordinate mean and divides by a standard deviation. RMSNorm divides by root mean square without the same centering step. Learned affine parameters are additional model parameters; the arithmetic trace fixes them to identity.
 
 ### The important distinction
 
-In a typical block, attention mixes across positions while the feed-forward network transforms each position independently. Residual additions let later layers refine rather than replace the incoming representation. Layer normalization stabilizes the scale of these transformations; exact ordering varies among model architectures.
+A position-wise MLP does not itself read another token, though its input may already contain contextual information.
 
 ## Worked example
 
-For “The cat slept”, a middle block can let “slept” collect information about “cat”, then transform its own hidden representation. Repeating blocks builds progressively contextual features. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+For x=[1,2,3], LayerNorm without learned affine terms produces roughly [-1.225,0,1.225], while RMSNorm produces about [0.463,0.926,1.389]. Adding a zero residual branch leaves x unchanged. The two normalization results differ because only one subtracts the mean.
 
-<LessonFlow steps={["Normalize and project the incoming hidden states", "Mix information across token positions using attention", "Apply a feed-forward transformation and add residual information."]} caption="A teaching diagram for Transformer block. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
+
+<AttentionStepper client:visible />
+
+### Normalization and residuals
+
+Normalization statistics are computed over the feature coordinates described by the layer, not over future labels. A residual connection provides an additive path around a transformation; its output is still processed by subsequent operations. In the common pre-norm arrangement, normalization precedes each branch. A model using post-norm instead places normalization after the addition, so the equations and gradients differ.
+
+### Feedforward activations
+
+ReLU returns max(0, z). SiLU returns z·sigmoid(z), and SwiGLU uses a SiLU-activated gate multiplied by a second projected branch. For gate input 0 the gate is zero; for a large positive input it approaches a roughly linear response. Do not substitute ReLU in a code example and claim it is a SwiGLU implementation.
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+Run the small mechanism from the repository root with `python3 scripts/run-examples.py --id foundation-transformer-block`. Its values are illustrative; it isolates the stated operation rather than pretending to load a trained model.
+
+{/* example:foundation-transformer-block:start */}
 
 ```python
-from math import exp
-scores = [1.2, 0.4, -0.3]
-weights = [exp(x) for x in scores]
-weights = [x / sum(weights) for x in weights]
-values = [2.0, 0.0, 1.0]
-print(round(sum(w*v for w, v in zip(weights, values)), 3))
+from math import sqrt
+
+x = [1.0, 2.0, 3.0]
+mean = sum(x) / len(x)
+ln = [(v - mean) / sqrt(sum((z - mean) ** 2 for z in x) / len(x) + 1e-5) for v in x]
+rms = [v / sqrt(sum(z * z for z in x) / len(x) + 1e-5) for v in x]
+print("LayerNorm:", [round(v, 3) for v in ln])
+print("RMSNorm:", [round(v, 3) for v in rms])
 ```
 
-**Expected output:**
+{/* example:foundation-transformer-block:end */}
 
-```text
-1.329
-```
+<FoundationEvidence id="transparent-transformer" />
 
-**What the code shows:** Exponentiating scores and dividing by their total forms softmax weights. The final line combines the values using those weights, which is the central attention operation. The [official chapter 3 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter03) develops the corresponding model-based implementation.
+The [foundation lab guide](/llm-concept-atlas/labs/foundations/) supplies setup, pinned artifacts, full source, recorded outputs, and the practical workflow. The mechanism snippet and the model lab serve different learning purposes: use the former to check a calculation and the latter to inspect actual library/model behavior.
 
 ## When to use it
 
-Use the block as the unit for tracing model architecture, activations, and adaptation choices. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use an explicit block trace when implementing or inspecting a model. Record pre- versus post-normalization, activation, widths, head counts, and positional scheme. A change to one block component needs task and numerical evaluation, not only a more modern label.
 
 ## Limits and common mistakes
 
-- The toy sequence hides multi-head attention, normalization details, and architecture variants.
-- **Failure to look for:** Confusing one attention map with the entire block misses the feed-forward and residual computations.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+A position-wise MLP does not itself read another token, though its input may already contain contextual information. A residual path does not prevent all training problems. FlashAttention is an implementation strategy for attention and does not define the MLP or normalization order.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First normalize and project the incoming hidden states Then mix information across token positions using attention Finally apply a feed-forward transformation and add residual information.</p></details>
+<details><summary>Why must the attention output be projected back to d_model before residual addition?</summary><p>The branch and residual tensors must have compatible coordinates and shapes. Concatenated head outputs are commonly mapped through an output projection; adding mismatched feature widths is not the stated block equation.</p></details>
 
-<details><summary>What would make the result misleading?</summary><p>Confusing one attention map with the entire block misses the feed-forward and residual computations.</p></details>
+<details><summary>For a [3,4] state and an MLP expansion to width 8, what are the two projection shapes?</summary><p>Under row-vector notation, W1 is [4,8] and W2 is [8,4]. After the nonlinearity and second projection, [3,4] can be added to the residual.</p></details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 3 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 3 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter03). Continue through the linked prerequisites and nearby concepts below.
+Book source locations: Chapter 3, printed pp. 85–95; Chapter 3, printed pp. 101–102; Chapter 3, printed pp. 86–88. Precise section IDs and mappings are recorded in the [coverage inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The small CPU model, original playlist data, and transparent numerical traces are atlas teaching choices. Read the [authors' official chapter 3 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter03) and the [E3 execution/source guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/E3.md) for the original workflow and supported implementation details.
 
 <ConceptConnections id="transformer-block" />

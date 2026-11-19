@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-decoding",
+  "status": "passed",
+  "date": "2026-11-19T17:56:57.684584+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/decoding.py"
+  ],
+  "sourceSha256": "c5d4d19870efc79351e899c681048fe9c1724c848cad3155b23b068b9af4701d",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "510e9aa4f4950bc4ee5c8c6f9ded8312a659addf0e776c7dfa56be7fcadd439e",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "top-p .8: [0.731, 0.269, 0]\n",
+  "stderr": "",
+  "error": null
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-vocabulary",
+  "status": "passed",
+  "date": "2026-11-19T17:56:56.242243+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/vocabulary.py"
+  ],
+  "sourceSha256": "0ce3558f6f8ae483c51237cee505f101d63135d43b627380ec1d583b75fd812c",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "dece42815c1394ea606f35d6880664356ff432a9c927901915feaa4dbc7b6b38",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "table shape: (3, 2)\nselected rows: [[1.0, 0.0], [0.0, 1.0], [1.0, 0.0]]\n",
+  "stderr": "",
+  "error": null
+}

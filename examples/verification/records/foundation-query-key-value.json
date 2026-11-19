@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-query-key-value",
+  "status": "passed",
+  "date": "2026-11-19T17:56:57.159324+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/query_key_value.py"
+  ],
+  "sourceSha256": "0e0c741d77e58fa93a540aaf9a8542058012edc00fbb35b544234d7cd4f37219",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "5fa9cfbcc43f941f6d8063ef27b94f12330ab1dd82d78803d7b36a21ce2c4f1e",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "[6.698, 1.321]\n",
+  "stderr": "",
+  "error": null
+}

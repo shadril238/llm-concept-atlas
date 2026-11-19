@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-cross-attention",
+  "status": "passed",
+  "date": "2026-11-19T17:56:57.241141+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/cross_attention.py"
+  ],
+  "sourceSha256": "359e106884761abbb358fcf71a12bfc89e7f8a854ae6b74d31b33446b9f9f22e",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "73a0c8565c874d8d42465248beb57def4bbc6092c354c818d580ffbdde4be155",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "rectangular weights: [[0.4, 0.2, 0.4], [0.2, 0.4, 0.4]]\n",
+  "stderr": "",
+  "error": null
+}

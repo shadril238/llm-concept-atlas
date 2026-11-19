@@ -1,88 +1,103 @@
 ---
 title: Text Embedding
-description: A vector representing a sentence or document.
+description: "A text embedding represents a sentence or document as a fixed-width vector for a specified task. It usually combines token-level computation with pooling or a dedicated representation head and suitable training."
 kind: concept
 conceptId: text-embedding
 chapter: 2
 part: foundations
-summary: A text embedding represents an entire piece of text as a vector that can be compared with other vectors.
+summary: "A text embedding represents a sentence or document as a fixed-width vector for a specified task. It usually combines token-level computation with pooling or a dedicated representation head and suitable training."
 parent: chapter-02
 prerequisites: [token-embedding]
 related: [representation-model, word2vec, semantic-search]
 level: beginner
 tags: [embeddings, retrieval]
 lessonStatus: full
-lastReviewed: 2026-11-12
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e3-foundations-author-review-2026-11-20
+exampleIds: ["foundation-text-embedding", "representation-inspection"]
+bookSections: ["book-ch01-dense-vectors", "book-ch01-embedding-types", "book-ch02-text-embeddings", "book-ch10-embedding-models"]
+aliases: ["sentence embedding", "document vector", "mean pooling"]
+learningObjectives: ["Explain the input/output contract of Text embedding.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Why should padding be excluded from mean pooling even if its token ID is a special marker?"]
+labHref: /labs/foundations/
+relationshipReasons: {"token-embedding": "The learned lookup row is the starting state before context changes it."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { EmbeddingLab } from '../../../components/simulations/LearningLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import FoundationEvidence from '../../../components/FoundationEvidence.astro';
+import { AttentionStepper, PositionExplorer, DecodingExplorer, CacheExplorer, PlaylistExplorer, ArchitectureMap, RepresentationExplorer } from '../../../components/simulations/FoundationLabs';
 
 <ConceptPrimer id="text-embedding" />
 
 ## Definition and intuition
 
-A **text embedding** is a vector representing a whole phrase, sentence, passage, or document. It lets software compare texts numerically. A useful embedding model aims to place texts relevant to the same task near each other, even if they use different words.
+A text embedding represents a sentence or document as a fixed-width vector for a specified task. It usually combines token-level computation with pooling or a dedicated representation head and suitable training.
 
-Imagine placing short passages on a map where distance roughly reflects similarity. That map is learned and task-dependent; it is not a universal map of all meanings.
+A search application needs to compare millions of passages repeatedly. One vector per passage allows precomputation and efficient retrieval, but the representation must be useful for the queries and documents being compared.
 
-## Before you start
-
-Read [token embedding](/llm-concept-atlas/concepts/token-embedding/) first; return here when the key terms feel familiar.
+<ReferenceBrief objectives={["Explain the input/output contract of Text embedding.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Why should padding be excluded from mean pooling even if its token ID is a special marker?"]} prerequisites="Use the linked prerequisites below. Distinguish an input, a learned parameter, and a result before following the trace." scope="An explicit teaching calculation plus a linked verified CPU workflow. Illustrative values and recorded model outputs are labeled separately." />
 
 ## How it works
 
-An embedding model tokenizes text, computes contextual representations, then pools or otherwise selects information into one vector. Many sentence embedding models use training pairs so related texts receive higher similarity than unrelated ones. A common comparison is cosine similarity: `cos(a,b) = (a·b) / (||a|| ||b||)`, with `a·b` the dot product and `||a||` a vector length.
+An encoder produces [batch, T, d] token states. Masked mean pooling multiplies each state by the attention mask, sums over positions, and divides by the count of nonpadding positions. This yields [batch, d]. Padding must not contribute as if it were content.
 
-For search, embed documents in advance, embed the query at request time, and rank documents by similarity. Query and document representations may use different prompts or encoders. The embedding model and its version should remain consistent across indexing and querying.
+L2 normalization scales a nonzero vector to unit length. For normalized vectors, the dot product equals cosine similarity. This simplifies comparison, but does not calibrate the score as a probability of relevance or remove domain bias.
+
+Sentence-level training determines which pairs should be close. A word-level co-occurrence objective, a masked-token objective, and a sentence-pair objective optimize different signals. A long document may exceed the encoder limit; chunking or aggregation needs an explicit policy and evaluation.
+
+### The important distinction
+
+A 2D plot can distort neighborhood relationships.
 
 ## Worked example
 
-A query “reduce energy use” may rank a passage “tips for using less electricity” above a passage about “energy drinks.” Keyword overlap alone can make that distinction harder. Similarity still needs evaluation against actual relevant results.
+Suppose content vectors are [1, 0] and [0, 1], while a padded position contains [9, 9]. A mask [1, 1, 0] gives mean [0.5, 0.5]. Averaging all three positions would instead distort the result toward padding. L03 runs real mask-aware pooling and prints a sentence cosine matrix.
 
-<LessonFlow steps={['Text', 'Contextual encoder', 'One vector per text', 'Similarity ranking']} caption="A simplified flow for text embedding. Follow each labeled step from left to right." />
+## Try the experiment
 
-## Try the vector lab
+<RepresentationExplorer client:visible />
 
-<EmbeddingLab client:visible />
+
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+Run the small mechanism from the repository root with `python3 scripts/run-examples.py --id foundation-text-embedding`. Its values are illustrative; it isolates the stated operation rather than pretending to load a trained model.
+
+{/* example:foundation-text-embedding:start */}
 
 ```python
-from math import sqrt
-vectors = {'query': (0.8, 0.5), 'electricity tip': (0.7, 0.6), 'energy drink': (-0.2, 0.9)}
-def cosine(a,b):
-    return sum(x*y for x,y in zip(a,b))/(sqrt(sum(x*x for x in a))*sqrt(sum(y*y for y in b)))
-for name, vector in vectors.items():
-    if name != 'query': print(name, round(cosine(vectors['query'],vector),2))
+states = [[1.0, 0.0], [0.0, 1.0], [9.0, 9.0]]
+mask = [1, 1, 0]
+pooled = [
+    sum(row[d] * keep for row, keep in zip(states, mask)) / sum(mask) for d in range(2)
+]
+print("masked mean:", pooled)
 ```
 
-**Expected behavior:** The invented electricity-tip vector ranks above the drink vector.
+{/* example:foundation-text-embedding:end */}
 
-This code implements similarity for hand-chosen vectors, not embedding training. Use the [interactive embedding lab above](#try-the-vector-lab) to see the geometry, then the official chapter notebook for a real encoder.
+<FoundationEvidence id="representation-inspection" />
+
+The [foundation lab guide](/llm-concept-atlas/labs/foundations/) supplies setup, pinned artifacts, full source, recorded outputs, and the practical workflow. The mechanism snippet and the model lab serve different learning purposes: use the former to check a calculation and the latter to inspect actual library/model behavior.
 
 ## When to use it
 
-- Semantic search, clustering, recommendations, and deduplication all use text-level vectors.
-- Use keyword or hybrid search when exact identifiers and rare names matter.
+Use text embeddings for semantic retrieval, clustering, or similarity features when the embedding model and domain are appropriate. Compare with keyword search for exact strings. Keep corpus/model revisions with stored vectors so later queries use a compatible space.
 
 ## Limits and common mistakes
 
-- High cosine similarity does not prove factual entailment or truth.
-- A two-dimensional illustration cannot show the full geometry of a real embedding space.
+A 2D plot can distort neighborhood relationships. An average over arbitrary token states is not a validated sentence model. A high cosine for “good” and “bad” can reflect shared context rather than interchangeable meaning; inspect negative examples and task-specific labels.
 
 ## Check your understanding
 
-<details><summary>Why embed documents before search requests?</summary><p>Their vectors can be reused; only a new query needs encoding.</p></details>
+<details><summary>Why should padding be excluded from mean pooling even if its token ID is a special marker?</summary><p>Its hidden state can be nonzero and can otherwise shift the average. The mask defines which positions count as content. Use the denominator of retained positions, and define behavior for empty inputs rather than dividing by zero.</p></details>
 
-<details><summary>What does cosine similarity compare?</summary><p>The alignment of two vector directions.</p></details>
+<details><summary>Pool [2,0], [0,2], and a padded [8,8] with mask [1,1,0].</summary><p>The masked mean is [1,1]. Normalization then gives approximately [0.707,0.707]. Including the padding row would implement a different, contaminated average.</p></details>
 
 ## Connections and sources
 
-This lesson follows the topic sequence in chapter 2 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter02) and [this primary technical reference](https://www.sbert.net/docs/sentence_transformer/usage/semantic_textual_similarity.html).
+Book source locations: Chapter 1, printed pp. 8–10; Chapter 1, printed pp. 10–11; Chapter 2, printed pp. 61–63; Chapter 10, printed pp. 289–291. Precise section IDs and mappings are recorded in the [coverage inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The small CPU model, original playlist data, and transparent numerical traces are atlas teaching choices. Read the [authors' official chapter 2 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter02) and the [E3 execution/source guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/E3.md) for the original workflow and supported implementation details.
 
 <ConceptConnections id="text-embedding" />

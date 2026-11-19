@@ -1,83 +1,100 @@
 ---
 title: Encoder-Only Model
-description: A transformer model built to form contextual representations of input text.
+description: "An encoder-only transformer computes contextual representations of an available input, usually allowing each nonpadding position to attend to both earlier and later positions. A task head can then classify tokens, sentences, or other structures."
 kind: concept
 conceptId: encoder-only
 chapter: 1
 part: foundations
-summary: An encoder-only model reads an input sequence to build context-aware representations of its tokens.
+summary: "An encoder-only transformer computes contextual representations of an available input, usually allowing each nonpadding position to attend to both earlier and later positions. A task head can then classify tokens, sentences, or other structures."
 parent: representation-model
 prerequisites: [representation-model]
 related: [decoder-only, text-embedding]
 level: intermediate
 tags: [architecture, models]
 lessonStatus: full
-lastReviewed: 2026-11-12
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e3-foundations-author-review-2026-11-20
+exampleIds: ["foundation-encoder-only", "representation-inspection"]
+bookSections: ["book-ch01-encoder-models"]
+aliases: ["bidirectional encoder", "BERT"]
+learningObjectives: ["Explain the input/output contract of Encoder-only model.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Does bidirectional attention make an encoder a left-to-right text generator?"]
+labHref: /labs/foundations/
+relationshipReasons: {"representation-model": "The vector/output contract distinguishes encoding from generation."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import FoundationEvidence from '../../../components/FoundationEvidence.astro';
+import { AttentionStepper, PositionExplorer, DecodingExplorer, CacheExplorer, PlaylistExplorer, ArchitectureMap, RepresentationExplorer } from '../../../components/simulations/FoundationLabs';
 
 <ConceptPrimer id="encoder-only" />
 
 ## Definition and intuition
 
-An **encoder-only model** builds context-aware representations of an input sequence. In a bidirectional encoder such as BERT, a token can use information from positions on both sides. The output is useful for understanding or labeling text, rather than directly continuing a prompt token by token.
+An encoder-only transformer computes contextual representations of an available input, usually allowing each nonpadding position to attend to both earlier and later positions. A task head can then classify tokens, sentences, or other structures.
 
-“Bank” in “river bank” and “bank account” begins as the same written word, but the surrounding words help the encoder produce different contextual states.
+In “The bank approved the loan,” the word after “bank” helps identify its meaning. An encoder can incorporate both sides of the complete input instead of being restricted to the already-seen prefix.
 
-## Before you start
-
-Read [representation model](/llm-concept-atlas/concepts/representation-model/) first; return here when the key terms feel familiar.
+<ReferenceBrief objectives={["Explain the input/output contract of Encoder-only model.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Does bidirectional attention make an encoder a left-to-right text generator?"]} prerequisites="Use the linked prerequisites below. Distinguish an input, a learned parameter, and a result before following the trace." scope="An explicit teaching calculation plus a linked verified CPU workflow. Illustrative values and recorded model outputs are labeled separately." />
 
 ## How it works
 
-Token IDs enter an embedding layer with position information. Repeated encoder blocks apply self-attention across the allowed input positions and a feed-forward transformation. The final hidden states contain contextual information. A task head can read a designated pooled position or token states to classify a sequence or label tokens.
+Bidirectional attention concerns which input positions are visible in a forward pass. It does not mean the model knows unseen documents. A padding mask can still exclude filler positions, and other task-specific masks may impose additional restrictions.
 
-BERT-style pretraining hides some tokens and asks the model to recover them using context. For a real task, a classifier head usually needs task training; raw encoder states are not automatically sentiment labels.
+BERT-style masked-language pretraining hides selected token identities and predicts them from context. This differs from causal next-token prediction. The [MASK] symbol is a training/task marker; leaving every input word visible and asking a model to copy it would not create the same learning problem.
+
+The encoder output is a sequence of contextual states. Sequence classification, token classification, and sentence embedding all require different heads or aggregation choices. A pretrained encoder’s existence does not supply a well-trained downstream classifier automatically.
+
+### The important distinction
+
+Bidirectional context inside a known input is not permission to leak future labels or held-out documents into training.
 
 ## Worked example
 
-Input: “The bank near the river flooded.” For the `bank` position, `river` and `flooded` are available context. In “The bank approved the loan,” `loan` pushes toward the financial sense. This does not mean every attention weight directly names the model’s interpretation.
+For a three-token input, a bidirectional visibility matrix is all allowed positions, while a causal decoder’s matrix is lower triangular. At the middle position, the encoder can use the third token; the causal decoder cannot. The real representation lab checks that changing context changes a bank hidden state.
 
-<LessonFlow steps={['Full input sequence', 'Bidirectional self-attention', 'Contextual states', 'Task head']} caption="A simplified flow for encoder only. Follow each labeled step from left to right." />
+## Try the experiment
+
+<ArchitectureMap client:visible />
+
+
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+Run the small mechanism from the repository root with `python3 scripts/run-examples.py --id foundation-encoder-only`. Its values are illustrative; it isolates the stated operation rather than pretending to load a trained model.
+
+{/* example:foundation-encoder-only:start */}
 
 ```python
-# A tiny context rule, not a neural encoder
-sentences = ['The bank flooded by the river', 'The bank approved a loan']
-for sentence in sentences:
-    words = sentence.lower().split()
-    sense = 'river edge' if 'river' in words else 'financial institution'
-    print(sense)
+positions = range(3)
+print("encoder:", [[1 for j in positions] for i in positions])
+print("causal:", [[int(j <= i) for j in positions] for i in positions])
 ```
 
-**Expected behavior:** `river edge` followed by `financial institution`.
+{/* example:foundation-encoder-only:end */}
 
-This explicit rule shows why context changes an interpretation. A trained encoder learns its context-dependent features from data rather than using this `if` statement. For a real classifier, follow the [classification use case](/llm-concept-atlas/use-cases/text-classification/).
+<FoundationEvidence id="representation-inspection" />
+
+The [foundation lab guide](/llm-concept-atlas/labs/foundations/) supplies setup, pinned artifacts, full source, recorded outputs, and the practical workflow. The mechanism snippet and the model lab serve different learning purposes: use the former to check a calculation and the latter to inspect actual library/model behavior.
 
 ## When to use it
 
-- Use encoder-style models for classification, entity labeling, and representation tasks.
-- Use a decoder-style model when direct left-to-right generation is the goal.
+Choose an encoder for tasks where a complete input is already available, such as tagging, document classification, or encoding for retrieval. Compare pooling and fine-tuning choices on held-out data. The NER reference lesson shows an actual trained token-classification head.
 
 ## Limits and common mistakes
 
-- “Bidirectional” describes available context in the encoder, not perfect language understanding.
-- An encoder model can be adapted into a generator in other architectures, but the basic encoder-only setup is not an autoregressive text generator.
+Bidirectional context inside a known input is not permission to leak future labels or held-out documents into training. An attention matrix is not a complete causal explanation of the model’s decision. A model’s uncased tokenizer may remove capitalization useful for names.
 
 ## Check your understanding
 
-<details><summary>Can a BERT-style encoder read a later token while representing an earlier one?</summary><p>Yes, in its standard bidirectional self-attention setup.</p></details>
+<details><summary>Does bidirectional attention make an encoder a left-to-right text generator?</summary><p>No. Its usual pretraining, output head, and inference procedure differ. A generator needs a suitable causal or encoder-decoder generation contract, not merely the ability to compute vectors.</p></details>
 
-<details><summary>Why is a task head needed?</summary><p>Hidden states are vectors; the head maps them to the task’s labels or values.</p></details>
+<details><summary>Which input positions can an ordinary bidirectional encoder use for the middle word in a five-word sentence?</summary><p>All five permitted nonpadding positions, including left and right context. This says nothing about unseen future documents or held-out labels.</p></details>
 
 ## Connections and sources
 
-This lesson follows the topic sequence in chapter 1 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter01) and [this primary technical reference](https://huggingface.co/docs/transformers/model_doc/bert).
+Book source locations: Chapter 1, printed pp. 18–20. Precise section IDs and mappings are recorded in the [coverage inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The small CPU model, original playlist data, and transparent numerical traces are atlas teaching choices. Read the [authors' official chapter 1 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter01) and the [E3 execution/source guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/E3.md) for the original workflow and supported implementation details.
 
 <ConceptConnections id="encoder-only" />

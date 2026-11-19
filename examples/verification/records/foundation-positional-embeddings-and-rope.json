@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-positional-embeddings-and-rope",
+  "status": "passed",
+  "date": "2026-11-19T17:56:57.390400+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/positional_embeddings_and_rope.py"
+  ],
+  "sourceSha256": "20cbc799a40f04e1569470a8f0f104dff0c76898ebdc4bff8641560de3ef83e1",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "e75b1c0fe0d5b66581ad7bcb33d89ec62af7b135d347206b75a094434ef674ee",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "[0.0, 1.0]\n",
+  "stderr": "",
+  "error": null
+}

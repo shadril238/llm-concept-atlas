@@ -1,91 +1,106 @@
 ---
 title: Recommendation embeddings
-description: Recommendation embeddings put users and items in a shared space so likely preferences can be estimated by proximity.
+description: "Recommendation embeddings represent items or users through learned vectors so that a scoring rule can rank candidates. In a playlist example, co-occurring song IDs supply the training signal rather than lyrics or audio."
 kind: concept
 conceptId: recommendation-embeddings
 chapter: 2
 part: foundations
-summary: Recommendation embeddings put users and items in a shared space so likely preferences can be estimated by proximity.
+summary: "Recommendation embeddings represent items or users through learned vectors so that a scoring rule can rank candidates. In a playlist example, co-occurring song IDs supply the training signal rather than lyrics or audio."
 parent: chapter-02
 prerequisites: [text-embedding]
 related: [contrastive-training]
 level: beginner
 tags: [foundations, chapter-02]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e3-foundations-author-review-2026-11-20
+exampleIds: ["foundation-recommendation-embeddings", "playlist-embeddings"]
+bookSections: ["book-ch02-recommendations", "book-ch02-song-recommendations", "book-ch02-song-training"]
+aliases: ["playlist embeddings", "song recommendations", "cold start"]
+learningObjectives: ["Explain the input/output contract of Recommendation embeddings.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Why is the cold-start item excluded even though the catalog assigns it an ID?"]
+labHref: /labs/foundations/
+relationshipReasons: {"text-embedding": "Vector direction and pooling clarify what a similarity comparison means."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import FoundationEvidence from '../../../components/FoundationEvidence.astro';
+import { AttentionStepper, PositionExplorer, DecodingExplorer, CacheExplorer, PlaylistExplorer, ArchitectureMap, RepresentationExplorer } from '../../../components/simulations/FoundationLabs';
 
 <ConceptPrimer id="recommendation-embeddings" />
 
 ## Definition and intuition
 
-Recommendation embeddings put users and items in a shared space so likely preferences can be estimated by proximity.
+Recommendation embeddings represent items or users through learned vectors so that a scoring rule can rank candidates. In a playlist example, co-occurring song IDs supply the training signal rather than lyrics or audio.
 
-Chapter 2 follows text into tokens and vectors. The shape and training objective of a representation determine which comparisons are meaningful.
+A listener has heard three songs in a session. You need to rank a new song without returning one already observed. A popularity list is a useful baseline, while learned co-occurrence vectors may capture narrower patterns.
 
-## Before you start
+<ReferenceBrief objectives={["Explain the input/output contract of Recommendation embeddings.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Why is the cold-start item excluded even though the catalog assigns it an ID?"]} prerequisites="Use the linked prerequisites below. Distinguish an input, a learned parameter, and a result before following the trace." scope="An explicit teaching calculation plus a linked verified CPU workflow. Illustrative values and recorded model outputs are labeled separately." />
 
-Read [Text Embedding](/llm-concept-atlas/concepts/text-embedding/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **recommendation embeddings** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+Treat songs as vocabulary items and playlists as sequences. Center/context pairs are drawn from training playlists only. A skip-gram negative-sampling model learns input and context tables; the demo ranks candidates with cosine to a pooled vector of observed songs.
 
-1. **Prepare:** Gather interaction signals such as plays or clicks
-2. **Transform:** Learn user and item vectors from observed and sampled interactions
-3. **Inspect:** Rank candidate items and evaluate on held-out behavior.
+Split whole sessions before fitting. In validation/test, hide the last song, form the query from the preceding songs, and exclude already observed items from candidates. Fit popularity counts on training sessions only. A public item catalog can define IDs without exposing held-out interactions.
+
+Recall@3 asks whether the hidden target appears in the first three results. Reciprocal rank is 1 divided by the target rank; mean reciprocal rank averages it over queries. These metrics are meaningful only with a declared candidate pool, target policy, and eligibility denominator.
 
 ### The important distinction
 
-A dot product between a user vector and an item vector can serve as a preference score, but observed interactions are not random samples. Exposure bias means an unclicked item might simply never have been shown. Evaluate with held-out interactions and account for popularity before interpreting a vector as personal taste.
+Our fictional themes make a deliberately easy controlled task.
 
 ## Worked example
 
-A listener who plays two similar songs may have a vector near both songs. A newly added song with few interactions may be difficult to place reliably. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+If the target ranks second, that query contributes 1 to Recall@3 and 0.5 to MRR. If it ranks fourth, it contributes 0 to Recall@3 and 0.25 to MRR. Returning an already observed song would violate this exercise’s recommendation contract even if the cosine were high.
 
-<LessonFlow steps={["Gather interaction signals such as plays or clicks", "Learn user and item vectors from observed and sampled interactions", "Rank candidate items and evaluate on held-out behavior."]} caption="A teaching diagram for Recommendation embeddings. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
+
+<PlaylistExplorer client:visible />
+
+### From the small fixture to a larger dataset
+
+The runnable default contains original fictional sessions with unique song sets across train/validation/test. The optional Last.fm-1K importer reads local listening-event TSV data, groups events into 30-minute sessions, and splits by user group before training. The author's [dataset record](https://zenodo.org/records/6090214) permits non-commercial use and requires attribution; it is not covered by this repository's MIT license. The larger route is documented and parser-tested, but no full Last.fm training result is claimed here.
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+Run the small mechanism from the repository root with `python3 scripts/run-examples.py --id foundation-recommendation-embeddings`. Its values are illustrative; it isolates the stated operation rather than pretending to load a trained model.
+
+{/* example:foundation-recommendation-embeddings:start */}
 
 ```python
-from math import sqrt
-a, b = (0.8, 0.6), (0.7, 0.7)
-dot = sum(x*y for x, y in zip(a, b))
-cosine = dot / (sqrt(sum(x*x for x in a)) * sqrt(sum(y*y for y in b)))
-print(round(cosine, 3))
+observed = {"song-a", "song-b"}
+catalog = ["song-a", "song-b", "song-c", "song-d"]
+candidates = [song for song in catalog if song not in observed]
+rank = 2
+print(
+    "eligible:", candidates, "recall@3:", int(rank <= 3), "reciprocal rank:", 1 / rank
+)
 ```
 
-**Expected output:**
+{/* example:foundation-recommendation-embeddings:end */}
 
-```text
-0.99
-```
+<FoundationEvidence id="playlist-embeddings" />
 
-**What the code shows:** The code takes a dot product, divides by both vector lengths, and prints a cosine score. Change a coordinate to see how the direction changes the comparison. The [official chapter 2 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter02) develops the corresponding model-based implementation.
+The [foundation lab guide](/llm-concept-atlas/labs/foundations/) supplies setup, pinned artifacts, full source, recorded outputs, and the practical workflow. The mechanism snippet and the model lab serve different learning purposes: use the former to check a calculation and the latter to inspect actual library/model behavior.
 
 ## When to use it
 
-Use embeddings to rank many items when sparse interaction patterns contain a reusable signal. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use co-occurrence embeddings when interaction patterns are available and a collaborative signal is appropriate. Compare against popularity, inspect rare-item coverage, and add metadata/content features or a transparent fallback for cold starts. Do not infer causal preference from co-occurrence alone.
 
 ## Limits and common mistakes
 
-- Clicks reflect exposure and position as well as preference, and cold-start items lack evidence.
-- **Failure to look for:** A popular item appears universally relevant because training data mostly showed it, not because every user prefers it.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Our fictional themes make a deliberately easy controlled task. A perfect plot would not establish real listening quality. New songs have no learned interaction vector; a random allocated row must not be presented as a meaningful recommendation. Popularity bias and repeated exposure can dominate observed interactions.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First gather interaction signals such as plays or clicks Then learn user and item vectors from observed and sampled interactions Finally rank candidate items and evaluate on held-out behavior.</p></details>
+<details><summary>Why is the cold-start item excluded even though the catalog assigns it an ID?</summary><p>An ID allocates a row but does not train it. With no positive interactions, its random representation is uninformative. Use a popularity/content fallback or collect suitable evidence, and label that route separately.</p></details>
 
-<details><summary>What would make the result misleading?</summary><p>A popular item appears universally relevant because training data mostly showed it, not because every user prefers it.</p></details>
+<details><summary>Across three queries, targets rank 1, 2, and 4. Compute Recall@3 and MRR.</summary><p>Recall@3 = 2/3. MRR = (1 + 1/2 + 1/4)/3 ≈ 0.583. State the candidate pool and exclude already observed songs before calculating these ranks.</p></details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 2 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 2 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter02). Continue through the linked prerequisites and nearby concepts below.
+Book source locations: Chapter 2, printed pp. 67–71; Chapter 2, printed pp. 67–69; Chapter 2, printed pp. 69–71. Precise section IDs and mappings are recorded in the [coverage inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The small CPU model, original playlist data, and transparent numerical traces are atlas teaching choices. Read the [authors' official chapter 2 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter02) and the [E3 execution/source guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/E3.md) for the original workflow and supported implementation details.
 
 <ConceptConnections id="recommendation-embeddings" />

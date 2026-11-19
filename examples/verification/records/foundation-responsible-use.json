@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-responsible-use",
+  "status": "passed",
+  "date": "2026-11-19T17:56:55.922381+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/responsible_use.py"
+  ],
+  "sourceSha256": "45d4d4b39f83d5bf33f53a1b3e0975cb82a944b66903dad93dc0708e212367b0",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "d75318c6ceb3ba767c2399ee99111f9f3de9c95deaf5bcbe5c9050bc8eb1d887",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "Saturday 10:00\u201316:00\nSunday No verified source; ask or abstain\n",
+  "stderr": "",
+  "error": null
+}

@@ -25,6 +25,8 @@ export default defineConfig({
             { label: "From semantic search to RAG", slug: "paths/from-semantic-search-to-rag" },
             { label: "From applications to fine-tuning", slug: "paths/from-applications-to-fine-tuning" },
             { label: "Run verified examples", slug: "labs/first-verified-examples" },
+            { label: "Foundation labs · L01–L06", slug: "labs/foundations" },
+            { label: "Concept glossary", slug: "glossary" },
             { label: "About and sources", slug: "about-and-sources" },
           ],
         },

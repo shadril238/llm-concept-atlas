@@ -1,8 +1,8 @@
 # Existing lesson depth audit
 
-Initial review 2026-11-19; latest lesson update 2026-11-20. Covers **96 concepts**. Source hashes detect stale findings. Independent pedagogical acceptance remains pending; execution claims below refer only to linked workflow evidence.
+Initial review 2026-11-19; latest lesson update 2026-11-20. Covers **100 concepts**. Source hashes detect stale findings. Independent pedagogical acceptance remains pending; execution claims below refer only to linked workflow evidence.
 
-The 96 concept snippets contain **48 distinct Python implementations**. Shared code is not automatically wrong; the finding records whether it demonstrates this lesson's mechanism.
+The 100 concept snippets contain **61 distinct Python implementations**. Shared code is not automatically wrong; the finding records whether it demonstrates this lesson's mechanism.
 
 ## Useful existing work
 
@@ -14,45 +14,49 @@ The site has explanations, labeled illustrative examples, relationship navigatio
 
 | Lesson | Current implementation finding | Priority / next phase |
 | --- | --- | --- |
-| [bag-of-words](../../src/content/docs/concepts/bag-of-words.mdx#implement-it) | The Counter example is relevant; extend to consistent corpus vocabulary and aligned document vectors. | P1 / E3 |
-| [decoder-only](../../src/content/docs/concepts/decoder-only.mdx#implement-it) | The visibility trace is useful; add a real causal-model input/output and training-versus-generation comparison. | P1 / E3 |
-| [encoder-only](../../src/content/docs/concepts/encoder-only.mdx#implement-it) | The disambiguation rule is explicitly illustrative; add actual contextual encoder states. | P1 / E3 |
-| [generative-model](../../src/content/docs/concepts/generative-model.mdx#implement-it) | Greedy selection from supplied probabilities is useful; add actual model scoring and multi-step generation. | P1 / E3 |
-| [language-ai](../../src/content/docs/concepts/language-ai.mdx#implement-it) | The routing rule motivates tasks well; add a comparative decision exercise with task-appropriate evaluation. | P1 / E3 |
-| [llm](../../src/content/docs/concepts/llm.mdx#implement-it) | The small softmax supports the definition; connect it to real model inputs and output-head shapes. | P1 / E3 |
-| [pretraining](../../src/content/docs/concepts/pretraining.mdx#implement-it) | The scalar update illustrates optimization, but not token prediction, batches, or model pretraining. | P1 / E3 |
-| [representation-model](../../src/content/docs/concepts/representation-model.mdx#implement-it) | Cosine similarity on invented vectors is useful; add real encoder pooling and task distinctions. | P1 / E3 |
-| [responsible-use](../../src/content/docs/concepts/responsible-use.mdx#implement-it) | Generic label accuracy is not a harm analysis or task-specific responsible-use decision exercise. | P1 / E3 |
+| [bag-of-words](../../src/content/docs/concepts/bag-of-words.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [cross-attention](../../src/content/docs/concepts/cross-attention.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [decoder-only](../../src/content/docs/concepts/decoder-only.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [encoder-only](../../src/content/docs/concepts/encoder-only.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [generative-model](../../src/content/docs/concepts/generative-model.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [language-ai](../../src/content/docs/concepts/language-ai.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [llm](../../src/content/docs/concepts/llm.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [model-access](../../src/content/docs/concepts/model-access.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [pretraining](../../src/content/docs/concepts/pretraining.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [representation-model](../../src/content/docs/concepts/representation-model.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [responsible-use](../../src/content/docs/concepts/responsible-use.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [sequence-to-sequence](../../src/content/docs/concepts/sequence-to-sequence.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
 
 ### Chapter 2
 
 | Lesson | Current implementation finding | Priority / next phase |
 | --- | --- | --- |
-| [contextualized-embeddings](../../src/content/docs/concepts/contextualized-embeddings.mdx#implement-it) | Cosine similarity of fixed vectors does not extract context-dependent states for a repeated word. | P1 / E3 |
-| [contrastive-training](../../src/content/docs/concepts/contrastive-training.mdx#implement-it) | The fixed-score loss lacks word2vec pair scoring, sampled negatives, and parameter updates. | P1 / E3 |
-| [recommendation-embeddings](../../src/content/docs/concepts/recommendation-embeddings.mdx#implement-it) | Two fixed vectors do not train playlist embeddings, retrieve songs, or evaluate recommendations. | P1 / E3 |
-| [text-embedding](../../src/content/docs/concepts/text-embedding.mdx#implement-it) | Invented-vector similarity is relevant; add actual sentence encoding and pooling/normalization inspection. | P1 / E3 |
-| [token-embedding](../../src/content/docs/concepts/token-embedding.mdx#implement-it) | The lookup table correctly illustrates ID-to-row mapping; add a real model matrix and shape inspection. | P1 / E3 |
-| [token](../../src/content/docs/concepts/token.mdx#implement-it) | The invented vocabulary correctly demonstrates piece-to-ID lookup; link a verified real tokenizer run. | P1 / E3 |
+| [contextualized-embeddings](../../src/content/docs/concepts/contextualized-embeddings.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [contrastive-training](../../src/content/docs/concepts/contrastive-training.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [recommendation-embeddings](../../src/content/docs/concepts/recommendation-embeddings.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [text-embedding](../../src/content/docs/concepts/text-embedding.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [token](../../src/content/docs/concepts/token.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [token-embedding](../../src/content/docs/concepts/token-embedding.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
 | [tokenization](../../src/content/docs/concepts/tokenization.mdx#implement-it-with-a-real-tokenizer) | E2 adds actual BERT/GPT-2 comparison, multilingual/code/empty cases, offsets, special-token inspection, locked execution, and topic-specific exercises. Independent editorial and beginner review remain pending. | P2 / E2 |
-| [vocabulary](../../src/content/docs/concepts/vocabulary.mdx#implement-it) | The dictionary correctly illustrates mappings; inspect real special tokens and tokenizer/model compatibility. | P1 / E3 |
-| [word-and-subword-tokens](../../src/content/docs/concepts/word-and-subword-tokens.mdx#implement-it) | The example slices visible context and performs no word/subword tokenization. | P0 / E3 |
-| [word2vec](../../src/content/docs/concepts/word2vec.mdx#implement-it) | The training-pair construction is relevant; implement sampled-negative scoring, optimization, and learned neighbors. | P1 / E3 |
+| [vocabulary](../../src/content/docs/concepts/vocabulary.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [word-and-subword-tokens](../../src/content/docs/concepts/word-and-subword-tokens.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [word2vec](../../src/content/docs/concepts/word2vec.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
 
 ### Chapter 3
 
 | Lesson | Current implementation finding | Priority / next phase |
 | --- | --- | --- |
-| [attention](../../src/content/docs/concepts/attention.mdx#implement-it) | The weighted-value calculation is relevant; extend to actual Q/K projections, dimensions, masking, and stable softmax. | P1 / E3 |
-| [context-size](../../src/content/docs/concepts/context-size.mdx#implement-it) | A prefix slice illustrates causal visibility, not a tokenizer-aware prompt/output budget. | P1 / E3 |
-| [decoding](../../src/content/docs/concepts/decoding.mdx#implement-it) | Greedy and seeded choice are useful; temperature and top-k/top-p described in the text are not implemented. | P1 / E3 |
-| [efficient-attention](../../src/content/docs/concepts/efficient-attention.mdx#implement-it) | An ordinary weighted sum demonstrates no sparse pattern, shared KV heads, or memory-efficient algorithm. | P1 / E3 |
-| [kv-cache](../../src/content/docs/concepts/kv-cache.mdx#implement-it) | The append-only list illustrates storage but not real cached keys/values or correctness/speed comparison. | P1 / E3 |
-| [positional-embeddings-and-rope](../../src/content/docs/concepts/positional-embeddings-and-rope.mdx#implement-it) | The snippet has no position values or rotations; it repeats an attention weighted sum. | P0 / E3 |
-| [query-key-value](../../src/content/docs/concepts/query-key-value.mdx#implement-it) | A scalar query/key/value calculation is relevant; add learned matrix projections, shapes, and masks. | P1 / E3 |
-| [self-attention](../../src/content/docs/concepts/self-attention.mdx#implement-it) | The mask visibility printout is relevant; add the actual self-attention matrix computation. | P1 / E3 |
-| [transformer-block](../../src/content/docs/concepts/transformer-block.mdx#implement-it) | Only the weighted sum is computed; feedforward, residual, and normalization operations are absent. | P1 / E3 |
-| [transformer](../../src/content/docs/concepts/transformer.mdx#implement-it) | The explicitly simplified data flow is useful; add real projections, residual paths, normalization, and tensor shapes. | P1 / E3 |
+| [attention](../../src/content/docs/concepts/attention.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [context-size](../../src/content/docs/concepts/context-size.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [decoding](../../src/content/docs/concepts/decoding.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [efficient-attention](../../src/content/docs/concepts/efficient-attention.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [kv-cache](../../src/content/docs/concepts/kv-cache.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [positional-embeddings-and-rope](../../src/content/docs/concepts/positional-embeddings-and-rope.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [query-key-value](../../src/content/docs/concepts/query-key-value.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [self-attention](../../src/content/docs/concepts/self-attention.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [sequence-packing](../../src/content/docs/concepts/sequence-packing.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [transformer](../../src/content/docs/concepts/transformer.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
+| [transformer-block](../../src/content/docs/concepts/transformer-block.mdx#implement-it) | E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending. | P2 / E3 |
 
 ### Chapter 4
 
@@ -110,8 +114,8 @@ The site has explanations, labeled illustrative examples, relationship navigatio
 | [dense-retrieval](../../src/content/docs/concepts/dense-retrieval.mdx#implement-it) | The code counts keyword intersection, which is lexical retrieval rather than dense vector retrieval. | P0 / E6 |
 | [grounded-generation](../../src/content/docs/concepts/grounded-generation.mdx#implement-it) | The code ranks keyword overlap and never generates an evidence-supported answer. | P0 / E6 |
 | [local-model-rag](../../src/content/docs/concepts/local-model-rag.mdx#implement-it) | The concept snippet has fixed retrieval and no generation; the RAG use case contains a separate unverified real-model sketch. | P1 / E6 |
-| [rag-evaluation](../../src/content/docs/concepts/rag-evaluation.mdx#implement-it) | Retrieval recall alone does not evaluate answer support, citations, relevance, or faithfulness. | P1 / E6 |
 | [rag](../../src/content/docs/concepts/rag.mdx#implement-it) | The fixed selected passage illustrates support, but is not a retriever/generator; retain the separate real-model use-case sketch. | P1 / E6 |
+| [rag-evaluation](../../src/content/docs/concepts/rag-evaluation.mdx#implement-it) | Retrieval recall alone does not evaluate answer support, citations, relevance, or faithfulness. | P1 / E6 |
 | [reranking](../../src/content/docs/concepts/reranking.mdx#implement-it) | The code performs keyword overlap once and does not rerank first-stage candidates with a joint scorer. | P0 / E6 |
 | [retrieval-metrics](../../src/content/docs/concepts/retrieval-metrics.mdx#implement-it) | The snippet covers recall only; the book devotes a worked sequence to AP and MAP. | P1 / E6 |
 | [semantic-search](../../src/content/docs/concepts/semantic-search.mdx#implement-it) | Invented-vector cosine ranking is relevant; add real encoding, source IDs, indexing, and query evaluation. | P1 / E6 |

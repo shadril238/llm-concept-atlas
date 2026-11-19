@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "representation-inspection",
+  "status": "passed",
+  "date": "2026-11-19T17:59:55.130613+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/training/reference/src/atlas_reference/e3/representations.py"
+  ],
+  "sourceSha256": "8258d0ce9a2a4487995aefac31210c9ac9e701674d7ee28d87be219d2a73c719",
+  "lockSha256": "d4b64636a97fdd81593972dc4241059dc1edf5178dec89bf5c1cf6601d7f5615",
+  "contractSha256": "56d04b9de582ab3f325f693041ae1207fec1a30a09f1d931cf430d35f4db1562",
+  "fixtureSha256": null,
+  "models": [
+    {
+      "id": "prajjwal1/bert-tiny",
+      "revision": "6f75de8b60a9f8a2fdf7b69cbd86d9e64bcb3837"
+    },
+    {
+      "id": "google-bert/bert-base-uncased",
+      "revision": "86b5e0934494bd15c9632b12f734a8a67f723594"
+    },
+    {
+      "id": "sentence-transformers/paraphrase-MiniLM-L3-v2",
+      "revision": "4ca70771034acceecb2e72475f72050fcdde4ddc"
+    },
+    {
+      "id": "GloVe/wiki-gigaword-50",
+      "revision": "bd93f51f7536dbf84f194cd8a81c0644b7b95b41"
+    }
+  ],
+  "python": "3.11.18",
+  "packages": {
+    "numpy": "2.2.6",
+    "packaging": "26.3",
+    "requests": "2.34.2",
+    "certifi": "2026.10.23",
+    "networkx": "3.6.1",
+    "torch": "2.8.0",
+    "filelock": "4.2.12",
+    "accelerate": "1.16.0",
+    "sympy": "1.14.0",
+    "huggingface_hub": "0.36.2",
+    "safetensors": "0.8.0",
+    "tqdm": "4.70.1",
+    "urllib3": "2.8.0",
+    "mpmath": "1.3.0",
+    "PyYAML": "6.0.3",
+    "fsspec": "2026.9.0",
+    "peft": "0.17.0",
+    "Jinja2": "3.1.6",
+    "regex": "2026.11.19",
+    "transformers": "4.57.1",
+    "typing_extensions": "4.16.0",
+    "MarkupSafe": "3.0.4",
+    "hf-xet": "1.8.0",
+    "tokenizers": "0.22.2",
+    "psutil": "7.2.2",
+    "charset-normalizer": "3.5.2",
+    "idna": "3.20"
+  },
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 2.735,
+  "peakMemoryMiB": 627.9,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "{\"static_shape\": [400000, 50], \"neighbors\": {\"king\": [{\"word\": \"prince\", \"cosine\": 0.82362}, {\"word\": \"queen\", \"cosine\": 0.7839}, {\"word\": \"ii\", \"cosine\": 0.77462}, {\"word\": \"emperor\", \"cosine\": 0.77362}, {\"word\": \"son\", \"cosine\": 0.76672}], \"bank\": [{\"word\": \"banks\", \"cosine\": 0.86986}, {\"word\": \"securities\", \"cosine\": 0.79968}, {\"word\": \"banking\", \"cosine\": 0.79652}, {\"word\": \"investment\", \"cosine\": 0.78497}, {\"word\": \"exchange\", \"cosine\": 0.78088}], \"good\": [{\"word\": \"better\", \"cosine\": 0.92844}, {\"word\": \"really\", \"cosine\": 0.92206}, {\"word\": \"always\", \"cosine\": 0.91653}, {\"word\": \"sure\", \"cosine\": 0.90335}, {\"word\": \"something\", \"cosine\": 0.90142}]}, \"bank_token_id\": 2924, \"lookup_shape\": [2, 8, 128], \"hidden_shape\": [2, 8, 128], \"same_lookup\": true, \"different_context\": true, \"bank_context_cosine\": 0.879865825176239, \"sentence_shape\": [3, 384], \"sentence_cosines\": [[1.0, 0.3572535514831543, 0.587199866771698], [0.3572535514831543, 1.0, 0.25432437658309937], [0.587199866771698, 0.25432437658309937, 0.9999999403953552]], \"sentences\": [\"The bank approved the loan.\", \"The bank flooded after rain.\", \"A lender accepted a credit application.\"], \"projection\": {\"words\": [\"king\", \"queen\", \"bank\", \"river\", \"loan\", \"good\", \"bad\", \"excellent\"], \"coordinates\": [[-0.6752291917800903, 0.015747012570500374], [-0.6942226886749268, 0.010457966476678848], [0.26145434379577637, -0.5516394972801208], [-0.08203966915607452, -0.3344131410121918], [0.43284302949905396, -0.41946205496788025], [0.20304709672927856, 0.48959484696388245], [0.2833760380744934, 0.23839882016181946], [0.2707708477973938, 0.5513160824775696]], \"variance_fraction\": 0.5937596559524536, \"method\": \"PCA of eight selected normalized 50D GloVe rows; nearest neighbors computed in 50D, not this projection\"}, \"numerical_token_counts\": {\"bert\": 11, \"sentence\": 11}, \"glove_sha256\": \"5c55f98957aa9fed8d2ac5fb1dcff57af3b23c5a3ee7af3f7945f8d49198eb24\"}\n",
+  "stderr": "<repository>/examples/training/reference/src/atlas_reference/e3/representations.py:47: RuntimeWarning: divide by zero encountered in matmul\n  scores = vectors @ vectors[index[query]]\n<repository>/examples/training/reference/src/atlas_reference/e3/representations.py:47: RuntimeWarning: overflow encountered in matmul\n  scores = vectors @ vectors[index[query]]\n<repository>/examples/training/reference/src/atlas_reference/e3/representations.py:47: RuntimeWarning: invalid value encountered in matmul\n  scores = vectors @ vectors[index[query]]\n",
+  "error": null,
+  "artifactSha256": "514e34eeda023461e309e0cbd2cf6b6a2300a873bed5ad39ddbde6a071075560"
+}

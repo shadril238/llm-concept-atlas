@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-llm",
+  "status": "passed",
+  "date": "2026-11-19T17:56:55.446355+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/llm.py"
+  ],
+  "sourceSha256": "52ff7a2ceb4b26b5ac312300b9b180889f6727366fade5f9e43c4826c921296a",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "a260d108626b60bd83180c445a069b4f431e8901cc408f082db66f9480b5bd7b",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "[0.665, 0.245, 0.09]\n",
+  "stderr": "",
+  "error": null
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-sequence-to-sequence",
+  "status": "passed",
+  "date": "2026-11-19T17:56:56.082653+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/sequence_to_sequence.py"
+  ],
+  "sourceSha256": "3377cbf49f137c7ebf5fa5e35fcef40ae8ad36aacf58a1d2c3db1a18c130c830",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "0bfc8c9e933ce7c5adad5ee98304dea3e253e9bce5414bf49760fb8d2cf50e94",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "cross-attention scores: (2, 3)\ncross-attention output: (2, 4)\n",
+  "stderr": "",
+  "error": null
+}

@@ -1,0 +1,11 @@
+{
+  "id": "atlas-playlists-v1",
+  "revision": 1,
+  "path": "examples/data/fixtures/playlists.json",
+  "sha256": "5c47be30685d63812ca8c0b8d32b8b452dbd74a015ddbe547c8dd1b0f23181df",
+  "source": "Original fictional songs and seeded synthetic playlist sessions",
+  "license": "MIT (repository LICENSE)",
+  "split": "48 train / 9 validation / 12 test sessions; hold out final song in validation/test; entire held-out sessions excluded from co-occurrence fitting",
+  "training": true,
+  "leakagePolicy": "Vocabulary comes from catalog, not held-out interactions. Popularity uses train only. Queries exclude already observed songs. Song sets are unique across all sessions/splits. Synthetic themes remain intentionally easy and are not real listening behavior."
+}

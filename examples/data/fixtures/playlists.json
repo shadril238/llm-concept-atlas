@@ -1,0 +1,806 @@
+{
+  "items": [
+    {
+      "id": "a0",
+      "title": "Acoustic dawn 1",
+      "theme": "a"
+    },
+    {
+      "id": "a1",
+      "title": "Acoustic dawn 2",
+      "theme": "a"
+    },
+    {
+      "id": "a2",
+      "title": "Acoustic dawn 3",
+      "theme": "a"
+    },
+    {
+      "id": "a3",
+      "title": "Acoustic dawn 4",
+      "theme": "a"
+    },
+    {
+      "id": "a4",
+      "title": "Acoustic dawn 5",
+      "theme": "a"
+    },
+    {
+      "id": "a5",
+      "title": "Acoustic dawn 6",
+      "theme": "a"
+    },
+    {
+      "id": "a6",
+      "title": "Acoustic dawn 7",
+      "theme": "a"
+    },
+    {
+      "id": "b0",
+      "title": "Night synth 1",
+      "theme": "b"
+    },
+    {
+      "id": "b1",
+      "title": "Night synth 2",
+      "theme": "b"
+    },
+    {
+      "id": "b2",
+      "title": "Night synth 3",
+      "theme": "b"
+    },
+    {
+      "id": "b3",
+      "title": "Night synth 4",
+      "theme": "b"
+    },
+    {
+      "id": "b4",
+      "title": "Night synth 5",
+      "theme": "b"
+    },
+    {
+      "id": "b5",
+      "title": "Night synth 6",
+      "theme": "b"
+    },
+    {
+      "id": "b6",
+      "title": "Night synth 7",
+      "theme": "b"
+    },
+    {
+      "id": "c0",
+      "title": "Piano rain 1",
+      "theme": "c"
+    },
+    {
+      "id": "c1",
+      "title": "Piano rain 2",
+      "theme": "c"
+    },
+    {
+      "id": "c2",
+      "title": "Piano rain 3",
+      "theme": "c"
+    },
+    {
+      "id": "c3",
+      "title": "Piano rain 4",
+      "theme": "c"
+    },
+    {
+      "id": "c4",
+      "title": "Piano rain 5",
+      "theme": "c"
+    },
+    {
+      "id": "c5",
+      "title": "Piano rain 6",
+      "theme": "c"
+    },
+    {
+      "id": "c6",
+      "title": "Piano rain 7",
+      "theme": "c"
+    },
+    {
+      "id": "cold",
+      "title": "New unheard song",
+      "theme": null
+    }
+  ],
+  "playlists": [
+    {
+      "id": "train-0",
+      "split": "train",
+      "songs": [
+        "a3",
+        "a4",
+        "a6",
+        "a5"
+      ]
+    },
+    {
+      "id": "train-1",
+      "split": "train",
+      "songs": [
+        "b4",
+        "b6",
+        "b1",
+        "b5"
+      ]
+    },
+    {
+      "id": "train-2",
+      "split": "train",
+      "songs": [
+        "c6",
+        "c4",
+        "c3",
+        "c1"
+      ]
+    },
+    {
+      "id": "train-3",
+      "split": "train",
+      "songs": [
+        "a0",
+        "a3",
+        "a2",
+        "a1"
+      ]
+    },
+    {
+      "id": "train-4",
+      "split": "train",
+      "songs": [
+        "b0",
+        "b4",
+        "b6",
+        "b3"
+      ]
+    },
+    {
+      "id": "train-5",
+      "split": "train",
+      "songs": [
+        "c3",
+        "c5",
+        "c4",
+        "c1"
+      ]
+    },
+    {
+      "id": "train-6",
+      "split": "train",
+      "songs": [
+        "a4",
+        "a0",
+        "a6",
+        "a5"
+      ]
+    },
+    {
+      "id": "train-7",
+      "split": "train",
+      "songs": [
+        "b0",
+        "b6",
+        "b1",
+        "b4"
+      ]
+    },
+    {
+      "id": "train-8",
+      "split": "train",
+      "songs": [
+        "c4",
+        "c0",
+        "c3",
+        "c2"
+      ]
+    },
+    {
+      "id": "train-9",
+      "split": "train",
+      "songs": [
+        "a3",
+        "a4",
+        "a1",
+        "a5"
+      ]
+    },
+    {
+      "id": "train-10",
+      "split": "train",
+      "songs": [
+        "b5",
+        "b2",
+        "b3",
+        "b0"
+      ]
+    },
+    {
+      "id": "train-11",
+      "split": "train",
+      "songs": [
+        "c5",
+        "c0",
+        "c3",
+        "c2"
+      ]
+    },
+    {
+      "id": "train-12",
+      "split": "train",
+      "songs": [
+        "a3",
+        "a4",
+        "a0",
+        "a2"
+      ]
+    },
+    {
+      "id": "train-13",
+      "split": "train",
+      "songs": [
+        "b2",
+        "b1",
+        "b4",
+        "b6"
+      ]
+    },
+    {
+      "id": "train-14",
+      "split": "train",
+      "songs": [
+        "c0",
+        "c6",
+        "c4",
+        "c5"
+      ]
+    },
+    {
+      "id": "train-15",
+      "split": "train",
+      "songs": [
+        "a3",
+        "a0",
+        "a2",
+        "a6"
+      ]
+    },
+    {
+      "id": "train-16",
+      "split": "train",
+      "songs": [
+        "b0",
+        "b6",
+        "b5",
+        "b1"
+      ]
+    },
+    {
+      "id": "train-17",
+      "split": "train",
+      "songs": [
+        "c1",
+        "c0",
+        "c3",
+        "c4"
+      ]
+    },
+    {
+      "id": "train-18",
+      "split": "train",
+      "songs": [
+        "a5",
+        "a3",
+        "a6",
+        "a0"
+      ]
+    },
+    {
+      "id": "train-19",
+      "split": "train",
+      "songs": [
+        "b4",
+        "b5",
+        "b1",
+        "b2"
+      ]
+    },
+    {
+      "id": "train-20",
+      "split": "train",
+      "songs": [
+        "c2",
+        "c0",
+        "c6",
+        "c4"
+      ]
+    },
+    {
+      "id": "train-21",
+      "split": "train",
+      "songs": [
+        "a0",
+        "a3",
+        "a6",
+        "a1"
+      ]
+    },
+    {
+      "id": "train-22",
+      "split": "train",
+      "songs": [
+        "b1",
+        "b5",
+        "b0",
+        "b4"
+      ]
+    },
+    {
+      "id": "train-23",
+      "split": "train",
+      "songs": [
+        "c0",
+        "c3",
+        "c5",
+        "c1"
+      ]
+    },
+    {
+      "id": "train-24",
+      "split": "train",
+      "songs": [
+        "a6",
+        "a4",
+        "a2",
+        "a0"
+      ]
+    },
+    {
+      "id": "train-25",
+      "split": "train",
+      "songs": [
+        "b1",
+        "b6",
+        "b3",
+        "b0"
+      ]
+    },
+    {
+      "id": "train-26",
+      "split": "train",
+      "songs": [
+        "c6",
+        "c2",
+        "c3",
+        "c0"
+      ]
+    },
+    {
+      "id": "train-27",
+      "split": "train",
+      "songs": [
+        "a0",
+        "a6",
+        "a1",
+        "a4"
+      ]
+    },
+    {
+      "id": "train-28",
+      "split": "train",
+      "songs": [
+        "b0",
+        "b4",
+        "b2",
+        "b5"
+      ]
+    },
+    {
+      "id": "train-29",
+      "split": "train",
+      "songs": [
+        "c1",
+        "c5",
+        "c6",
+        "c2"
+      ]
+    },
+    {
+      "id": "train-30",
+      "split": "train",
+      "songs": [
+        "a1",
+        "a4",
+        "a6",
+        "a5"
+      ]
+    },
+    {
+      "id": "train-31",
+      "split": "train",
+      "songs": [
+        "b5",
+        "b3",
+        "b6",
+        "b0"
+      ]
+    },
+    {
+      "id": "train-32",
+      "split": "train",
+      "songs": [
+        "c3",
+        "c0",
+        "c5",
+        "c4"
+      ]
+    },
+    {
+      "id": "train-33",
+      "split": "train",
+      "songs": [
+        "a0",
+        "a4",
+        "a2",
+        "a1"
+      ]
+    },
+    {
+      "id": "train-34",
+      "split": "train",
+      "songs": [
+        "b5",
+        "b6",
+        "b3",
+        "b2"
+      ]
+    },
+    {
+      "id": "train-35",
+      "split": "train",
+      "songs": [
+        "c3",
+        "c4",
+        "c6",
+        "c2"
+      ]
+    },
+    {
+      "id": "train-36",
+      "split": "train",
+      "songs": [
+        "a4",
+        "a1",
+        "a0",
+        "a5"
+      ]
+    },
+    {
+      "id": "train-37",
+      "split": "train",
+      "songs": [
+        "b1",
+        "b3",
+        "b4",
+        "b0"
+      ]
+    },
+    {
+      "id": "train-38",
+      "split": "train",
+      "songs": [
+        "c2",
+        "c1",
+        "c5",
+        "c0"
+      ]
+    },
+    {
+      "id": "train-39",
+      "split": "train",
+      "songs": [
+        "a1",
+        "a0",
+        "a5",
+        "a6"
+      ]
+    },
+    {
+      "id": "train-40",
+      "split": "train",
+      "songs": [
+        "b0",
+        "b2",
+        "b1",
+        "b3"
+      ]
+    },
+    {
+      "id": "train-41",
+      "split": "train",
+      "songs": [
+        "c2",
+        "c5",
+        "c4",
+        "c1"
+      ]
+    },
+    {
+      "id": "train-42",
+      "split": "train",
+      "songs": [
+        "a4",
+        "a0",
+        "a5",
+        "a3"
+      ]
+    },
+    {
+      "id": "train-43",
+      "split": "train",
+      "songs": [
+        "b2",
+        "b5",
+        "b6",
+        "b0"
+      ]
+    },
+    {
+      "id": "train-44",
+      "split": "train",
+      "songs": [
+        "c0",
+        "c4",
+        "c6",
+        "c3"
+      ]
+    },
+    {
+      "id": "train-45",
+      "split": "train",
+      "songs": [
+        "a0",
+        "a5",
+        "a2",
+        "a4"
+      ]
+    },
+    {
+      "id": "train-46",
+      "split": "train",
+      "songs": [
+        "b1",
+        "b0",
+        "b5",
+        "b3"
+      ]
+    },
+    {
+      "id": "train-47",
+      "split": "train",
+      "songs": [
+        "c4",
+        "c2",
+        "c0",
+        "c1"
+      ]
+    },
+    {
+      "id": "validation-0",
+      "split": "validation",
+      "songs": [
+        "a6",
+        "a2",
+        "a5",
+        "a0"
+      ]
+    },
+    {
+      "id": "validation-1",
+      "split": "validation",
+      "songs": [
+        "b4",
+        "b5",
+        "b3",
+        "b6"
+      ]
+    },
+    {
+      "id": "validation-2",
+      "split": "validation",
+      "songs": [
+        "c0",
+        "c6",
+        "c5",
+        "c2"
+      ]
+    },
+    {
+      "id": "validation-3",
+      "split": "validation",
+      "songs": [
+        "a3",
+        "a5",
+        "a2",
+        "a6"
+      ]
+    },
+    {
+      "id": "validation-4",
+      "split": "validation",
+      "songs": [
+        "b4",
+        "b6",
+        "b0",
+        "b2"
+      ]
+    },
+    {
+      "id": "validation-5",
+      "split": "validation",
+      "songs": [
+        "c5",
+        "c4",
+        "c1",
+        "c6"
+      ]
+    },
+    {
+      "id": "validation-6",
+      "split": "validation",
+      "songs": [
+        "a6",
+        "a2",
+        "a3",
+        "a4"
+      ]
+    },
+    {
+      "id": "validation-7",
+      "split": "validation",
+      "songs": [
+        "b1",
+        "b2",
+        "b3",
+        "b5"
+      ]
+    },
+    {
+      "id": "validation-8",
+      "split": "validation",
+      "songs": [
+        "c1",
+        "c5",
+        "c3",
+        "c6"
+      ]
+    },
+    {
+      "id": "test-0",
+      "split": "test",
+      "songs": [
+        "a1",
+        "a3",
+        "a6",
+        "a2"
+      ]
+    },
+    {
+      "id": "test-1",
+      "split": "test",
+      "songs": [
+        "b1",
+        "b6",
+        "b5",
+        "b3"
+      ]
+    },
+    {
+      "id": "test-2",
+      "split": "test",
+      "songs": [
+        "c6",
+        "c1",
+        "c0",
+        "c3"
+      ]
+    },
+    {
+      "id": "test-3",
+      "split": "test",
+      "songs": [
+        "a5",
+        "a2",
+        "a4",
+        "a3"
+      ]
+    },
+    {
+      "id": "test-4",
+      "split": "test",
+      "songs": [
+        "b5",
+        "b1",
+        "b3",
+        "b4"
+      ]
+    },
+    {
+      "id": "test-5",
+      "split": "test",
+      "songs": [
+        "c1",
+        "c0",
+        "c2",
+        "c6"
+      ]
+    },
+    {
+      "id": "test-6",
+      "split": "test",
+      "songs": [
+        "a1",
+        "a6",
+        "a2",
+        "a4"
+      ]
+    },
+    {
+      "id": "test-7",
+      "split": "test",
+      "songs": [
+        "b3",
+        "b4",
+        "b5",
+        "b2"
+      ]
+    },
+    {
+      "id": "test-8",
+      "split": "test",
+      "songs": [
+        "c3",
+        "c2",
+        "c1",
+        "c0"
+      ]
+    },
+    {
+      "id": "test-9",
+      "split": "test",
+      "songs": [
+        "a1",
+        "a0",
+        "a3",
+        "a5"
+      ]
+    },
+    {
+      "id": "test-10",
+      "split": "test",
+      "songs": [
+        "b3",
+        "b1",
+        "b4",
+        "b6"
+      ]
+    },
+    {
+      "id": "test-11",
+      "split": "test",
+      "songs": [
+        "c3",
+        "c4",
+        "c5",
+        "c2"
+      ]
+    }
+  ]
+}

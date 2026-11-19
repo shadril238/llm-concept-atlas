@@ -1,87 +1,100 @@
 ---
 title: Language AI
-description: The field that helps computers work with human language.
+description: "Language AI is the use of computational models to represent, classify, retrieve, transform, or generate language. A useful system definition names its input, output, and success criterion before naming a model."
 kind: concept
 conceptId: language-ai
 chapter: 1
 part: foundations
-summary: Language AI builds systems that process, understand, or generate human language.
+summary: "Language AI is the use of computational models to represent, classify, retrieve, transform, or generate language. A useful system definition names its input, output, and success criterion before naming a model."
 parent: chapter-01
 related: [llm, tokenization]
 level: beginner
 tags: [foundations]
 lessonStatus: full
-lastReviewed: 2026-11-12
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e3-foundations-author-review-2026-11-20
+exampleIds: ["foundation-language-ai", "first-generation"]
+bookSections: ["book-ch01-language-ai", "book-ch01-history", "book-ch01-generative-ai-year", "book-ch01-applications"]
+aliases: ["natural language processing", "NLP"]
+learningObjectives: ["Explain the input/output contract of Language AI.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: A request asks for the exact return policy. What should be checked before polishing the reply?"]
+labHref: /labs/foundations/
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import FoundationEvidence from '../../../components/FoundationEvidence.astro';
+import { AttentionStepper, PositionExplorer, DecodingExplorer, CacheExplorer, PlaylistExplorer, ArchitectureMap, RepresentationExplorer } from '../../../components/simulations/FoundationLabs';
 
 <ConceptPrimer id="language-ai" />
 
 ## Definition and intuition
 
-**Language AI** is the design of systems that work with human language: reading it, searching it, labeling it, or producing it. The task comes first. An email spam detector needs a label; a search engine needs a ranked list; a translator needs a new sentence. All three operate on language, but their outputs and success measures differ.
+Language AI is the use of computational models to represent, classify, retrieve, transform, or generate language. A useful system definition names its input, output, and success criterion before naming a model.
 
-Think of language AI as a toolbox rather than one model. Rules, keyword search, statistical classifiers, representation models, and generators each solve different parts of a language problem.
+A library receives a support message. It could route the message to a team, retrieve a policy, or draft a reply. These are three different products even though all accept text. Choosing a chat model first can hide the simpler task you actually need.
 
-## Before you start
-
-No prior model knowledge is required. Start with the example and follow linked terms as you need them.
+<ReferenceBrief objectives={["Explain the input/output contract of Language AI.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: A request asks for the exact return policy. What should be checked before polishing the reply?"]} prerequisites="Use the linked prerequisites below. Distinguish an input, a learned parameter, and a result before following the trace." scope="An explicit teaching calculation plus a linked verified CPU workflow. Illustrative values and recorded model outputs are labeled separately." />
 
 ## How it works
 
-1. **Choose an input and output.** For classification the input is text and the output is a fixed label. For generation both input and output can be text.
-2. **Represent text.** Simple systems count words; neural systems tokenize text and turn token IDs into vectors.
-3. **Learn or define a decision.** A rule can be handwritten; a model learns parameters from examples.
-4. **Evaluate the real task.** Accuracy, retrieval relevance, and answer quality measure different things. A fluent answer may still be wrong.
+A representation model turns an input into useful numeric features. A classifier maps features to a fixed label set. A retriever ranks existing items. A generator predicts a sequence of new tokens. A product can combine these roles, but its evaluation should retain the distinction.
 
-The book starts with this history because tokenization, embeddings, and transformers solve different bottlenecks in that pipeline.
+The historical progression addressed different bottlenecks: count vectors represented documents without word order; learned word vectors shared information across words; recurrent encoder-decoder models handled sequences; attention exposed relevant source states; transformers made attention central and processed available positions in parallel. These developments did not make earlier methods useless.
+
+Pretraining uses broad data and a learning objective to fit parameters. Task adaptation changes those parameters or adds task-specific components. In-context examples instead change the input while parameters remain fixed. A fluent reply can fail the user’s task, so test the system-level outcome as well as the model output.
+
+### The important distinction
+
+A demonstration with a hardcoded routing rule is a software baseline, not a trained model.
 
 ## Worked example
 
-Suppose a support team receives “I cannot sign in.” A keyword rule can route messages containing “sign in” to account support. A classifier might learn that “login failed” means the same thing even without that phrase. A generator could draft a reply, but should not be used as the sole authority for account policy.
+For “I cannot sign in,” routing might output ACCOUNT, retrieval might return a reset-policy document, and drafting might produce a paragraph. A routing error is a wrong class; a retrieval error is missing evidence; a drafting error might invent an unsupported reset step. Counting pleasant paragraphs would not evaluate the first two tasks.
 
-<LessonFlow steps={['Incoming message', 'Represent words or tokens', 'Choose task: label, find, or write', 'Evaluate the result']} caption="A simplified flow for language ai. Follow each labeled step from left to right." />
+## Try the experiment
+
+<ArchitectureMap client:visible />
+
+### Historical context, not a market leaderboard
+
+The book's first edition describes the landscape as of 2024. Word2vec (2013), sequence-to-sequence work (2014), the transformer (2017), and BERT (2018) are useful research milestones. The book's account of the rapid growth in generative interfaces describes a historical period; it does not identify today's best product. Compare current systems through their documented task contracts and reproducible measurements.
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+Run the small mechanism from the repository root with `python3 scripts/run-examples.py --id foundation-language-ai`. Its values are illustrative; it isolates the stated operation rather than pretending to load a trained model.
+
+{/* example:foundation-language-ai:start */}
 
 ```python
-def route(message):
-    text = message.lower()
-    if 'sign in' in text or 'login' in text:
-        return 'account support'
-    return 'general support'
-
-print(route('I cannot sign in'))
+tasks = {"route": "fixed label", "search": "existing document", "draft": "new text"}
+for task, output in tasks.items():
+    print(task, "->", output)
 ```
 
-**Expected behavior:** `account support`
+{/* example:foundation-language-ai:end */}
 
-This is a deliberately small rule system. `lower()` normalizes case; the two phrase checks define a decision boundary. It needs no model download and exposes where a rule fails: “my password is broken” would be missed.
+<FoundationEvidence id="first-generation" />
+
+The [foundation lab guide](/llm-concept-atlas/labs/foundations/) supplies setup, pinned artifacts, full source, recorded outputs, and the practical workflow. The mechanism snippet and the model lab serve different learning purposes: use the former to check a calculation and the latter to inspect actual library/model behavior.
 
 ## When to use it
 
-- Use a rule when the wording is stable and the consequence is easy to inspect.
-- Use a trained classifier when many varied expressions map to a fixed set of labels.
-- Use retrieval when the answer is in a document; use generation when you need new wording, ideally grounded in that document.
+Use classification for stable categories, retrieval when an existing source should be returned, and generation when a new sequence is needed. Start with a measurable baseline and the smallest adequate output. A model family is a means to that goal, not a product specification.
 
 ## Limits and common mistakes
 
-- Language AI is broader than LLMs. A simple rule can be the right tool.
-- Fluent output is not proof of understanding or factual correctness; evaluation must match the task.
+A demonstration with a hardcoded routing rule is a software baseline, not a trained model. A generated explanation of a policy is not evidence that the policy exists. Inspect data provenance and include an absent-answer case before making a reliability claim.
 
 ## Check your understanding
 
-<details><summary>Why would a spam filter and a chatbot need different metrics?</summary><p>One assigns a fixed label, while the other produces open-ended text; label accuracy does not measure answer quality.</p></details>
+<details><summary>A request asks for the exact return policy. What should be checked before polishing the reply?</summary><p>Check whether retrieval found the current applicable policy and whether the reply is supported by that source. Language fluency is a separate criterion. A system should say when the source does not answer the request.</p></details>
 
-<details><summary>What fails in the keyword rule above?</summary><p>It misses paraphrases such as “my password is broken.”</p></details>
+<details><summary>A message must be routed to one of five teams. What output and baseline would you choose?</summary><p>Use a five-label classification contract and a simple rule/count-vector baseline. Evaluate routing labels on held-out messages; a fluent paragraph is unnecessary.</p></details>
 
 ## Connections and sources
 
-This lesson follows the topic sequence in chapter 1 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter01) and [this primary technical reference](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter01).
+Book source locations: Chapter 1, printed pp. 4–5; Chapter 1, printed pp. 5–25; Chapter 1, printed pp. 23–25; Chapter 1, printed pp. 27–28. Precise section IDs and mappings are recorded in the [coverage inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The small CPU model, original playlist data, and transparent numerical traces are atlas teaching choices. Read the [authors' official chapter 1 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter01) and the [E3 execution/source guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/E3.md) for the original workflow and supported implementation details.
 
 <ConceptConnections id="language-ai" />

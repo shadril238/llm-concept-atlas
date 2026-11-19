@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-mechanics",
+  "status": "passed",
+  "date": "2026-11-19T17:56:55.209164+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/mechanics.py"
+  ],
+  "sourceSha256": "5cd18edf1103334169e5d3bf575f22c78eae57109a8b3098aebded6782491db3",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "bf692999cf8a8a0b2274ee22508845594b83b7cd918a22d403329c64688652c2",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "causal weights: [[1.0, 0.0, 0.0], [0.3302, 0.6698, 0.0], [0.2483, 0.2483, 0.5035]]\nlast output: [1.7587, 1.0]\ntop-p probabilities: [0.7311, 0.2689, 0.0]\nrotated pair: [0.5403, 0.8415]\ncache bytes: 2560\n",
+  "stderr": "",
+  "error": null
+}

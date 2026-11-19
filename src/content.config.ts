@@ -29,6 +29,8 @@ export const collections = {
         exampleIds: z.array(z.string()).default([]),
         reviewStatus: z.enum(["unreviewed", "author-reviewed", "accepted"]).optional(),
         reviewRecord: z.string().optional(),
+        relationshipReasons: z.record(z.string(), z.string()).default({}),
+        labHref: z.string().optional(),
       }),
     }),
   }),

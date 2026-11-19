@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-efficient-attention",
+  "status": "passed",
+  "date": "2026-11-19T17:56:57.610872+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/efficient_attention.py"
+  ],
+  "sourceSha256": "c584b14168de8448e0442e2d202d3ee8d793184b5aa78692e05d725dda95ab95",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "c84b08bde2230c22e1fb360957c259982d2f8fd9a26fb7f4209cbb00a9730c88",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.008,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "KV heads: 4 cache bytes: 51200\nKV heads: 2 cache bytes: 25600\nKV heads: 1 cache bytes: 12800\n",
+  "stderr": "",
+  "error": null
+}

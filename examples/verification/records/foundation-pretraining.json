@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-pretraining",
+  "status": "passed",
+  "date": "2026-11-19T17:56:55.843966+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/pretraining.py"
+  ],
+  "sourceSha256": "ba41abc0b1b5a0a6e0b6eda46d1ccfb8c01750a989798431c4b6240498150da0",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "9b686d6bddabed27915595a2875f9125849692dc2ef26806f719720f37a5a0a6",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "probability 0.25 loss 1.386\nprobability 0.5 loss 0.693\n",
+  "stderr": "",
+  "error": null
+}

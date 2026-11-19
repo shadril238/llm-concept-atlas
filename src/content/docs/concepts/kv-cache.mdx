@@ -1,83 +1,101 @@
 ---
 title: KV Cache
-description: Reuse of past attention calculations during generation.
+description: "A key-value cache stores previous attention keys and values during autoregressive inference so later decode steps can reuse them. It avoids rebuilding prior states while retaining attention to the available prefix."
 kind: concept
 conceptId: kv-cache
 chapter: 3
 part: foundations
-summary: A KV cache stores earlier key and value vectors so generation need not recompute them for every new token.
+summary: "A key-value cache stores previous attention keys and values during autoregressive inference so later decode steps can reuse them. It avoids rebuilding prior states while retaining attention to the available prefix."
 parent: transformer
 prerequisites: [attention]
 related: [query-key-value, decoding, decoder-only]
 level: intermediate
 tags: [architecture, generation]
 lessonStatus: full
-lastReviewed: 2026-11-12
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e3-foundations-author-review-2026-11-20
+exampleIds: ["foundation-kv-cache", "cache-equivalence"]
+bookSections: ["book-ch03-kv-cache"]
+aliases: ["key value cache", "prefill", "cached decoding"]
+learningObjectives: ["Explain the input/output contract of KV cache.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Why does adding a new token not require recomputing old causal positions in a standard decoder?"]
+labHref: /labs/foundations/
+relationshipReasons: {"attention": "Scoring, masking, and value mixing are the core operations extended here."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import FoundationEvidence from '../../../components/FoundationEvidence.astro';
+import { AttentionStepper, PositionExplorer, DecodingExplorer, CacheExplorer, PlaylistExplorer, ArchitectureMap, RepresentationExplorer } from '../../../components/simulations/FoundationLabs';
 
 <ConceptPrimer id="kv-cache" />
 
 ## Definition and intuition
 
-A **key–value (KV) cache** stores the attention keys and values already computed for previous tokens during autoregressive generation. When a new token is added, the decoder can reuse those stored vectors instead of recomputing them at every earlier position.
+A key-value cache stores previous attention keys and values during autoregressive inference so later decode steps can reuse them. It avoids rebuilding prior states while retaining attention to the available prefix.
 
-Think of it as keeping the reusable work from previous steps. It speeds repeated generation steps, while consuming memory that grows with kept context, layers, and heads.
+An uncached decoder repeatedly processes the whole growing prefix for every new token. The already computed keys/values are reusable under the same causal model and positions, so rebuilding them wastes work.
 
-## Before you start
-
-Read [attention](/llm-concept-atlas/concepts/attention/) first; return here when the key terms feel familiar.
+<ReferenceBrief objectives={["Explain the input/output contract of KV cache.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Why does adding a new token not require recomputing old causal positions in a standard decoder?"]} prerequisites="Use the linked prerequisites below. Distinguish an input, a learned parameter, and a result before following the trace." scope="An explicit teaching calculation plus a linked verified CPU workflow. Illustrative values and recorded model outputs are labeled separately." />
 
 ## How it works
 
-At step `t`, the decoder creates a query, key, and value for the new position in each attention layer. It appends the new key and value to that layer’s cache. The new query scores all keys that the causal mask permits, including cached ones, and combines the corresponding values. Because earlier causal states cannot depend on later tokens, their keys and values remain reusable.
+Prefill processes the prompt and creates per-layer caches. A decode step supplies only the new input token plus the past state; its query attends to previous and current keys/values. Positions and masks must describe the complete retained sequence.
 
-The cache is normally an inference optimization. Training often scores many positions together and has different memory and gradient needs. Cache policy matters with sliding windows, long contexts, and batched requests.
+For ordinary dense caches, bytes = 2 × layers × batch × KV_heads × positions × head_width × bytes_per_value. The factor two counts keys and values. GQA/MQA change KV-head count; dtype changes bytes per value. This is tensor storage, not all process memory.
+
+Before comparing speed, compare logits for the same prefix and forced continuation. Greedy paths can diverge if numerical ties choose different tokens, making a timing comparison confound different inputs. Warm up the declared device and state whether prefill is included.
+
+### The important distinction
+
+A cache is not persistent factual memory and does not extend the trained context by itself.
 
 ## Worked example
 
-Generate “cats” and then “sleep.” Without caching, a naive implementation reprocesses the prefix for the second step. With caching, the keys and values for “cats” are retained and only the new position’s projections are added. The next query still attends across the allowed history.
+L06 compares every next-token logit vector along one fixed teacher-forced continuation. It uses CPU float64 to make the numerical correctness check strict, verifies cache tensor shapes and byte counts, then records three warmed timings with and without caching. The short workload can have overhead that reduces or reverses a speed advantage.
 
-<LessonFlow steps={['Prompt prefill', 'Store K and V per layer', 'Compute new Q/K/V', 'Append new K/V', 'Reuse history']} caption="A simplified flow for kv cache. Follow each labeled step from left to right." />
+## Try the experiment
+
+<CacheExplorer client:visible />
+
+
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+Run the small mechanism from the repository root with `python3 scripts/run-examples.py --id foundation-kv-cache`. Its values are illustrative; it isolates the stated operation rather than pretending to load a trained model.
+
+{/* example:foundation-kv-cache:start */}
 
 ```python
-cache = {'keys': [], 'values': []}
-for token in ['cats', 'sleep']:
-    key, value = len(token), token.upper()  # invented stand-ins
-    cache['keys'].append(key)
-    cache['values'].append(value)
-    print(token, 'can use', len(cache['keys']), 'stored positions')
+layers, batch, kv_heads, positions, head_width, bytes_per_value = 4, 1, 2, 10, 8, 2
+size = 2 * layers * batch * kv_heads * positions * head_width * bytes_per_value
+print("cache bytes:", size)
+print("doubling positions:", size * 2)
 ```
 
-**Expected behavior:** `cats can use 1 stored positions` then `sleep can use 2 stored positions`.
+{/* example:foundation-kv-cache:end */}
 
-The strings and lengths are placeholders, not neural vectors. The append operation is the important idea. Actual caches hold tensors for every layer and attention head.
+<FoundationEvidence id="cache-equivalence" />
+
+The [foundation lab guide](/llm-concept-atlas/labs/foundations/) supplies setup, pinned artifacts, full source, recorded outputs, and the practical workflow. The mechanism snippet and the model lab serve different learning purposes: use the former to check a calculation and the latter to inspect actual library/model behavior.
 
 ## When to use it
 
-- Enable cache for interactive generation when the framework supports it.
-- Consider cache memory when serving many users or very long contexts.
+Use caching for supported autoregressive inference when prefix reuse matters. Budget memory using actual cache shapes and precision. Benchmark the real sequence lengths and hardware; do not convert this tiny CPU demonstration into a general throughput claim.
 
 ## Limits and common mistakes
 
-- The cache does not remember across unrelated requests unless deliberately retained.
-- Caching improves compute reuse; it does not improve answer quality or add knowledge.
+A cache is not persistent factual memory and does not extend the trained context by itself. Reusing a cache after changing the prefix or positions can produce wrong results. Training and inference cache requirements differ; follow the library’s supported contract.
 
 ## Check your understanding
 
-<details><summary>Why can previous causal keys and values be reused?</summary><p>Earlier positions could not depend on future tokens.</p></details>
+<details><summary>Why does adding a new token not require recomputing old causal positions in a standard decoder?</summary><p>Their permitted context excludes the new future token, so those old states remain unchanged under the same model, mask, and positions. The new position still needs to attend to the stored past.</p></details>
 
-<details><summary>What resource grows as more history is cached?</summary><p>Memory for stored key and value tensors.</p></details>
+<details><summary>A cache has shape [1,4,12,32] for K and V in each of six layers, float64. How many bytes?</summary><p>2×6×1×4×12×32×8 = 147,456 bytes. This matches the key/value tensors only; the model and other allocations are additional.</p></details>
 
 ## Connections and sources
 
-This lesson follows the topic sequence in chapter 3 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter03) and [this primary technical reference](https://huggingface.co/docs/transformers/main/cache_explanation).
+Book source locations: Chapter 3, printed pp. 83–85. Precise section IDs and mappings are recorded in the [coverage inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The small CPU model, original playlist data, and transparent numerical traces are atlas teaching choices. Read the [authors' official chapter 3 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter03) and the [E3 execution/source guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/E3.md) for the original workflow and supported implementation details.
 
 <ConceptConnections id="kv-cache" />

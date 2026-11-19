@@ -1,0 +1,100 @@
+---
+title: Sequence-to-sequence models
+description: "A sequence-to-sequence system maps an input sequence to an output sequence, which may have a different length. In an encoder-decoder design, an encoder represents the source and a decoder produces target tokens conditioned on that source."
+kind: concept
+conceptId: sequence-to-sequence
+chapter: 1
+part: foundations
+summary: "A sequence-to-sequence system maps an input sequence to an output sequence, which may have a different length. In an encoder-decoder design, an encoder represents the source and a decoder produces target tokens conditioned on that source."
+parent: encoder-only
+prerequisites: ["encoder-only", "decoder-only"]
+related: ["cross-attention"]
+level: beginner
+tags: [foundations]
+lessonStatus: full
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e3-foundations-author-review-2026-11-20
+exampleIds: ["foundation-sequence-to-sequence", "transparent-transformer"]
+bookSections: ["book-ch01-sequence-attention", "book-ch01-recurrent-context"]
+aliases: ["seq2seq", "encoder-decoder"]
+learningObjectives: ["Explain the input/output contract of Sequence-to-sequence models.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: If the source has ten tokens and the target prefix has four, must cross-attention be square?"]
+labHref: /labs/foundations/
+relationshipReasons: {"encoder-only": "Source-side contextual states form the memory used by an encoder-decoder.", "decoder-only": "Causal target-prefix processing is required before source-conditioned generation."}
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import FoundationEvidence from '../../../components/FoundationEvidence.astro';
+import { AttentionStepper, PositionExplorer, DecodingExplorer, CacheExplorer, PlaylistExplorer, ArchitectureMap, RepresentationExplorer } from '../../../components/simulations/FoundationLabs';
+
+<ConceptPrimer id="sequence-to-sequence" />
+
+## Definition and intuition
+
+A sequence-to-sequence system maps an input sequence to an output sequence, which may have a different length. In an encoder-decoder design, an encoder represents the source and a decoder produces target tokens conditioned on that source.
+
+A translation system receives a complete source sentence but must produce a target sentence whose word order and length can differ. A fixed list of sentence labels cannot express that output contract.
+
+<ReferenceBrief objectives={["Explain the input/output contract of Sequence-to-sequence models.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: If the source has ten tokens and the target prefix has four, must cross-attention be square?"]} prerequisites="Use the linked prerequisites below. Distinguish an input, a learned parameter, and a result before following the trace." scope="An explicit teaching calculation plus a linked verified CPU workflow. Illustrative values and recorded model outputs are labeled separately." />
+
+## How it works
+
+A recurrent encoder historically compressed a source into a state that initialized the decoder. Long inputs stressed that bottleneck. Attention let the decoder consult a collection of source states instead of relying only on one fixed summary.
+
+In a transformer encoder-decoder, the encoder builds source states, decoder self-attention is causal over target tokens, and cross-attention uses target-derived queries against source-derived keys/values. The source and target lengths can differ, so cross-attention weights form a target_length × source_length matrix.
+
+Teacher forcing supplies observed target prefixes during training. At inference the decoder must use its own selected tokens. The mismatch can expose accumulated errors; a strong training loss alone does not certify good sequence output. Masks should separately handle source padding and target causality.
+
+### The important distinction
+
+Do not assume “decoder” always means decoder-only.
+
+## Worked example
+
+For a source of three tokens and a target prefix of two, a cross-attention head can have Q shape [2, d_k], K shape [3, d_k], V shape [3, d_v], and output [2, d_v]. Each of the two target queries produces a distribution over the three source positions.
+
+## Try the experiment
+
+<ArchitectureMap client:visible />
+
+
+
+## Implement it
+
+Run the small mechanism from the repository root with `python3 scripts/run-examples.py --id foundation-sequence-to-sequence`. Its values are illustrative; it isolates the stated operation rather than pretending to load a trained model.
+
+{/* example:foundation-sequence-to-sequence:start */}
+
+```python
+target_length, source_length, value_width = 2, 3, 4
+print("cross-attention scores:", (target_length, source_length))
+print("cross-attention output:", (target_length, value_width))
+```
+
+{/* example:foundation-sequence-to-sequence:end */}
+
+<FoundationEvidence id="transparent-transformer" />
+
+The [foundation lab guide](/llm-concept-atlas/labs/foundations/) supplies setup, pinned artifacts, full source, recorded outputs, and the practical workflow. The mechanism snippet and the model lab serve different learning purposes: use the former to check a calculation and the latter to inspect actual library/model behavior.
+
+## When to use it
+
+Choose an encoder-decoder when a complete source-to-target transformation is central, such as translation or some summarization tasks. A decoder-only prompt can also implement transformations; compare actual task behavior and input/output costs instead of inferring quality from the architecture name.
+
+## Limits and common mistakes
+
+Do not assume “decoder” always means decoder-only. An encoder-decoder includes a decoder too. Cross-attention should not accidentally use target-side future tokens as source evidence. Returned attention weights are not guaranteed linguistic word alignments.
+
+## Check your understanding
+
+<details><summary>If the source has ten tokens and the target prefix has four, must cross-attention be square?</summary><p>No. The score matrix has one row per target query and one column per source key, so it is 4 × 10 for one head. A square matrix is a common self-attention case, not an attention requirement.</p></details>
+
+<details><summary>For Q [4,8], K [10,8], V [10,6], what are score and output shapes?</summary><p>Scores are [4,10]; row-normalized scores multiplied by V give [4,6]. The target/query row count is preserved.</p></details>
+
+## Connections and sources
+
+Book source locations: Chapter 1, printed pp. 11–15; Chapter 1, printed pp. 11–14. Precise section IDs and mappings are recorded in the [coverage inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The small CPU model, original playlist data, and transparent numerical traces are atlas teaching choices. Read the [authors' official chapter 1 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter01) and the [E3 execution/source guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/E3.md) for the original workflow and supported implementation details.
+
+<ConceptConnections id="sequence-to-sequence" />

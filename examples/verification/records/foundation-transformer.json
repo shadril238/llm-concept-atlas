@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-transformer",
+  "status": "passed",
+  "date": "2026-11-19T17:56:56.893464+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/transformer.py"
+  ],
+  "sourceSha256": "55cd4be09ac5515500fc4242ccde1864187ae24ea86a155067fde52629f3f624",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "fb2deda4b5f0e942396d14f95d4483fea30f714660a8c6c59a2ae09521dcc609",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "IDs: (1, 3)\nstates: (1, 3, 4)\nLM logits: (1, 3, 7)\n",
+  "stderr": "",
+  "error": null
+}

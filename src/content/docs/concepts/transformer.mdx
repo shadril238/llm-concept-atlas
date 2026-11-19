@@ -1,83 +1,103 @@
 ---
 title: Transformer
-description: The architecture behind many modern language models.
+description: "A transformer is a neural architecture built around attention and position-wise transformations, usually organized into repeated blocks. Different encoder, decoder, and encoder-decoder variants impose different visibility and output contracts."
 kind: concept
 conceptId: transformer
 chapter: 3
 part: foundations
-summary: A transformer processes token representations through repeated attention and feed-forward layers.
+summary: "A transformer is a neural architecture built around attention and position-wise transformations, usually organized into repeated blocks. Different encoder, decoder, and encoder-decoder variants impose different visibility and output contracts."
 parent: chapter-03
 prerequisites: [token-embedding]
 related: [attention, decoder-only, encoder-only]
 level: intermediate
 tags: [architecture]
 lessonStatus: full
-lastReviewed: 2026-11-12
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e3-foundations-author-review-2026-11-20
+exampleIds: ["foundation-transformer", "transparent-transformer"]
+bookSections: ["book-ch01-transformer-history", "book-ch03-transformer-overview", "book-ch03-forward-pass", "book-ch03-research-directions"]
+aliases: ["transformer forward pass", "LM head"]
+learningObjectives: ["Explain the input/output contract of Transformer.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Does the transformer itself choose when an email is complete?"]
+labHref: /labs/foundations/
+relationshipReasons: {"token-embedding": "The learned lookup row is the starting state before context changes it."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import FoundationEvidence from '../../../components/FoundationEvidence.astro';
+import { AttentionStepper, PositionExplorer, DecodingExplorer, CacheExplorer, PlaylistExplorer, ArchitectureMap, RepresentationExplorer } from '../../../components/simulations/FoundationLabs';
 
 <ConceptPrimer id="transformer" />
 
 ## Definition and intuition
 
-A **transformer** processes a sequence of vectors through repeated blocks that combine information across positions with attention and transform each position with a feed-forward network. The architecture underlies many language models, but “transformer” does not specify whether a model is an encoder, decoder, or encoder-decoder.
+A transformer is a neural architecture built around attention and position-wise transformations, usually organized into repeated blocks. Different encoder, decoder, and encoder-decoder variants impose different visibility and output contracts.
 
-Picture a sentence entering several layers. Each layer gives each position another chance to use context. The final representation is therefore more than a static token lookup.
+You need to trace a model beyond “text goes in, text comes out.” A useful mental model identifies the tokenizer, embedding table, blocks, output head, and external generation loop as separate parts.
 
-## Before you start
-
-Read [token embedding](/llm-concept-atlas/concepts/token-embedding/) first; return here when the key terms feel familiar.
+<ReferenceBrief objectives={["Explain the input/output contract of Transformer.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Does the transformer itself choose when an email is complete?"]} prerequisites="Use the linked prerequisites below. Distinguish an input, a learned parameter, and a result before following the trace." scope="An explicit teaching calculation plus a linked verified CPU workflow. Illustrative values and recorded model outputs are labeled separately." />
 
 ## How it works
 
-A basic block receives a matrix of token states. Self-attention makes new states by weighting value vectors from allowed positions. A feed-forward network then transforms each position independently. Residual connections preserve an information path around each sublayer, and layer normalization stabilizes computation. Position information lets the model distinguish order. Repeating blocks builds increasingly contextual features.
+The tokenizer returns IDs and masks. An embedding lookup creates token vectors. Each block combines attention-based information mixing with position-wise nonlinear computation and residual paths. A final task head maps states to vocabulary logits, class logits, or another output.
 
-An encoder may let positions attend across the whole input. A decoder uses a causal mask when predicting future tokens. Real variants differ in normalization order, position encoding, attention pattern, and other details, so a single diagram is a map of common roles rather than every model’s exact implementation.
+For a causal generator with batch B, sequence T, hidden width d, and vocabulary V, input IDs have [B,T], states [B,T,d], and LM logits [B,T,V]. The head’s raw outputs are logits; softmax and token selection are additional operations. A head need not directly return probabilities.
+
+The original transformer was an encoder-decoder architecture. Modern “transformer LLM” often refers to a decoder-only system, but architecture details such as normalization placement, activation, attention sharing, and positional scheme vary. Inspect the actual modules instead of treating one diagram as universal.
+
+### The important distinction
+
+An attention heatmap is only one intermediate tensor, not the model’s complete explanation.
 
 ## Worked example
 
-For “birds fly south,” the starting vector for `fly` is a lookup row. After attention it can combine signals from `birds` and `south`; after the feed-forward step it is transformed again. A second block can repeat the process on these updated states. The exact numerical values are learned.
+L05 uses three positions, width four, two heads, and random weights. It prints Q/K/V, masked attention, residual/MLP outputs, and seven output logits. Its attention agrees with PyTorch’s reference. L01 separately inspects a real pretrained decoder and checks its LM-head projection.
 
-<LessonFlow steps={['Token + position vectors', 'Self-attention', 'Residual + normalization', 'Feed-forward network', 'Repeat block']} caption="A simplified flow for transformer. Follow each labeled step from left to right." />
+## Try the experiment
+
+<ArchitectureMap client:visible />
+
+### Research directions in the book
+
+Chapter 3's 2024 research pointers include visual inputs, robotics, and time-series applications. They illustrate that token-like sequences and attention can be used beyond prose. They do not mean a text-only checkpoint accepts pixels or motor actions without appropriate representations, objectives, and interfaces. These are contextual research directions, not claims that the atlas has implemented those additional systems.
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+Run the small mechanism from the repository root with `python3 scripts/run-examples.py --id foundation-transformer`. Its values are illustrative; it isolates the stated operation rather than pretending to load a trained model.
+
+{/* example:foundation-transformer:start */}
 
 ```python
-# Toy one-block data flow, without learned weights
-states = [1.0, 2.0, 3.0]
-context = sum(states) / len(states)
-attention_mix = [0.7*x + 0.3*context for x in states]
-feed_forward = [max(0, 2*x - 1) for x in attention_mix]
-print([round(x, 2) for x in feed_forward])
+batch, tokens, width, vocabulary = 1, 3, 4, 7
+print("IDs:", (batch, tokens))
+print("states:", (batch, tokens, width))
+print("LM logits:", (batch, tokens, vocabulary))
 ```
 
-**Expected behavior:** A three-number list of transformed states.
+{/* example:foundation-transformer:end */}
 
-The shared average stands in for context exchange, and the last expression stands in for a position-wise transform. Real attention is query-dependent and multi-headed; this tiny calculation only shows the order of operations.
+<FoundationEvidence id="transparent-transformer" />
+
+The [foundation lab guide](/llm-concept-atlas/labs/foundations/) supplies setup, pinned artifacts, full source, recorded outputs, and the practical workflow. The mechanism snippet and the model lab serve different learning purposes: use the former to check a calculation and the latter to inspect actual library/model behavior.
 
 ## When to use it
 
-- Transformer encoders are useful for representations and classification.
-- Causal transformer decoders are useful for autoregressive generation.
+Use the transparent implementation to debug shapes and causal invariants, then inspect a supported trained model for real representations and generation. Random weights can validate mechanics but cannot establish learned language ability or useful task performance.
 
 ## Limits and common mistakes
 
-- The architecture itself does not make a model truthful or up to date.
-- Attention is one sublayer; feed-forward networks, position signals, residual paths, and training also matter.
+An attention heatmap is only one intermediate tensor, not the model’s complete explanation. Available input positions can be processed in parallel, while unknown output tokens still require sequential selection. Model-specific implementation changes can alter costs without changing this distinction.
 
 ## Check your understanding
 
-<details><summary>Which operation exchanges information across token positions?</summary><p>Self-attention.</p></details>
+<details><summary>Does the transformer itself choose when an email is complete?</summary><p>The network produces token scores, including any EOS score. The generation procedure applies selection and stopping rules such as EOS and max_new_tokens. A fixed cutoff can stop mid-sentence even when the model would continue.</p></details>
 
-<details><summary>Which operation transforms each position after attention?</summary><p>The feed-forward sublayer.</p></details>
+<details><summary>A final state has width 128 and the LM vocabulary has 50,304 items. What does the head return at one position?</summary><p>50,304 logits under a standard dense LM head. A softmax or selection policy is still needed; the width-128 state is not itself a vocabulary distribution.</p></details>
 
 ## Connections and sources
 
-This lesson follows the topic sequence in chapter 3 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter03) and [this primary technical reference](https://arxiv.org/abs/1706.03762).
+Book source locations: Chapter 1, printed pp. 15–18; Chapter 3, printed pp. 74–95; Chapter 3, printed pp. 76–79; Chapter 3, printed pp. 105–106. Precise section IDs and mappings are recorded in the [coverage inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The small CPU model, original playlist data, and transparent numerical traces are atlas teaching choices. Read the [authors' official chapter 3 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter03) and the [E3 execution/source guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/E3.md) for the original workflow and supported implementation details.
 
 <ConceptConnections id="transformer" />

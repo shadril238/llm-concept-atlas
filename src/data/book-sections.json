@@ -231,14 +231,13 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Distinguish labeling, searching, and generating by their inputs, outputs, and evaluation.",
-        "The routing rule motivates tasks well; add a comparative decision exercise with task-appropriate evaluation."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/language-ai.mdx",
           "anchor": "implement-it",
-          "finding": "The routing rule motivates tasks well; add a comparative decision exercise with task-appropriate evaluation."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -246,7 +245,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 26
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch01-history",
@@ -260,12 +260,18 @@
       "scope": "context",
       "kind": "container",
       "coverageUnit": false,
-      "mappings": [],
-      "plannedDestinations": ["language-ai-history"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/language-ai.mdx",
+          "anchor": "historical-context-not-a-market-leaderboard",
+          "conceptId": "language-ai"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L01"],
       "requirements": {
@@ -293,16 +299,22 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Explain the historical sequence of representation and generation approaches, with dated claims.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/language-ai.mdx",
+          "anchor": "historical-context-not-a-market-leaderboard",
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 27
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch01-bag-of-words",
@@ -352,14 +364,13 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Build vocabulary-aligned document count vectors and demonstrate loss of word order.",
-        "The Counter example is relevant; extend to consistent corpus vocabulary and aligned document vectors."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/bag-of-words.mdx",
           "anchor": "implement-it",
-          "finding": "The Counter example is relevant; extend to consistent corpus vocabulary and aligned document vectors."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -367,7 +378,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 28
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch01-dense-vectors",
@@ -423,19 +435,18 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Explain learned dense coordinates and compare them with sparse counts using an actual embedding.",
-        "Invented-vector similarity is relevant; add actual sentence encoding and pooling/normalization inspection."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/text-embedding.mdx",
           "anchor": "implement-it",
-          "finding": "Invented-vector similarity is relevant; add actual sentence encoding and pooling/normalization inspection."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         },
         {
           "path": "src/content/docs/concepts/word2vec.mdx",
           "anchor": "implement-it",
-          "finding": "The training-pair construction is relevant; implement sampled-negative scoring, optimization, and learned neighbors."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -443,7 +454,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 30
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch01-embedding-types",
@@ -505,19 +517,18 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Compare word, sentence, document, and image representations without treating their spaces as interchangeable.",
-        "The lookup table correctly illustrates ID-to-row mapping; add a real model matrix and shape inspection."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/token-embedding.mdx",
           "anchor": "implement-it",
-          "finding": "The lookup table correctly illustrates ID-to-row mapping; add a real model matrix and shape inspection."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         },
         {
           "path": "src/content/docs/concepts/text-embedding.mdx",
           "anchor": "implement-it",
-          "finding": "Invented-vector similarity is relevant; add actual sentence encoding and pooling/normalization inspection."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         },
         {
           "path": "src/content/docs/concepts/multimodal-embeddings.mdx",
@@ -530,7 +541,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 32
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch01-sequence-attention",
@@ -544,12 +556,18 @@
       "scope": "core",
       "kind": "container",
       "coverageUnit": false,
-      "mappings": [],
-      "plannedDestinations": ["sequence-to-sequence"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/sequence-to-sequence.mdx",
+          "anchor": "how-it-works",
+          "conceptId": "sequence-to-sequence"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L01"],
       "requirements": {
@@ -577,16 +595,22 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Trace recurrent encoder-decoder translation, the context bottleneck, and cross-attention.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/sequence-to-sequence.mdx",
+          "anchor": "how-it-works",
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 33
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch01-transformer-history",
@@ -640,14 +664,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Explain the original encoder-decoder transformer and its cross-attention, not only decoder blocks.",
-        "The explicitly simplified data flow is useful; add real projections, residual paths, normalization, and tensor shapes."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/transformer.mdx",
           "anchor": "implement-it",
-          "finding": "The explicitly simplified data flow is useful; add real projections, residual paths, normalization, and tensor shapes."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -655,7 +678,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 37
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch01-encoder-models",
@@ -711,19 +735,18 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Connect bidirectional context and masked pretraining to real representation tasks.",
-        "The disambiguation rule is explicitly illustrative; add actual contextual encoder states."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/encoder-only.mdx",
           "anchor": "implement-it",
-          "finding": "The disambiguation rule is explicitly illustrative; add actual contextual encoder states."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         },
         {
           "path": "src/content/docs/concepts/representation-model.mdx",
           "anchor": "implement-it",
-          "finding": "Cosine similarity on invented vectors is useful; add real encoder pooling and task distinctions."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -731,7 +754,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 40
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch01-decoder-models",
@@ -787,19 +811,18 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Trace causal pretraining and generation with a real model and compare base versus instruction behavior.",
-        "The visibility trace is useful; add a real causal-model input/output and training-versus-generation comparison."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/decoder-only.mdx",
           "anchor": "implement-it",
-          "finding": "The visibility trace is useful; add a real causal-model input/output and training-versus-generation comparison."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         },
         {
           "path": "src/content/docs/concepts/generative-model.mdx",
           "anchor": "implement-it",
-          "finding": "Greedy selection from supplied probabilities is useful; add actual model scoring and multi-step generation."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -807,7 +830,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 42
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch01-generative-ai-year",
@@ -821,12 +845,18 @@
       "scope": "context",
       "kind": "context",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["language-ai-history"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/language-ai.mdx",
+          "anchor": "historical-context-not-a-market-leaderboard",
+          "conceptId": "language-ai"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L01"],
       "requirements": {
@@ -842,24 +872,30 @@
         "evaluation": "Contextual decision/discussion objective; a model execution or benchmark is not required."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Provide a dated timeline explaining the book's historical context without claiming it is current market coverage.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/language-ai.mdx",
+          "anchor": "historical-context-not-a-market-leaderboard",
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 45
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch01-llm-definition",
@@ -909,14 +945,13 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Explain why size alone is not a stable model-family definition.",
-        "The small softmax supports the definition; connect it to real model inputs and output-head shapes."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/llm.mdx",
           "anchor": "implement-it",
-          "finding": "The small softmax supports the definition; connect it to real model inputs and output-head shapes."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -924,7 +959,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 47
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch01-training-paradigm",
@@ -980,14 +1016,13 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Trace pretraining, task adaptation, and preference tuning with distinct data and objectives.",
-        "The scalar update illustrates optimization, but not token prediction, batches, or model pretraining."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/pretraining.mdx",
           "anchor": "implement-it",
-          "finding": "The scalar update illustrates optimization, but not token prediction, batches, or model pretraining."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         },
         {
           "path": "src/content/docs/concepts/pretraining-and-sft.mdx",
@@ -1000,7 +1035,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 47
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch01-applications",
@@ -1050,14 +1086,13 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Match task types to model families and appropriate success criteria.",
-        "The routing rule motivates tasks well; add a comparative decision exercise with task-appropriate evaluation."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/language-ai.mdx",
           "anchor": "implement-it",
-          "finding": "The routing rule motivates tasks well; add a comparative decision exercise with task-appropriate evaluation."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -1065,7 +1100,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 49
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch01-responsible-use",
@@ -1115,14 +1151,13 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Apply an explicit harm and validation exercise rather than generic label accuracy.",
-        "Generic label accuracy is not a harm analysis or task-specific responsible-use decision exercise."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/responsible-use.mdx",
           "anchor": "implement-it",
-          "finding": "Generic label accuracy is not a harm analysis or task-specific responsible-use decision exercise."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -1130,7 +1165,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 50
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch01-limited-resources",
@@ -1144,12 +1180,18 @@
       "scope": "context",
       "kind": "context",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["model-access"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/model-access.mdx",
+          "anchor": "how-it-works",
+          "conceptId": "model-access"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L01"],
       "requirements": {
@@ -1165,24 +1207,30 @@
         "evaluation": "Contextual decision/discussion objective; a model execution or benchmark is not required."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Give verified CPU, GPU, download, and optional hosted access routes for a beginner.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/model-access.mdx",
+          "anchor": "how-it-works",
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 50
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch01-interfaces",
@@ -1196,12 +1244,18 @@
       "scope": "context",
       "kind": "container",
       "coverageUnit": false,
-      "mappings": [],
-      "plannedDestinations": ["model-access"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/model-access.mdx",
+          "anchor": "how-it-works",
+          "conceptId": "model-access"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L01"],
       "requirements": {
@@ -1229,16 +1283,22 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Compare hosted interfaces and local artifacts by control, requirements, and reproducibility.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/model-access.mdx",
+          "anchor": "how-it-works",
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 51
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch01-proprietary",
@@ -1252,12 +1312,18 @@
       "scope": "context",
       "kind": "context",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["model-access"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/model-access.mdx",
+          "anchor": "how-it-works",
+          "conceptId": "model-access"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L01"],
       "requirements": {
@@ -1273,24 +1339,30 @@
         "evaluation": "Contextual decision/discussion objective; a model execution or benchmark is not required."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Explain hosted model access and its operational tradeoffs with a concrete decision exercise.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/model-access.mdx",
+          "anchor": "how-it-works",
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 51
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch01-open-models",
@@ -1304,12 +1376,18 @@
       "scope": "context",
       "kind": "context",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["model-access"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/model-access.mdx",
+          "anchor": "how-it-works",
+          "conceptId": "model-access"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L01"],
       "requirements": {
@@ -1325,24 +1403,30 @@
         "evaluation": "Contextual decision/discussion objective; a model execution or benchmark is not required."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Distinguish downloadable weights, license permissions, and openness of training resources.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/model-access.mdx",
+          "anchor": "how-it-works",
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 52
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch01-frameworks",
@@ -1356,12 +1440,18 @@
       "scope": "context",
       "kind": "context",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["model-access"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/model-access.mdx",
+          "anchor": "how-it-works",
+          "conceptId": "model-access"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L01"],
       "requirements": {
@@ -1377,24 +1467,30 @@
         "evaluation": "Contextual decision/discussion objective; a model execution or benchmark is not required."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Explain the different roles of model hubs, inference libraries, and workflow frameworks.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/model-access.mdx",
+          "anchor": "how-it-works",
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 53
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch01-first-generation",
@@ -1408,12 +1504,18 @@
       "scope": "core",
       "kind": "workflow",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["first-text-generation"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/generative-model.mdx",
+          "anchor": "implement-it",
+          "conceptId": "generative-model"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L01"],
       "requirements": {
@@ -1426,24 +1528,30 @@
       },
       "notApplicableReasons": {},
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
-        "implementation": "missing",
-        "evaluation": "missing",
-        "exercises": "missing"
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
+        "implementation": "partial",
+        "evaluation": "partial",
+        "exercises": "partial"
       },
       "gaps": [
-        "Load a matching tokenizer/model and inspect real generated continuation and generation settings.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/generative-model.mdx",
+          "anchor": "implement-it",
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 54
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-tokenization",
@@ -1503,18 +1611,18 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/tokenization.mdx",
           "anchor": "implement-it-with-a-real-tokenizer",
-          "finding": "E2 adds actual BERT/GPT-2 comparison, multilingual/code/empty cases, offsets, special-token inspection, locked execution, and topic-specific exercises. Independent editorial and beginner review remain pending."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         },
         {
           "path": "src/content/docs/concepts/token.mdx",
           "anchor": "implement-it",
-          "finding": "The invented vocabulary correctly demonstrates piece-to-ID lookup; link a verified real tokenizer run."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -1523,7 +1631,7 @@
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 60
       },
-      "enhancementReview": "e2-reference-author-review-2026-11-20"
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-prepare-inputs",
@@ -1579,18 +1687,18 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/tokenization.mdx",
           "anchor": "implement-it-with-a-real-tokenizer",
-          "finding": "E2 adds actual BERT/GPT-2 comparison, multilingual/code/empty cases, offsets, special-token inspection, locked execution, and topic-specific exercises. Independent editorial and beginner review remain pending."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         },
         {
           "path": "src/content/docs/concepts/vocabulary.mdx",
           "anchor": "implement-it",
-          "finding": "The dictionary correctly illustrates mappings; inspect real special tokens and tokenizer/model compatibility."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -1599,7 +1707,7 @@
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 60
       },
-      "enhancementReview": "e2-reference-author-review-2026-11-20"
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-run-llm",
@@ -1613,12 +1721,18 @@
       "scope": "core",
       "kind": "workflow",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["first-text-generation"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/generative-model.mdx",
+          "anchor": "implement-it",
+          "conceptId": "generative-model"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L02", "L03", "L04"],
       "requirements": {
@@ -1631,24 +1745,30 @@
       },
       "notApplicableReasons": {},
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
-        "implementation": "missing",
-        "evaluation": "missing",
-        "exercises": "missing"
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
+        "implementation": "partial",
+        "evaluation": "partial",
+        "exercises": "partial"
       },
       "gaps": [
-        "Run tokenization and generation together with a matching model on documented hardware.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/generative-model.mdx",
+          "anchor": "implement-it",
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 61
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-segmentation",
@@ -1698,13 +1818,13 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/tokenization.mdx",
           "anchor": "implement-it-with-a-real-tokenizer",
-          "finding": "E2 adds actual BERT/GPT-2 comparison, multilingual/code/empty cases, offsets, special-token inspection, locked execution, and topic-specific exercises. Independent editorial and beginner review remain pending."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -1713,7 +1833,7 @@
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 65
       },
-      "enhancementReview": "e2-reference-author-review-2026-11-20"
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-token-units",
@@ -1769,18 +1889,18 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/word-and-subword-tokens.mdx",
           "anchor": "implement-it",
-          "finding": "The example slices visible context and performs no word/subword tokenization."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         },
         {
           "path": "src/content/docs/concepts/tokenization.mdx",
           "anchor": "implement-it-with-a-real-tokenizer",
-          "finding": "E2 adds actual BERT/GPT-2 comparison, multilingual/code/empty cases, offsets, special-token inspection, locked execution, and topic-specific exercises. Independent editorial and beginner review remain pending."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -1789,7 +1909,7 @@
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 66
       },
-      "enhancementReview": "e2-reference-author-review-2026-11-20"
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-tokenizer-comparison",
@@ -1814,7 +1934,7 @@
       "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E2",
       "plannedLabs": ["L02", "L03", "L04"],
       "requirements": {
@@ -1835,13 +1955,13 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Independent review and a wider tokenizer/numerical comparison remain; E2 provides a verified two-tokenizer slice."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/tokenization.mdx",
           "anchor": "see-a-worked-example",
-          "finding": "E2 compares two pinned tokenizers on eight recorded English, multilingual, code, and whitespace cases."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -1849,7 +1969,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 68
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-tokenizer-properties",
@@ -1909,18 +2030,18 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/tokenization.mdx",
           "anchor": "implement-it-with-a-real-tokenizer",
-          "finding": "E2 adds actual BERT/GPT-2 comparison, multilingual/code/empty cases, offsets, special-token inspection, locked execution, and topic-specific exercises. Independent editorial and beginner review remain pending."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         },
         {
           "path": "src/content/docs/concepts/vocabulary.mdx",
           "anchor": "implement-it",
-          "finding": "The dictionary correctly illustrates mappings; inspect real special tokens and tokenizer/model compatibility."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -1929,7 +2050,7 @@
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 77
       },
-      "enhancementReview": "e2-reference-author-review-2026-11-20"
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-token-embeddings",
@@ -1983,14 +2104,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Distinguish learned lookup rows from later contextual states and sentence vectors.",
-        "The lookup table correctly illustrates ID-to-row mapping; add a real model matrix and shape inspection."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/token-embedding.mdx",
           "anchor": "implement-it",
-          "finding": "The lookup table correctly illustrates ID-to-row mapping; add a real model matrix and shape inspection."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -1998,7 +2118,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 79
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-embedding-table",
@@ -2054,19 +2175,18 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Inspect the actual embedding matrix shape and row lookup for tokenizer IDs.",
-        "The lookup table correctly illustrates ID-to-row mapping; add a real model matrix and shape inspection."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/token-embedding.mdx",
           "anchor": "implement-it",
-          "finding": "The lookup table correctly illustrates ID-to-row mapping; add a real model matrix and shape inspection."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         },
         {
           "path": "src/content/docs/concepts/vocabulary.mdx",
           "anchor": "implement-it",
-          "finding": "The dictionary correctly illustrates mappings; inspect real special tokens and tokenizer/model compatibility."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -2074,7 +2194,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 79
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-contextual-embeddings",
@@ -2124,14 +2245,13 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Extract real hidden states for the same word in different contexts with aligned tokens.",
-        "Cosine similarity of fixed vectors does not extract context-dependent states for a repeated word."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/contextualized-embeddings.mdx",
           "anchor": "implement-it",
-          "finding": "Cosine similarity of fixed vectors does not extract context-dependent states for a repeated word."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -2139,7 +2259,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 80
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-text-embeddings",
@@ -2189,14 +2310,13 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Encode real texts and explain pooling, shape, normalization, and similarity.",
-        "Invented-vector similarity is relevant; add actual sentence encoding and pooling/normalization inspection."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/text-embedding.mdx",
           "anchor": "implement-it",
-          "finding": "Invented-vector similarity is relevant; add actual sentence encoding and pooling/normalization inspection."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -2204,7 +2324,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 83
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-word-embeddings",
@@ -2258,14 +2379,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Distinguish static word vectors from contextual language-model representations.",
-        "The training-pair construction is relevant; implement sampled-negative scoring, optimization, and learned neighbors."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/word2vec.mdx",
           "anchor": "implement-it",
-          "finding": "The training-pair construction is relevant; implement sampled-negative scoring, optimization, and learned neighbors."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -2273,7 +2393,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 85
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-pretrained-word-vectors",
@@ -2287,12 +2408,18 @@
       "scope": "core",
       "kind": "workflow",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["pretrained-word-embeddings"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/word2vec.mdx",
+          "anchor": "pretrained-word-embeddings",
+          "conceptId": "word2vec"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L02", "L03", "L04"],
       "requirements": {
@@ -2305,24 +2432,30 @@
       },
       "notApplicableReasons": {},
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
-        "implementation": "missing",
-        "evaluation": "missing",
-        "exercises": "missing"
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
+        "implementation": "partial",
+        "evaluation": "partial",
+        "exercises": "partial"
       },
       "gaps": [
-        "Load pretrained word vectors, inspect nearest neighbors, and explain a misleading neighbor.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/word2vec.mdx",
+          "anchor": "pretrained-word-embeddings",
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 85
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-word2vec-training",
@@ -2382,19 +2515,18 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Connect center/context pairs and negative sampling to parameter updates, not just pair creation.",
-        "The training-pair construction is relevant; implement sampled-negative scoring, optimization, and learned neighbors."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/word2vec.mdx",
           "anchor": "implement-it",
-          "finding": "The training-pair construction is relevant; implement sampled-negative scoring, optimization, and learned neighbors."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         },
         {
           "path": "src/content/docs/concepts/contrastive-training.mdx",
           "anchor": "implement-it",
-          "finding": "The fixed-score loss lacks word2vec pair scoring, sampled negatives, and parameter updates."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -2402,7 +2534,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 86
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-recommendations",
@@ -2456,14 +2589,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Explain why item co-occurrence can train useful representations and what it cannot establish.",
-        "Two fixed vectors do not train playlist embeddings, retrieve songs, or evaluate recommendations."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/recommendation-embeddings.mdx",
           "anchor": "implement-it",
-          "finding": "Two fixed vectors do not train playlist embeddings, retrieve songs, or evaluate recommendations."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -2471,7 +2603,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 89
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-song-recommendations",
@@ -2485,12 +2618,18 @@
       "scope": "core",
       "kind": "workflow",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["song-recommendations"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/recommendation-embeddings.mdx",
+          "anchor": "implement-it",
+          "conceptId": "recommendation-embeddings"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L02", "L03", "L04"],
       "requirements": {
@@ -2503,24 +2642,30 @@
       },
       "notApplicableReasons": {},
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
-        "implementation": "missing",
-        "evaluation": "missing",
-        "exercises": "missing"
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
+        "implementation": "partial",
+        "evaluation": "partial",
+        "exercises": "partial"
       },
       "gaps": [
-        "Load playlists and metadata, retrieve neighbors, and compare recommendations with a baseline.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/recommendation-embeddings.mdx",
+          "anchor": "implement-it",
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 89
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-song-training",
@@ -2534,12 +2679,18 @@
       "scope": "core",
       "kind": "workflow",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["song-recommendations"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/recommendation-embeddings.mdx",
+          "anchor": "implement-it",
+          "conceptId": "recommendation-embeddings"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L02", "L03", "L04"],
       "requirements": {
@@ -2552,24 +2703,30 @@
       },
       "notApplicableReasons": {},
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
-        "implementation": "missing",
-        "evaluation": "missing",
-        "exercises": "missing"
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
+        "implementation": "partial",
+        "evaluation": "partial",
+        "exercises": "partial"
       },
       "gaps": [
-        "Train song vectors from playlists and evaluate held-out interactions without leakage.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/recommendation-embeddings.mdx",
+          "anchor": "implement-it",
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 91
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch03-transformer-overview",
@@ -2623,14 +2780,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Trace a real model from tokenizer through blocks and the language-model head.",
-        "The explicitly simplified data flow is useful; add real projections, residual paths, normalization, and tensor shapes."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/transformer.mdx",
           "anchor": "implement-it",
-          "finding": "The explicitly simplified data flow is useful; add real projections, residual paths, normalization, and tensor shapes."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -2638,7 +2794,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 96
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch03-inputs-outputs",
@@ -2664,7 +2821,7 @@
       "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L05", "L06"],
       "requirements": {
@@ -2680,19 +2837,18 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Inspect real input IDs, output logits, and newly generated tokens.",
-        "Greedy selection from supplied probabilities is useful; add actual model scoring and multi-step generation."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/generative-model.mdx",
           "anchor": "implement-it",
-          "finding": "Greedy selection from supplied probabilities is useful; add actual model scoring and multi-step generation."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -2700,7 +2856,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 96
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch03-forward-pass",
@@ -2756,19 +2913,18 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Show model modules and intermediate tensor shapes including the language-model head.",
-        "The explicitly simplified data flow is useful; add real projections, residual paths, normalization, and tensor shapes."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/transformer.mdx",
           "anchor": "implement-it",
-          "finding": "The explicitly simplified data flow is useful; add real projections, residual paths, normalization, and tensor shapes."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         },
         {
           "path": "src/content/docs/concepts/token-embedding.mdx",
           "anchor": "implement-it",
-          "finding": "The lookup table correctly illustrates ID-to-row mapping; add a real model matrix and shape inspection."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -2776,7 +2932,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 98
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch03-decoding",
@@ -2826,14 +2983,13 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Implement probability conversion, temperature, top-k/top-p, and a verified token selection.",
-        "Greedy and seeded choice are useful; temperature and top-k/top-p described in the text are not implemented."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/decoding.mdx",
           "anchor": "implement-it",
-          "finding": "Greedy and seeded choice are useful; temperature and top-k/top-p described in the text are not implemented."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -2841,7 +2997,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 101
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch03-parallel-context",
@@ -2897,19 +3054,18 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Separate parallel processing of existing positions from sequential generation and token budgets.",
-        "A prefix slice illustrates causal visibility, not a tokenizer-aware prompt/output budget."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/context-size.mdx",
           "anchor": "implement-it",
-          "finding": "A prefix slice illustrates causal visibility, not a tokenizer-aware prompt/output budget."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         },
         {
           "path": "src/content/docs/concepts/decoder-only.mdx",
           "anchor": "implement-it",
-          "finding": "The visibility trace is useful; add a real causal-model input/output and training-versus-generation comparison."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -2917,7 +3073,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 103
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch03-kv-cache",
@@ -2943,7 +3100,7 @@
       "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L05", "L06"],
       "requirements": {
@@ -2959,19 +3116,18 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Compare cached and uncached real logits before measuring generation time and cache memory.",
-        "The append-only list illustrates storage but not real cached keys/values or correctness/speed comparison."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/kv-cache.mdx",
           "anchor": "implement-it",
-          "finding": "The append-only list illustrates storage but not real cached keys/values or correctness/speed comparison."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -2979,7 +3135,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 105
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch03-block",
@@ -3051,29 +3208,28 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Trace projections, attention, feedforward, residual, and normalization calculations with shapes.",
-        "Only the weighted sum is computed; feedforward, residual, and normalization operations are absent."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/transformer-block.mdx",
           "anchor": "implement-it",
-          "finding": "Only the weighted sum is computed; feedforward, residual, and normalization operations are absent."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         },
         {
           "path": "src/content/docs/concepts/attention.mdx",
           "anchor": "implement-it",
-          "finding": "The weighted-value calculation is relevant; extend to actual Q/K projections, dimensions, masking, and stable softmax."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         },
         {
           "path": "src/content/docs/concepts/self-attention.mdx",
           "anchor": "implement-it",
-          "finding": "The mask visibility printout is relevant; add the actual self-attention matrix computation."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         },
         {
           "path": "src/content/docs/concepts/query-key-value.mdx",
           "anchor": "implement-it",
-          "finding": "A scalar query/key/value calculation is relevant; add learned matrix projections, shapes, and masks."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -3081,7 +3237,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 107
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch03-architecture-improvements",
@@ -3135,14 +3292,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Organize architectural versus implementation changes without treating them as the same optimization.",
-        "An ordinary weighted sum demonstrates no sparse pattern, shared KV heads, or memory-efficient algorithm."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/efficient-attention.mdx",
           "anchor": "implement-it",
-          "finding": "An ordinary weighted sum demonstrates no sparse pattern, shared KV heads, or memory-efficient algorithm."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -3150,7 +3306,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 117
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch03-efficient-attention",
@@ -3204,14 +3361,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Compare local attention, shared KV heads, and memory-efficient exact attention.",
-        "An ordinary weighted sum demonstrates no sparse pattern, shared KV heads, or memory-efficient algorithm."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/efficient-attention.mdx",
           "anchor": "implement-it",
-          "finding": "An ordinary weighted sum demonstrates no sparse pattern, shared KV heads, or memory-efficient algorithm."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -3219,7 +3375,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 118
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch03-modern-block",
@@ -3273,14 +3430,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Explain pre-normalization, RMSNorm, and SwiGLU with numerical or shape-level traces.",
-        "Only the weighted sum is computed; feedforward, residual, and normalization operations are absent."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/transformer-block.mdx",
           "anchor": "implement-it",
-          "finding": "Only the weighted sum is computed; feedforward, residual, and normalization operations are absent."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -3288,7 +3444,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 123
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch03-rope",
@@ -3314,7 +3471,7 @@
       "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P0",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L05", "L06"],
       "requirements": {
@@ -3342,14 +3499,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Compute actual paired-coordinate rotations of queries and keys and explain relative offsets.",
-        "The snippet has no position values or rotations; it repeats an attention weighted sum."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/positional-embeddings-and-rope.mdx",
           "anchor": "implement-it",
-          "finding": "The snippet has no position values or rotations; it repeats an attention weighted sum."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -3357,7 +3513,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 124
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch03-research-directions",
@@ -3371,12 +3528,18 @@
       "scope": "context",
       "kind": "context",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["architecture-research-directions"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/transformer.mdx",
+          "anchor": "research-directions-in-the-book",
+          "conceptId": "transformer"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L05", "L06"],
       "requirements": {
@@ -3392,24 +3555,30 @@
         "evaluation": "Contextual decision/discussion objective; a model execution or benchmark is not required."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Explain the book's vision, robotics, and time-series research pointers as contextual directions.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/transformer.mdx",
+          "anchor": "research-directions-in-the-book",
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 127
-      }
+      },
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch04-sentiment-task",
@@ -4823,9 +4992,15 @@
       "scope": "core",
       "kind": "workflow",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["first-text-generation"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/generative-model.mdx",
+          "anchor": "implement-it",
+          "conceptId": "generative-model"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -4852,7 +5027,13 @@
         "Load matching artifacts and inspect the model-specific rendered chat prompt.",
         "No dedicated explanation or executable workflow for this source objective was found in the atlas."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/generative-model.mdx",
+          "anchor": "implement-it",
+          "finding": "E3 delivers the dedicated explanation, worked trace, practice, and connected verified foundation workflow."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
@@ -11257,12 +11438,18 @@
       "scope": "core",
       "kind": "concept",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["sequence-to-sequence"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/sequence-to-sequence.mdx",
+          "anchor": "how-it-works",
+          "conceptId": "sequence-to-sequence"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L01"],
       "requirements": {
@@ -11278,20 +11465,26 @@
         "evaluation": "A numerical or reasoning self-check suffices for this mechanism; full task evaluation belongs to its workflow."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Trace recurrent state and cross-attention in translation before comparing transformers.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/sequence-to-sequence.mdx",
+          "anchor": "how-it-works",
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch01-cross-attention",
@@ -11305,12 +11498,18 @@
       "scope": "core",
       "kind": "concept",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["cross-attention"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/cross-attention.mdx",
+          "anchor": "how-it-works",
+          "conceptId": "cross-attention"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L01"],
       "requirements": {
@@ -11326,20 +11525,26 @@
         "evaluation": "A numerical or reasoning self-check suffices for this mechanism; full task evaluation belongs to its workflow."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Distinguish queries from decoder states and keys/values from encoder outputs.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/cross-attention.mdx",
+          "anchor": "how-it-works",
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-tokenizer-algorithms",
@@ -11389,18 +11594,18 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/tokenization.mdx",
           "anchor": "implement-it-with-a-real-tokenizer",
-          "finding": "E2 adds actual BERT/GPT-2 comparison, multilingual/code/empty cases, offsets, special-token inspection, locked execution, and topic-specific exercises. Independent editorial and beginner review remain pending."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
-      "enhancementReview": "e2-reference-author-review-2026-11-20"
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-special-tokens",
@@ -11456,23 +11661,23 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/tokenization.mdx",
           "anchor": "implement-it-with-a-real-tokenizer",
-          "finding": "E2 adds actual BERT/GPT-2 comparison, multilingual/code/empty cases, offsets, special-token inspection, locked execution, and topic-specific exercises. Independent editorial and beginner review remain pending."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         },
         {
           "path": "src/content/docs/concepts/vocabulary.mdx",
           "anchor": "implement-it",
-          "finding": "The dictionary correctly illustrates mappings; inspect real special tokens and tokenizer/model compatibility."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
-      "enhancementReview": "e2-reference-author-review-2026-11-20"
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-negative-sampling",
@@ -11528,23 +11733,23 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Show center/context pairs, negative sampling, a binary objective, and an update.",
-        "The training-pair construction is relevant; implement sampled-negative scoring, optimization, and learned neighbors."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/word2vec.mdx",
           "anchor": "implement-it",
-          "finding": "The training-pair construction is relevant; implement sampled-negative scoring, optimization, and learned neighbors."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         },
         {
           "path": "src/content/docs/concepts/contrastive-training.mdx",
           "anchor": "implement-it",
-          "finding": "The fixed-score loss lacks word2vec pair scoring, sampled negatives, and parameter updates."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch03-lm-head",
@@ -11600,23 +11805,23 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Show the hidden-state to vocabulary projection and distinguish logits from probabilities.",
-        "Greedy selection from supplied probabilities is useful; add actual model scoring and multi-step generation."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/generative-model.mdx",
           "anchor": "implement-it",
-          "finding": "Greedy selection from supplied probabilities is useful; add actual model scoring and multi-step generation."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         },
         {
           "path": "src/content/docs/concepts/llm.mdx",
           "anchor": "implement-it",
-          "finding": "The small softmax supports the definition; connect it to real model inputs and output-head shapes."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch03-feedforward",
@@ -11666,18 +11871,18 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Trace a position-wise feedforward transformation with explicit shapes and activation.",
-        "Only the weighted sum is computed; feedforward, residual, and normalization operations are absent."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/transformer-block.mdx",
           "anchor": "implement-it",
-          "finding": "Only the weighted sum is computed; feedforward, residual, and normalization operations are absent."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch03-attention-calculation",
@@ -11739,28 +11944,28 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Compute matrix Q/K/V projections, masking, scaling, normalization, and weighted outputs.",
-        "The weighted-value calculation is relevant; extend to actual Q/K projections, dimensions, masking, and stable softmax."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/attention.mdx",
           "anchor": "implement-it",
-          "finding": "The weighted-value calculation is relevant; extend to actual Q/K projections, dimensions, masking, and stable softmax."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         },
         {
           "path": "src/content/docs/concepts/self-attention.mdx",
           "anchor": "implement-it",
-          "finding": "The mask visibility printout is relevant; add the actual self-attention matrix computation."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         },
         {
           "path": "src/content/docs/concepts/query-key-value.mdx",
           "anchor": "implement-it",
-          "finding": "A scalar query/key/value calculation is relevant; add learned matrix projections, shapes, and masks."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch03-multi-head",
@@ -11810,18 +12015,18 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Show several projected heads and their concatenation/output projection.",
-        "The weighted-value calculation is relevant; extend to actual Q/K projections, dimensions, masking, and stable softmax."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/attention.mdx",
           "anchor": "implement-it",
-          "finding": "The weighted-value calculation is relevant; extend to actual Q/K projections, dimensions, masking, and stable softmax."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch03-local-attention",
@@ -11871,18 +12076,18 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Compare actual allowed-position masks and the information each pattern removes.",
-        "An ordinary weighted sum demonstrates no sparse pattern, shared KV heads, or memory-efficient algorithm."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/efficient-attention.mdx",
           "anchor": "implement-it",
-          "finding": "An ordinary weighted sum demonstrates no sparse pattern, shared KV heads, or memory-efficient algorithm."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch03-shared-kv",
@@ -11896,12 +12101,18 @@
       "scope": "core",
       "kind": "concept",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["grouped-query-attention"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/efficient-attention.mdx",
+          "anchor": "grouped-query-attention",
+          "conceptId": "efficient-attention"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L05", "L06"],
       "requirements": {
@@ -11917,20 +12128,26 @@
         "evaluation": "A numerical or reasoning self-check suffices for this mechanism; full task evaluation belongs to its workflow."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Calculate query and shared KV head shapes and their cache-memory consequences.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/efficient-attention.mdx",
+          "anchor": "grouped-query-attention",
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch03-flash-attention",
@@ -11980,18 +12197,18 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Explain exact tiled attention and memory traffic separately from sparse attention.",
-        "An ordinary weighted sum demonstrates no sparse pattern, shared KV heads, or memory-efficient algorithm."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/efficient-attention.mdx",
           "anchor": "implement-it",
-          "finding": "An ordinary weighted sum demonstrates no sparse pattern, shared KV heads, or memory-efficient algorithm."
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch03-normalization",
@@ -12005,12 +12222,18 @@
       "scope": "core",
       "kind": "concept",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["normalization-and-residuals"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/transformer-block.mdx",
+          "anchor": "normalization-and-residuals",
+          "conceptId": "transformer-block"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L05", "L06"],
       "requirements": {
@@ -12026,20 +12249,26 @@
         "evaluation": "A numerical or reasoning self-check suffices for this mechanism; full task evaluation belongs to its workflow."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Trace residual addition and compare centering/scaling operations with correct dimensions.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/transformer-block.mdx",
+          "anchor": "normalization-and-residuals",
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch03-swiglu",
@@ -12053,12 +12282,18 @@
       "scope": "core",
       "kind": "concept",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["feedforward-activations"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/transformer-block.mdx",
+          "anchor": "feedforward-activations",
+          "conceptId": "transformer-block"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L05", "L06"],
       "requirements": {
@@ -12074,20 +12309,26 @@
         "evaluation": "A numerical or reasoning self-check suffices for this mechanism; full task evaluation belongs to its workflow."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Explain gated feedforward operations and the role of the activation.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/transformer-block.mdx",
+          "anchor": "feedforward-activations",
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch03-packing",
@@ -12101,12 +12342,18 @@
       "scope": "core",
       "kind": "concept",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["sequence-packing"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/sequence-packing.mdx",
+          "anchor": "how-it-works",
+          "conceptId": "sequence-packing"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L05", "L06"],
       "requirements": {
@@ -12122,20 +12369,26 @@
         "evaluation": "A numerical or reasoning self-check suffices for this mechanism; full task evaluation belongs to its workflow."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Show how packing affects masks and positions without cross-document leakage.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E3 author implementation and CPU reference evidence are available. Independent technical/editorial acceptance and beginner feedback remain pending; realistic larger-data and hardware extensions retain their own status."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/sequence-packing.mdx",
+          "anchor": "how-it-works",
+          "finding": "E3 replaces the earlier introductory mechanism with a topic-specific trace and linked verified foundation workflow; independent acceptance remains pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "book-ch04-classification-metrics",

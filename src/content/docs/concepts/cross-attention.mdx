@@ -1,0 +1,102 @@
+---
+title: Cross-attention
+description: "Cross-attention forms queries from one stream and keys/values from another. In an encoder-decoder model, target-side queries retrieve mixtures of source-side states."
+kind: concept
+conceptId: cross-attention
+chapter: 1
+part: foundations
+summary: "Cross-attention forms queries from one stream and keys/values from another. In an encoder-decoder model, target-side queries retrieve mixtures of source-side states."
+parent: attention
+prerequisites: ["query-key-value"]
+related: ["sequence-to-sequence"]
+level: beginner
+tags: [foundations]
+lessonStatus: full
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e3-foundations-author-review-2026-11-20
+exampleIds: ["foundation-cross-attention", "transparent-transformer"]
+bookSections: ["book-ch01-cross-attention"]
+aliases: ["encoder-decoder attention"]
+learningObjectives: ["Explain the input/output contract of Cross-attention.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Can source and target have different token counts?"]
+labHref: /labs/foundations/
+relationshipReasons: {"query-key-value": "Projection roles and shapes determine which tensors are rotated or cached."}
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import FoundationEvidence from '../../../components/FoundationEvidence.astro';
+import { AttentionStepper, PositionExplorer, DecodingExplorer, CacheExplorer, PlaylistExplorer, ArchitectureMap, RepresentationExplorer } from '../../../components/simulations/FoundationLabs';
+
+<ConceptPrimer id="cross-attention" />
+
+## Definition and intuition
+
+Cross-attention forms queries from one stream and keys/values from another. In an encoder-decoder model, target-side queries retrieve mixtures of source-side states.
+
+A translation decoder has generated two target tokens but needs information from a three-token source. It should inspect source states without pretending that source and target positions are the same sequence.
+
+<ReferenceBrief objectives={["Explain the input/output contract of Cross-attention.", "Trace the worked case and inspect its intermediate values.", "Diagnose this failure: Can source and target have different token counts?"]} prerequisites="Use the linked prerequisites below. Distinguish an input, a learned parameter, and a result before following the trace." scope="An explicit teaching calculation plus a linked verified CPU workflow. Illustrative values and recorded model outputs are labeled separately." />
+
+## How it works
+
+The query matrix has one row per target position, while key/value matrices have one row per source position. QKᵀ therefore produces a rectangular target-by-source score matrix. Row-wise softmax chooses a source mixture for each target query.
+
+A causal mask usually governs target self-attention. Cross-attention instead needs the appropriate source visibility and padding mask; copying a square target-causal mask onto a rectangular source matrix can remove valid evidence or cause shape errors.
+
+Cross-attention can connect modalities when representations and training support that design. The word “cross” alone does not make any two arbitrary vector spaces compatible. Learned projections, dimensional contracts, and the task objective remain necessary.
+
+### The important distinction
+
+A cross-attention map is not guaranteed to be a word alignment.
+
+## Worked example
+
+Two target queries [1,0] and [0,1] compare with three source keys [1,0], [0,1], [1,1]. The first emphasizes sources matching its first coordinate; the second emphasizes sources matching its second. Both outputs are mixtures of three source values, not newly generated words by themselves.
+
+## Try the experiment
+
+<AttentionStepper client:visible />
+
+
+
+## Implement it
+
+Run the small mechanism from the repository root with `python3 scripts/run-examples.py --id foundation-cross-attention`. Its values are illustrative; it isolates the stated operation rather than pretending to load a trained model.
+
+{/* example:foundation-cross-attention:start */}
+
+```python
+target_queries, source_keys = 2, 3
+weights = [[0.4, 0.2, 0.4], [0.2, 0.4, 0.4]]
+assert len(weights) == target_queries
+assert all(len(row) == source_keys and abs(sum(row) - 1) < 1e-9 for row in weights)
+print("rectangular weights:", weights)
+```
+
+{/* example:foundation-cross-attention:end */}
+
+<FoundationEvidence id="transparent-transformer" />
+
+The [foundation lab guide](/llm-concept-atlas/labs/foundations/) supplies setup, pinned artifacts, full source, recorded outputs, and the practical workflow. The mechanism snippet and the model lab serve different learning purposes: use the former to check a calculation and the latter to inspect actual library/model behavior.
+
+## When to use it
+
+Use cross-attention for source-conditioned generation or other architectures that query an external representation stream. Connect it to sequence-to-sequence tasks rather than assuming every decoder-only model contains this separate layer.
+
+## Limits and common mistakes
+
+A cross-attention map is not guaranteed to be a word alignment. Ignoring source padding lets filler states enter the mixture. Confusing target/source axes can produce plausible visualizations with the wrong interpretation.
+
+## Check your understanding
+
+<details><summary>Can source and target have different token counts?</summary><p>Yes. Q has T_target rows and K/V have T_source rows. The attention output preserves the query-row count; the key count determines the number of terms in each mixture.</p></details>
+
+<details><summary>A target has four positions and the source has ten plus two pads. How many source columns should contribute?</summary><p>The score tensor may contain twelve columns, but the two source padding positions should be masked. Each target row then normalizes over the ten permitted source positions.</p></details>
+
+## Connections and sources
+
+Book source locations: Chapter 1, printed pp. 17–17. Precise section IDs and mappings are recorded in the [coverage inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The small CPU model, original playlist data, and transparent numerical traces are atlas teaching choices. Read the [authors' official chapter 1 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter01) and the [E3 execution/source guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/E3.md) for the original workflow and supported implementation details.
+
+<ConceptConnections id="cross-attention" />

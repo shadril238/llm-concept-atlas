@@ -248,12 +248,19 @@ def validate(manifest, root=ROOT, check_records=True, check_generated=True):
             }:
                 errors.append(f"{eid}: stale verification support source")
             if check_generated and eid == "lora-tiny-training":
-                published = json.loads((root / "src/data/reference-results.json").read_text())["tiny"]
-                if published != json.loads(record["stdout"]):
-                    errors.append(f"{eid}: published regression result differs from verified output")
-            if check_generated and entry.get("resultKey"):
                 published = json.loads(
                     (root / "src/data/reference-results.json").read_text()
+                )["tiny"]
+                if published != json.loads(record["stdout"]):
+                    errors.append(
+                        f"{eid}: published regression result differs from verified output"
+                    )
+            if check_generated and entry.get("resultKey"):
+                published = json.loads(
+                    (
+                        root
+                        / entry.get("resultFile", "src/data/reference-results.json")
+                    ).read_text()
                 )[entry["resultKey"]]
                 encoded = json.dumps(published, indent=2, ensure_ascii=False) + "\n"
                 if hashlib.sha256(encoded.encode()).hexdigest() != record.get(

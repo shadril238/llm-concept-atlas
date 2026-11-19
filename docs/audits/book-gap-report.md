@@ -6,7 +6,7 @@ Generated from the E0 inventory dated 2026-11-19; latest enhancement update 2026
 
 The inventory records **231 source entries** (170 contents entries and 61 embedded concepts). It counts **160 leaf objectives**; 71 parent containers are excluded from the denominator. This inventory is a reviewed edition-specific work list, not a universal count of all AI terms.
 
-Of the leaf objectives, **100 have partial atlas mappings** and **60 have no direct atlas mapping**. **0 have passed enhancement acceptance**. Planned destinations are not published lessons.
+Of the leaf objectives, **118 have partial atlas mappings** and **42 have no direct atlas mapping**. **0 have passed enhancement acceptance**. Planned destinations are not published lessons.
 
 ## Read this report
 
@@ -21,12 +21,12 @@ Of the leaf objectives, **100 have partial atlas mappings** and **60 have no dir
 
 | Chapter | Source entries | Core leaves | Context leaves | Partial mappings | Unmapped | Accepted | Next batch |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
-| 1. An Introduction to Large Language Models | 22 | 10 | 8 | 10 | 8 | 0 | E3 |
-| 2. Tokens and Embeddings | 20 | 14 | 0 | 10 | 4 | 0 | E3 |
-| 3. Looking Inside Large Language Models | 22 | 15 | 1 | 11 | 5 | 0 | E3 |
+| 1. An Introduction to Large Language Models | 22 | 10 | 8 | 18 | 0 | 0 | E3 |
+| 2. Tokens and Embeddings | 20 | 14 | 0 | 14 | 0 | 0 | E3 |
+| 3. Looking Inside Large Language Models | 22 | 15 | 1 | 16 | 0 | 0 | E3 |
 | 4. Text Classification | 12 | 6 | 1 | 4 | 3 | 0 | E4 |
 | 5. Text Clustering and Topic Modeling | 16 | 10 | 0 | 5 | 5 | 0 | E4 |
-| 6. Prompt Engineering | 19 | 12 | 1 | 9 | 4 | 0 | E5 |
+| 6. Prompt Engineering | 19 | 12 | 1 | 10 | 3 | 0 | E5 |
 | 7. Advanced Text Generation Techniques and Tools | 12 | 8 | 0 | 7 | 1 | 0 | E5 |
 | 8. Semantic Search and Retrieval-Augmented Generation | 23 | 17 | 0 | 7 | 10 | 0 | E6 |
 | 9. Multimodal Large Language Models | 14 | 8 | 0 | 5 | 3 | 0 | E6 |
@@ -38,12 +38,12 @@ Of the leaf objectives, **100 have partial atlas mappings** and **60 have no dir
 
 | Dimension | Required leaf objectives | Missing | Partial | Sufficient |
 | --- | ---: | ---: | ---: | ---: |
-| explanation | 160 | 60 | 100 | 0 |
-| workedExample | 160 | 60 | 100 | 0 |
-| visual | 160 | 60 | 100 | 0 |
-| implementation | 51 | 47 | 4 | 0 |
-| evaluation | 51 | 48 | 3 | 0 |
-| exercises | 160 | 60 | 100 | 0 |
+| explanation | 160 | 43 | 117 | 0 |
+| workedExample | 160 | 43 | 117 | 0 |
+| visual | 160 | 43 | 117 | 0 |
+| implementation | 51 | 40 | 11 | 0 |
+| evaluation | 51 | 41 | 10 | 0 |
+| exercises | 160 | 43 | 117 | 0 |
 
 ## Priority corrections
 
@@ -52,7 +52,6 @@ Of the leaf objectives, **100 have partial atlas mappings** and **60 have no dir
 | [constrained-sampling](../../src/content/docs/concepts/constrained-sampling.mdx#implement-it) | Post-generation membership checking is validation, not constraints on the decoder token choices. | E5 |
 | [dense-retrieval](../../src/content/docs/concepts/dense-retrieval.mdx#implement-it) | The code counts keyword intersection, which is lexical retrieval rather than dense vector retrieval. | E6 |
 | [grounded-generation](../../src/content/docs/concepts/grounded-generation.mdx#implement-it) | The code ranks keyword overlap and never generates an evidence-supported answer. | E6 |
-| [positional-embeddings-and-rope](../../src/content/docs/concepts/positional-embeddings-and-rope.mdx#implement-it) | The snippet has no position values or rotations; it repeats an attention weighted sum. | E3 |
 | [reranking](../../src/content/docs/concepts/reranking.mdx#implement-it) | The code performs keyword overlap once and does not rerank first-stage candidates with a joint scorer. | E6 |
 | [reward-models](../../src/content/docs/concepts/reward-models.mdx#implement-it) | The code uses policy/reference log probabilities and beta: it is a DPO loss, not reward-model training. | E8 |
 | [rlhf](../../src/content/docs/concepts/rlhf.mdx#implement-it) | A DPO scalar loss does not show the reward-model and policy-optimization stages described in the lesson. | E8 |
@@ -61,7 +60,6 @@ Of the leaf objectives, **100 have partial atlas mappings** and **60 have no dir
 | [summarized-memory](../../src/content/docs/concepts/summarized-memory.mdx#implement-it) | The code prints the last three messages; it never creates or updates a summary. | E5 |
 | [tsdae](../../src/content/docs/concepts/tsdae.mdx#implement-it) | A single MLM-style mask omits deletion noise, sentence reconstruction, decoder training, and embedding evaluation. | E7 |
 | [vision-transformers](../../src/content/docs/concepts/vision-transformers.mdx#implement-it) | The code never reads pixels, extracts patches, or creates projected image tokens. | E6 |
-| [word-and-subword-tokens](../../src/content/docs/concepts/word-and-subword-tokens.mdx#implement-it) | The example slices visible context and performs no word/subword tokenization. | E3 |
 
 ## Proposed destinations
 
@@ -69,13 +67,6 @@ The placement decision avoids creating a separate page for every subsection. IDs
 
 | Proposed ID | Placement | Existing parent | Aliases | Source references |
 | --- | --- | --- | --- | --- |
-| language-ai-history | subsection | language-ai | language AI timeline | book-ch01-history, book-ch01-generative-ai-year |
-| sequence-to-sequence | standalone | encoder-only | seq2seq, encoder-decoder | book-ch01-sequence-attention, book-ch01-recurrent-context |
-| model-access | standalone | llm | open weights, hosted models, local models | book-ch01-limited-resources, book-ch01-interfaces, book-ch01-proprietary, book-ch01-open-models, book-ch01-frameworks |
-| first-text-generation | lab | generative-model | first generation | book-ch01-first-generation, book-ch02-run-llm, book-ch06-model-loading |
-| pretrained-word-embeddings | subsection | word2vec | GloVe | book-ch02-pretrained-word-vectors |
-| song-recommendations | lab | recommendation-embeddings | playlist embeddings | book-ch02-song-recommendations, book-ch02-song-training |
-| architecture-research-directions | subsection | transformer | — | book-ch03-research-directions |
 | classification-model-selection | subsection | generative-classification | — | book-ch04-model-selection |
 | t5-classification | subsection | generative-classification | — | book-ch04-t5 |
 | hosted-classification | subsection | generative-classification | — | book-ch04-chatgpt |
@@ -96,11 +87,6 @@ The placement decision avoids creating a separate page for every subsection. IDs
 | adapter-merging | subsection | lora | merge weights, merge_and_unload | book-ch12-merge |
 | generation-benchmarks | subsection | generative-evaluation | — | book-ch12-benchmarks, book-ch12-leaderboards |
 | preference-data-templating | subsection | dpo | chosen rejected pairs | book-ch12-alignment-template |
-| cross-attention | standalone | attention | — | book-ch01-cross-attention |
-| grouped-query-attention | subsection | efficient-attention | GQA, MQA, multi-query attention | book-ch03-shared-kv |
-| normalization-and-residuals | subsection | transformer-block | RMSNorm, LayerNorm, residual connection | book-ch03-normalization |
-| feedforward-activations | subsection | transformer-block | SwiGLU | book-ch03-swiglu |
-| sequence-packing | standalone | context-size | packing | book-ch03-packing |
 | class-based-tf-idf | standalone | topic-modeling | c-TF-IDF, class TF-IDF | book-ch05-ctfidf |
 | topic-representation-models | subsection | topic-representations | KeyBERTInspired | book-ch05-keybert |
 | maximal-marginal-relevance | subsection | topic-representations | MMR | book-ch05-mmr |
@@ -127,27 +113,27 @@ Printed pages 3–34; PDF pages 25–56. [Pinned official notebook](https://gith
 | Source ID / location | Objective and remaining work | Existing destination | Status / priority |
 | --- | --- | --- | --- |
 | **book-ch01-language-ai**<br>What Is Language AI?; pp. 4–5 (contents) | Distinguish labeling, searching, and generating by their inputs, outputs, and evaluation. | [language-ai](../../src/content/docs/concepts/language-ai.mdx#how-it-works) | partial; P2; E3 |
-| **book-ch01-history**<br>A Recent History of Language AI; pp. 5–25 (contents; container, not counted) | Explain the historical sequence of representation and generation approaches, with dated claims. | Proposed: language-ai-history | unmapped; P1; E3 |
+| **book-ch01-history**<br>A Recent History of Language AI; pp. 5–25 (contents; container, not counted) | Explain the historical sequence of representation and generation approaches, with dated claims. | [language-ai](../../src/content/docs/concepts/language-ai.mdx#historical-context-not-a-market-leaderboard) | partial; P2; E3 |
 | **book-ch01-bag-of-words**<br>Representing Language as a Bag-of-Words; pp. 6–8 (contents) | Build vocabulary-aligned document count vectors and demonstrate loss of word order. | [bag-of-words](../../src/content/docs/concepts/bag-of-words.mdx#the-important-distinction) | partial; P2; E3 |
 | **book-ch01-dense-vectors**<br>Better Representations with Dense Vector Embeddings; pp. 8–10 (contents) | Explain learned dense coordinates and compare them with sparse counts using an actual embedding. | [text-embedding](../../src/content/docs/concepts/text-embedding.mdx#how-it-works), [word2vec](../../src/content/docs/concepts/word2vec.mdx#how-it-works) | partial; P2; E3 |
 | **book-ch01-embedding-types**<br>Types of Embeddings; pp. 10–11 (contents) | Compare word, sentence, document, and image representations without treating their spaces as interchangeable. | [token-embedding](../../src/content/docs/concepts/token-embedding.mdx#how-it-works), [text-embedding](../../src/content/docs/concepts/text-embedding.mdx#how-it-works), [multimodal-embeddings](../../src/content/docs/concepts/multimodal-embeddings.mdx#the-important-distinction) | partial; P2; E3 |
-| **book-ch01-sequence-attention**<br>Encoding and Decoding Context with Attention; pp. 11–15 (contents; container, not counted) | Trace recurrent encoder-decoder translation, the context bottleneck, and cross-attention. | Proposed: sequence-to-sequence | unmapped; P1; E3 |
+| **book-ch01-sequence-attention**<br>Encoding and Decoding Context with Attention; pp. 11–15 (contents; container, not counted) | Trace recurrent encoder-decoder translation, the context bottleneck, and cross-attention. | [sequence-to-sequence](../../src/content/docs/concepts/sequence-to-sequence.mdx#how-it-works) | partial; P2; E3 |
 | **book-ch01-transformer-history**<br>Attention Is All You Need; pp. 15–18 (contents; container, not counted) | Explain the original encoder-decoder transformer and its cross-attention, not only decoder blocks. | [transformer](../../src/content/docs/concepts/transformer.mdx#how-it-works) | partial; P2; E3 |
 | **book-ch01-encoder-models**<br>Representation Models: Encoder-Only Models; pp. 18–20 (contents) | Connect bidirectional context and masked pretraining to real representation tasks. | [encoder-only](../../src/content/docs/concepts/encoder-only.mdx#how-it-works), [representation-model](../../src/content/docs/concepts/representation-model.mdx#how-it-works) | partial; P2; E3 |
 | **book-ch01-decoder-models**<br>Generative Models: Decoder-Only Models; pp. 20–23 (contents) | Trace causal pretraining and generation with a real model and compare base versus instruction behavior. | [decoder-only](../../src/content/docs/concepts/decoder-only.mdx#how-it-works), [generative-model](../../src/content/docs/concepts/generative-model.mdx#how-it-works) | partial; P2; E3 |
-| **book-ch01-generative-ai-year**<br>The Year of Generative AI; pp. 23–25 (contents) | Provide a dated timeline explaining the book's historical context without claiming it is current market coverage. | Proposed: language-ai-history | unmapped; P1; E3 |
+| **book-ch01-generative-ai-year**<br>The Year of Generative AI; pp. 23–25 (contents) | Provide a dated timeline explaining the book's historical context without claiming it is current market coverage. | [language-ai](../../src/content/docs/concepts/language-ai.mdx#historical-context-not-a-market-leaderboard) | partial; P2; E3 |
 | **book-ch01-llm-definition**<br>The Moving Definition of a “Large Language Model”; pp. 25–25 (contents) | Explain why size alone is not a stable model-family definition. | [llm](../../src/content/docs/concepts/llm.mdx#how-it-works) | partial; P2; E3 |
 | **book-ch01-training-paradigm**<br>The Training Paradigm of Large Language Models; pp. 25–27 (contents) | Trace pretraining, task adaptation, and preference tuning with distinct data and objectives. | [pretraining](../../src/content/docs/concepts/pretraining.mdx#the-important-distinction), [pretraining-and-sft](../../src/content/docs/concepts/pretraining-and-sft.mdx#the-important-distinction) | partial; P2; E3 |
 | **book-ch01-applications**<br>Large Language Model Applications: What Makes Them So Useful?; pp. 27–28 (contents) | Match task types to model families and appropriate success criteria. | [language-ai](../../src/content/docs/concepts/language-ai.mdx#how-it-works) | partial; P2; E3 |
 | **book-ch01-responsible-use**<br>Responsible LLM Development and Usage; pp. 28–28 (contents) | Apply an explicit harm and validation exercise rather than generic label accuracy. | [responsible-use](../../src/content/docs/concepts/responsible-use.mdx#the-important-distinction) | partial; P2; E3 |
-| **book-ch01-limited-resources**<br>Limited Resources Are All You Need; pp. 28–29 (contents) | Give verified CPU, GPU, download, and optional hosted access routes for a beginner. | Proposed: model-access | unmapped; P1; E3 |
-| **book-ch01-interfaces**<br>Interfacing with Large Language Models; pp. 29–32 (contents; container, not counted) | Compare hosted interfaces and local artifacts by control, requirements, and reproducibility. | Proposed: model-access | unmapped; P1; E3 |
-| **book-ch01-proprietary**<br>Proprietary, Private Models; pp. 29–30 (contents) | Explain hosted model access and its operational tradeoffs with a concrete decision exercise. | Proposed: model-access | unmapped; P1; E3 |
-| **book-ch01-open-models**<br>Open Models; pp. 30–31 (contents) | Distinguish downloadable weights, license permissions, and openness of training resources. | Proposed: model-access | unmapped; P1; E3 |
-| **book-ch01-frameworks**<br>Open Source Frameworks; pp. 31–32 (contents) | Explain the different roles of model hubs, inference libraries, and workflow frameworks. | Proposed: model-access | unmapped; P1; E3 |
-| **book-ch01-first-generation**<br>Generating Your First Text; pp. 32–34 (contents) | Load a matching tokenizer/model and inspect real generated continuation and generation settings. | Proposed: first-text-generation | unmapped; P1; E3 |
-| **book-ch01-recurrent-context**<br>Recurrent encoder-decoder context bottleneck; pp. 11–14 (body-concept) | Trace recurrent state and cross-attention in translation before comparing transformers. | Proposed: sequence-to-sequence | unmapped; P1; E3 |
-| **book-ch01-cross-attention**<br>Encoder-decoder cross-attention; pp. 17–17 (body-concept) | Distinguish queries from decoder states and keys/values from encoder outputs. | Proposed: cross-attention | unmapped; P1; E3 |
+| **book-ch01-limited-resources**<br>Limited Resources Are All You Need; pp. 28–29 (contents) | Give verified CPU, GPU, download, and optional hosted access routes for a beginner. | [model-access](../../src/content/docs/concepts/model-access.mdx#how-it-works) | partial; P2; E3 |
+| **book-ch01-interfaces**<br>Interfacing with Large Language Models; pp. 29–32 (contents; container, not counted) | Compare hosted interfaces and local artifacts by control, requirements, and reproducibility. | [model-access](../../src/content/docs/concepts/model-access.mdx#how-it-works) | partial; P2; E3 |
+| **book-ch01-proprietary**<br>Proprietary, Private Models; pp. 29–30 (contents) | Explain hosted model access and its operational tradeoffs with a concrete decision exercise. | [model-access](../../src/content/docs/concepts/model-access.mdx#how-it-works) | partial; P2; E3 |
+| **book-ch01-open-models**<br>Open Models; pp. 30–31 (contents) | Distinguish downloadable weights, license permissions, and openness of training resources. | [model-access](../../src/content/docs/concepts/model-access.mdx#how-it-works) | partial; P2; E3 |
+| **book-ch01-frameworks**<br>Open Source Frameworks; pp. 31–32 (contents) | Explain the different roles of model hubs, inference libraries, and workflow frameworks. | [model-access](../../src/content/docs/concepts/model-access.mdx#how-it-works) | partial; P2; E3 |
+| **book-ch01-first-generation**<br>Generating Your First Text; pp. 32–34 (contents) | Load a matching tokenizer/model and inspect real generated continuation and generation settings. | [generative-model](../../src/content/docs/concepts/generative-model.mdx#implement-it) | partial; P2; E3 |
+| **book-ch01-recurrent-context**<br>Recurrent encoder-decoder context bottleneck; pp. 11–14 (body-concept) | Trace recurrent state and cross-attention in translation before comparing transformers. | [sequence-to-sequence](../../src/content/docs/concepts/sequence-to-sequence.mdx#how-it-works) | partial; P2; E3 |
+| **book-ch01-cross-attention**<br>Encoder-decoder cross-attention; pp. 17–17 (body-concept) | Distinguish queries from decoder states and keys/values from encoder outputs. | [cross-attention](../../src/content/docs/concepts/cross-attention.mdx#how-it-works) | partial; P2; E3 |
 
 ## Chapter 2: Tokens and Embeddings
 
@@ -157,21 +143,21 @@ Printed pages 37–71; PDF pages 59–93. [Pinned official notebook](https://git
 | --- | --- | --- | --- |
 | **book-ch02-tokenization**<br>LLM Tokenization; pp. 38–57 (contents; container, not counted) | Connect segmentation, token IDs, and model input with a complete trace. | [tokenization](../../src/content/docs/concepts/tokenization.mdx#how-tokenization-works), [token](../../src/content/docs/concepts/token.mdx#how-it-works) | partial; P2; E2 |
 | **book-ch02-prepare-inputs**<br>How Tokenizers Prepare the Inputs to the Language Model; pp. 38–39 (contents) | Show input IDs, boundary markers, masks, and the vocabulary-to-embedding connection. | [tokenization](../../src/content/docs/concepts/tokenization.mdx#how-tokenization-works), [vocabulary](../../src/content/docs/concepts/vocabulary.mdx#how-it-works) | partial; P2; E3 |
-| **book-ch02-run-llm**<br>Downloading and Running an LLM; pp. 39–43 (contents) | Run tokenization and generation together with a matching model on documented hardware. | Proposed: first-text-generation | unmapped; P1; E3 |
+| **book-ch02-run-llm**<br>Downloading and Running an LLM; pp. 39–43 (contents) | Run tokenization and generation together with a matching model on documented hardware. | [generative-model](../../src/content/docs/concepts/generative-model.mdx#implement-it) | partial; P2; E3 |
 | **book-ch02-segmentation**<br>How Does the Tokenizer Break Down Text?; pp. 43–44 (contents) | Inspect decoded individual tokens and full sequences, including non-word pieces. | [tokenization](../../src/content/docs/concepts/tokenization.mdx#how-tokenization-works) | partial; P2; E3 |
 | **book-ch02-token-units**<br>Word Versus Subword Versus Character Versus Byte Tokens; pp. 44–46 (contents) | Replace the causal-slicing snippet with an actual comparison of segmentation units. | [word-and-subword-tokens](../../src/content/docs/concepts/word-and-subword-tokens.mdx#the-important-distinction), [tokenization](../../src/content/docs/concepts/tokenization.mdx#how-tokenization-works) | partial; P2; E3 |
-| **book-ch02-tokenizer-comparison**<br>Comparing Trained LLM Tokenizers; pp. 46–55 (contents) | Compare multiple trained tokenizers on identical multilingual, numerical, whitespace, and code inputs. | [tokenization](../../src/content/docs/concepts/tokenization.mdx#see-a-worked-example) | partial; P1; E2 |
+| **book-ch02-tokenizer-comparison**<br>Comparing Trained LLM Tokenizers; pp. 46–55 (contents) | Compare multiple trained tokenizers on identical multilingual, numerical, whitespace, and code inputs. | [tokenization](../../src/content/docs/concepts/tokenization.mdx#see-a-worked-example) | partial; P2; E2 |
 | **book-ch02-tokenizer-properties**<br>Tokenizer Properties; pp. 55–57 (contents; container, not counted) | Separate algorithm, corpus, parameters, special markers, and model compatibility. | [tokenization](../../src/content/docs/concepts/tokenization.mdx#how-tokenization-works), [vocabulary](../../src/content/docs/concepts/vocabulary.mdx#how-it-works) | partial; P2; E3 |
 | **book-ch02-token-embeddings**<br>Token Embeddings; pp. 57–61 (contents; container, not counted) | Distinguish learned lookup rows from later contextual states and sentence vectors. | [token-embedding](../../src/content/docs/concepts/token-embedding.mdx#how-it-works) | partial; P2; E3 |
 | **book-ch02-embedding-table**<br>A Language Model Holds Embeddings for the Vocabulary of Its Tokenizer; pp. 57–58 (contents) | Inspect the actual embedding matrix shape and row lookup for tokenizer IDs. | [token-embedding](../../src/content/docs/concepts/token-embedding.mdx#how-it-works), [vocabulary](../../src/content/docs/concepts/vocabulary.mdx#how-it-works) | partial; P2; E3 |
 | **book-ch02-contextual-embeddings**<br>Creating Contextualized Word Embeddings with Language Models; pp. 58–61 (contents) | Extract real hidden states for the same word in different contexts with aligned tokens. | [contextualized-embeddings](../../src/content/docs/concepts/contextualized-embeddings.mdx#the-important-distinction) | partial; P2; E3 |
 | **book-ch02-text-embeddings**<br>Text Embeddings (for Sentences and Whole Documents); pp. 61–63 (contents) | Encode real texts and explain pooling, shape, normalization, and similarity. | [text-embedding](../../src/content/docs/concepts/text-embedding.mdx#how-it-works) | partial; P2; E3 |
 | **book-ch02-word-embeddings**<br>Word Embeddings Beyond LLMs; pp. 63–67 (contents; container, not counted) | Distinguish static word vectors from contextual language-model representations. | [word2vec](../../src/content/docs/concepts/word2vec.mdx#how-it-works) | partial; P2; E3 |
-| **book-ch02-pretrained-word-vectors**<br>Using pretrained Word Embeddings; pp. 63–64 (contents) | Load pretrained word vectors, inspect nearest neighbors, and explain a misleading neighbor. | Proposed: pretrained-word-embeddings | unmapped; P1; E3 |
+| **book-ch02-pretrained-word-vectors**<br>Using pretrained Word Embeddings; pp. 63–64 (contents) | Load pretrained word vectors, inspect nearest neighbors, and explain a misleading neighbor. | [word2vec](../../src/content/docs/concepts/word2vec.mdx#pretrained-word-embeddings) | partial; P2; E3 |
 | **book-ch02-word2vec-training**<br>The Word2vec Algorithm and Contrastive Training; pp. 64–67 (contents; container, not counted) | Connect center/context pairs and negative sampling to parameter updates, not just pair creation. | [word2vec](../../src/content/docs/concepts/word2vec.mdx#how-it-works), [contrastive-training](../../src/content/docs/concepts/contrastive-training.mdx#the-important-distinction) | partial; P2; E3 |
 | **book-ch02-recommendations**<br>Embeddings for Recommendation Systems; pp. 67–71 (contents; container, not counted) | Explain why item co-occurrence can train useful representations and what it cannot establish. | [recommendation-embeddings](../../src/content/docs/concepts/recommendation-embeddings.mdx#the-important-distinction) | partial; P2; E3 |
-| **book-ch02-song-recommendations**<br>Recommending Songs by Embeddings; pp. 67–69 (contents) | Load playlists and metadata, retrieve neighbors, and compare recommendations with a baseline. | Proposed: song-recommendations | unmapped; P1; E3 |
-| **book-ch02-song-training**<br>Training a Song Embedding Model; pp. 69–71 (contents) | Train song vectors from playlists and evaluate held-out interactions without leakage. | Proposed: song-recommendations | unmapped; P1; E3 |
+| **book-ch02-song-recommendations**<br>Recommending Songs by Embeddings; pp. 67–69 (contents) | Load playlists and metadata, retrieve neighbors, and compare recommendations with a baseline. | [recommendation-embeddings](../../src/content/docs/concepts/recommendation-embeddings.mdx#implement-it) | partial; P2; E3 |
+| **book-ch02-song-training**<br>Training a Song Embedding Model; pp. 69–71 (contents) | Train song vectors from playlists and evaluate held-out interactions without leakage. | [recommendation-embeddings](../../src/content/docs/concepts/recommendation-embeddings.mdx#implement-it) | partial; P2; E3 |
 | **book-ch02-tokenizer-algorithms**<br>BPE, WordPiece, and Unigram; pp. 55–55 (body-concept) | Contrast vocabulary learning and segmentation decisions with worked tokenization cases. | [tokenization](../../src/content/docs/concepts/tokenization.mdx#how-tokenization-works) | partial; P2; E3 |
 | **book-ch02-special-tokens**<br>Special tokens and model-specific formatting; pp. 55–57 (body-concept) | Inspect role/boundary tokens, padding, and task markers in a real tokenizer. | [tokenization](../../src/content/docs/concepts/tokenization.mdx#how-tokenization-works), [vocabulary](../../src/content/docs/concepts/vocabulary.mdx#how-it-works) | partial; P2; E3 |
 | **book-ch02-negative-sampling**<br>Skip-gram and negative sampling; pp. 64–67 (body-concept) | Show center/context pairs, negative sampling, a binary objective, and an update. | [word2vec](../../src/content/docs/concepts/word2vec.mdx#how-it-works), [contrastive-training](../../src/content/docs/concepts/contrastive-training.mdx#the-important-distinction) | partial; P2; E3 |
@@ -183,27 +169,27 @@ Printed pages 73–106; PDF pages 95–128. [Pinned official notebook](https://g
 | Source ID / location | Objective and remaining work | Existing destination | Status / priority |
 | --- | --- | --- | --- |
 | **book-ch03-transformer-overview**<br>An Overview of Transformer Models; pp. 74–95 (contents; container, not counted) | Trace a real model from tokenizer through blocks and the language-model head. | [transformer](../../src/content/docs/concepts/transformer.mdx#how-it-works) | partial; P2; E3 |
-| **book-ch03-inputs-outputs**<br>The Inputs and Outputs of a Trained Transformer LLM; pp. 74–76 (contents) | Inspect real input IDs, output logits, and newly generated tokens. | [generative-model](../../src/content/docs/concepts/generative-model.mdx#how-it-works) | partial; P1; E3 |
+| **book-ch03-inputs-outputs**<br>The Inputs and Outputs of a Trained Transformer LLM; pp. 74–76 (contents) | Inspect real input IDs, output logits, and newly generated tokens. | [generative-model](../../src/content/docs/concepts/generative-model.mdx#how-it-works) | partial; P2; E3 |
 | **book-ch03-forward-pass**<br>The Components of the Forward Pass; pp. 76–79 (contents) | Show model modules and intermediate tensor shapes including the language-model head. | [transformer](../../src/content/docs/concepts/transformer.mdx#how-it-works), [token-embedding](../../src/content/docs/concepts/token-embedding.mdx#how-it-works) | partial; P2; E3 |
 | **book-ch03-decoding**<br>Choosing a Single Token from the Probability Distribution (Sampling/Decoding); pp. 79–81 (contents) | Implement probability conversion, temperature, top-k/top-p, and a verified token selection. | [decoding](../../src/content/docs/concepts/decoding.mdx#how-it-works) | partial; P2; E3 |
 | **book-ch03-parallel-context**<br>Parallel Token Processing and Context Size; pp. 81–83 (contents) | Separate parallel processing of existing positions from sequential generation and token budgets. | [context-size](../../src/content/docs/concepts/context-size.mdx#the-important-distinction), [decoder-only](../../src/content/docs/concepts/decoder-only.mdx#how-it-works) | partial; P2; E3 |
-| **book-ch03-kv-cache**<br>Speeding Up Generation by Caching Keys and Values; pp. 83–85 (contents) | Compare cached and uncached real logits before measuring generation time and cache memory. | [kv-cache](../../src/content/docs/concepts/kv-cache.mdx#how-it-works) | partial; P1; E3 |
+| **book-ch03-kv-cache**<br>Speeding Up Generation by Caching Keys and Values; pp. 83–85 (contents) | Compare cached and uncached real logits before measuring generation time and cache memory. | [kv-cache](../../src/content/docs/concepts/kv-cache.mdx#how-it-works) | partial; P2; E3 |
 | **book-ch03-block**<br>Inside the Transformer Block; pp. 85–95 (contents; container, not counted) | Trace projections, attention, feedforward, residual, and normalization calculations with shapes. | [transformer-block](../../src/content/docs/concepts/transformer-block.mdx#the-important-distinction), [attention](../../src/content/docs/concepts/attention.mdx#how-it-works), [self-attention](../../src/content/docs/concepts/self-attention.mdx#how-it-works), [query-key-value](../../src/content/docs/concepts/query-key-value.mdx#how-it-works) | partial; P2; E3 |
 | **book-ch03-architecture-improvements**<br>Recent Improvements to the Transformer Architecture; pp. 95–106 (contents; container, not counted) | Organize architectural versus implementation changes without treating them as the same optimization. | [efficient-attention](../../src/content/docs/concepts/efficient-attention.mdx#the-important-distinction) | partial; P2; E3 |
 | **book-ch03-efficient-attention**<br>More Efficient Attention; pp. 96–101 (contents; container, not counted) | Compare local attention, shared KV heads, and memory-efficient exact attention. | [efficient-attention](../../src/content/docs/concepts/efficient-attention.mdx#the-important-distinction) | partial; P2; E3 |
 | **book-ch03-modern-block**<br>The Transformer Block; pp. 101–102 (contents; container, not counted) | Explain pre-normalization, RMSNorm, and SwiGLU with numerical or shape-level traces. | [transformer-block](../../src/content/docs/concepts/transformer-block.mdx#the-important-distinction) | partial; P2; E3 |
-| **book-ch03-rope**<br>Positional Embeddings (RoPE); pp. 102–105 (contents; container, not counted) | Compute actual paired-coordinate rotations of queries and keys and explain relative offsets. | [positional-embeddings-and-rope](../../src/content/docs/concepts/positional-embeddings-and-rope.mdx#the-important-distinction) | partial; P0; E3 |
-| **book-ch03-research-directions**<br>Other Architectural Experiments and Improvements; pp. 105–106 (contents) | Explain the book's vision, robotics, and time-series research pointers as contextual directions. | Proposed: architecture-research-directions | unmapped; P1; E3 |
+| **book-ch03-rope**<br>Positional Embeddings (RoPE); pp. 102–105 (contents; container, not counted) | Compute actual paired-coordinate rotations of queries and keys and explain relative offsets. | [positional-embeddings-and-rope](../../src/content/docs/concepts/positional-embeddings-and-rope.mdx#the-important-distinction) | partial; P2; E3 |
+| **book-ch03-research-directions**<br>Other Architectural Experiments and Improvements; pp. 105–106 (contents) | Explain the book's vision, robotics, and time-series research pointers as contextual directions. | [transformer](../../src/content/docs/concepts/transformer.mdx#research-directions-in-the-book) | partial; P2; E3 |
 | **book-ch03-lm-head**<br>Language-model head and logits; pp. 78–80 (body-concept) | Show the hidden-state to vocabulary projection and distinguish logits from probabilities. | [generative-model](../../src/content/docs/concepts/generative-model.mdx#how-it-works), [llm](../../src/content/docs/concepts/llm.mdx#how-it-works) | partial; P2; E3 |
 | **book-ch03-feedforward**<br>Feedforward network inside a block; pp. 86–88 (body-concept) | Trace a position-wise feedforward transformation with explicit shapes and activation. | [transformer-block](../../src/content/docs/concepts/transformer-block.mdx#the-important-distinction) | partial; P2; E3 |
 | **book-ch03-attention-calculation**<br>Attention projections, scores, and weighted values; pp. 89–95 (body-concept) | Compute matrix Q/K/V projections, masking, scaling, normalization, and weighted outputs. | [attention](../../src/content/docs/concepts/attention.mdx#how-it-works), [self-attention](../../src/content/docs/concepts/self-attention.mdx#how-it-works), [query-key-value](../../src/content/docs/concepts/query-key-value.mdx#how-it-works) | partial; P2; E3 |
 | **book-ch03-multi-head**<br>Multi-head attention; pp. 91–93 (body-concept) | Show several projected heads and their concatenation/output projection. | [attention](../../src/content/docs/concepts/attention.mdx#how-it-works) | partial; P2; E3 |
 | **book-ch03-local-attention**<br>Local and sparse attention; pp. 96–98 (body-concept) | Compare actual allowed-position masks and the information each pattern removes. | [efficient-attention](../../src/content/docs/concepts/efficient-attention.mdx#the-important-distinction) | partial; P2; E3 |
-| **book-ch03-shared-kv**<br>Multi-query and grouped-query attention; pp. 98–100 (body-concept) | Calculate query and shared KV head shapes and their cache-memory consequences. | Proposed: grouped-query-attention | unmapped; P1; E3 |
+| **book-ch03-shared-kv**<br>Multi-query and grouped-query attention; pp. 98–100 (body-concept) | Calculate query and shared KV head shapes and their cache-memory consequences. | [efficient-attention](../../src/content/docs/concepts/efficient-attention.mdx#grouped-query-attention) | partial; P2; E3 |
 | **book-ch03-flash-attention**<br>FlashAttention; pp. 100–100 (body-concept) | Explain exact tiled attention and memory traffic separately from sparse attention. | [efficient-attention](../../src/content/docs/concepts/efficient-attention.mdx#the-important-distinction) | partial; P2; E3 |
-| **book-ch03-normalization**<br>Residual paths, pre-normalization, LayerNorm, and RMSNorm; pp. 101–102 (body-concept) | Trace residual addition and compare centering/scaling operations with correct dimensions. | Proposed: normalization-and-residuals | unmapped; P1; E3 |
-| **book-ch03-swiglu**<br>SwiGLU feedforward activation; pp. 101–102 (body-concept) | Explain gated feedforward operations and the role of the activation. | Proposed: feedforward-activations | unmapped; P1; E3 |
-| **book-ch03-packing**<br>Sequence packing and document boundaries; pp. 102–103 (body-concept) | Show how packing affects masks and positions without cross-document leakage. | Proposed: sequence-packing | unmapped; P1; E3 |
+| **book-ch03-normalization**<br>Residual paths, pre-normalization, LayerNorm, and RMSNorm; pp. 101–102 (body-concept) | Trace residual addition and compare centering/scaling operations with correct dimensions. | [transformer-block](../../src/content/docs/concepts/transformer-block.mdx#normalization-and-residuals) | partial; P2; E3 |
+| **book-ch03-swiglu**<br>SwiGLU feedforward activation; pp. 101–102 (body-concept) | Explain gated feedforward operations and the role of the activation. | [transformer-block](../../src/content/docs/concepts/transformer-block.mdx#feedforward-activations) | partial; P2; E3 |
+| **book-ch03-packing**<br>Sequence packing and document boundaries; pp. 102–103 (body-concept) | Show how packing affects masks and positions without cross-document leakage. | [sequence-packing](../../src/content/docs/concepts/sequence-packing.mdx#how-it-works) | partial; P2; E3 |
 
 ## Chapter 4: Text Classification
 
@@ -255,7 +241,7 @@ Printed pages 167–198; PDF pages 189–220. [Pinned official notebook](https:/
 | --- | --- | --- | --- |
 | **book-ch06-generation-models**<br>Using Text Generation Models; pp. 167–173 (contents; container, not counted) | Explain model loading, message formatting, and controlled generation in one workflow. | [generative-model](../../src/content/docs/concepts/generative-model.mdx#how-it-works) | partial; P2; E5 |
 | **book-ch06-model-selection**<br>Choosing a Text Generation Model; pp. 167–168 (contents) | Choose an accessible base or instruction model based on the task and runtime. | Proposed: generation-model-selection | unmapped; P1; E5 |
-| **book-ch06-model-loading**<br>Loading a Text Generation Model; pp. 168–170 (contents) | Load matching artifacts and inspect the model-specific rendered chat prompt. | Proposed: first-text-generation | unmapped; P1; E5 |
+| **book-ch06-model-loading**<br>Loading a Text Generation Model; pp. 168–170 (contents) | Load matching artifacts and inspect the model-specific rendered chat prompt. | [generative-model](../../src/content/docs/concepts/generative-model.mdx#implement-it) | partial; P1; E5 |
 | **book-ch06-output-controls**<br>Controlling Model Output; pp. 170–173 (contents) | Run controlled generation comparisons with fixed inputs, seeds, and output budgets. | [decoding](../../src/content/docs/concepts/decoding.mdx#how-it-works) | partial; P1; E5 |
 | **book-ch06-prompt-introduction**<br>Intro to Prompt Engineering; pp. 173–177 (contents; container, not counted) | Explain how input structure conditions behavior and how to test the result. | [prompt-structure](../../src/content/docs/concepts/prompt-structure.mdx#the-important-distinction) | partial; P2; E5 |
 | **book-ch06-prompt-ingredients**<br>The Basic Ingredients of a Prompt; pp. 173–175 (contents) | Distinguish instruction, context, role, examples, and requested output format. | [prompt-structure](../../src/content/docs/concepts/prompt-structure.mdx#the-important-distinction) | partial; P2; E5 |

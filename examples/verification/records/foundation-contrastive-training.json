@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-contrastive-training",
+  "status": "passed",
+  "date": "2026-11-19T17:56:56.720981+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/contrastive_training.py"
+  ],
+  "sourceSha256": "676c0b8523455348d7b0798e423ac1da39d1b0c3211cbcbcfb932218983d3df5",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "38e9aa329cec7a7c9e09a2020532d8784100f2659aad61529745c644ed244b3c",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "positive probability: 0.881 loss: 0.127\n",
+  "stderr": "",
+  "error": null
+}

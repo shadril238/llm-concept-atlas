@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-representation-model",
+  "status": "passed",
+  "date": "2026-11-19T17:56:55.528394+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/representation_model.py"
+  ],
+  "sourceSha256": "93533b518dcfebc896f8f1488e058279c1eecacf608cbfd19acd579599a5fd44",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "caa5dd305a48183a338090cbcd7db9c26bdb0b50473f5e287c52ebbedb764e92",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "same direction: 1.0\n",
+  "stderr": "",
+  "error": null
+}

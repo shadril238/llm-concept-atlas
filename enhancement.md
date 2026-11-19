@@ -2,7 +2,7 @@
 
 **Prepared:** 2026-11-18  
 **Last updated:** 2026-11-19  
-**Status:** E0 source inventory and initial lesson audit, and E1 infrastructure implemented; E2 reference implementation delivered, independent review pending; E3–E10 pending. See the [gap report](./docs/audits/book-gap-report.md) and [audit guide](./docs/audits/README.md).
+**Status:** E0 source inventory and initial lesson audit, and E1 infrastructure implemented; E2 and E3 implementation delivered, independent review pending; E4–E10 pending. See the [gap report](./docs/audits/book-gap-report.md) and [audit guide](./docs/audits/README.md).
 **Baseline:** Repository commit `a6b3ec4`, following the original Phases 1–5 in [plan.md](./plan.md).  
 **Source edition:** _Hands-On Large Language Models_, Jay Alammar and Maarten Grootendorst, first edition, September 2024.  
 **Primary goal:** A learner can explain, trace, implement, evaluate, and apply the book's ideas without depending on unexplained terminology or disconnected code snippets.
@@ -838,13 +838,16 @@ Use enhancement phase IDs **E0–E10** to distinguish this work from the origina
 
 **Depends on:** E2.
 
-- [ ] Complete Chapter 1–3 work from Section 7, including missing access/context material and prerequisite bridges.
-- [ ] Complete L01–L06, reusing the reference tokenizer work.
-- [ ] Upgrade attention, decoding, cache, and architecture visuals with tested quantities and clear assumptions.
-- [ ] Revise all affected existing foundation lessons, including generic worked examples and repeated self-checks.
-- [ ] Update the sentence-processing path, graph dependencies, glossary aliases, and chapter coverage views.
+- [x] Complete Chapter 1–3 work from Section 7, including missing access/context material and prerequisite bridges.
+- [x] Complete L01–L06, reusing the reference tokenizer work.
+- [x] Upgrade attention, decoding, cache, and architecture visuals with tested quantities and clear assumptions.
+- [x] Revise all affected existing foundation lessons, including generic worked examples and repeated self-checks.
+- [x] Update the sentence-processing path, graph dependencies, glossary aliases, and chapter coverage views.
 
 **Gate:** A learner can generate text, compare tokenizers, inspect representations, train a small recommendation model, and trace a transformer computation. Numerical properties and cached/uncached correctness are verified.
+
+
+**Implementation evidence:** [Foundation labs](./src/content/docs/labs/foundations.mdx), [CPU guide](./examples/training/reference/E3.md), and [author review](./docs/reviews/e3-foundations.md). L02 reuses the E2 tokenizer package. L01/L03–L06 have recorded CPU runs. The optional larger Last.fm route is importer-tested, not a claimed full-data experiment. Independent technical/editorial and beginner review remain open; implementation does not award acceptance.
 
 ### E4 — classification and topic discovery
 
@@ -1050,7 +1053,7 @@ These references support the implementation direction, not a claim that all prop
 | E0: audit and honest coverage         | Complete    | Source inventory, two generated reports, per-lesson findings, pinned notebooks, and validation. |
 | E1: executable-example foundation     | Complete | 100-example registry, two locked environments, runner, synchronized lesson/notebooks, and CPU execution records. |
 | E2: three reference lessons | Implemented; review pending | Detailed lessons, interactive labs, CPU model/training records, author review; independent acceptance still open. |
-| E3: foundations                       | Not started | Chapter 1–3 objectives and L01–L06 accepted.                                                    |
+| E3: foundations | Implemented; review pending | 32 rewritten/new lessons plus E2 tokenization, L01–L06 CPU evidence, graph/glossary/path updates; independent acceptance open. |
 | E4: classification and topics         | Not started | Chapter 4–5 objectives and L07–L08 accepted.                                                    |
 | E5: prompting and workflows           | Not started | Chapter 6–7 objectives and L09–L11 accepted.                                                    |
 | E6: RAG and multimodal                | Not started | Chapter 8–9 objectives and L12–L14 accepted.                                                    |
@@ -1059,4 +1062,4 @@ These references support the implementation direction, not a claim that all prop
 | E9: integrated learner experience     | Not started | Discovery, navigation, practice, and accessibility/performance checks.                          |
 | E10: review and release               | Not started | Reconciled coverage, execution evidence, learner feedback, and release report.                  |
 
-**Next:** Review the three E2 reference lessons using the [review packet](./docs/reviews/e2-reference-lessons.md). Their implementation and CPU execution are delivered; independent editorial/beginner acceptance remains open. E3 can reuse the documented pattern for authoring, while broadening foundations according to the gap report.
+**Next:** Independently review the E2/E3 lesson and execution packets. E4 classification/topic-discovery implementation can then build on the supported environments and lesson pattern; full enhancement acceptance remains tied to the documented review gates.

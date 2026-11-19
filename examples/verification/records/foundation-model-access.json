@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-model-access",
+  "status": "passed",
+  "date": "2026-11-19T17:56:56.000925+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/model_access.py"
+  ],
+  "sourceSha256": "7b5f43be19da4ed34322d572dbb35e0bfbf05e29a41c2601003ddff89ddd0cdd",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "18008ab9d164d69cd51cd90484035db8fb218ada203767cc3d61e5c2270e38ed",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "4 bytes/weight: 53.4 MiB for weights only\n2 bytes/weight: 26.7 MiB for weights only\n",
+  "stderr": "",
+  "error": null
+}

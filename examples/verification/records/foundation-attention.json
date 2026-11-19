@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "foundation-attention",
+  "status": "passed",
+  "date": "2026-11-19T17:56:56.982950+00:00",
+  "gitCommit": "d0eac3096fe9809733ffd65b0cd29b116d8c8481",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e3/lesson_snippets/attention.py"
+  ],
+  "sourceSha256": "481e08d65d31f219359034a33fc67ad26f98d77121806b7c42414046e5faac18",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "f6c5482e27dd059fc87d36dd11cac7f0b1638122131449b5233c5ca71c0ada06",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.012,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "weights: [0.731, 0.269]\noutput: 7.311\n",
+  "stderr": "",
+  "error": null
+}

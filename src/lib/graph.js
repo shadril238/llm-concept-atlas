@@ -87,6 +87,9 @@ export function buildAtlasGraph(parts, chapters, entries) {
       level: data.level,
       lessonStatus: data.lessonStatus ?? "primer",
       tags: data.tags ?? [],
+      aliases: data.aliases ?? [],
+      relationshipReasons: data.relationshipReasons ?? {},
+      labHref: data.labHref,
     });
   }
 
@@ -104,6 +107,10 @@ export function buildAtlasGraph(parts, chapters, entries) {
         errors.push(`${node.id} has unknown related concept ${related}`);
       if (related === node.id)
         errors.push(`${node.id} cannot relate to itself`);
+    }
+    for (const key of Object.keys(node.relationshipReasons ?? {})) {
+      if (![node.parent, ...node.prerequisites, ...node.related].includes(key))
+        errors.push(`${node.id} has reason for unrelated node ${key}`);
     }
     if (!node.href) errors.push(`${node.id} has no destination`);
   }
