@@ -1,0 +1,11 @@
+{
+  "id": "lora-reference-v1",
+  "revision": 1,
+  "path": "examples/data/fixtures/lora-reference.json",
+  "sha256": "2430df1d7a44f2ccebf8986dc8b463c537fa4d44ee34d42088dbf233400d40d8",
+  "source": "Original atlas-authored fictional teaching examples",
+  "license": "MIT (repository LICENSE)",
+  "split": "24 train / 4 validation / 4 test prompts; queried words disjoint; templated completion-only demonstration",
+  "training": true,
+  "leakagePolicy": "Splits fixed before training. No exact duplicate texts. NER name sets are disjoint across splits. Shared templates make these controlled demonstrations, not domain benchmarks."
+}

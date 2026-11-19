@@ -1,0 +1,997 @@
+{
+  "policy": "PER human names; ORG whole fictional organization; LOC whole place; exclude titles and punctuation; flat nonoverlapping BIO; half-open word spans.",
+  "records": [
+    {
+      "id": "train-0-0",
+      "split": "train",
+      "tokens": [
+        "Ada",
+        "Lovelace",
+        "joined",
+        "Cedar",
+        "Labs",
+        "in",
+        "New",
+        "York",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-0-1",
+      "split": "train",
+      "tokens": [
+        "Ada",
+        "Lovelace",
+        "visited",
+        "Cedar",
+        "Labs",
+        "in",
+        "New",
+        "York",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-0-2",
+      "split": "train",
+      "tokens": [
+        "Ada",
+        "Lovelace",
+        "contacted",
+        "Cedar",
+        "Labs",
+        "near",
+        "New",
+        "York",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-1-0",
+      "split": "train",
+      "tokens": [
+        "Alan",
+        "Turing",
+        "joined",
+        "Maple",
+        "Research",
+        "in",
+        "San",
+        "Diego",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-1-1",
+      "split": "train",
+      "tokens": [
+        "Alan",
+        "Turing",
+        "visited",
+        "Maple",
+        "Research",
+        "in",
+        "San",
+        "Diego",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-1-2",
+      "split": "train",
+      "tokens": [
+        "Alan",
+        "Turing",
+        "contacted",
+        "Maple",
+        "Research",
+        "near",
+        "San",
+        "Diego",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-2-0",
+      "split": "train",
+      "tokens": [
+        "Grace",
+        "Hopper",
+        "joined",
+        "Birch",
+        "Systems",
+        "in",
+        "Los",
+        "Angeles",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-2-1",
+      "split": "train",
+      "tokens": [
+        "Grace",
+        "Hopper",
+        "visited",
+        "Birch",
+        "Systems",
+        "in",
+        "Los",
+        "Angeles",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-2-2",
+      "split": "train",
+      "tokens": [
+        "Grace",
+        "Hopper",
+        "contacted",
+        "Birch",
+        "Systems",
+        "near",
+        "Los",
+        "Angeles",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-3-0",
+      "split": "train",
+      "tokens": [
+        "Katherine",
+        "Johnson",
+        "joined",
+        "Pine",
+        "Analytics",
+        "in",
+        "San",
+        "Jose",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-3-1",
+      "split": "train",
+      "tokens": [
+        "Katherine",
+        "Johnson",
+        "visited",
+        "Pine",
+        "Analytics",
+        "in",
+        "San",
+        "Jose",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-3-2",
+      "split": "train",
+      "tokens": [
+        "Katherine",
+        "Johnson",
+        "contacted",
+        "Pine",
+        "Analytics",
+        "near",
+        "San",
+        "Jose",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-4-0",
+      "split": "train",
+      "tokens": [
+        "Edsger",
+        "Dijkstra",
+        "joined",
+        "Willow",
+        "Studio",
+        "in",
+        "Salt",
+        "Lake",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-4-1",
+      "split": "train",
+      "tokens": [
+        "Edsger",
+        "Dijkstra",
+        "visited",
+        "Willow",
+        "Studio",
+        "in",
+        "Salt",
+        "Lake",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-4-2",
+      "split": "train",
+      "tokens": [
+        "Edsger",
+        "Dijkstra",
+        "contacted",
+        "Willow",
+        "Studio",
+        "near",
+        "Salt",
+        "Lake",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-5-0",
+      "split": "train",
+      "tokens": [
+        "Barbara",
+        "Liskov",
+        "joined",
+        "Oak",
+        "Robotics",
+        "in",
+        "Hong",
+        "Kong",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-5-1",
+      "split": "train",
+      "tokens": [
+        "Barbara",
+        "Liskov",
+        "visited",
+        "Oak",
+        "Robotics",
+        "in",
+        "Hong",
+        "Kong",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-5-2",
+      "split": "train",
+      "tokens": [
+        "Barbara",
+        "Liskov",
+        "contacted",
+        "Oak",
+        "Robotics",
+        "near",
+        "Hong",
+        "Kong",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-6-0",
+      "split": "train",
+      "tokens": [
+        "Donald",
+        "Knuth",
+        "joined",
+        "Elm",
+        "Software",
+        "in",
+        "Cape",
+        "Town",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-6-1",
+      "split": "train",
+      "tokens": [
+        "Donald",
+        "Knuth",
+        "visited",
+        "Elm",
+        "Software",
+        "in",
+        "Cape",
+        "Town",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-6-2",
+      "split": "train",
+      "tokens": [
+        "Donald",
+        "Knuth",
+        "contacted",
+        "Elm",
+        "Software",
+        "near",
+        "Cape",
+        "Town",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-7-0",
+      "split": "train",
+      "tokens": [
+        "Margaret",
+        "Hamilton",
+        "joined",
+        "Ash",
+        "Network",
+        "in",
+        "Buenos",
+        "Aires",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-7-1",
+      "split": "train",
+      "tokens": [
+        "Margaret",
+        "Hamilton",
+        "visited",
+        "Ash",
+        "Network",
+        "in",
+        "Buenos",
+        "Aires",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-7-2",
+      "split": "train",
+      "tokens": [
+        "Margaret",
+        "Hamilton",
+        "contacted",
+        "Ash",
+        "Network",
+        "near",
+        "Buenos",
+        "Aires",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "train-empty-0",
+      "split": "train",
+      "tokens": [
+        "The",
+        "meeting",
+        "ended",
+        "early",
+        "."
+      ],
+      "tags": [
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ]
+    },
+    {
+      "id": "train-empty-1",
+      "split": "train",
+      "tokens": [
+        "Please",
+        "open",
+        "the",
+        "window",
+        "."
+      ],
+      "tags": [
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ]
+    },
+    {
+      "id": "validation-8-0",
+      "split": "validation",
+      "tokens": [
+        "Sofia",
+        "Rivera",
+        "joined",
+        "Coral",
+        "Data",
+        "in",
+        "Rio",
+        "Claro",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "validation-9-0",
+      "split": "validation",
+      "tokens": [
+        "Hiro",
+        "Tanaka",
+        "joined",
+        "Pearl",
+        "Devices",
+        "in",
+        "Port",
+        "Azure",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "validation-10-0",
+      "split": "validation",
+      "tokens": [
+        "Mira",
+        "Patel",
+        "joined",
+        "Ruby",
+        "Science",
+        "in",
+        "Lake",
+        "Haven",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "validation-11-0",
+      "split": "validation",
+      "tokens": [
+        "Noah",
+        "Garcia",
+        "joined",
+        "Amber",
+        "Design",
+        "in",
+        "Mount",
+        "Vale",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "validation-empty-0",
+      "split": "validation",
+      "tokens": [
+        "Rain",
+        "fell",
+        "before",
+        "dawn",
+        "."
+      ],
+      "tags": [
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ]
+    },
+    {
+      "id": "validation-empty-1",
+      "split": "validation",
+      "tokens": [
+        "The",
+        "door",
+        "stayed",
+        "closed",
+        "."
+      ],
+      "tags": [
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ]
+    },
+    {
+      "id": "test-12-0",
+      "split": "test",
+      "tokens": [
+        "Lena",
+        "Fischer",
+        "joined",
+        "Silver",
+        "Works",
+        "in",
+        "North",
+        "Harbor",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "test-13-0",
+      "split": "test",
+      "tokens": [
+        "Omar",
+        "Hassan",
+        "joined",
+        "Copper",
+        "Lab",
+        "in",
+        "West",
+        "Ridge",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "test-14-0",
+      "split": "test",
+      "tokens": [
+        "Eva",
+        "Chen",
+        "joined",
+        "Indigo",
+        "Tech",
+        "in",
+        "East",
+        "Bay",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "test-15-0",
+      "split": "test",
+      "tokens": [
+        "Leo",
+        "Martin",
+        "joined",
+        "Violet",
+        "Space",
+        "in",
+        "South",
+        "Point",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "test-16-0",
+      "split": "test",
+      "tokens": [
+        "Amara",
+        "Okafor",
+        "joined",
+        "Saffron",
+        "Energy",
+        "in",
+        "Green",
+        "Hills",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "test-17-0",
+      "split": "test",
+      "tokens": [
+        "Iris",
+        "Novak",
+        "joined",
+        "Jade",
+        "Medicine",
+        "in",
+        "Blue",
+        "River",
+        "."
+      ],
+      "tags": [
+        "B-PER",
+        "I-PER",
+        "O",
+        "B-ORG",
+        "I-ORG",
+        "O",
+        "B-LOC",
+        "I-LOC",
+        "O"
+      ]
+    },
+    {
+      "id": "test-empty-0",
+      "split": "test",
+      "tokens": [
+        "We",
+        "read",
+        "the",
+        "report",
+        "."
+      ],
+      "tags": [
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ]
+    },
+    {
+      "id": "test-empty-1",
+      "split": "test",
+      "tokens": [
+        "The",
+        "lights",
+        "went",
+        "dark",
+        "."
+      ],
+      "tags": [
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ]
+    }
+  ]
+}

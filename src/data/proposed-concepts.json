@@ -71,9 +71,15 @@
       "placement": "subsection",
       "parentConceptId": "tokenization",
       "aliases": ["compare tokenizers"],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E3",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/concepts/tokenization.mdx",
+        "anchor": "see-a-worked-example"
+      },
+      "exampleIds": ["tokenizer-comparison"],
+      "reviewRecord": "e2-reference-author-review-2026-11-20"
     },
     {
       "id": "pretrained-word-embeddings",

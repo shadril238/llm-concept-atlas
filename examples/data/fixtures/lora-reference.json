@@ -1,0 +1,196 @@
+{
+  "records": [
+    {
+      "id": "train-cat",
+      "split": "train",
+      "prompt": "Question: Is cat an animal or a color?\nAnswer:",
+      "answer": " animal"
+    },
+    {
+      "id": "train-dog",
+      "split": "train",
+      "prompt": "Question: Is dog an animal or a color?\nAnswer:",
+      "answer": " animal"
+    },
+    {
+      "id": "train-bird",
+      "split": "train",
+      "prompt": "Question: Is bird an animal or a color?\nAnswer:",
+      "answer": " animal"
+    },
+    {
+      "id": "train-fox",
+      "split": "train",
+      "prompt": "Question: Is fox an animal or a color?\nAnswer:",
+      "answer": " animal"
+    },
+    {
+      "id": "train-lion",
+      "split": "train",
+      "prompt": "Question: Is lion an animal or a color?\nAnswer:",
+      "answer": " animal"
+    },
+    {
+      "id": "train-horse",
+      "split": "train",
+      "prompt": "Question: Is horse an animal or a color?\nAnswer:",
+      "answer": " animal"
+    },
+    {
+      "id": "train-tiger",
+      "split": "train",
+      "prompt": "Question: Is tiger an animal or a color?\nAnswer:",
+      "answer": " animal"
+    },
+    {
+      "id": "train-bear",
+      "split": "train",
+      "prompt": "Question: Is bear an animal or a color?\nAnswer:",
+      "answer": " animal"
+    },
+    {
+      "id": "train-mouse",
+      "split": "train",
+      "prompt": "Question: Is mouse an animal or a color?\nAnswer:",
+      "answer": " animal"
+    },
+    {
+      "id": "train-whale",
+      "split": "train",
+      "prompt": "Question: Is whale an animal or a color?\nAnswer:",
+      "answer": " animal"
+    },
+    {
+      "id": "train-eagle",
+      "split": "train",
+      "prompt": "Question: Is eagle an animal or a color?\nAnswer:",
+      "answer": " animal"
+    },
+    {
+      "id": "train-panda",
+      "split": "train",
+      "prompt": "Question: Is panda an animal or a color?\nAnswer:",
+      "answer": " animal"
+    },
+    {
+      "id": "train-red",
+      "split": "train",
+      "prompt": "Question: Is red an animal or a color?\nAnswer:",
+      "answer": " color"
+    },
+    {
+      "id": "train-blue",
+      "split": "train",
+      "prompt": "Question: Is blue an animal or a color?\nAnswer:",
+      "answer": " color"
+    },
+    {
+      "id": "train-green",
+      "split": "train",
+      "prompt": "Question: Is green an animal or a color?\nAnswer:",
+      "answer": " color"
+    },
+    {
+      "id": "train-yellow",
+      "split": "train",
+      "prompt": "Question: Is yellow an animal or a color?\nAnswer:",
+      "answer": " color"
+    },
+    {
+      "id": "train-purple",
+      "split": "train",
+      "prompt": "Question: Is purple an animal or a color?\nAnswer:",
+      "answer": " color"
+    },
+    {
+      "id": "train-orange",
+      "split": "train",
+      "prompt": "Question: Is orange an animal or a color?\nAnswer:",
+      "answer": " color"
+    },
+    {
+      "id": "train-white",
+      "split": "train",
+      "prompt": "Question: Is white an animal or a color?\nAnswer:",
+      "answer": " color"
+    },
+    {
+      "id": "train-black",
+      "split": "train",
+      "prompt": "Question: Is black an animal or a color?\nAnswer:",
+      "answer": " color"
+    },
+    {
+      "id": "train-brown",
+      "split": "train",
+      "prompt": "Question: Is brown an animal or a color?\nAnswer:",
+      "answer": " color"
+    },
+    {
+      "id": "train-pink",
+      "split": "train",
+      "prompt": "Question: Is pink an animal or a color?\nAnswer:",
+      "answer": " color"
+    },
+    {
+      "id": "train-violet",
+      "split": "train",
+      "prompt": "Question: Is violet an animal or a color?\nAnswer:",
+      "answer": " color"
+    },
+    {
+      "id": "train-gray",
+      "split": "train",
+      "prompt": "Question: Is gray an animal or a color?\nAnswer:",
+      "answer": " color"
+    },
+    {
+      "id": "validation-rabbit",
+      "split": "validation",
+      "prompt": "Question: Is rabbit an animal or a color?\nAnswer:",
+      "answer": " animal"
+    },
+    {
+      "id": "validation-gold",
+      "split": "validation",
+      "prompt": "Question: Is gold an animal or a color?\nAnswer:",
+      "answer": " color"
+    },
+    {
+      "id": "validation-deer",
+      "split": "validation",
+      "prompt": "Question: Is deer an animal or a color?\nAnswer:",
+      "answer": " animal"
+    },
+    {
+      "id": "validation-cyan",
+      "split": "validation",
+      "prompt": "Question: Is cyan an animal or a color?\nAnswer:",
+      "answer": " color"
+    },
+    {
+      "id": "test-zebra",
+      "split": "test",
+      "prompt": "Question: Is zebra an animal or a color?\nAnswer:",
+      "answer": " animal"
+    },
+    {
+      "id": "test-silver",
+      "split": "test",
+      "prompt": "Question: Is silver an animal or a color?\nAnswer:",
+      "answer": " color"
+    },
+    {
+      "id": "test-otter",
+      "split": "test",
+      "prompt": "Question: Is otter an animal or a color?\nAnswer:",
+      "answer": " animal"
+    },
+    {
+      "id": "test-magenta",
+      "split": "test",
+      "prompt": "Question: Is magenta an animal or a color?\nAnswer:",
+      "answer": " color"
+    }
+  ]
+}

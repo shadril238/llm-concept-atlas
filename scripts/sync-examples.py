@@ -34,14 +34,21 @@ outputs["examples/verification/README.md"] = "\n".join(report) + "\n"
 for family, eid in [
     ("foundations", "attention-softmax"),
     ("applications", "embedding-retrieval"),
+    ("reference", "tokenizer-comparison"),
+    ("reference", "lora-tiny-training"),
+    ("reference", "lora-pretrained"),
+    ("reference", "ner-training"),
 ]:
     entry = next(e for e in manifest["examples"] if e["id"] == eid)
     directory = ROOT / manifest["environments"][family]["project"]
-    module = (
-        "atlas_foundations.attention"
-        if family == "foundations"
-        else "atlas_applications.retrieval"
-    )
+    module = {
+        "attention-softmax": "atlas_foundations.attention",
+        "embedding-retrieval": "atlas_applications.retrieval",
+        "tokenizer-comparison": "atlas_reference.tokenizer_compare",
+        "lora-tiny-training": "atlas_reference.lora_tiny",
+        "lora-pretrained": "atlas_reference.lora_model",
+        "ner-training": "atlas_reference.ner_model",
+    }[eid]
     # Generated notebooks import the same source used by the CLI; no copied algorithm.
     code = f'import sys\nfrom pathlib import Path\nproject = Path.cwd()\nif project.name == "notebooks": project = project.parent\nsys.path.insert(0, str(project / "src"))\nfrom {module} import main\nmain()'
     notebook = {
@@ -76,9 +83,50 @@ for family, eid in [
             },
         ],
     }
-    outputs[f"examples/{family}/notebooks/{eid}.ipynb"] = (
+    outputs[f"{manifest['environments'][family]['project']}/notebooks/{eid}.ipynb"] = (
         json.dumps(notebook, indent=2) + "\n"
     )
+if not args.check:
+    artifacts = {"tokenizers": "tokenizers", "lora": "lora-model", "ner": "ner-model"}
+    paths = {
+        key: ROOT / "examples/artifacts" / directory / "results.json"
+        for key, directory in artifacts.items()
+    }
+    if all(path.exists() for path in paths.values()):
+        results = {key: json.loads(path.read_text()) for key, path in paths.items()}
+        results["tiny"] = json.loads(
+            json.loads(
+                (
+                    ROOT / "examples/verification/records/lora-tiny-training.json"
+                ).read_text()
+            )["stdout"]
+        )
+        outputs["src/data/reference-results.json"] = (
+            json.dumps(results, indent=2, ensure_ascii=False) + "\n"
+        )
+# Replace only explicit source regions; surrounding explanations stay authored.
+for entry in manifest["examples"]:
+    if not entry.get("lesson"):
+        continue
+    name = entry["lesson"]["path"]
+    path = ROOT / name
+    text = outputs.get(name, path.read_text())
+    start, end = (
+        f"{{/* example:{entry['id']}:start */}}",
+        f"{{/* example:{entry['id']}:end */}}",
+    )
+    if start in text:
+        before, remainder = text.split(start, 1)
+        _, after = remainder.split(end, 1)
+        outputs[name] = (
+            before
+            + start
+            + "\n\n```python\n"
+            + region(entry)
+            + "\n```\n\n"
+            + end
+            + after
+        )
 for name, content in outputs.items():
     path = ROOT / name
     if args.check:

@@ -113,3 +113,20 @@ test("reports deterministically include every source objective and lesson findin
       reports["docs/audits/lesson-depth-report.md"].includes(lesson.finding),
     );
 });
+
+test("implemented source destinations require real mappings and review evidence", () => {
+  const errors = changed(({ proposals }) => {
+    const destination = proposals.proposals.find(p => p.status === 'implemented');
+    destination.destination.anchor = 'missing-reference-anchor';
+    destination.reviewRecord = null;
+  });
+  assert.ok(errors.some(error => error.includes('invalid source proposal link')));
+  assert.ok(errors.some(error => error.includes('lacks evidence')));
+});
+
+test("reference lessons cannot silently lose their author review record", () => {
+  const errors = changed(({ audit }) => {
+    audit.lessons.find(lesson => lesson.enhancementReview).enhancementReview = 'missing-review';
+  });
+  assert.ok(errors.some(error => error.includes('missing enhancement review record')));
+});

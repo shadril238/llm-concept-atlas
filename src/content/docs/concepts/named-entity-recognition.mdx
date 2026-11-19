@@ -12,78 +12,243 @@ related: [masked-language-modeling]
 level: advanced
 tags: [training, chapter-11]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e2-reference-author-review-2026-11-20
+exampleIds: ["ner-span-scoring", "ner-training"]
+bookSections: ["book-ch11-ner", "book-ch11-ner-data", "book-ch11-ner-training", "book-ch11-bio-alignment", "book-ch11-entity-metrics"]
+aliases: ["NER", "BIO tagging", "token classification"]
+learningObjectives: ["Write a consistent flat BIO annotation policy.", "Align word labels to real subtokens, including special tokens and padding.", "Train a token classifier, reconstruct entities, and score exact typed spans.", "Diagnose type, boundary, truncation, and class-imbalance errors."]
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import VerifiedRun from '../../../components/VerifiedRun.astro';
+import ReferenceResults from '../../../components/ReferenceResults.astro';
+import { NerExplorer } from '../../../components/simulations/ReferenceLabs';
 
 <ConceptPrimer id="named-entity-recognition" />
 
 ## Definition and intuition
 
-Named-entity recognition assigns spans or token labels to names of people, places, organizations, or other defined entities.
+A support system needs to turn “Ada Lovelace joined Cedar Labs in New York” into structured fields. **Named-entity recognition (NER)** identifies spans of text and assigns an entity type, such as person, organization, or location. It answers both **where is the entity?** and **what kind is it?** Sentence classification answers a different question: it gives a label to a whole input.
 
-Chapter 11 adapts an encoder to labeled tasks. Data splits, frozen versus trainable weights, and task-specific heads change both cost and generalization.
+A useful mental model is a highlighter with typed colors. It must mark the correct extent of a name, not just notice a familiar word somewhere inside it. The analogy does not explain the model's uncertainty or contextual computation; those come from the encoder and classification head.
+
+<ReferenceBrief objectives={["Write a consistent flat BIO annotation policy.", "Align word labels to real subtokens, including special tokens and padding.", "Train a token classifier, reconstruct entities, and score exact typed spans.", "Diagnose type, boundary, truncation, and class-imbalance errors."]} prerequisites="Read tokenization and BERT fine-tuning. Recall that one original word can become several model tokens; the label list must match the model's actual sequence length." scope="A pretrained tiny BERT encoder plus a new seven-label head, trained on original fictional sentences. Held-out names and fixed splits support a small teaching experiment; the results are not a production NER benchmark." />
 
 ## Before you start
 
-Read [BERT fine-tuning](/llm-concept-atlas/concepts/bert-fine-tuning/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **named-entity recognition** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+Define the annotation policy **before** fitting a model. Here PER includes the complete human name, ORG includes the complete fictional organization name, and LOC includes the complete place name. Titles and punctuation are excluded. Spans are flat and nonoverlapping: this representation cannot simultaneously label an organization and a nested place inside its name.
+
+For this exercise, “Cedar Labs” is one ORG span, and “New York” is one LOC span. In another domain, products, genes, or legal citations may require different types and boundaries. A model trained under one convention can be “wrong” under another convention even when its prediction looks reasonable.
 
 ## Theory: how it works
 
-1. **Prepare:** Define entity types and annotation boundaries
-2. **Transform:** Predict token or span tags from contextual text
-3. **Inspect:** Merge tags into entities and evaluate both boundaries and types.
+### BIO labels encode boundaries
+
+**B** means beginning, **I** means inside an entity of the same type, and **O** means outside. The seven labels are O plus B/I for PER, ORG, and LOC.
+
+| Word index | Word | Gold label |
+| --- | --- | --- |
+| 0 | Ada | B-PER |
+| 1 | Lovelace | I-PER |
+| 2 | joined | O |
+| 3 | Cedar | B-ORG |
+| 4 | Labs | I-ORG |
+| 5 | in | O |
+| 6 | New | B-LOC |
+| 7 | York | I-LOC |
+
+An I-ORG following O is an invalid continuation under strict BIO annotation. The example's decoder uses an explicit repair rule: an I tag without a matching active entity begins a new entity. Both the browser and Python metrics apply that same policy. Gold annotations should still be valid BIO; repair is a declared prediction-decoding choice, not permission to ignore malformed training data.
+
+### From contextual vectors to labels
+
+A tokenizer creates `input_ids` and an attention mask with shape `[batch, sequence_length]`. The encoder creates contextual states `[batch, sequence_length, hidden_width]`. A token-classification head maps each state to seven logits, producing `[batch, sequence_length, 7]`. A softmax can convert these logits to per-position label probabilities, but the training loss accepts logits directly.
+
+For every supervised position, cross-entropy penalizes the negative logarithm of the correct label's probability. The batch loss averages over positions whose label is **not −100**. Ignoring special tokens, padding, and selected subtokens prevents meaningless positions from contributing to that objective. An attention mask and a loss mask have different purposes: ignoring a label does not remove that token from contextual computation.
 
 ### The important distinction
 
-BIO tags encode whether a token begins, continues, or lies outside an entity span. Evaluation should require both correct type and correct boundaries for a strict match. Annotation policy matters: “New York Times” could be one organization span, while “New York” alone is a place in another context.
+The annotation unit is a **word**, while the input unit is a **subtoken**. You cannot zip a word-label list directly with a longer model-token list. A fast tokenizer's `word_ids()` maps each subtoken back to its original word index; special tokens and padding map to None.
+
+Two valid supervision policies are common. **First subtoken only** gives each word one loss contribution and ignores its continuation pieces. **All subtokens** propagates labels, changing B-X to I-X for later pieces of a split word. It increases the loss contribution of heavily split words. Neither policy can be silently swapped at evaluation time. This run uses first-subtoken supervision and reads the first subtoken's predicted class back into one word label.
 
 ## Worked example
 
-In “Ada works at Acme,” Ada is a person and Acme an organization. A tagger might label the first tokens correctly but split a multiword organization incorrectly. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+Predict which pieces of “Lovelace” should contribute to the loss, then inspect the actual BERT pieces below. Switching the policy changes the label calculation, while the tokenizer output remains fixed. Continue to the error experiment: a prediction of “Cedar” has the right type but the wrong boundary for “Cedar Labs.”
 
-<LessonFlow steps={["Define entity types and annotation boundaries", "Predict token or span tags from contextual text", "Merge tags into entities and evaluate both boundaries and types."]} caption="A teaching diagram for Named-entity recognition. Read the three labeled stages from left to right; each stage is described in the text above." />
+<NerExplorer client:visible />
+
+The table includes original word ID and label, subtoken and vocabulary ID, aligned training label, and whether it enters the loss. The recorded row uses the actual authored training sentence; the second sentence is a separate invented error example. Padding remains visible so you can inspect its None word IDs and −100 labels.
+
+### Truncation is an annotation decision
+
+A 48-token budget can retain only part of a long word or entity. This workflow compares each retained word's piece count with its untruncated count and **rejects any truncated record**. A production extension should split long documents at safe entity boundaries and preserve source offsets; silently converting a partial name into a complete gold entity corrupts the task. The present short fixture passes without truncation. Tests deliberately force partial words and dropped words to verify rejection.
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+### Score a boundary error by hand
+
+The source below preserves sentence boundaries and compares exact `(type, start, exclusive_end)` tuples. Run `python3 scripts/run-examples.py --id ner-span-scoring`.
+
+{/* example:ner-span-scoring:start */}
 
 ```python
-tokens = ["Ada", "works", "at", "Acme"]
-tags = ["B-PER", "O", "O", "B-ORG"]
-print(list(zip(tokens, tags)))
+"""Word-level BIO alignment and strict, sentence-preserving entity scoring."""
+
+LABELS = ["O", "B-PER", "I-PER", "B-ORG", "I-ORG", "B-LOC", "I-LOC"]
+
+
+def spans(tags):
+    """Return (type, start, exclusive_end). Invalid I starts a new span.
+
+    This explicit repair policy is applied to both displayed predictions and
+    metrics. Never join spans across sentence boundaries.
+    """
+    result, active, start = [], None, 0
+    for index, tag in enumerate(list(tags) + ["O"]):
+        prefix, kind = ("O", None) if tag == "O" else tag.split("-", 1)
+        if prefix not in ["O", "B", "I"]:
+            raise ValueError("Expected BIO tags")
+        continues = prefix == "I" and kind == active
+        if active is not None and not continues:
+            result.append((active, start, index))
+            active = None
+        if prefix != "O" and not continues:
+            active, start = kind, index
+    return result
+
+
+def entity_scores(gold, predicted):
+    if len(gold) != len(predicted) or any(
+        len(a) != len(b) for a, b in zip(gold, predicted)
+    ):
+        raise ValueError("Sentence and word counts must match")
+    expected = {(i, *span) for i, tags in enumerate(gold) for span in spans(tags)}
+    actual = {(i, *span) for i, tags in enumerate(predicted) for span in spans(tags)}
+    tp = len(expected & actual)
+    precision = tp / len(actual) if actual else 0.0
+    recall = tp / len(expected) if expected else 0.0
+    return {
+        "tp": tp,
+        "predicted": len(actual),
+        "gold": len(expected),
+        "precision": precision,
+        "recall": recall,
+        "f1": 2 * precision * recall / (precision + recall)
+        if precision + recall
+        else 0.0,
+    }
+
+
+def align_first(word_ids, tags, complete_counts, reject_truncated=True):
+    """Only a retained complete word's first piece receives loss supervision.
+
+    Reject rows with any truncated word/entity: no partial entity can silently
+    become a shorter gold entity. Interactive inspection can show masks without
+    training on such a row.
+    """
+    from collections import Counter
+
+    retained = Counter(index for index in word_ids if index is not None)
+    if reject_truncated and retained != complete_counts:
+        raise ValueError("Truncated record: chunk at safe entity boundaries first")
+    seen, labels = set(), []
+    for index in word_ids:
+        if index is None or index in seen or retained[index] != complete_counts[index]:
+            labels.append(-100)
+        else:
+            labels.append(LABELS.index(tags[index]))
+            seen.add(index)
+    return labels
+
+
+# region demonstration
+def main():
+    gold = [["B-PER", "O", "B-ORG", "I-ORG", "O"]]
+    boundary_error = [["B-PER", "O", "B-ORG", "O", "O"]]
+    result = entity_scores(gold, boundary_error)
+    print(
+        "token accuracy:", sum(a == b for a, b in zip(gold[0], boundary_error[0])) / 5
+    )
+    print("strict entity F1:", result["f1"])
+    assert result["tp"] == 1 and result["gold"] == 2 and result["f1"] == 0.5
+
+
+if __name__ == "__main__":
+    main()
+# endregion demonstration
 ```
 
-**Expected output:**
+{/* example:ner-span-scoring:end */}
 
-```text
-[('Ada', 'B-PER'), ('works', 'O'), ('at', 'O'), ('Acme', 'B-ORG')]
+In the five-word fixture, one wrong word label gives token accuracy 4/5 = 0.8. There are two gold entities and two predicted entities, but only the person matches exactly. Precision = 1/2, recall = 1/2, and F1 = 0.5. A boundary error creates both an unmatched prediction and a missed gold entity.
+
+If 95 of 100 word labels are O, an all-O tagger can achieve 95% token accuracy while finding zero of the five entity words. Entity-level precision and recall expose this failure. Our metric returns zero when there are no predictions or no gold entities; it also records the counts so an empty set is not mistaken for a strong result.
+
+### Fine-tune, decode, and evaluate
+
+```bash
+uv sync --locked --project examples/training/reference
+python3 scripts/run-examples.py --id ner-training --allow-network
+# Cached rerun:
+python3 scripts/run-examples.py --id ner-training --offline
 ```
 
-**What the code shows:** Each token is paired with a BIO tag: `B` begins an entity and `O` marks outside. A real tagger predicts these labels and must handle multi-token spans. The [official chapter 11 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter11) develops the corresponding model-based implementation.
+The model is `prajjwal1/bert-tiny`, with its pretrained encoder and a newly initialized seven-label classification head. The tokenizer is the pinned BERT uncased tokenizer. The workflow checks their shared 30,522-item vocabulary size; these choices belong to this verified fixture and are not a general license to mix arbitrary tokenizers and models.
+
+The following alignment function is extracted from the complete workflow. `tokenizer`, the shared `align_first` helper, and imports are defined in that source; run the repository command above rather than copying this excerpt alone.
+
+{/* example:ner-training:start */}
+
+```python
+def encode(row):
+    complete = tokenizer(row["tokens"], is_split_into_words=True, truncation=False)
+    counts = Counter(i for i in complete.word_ids() if i is not None)
+    encoded = tokenizer(
+        row["tokens"], is_split_into_words=True, truncation=True, max_length=48
+    )
+    encoded["labels"] = align_first(encoded.word_ids(), row["tags"], counts)
+    assert len(encoded["labels"]) == len(encoded["input_ids"])
+    return dict(encoded)
+```
+
+{/* example:ner-training:end */}
+
+There are 26 training, six validation, and eight final test documents. Every person, organization, and place name belongs to one split only. Two entity-free sentences appear in each split. The sentence templates still overlap structurally, so this tests controlled transfer to new names, not robustness across domains. The data manifest records provenance, hash, annotation policy, and split membership.
+
+The run freezes embeddings and trains both transformer layers and the classifier with AdamW, learning rate 0.001, batch size eight, and 90 fixed steps. Validation entity F1 is checked every 30 steps; the first best checkpoint is kept. Only that checkpoint is evaluated on the final test set. The all-O baseline uses the same test documents. These settings are a small CPU demonstration, not recommended hyperparameters for a realistic corpus.
+
+The workflow verifies unchanged frozen embeddings, finite loss, actual model predictions, sentence/word lengths, and checkpoint reload. It saves the tokenizer beside the model. Predictions are decoded into word spans per sentence; an entity never extends into the next document. Reopening the saved checkpoint reproduces the same decoded outputs.
+
+<VerifiedRun id="ner-training" />
+
+<ReferenceResults kind="ner" />
+
+Inspect the displayed errors before judging the score. A type error and a boundary error have different causes. For a real project, inspect rare types, long names, ambiguous names, entity-free documents, and the domain shift from your training source. Keep a final test set separate from all checkpoint and hyperparameter choices.
 
 ## When to use it
 
-Use it to extract structured entities from documents when types and boundaries are specified. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+NER supports document indexing, entity-centered search, structured extraction, and candidate redaction. For sensitive redaction, missed entities matter and require broader validation and human procedures. A simple dictionary may be an effective baseline for a fixed catalog; a learned tagger helps when context and previously unseen names matter. A flat tagger is a poor fit for nested or overlapping span requirements unless the representation is changed.
 
 ## Limits and common mistakes
 
-- Ambiguous names, nested entities, and domain-specific terminology remain difficult.
-- **Failure to look for:** A model marks “Apple” as a company in a sentence about fruit because it ignores context.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Do not label every subpiece B-PER: that creates several beginnings inside one name. Do not score each word as its own sentence: multiword boundaries disappear. Do not include padding in accuracy or assume a high token score means strong extraction. An uncased tokenizer removes capitalization information that can be useful for entity decisions. The small fixture, narrow templates, and repaired BIO predictions limit what this experiment establishes.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First define entity types and annotation boundaries Then predict token or span tags from contextual text Finally merge tags into entities and evaluate both boundaries and types.</p></details>
+<details><summary>Recall: how does an attention mask differ from the −100 label?</summary><p>The attention mask marks positions such as padding for attention processing. The −100 label excludes a position from cross-entropy supervision. A continuation piece can remain in the input while its own label is ignored.</p></details>
 
-<details><summary>What would make the result misleading?</summary><p>A model marks “Apple” as a company in a sentence about fruit because it ignores context.</p></details>
+<details><summary>Calculate: two predicted entities, three gold entities, and one exact typed match. What are precision, recall, and F1?</summary><p>Precision = 1/2, recall = 1/3, F1 = 2×(1/2)×(1/3)÷(1/2+1/3) = 0.4. A correct type with an incorrect endpoint is not an exact match.</p></details>
+
+<details><summary>Debug: “Ada Lovelace” splits into three subtokens. Which labels should they receive?</summary><p>Hint: preserve the original word mapping first. If Ada is one piece and Lovelace two pieces, first-only supervision uses B-PER, I-PER, −100. All-piece supervision uses B-PER, I-PER, I-PER. Special and padding tokens get −100 in either policy.</p></details>
+
+<details><summary>Transfer: how would you adapt this to long medical reports?</summary><p>Define the medical annotation policy and nested-span requirements, split by patient or document group before fitting, chunk without cutting entities, preserve character offsets, and evaluate strict spans plus clinically relevant error slices. The fictional-name fixture cannot establish clinical reliability.</p></details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 11 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 11 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter11). Continue through the linked prerequisites and nearby concepts below.
+This original lesson develops Chapter 11, printed pp. 345–353. Its tiny model, original corpus, explicit truncation rejection, and sentence-preserving scorer are atlas choices. The book's [official notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter11) uses a different model and corpus. See the [token-classification guide](https://huggingface.co/docs/transformers/en/tasks/token_classification), [BERT tokenizer API](https://huggingface.co/docs/transformers/en/main_classes/tokenizer), and [tiny BERT model card](https://huggingface.co/prajjwal1/bert-tiny). Continue to tokenization, BERT fine-tuning, and evaluation.
 
 <ConceptConnections id="named-entity-recognition" />

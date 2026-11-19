@@ -48,3 +48,5 @@ For corrections, please describe what a reader could misunderstand and how your 
 ## Example infrastructure
 
 Follow [examples/README.md](./examples/README.md). Register every Python block, use named source regions for new examples, run the declared locked environment, and regenerate synchronized lessons/notebooks. Ordinary site builds execute the foundation suite; CPU model runs are explicit. Preserve the legacy exact-output validations while migrating examples. Passing execution does not resolve an E0 teaching finding or award editorial acceptance.
+
+Use the [reference lesson template](./docs/templates/reference-lesson.md) and [E2 author review](./docs/reviews/e2-reference-lessons.md) when expanding lessons. Keep author review, independent editorial acceptance, and execution verification distinct.

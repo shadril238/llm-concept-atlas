@@ -1,0 +1,10 @@
+---
+const { objectives, prerequisites, scope } = Astro.props as {objectives: string[]; prerequisites: string; scope: string};
+---
+<aside class="reference-brief" aria-label="Learning objectives and prerequisites">
+  <strong>What you will be able to do</strong>
+  <ul>{objectives.map(objective => <li>{objective}</li>)}</ul>
+  <p><strong>Bring with you:</strong> {prerequisites}</p>
+  <p><strong>Experiment scope:</strong> {scope}</p>
+  <p><small>Examples have recorded CPU verification. Independent lesson review and reader feedback are pending.</small></p>
+</aside>

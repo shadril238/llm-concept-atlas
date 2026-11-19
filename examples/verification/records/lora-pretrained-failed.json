@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "lora-pretrained",
+  "status": "failed",
+  "date": "2026-11-19T16:48:11.708474+00:00",
+  "gitCommit": "1f79da4bfc10e35e3dd5f0d8acd012f0106692ca",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/training/reference/src/atlas_reference/lora_model.py"
+  ],
+  "sourceSha256": "34249ab8d73ef77663b3048e32db1a8e2780548f110cfaa172a09dfc2270e358",
+  "lockSha256": "d4b64636a97fdd81593972dc4241059dc1edf5178dec89bf5c1cf6601d7f5615",
+  "contractSha256": "b11e4d65cda5e7530f81bbbd82f4302a8886e87fdfc14c6a6d8e76fb8e4d20fd",
+  "fixtureSha256": "2430df1d7a44f2ccebf8986dc8b463c537fa4d44ee34d42088dbf233400d40d8",
+  "models": [
+    {
+      "id": "EleutherAI/pythia-14m",
+      "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac"
+    }
+  ],
+  "python": "3.11.18",
+  "packages": {
+    "numpy": "2.2.6",
+    "packaging": "26.3",
+    "requests": "2.34.2",
+    "certifi": "2026.10.23",
+    "networkx": "3.6.1",
+    "torch": "2.8.0",
+    "filelock": "4.2.12",
+    "accelerate": "1.16.0",
+    "sympy": "1.14.0",
+    "huggingface_hub": "0.36.2",
+    "safetensors": "0.8.0",
+    "tqdm": "4.70.1",
+    "urllib3": "2.8.0",
+    "mpmath": "1.3.0",
+    "PyYAML": "6.0.3",
+    "fsspec": "2026.9.0",
+    "peft": "0.17.0",
+    "Jinja2": "3.1.6",
+    "regex": "2026.11.19",
+    "transformers": "4.57.1",
+    "typing_extensions": "4.16.0",
+    "MarkupSafe": "3.0.4",
+    "hf-xet": "1.8.0",
+    "tokenizers": "0.22.2",
+    "psutil": "7.2.2",
+    "charset-normalizer": "3.5.2",
+    "idna": "3.20"
+  },
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 20.368,
+  "peakMemoryMiB": 618.8,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "allowed",
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<repository>/examples/training/reference/src/atlas_reference/lora_model.py\", line 97, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"<repository>/examples/training/reference/src/atlas_reference/lora_model.py\", line 85, in main\n    assert torch.allclose(logits,merged_logits,atol=3e-5,rtol=1e-4)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+  "error": "process exit 1"
+}

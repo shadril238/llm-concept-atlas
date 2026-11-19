@@ -104,3 +104,9 @@ Generated from the registry and execution records. Execution checks do not const
 | legacy-text-classification | B | exit-success | Unverified |
 | attention-softmax | A | exact-stdout | [Passed 2026-11-19T06:54:30.321174+00:00](records/attention-softmax.json) |
 | embedding-retrieval | B | json-invariants | [Passed 2026-11-19T07:33:39.132970+00:00](records/embedding-retrieval.json) |
+| lora-trace | A | exact-stdout | [Passed 2026-11-19T17:03:35.734632+00:00](records/lora-trace.json) |
+| ner-span-scoring | A | exact-stdout | [Passed 2026-11-19T17:03:35.809287+00:00](records/ner-span-scoring.json) |
+| tokenizer-comparison | B | json-invariants | [Passed 2026-11-19T17:03:37.741892+00:00](records/tokenizer-comparison.json) |
+| lora-tiny-training | A | json-invariants | [Passed 2026-11-19T17:03:38.562547+00:00](records/lora-tiny-training.json) |
+| lora-pretrained | B | json-invariants | [Passed 2026-11-19T17:03:40.763960+00:00](records/lora-pretrained.json) |
+| ner-training | B | json-invariants | [Passed 2026-11-19T17:03:42.402070+00:00](records/ner-training.json) |

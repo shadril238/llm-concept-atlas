@@ -15,6 +15,11 @@
       "project": null,
       "python": null,
       "lock": null
+    },
+    "reference": {
+      "project": "examples/training/reference",
+      "python": "3.11",
+      "lock": "examples/training/reference/uv.lock"
     }
   },
   "examples": [
@@ -1829,10 +1834,7 @@
       "entrypoint": "examples/legacy/legacy-lora.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/lora.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -2036,10 +2038,7 @@
       "entrypoint": "examples/legacy/legacy-named-entity-recognition.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/named-entity-recognition.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3469,10 +3468,7 @@
       "entrypoint": "examples/legacy/legacy-tokenization.py",
       "environment": "legacy-unverified",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/tokenization.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -4114,6 +4110,306 @@
       },
       "verificationRecord": "examples/verification/records/embedding-retrieval.json",
       "troubleshooting": "See examples/README.md. Download failures require network/cache repair; do not relabel a failed run verified."
+    },
+    {
+      "id": "lora-trace",
+      "title": "Lora Trace",
+      "concepts": [
+        "lora"
+      ],
+      "sourceSections": [
+        "book-ch12-peft",
+        "book-ch12-lora-config",
+        "book-ch12-low-rank"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/lora_trace.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/lora.mdx",
+        "block": 0
+      },
+      "region": "demonstration",
+      "models": [],
+      "dataset": null,
+      "seed": 7,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "A @ x: 0.5\nupdate: [0.05, 0.1]\noutput: [2.05, 1.1]",
+        "origin": "analytical result"
+      },
+      "verificationRecord": "examples/verification/records/lora-trace.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "ner-span-scoring",
+      "title": "Ner Span Scoring",
+      "concepts": [
+        "named-entity-recognition"
+      ],
+      "sourceSections": [
+        "book-ch11-ner",
+        "book-ch11-ner-data",
+        "book-ch11-ner-training",
+        "book-ch11-bio-alignment",
+        "book-ch11-entity-metrics"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/ner_contract.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/named-entity-recognition.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 7,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "token accuracy: 0.8\nstrict entity F1: 0.5",
+        "origin": "hand-scored span fixture"
+      },
+      "verificationRecord": "examples/verification/records/ner-span-scoring.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "tokenizer-comparison",
+      "title": "Tokenizer Comparison",
+      "concepts": [
+        "tokenization"
+      ],
+      "sourceSections": [
+        "book-ch02-tokenization",
+        "book-ch02-prepare-inputs",
+        "book-ch02-segmentation",
+        "book-ch02-token-units",
+        "book-ch02-tokenizer-properties",
+        "book-ch02-tokenizer-algorithms",
+        "book-ch02-special-tokens"
+      ],
+      "level": "B",
+      "kind": "tokenizer-inspection",
+      "entrypoint": "examples/training/reference/src/atlas_reference/tokenizer_compare.py",
+      "environment": "reference",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/tokenization.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [
+        {
+          "id": "google-bert/bert-base-uncased",
+          "revision": "86b5e0934494bd15c9632b12f734a8a67f723594"
+        },
+        {
+          "id": "openai-community/gpt2",
+          "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e"
+        }
+      ],
+      "dataset": null,
+      "seed": 7,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 600,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "JSON summary plus results.json artifacts",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "tokenizers": 2,
+          "cases": 8,
+          "roundtrip_gpt2": true
+        }
+      },
+      "verificationRecord": "examples/verification/records/tokenizer-comparison.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks.",
+      "resultKey": "tokenizers",
+      "resultArtifact": "examples/artifacts/tokenizers/results.json"
+    },
+    {
+      "id": "lora-tiny-training",
+      "title": "Lora Tiny Training",
+      "concepts": [
+        "lora"
+      ],
+      "sourceSections": [
+        "book-ch12-peft",
+        "book-ch12-lora-config",
+        "book-ch12-low-rank"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/training/reference/src/atlas_reference/lora_tiny.py",
+      "environment": "reference",
+      "workingDirectory": ".",
+      "lesson": null,
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": 7,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 30,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "stdout teaching trace",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "base_frozen": true,
+          "merge_reload": true
+        }
+      },
+      "verificationRecord": "examples/verification/records/lora-tiny-training.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "lora-pretrained",
+      "title": "Lora Pretrained",
+      "concepts": [
+        "lora"
+      ],
+      "sourceSections": [
+        "book-ch12-peft",
+        "book-ch12-lora-config",
+        "book-ch12-low-rank"
+      ],
+      "level": "B",
+      "kind": "fine-tuning",
+      "entrypoint": "examples/training/reference/src/atlas_reference/lora_model.py",
+      "environment": "reference",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/lora.mdx",
+        "block": 1
+      },
+      "region": "adapter",
+      "models": [
+        {
+          "id": "EleutherAI/pythia-14m",
+          "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac"
+        }
+      ],
+      "dataset": "examples/data/manifests/lora-reference.json",
+      "seed": 7,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 600,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "JSON summary plus results.json artifacts",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "base_frozen": true,
+          "reload_merge": true,
+          "test_documents": 4
+        }
+      },
+      "verificationRecord": "examples/verification/records/lora-pretrained.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks.",
+      "resultKey": "lora",
+      "resultArtifact": "examples/artifacts/lora-model/results.json"
+    },
+    {
+      "id": "ner-training",
+      "title": "Ner Training",
+      "concepts": [
+        "named-entity-recognition"
+      ],
+      "sourceSections": [
+        "book-ch11-ner",
+        "book-ch11-ner-data",
+        "book-ch11-ner-training",
+        "book-ch11-bio-alignment",
+        "book-ch11-entity-metrics"
+      ],
+      "level": "B",
+      "kind": "fine-tuning",
+      "entrypoint": "examples/training/reference/src/atlas_reference/ner_model.py",
+      "environment": "reference",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/named-entity-recognition.mdx",
+        "block": 1
+      },
+      "region": "alignment",
+      "models": [
+        {
+          "id": "prajjwal1/bert-tiny",
+          "revision": "6f75de8b60a9f8a2fdf7b69cbd86d9e64bcb3837"
+        },
+        {
+          "id": "google-bert/bert-base-uncased",
+          "revision": "86b5e0934494bd15c9632b12f734a8a67f723594"
+        }
+      ],
+      "dataset": "examples/data/manifests/ner-reference.json",
+      "seed": 7,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 600,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Fixed authored fixtures; see source and fixture manifest.",
+      "outputSchema": "JSON summary plus results.json artifacts",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "frozen_embeddings": true,
+          "reload": true,
+          "test_documents": 8
+        }
+      },
+      "verificationRecord": "examples/verification/records/ner-training.json",
+      "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks.",
+      "supportFiles": [
+        "examples/foundations/src/atlas_foundations/ner_contract.py"
+      ],
+      "resultKey": "ner",
+      "resultArtifact": "examples/artifacts/ner-model/results.json"
     }
   ]
 }

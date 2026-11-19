@@ -865,7 +865,7 @@
       "id": "book-ch01-llm-definition",
       "chapter": 1,
       "parentId": null,
-      "title": "The Moving Definition of a “Large Language Model”",
+      "title": "The Moving Definition of a \u201cLarge Language Model\u201d",
       "origin": "contents",
       "printedPages": [25, 25],
       "pdfPages": [47, 47],
@@ -1503,14 +1503,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Connect segmentation, token IDs, and model input with a complete trace.",
-        "This is a real tokenizer sketch, but dependencies and artifact revisions are unpinned and comparative outputs lack execution records."
+        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/tokenization.mdx",
           "anchor": "implement-it-with-a-real-tokenizer",
-          "finding": "This is a real tokenizer sketch, but dependencies and artifact revisions are unpinned and comparative outputs lack execution records."
+          "finding": "E2 adds actual BERT/GPT-2 comparison, multilingual/code/empty cases, offsets, special-token inspection, locked execution, and topic-specific exercises. Independent editorial and beginner review remain pending."
         },
         {
           "path": "src/content/docs/concepts/token.mdx",
@@ -1523,7 +1522,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 60
-      }
+      },
+      "enhancementReview": "e2-reference-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-prepare-inputs",
@@ -1579,14 +1579,13 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Show input IDs, boundary markers, masks, and the vocabulary-to-embedding connection.",
-        "This is a real tokenizer sketch, but dependencies and artifact revisions are unpinned and comparative outputs lack execution records."
+        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/tokenization.mdx",
           "anchor": "implement-it-with-a-real-tokenizer",
-          "finding": "This is a real tokenizer sketch, but dependencies and artifact revisions are unpinned and comparative outputs lack execution records."
+          "finding": "E2 adds actual BERT/GPT-2 comparison, multilingual/code/empty cases, offsets, special-token inspection, locked execution, and topic-specific exercises. Independent editorial and beginner review remain pending."
         },
         {
           "path": "src/content/docs/concepts/vocabulary.mdx",
@@ -1599,7 +1598,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 60
-      }
+      },
+      "enhancementReview": "e2-reference-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-run-llm",
@@ -1698,14 +1698,13 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Inspect decoded individual tokens and full sequences, including non-word pieces.",
-        "This is a real tokenizer sketch, but dependencies and artifact revisions are unpinned and comparative outputs lack execution records."
+        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/tokenization.mdx",
           "anchor": "implement-it-with-a-real-tokenizer",
-          "finding": "This is a real tokenizer sketch, but dependencies and artifact revisions are unpinned and comparative outputs lack execution records."
+          "finding": "E2 adds actual BERT/GPT-2 comparison, multilingual/code/empty cases, offsets, special-token inspection, locked execution, and topic-specific exercises. Independent editorial and beginner review remain pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -1713,7 +1712,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 65
-      }
+      },
+      "enhancementReview": "e2-reference-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-token-units",
@@ -1745,7 +1745,7 @@
       "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P0",
+      "priority": "P2",
       "nextPhase": "E3",
       "plannedLabs": ["L02", "L03", "L04"],
       "requirements": {
@@ -1769,8 +1769,7 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Replace the causal-slicing snippet with an actual comparison of segmentation units.",
-        "The example slices visible context and performs no word/subword tokenization."
+        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
       ],
       "evidence": [
         {
@@ -1781,7 +1780,7 @@
         {
           "path": "src/content/docs/concepts/tokenization.mdx",
           "anchor": "implement-it-with-a-real-tokenizer",
-          "finding": "This is a real tokenizer sketch, but dependencies and artifact revisions are unpinned and comparative outputs lack execution records."
+          "finding": "E2 adds actual BERT/GPT-2 comparison, multilingual/code/empty cases, offsets, special-token inspection, locked execution, and topic-specific exercises. Independent editorial and beginner review remain pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -1789,7 +1788,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 66
-      }
+      },
+      "enhancementReview": "e2-reference-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-tokenizer-comparison",
@@ -1803,9 +1803,15 @@
       "scope": "core",
       "kind": "workflow",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["tokenizer-comparison"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "conceptId": "tokenization",
+          "path": "src/content/docs/concepts/tokenization.mdx",
+          "anchor": "see-a-worked-example"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -1821,18 +1827,23 @@
       },
       "notApplicableReasons": {},
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
-        "implementation": "missing",
-        "evaluation": "missing",
-        "exercises": "missing"
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
+        "implementation": "partial",
+        "evaluation": "partial",
+        "exercises": "partial"
       },
       "gaps": [
-        "Compare multiple trained tokenizers on identical multilingual, numerical, whitespace, and code inputs.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "Independent review and a wider tokenizer/numerical comparison remain; E2 provides a verified two-tokenizer slice."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/tokenization.mdx",
+          "anchor": "see-a-worked-example",
+          "finding": "E2 compares two pinned tokenizers on eight recorded English, multilingual, code, and whitespace cases."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
@@ -1898,14 +1909,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Separate algorithm, corpus, parameters, special markers, and model compatibility.",
-        "This is a real tokenizer sketch, but dependencies and artifact revisions are unpinned and comparative outputs lack execution records."
+        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/tokenization.mdx",
           "anchor": "implement-it-with-a-real-tokenizer",
-          "finding": "This is a real tokenizer sketch, but dependencies and artifact revisions are unpinned and comparative outputs lack execution records."
+          "finding": "E2 adds actual BERT/GPT-2 comparison, multilingual/code/empty cases, offsets, special-token inspection, locked execution, and topic-specific exercises. Independent editorial and beginner review remain pending."
         },
         {
           "path": "src/content/docs/concepts/vocabulary.mdx",
@@ -1918,7 +1928,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 77
-      }
+      },
+      "enhancementReview": "e2-reference-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-token-embeddings",
@@ -4047,7 +4058,7 @@
       "id": "book-ch05-arxiv-data",
       "chapter": 5,
       "parentId": null,
-      "title": "ArXiv’s Articles: Computation and Language",
+      "title": "ArXiv\u2019s Articles: Computation and Language",
       "origin": "contents",
       "printedPages": [138, 139],
       "pdfPages": [160, 161],
@@ -9370,14 +9381,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Define typed spans, BIO conventions, and entity-level prediction and scoring.",
-        "Supplied BIO tags are zipped to words; no tokenizer alignment, predictions, training, or span metrics are computed."
+        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/named-entity-recognition.mdx",
           "anchor": "implement-it",
-          "finding": "Supplied BIO tags are zipped to words; no tokenizer alignment, predictions, training, or span metrics are computed."
+          "finding": "E2 replaces supplied labels as the main implementation with actual tokenizer alignment and trained predictions, explicit masking/truncation, sentence-preserving spans, baseline/test metrics, validation errors, and reload checks. Real-domain extension and independent review remain pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -9385,7 +9395,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 367
-      }
+      },
+      "enhancementReview": "e2-reference-author-review-2026-11-20"
     },
     {
       "id": "book-ch11-ner-data",
@@ -9439,14 +9450,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Align word labels to actual subtokens, special tokens, padding, and truncated sequences.",
-        "Supplied BIO tags are zipped to words; no tokenizer alignment, predictions, training, or span metrics are computed."
+        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/named-entity-recognition.mdx",
           "anchor": "implement-it",
-          "finding": "Supplied BIO tags are zipped to words; no tokenizer alignment, predictions, training, or span metrics are computed."
+          "finding": "E2 replaces supplied labels as the main implementation with actual tokenizer alignment and trained predictions, explicit masking/truncation, sentence-preserving spans, baseline/test metrics, validation errors, and reload checks. Real-domain extension and independent review remain pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -9454,7 +9464,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 369
-      }
+      },
+      "enhancementReview": "e2-reference-author-review-2026-11-20"
     },
     {
       "id": "book-ch11-ner-training",
@@ -9480,7 +9491,7 @@
       "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E2",
       "plannedLabs": ["L18", "L19", "L20"],
       "requirements": {
@@ -9496,27 +9507,27 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Train a token classifier, decode full sequences, and calculate strict span metrics.",
-        "Supplied BIO tags are zipped to words; no tokenizer alignment, predictions, training, or span metrics are computed."
+        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/named-entity-recognition.mdx",
           "anchor": "implement-it",
-          "finding": "Supplied BIO tags are zipped to words; no tokenizer alignment, predictions, training, or span metrics are computed."
+          "finding": "E2 replaces supplied labels as the main implementation with actual tokenizer alignment and trained predictions, explicit masking/truncation, sentence-preserving spans, baseline/test metrics, validation errors, and reload checks. Real-domain extension and independent review remain pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified-reference-slice",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 374
-      }
+      },
+      "enhancementReview": "e2-reference-author-review-2026-11-20"
     },
     {
       "id": "book-ch12-training-stages",
@@ -9751,7 +9762,7 @@
       "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P0",
+      "priority": "P2",
       "nextPhase": "E8",
       "plannedLabs": ["L21", "L22", "L23"],
       "requirements": {
@@ -9779,8 +9790,7 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Distinguish added adapters, low-rank updates, and quantized base storage.",
-        "A matrix update illustrates LoRA only; distinguish adapter families and actual frozen/trainable parameter groups."
+        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
       ],
       "evidence": [
         {
@@ -9791,7 +9801,7 @@
         {
           "path": "src/content/docs/concepts/lora.mdx",
           "anchor": "implement-it",
-          "finding": "The example computes a rank-one update but reverses the A/B naming used by its BA prose and omits scaling, initialization, and learning."
+          "finding": "E2 resolves the A/B orientation mismatch and adds standard scaling, parameter counts, initialization/gradient trace, controlled training, a real pretrained adapter, held-out losses, reload, and precision-aware merge checks. Broader E8 workflows and independent review remain pending."
         },
         {
           "path": "src/content/docs/concepts/qlora.mdx",
@@ -9804,7 +9814,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 381
-      }
+      },
+      "enhancementReview": "e2-reference-author-review-2026-11-20"
     },
     {
       "id": "book-ch12-instruction-qlora",
@@ -10021,7 +10032,7 @@
       "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P0",
+      "priority": "P2",
       "nextPhase": "E2",
       "plannedLabs": ["L21", "L22", "L23"],
       "requirements": {
@@ -10037,27 +10048,27 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Explain rank, alpha scaling, target modules, dropout, initialization, and trainable counts.",
-        "The example computes a rank-one update but reverses the A/B naming used by its BA prose and omits scaling, initialization, and learning."
+        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/lora.mdx",
           "anchor": "implement-it",
-          "finding": "The example computes a rank-one update but reverses the A/B naming used by its BA prose and omits scaling, initialization, and learning."
+          "finding": "E2 resolves the A/B orientation mismatch and adds standard scaling, parameter counts, initialization/gradient trace, controlled training, a real pretrained adapter, held-out losses, reload, and precision-aware merge checks. Broader E8 workflows and independent review remain pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified-reference-slice",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 392
-      }
+      },
+      "enhancementReview": "e2-reference-author-review-2026-11-20"
     },
     {
       "id": "book-ch12-sft-config",
@@ -11378,18 +11389,18 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Contrast vocabulary learning and segmentation decisions with worked tokenization cases.",
-        "This is a real tokenizer sketch, but dependencies and artifact revisions are unpinned and comparative outputs lack execution records."
+        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/tokenization.mdx",
           "anchor": "implement-it-with-a-real-tokenizer",
-          "finding": "This is a real tokenizer sketch, but dependencies and artifact revisions are unpinned and comparative outputs lack execution records."
+          "finding": "E2 adds actual BERT/GPT-2 comparison, multilingual/code/empty cases, offsets, special-token inspection, locked execution, and topic-specific exercises. Independent editorial and beginner review remain pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e2-reference-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-special-tokens",
@@ -11445,14 +11456,13 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Inspect role/boundary tokens, padding, and task markers in a real tokenizer.",
-        "This is a real tokenizer sketch, but dependencies and artifact revisions are unpinned and comparative outputs lack execution records."
+        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/tokenization.mdx",
           "anchor": "implement-it-with-a-real-tokenizer",
-          "finding": "This is a real tokenizer sketch, but dependencies and artifact revisions are unpinned and comparative outputs lack execution records."
+          "finding": "E2 adds actual BERT/GPT-2 comparison, multilingual/code/empty cases, offsets, special-token inspection, locked execution, and topic-specific exercises. Independent editorial and beginner review remain pending."
         },
         {
           "path": "src/content/docs/concepts/vocabulary.mdx",
@@ -11461,7 +11471,8 @@
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e2-reference-author-review-2026-11-20"
     },
     {
       "id": "book-ch02-negative-sampling",
@@ -14010,18 +14021,18 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Map word IDs to subtokens and handle B/I transitions, special tokens, and padding.",
-        "Supplied BIO tags are zipped to words; no tokenizer alignment, predictions, training, or span metrics are computed."
+        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/named-entity-recognition.mdx",
           "anchor": "implement-it",
-          "finding": "Supplied BIO tags are zipped to words; no tokenizer alignment, predictions, training, or span metrics are computed."
+          "finding": "E2 replaces supplied labels as the main implementation with actual tokenizer alignment and trained predictions, explicit masking/truncation, sentence-preserving spans, baseline/test metrics, validation errors, and reload checks. Real-domain extension and independent review remain pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e2-reference-author-review-2026-11-20"
     },
     {
       "id": "book-ch11-entity-metrics",
@@ -14071,18 +14082,18 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Evaluate complete BIO sequences and typed spans instead of independent singleton tags.",
-        "Supplied BIO tags are zipped to words; no tokenizer alignment, predictions, training, or span metrics are computed."
+        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/named-entity-recognition.mdx",
           "anchor": "implement-it",
-          "finding": "Supplied BIO tags are zipped to words; no tokenizer alignment, predictions, training, or span metrics are computed."
+          "finding": "E2 replaces supplied labels as the main implementation with actual tokenizer alignment and trained predictions, explicit masking/truncation, sentence-preserving spans, baseline/test metrics, validation errors, and reload checks. Real-domain extension and independent review remain pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e2-reference-author-review-2026-11-20"
     },
     {
       "id": "book-ch12-adapters",
@@ -14169,7 +14180,7 @@
       "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P0",
+      "priority": "P2",
       "nextPhase": "E2",
       "plannedLabs": ["L21", "L22", "L23"],
       "requirements": {
@@ -14193,18 +14204,18 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Use consistent A/B shapes, rank, alpha scaling, and a real update with frozen base weights.",
-        "The example computes a rank-one update but reverses the A/B naming used by its BA prose and omits scaling, initialization, and learning."
+        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/lora.mdx",
           "anchor": "implement-it",
-          "finding": "The example computes a rank-one update but reverses the A/B naming used by its BA prose and omits scaling, initialization, and learning."
+          "finding": "E2 resolves the A/B orientation mismatch and adds standard scaling, parameter counts, initialization/gradient trace, controlled training, a real pretrained adapter, held-out losses, reload, and precision-aware merge checks. Broader E8 workflows and independent review remain pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e2-reference-author-review-2026-11-20"
     },
     {
       "id": "book-ch12-blockwise-quantization",
@@ -14653,5 +14664,6 @@
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified"
     }
-  ]
+  ],
+  "lastUpdated": "2026-11-20"
 }

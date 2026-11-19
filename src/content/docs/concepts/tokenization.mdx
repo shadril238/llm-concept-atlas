@@ -12,147 +12,202 @@ related: [vocabulary, token-embedding, language-ai]
 level: beginner
 lessonStatus: full
 tags: [tokens, foundations]
-lastReviewed: 2026-11-12
+lastReviewed: 2026-11-20
+reviewStatus: author-reviewed
+reviewRecord: e2-reference-author-review-2026-11-20
+exampleIds: ["tokenizer-comparison"]
+bookSections: ["book-ch02-tokenization", "book-ch02-prepare-inputs", "book-ch02-segmentation", "book-ch02-token-units", "book-ch02-tokenizer-properties", "book-ch02-tokenizer-algorithms", "book-ch02-special-tokens", "book-ch02-tokenizer-comparison"]
+aliases: ["tokenizer", "WordPiece", "byte pair encoding"]
+learningObjectives: ["Trace text through pieces, IDs, masks, and decoding.", "Compare actual WordPiece and byte-BPE tokenizers on English, Korean, emoji, and code.", "Explain special tokens, normalization, and non-reversible decoding.", "Diagnose context overflow and tokenizer/model mismatches."]
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import TokenDiagram from '../../../components/TokenDiagram.astro';
-import TokenizationLab from '../../../components/TokenizationLab.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import VerifiedRun from '../../../components/VerifiedRun.astro';
+import ReferenceResults from '../../../components/ReferenceResults.astro';
+import { TokenizerExplorer } from '../../../components/simulations/ReferenceLabs';
 
 <ConceptPrimer id="tokenization" />
 
-**Before you start:** know what a [token](/llm-concept-atlas/concepts/token/) is. You can return here after reading that lesson.
-
 ## The idea in plain language
 
-Imagine a model receiving the sentence **“Language models learn patterns.”** It cannot work directly with the letters on the page. A tokenizer first turns that text into a sequence of pieces, then assigns each piece a number called a **token ID**. The model looks up those IDs to begin its numerical calculations.
+You are building a document assistant. A 500-word passage fits one model and overflows another. Why? Models budget their input in **tokens**, and different tokenizers can turn the same text into different-length sequences.
 
-A token might be a whole word, part of a word, a punctuation mark, or a byte-like piece. **One token does not always equal one word.** The split depends on the tokenizer paired with the model.
+**Tokenization** is the conversion of text into an ordered sequence of vocabulary items and their integer IDs, using a particular tokenizer's rules. A tokenizer is part of a model's input contract. It does not infer a word's contextual meaning; the model's embedding and transformer layers perform later numerical processing. Think of the tokenizer as an agreed encoding system: both sender and receiver must use the same vocabulary. The analogy stops at meaning—an ID is an address, not a definition.
 
-The two directions are useful to keep in mind:
-
-```text
-Input:   text → token pieces → token IDs → model
-Output:  model's token IDs → token pieces → readable text
-```
+<ReferenceBrief objectives={["Trace text through pieces, IDs, masks, and decoding.", "Compare actual WordPiece and byte-BPE tokenizers on English, Korean, emoji, and code.", "Explain special tokens, normalization, and non-reversible decoding.", "Diagnose context overflow and tokenizer/model mismatches."]} prerequisites="Know what a token and a lookup table are. Recall: does an ID's numerical size imply its importance? No." scope="Two real tokenizers, eight recorded cases, CPU. The browser inspects recorded output; the Python comparison downloads tokenizer files only." />
 
 ## See a worked example
 
-<TokenDiagram />
+Start with `Language models learn patterns.`. Predict whether punctuation becomes a separate piece, whether capitalization survives decoding, and whether boundary markers add to the count. Then inspect both tokenizers below.
 
-The colored pieces and IDs above are **invented for teaching**. They show the stages, not the output of a trained tokenizer. A real tokenizer might split “Language” into several pieces or combine a space with the piece after it.
+<TokenizerExplorer client:visible />
 
-Here is what to trace in the diagram:
+The piece buttons display **actual recorded IDs**. Selecting one exposes its original-string offsets. Offsets are half-open character ranges: `[0, 8)` covers positions 0 through 7. Added special tokens can have an empty source range. A Unicode character can occupy several UTF-8 bytes, so byte-based pieces may share a character's offset range. Offsets are not a universal one-to-one map between pieces and characters.
 
-1. **Text enters.** The input is still a normal string that a person can read.
-2. **The tokenizer chooses pieces.** It follows its own vocabulary and rules. Punctuation and spaces may be represented differently by different tokenizers.
-3. **Each piece receives an ID.** The model receives integers, not the visible colored blocks.
-4. **The model uses those IDs.** An embedding table turns the IDs into vectors. Later layers use those vectors together with context.
-
-Generation runs the last step in reverse: the model predicts an ID, and the tokenizer decodes IDs back into visible text. This is why you often see generated text appear piece by piece.
+For the English example, BERT's uncased normalization removes capitalization. Its vocabulary lookup adds `[CLS]` and `[SEP]` under the default single-sequence encoding. GPT-2's byte-BPE encoding does not add those BERT markers. Look at the recorded count rather than assuming two tokenizers must agree.
 
 ### Try changing the split
 
-<TokenizationLab />
+Choose **Unusual word** and compare `unbelievableness`. WordPiece marks internal continuations with `##`; GPT-2 uses visible byte notation, including a symbol often rendered as `Ġ` for a leading space. These symbols describe vocabulary entries; they are not decorations to append to your input. Decode the complete ID sequence with the tokenizer instead of manually joining the displayed pieces.
 
-Type a longer word such as **unbelievableness**, switch between the three rules, and watch the number of pieces change. In the toy subword view, `##` means “continue the same word”; the displayed IDs simply label pieces in this demo. The real BERT tokenizer in the code exercise below has its own learned vocabulary and IDs.
+Next select **Korean + emoji**. BERT's English uncased vocabulary can lose information through normalization and unknown tokens. GPT-2's byte vocabulary can represent the supplied text and reconstruct it, although it may use many pieces. This does not establish that GPT-2's language model understands Korean well. Representability, compression, and downstream model quality are separate properties.
 
-The comparison row shows all three counts at once. Change the illustrative context budget to see why the same text may fit under one splitting rule but exceed another. This is a teaching budget; use the actual model tokenizer to plan a real context window.
+Finally select **Python + whitespace**. Inspect the newline, indentation, quotes, and punctuation. Removing whitespace to reduce a token count can change a program's meaning. The compactness of an encoding is useful only if it preserves information your task needs.
 
 ## How tokenization works
 
-A tokenizer has two parts that are easy to confuse. **Training a tokenizer** chooses its vocabulary and splitting rules from a text collection. **Using a trained tokenizer** applies those fixed choices to new text. The vocabulary can reflect the data it was trained on: a tokenizer built around English prose, programming code, or several languages may split the same input differently.
+A trained tokenizer commonly combines the following operations; the exact pipeline is model-specific.
 
-The path from text to model input usually includes these operations, although their order and details vary by tokenizer:
-
-| Stage | What happens | Why it matters |
+| Stage | Input → output | What to inspect |
 | --- | --- | --- |
-| Normalization | Text may be lowercased or otherwise standardized. Some tokenizers preserve the original form. | An uncased tokenizer may treat `Apple` and `apple` alike. |
-| Segmentation | The text is divided into pieces from a learned vocabulary. | Common strings may be one piece; rare strings may need several. |
-| ID lookup | Every chosen piece is replaced with its vocabulary ID. | These are the integers given to the model. |
-| Special tokens | Task markers may be added, such as start, end, separator, or padding tokens. | They tell the model where text or task boundaries are. |
+| Normalization | Original Unicode text → normalized text | Case folding, accents, and whitespace policies can discard distinctions. |
+| Pre-tokenization | Normalized text → candidate spans | Spaces and punctuation often guide boundaries. This stage differs across tokenizers. |
+| Subword segmentation | Spans → vocabulary pieces | The algorithm selects known units; unusual text may need many pieces. |
+| ID lookup | Pieces → integers | IDs must match the paired model's embedding rows. |
+| Post-processing | IDs → model-ready sequence | Add task markers, attention masks, padding, or other fields when needed. |
 
-Most modern language models use **subword** pieces. This is a useful compromise: frequent words can be compact, while less familiar words can be assembled from smaller pieces. Three common subword algorithms are **byte pair encoding (BPE)**, **WordPiece**, and **Unigram**. They differ in how they learn and select pieces; knowing the exact algorithm is less important at first than understanding the shared goal. A model's tokenizer also has a vocabulary size, special tokens, and training data that shape its behavior. [Hugging Face's tokenizer overview](https://huggingface.co/docs/transformers/en/tokenizer_summary) explains the algorithms in more depth.
+**Training a tokenizer** learns a vocabulary and segmentation rules from a corpus. **Encoding text** applies a fixed tokenizer to a new input. These are different jobs. The pretrained comparison performs encoding; it does not train either tokenizer or either language model.
 
 ### Why not split on spaces?
 
-Space splitting fails on punctuation, unfamiliar words, languages without spaces between words, and formatting such as code. It also cannot tell a model what numerical ID to use for each piece. A trained tokenizer solves a more specific problem: it represents text with a vocabulary the paired model learned to use.
+Space splitting cannot consistently handle punctuation, languages without word spaces, unfamiliar compounds, emoji, and source-code layout. A whole-word vocabulary also needs a policy for words absent from training. Character tokenization avoids many unknown-word problems but lengthens the input; byte tokenization covers encodable text using byte units and can require multiple pieces per visible character.
 
-| Unit | Simple intuition | Main trade-off |
-| --- | --- | --- |
-| Word | One known word per piece | Unseen words are difficult to represent with a fixed word vocabulary. |
-| Subword | Frequent words and reusable word parts | The split can look surprising and depends on training data. |
-| Character | One character per piece | Sequences become longer, so the model must process more positions. |
-| Byte | Represent text through encoded bytes | Can cover many characters, but a visible character may need several pieces. |
+**BPE (byte pair encoding)** begins with smaller units and learns merges of frequently adjacent pairs. A toy sequence `l o w` might become `lo w`, then `low`, if those merges were learned. The merge rules and order determine encoding; you cannot infer the full vocabulary from this toy trace. **WordPiece** also uses subword units, with its own vocabulary learning and matching procedure. **Unigram** starts from a candidate vocabulary and uses a probabilistic segmentation model. SentencePiece is a toolkit that can implement BPE or Unigram; it is not a synonym for a third universal segmentation algorithm.
+
+A useful accounting equation is `total input length = content pieces + inserted special tokens + prompt/template tokens`. Padding extends a batch tensor, but its mask distinguishes those filler positions from actual content. An attention mask of 0 marks padding for these examples; a training label of −100 has a different role, which the NER lesson explains.
+
+### Special tokens and context budgets
+
+BERT's `[CLS]`, `[SEP]`, `[PAD]`, `[UNK]`, and `[MASK]` have task-specific uses. GPT-2 has a different special-token scheme. Setting `add_special_tokens=False` is an experiment, not a safe default for every task. Chat models may additionally require a template with role and turn markers. Count the **final encoded prompt**, including its template, before reserving room for generated output.
+
+The same integer can refer to unrelated pieces in two vocabularies. Even if two tokenizers report the same vocabulary size, swapping them can silently feed the wrong embedding rows into a model. Loading succeeds is a weaker test than checking the model/tokenizer identity and revision.
 
 ## Implement it with a real tokenizer
 
-This example downloads **only a tokenizer**, not the BERT model weights. It runs on a CPU. Install the library once, then save and run the Python code:
+From the repository root, create the locked reference environment and run the comparison:
 
 ```bash
-python -m pip install transformers
+uv sync --locked --project examples/training/reference
+python3 scripts/run-examples.py --id tokenizer-comparison --allow-network
+# After the first download, rerun from the cache:
+python3 scripts/run-examples.py --id tokenizer-comparison --offline
 ```
+
+The following complete source records the pieces, IDs, offsets, special-token mask, and decoded text. Run it in its repository location; its artifact path is derived from that location.
+
+{/* example:tokenizer-comparison:start */}
 
 ```python
+"""Compare two actual tokenizer vocabularies and normalization policies."""
+
+import json
+from pathlib import Path
 from transformers import AutoTokenizer
 
-model_id = "google-bert/bert-base-uncased"
-tokenizer = AutoTokenizer.from_pretrained(model_id)
+ROOT = Path(__file__).resolve().parents[5]
+SPECS = [
+    ("google-bert/bert-base-uncased", "86b5e0934494bd15c9632b12f734a8a67f723594"),
+    ("openai-community/gpt2", "607a30d783dfa663caf39e06633721c8d4cfcd7e"),
+]
+TEXTS = [
+    "Language models learn patterns.",
+    "unbelievableness",
+    "안녕하세요 👋",
+    'print("Hello")\n  x = 2',
+]
 
-for text in ["Language models learn patterns.", "unbelievableness"]:
-    encoded = tokenizer(text)
-    ids = encoded["input_ids"]
-    pieces = tokenizer.convert_ids_to_tokens(ids)
 
-    print(f"\nInput: {text}")
-    print("Pieces and IDs:", list(zip(pieces, ids)))
-    print("Token count:", len(ids))
-    print("Decoded:", tokenizer.decode(ids, skip_special_tokens=True))
+def main():
+    examples = []
+    for model_id, revision in SPECS:
+        tokenizer = AutoTokenizer.from_pretrained(
+            model_id, revision=revision, use_fast=True
+        )
+        for text in TEXTS:
+            encoded = tokenizer(
+                text, return_offsets_mapping=True, return_special_tokens_mask=True
+            )
+            ids = encoded["input_ids"]
+            examples.append(
+                {
+                    "model": model_id,
+                    "text": text,
+                    "pieces": tokenizer.convert_ids_to_tokens(ids),
+                    "ids": ids,
+                    "offsets": encoded["offset_mapping"],
+                    "special": encoded["special_tokens_mask"],
+                    "decoded": tokenizer.decode(
+                        ids,
+                        skip_special_tokens=True,
+                        clean_up_tokenization_spaces=False,
+                    ),
+                }
+            )
+            assert (
+                len(ids)
+                == len(encoded["offset_mapping"])
+                == len(encoded["special_tokens_mask"])
+            )
+            if "gpt2" in model_id:
+                assert tokenizer.decode(ids, clean_up_tokenization_spaces=False) == text
+        # Empty input is still a valid encoded input; BERT adds two markers.
+        assert len(tokenizer("")["input_ids"]) == (2 if "bert" in model_id else 0)
+    path = ROOT / "examples/artifacts/tokenizers"
+    path.mkdir(parents=True, exist_ok=True)
+    (path / "results.json").write_text(
+        json.dumps(examples, indent=2, ensure_ascii=False) + "\n"
+    )
+    print(
+        json.dumps(
+            {
+                "tokenizers": 2,
+                "cases": len(examples),
+                "roundtrip_gpt2": True,
+                "counts": [len(row["ids"]) for row in examples],
+            }
+        )
+    )
+
+
+# region usage
+if __name__ == "__main__":
+    main()
+# endregion usage
 ```
 
-Look for three things in the output. BERT adds boundary markers such as `[CLS]` and `[SEP]`; the `uncased` tokenizer lowercases input; and the unusual second word is likely to split into multiple pieces. Pieces beginning with `##` continue the same word in BERT's WordPiece display. The printed IDs are specific to this tokenizer. [The model card](https://huggingface.co/google-bert/bert-base-uncased) and [AutoTokenizer documentation](https://huggingface.co/docs/transformers/model_doc/auto) describe the tokenizer used here.
+{/* example:tokenizer-comparison:end */}
 
-`AutoTokenizer.from_pretrained` loads the tokenizer paired with the named model. Calling `tokenizer(text)` produces an encoded result; `input_ids` is the sequence the model would use. `convert_ids_to_tokens` lets you inspect the visible pieces, and `decode` turns IDs back into readable text. The count includes BERT's special tokens, so it can be larger than the number of visible word pieces in the original sentence.
+<VerifiedRun id="tokenizer-comparison" />
 
-Change the inputs to a sentence in another language, a line of Python, and text with emoji. Compare the number and appearance of the pieces. This small experiment reveals why tokenizer choice affects different kinds of text differently.
+`use_fast=True` enables the alignment information used here. `return_offsets_mapping` ties pieces to source characters; `return_special_tokens_mask` identifies added markers. The script checks matching array lengths, empty-input behavior, and exact GPT-2 round trips for these fixtures. BERT's output is allowed to differ from the original because its normalization intentionally changes text. Assertions should test the tokenizer's documented contract, not demand impossible lossless decoding from an uncased tokenizer.
+
+Inspect `examples/artifacts/tokenizers/results.json` after running. Changing a string requires rerunning the tokenizer; the browser does not fabricate new pieces. The locked environment and pinned revisions let another reader inspect the same vocabulary. Later library changes still require re-verification.
 
 ## Why it matters
 
-Tokenization is a practical design decision, not only a preprocessing detail:
-
-- **Context limits:** a model's context size is measured in tokens. Two passages with the same number of words can use different numbers of tokens, so count tokens before trimming or chunking long input.
-- **Retrieval and RAG:** a retrieved passage must fit alongside the user's question and any instructions. Token counts help decide how much evidence can be included.
-- **Code and multilingual text:** whitespace, punctuation, emoji, and different scripts can split differently. Inspect the actual tokenizer before making assumptions about length or coverage.
-- **Model compatibility:** use the tokenizer associated with the model. The same integer ID can mean a different piece in another vocabulary.
-- **Output interpretation:** generated text arrives as token IDs before it becomes readable text. Several output tokens can make one visible word.
+- **Retrieval:** chunk source documents with the target tokenizer and leave room for the question, instructions, and answer. A character count is an estimate, not the final budget.
+- **Multilingual products:** compare counts and information loss on the actual scripts your users write. An English-only fixture cannot establish multilingual suitability.
+- **Training:** align word-level annotations with actual model pieces. The [NER lesson](/llm-concept-atlas/concepts/named-entity-recognition/) makes that mapping explicit.
+- **Cost and latency:** input length affects many workloads, but the cheapest encoding is not automatically the most accurate model.
 
 ## Limits and common mistakes
 
-- **“One token is one word.”** A token can be a word, subword, punctuation piece, or other unit.
-- **“The colored diagram is an exact tokenizer output.”** It is a teaching model. Use the code above to inspect actual output.
-- **“Decoding always reconstructs the exact original string.”** Normalization and unknown-token behavior can discard distinctions, such as capitalization in an uncased tokenizer.
-- **“Fewer tokens always means a better model.”** Token count is one factor. Model quality also depends on architecture, training, data, and the task.
+A token is not always a word, an ID is not a semantic score, and individual-token decoding need not reconstruct every character cleanly. Do not equate byte coverage with language competence or assume a token-count comparison ranks language models. Truncation can cut an instruction or entity in half. Inspect the retained content and choose a task-aware policy rather than silently accepting the first N tokens.
 
 ## Check your understanding
 
-<details>
-  <summary>Why can two tokenizers give different token counts for the same sentence?</summary>
-  <p>They can use different algorithms, vocabulary sizes, special tokens, and training data. Each of those choices can change the pieces selected for the same text.</p>
-</details>
+<details><summary>Recall: why can two tokenizers assign different IDs to “cat”?</summary><p>Each vocabulary has its own mapping. The number selects a row in the paired model's embedding table; its magnitude does not measure meaning or importance.</p></details>
 
-<details>
-  <summary>What does the model receive: the original text, token pieces, or token IDs?</summary>
-  <p>The tokenizer supplies token IDs. The model then looks up numerical representations for those IDs.</p>
-</details>
+<details><summary>Calculate: you have 128 content pieces, 2 inserted markers, and a 160-token context. How much remains before adding an answer?</summary><p>160 − 128 − 2 = 30 positions, provided the prompt has no additional template tokens. Count the final encoding to check that assumption.</p></details>
 
-<details>
-  <summary>Why might a RAG system count tokens before sending retrieved passages to a model?</summary>
-  <p>The question, instructions, and passages share a finite context window. Counting tokens helps the system choose evidence that fits.</p>
-</details>
+<details><summary>Debug: BERT decodes “Hello” as “hello”. Did the decoder malfunction?</summary><p>Hint: inspect the normalization policy. Solution: the uncased tokenizer removes capitalization before lookup; decoding cannot recover information that was discarded. A byte-preserving tokenizer offers a different round-trip contract.</p></details>
+
+<details><summary>Transfer: how would you choose a chunk size for bilingual search?</summary><p>Sample real documents in both languages, encode with the generation model's tokenizer, reserve a measured prompt/answer budget, and check chunk boundaries. Evaluate retrieval and answer quality separately from token counts. Report the distribution of lengths, rather than one convenient English example.</p></details>
 
 ## Continue learning
 
-Next, explore the [vocabulary](/llm-concept-atlas/concepts/vocabulary/) that maps pieces to IDs, then [token embeddings](/llm-concept-atlas/concepts/token-embedding/) that turn IDs into starting vectors. Chapter 2 of *Hands-On Large Language Models* develops both ideas and provides [official runnable notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter02). The atlas explanation and diagram here are original.
+This original lesson follows the book's Chapter 2 discussion, printed pp. 38–57. The comparison is an atlas-authored exercise with different model choices. Consult the [official chapter notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter02), the [tokenizer API](https://huggingface.co/docs/transformers/en/main_classes/tokenizer), and the [tokenizer algorithm guide](https://huggingface.co/docs/transformers/en/tokenizer_summary). Continue to [vocabulary](/llm-concept-atlas/concepts/vocabulary/) and [token embeddings](/llm-concept-atlas/concepts/token-embedding/).
 
 <ConceptConnections id="tokenization" />

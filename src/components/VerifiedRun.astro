@@ -1,0 +1,13 @@
+---
+import { readFileSync } from 'node:fs';
+import manifest from '../../examples/manifest.json';
+const { id } = Astro.props as { id: string };
+const entry = manifest.examples.find(example => example.id === id);
+if (!entry?.verificationRecord) throw new Error(`Missing verification for ${id}`);
+const record = JSON.parse(readFileSync(entry.verificationRecord, 'utf8'));
+---
+<aside class="reference-brief" aria-label={`${entry.title} execution record`}>
+  <strong>CPU run verified · {record.date.slice(0,10)} UTC</strong>
+  <p>Python {record.python} · {record.platform} · {record.durationSeconds} seconds · {record.peakMemoryMiB} MiB peak child memory. Measurements describe this host and configuration.</p>
+  <p><a href={`https://github.com/shadril238/llm-concept-atlas/blob/main/${entry.entrypoint}`}>Runnable source</a> · <a href={`https://github.com/shadril238/llm-concept-atlas/blob/main/${entry.verificationRecord}`}>Full run record</a></p>
+</aside>

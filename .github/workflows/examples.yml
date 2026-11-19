@@ -7,6 +7,10 @@ on:
         description: Run the pinned public CPU model smoke example
         type: boolean
         default: false
+      reference:
+        description: Run the E2 tokenizer and CPU training reference workflows
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
@@ -36,3 +40,23 @@ jobs:
         with:
           name: cpu-model-verification
           path: examples/verification/records/embedding-retrieval*.json
+  reference:
+    if: github.event_name == 'workflow_dispatch' && inputs.reference
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+        with:
+          version: "0.13.9"
+      - run: uv sync --locked --project examples/training/reference
+      - run: python3 scripts/run-examples.py --id tokenizer-comparison --id lora-tiny-training --id lora-pretrained --id ner-training --allow-network --record
+      - run: examples/training/reference/.venv/bin/python examples/training/reference/test_model_contracts.py
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: e2-reference-verification
+          path: |
+            examples/verification/records/*training*.json
+            examples/verification/records/lora-*.json
+            examples/verification/records/tokenizer-comparison*.json
+            examples/artifacts/*/results.json

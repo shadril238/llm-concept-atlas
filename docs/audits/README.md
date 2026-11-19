@@ -52,3 +52,7 @@ The validator checks IDs, chapter/page ranges, the PDF offset, parent cycles, le
 ## First work after E0
 
 Implement **E1**, the reproducible example infrastructure. Then complete the **E2 tokenization, LoRA, and NER reference lessons**. Use the per-topic findings to replace unrelated calculations, add real workflows, and validate actual learning objectives. AP/MAP, source chunking, and other embedded book topics discovered by this audit are now explicit inventory entries.
+
+## E2 update
+
+The three reference lessons now have [author review evidence](../reviews/e2-reference-lessons.md), recorded CPU workflows, and separate review frontmatter. E0 audit dates remain historical; generated reports show the latest enhancement update. One proposed tokenizer-comparison subsection now maps to implemented content. Independent enhancement acceptance remains pending.

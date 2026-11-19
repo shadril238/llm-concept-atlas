@@ -21,7 +21,7 @@ class InfrastructureTests(unittest.TestCase):
         for path in (ROOT / "src/content/docs").rglob("*.mdx"):
             published.extend(re.findall(r"\*\*Expected output:\*\*\n\n```text\n([\s\S]*?)\n```", path.read_text()))
         registered = [entry["validation"]["expected"] for entry in self.manifest["examples"]
-                      if entry["validation"].get("origin") == "existing-published-output"]
+                      if entry["validation"].get("origin") == "existing-published-output" and entry["lesson"]]
         self.assertCountEqual(registered, [value.strip() for value in published])
 
     def test_missing_registration_and_source_drift_fail(self):

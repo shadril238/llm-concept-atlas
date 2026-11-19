@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "id": "e2-reference-author-review-2026-11-20",
+      "date": "2026-11-20",
+      "status": "author-reviewed",
+      "independentReview": false,
+      "reviewer": "Implementing assistant (author technical pass)",
+      "concepts": [
+        "tokenization",
+        "lora",
+        "named-entity-recognition"
+      ],
+      "evidence": "docs/reviews/e2-reference-lessons.md",
+      "pending": [
+        "Independent technical/editorial review",
+        "Beginner pilot feedback"
+      ],
+      "accepted": false
+    }
+  ]
+}

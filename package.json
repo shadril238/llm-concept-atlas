@@ -16,11 +16,12 @@
     "coverage:report": "node scripts/check-coverage.mjs --write",
     "check:examples": "node scripts/check-code-examples.mjs",
     "check:links": "node scripts/check-internal-links.mjs",
-    "release:build": "npm run test:graph && npm run test:content && npm run test:coverage && npm run check:coverage && npm run check:example-manifest && npm run test:examples && npm run check:examples && npm run check && npm run build && npm run check:links",
+    "release:build": "npm run test:graph && npm run test:content && npm run test:coverage && npm run check:coverage && npm run check:example-manifest && npm run test:examples && npm run test:reference && npm run check:examples && npm run check && npm run build && npm run check:links",
     "check:example-manifest": "node scripts/check-example-manifest.mjs",
     "examples:sync": "python3 scripts/sync-examples.py",
     "examples:list": "python3 scripts/run-examples.py --list",
-    "test:examples": "python3 -m unittest discover -s tests/examples -v"
+    "test:examples": "python3 -m unittest discover -s tests/examples -v",
+    "test:reference": "node --test tests/reference-mechanics.test.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^7.1.8",

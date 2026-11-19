@@ -3,6 +3,7 @@
 import hashlib
 import json
 import re
+import textwrap
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,11 +26,11 @@ def region(entry, root=ROOT):
     if entry["region"]:
         name = re.escape(entry["region"])
         matches = re.findall(
-            rf"^# region {name}\n([\s\S]*?)^# endregion {name}$", text, re.M
+            rf"^[ \t]*# region {name}\n([\s\S]*?)^[ \t]*# endregion {name}$", text, re.M
         )
         if len(matches) != 1:
             raise ValueError(f"{entry['id']}: region must occur exactly once")
-        return matches[0].rstrip()
+        return textwrap.dedent(matches[0]).rstrip()
     return text.rstrip()
 
 
@@ -206,7 +207,7 @@ def validate(manifest, root=ROOT, check_records=True, check_generated=True):
         except ValueError as exc:
             errors.append(str(exc))
             continue
-        if entry["lesson"] and (check_generated or not entry["region"]):
+        if entry["lesson"] and (check_generated or entry["id"].startswith("legacy-")):
             lesson = entry["lesson"]
             key = (lesson["path"], lesson["block"])
             if key in registered:
@@ -222,6 +223,9 @@ def validate(manifest, root=ROOT, check_records=True, check_generated=True):
                 or source != blocks[lesson["block"]].rstrip()
             ):
                 errors.append(f"{eid}: lesson/source drift")
+        for helper in entry.get("supportFiles", []):
+            if not safe(helper) or not (root / helper).is_file():
+                errors.append(f"{eid}: unsafe or missing support source")
         if entry["verificationRecord"] and check_records:
             path = entry["verificationRecord"]
             if not safe(path) or not (root / path).is_file():
@@ -239,6 +243,25 @@ def validate(manifest, root=ROOT, check_records=True, check_generated=True):
                 continue
             if record["exampleId"] != eid or record["status"] != "passed":
                 errors.append(f"{eid}: invalid verification record")
+            if record.get("supportHashes", {}) != {
+                name: digest(root / name) for name in entry.get("supportFiles", [])
+            }:
+                errors.append(f"{eid}: stale verification support source")
+            if check_generated and eid == "lora-tiny-training":
+                published = json.loads((root / "src/data/reference-results.json").read_text())["tiny"]
+                if published != json.loads(record["stdout"]):
+                    errors.append(f"{eid}: published regression result differs from verified output")
+            if check_generated and entry.get("resultKey"):
+                published = json.loads(
+                    (root / "src/data/reference-results.json").read_text()
+                )[entry["resultKey"]]
+                encoded = json.dumps(published, indent=2, ensure_ascii=False) + "\n"
+                if hashlib.sha256(encoded.encode()).hexdigest() != record.get(
+                    "artifactSha256"
+                ):
+                    errors.append(
+                        f"{eid}: published result differs from verified artifact"
+                    )
             if record["sourceSha256"] != digest(root / entry["entrypoint"]):
                 errors.append(f"{eid}: stale verification source")
             project = manifest["environments"][entry["environment"]]["project"]

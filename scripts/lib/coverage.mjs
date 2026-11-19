@@ -376,6 +376,62 @@ export function validateCoverage(data, root = process.cwd()) {
         `${lesson.conceptId}: invalid shared-code reference ${id}`,
       );
   }
+  const reviewRecords = JSON.parse(
+    readFileSync(resolve(root, "src/data/review-records.json"), "utf8"),
+  ).records;
+  const examples = JSON.parse(
+    readFileSync(resolve(root, "examples/manifest.json"), "utf8"),
+  ).examples;
+  for (const lesson of lessons.values()) {
+    if (!lesson.enhancementReview) continue;
+    const review = reviewRecords.find(
+      (record) => record.id === lesson.enhancementReview,
+    );
+    check(
+      review?.concepts.includes(lesson.conceptId),
+      `${lesson.conceptId}: missing enhancement review record`,
+    );
+    check(
+      review?.independentReview === false && review?.accepted === false,
+      `${lesson.conceptId}: author review must not claim independent acceptance`,
+    );
+    const text = source(lesson.path);
+    for (const field of [
+      "bookSections",
+      "exampleIds",
+      "learningObjectives",
+      "aliases",
+    ]) {
+      const match = text.match(new RegExp(`^${field}: (.+)$`, "m"));
+      const values = match ? JSON.parse(match[1]) : [];
+      check(
+        Array.isArray(values) && values.length > 0,
+        `${lesson.conceptId}: missing ${field}`,
+      );
+      if (field === "bookSections")
+        check(
+          values.every(
+            (id) => sections.has(id) && lesson.sourceSectionIds.includes(id),
+          ),
+          `${lesson.conceptId}: invalid lesson source sections`,
+        );
+      if (field === "exampleIds")
+        check(
+          values.every((id) =>
+            examples.some(
+              (example) =>
+                example.id === id &&
+                example.concepts.includes(lesson.conceptId),
+            ),
+          ),
+          `${lesson.conceptId}: invalid lesson example IDs`,
+        );
+    }
+    check(
+      text.includes(`reviewRecord: ${lesson.enhancementReview}`),
+      `${lesson.conceptId}: review frontmatter mismatch`,
+    );
+  }
   for (const useCase of audit.useCases) {
     link(useCase, "use case");
     check(
@@ -398,8 +454,8 @@ export function validateCoverage(data, root = process.cwd()) {
       `${proposal.id}: invalid placement`,
     );
     check(
-      proposal.status === "proposed",
-      `${proposal.id}: E0 must not claim implementation`,
+      ["proposed", "implemented"].includes(proposal.status),
+      `${proposal.id}: invalid destination status`,
     );
     check(
       proposal.sourceSectionIds.length > 0,
@@ -407,9 +463,24 @@ export function validateCoverage(data, root = process.cwd()) {
     );
     for (const id of proposal.sourceSectionIds)
       check(
-        sections.get(id)?.plannedDestinations.includes(proposal.id),
+        proposal.status === "implemented"
+          ? sections
+              .get(id)
+              ?.mappings.some(
+                (m) =>
+                  m.path === proposal.destination?.path &&
+                  m.anchor === proposal.destination?.anchor,
+              )
+          : sections.get(id)?.plannedDestinations.includes(proposal.id),
         `${proposal.id}: invalid source proposal link ${id}`,
       );
+    if (proposal.status === "implemented") {
+      link(proposal.destination, proposal.id);
+      check(
+        proposal.reviewRecord && proposal.exampleIds?.length,
+        `${proposal.id}: implemented destination lacks evidence`,
+      );
+    }
     for (const alias of proposal.aliases) {
       const normalized = alias.toLowerCase().trim();
       check(!aliases.has(normalized), `Duplicate proposed alias: ${alias}`);
@@ -450,7 +521,7 @@ export function renderCoverageReports({
   const gap = [
     "# Book coverage and enhancement gap report",
     "",
-    `Generated from the E0 inventory dated ${inventory.auditDate}. Rebuild with \`npm run coverage:report\`; do not edit generated tables directly.`,
+    `Generated from the E0 inventory dated ${inventory.auditDate}; latest enhancement update ${inventory.lastUpdated ?? inventory.auditDate}. Rebuild with \`npm run coverage:report\`; do not edit generated tables directly.`,
     "",
     "**This is a source and depth audit, not a certification of complete teaching coverage.** All legacy lessons require enhancement review. Existing mappings are partial; an official notebook link is a source, not an atlas implementation.",
     "",
@@ -512,7 +583,7 @@ export function renderCoverageReports({
     "| Proposed ID | Placement | Existing parent | Aliases | Source references |",
     "| --- | --- | --- | --- | --- |",
   );
-  for (const p of proposals.proposals)
+  for (const p of proposals.proposals.filter((p) => p.status === "proposed"))
     gap.push(
       `| ${p.id} | ${p.placement} | ${p.parentConceptId} | ${cell(p.aliases.join(", ") || "—")} | ${p.sourceSectionIds.join(", ")} |`,
     );
@@ -569,7 +640,7 @@ export function renderCoverageReports({
   const depth = [
     "# Existing lesson depth audit",
     "",
-    `Generated ${inventory.auditDate} from the initial static review of **${audit.lessons.length} concepts**. Source hashes make edits invalidate their old audit records. This is not an independent pedagogical review or a claim that model examples were executed.`,
+    `Initial review ${inventory.auditDate}; latest lesson update ${audit.lastUpdated ?? inventory.auditDate}. Covers **${audit.lessons.length} concepts**. Source hashes detect stale findings. Independent pedagogical acceptance remains pending; execution claims below refer only to linked workflow evidence.`,
     "",
     `The ${audit.lessons.length} concept snippets contain **${new Set(audit.lessons.map((l) => l.codeSha256)).size} distinct Python implementations**. Shared code is not automatically wrong; the finding records whether it demonstrates this lesson's mechanism.`,
     "",

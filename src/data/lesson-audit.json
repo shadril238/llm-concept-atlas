@@ -1306,11 +1306,11 @@
       "conceptId": "lora",
       "chapter": 12,
       "path": "src/content/docs/concepts/lora.mdx",
-      "sourceSha256": "fafcc0ac05aa6e05f40734eb2f6211ded71f31ac0ccbd1c8e526d65525605349",
+      "sourceSha256": "01083a26356cd8ca8e0ca190cc76f5683eafacde74b53b38a04e10d2bc7548b3",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P0",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch12-peft",
@@ -1318,20 +1318,19 @@
         "book-ch12-low-rank"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The example computes a rank-one update but reverses the A/B naming used by its BA prose and omits scaling, initialization, and learning.",
+      "finding": "E2 resolves the A/B orientation mismatch and adds standard scaling, parameter counts, initialization/gradient trace, controlled training, a real pretrained adapter, held-out losses, reload, and precision-aware merge checks. Broader E8 workflows and independent review remain pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "c006509147e71d86bae6a67e9e384ecb3725e26ed541b6c4445d4f66cf18a832",
-      "codeFirstLine": "base = [[1.0, 0.0], [0.0, 1.0]]",
-      "sharedExampleWith": ["peft", "qlora"],
-      "genericExercise": true,
+      "exampleKind": "verified-reference-workflow",
+      "codeSha256": "b70826ce671c5ef90027563ffc97f8c684e058c792670cc3591a1afd302d3379",
+      "codeFirstLine": "W = [[1.0, 0.0], [0.0, 1.0]]  # [d_out=2, d_in=2]",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Distinguish added adapters, low-rank updates, and quantized base storage.",
-        "Explain rank, alpha scaling, target modules, dropout, initialization, and trainable counts.",
-        "Use consistent A/B shapes, rank, alpha scaling, and a real update with frozen base weights."
+        "Independent technical/editorial review and beginner pilot; broader chapter workflow remains tracked separately."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E2"
+      "executionStatus": "cpu-reference-verified",
+      "nextPhase": "E2",
+      "enhancementReview": "e2-reference-author-review-2026-11-20"
     },
     {
       "conceptId": "loss-functions",
@@ -1450,11 +1449,11 @@
       "conceptId": "named-entity-recognition",
       "chapter": 11,
       "path": "src/content/docs/concepts/named-entity-recognition.mdx",
-      "sourceSha256": "079784d12990b16d40ffd82f31db89d00699edb320eb442d47a2813863d62a1e",
+      "sourceSha256": "d9e672690aaa8ba08e364e179e526cc9ab813ebc3acef27125fa1f2c6712b797",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch11-ner",
@@ -1464,22 +1463,19 @@
         "book-ch11-entity-metrics"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "Supplied BIO tags are zipped to words; no tokenizer alignment, predictions, training, or span metrics are computed.",
+      "finding": "E2 replaces supplied labels as the main implementation with actual tokenizer alignment and trained predictions, explicit masking/truncation, sentence-preserving spans, baseline/test metrics, validation errors, and reload checks. Real-domain extension and independent review remain pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "4e5ed16d34f109dfc0757838da792ff4687da338d4bdcebe05f0873a898f5545",
-      "codeFirstLine": "tokens = [\"Ada\", \"works\", \"at\", \"Acme\"]",
+      "exampleKind": "verified-reference-workflow",
+      "codeSha256": "ef5ab63ce78af0ddefd89bab70d39267f86afd5af7ab905d12d646026aab2514",
+      "codeFirstLine": "\"\"\"Word-level BIO alignment and strict, sentence-preserving entity scoring.\"\"\"",
       "sharedExampleWith": [],
-      "genericExercise": true,
+      "genericExercise": false,
       "requiredWork": [
-        "Define typed spans, BIO conventions, and entity-level prediction and scoring.",
-        "Align word labels to actual subtokens, special tokens, padding, and truncated sequences.",
-        "Train a token classifier, decode full sequences, and calculate strict span metrics.",
-        "Map word IDs to subtokens and handle B/I transitions, special tokens, and padding.",
-        "Evaluate complete BIO sequences and typed spans instead of independent singleton tags."
+        "Independent technical/editorial review and beginner pilot; broader chapter workflow remains tracked separately."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E2"
+      "executionStatus": "cpu-reference-verified",
+      "nextPhase": "E2",
+      "enhancementReview": "e2-reference-author-review-2026-11-20"
     },
     {
       "conceptId": "openclip",
@@ -1552,7 +1548,7 @@
       "exampleKind": "illustrative-python",
       "codeSha256": "c006509147e71d86bae6a67e9e384ecb3725e26ed541b6c4445d4f66cf18a832",
       "codeFirstLine": "base = [[1.0, 0.0], [0.0, 1.0]]",
-      "sharedExampleWith": ["lora", "qlora"],
+      "sharedExampleWith": ["qlora"],
       "genericExercise": true,
       "requiredWork": [
         "Distinguish added adapters, low-rank updates, and quantized base storage.",
@@ -1739,7 +1735,7 @@
       "exampleKind": "illustrative-python",
       "codeSha256": "c006509147e71d86bae6a67e9e384ecb3725e26ed541b6c4445d4f66cf18a832",
       "codeFirstLine": "base = [[1.0, 0.0], [0.0, 1.0]]",
-      "sharedExampleWith": ["lora", "peft"],
+      "sharedExampleWith": ["peft"],
       "genericExercise": true,
       "requiredWork": [
         "Distinguish added adapters, low-rank updates, and quantized base storage.",
@@ -2475,11 +2471,11 @@
       "conceptId": "tokenization",
       "chapter": 2,
       "path": "src/content/docs/concepts/tokenization.mdx",
-      "sourceSha256": "e528a6f5df472e9f3b8342fd890442f1838d9dc65beb6e414311bd8eeecd0cf6",
+      "sourceSha256": "c5c6c957c649d271144a936d58cc3145eefae48e68dae2052dfde6cd846d1104",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch02-tokenization",
@@ -2488,27 +2484,23 @@
         "book-ch02-token-units",
         "book-ch02-tokenizer-properties",
         "book-ch02-tokenizer-algorithms",
-        "book-ch02-special-tokens"
+        "book-ch02-special-tokens",
+        "book-ch02-tokenizer-comparison"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "This is a real tokenizer sketch, but dependencies and artifact revisions are unpinned and comparative outputs lack execution records.",
+      "finding": "E2 adds actual BERT/GPT-2 comparison, multilingual/code/empty cases, offsets, special-token inspection, locked execution, and topic-specific exercises. Independent editorial and beginner review remain pending.",
       "evidenceAnchor": "implement-it-with-a-real-tokenizer",
-      "exampleKind": "real-tokenizer-sketch",
-      "codeSha256": "8f66446fd88b2efcae26c8d4c304cbf14678bfe05e5a4691011e2ca9e1eb2701",
-      "codeFirstLine": "from transformers import AutoTokenizer",
+      "exampleKind": "verified-reference-workflow",
+      "codeSha256": "b055bcee20d9e015d6d9a4b4d2d20e46d00d824cfefbac17e9713f20b25f80a7",
+      "codeFirstLine": "\"\"\"Compare two actual tokenizer vocabularies and normalization policies.\"\"\"",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
-        "Connect segmentation, token IDs, and model input with a complete trace.",
-        "Show input IDs, boundary markers, masks, and the vocabulary-to-embedding connection.",
-        "Inspect decoded individual tokens and full sequences, including non-word pieces.",
-        "Replace the causal-slicing snippet with an actual comparison of segmentation units.",
-        "Separate algorithm, corpus, parameters, special markers, and model compatibility.",
-        "Contrast vocabulary learning and segmentation decisions with worked tokenization cases.",
-        "Inspect role/boundary tokens, padding, and task markers in a real tokenizer."
+        "Independent technical/editorial review and beginner pilot; broader chapter workflow remains tracked separately."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E2"
+      "executionStatus": "cpu-reference-verified",
+      "nextPhase": "E2",
+      "enhancementReview": "e2-reference-author-review-2026-11-20"
     },
     {
       "conceptId": "topic-modeling",
@@ -2855,5 +2847,6 @@
       "sourceSha256": "23a79f07657120f1035733fd72d76dbb1486a0f34f11b27fea05ca92a7152842",
       "executionStatus": "not-verified"
     }
-  ]
+  ],
+  "lastUpdated": "2026-11-20"
 }

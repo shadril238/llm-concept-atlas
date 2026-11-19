@@ -12,7 +12,7 @@ python3 scripts/run-examples.py --id embedding-retrieval --allow-network
 python3 scripts/run-examples.py --id embedding-retrieval --offline
 ```
 
-The registry contains all 98 pre-existing Python lesson/use-case blocks plus two E1 examples. The 76 published exact-output checks are retained. Another 19 earlier standard-library blocks now receive execution checks. These earlier examples have no new semantic correctness certification: the E0 findings still apply. Three unpinned model sketches remain explicitly unverified and cannot be run through this runner until migrated.
+The registry contains the original 98 Python blocks, two E1 examples, and six E2 reference examples. Superseded LoRA/NER/tokenizer snippets remain as historical downloadable sources; the three reference lessons now use replacements. The 76 published exact-output checks are retained. Another 19 earlier standard-library blocks now receive execution checks. These earlier examples have no new semantic correctness certification: the E0 findings still apply. Three historical unpinned model sketches remain explicitly unverified and cannot be run through this runner until migrated.
 
 ## Source authority and synchronization
 
@@ -32,7 +32,7 @@ npm run release:build
 
 Records retain command, UTC timestamp, base Git commit, dirty-tree indicator, source/contract/lock/fixture hashes, model revision, installed package versions, CPU/platform, stdout/stderr, elapsed duration, peak child memory, and outcome. A dirty-tree run is identified by file hashes; the base commit alone does not identify its code. Source, validation-contract, or lock changes invalidate the evidence until rerun. Failed records remain failures and do not replace successful evidence. Never edit a failed record into a pass.
 
-Memory is `RUSAGE_CHILDREN`'s cumulative peak within one runner invocation, including environment probes; use one `--id` per invocation for resource comparison. Download timing can dominate a first model run. Timings and memory are observations on the recorded host, not promises. Package installation disk use is separate from model weights. No GPU, API, or training run has been verified in E1.
+Memory is `RUSAGE_CHILDREN`'s cumulative peak within one runner invocation, including environment probes; use one `--id` per invocation for resource comparison. Download timing can dominate a first model run. Timings and memory are observations on the recorded host, not promises. Package installation disk use is separate from model weights. E1 verified CPU inference; E2 adds the [reference training environment](./training/reference/README.md). No GPU or hosted API configuration has been verified.
 
 `--offline` disables Hugging Face network access and requires cached files. Offline standard-library examples perform no downloads. This runner executes trusted repository code locally; it is not an operating-system network sandbox. Paid APIs are never invoked by these examples or site visits.
 

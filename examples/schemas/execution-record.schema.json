@@ -120,6 +120,13 @@
         "string",
         "null"
       ]
+    },
+    "supportHashes": {
+      "type": "object"
+    },
+    "artifactSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
     }
   }
 }

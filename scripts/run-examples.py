@@ -48,6 +48,7 @@ def main():
         else [e for e in entries if e["environment"] == "foundations"]
     )
     failures = []
+    passed_records = {}
     for entry in selected:
         if entry["environment"] == "legacy-unverified":
             raise SystemExit(
@@ -133,7 +134,9 @@ def main():
             )
             stdout, stderr = (
                 run.stdout.replace(str(ROOT), "<repository>"),
-                run.stderr.replace(str(ROOT), "<repository>"),
+                run.stderr.replace(str(ROOT), "<repository>").replace(
+                    str(Path.home()), "<home>"
+                ),
             )
             if run.returncode:
                 raise ValueError(f"process exit {run.returncode}")
@@ -145,9 +148,18 @@ def main():
                 raise ValueError("stdout differs from expected output")
             if check["method"] == "json-invariants":
                 result = json.loads(stdout)
-                for key in ["shape", "top_documents"]:
-                    if result[key] != check[key]:
+                expected = check.get(
+                    "equals",
+                    {
+                        key: check[key]
+                        for key in ["shape", "top_documents"]
+                        if key in check
+                    },
+                )
+                for key, value in expected.items():
+                    if result.get(key) != value:
                         raise ValueError(f"{key} invariant failed")
+
         except (ValueError, subprocess.TimeoutExpired) as exc:
             status = "failed"
             error = str(exc)
@@ -190,6 +202,12 @@ def main():
             "stderr": stderr,
             "error": error,
         }
+        if status == "passed" and entry.get("resultArtifact"):
+            record["artifactSha256"] = digest(ROOT / entry["resultArtifact"])
+        if entry.get("supportFiles"):
+            record["supportHashes"] = {
+                name: digest(ROOT / name) for name in entry["supportFiles"]
+            }
         if args.record:
             directory = ROOT / "examples/verification/records"
             directory.mkdir(parents=True, exist_ok=True)
@@ -197,13 +215,17 @@ def main():
             path = directory / name
             path.write_text(json.dumps(record, indent=2) + "\n")
             if status == "passed":
-                entry["verificationRecord"] = str(path.relative_to(ROOT))
+                passed_records[entry["id"]] = str(path.relative_to(ROOT))
         print(f"{entry['id']}: {status} ({elapsed}s)")
         if error:
             print(error, stderr[-1500:], file=sys.stderr)
     if args.record:
+        latest = load()
+        for entry in latest["examples"]:
+            if entry["id"] in passed_records:
+                entry["verificationRecord"] = passed_records[entry["id"]]
         (ROOT / "examples/manifest.json").write_text(
-            json.dumps(manifest, indent=2) + "\n"
+            json.dumps(latest, indent=2) + "\n"
         )
     print(f"{len(selected) - len(failures)}/{len(selected)} examples passed")
     if failures:

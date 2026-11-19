@@ -2,7 +2,7 @@
 
 **Prepared:** 2026-11-18  
 **Last updated:** 2026-11-19  
-**Status:** E0 source inventory and initial lesson audit, and E1 reproducible example infrastructure implemented; E2–E10 pending. See the [gap report](./docs/audits/book-gap-report.md) and [audit guide](./docs/audits/README.md).
+**Status:** E0 source inventory and initial lesson audit, and E1 infrastructure implemented; E2 reference implementation delivered, independent review pending; E3–E10 pending. See the [gap report](./docs/audits/book-gap-report.md) and [audit guide](./docs/audits/README.md).
 **Baseline:** Repository commit `a6b3ec4`, following the original Phases 1–5 in [plan.md](./plan.md).  
 **Source edition:** _Hands-On Large Language Models_, Jay Alammar and Maarten Grootendorst, first edition, September 2024.  
 **Primary goal:** A learner can explain, trace, implement, evaluate, and apply the book's ideas without depending on unexplained terminology or disconnected code snippets.
@@ -823,16 +823,16 @@ Use enhancement phase IDs **E0–E10** to distinguish this work from the origina
 
 **Depends on:** E0–E1.
 
-- [ ] Rewrite tokenization, LoRA, and NER using the teaching sequence and precise contracts in Sections 3 and 8.
-- [ ] Deliver the tokenizer comparison, tiny trainable LoRA mechanism plus a supported adapter run, and a complete small NER training workflow.
-- [ ] Build only the reusable lesson components these examples actually require.
-- [ ] Add equation/shape traces, topic-specific exercises, real error cases, and aligned simulation/code fixtures.
-- [ ] Obtain editorial and technical review; verify a beginner can perform the main task without unexplained steps.
-- [ ] Document the resulting reference pattern in CONTRIBUTING and a lesson template.
+- [x] Rewrite tokenization, LoRA, and NER using the teaching sequence and precise contracts in Sections 3 and 8.
+- [x] Deliver the tokenizer comparison, tiny trainable LoRA mechanism plus a supported adapter run, and a complete small NER training workflow.
+- [x] Build only the reusable lesson components these examples actually require.
+- [x] Add equation/shape traces, topic-specific exercises, real error cases, and aligned simulation/code fixtures.
+- [ ] Obtain independent editorial and technical review; verify a beginner can perform the main task without unexplained steps.
+- [x] Document the resulting reference pattern in CONTRIBUTING and a lesson template.
 
 **Gate:** All three lessons pass the rubric and their supported examples execute. L02/L20 and the initial LoRA portion of L21 establish reusable references; later phases extend dataset choices, QLoRA, merging, and broader evaluations rather than rewriting the same work.
 
-**Review artifact:** Three finished lessons, runnable lab slices, UI examples, review records, and resolved feedback.
+**Review artifact:** [Three reference lesson author review](./docs/reviews/e2-reference-lessons.md), [locked environment and execution guide](./examples/training/reference/README.md), [lesson template](./docs/templates/reference-lesson.md), synchronized notebooks, and committed execution records. Implementation and author technical checks are delivered; independent review/beginner feedback remain pending, so the full E2 acceptance gate remains open.
 
 ### E3 — foundations and model access
 
@@ -1049,7 +1049,7 @@ These references support the implementation direction, not a claim that all prop
 | ------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------- |
 | E0: audit and honest coverage         | Complete    | Source inventory, two generated reports, per-lesson findings, pinned notebooks, and validation. |
 | E1: executable-example foundation     | Complete | 100-example registry, two locked environments, runner, synchronized lesson/notebooks, and CPU execution records. |
-| E2: three reference lessons           | Not started | Tokenization, LoRA, and NER pass teaching and execution gates.                                  |
+| E2: three reference lessons | Implemented; review pending | Detailed lessons, interactive labs, CPU model/training records, author review; independent acceptance still open. |
 | E3: foundations                       | Not started | Chapter 1–3 objectives and L01–L06 accepted.                                                    |
 | E4: classification and topics         | Not started | Chapter 4–5 objectives and L07–L08 accepted.                                                    |
 | E5: prompting and workflows           | Not started | Chapter 6–7 objectives and L09–L11 accepted.                                                    |
@@ -1059,4 +1059,4 @@ These references support the implementation direction, not a claim that all prop
 | E9: integrated learner experience     | Not started | Discovery, navigation, practice, and accessibility/performance checks.                          |
 | E10: review and release               | Not started | Reconciled coverage, execution evidence, learner feedback, and release report.                  |
 
-**Next: E2.** E1 provides the [example infrastructure](./examples/README.md), [execution report](./examples/verification/README.md), and [first verified lab](./src/content/docs/labs/first-verified-examples.mdx). All 98 existing blocks are registered; 96 offline examples execute, the 76 existing exact-output comparisons remain, and the new pinned CPU embedding example has recorded online and offline execution. Three legacy model sketches remain unverified. Finish the tokenization, LoRA, and NER reference lessons before scaling across chapters.
+**Next:** Review the three E2 reference lessons using the [review packet](./docs/reviews/e2-reference-lessons.md). Their implementation and CPU execution are delivered; independent editorial/beginner acceptance remains open. E3 can reuse the documented pattern for authoring, while broadening foundations according to the gap report.

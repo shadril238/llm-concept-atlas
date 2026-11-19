@@ -1,8 +1,8 @@
 # Existing lesson depth audit
 
-Generated 2026-11-19 from the initial static review of **96 concepts**. Source hashes make edits invalidate their old audit records. This is not an independent pedagogical review or a claim that model examples were executed.
+Initial review 2026-11-19; latest lesson update 2026-11-20. Covers **96 concepts**. Source hashes detect stale findings. Independent pedagogical acceptance remains pending; execution claims below refer only to linked workflow evidence.
 
-The 96 concept snippets contain **47 distinct Python implementations**. Shared code is not automatically wrong; the finding records whether it demonstrates this lesson's mechanism.
+The 96 concept snippets contain **48 distinct Python implementations**. Shared code is not automatically wrong; the finding records whether it demonstrates this lesson's mechanism.
 
 ## Useful existing work
 
@@ -34,7 +34,7 @@ The site has explanations, labeled illustrative examples, relationship navigatio
 | [text-embedding](../../src/content/docs/concepts/text-embedding.mdx#implement-it) | Invented-vector similarity is relevant; add actual sentence encoding and pooling/normalization inspection. | P1 / E3 |
 | [token-embedding](../../src/content/docs/concepts/token-embedding.mdx#implement-it) | The lookup table correctly illustrates ID-to-row mapping; add a real model matrix and shape inspection. | P1 / E3 |
 | [token](../../src/content/docs/concepts/token.mdx#implement-it) | The invented vocabulary correctly demonstrates piece-to-ID lookup; link a verified real tokenizer run. | P1 / E3 |
-| [tokenization](../../src/content/docs/concepts/tokenization.mdx#implement-it-with-a-real-tokenizer) | This is a real tokenizer sketch, but dependencies and artifact revisions are unpinned and comparative outputs lack execution records. | P1 / E2 |
+| [tokenization](../../src/content/docs/concepts/tokenization.mdx#implement-it-with-a-real-tokenizer) | E2 adds actual BERT/GPT-2 comparison, multilingual/code/empty cases, offsets, special-token inspection, locked execution, and topic-specific exercises. Independent editorial and beginner review remain pending. | P2 / E2 |
 | [vocabulary](../../src/content/docs/concepts/vocabulary.mdx#implement-it) | The dictionary correctly illustrates mappings; inspect real special tokens and tokenizer/model compatibility. | P1 / E3 |
 | [word-and-subword-tokens](../../src/content/docs/concepts/word-and-subword-tokens.mdx#implement-it) | The example slices visible context and performs no word/subword tokenization. | P0 / E3 |
 | [word2vec](../../src/content/docs/concepts/word2vec.mdx#implement-it) | The training-pair construction is relevant; implement sampled-negative scoring, optimization, and learned neighbors. | P1 / E3 |
@@ -149,7 +149,7 @@ The site has explanations, labeled illustrative examples, relationship navigatio
 | [few-shot-classification](../../src/content/docs/concepts/few-shot-classification.mdx#implement-it) | A keyword if-statement uses no labeled support-set learning or sampling comparison. | P1 / E7 |
 | [frozen-layers](../../src/content/docs/concepts/frozen-layers.mdx#implement-it) | The selective dictionary update is relevant; verify actual parameter freezing and compare held-out model results. | P1 / E7 |
 | [masked-language-modeling](../../src/content/docs/concepts/masked-language-modeling.mdx#implement-it) | Replacing one token is a preprocessing illustration; add corruption policy, ignored labels, and actual MLM training. | P1 / E7 |
-| [named-entity-recognition](../../src/content/docs/concepts/named-entity-recognition.mdx#implement-it) | Supplied BIO tags are zipped to words; no tokenizer alignment, predictions, training, or span metrics are computed. | P1 / E2 |
+| [named-entity-recognition](../../src/content/docs/concepts/named-entity-recognition.mdx#implement-it) | E2 replaces supplied labels as the main implementation with actual tokenizer alignment and trained predictions, explicit masking/truncation, sentence-preserving spans, baseline/test metrics, validation errors, and reload checks. Real-domain extension and independent review remain pending. | P2 / E2 |
 | [setfit](../../src/content/docs/concepts/setfit.mdx#implement-it) | The snippet has no labeled-pair generation, sentence-model adaptation, or classifier fitting. | P0 / E7 |
 
 ### Chapter 12
@@ -158,7 +158,7 @@ The site has explanations, labeled illustrative examples, relationship navigatio
 | --- | --- | --- |
 | [dpo](../../src/content/docs/concepts/dpo.mdx#implement-it) | The scalar reference-relative loss is relevant; add completion logprob aggregation, masks, data, and actual training. | P1 / E8 |
 | [generative-evaluation](../../src/content/docs/concepts/generative-evaluation.mdx#implement-it) | Exact-label accuracy does not demonstrate generation metrics, benchmarks, or rubric-based evaluation. | P1 / E8 |
-| [lora](../../src/content/docs/concepts/lora.mdx#implement-it) | The example computes a rank-one update but reverses the A/B naming used by its BA prose and omits scaling, initialization, and learning. | P0 / E2 |
+| [lora](../../src/content/docs/concepts/lora.mdx#implement-it) | E2 resolves the A/B orientation mismatch and adds standard scaling, parameter counts, initialization/gradient trace, controlled training, a real pretrained adapter, held-out losses, reload, and precision-aware merge checks. Broader E8 workflows and independent review remain pending. | P2 / E2 |
 | [peft](../../src/content/docs/concepts/peft.mdx#implement-it) | A matrix update illustrates LoRA only; distinguish adapter families and actual frozen/trainable parameter groups. | P1 / E8 |
 | [pretraining-and-sft](../../src/content/docs/concepts/pretraining-and-sft.mdx#implement-it) | The same scalar update does not distinguish causal pretraining from instruction-conditioned SFT. | P1 / E8 |
 | [qlora](../../src/content/docs/concepts/qlora.mdx#implement-it) | The reused low-rank update never quantizes base weights or demonstrates their precision/memory behavior. | P1 / E8 |

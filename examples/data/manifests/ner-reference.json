@@ -1,0 +1,11 @@
+{
+  "id": "ner-reference-v1",
+  "revision": 1,
+  "path": "examples/data/fixtures/ner-reference.json",
+  "sha256": "1c16a6f4b0dba0775c6ce5b52a809efea9080450635d058ba097ca1e7a34220f",
+  "source": "Original atlas-authored fictional teaching examples",
+  "license": "MIT (repository LICENSE)",
+  "split": "26 train / 6 validation / 8 test documents; all person/organization/place name sets disjoint",
+  "training": true,
+  "leakagePolicy": "Splits fixed before training. No exact duplicate texts. NER name sets are disjoint across splits. Shared templates make these controlled demonstrations, not domain benchmarks."
+}

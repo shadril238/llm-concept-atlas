@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "ner-span-scoring",
+  "status": "passed",
+  "date": "2026-11-19T17:03:35.809287+00:00",
+  "gitCommit": "1f79da4bfc10e35e3dd5f0d8acd012f0106692ca",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/ner_contract.py"
+  ],
+  "sourceSha256": "1c522d9347af9b28d65a724052c40811d674627ba9f481309ee3b73abd623a2d",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "58d8569650d93ed7843fcffa9d515374b6bdb1025f952a783507f5496583f7fb",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.2,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "token accuracy: 0.8\nstrict entity F1: 0.5\n",
+  "stderr": "",
+  "error": null
+}

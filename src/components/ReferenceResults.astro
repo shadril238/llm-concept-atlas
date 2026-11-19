@@ -1,0 +1,29 @@
+---
+import results from '../data/reference-results.json';
+const { kind } = Astro.props as { kind: 'lora' | 'ner' };
+const lora=results.lora, ner=results.ner;
+---
+{kind === 'lora' ? <section aria-label="Recorded LoRA results">
+  <h3>Observed CPU results</h3>
+  <table><thead><tr><th>Check</th><th>Recorded result</th></tr></thead><tbody>
+    <tr><td>Trainable / total parameters</td><td>{lora.trainable.toLocaleString()} / {lora.total.toLocaleString()}</td></tr>
+    <tr><td>Frozen base · test answer loss</td><td>{lora.base_test_loss.toFixed(4)}</td></tr>
+    <tr><td>Selected adapter · test answer loss</td><td>{lora.adapter_test_loss.toFixed(4)}</td></tr>
+    <tr><td>Maximum float32 merged logit difference</td><td>{lora.merge_max_error.toExponential(3)}</td></tr>
+    <tr><td>Maximum float64 merge-check difference</td><td>{lora.double_merge_max_error.toExponential(3)}</td></tr>
+  </tbody></table>
+  <p><strong>Held-out prompt:</strong> {lora.test_prompt}</p><p><strong>Observed greedy completion:</strong> <code>{JSON.stringify(lora.generated_completion)}</code></p>
+  <p>The higher-precision merge check isolates the algebra. The float32 path also records scale-relative rounding drift; identical floating-point logits are not promised.</p>
+  <h3>Controlled regression comparison</h3>
+  <table><thead><tr><th>Method</th><th>Held-out MSE</th><th>Updated parameters</th></tr></thead><tbody><tr><td>Frozen base</td><td>{results.tiny.base_mse}</td><td>0</td></tr><tr><td>Full update</td><td>{results.tiny.full_mse}</td><td>64</td></tr><tr><td>Rank-one adapter</td><td>{results.tiny.adapter_mse}</td><td>16</td></tr></tbody></table>
+</section> : <section aria-label="Recorded NER evaluation">
+  <h3>Held-out results · eight documents</h3>
+  <table><thead><tr><th>Method</th><th>Exact matches / gold entities</th><th>Precision</th><th>Recall</th><th>F1</th></tr></thead><tbody>
+    <tr><td>All-O baseline</td><td>0 / {ner.metrics.gold}</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td>Selected trained tagger</td><td>{ner.metrics.tp} / {ner.metrics.gold}</td><td>{ner.metrics.precision.toFixed(3)}</td><td>{ner.metrics.recall.toFixed(3)}</td><td>{ner.metrics.f1.toFixed(3)}</td></tr>
+  </tbody></table>
+  <p>Token accuracy: {(ner.token_accuracy*100).toFixed(1)}%. The fixture uses shared templates and disjoint name sets. Even a perfect score on these eight short documents does not establish reliability on new sentence structures or domains.</p>
+  <h3>Actual validation error</h3>
+  {ner.validation_errors.length ? <><p>This error comes from the selected checkpoint on validation data, which was used for model selection.</p><p>{ner.validation_errors[0].tokens.join(' ')}</p><div class="reference-table"><table><thead><tr><th>Word</th><th>Gold</th><th>Predicted</th></tr></thead><tbody>{ner.validation_errors[0].tokens.map((word,index)=><tr><td>{word}</td><td>{ner.validation_errors[0].gold[index]}</td><td>{ner.validation_errors[0].predicted[index]}</td></tr>)}</tbody></table></div></> : <p>No word-label errors occurred in this fixed validation run. Add a separate stress suite before making broader claims.</p>}
+  <details><summary>One actual test prediction</summary><p>{ner.predictions[0].tokens.join(' ')}</p><p>Predicted tags: {ner.predictions[0].predicted.join(', ')}.</p></details>
+</section>}

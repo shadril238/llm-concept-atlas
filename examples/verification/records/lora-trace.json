@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "lora-trace",
+  "status": "passed",
+  "date": "2026-11-19T17:03:35.734632+00:00",
+  "gitCommit": "1f79da4bfc10e35e3dd5f0d8acd012f0106692ca",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/lora_trace.py"
+  ],
+  "sourceSha256": "154d299383016e1263a47594b4550ca403885cd7a2fb33f0b1fbee2490db8ba8",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "8bdb551c3d45fd3e8dd6509264fb94ce3b3ecc805f0ee4934470a1f1b7741435",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.2,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "A @ x: 0.5\nupdate: [0.05, 0.1]\noutput: [2.05, 1.1]\n",
+  "stderr": "",
+  "error": null
+}

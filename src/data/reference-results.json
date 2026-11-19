@@ -1,0 +1,1429 @@
+{
+  "tokenizers": [
+    {
+      "model": "google-bert/bert-base-uncased",
+      "text": "Language models learn patterns.",
+      "pieces": [
+        "[CLS]",
+        "language",
+        "models",
+        "learn",
+        "patterns",
+        ".",
+        "[SEP]"
+      ],
+      "ids": [
+        101,
+        2653,
+        4275,
+        4553,
+        7060,
+        1012,
+        102
+      ],
+      "offsets": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          9,
+          15
+        ],
+        [
+          16,
+          21
+        ],
+        [
+          22,
+          30
+        ],
+        [
+          30,
+          31
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "special": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "decoded": "language models learn patterns."
+    },
+    {
+      "model": "google-bert/bert-base-uncased",
+      "text": "unbelievableness",
+      "pieces": [
+        "[CLS]",
+        "unbelievable",
+        "##ness",
+        "[SEP]"
+      ],
+      "ids": [
+        101,
+        23653,
+        2791,
+        102
+      ],
+      "offsets": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          12
+        ],
+        [
+          12,
+          16
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "special": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "decoded": "unbelievableness"
+    },
+    {
+      "model": "google-bert/bert-base-uncased",
+      "text": "안녕하세요 👋",
+      "pieces": [
+        "[CLS]",
+        "ᄋ",
+        "##ᅡ",
+        "##ᆫ",
+        "##ᄂ",
+        "##ᅧ",
+        "##ᆼ",
+        "##ᄒ",
+        "##ᅡ",
+        "##ᄉ",
+        "##ᅦ",
+        "##ᄋ",
+        "##ᅭ",
+        "[UNK]",
+        "[SEP]"
+      ],
+      "ids": [
+        101,
+        1463,
+        30006,
+        30021,
+        29992,
+        30010,
+        30025,
+        30005,
+        30006,
+        29997,
+        30009,
+        29999,
+        30013,
+        100,
+        102
+      ],
+      "offsets": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "special": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "decoded": "안녕하세요"
+    },
+    {
+      "model": "google-bert/bert-base-uncased",
+      "text": "print(\"Hello\")\n  x = 2",
+      "pieces": [
+        "[CLS]",
+        "print",
+        "(",
+        "\"",
+        "hello",
+        "\"",
+        ")",
+        "x",
+        "=",
+        "2",
+        "[SEP]"
+      ],
+      "ids": [
+        101,
+        6140,
+        1006,
+        1000,
+        7592,
+        1000,
+        1007,
+        1060,
+        1027,
+        1016,
+        102
+      ],
+      "offsets": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          12
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          13,
+          14
+        ],
+        [
+          17,
+          18
+        ],
+        [
+          19,
+          20
+        ],
+        [
+          21,
+          22
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "special": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "decoded": "print ( \" hello \" ) x = 2"
+    },
+    {
+      "model": "openai-community/gpt2",
+      "text": "Language models learn patterns.",
+      "pieces": [
+        "Language",
+        "Ġmodels",
+        "Ġlearn",
+        "Ġpatterns",
+        "."
+      ],
+      "ids": [
+        32065,
+        4981,
+        2193,
+        7572,
+        13
+      ],
+      "offsets": [
+        [
+          0,
+          8
+        ],
+        [
+          8,
+          15
+        ],
+        [
+          15,
+          21
+        ],
+        [
+          21,
+          30
+        ],
+        [
+          30,
+          31
+        ]
+      ],
+      "special": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "decoded": "Language models learn patterns."
+    },
+    {
+      "model": "openai-community/gpt2",
+      "text": "unbelievableness",
+      "pieces": [
+        "un",
+        "bel",
+        "iev",
+        "abl",
+        "eness"
+      ],
+      "ids": [
+        403,
+        6667,
+        11203,
+        23117,
+        9449
+      ],
+      "offsets": [
+        [
+          0,
+          2
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          8,
+          11
+        ],
+        [
+          11,
+          16
+        ]
+      ],
+      "special": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "decoded": "unbelievableness"
+    },
+    {
+      "model": "openai-community/gpt2",
+      "text": "안녕하세요 👋",
+      "pieces": [
+        "ì",
+        "ķ",
+        "Ī",
+        "ë",
+        "ħ",
+        "ķ",
+        "íķ",
+        "ĺ",
+        "ì",
+        "Ħ",
+        "¸",
+        "ì",
+        "ļ",
+        "Ķ",
+        "ĠðŁĳ",
+        "ĭ"
+      ],
+      "ids": [
+        168,
+        243,
+        230,
+        167,
+        227,
+        243,
+        47991,
+        246,
+        168,
+        226,
+        116,
+        168,
+        248,
+        242,
+        50169,
+        233
+      ],
+      "offsets": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          6,
+          7
+        ]
+      ],
+      "special": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "decoded": "안녕하세요 👋"
+    },
+    {
+      "model": "openai-community/gpt2",
+      "text": "print(\"Hello\")\n  x = 2",
+      "pieces": [
+        "print",
+        "(\"",
+        "Hello",
+        "\")",
+        "Ċ",
+        "Ġ",
+        "Ġx",
+        "Ġ=",
+        "Ġ2"
+      ],
+      "ids": [
+        4798,
+        7203,
+        15496,
+        4943,
+        198,
+        220,
+        2124,
+        796,
+        362
+      ],
+      "offsets": [
+        [
+          0,
+          5
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          7,
+          12
+        ],
+        [
+          12,
+          14
+        ],
+        [
+          14,
+          15
+        ],
+        [
+          15,
+          16
+        ],
+        [
+          16,
+          18
+        ],
+        [
+          18,
+          20
+        ],
+        [
+          20,
+          22
+        ]
+      ],
+      "special": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "decoded": "print(\"Hello\")\n  x = 2"
+    }
+  ],
+  "lora": {
+    "base_test_loss": 11.318987846374512,
+    "adapter_test_loss": 0.073483407497406,
+    "trainable": 12288,
+    "total": 14080000,
+    "base_frozen": true,
+    "reload_merge": true,
+    "merge_max_error": 0.0034160614013671875,
+    "double_merge_max_error": 1.0715872633682011e-11,
+    "train_documents": 24,
+    "validation_documents": 4,
+    "test_documents": 4,
+    "history": [
+      {
+        "step": 10,
+        "train_loss": 1.8497085571289062,
+        "validation_loss": 1.2656235694885254
+      },
+      {
+        "step": 20,
+        "train_loss": 0.06869608908891678,
+        "validation_loss": 0.35853248834609985
+      },
+      {
+        "step": 30,
+        "train_loss": 0.018354706466197968,
+        "validation_loss": 0.3164345622062683
+      },
+      {
+        "step": 40,
+        "train_loss": 0.0018251598812639713,
+        "validation_loss": 0.06559154391288757
+      }
+    ],
+    "test_prompt": "Question: Is zebra an animal or a color?\nAnswer:",
+    "generated_completion": " animal"
+  },
+  "ner": {
+    "metrics": {
+      "tp": 18,
+      "predicted": 18,
+      "gold": 18,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "all_o_baseline": {
+      "tp": 0,
+      "predicted": 0,
+      "gold": 18,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "token_accuracy": 1.0,
+    "history": [
+      {
+        "step": 30,
+        "train_loss": 0.06466493755578995,
+        "validation_f1": 0.8461538461538461
+      },
+      {
+        "step": 60,
+        "train_loss": 0.012843548320233822,
+        "validation_f1": 0.8461538461538461
+      },
+      {
+        "step": 90,
+        "train_loss": 0.007340235635638237,
+        "validation_f1": 0.8461538461538461
+      }
+    ],
+    "predictions": [
+      {
+        "id": "test-12-0",
+        "tokens": [
+          "Lena",
+          "Fischer",
+          "joined",
+          "Silver",
+          "Works",
+          "in",
+          "North",
+          "Harbor",
+          "."
+        ],
+        "gold": [
+          "B-PER",
+          "I-PER",
+          "O",
+          "B-ORG",
+          "I-ORG",
+          "O",
+          "B-LOC",
+          "I-LOC",
+          "O"
+        ],
+        "predicted": [
+          "B-PER",
+          "I-PER",
+          "O",
+          "B-ORG",
+          "I-ORG",
+          "O",
+          "B-LOC",
+          "I-LOC",
+          "O"
+        ],
+        "gold_spans": [
+          [
+            "PER",
+            0,
+            2
+          ],
+          [
+            "ORG",
+            3,
+            5
+          ],
+          [
+            "LOC",
+            6,
+            8
+          ]
+        ],
+        "predicted_spans": [
+          [
+            "PER",
+            0,
+            2
+          ],
+          [
+            "ORG",
+            3,
+            5
+          ],
+          [
+            "LOC",
+            6,
+            8
+          ]
+        ]
+      },
+      {
+        "id": "test-13-0",
+        "tokens": [
+          "Omar",
+          "Hassan",
+          "joined",
+          "Copper",
+          "Lab",
+          "in",
+          "West",
+          "Ridge",
+          "."
+        ],
+        "gold": [
+          "B-PER",
+          "I-PER",
+          "O",
+          "B-ORG",
+          "I-ORG",
+          "O",
+          "B-LOC",
+          "I-LOC",
+          "O"
+        ],
+        "predicted": [
+          "B-PER",
+          "I-PER",
+          "O",
+          "B-ORG",
+          "I-ORG",
+          "O",
+          "B-LOC",
+          "I-LOC",
+          "O"
+        ],
+        "gold_spans": [
+          [
+            "PER",
+            0,
+            2
+          ],
+          [
+            "ORG",
+            3,
+            5
+          ],
+          [
+            "LOC",
+            6,
+            8
+          ]
+        ],
+        "predicted_spans": [
+          [
+            "PER",
+            0,
+            2
+          ],
+          [
+            "ORG",
+            3,
+            5
+          ],
+          [
+            "LOC",
+            6,
+            8
+          ]
+        ]
+      },
+      {
+        "id": "test-14-0",
+        "tokens": [
+          "Eva",
+          "Chen",
+          "joined",
+          "Indigo",
+          "Tech",
+          "in",
+          "East",
+          "Bay",
+          "."
+        ],
+        "gold": [
+          "B-PER",
+          "I-PER",
+          "O",
+          "B-ORG",
+          "I-ORG",
+          "O",
+          "B-LOC",
+          "I-LOC",
+          "O"
+        ],
+        "predicted": [
+          "B-PER",
+          "I-PER",
+          "O",
+          "B-ORG",
+          "I-ORG",
+          "O",
+          "B-LOC",
+          "I-LOC",
+          "O"
+        ],
+        "gold_spans": [
+          [
+            "PER",
+            0,
+            2
+          ],
+          [
+            "ORG",
+            3,
+            5
+          ],
+          [
+            "LOC",
+            6,
+            8
+          ]
+        ],
+        "predicted_spans": [
+          [
+            "PER",
+            0,
+            2
+          ],
+          [
+            "ORG",
+            3,
+            5
+          ],
+          [
+            "LOC",
+            6,
+            8
+          ]
+        ]
+      },
+      {
+        "id": "test-15-0",
+        "tokens": [
+          "Leo",
+          "Martin",
+          "joined",
+          "Violet",
+          "Space",
+          "in",
+          "South",
+          "Point",
+          "."
+        ],
+        "gold": [
+          "B-PER",
+          "I-PER",
+          "O",
+          "B-ORG",
+          "I-ORG",
+          "O",
+          "B-LOC",
+          "I-LOC",
+          "O"
+        ],
+        "predicted": [
+          "B-PER",
+          "I-PER",
+          "O",
+          "B-ORG",
+          "I-ORG",
+          "O",
+          "B-LOC",
+          "I-LOC",
+          "O"
+        ],
+        "gold_spans": [
+          [
+            "PER",
+            0,
+            2
+          ],
+          [
+            "ORG",
+            3,
+            5
+          ],
+          [
+            "LOC",
+            6,
+            8
+          ]
+        ],
+        "predicted_spans": [
+          [
+            "PER",
+            0,
+            2
+          ],
+          [
+            "ORG",
+            3,
+            5
+          ],
+          [
+            "LOC",
+            6,
+            8
+          ]
+        ]
+      },
+      {
+        "id": "test-16-0",
+        "tokens": [
+          "Amara",
+          "Okafor",
+          "joined",
+          "Saffron",
+          "Energy",
+          "in",
+          "Green",
+          "Hills",
+          "."
+        ],
+        "gold": [
+          "B-PER",
+          "I-PER",
+          "O",
+          "B-ORG",
+          "I-ORG",
+          "O",
+          "B-LOC",
+          "I-LOC",
+          "O"
+        ],
+        "predicted": [
+          "B-PER",
+          "I-PER",
+          "O",
+          "B-ORG",
+          "I-ORG",
+          "O",
+          "B-LOC",
+          "I-LOC",
+          "O"
+        ],
+        "gold_spans": [
+          [
+            "PER",
+            0,
+            2
+          ],
+          [
+            "ORG",
+            3,
+            5
+          ],
+          [
+            "LOC",
+            6,
+            8
+          ]
+        ],
+        "predicted_spans": [
+          [
+            "PER",
+            0,
+            2
+          ],
+          [
+            "ORG",
+            3,
+            5
+          ],
+          [
+            "LOC",
+            6,
+            8
+          ]
+        ]
+      },
+      {
+        "id": "test-17-0",
+        "tokens": [
+          "Iris",
+          "Novak",
+          "joined",
+          "Jade",
+          "Medicine",
+          "in",
+          "Blue",
+          "River",
+          "."
+        ],
+        "gold": [
+          "B-PER",
+          "I-PER",
+          "O",
+          "B-ORG",
+          "I-ORG",
+          "O",
+          "B-LOC",
+          "I-LOC",
+          "O"
+        ],
+        "predicted": [
+          "B-PER",
+          "I-PER",
+          "O",
+          "B-ORG",
+          "I-ORG",
+          "O",
+          "B-LOC",
+          "I-LOC",
+          "O"
+        ],
+        "gold_spans": [
+          [
+            "PER",
+            0,
+            2
+          ],
+          [
+            "ORG",
+            3,
+            5
+          ],
+          [
+            "LOC",
+            6,
+            8
+          ]
+        ],
+        "predicted_spans": [
+          [
+            "PER",
+            0,
+            2
+          ],
+          [
+            "ORG",
+            3,
+            5
+          ],
+          [
+            "LOC",
+            6,
+            8
+          ]
+        ]
+      },
+      {
+        "id": "test-empty-0",
+        "tokens": [
+          "We",
+          "read",
+          "the",
+          "report",
+          "."
+        ],
+        "gold": [
+          "O",
+          "O",
+          "O",
+          "O",
+          "O"
+        ],
+        "predicted": [
+          "O",
+          "O",
+          "O",
+          "O",
+          "O"
+        ],
+        "gold_spans": [],
+        "predicted_spans": []
+      },
+      {
+        "id": "test-empty-1",
+        "tokens": [
+          "The",
+          "lights",
+          "went",
+          "dark",
+          "."
+        ],
+        "gold": [
+          "O",
+          "O",
+          "O",
+          "O",
+          "O"
+        ],
+        "predicted": [
+          "O",
+          "O",
+          "O",
+          "O",
+          "O"
+        ],
+        "gold_spans": [],
+        "predicted_spans": []
+      }
+    ],
+    "validation_errors": [
+      {
+        "tokens": [
+          "Sofia",
+          "Rivera",
+          "joined",
+          "Coral",
+          "Data",
+          "in",
+          "Rio",
+          "Claro",
+          "."
+        ],
+        "gold": [
+          "B-PER",
+          "I-PER",
+          "O",
+          "B-ORG",
+          "I-ORG",
+          "O",
+          "B-LOC",
+          "I-LOC",
+          "O"
+        ],
+        "predicted": [
+          "I-PER",
+          "I-PER",
+          "O",
+          "B-ORG",
+          "I-ORG",
+          "O",
+          "B-LOC",
+          "I-PER",
+          "O"
+        ]
+      },
+      {
+        "tokens": [
+          "Rain",
+          "fell",
+          "before",
+          "dawn",
+          "."
+        ],
+        "gold": [
+          "O",
+          "O",
+          "O",
+          "O",
+          "O"
+        ],
+        "predicted": [
+          "I-PER",
+          "O",
+          "O",
+          "O",
+          "O"
+        ]
+      }
+    ],
+    "alignment": [
+      {
+        "wordId": null,
+        "word": "",
+        "wordTag": "",
+        "piece": "[CLS]",
+        "id": 101,
+        "label": -100
+      },
+      {
+        "wordId": 0,
+        "word": "Ada",
+        "wordTag": "B-PER",
+        "piece": "ada",
+        "id": 15262,
+        "label": 1
+      },
+      {
+        "wordId": 1,
+        "word": "Lovelace",
+        "wordTag": "I-PER",
+        "piece": "love",
+        "id": 2293,
+        "label": 2
+      },
+      {
+        "wordId": 1,
+        "word": "Lovelace",
+        "wordTag": "I-PER",
+        "piece": "##lace",
+        "id": 19217,
+        "label": -100
+      },
+      {
+        "wordId": 2,
+        "word": "joined",
+        "wordTag": "O",
+        "piece": "joined",
+        "id": 2587,
+        "label": 0
+      },
+      {
+        "wordId": 3,
+        "word": "Cedar",
+        "wordTag": "B-ORG",
+        "piece": "cedar",
+        "id": 11354,
+        "label": 3
+      },
+      {
+        "wordId": 4,
+        "word": "Labs",
+        "wordTag": "I-ORG",
+        "piece": "labs",
+        "id": 13625,
+        "label": 4
+      },
+      {
+        "wordId": 5,
+        "word": "in",
+        "wordTag": "O",
+        "piece": "in",
+        "id": 1999,
+        "label": 0
+      },
+      {
+        "wordId": 6,
+        "word": "New",
+        "wordTag": "B-LOC",
+        "piece": "new",
+        "id": 2047,
+        "label": 5
+      },
+      {
+        "wordId": 7,
+        "word": "York",
+        "wordTag": "I-LOC",
+        "piece": "york",
+        "id": 2259,
+        "label": 6
+      },
+      {
+        "wordId": 8,
+        "word": ".",
+        "wordTag": "O",
+        "piece": ".",
+        "id": 1012,
+        "label": 0
+      },
+      {
+        "wordId": null,
+        "word": "",
+        "wordTag": "",
+        "piece": "[SEP]",
+        "id": 102,
+        "label": -100
+      },
+      {
+        "wordId": null,
+        "word": "",
+        "wordTag": "",
+        "piece": "[PAD]",
+        "id": 0,
+        "label": -100
+      },
+      {
+        "wordId": null,
+        "word": "",
+        "wordTag": "",
+        "piece": "[PAD]",
+        "id": 0,
+        "label": -100
+      },
+      {
+        "wordId": null,
+        "word": "",
+        "wordTag": "",
+        "piece": "[PAD]",
+        "id": 0,
+        "label": -100
+      },
+      {
+        "wordId": null,
+        "word": "",
+        "wordTag": "",
+        "piece": "[PAD]",
+        "id": 0,
+        "label": -100
+      },
+      {
+        "wordId": null,
+        "word": "",
+        "wordTag": "",
+        "piece": "[PAD]",
+        "id": 0,
+        "label": -100
+      },
+      {
+        "wordId": null,
+        "word": "",
+        "wordTag": "",
+        "piece": "[PAD]",
+        "id": 0,
+        "label": -100
+      },
+      {
+        "wordId": null,
+        "word": "",
+        "wordTag": "",
+        "piece": "[PAD]",
+        "id": 0,
+        "label": -100
+      },
+      {
+        "wordId": null,
+        "word": "",
+        "wordTag": "",
+        "piece": "[PAD]",
+        "id": 0,
+        "label": -100
+      },
+      {
+        "wordId": null,
+        "word": "",
+        "wordTag": "",
+        "piece": "[PAD]",
+        "id": 0,
+        "label": -100
+      },
+      {
+        "wordId": null,
+        "word": "",
+        "wordTag": "",
+        "piece": "[PAD]",
+        "id": 0,
+        "label": -100
+      },
+      {
+        "wordId": null,
+        "word": "",
+        "wordTag": "",
+        "piece": "[PAD]",
+        "id": 0,
+        "label": -100
+      },
+      {
+        "wordId": null,
+        "word": "",
+        "wordTag": "",
+        "piece": "[PAD]",
+        "id": 0,
+        "label": -100
+      }
+    ],
+    "frozen_embeddings": true,
+    "reload": true,
+    "train_documents": 26,
+    "validation_documents": 6,
+    "test_documents": 8
+  },
+  "tiny": {
+    "base_mse": 0.121865,
+    "full_mse": 0.0,
+    "adapter_mse": 0.0,
+    "base_frozen": true,
+    "first_A_gradient": 0.0,
+    "first_B_gradient": 0.079331,
+    "full_parameters": 64,
+    "adapter_parameters": 16,
+    "merge_reload": true
+  }
+}

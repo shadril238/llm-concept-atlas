@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "tokenizer-comparison",
+  "status": "failed",
+  "date": "2026-11-19T16:45:57.908779+00:00",
+  "gitCommit": "1f79da4bfc10e35e3dd5f0d8acd012f0106692ca",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/training/reference/src/atlas_reference/tokenizers.py"
+  ],
+  "sourceSha256": "0b24fac485962dbae9347d9a09619920a4a0af199cac3e28dd3fdd630010146b",
+  "lockSha256": "d4b64636a97fdd81593972dc4241059dc1edf5178dec89bf5c1cf6601d7f5615",
+  "contractSha256": "f00941b396bfe0c7fe5c58f0eb6d68a70c02f8018da0feb387cbb4de5f82b7d2",
+  "fixtureSha256": null,
+  "models": [
+    {
+      "id": "google-bert/bert-base-uncased",
+      "revision": "86b5e0934494bd15c9632b12f734a8a67f723594"
+    },
+    {
+      "id": "openai-community/gpt2",
+      "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e"
+    }
+  ],
+  "python": "3.11.18",
+  "packages": {
+    "numpy": "2.2.6",
+    "packaging": "26.3",
+    "requests": "2.34.2",
+    "certifi": "2026.10.23",
+    "networkx": "3.6.1",
+    "torch": "2.8.0",
+    "filelock": "4.2.12",
+    "accelerate": "1.16.0",
+    "sympy": "1.14.0",
+    "huggingface_hub": "0.36.2",
+    "safetensors": "0.8.0",
+    "tqdm": "4.70.1",
+    "urllib3": "2.8.0",
+    "mpmath": "1.3.0",
+    "PyYAML": "6.0.3",
+    "fsspec": "2026.9.0",
+    "peft": "0.17.0",
+    "Jinja2": "3.1.6",
+    "regex": "2026.11.19",
+    "transformers": "4.57.1",
+    "typing_extensions": "4.16.0",
+    "MarkupSafe": "3.0.4",
+    "hf-xet": "1.8.0",
+    "tokenizers": "0.22.2",
+    "psutil": "7.2.2",
+    "charset-normalizer": "3.5.2",
+    "idna": "3.20"
+  },
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 2.39,
+  "peakMemoryMiB": 230.2,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "allowed",
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<repository>/examples/training/reference/src/atlas_reference/tokenizers.py\", line 4, in <module>\n    from transformers import AutoTokenizer\n  File \"<repository>/examples/training/reference/.venv/lib/python3.11/site-packages/transformers/utils/import_utils.py\", line 2317, in __getattr__\n    module = self._get_module(self._class_to_module[name])\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repository>/examples/training/reference/.venv/lib/python3.11/site-packages/transformers/utils/import_utils.py\", line 2347, in _get_module\n    raise e\n  File \"<repository>/examples/training/reference/.venv/lib/python3.11/site-packages/transformers/utils/import_utils.py\", line 2345, in _get_module\n    return importlib.import_module(\".\" + module_name, self.__name__)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<home>/.local/share/uv/python/cpython-3.11.18-macos-aarch64-none/lib/python3.11/importlib/__init__.py\", line 126, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repository>/examples/training/reference/.venv/lib/python3.11/site-packages/transformers/models/auto/tokenization_auto.py\", line 26, in <module>\n    from ...configuration_utils import PretrainedConfig\n  File \"<repository>/examples/training/reference/.venv/lib/python3.11/site-packages/transformers/configuration_utils.py\", line 27, in <module>\n    from .modeling_gguf_pytorch_utils import load_gguf_checkpoint\n  File \"<repository>/examples/training/reference/.venv/lib/python3.11/site-packages/transformers/modeling_gguf_pytorch_utils.py\", line 22, in <module>\n    from .integrations import (\n  File \"<repository>/examples/training/reference/.venv/lib/python3.11/site-packages/transformers/utils/import_utils.py\", line 2317, in __getattr__\n    module = self._get_module(self._class_to_module[name])\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repository>/examples/training/reference/.venv/lib/python3.11/site-packages/transformers/utils/import_utils.py\", line 2347, in _get_module\n    raise e\n  File \"<repository>/examples/training/reference/.venv/lib/python3.11/site-packages/transformers/utils/import_utils.py\", line 2345, in _get_module\n    return importlib.import_module(\".\" + module_name, self.__name__)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<home>/.local/share/uv/python/cpython-3.11.18-macos-aarch64-none/lib/python3.11/importlib/__init__.py\", line 126, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repository>/examples/training/reference/.venv/lib/python3.11/site-packages/transformers/integrations/ggml.py\", line 24, in <module>\n    from tokenizers import Tokenizer, decoders, normalizers, pre_tokenizers, processors\n  File \"<repository>/examples/training/reference/src/atlas_reference/tokenizers.py\", line 4, in <module>\n    from transformers import AutoTokenizer\nImportError: cannot import name 'AutoTokenizer' from 'transformers' (<repository>/examples/training/reference/.venv/lib/python3.11/site-packages/transformers/__init__.py)\n",
+  "error": "process exit 1"
+}
