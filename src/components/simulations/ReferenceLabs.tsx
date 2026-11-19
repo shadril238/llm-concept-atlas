@@ -169,8 +169,10 @@ export function LoraExplorer() {
       <div className="reference-pipeline">
         <div>
           <small>Compress · A x</small>
-          <strong>{fixed(trace.compressed)}</strong>
-          <span>A: r × 2</span>
+          <strong>
+            [{fixed(trace.compressed)}{rank === 2 ? ", 0.00" : ""}]
+          </strong>
+          <span>A: r × 2 → r × 1</span>
         </div>
         <span aria-hidden="true">→</span>
         <div>
