@@ -96,7 +96,7 @@ const url = (path: string) => base + path.replace(/^\/+/, '');
             const chapterConcepts = concepts.filter((node) => node.chapter === chapter.number);
             return <div class="atlas-directory-chapter">
               <div class="atlas-directory-chapter-head"><button type="button" data-focus-id={chapterId} aria-label={`Show chapter ${chapter.number} on the graph`}>{String(chapter.number).padStart(2, '0')}</button><a href={url(`chapters/${part.id}/${String(chapter.number).padStart(2, '0')}/`)}>{chapter.title}</a></div>
-              {chapterConcepts.length > 0 && <ul>{chapterConcepts.map((node) => <li><button type="button" data-focus-id={node.id} aria-label={`Show ${node.title} on the graph`}>◎</button><a href={url(node.href)}>{node.title}</a>{node.lessonStatus === 'full' && <span class="atlas-lesson-badge">Full lesson</span>}</li>)}</ul>}
+              {chapterConcepts.length > 0 && <ul>{chapterConcepts.map((node) => <li><button type="button" data-focus-id={node.id} aria-label={`Show ${node.title} on the graph`}>◎</button><a href={url(node.href)}>{node.title}</a>{node.lessonStatus === 'full' && <span class="atlas-lesson-badge">Concept lesson</span>}</li>)}</ul>}
               {chapterConcepts.length === 0 && <p>Chapter outline available; concept lessons to follow.</p>}
             </div>;
           })}

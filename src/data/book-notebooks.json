@@ -1,0 +1,206 @@
+{
+  "repository": "https://github.com/HandsOnLLM/Hands-On-Large-Language-Models",
+  "commit": "ea3390819997999a51983677b80b3aac4dc50ada",
+  "notebooks": [
+    {
+      "chapter": 1,
+      "path": "chapter01/Chapter 1 - Introduction to Language Models.ipynb",
+      "blob": "8618984de8ba5009129a4da2199dddf37c22e998",
+      "sha256": "df076ee85f41666ad7b2236a28ffe5a96be83cdb7247210ddafa6b15f36db45a",
+      "cells": 10,
+      "codeCells": 4,
+      "reviewedCellRanges": [[3, 9]],
+      "url": "https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/blob/ea3390819997999a51983677b80b3aac4dc50ada/chapter01/Chapter%201%20-%20Introduction%20to%20Language%20Models.ipynb"
+    },
+    {
+      "chapter": 2,
+      "path": "chapter02/Chapter 2 - Tokens and Token Embeddings.ipynb",
+      "blob": "fcccbfcf05d28e05a625ecd86ac0818314fcbe33",
+      "sha256": "41debbe42f27fb344976e4c986c5f7019d0e37269d41b17cafcd73c80c5dc499",
+      "cells": 41,
+      "codeCells": 33,
+      "reviewedCellRanges": [
+        [3, 9],
+        [10, 20],
+        [21, 28],
+        [29, 31],
+        [32, 40]
+      ],
+      "url": "https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/blob/ea3390819997999a51983677b80b3aac4dc50ada/chapter02/Chapter%202%20-%20Tokens%20and%20Token%20Embeddings.ipynb"
+    },
+    {
+      "chapter": 3,
+      "path": "chapter03/Chapter 3 - Looking Inside LLMs.ipynb",
+      "blob": "d69b90d3ada52271b7fe892402583fb5059708c1",
+      "sha256": "5642650babdc6665d3e557ce3e386e0d2226b6fc54e6d65de293800a429e685f",
+      "cells": 17,
+      "codeCells": 11,
+      "reviewedCellRanges": [
+        [3, 12],
+        [13, 16]
+      ],
+      "url": "https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/blob/ea3390819997999a51983677b80b3aac4dc50ada/chapter03/Chapter%203%20-%20Looking%20Inside%20LLMs.ipynb"
+    },
+    {
+      "chapter": 4,
+      "path": "chapter04/Chapter 4 - Text Classification.ipynb",
+      "blob": "43744b42910d6ff1bdd67ddc074ff45fed1b9da8",
+      "sha256": "a07ae914667c6f042e7238cf087ad79d2ffb4366f0485d52b526adf67d199f66",
+      "cells": 38,
+      "codeCells": 24,
+      "reviewedCellRanges": [
+        [3, 11],
+        [12, 24],
+        [25, 37]
+      ],
+      "url": "https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/blob/ea3390819997999a51983677b80b3aac4dc50ada/chapter04/Chapter%204%20-%20Text%20Classification.ipynb"
+    },
+    {
+      "chapter": 5,
+      "path": "chapter05/Chapter 5 - Text Clustering and Topic Modeling.ipynb",
+      "blob": "f4ba3e720b99a1f152e2f85da7d61c6e89ef32e5",
+      "sha256": "c095fa5ff8c436918548711a77976cd74f24eac09117313d466929f1c1e49f09",
+      "cells": 58,
+      "codeCells": 26,
+      "reviewedCellRanges": [
+        [3, 19],
+        [20, 37],
+        [38, 52],
+        [53, 57]
+      ],
+      "url": "https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/blob/ea3390819997999a51983677b80b3aac4dc50ada/chapter05/Chapter%205%20-%20Text%20Clustering%20and%20Topic%20Modeling.ipynb"
+    },
+    {
+      "chapter": 6,
+      "path": "chapter06/Chapter 6 - Prompt Engineering.ipynb",
+      "blob": "be82822ef33a8b415f7823bebc1b8df19b552efe",
+      "sha256": "42f98e4f1c40d15080bce8659018a409ded9193248cb585fd4993c0c99f1eea3",
+      "cells": 41,
+      "codeCells": 25,
+      "reviewedCellRanges": [
+        [3, 8],
+        [9, 21],
+        [22, 30],
+        [31, 39]
+      ],
+      "url": "https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/blob/ea3390819997999a51983677b80b3aac4dc50ada/chapter06/Chapter%206%20-%20Prompt%20Engineering.ipynb"
+    },
+    {
+      "chapter": 7,
+      "path": "chapter07/Chapter 7 - Advanced Text Generation Techniques and Tools.ipynb",
+      "blob": "f6d63267090f1f67f694345ad401adff7763d6c1",
+      "sha256": "120622855e8314857d22bed45f6f69b707c981ffe200e2e318502a1e7f05e868",
+      "cells": 43,
+      "codeCells": 33,
+      "reviewedCellRanges": [
+        [3, 17],
+        [18, 36],
+        [37, 42]
+      ],
+      "url": "https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/blob/ea3390819997999a51983677b80b3aac4dc50ada/chapter07/Chapter%207%20-%20Advanced%20Text%20Generation%20Techniques%20and%20Tools.ipynb"
+    },
+    {
+      "chapter": 8,
+      "path": "chapter08/Chapter 8 - Semantic Search.ipynb",
+      "blob": "1280594810dafbfd8a1f132bf87ca3e0a8c3875c",
+      "sha256": "35eed2a79e3f86b3b6900f9ba10ded4568e54fadec4e000e0b1693483455f91f",
+      "cells": 41,
+      "codeCells": 25,
+      "reviewedCellRanges": [
+        [3, 19],
+        [20, 24],
+        [25, 40]
+      ],
+      "url": "https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/blob/ea3390819997999a51983677b80b3aac4dc50ada/chapter08/Chapter%208%20-%20Semantic%20Search.ipynb"
+    },
+    {
+      "chapter": 9,
+      "path": "chapter09/Chapter 9 - Multimodal Large Language Models.ipynb",
+      "blob": "8c6b8749e74535843fabcca72134f109dee0867f",
+      "sha256": "81030971056e52ec7cf983b83fc87a12fdd35914183130410cf66defe3f05e09",
+      "cells": 42,
+      "codeCells": 31,
+      "reviewedCellRanges": [
+        [3, 20],
+        [21, 30],
+        [31, 40]
+      ],
+      "url": "https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/blob/ea3390819997999a51983677b80b3aac4dc50ada/chapter09/Chapter%209%20-%20Multimodal%20Large%20Language%20Models.ipynb"
+    },
+    {
+      "chapter": 10,
+      "path": "chapter10/Chapter 10 - Creating Text Embedding Models.ipynb",
+      "blob": "b4abfb6e47503cadd4b790d7193a0a654113b395",
+      "sha256": "7d89aeb2945c72e3948363fa3a312fe6c722b8819da8be2c3483ae511873ce73",
+      "cells": 78,
+      "codeCells": 49,
+      "reviewedCellRanges": [
+        [3, 18],
+        [22, 35],
+        [36, 43],
+        [46, 62],
+        [66, 76]
+      ],
+      "url": "https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/blob/ea3390819997999a51983677b80b3aac4dc50ada/chapter10/Chapter%2010%20-%20Creating%20Text%20Embedding%20Models.ipynb"
+    },
+    {
+      "chapter": 11,
+      "path": "chapter11/Chapter 11 - Fine-Tuning BERT.ipynb",
+      "blob": "c6879d3df3c9e9b27f700c36021e64bf77d4110b",
+      "sha256": "e3c36d306e639bdab334c778448e7145895b69609983f3c3deaccc276ae9a960",
+      "cells": 63,
+      "codeCells": 48,
+      "reviewedCellRanges": [
+        [3, 26],
+        [31, 38],
+        [39, 47],
+        [48, 61]
+      ],
+      "url": "https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/blob/ea3390819997999a51983677b80b3aac4dc50ada/chapter11/Chapter%2011%20-%20Fine-Tuning%20BERT.ipynb"
+    },
+    {
+      "chapter": 12,
+      "path": "chapter12/Chapter 12 - Fine-tuning Generation Models.ipynb",
+      "blob": "a8ea3cd407f0ccca46dd72ea4b1f7b27c08e778e",
+      "sha256": "a7efb589bf9bbbf540798b09d00d0a94ee6ec1f67a5bf45119a224cb7159e39c",
+      "cells": 31,
+      "codeCells": 16,
+      "reviewedCellRanges": [
+        [3, 19],
+        [20, 30]
+      ],
+      "url": "https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/blob/ea3390819997999a51983677b80b3aac4dc50ada/chapter12/Chapter%2012%20-%20Fine-tuning%20Generation%20Models.ipynb"
+    }
+  ],
+  "auditedOn": "2026-11-19",
+  "reviewType": "static-source-review",
+  "execution": "not-run",
+  "cellNumbering": "zero-based indices in the pinned notebook JSON",
+  "differences": [
+    {
+      "chapter": 6,
+      "cells": [28, 29, 30],
+      "finding": "The notebook uses an expert-simulation prompt for ToT; an explicit search algorithm is an atlas extension, not code already present here."
+    },
+    {
+      "chapter": 9,
+      "cells": [7, 20],
+      "finding": "The book section is named OpenCLIP, while this notebook demonstrates Transformers CLIP and a Sentence Transformers wrapper; preserve that distinction in the future implementation."
+    },
+    {
+      "chapter": 11,
+      "cells": [57],
+      "finding": "The metric function appends each retained token as a singleton sequence. Reimplement evaluation over full BIO sequences and manually verify multiword spans before reuse."
+    },
+    {
+      "chapter": 12,
+      "cells": [20, 30],
+      "finding": "The notebook provides DPO training, not a separate reward-model/PPO training run; reward training is discussed in the book and must receive its own atlas workflow."
+    },
+    {
+      "chapter": 5,
+      "cells": [53, 57],
+      "finding": "The word-cloud section is explicitly notebook bonus material and is excluded from book-core counts."
+    }
+  ]
+}

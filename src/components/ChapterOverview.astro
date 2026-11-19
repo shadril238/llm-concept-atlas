@@ -22,13 +22,13 @@ const chapterTopics = topicCoverage[String(number) as keyof typeof topicCoverage
   <div class="section-heading"><span class="eyebrow">Concepts to explore</span><h2>Start with the essentials</h2></div>
   {concepts.length > 0 ? <div class="concept-card-grid">
     {concepts.map((entry) => <a class="concept-card" href={`${base}concepts/${entry.data.conceptId}/`}>
-      <span class="concept-card-kind">Full lesson</span><h3>{entry.data.title}</h3><p>{entry.data.summary}</p><span class="text-arrow">Read the lesson →</span>
+      <span class="concept-card-kind">Concept lesson</span><h3>{entry.data.title}</h3><p>{entry.data.summary}</p><span class="text-arrow">Read the lesson →</span>
     </a>)}
   </div> : <p class="quiet-note">Concept notes for this chapter are being developed. Use the topic map below as a reading guide.</p>}
 </section>
 
 <section class="chapter-section">
-  <div class="section-heading"><span class="eyebrow">Chapter map</span><h2>Topics in this chapter</h2></div>
+  <div class="section-heading"><span class="eyebrow">Chapter map</span><h2>Selected topics in this chapter</h2></div>
   <ol class="topic-list">{chapter.topics.map((topic) => <li><a href={`${base}concepts/${chapterTopics[topic]}/`}>{topic} ↗</a></li>)}</ol>
 </section>
 

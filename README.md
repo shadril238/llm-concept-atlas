@@ -2,7 +2,9 @@
 
 **See it. Try it. Understand it.** An independent visual companion to *Hands-On Large Language Models* by Jay Alammar and Maarten Grootendorst.
 
-**Phases 1–5 are implemented** in [the implementation plan](./plan.md). The site covers all 12 chapter outlines with 96 full concept lessons, an interactive relationship graph, 11 teaching labs, three guided learning paths, and classification and RAG use cases. Each lesson has a definition, theory, worked example, original diagram, runnable teaching code, use cases, limits, and self-checks. Final reader and editorial review is pending.
+The original Phases 1–5 produced a **curated companion across all 12 chapters**: 96 concept lessons, an interactive relationship graph, 11 teaching simulations, three guided paths, and two use cases. The explanations and examples vary in depth; this is not yet exhaustive book coverage or a complete set of evaluated model workflows.
+
+**Enhancement E0 is complete:** the [book gap report](./docs/audits/book-gap-report.md) inventories 231 source entries and distinguishes partial explanations, missing topics, and practical implementation gaps. The [lesson depth audit](./docs/audits/lesson-depth-report.md) records findings for every existing concept. Follow [enhancement.md](./enhancement.md) for E1–E10; independent teaching acceptance and real-model execution verification remain pending.
 
 **Read the site:** [llm-concept-atlas on GitHub Pages](https://shadril238.github.io/llm-concept-atlas/).
 
@@ -23,8 +25,10 @@ npm run release:build
 
 ## Content model
 
-- `src/data/book-map.ts` records the book's three parts, 12 chapters, and chapter topic outlines.
-- `src/data/topic-coverage.json` maps all 95 chapter-topic entries to published concept lessons. Closely related entries can share a lesson.
+- `src/data/book-map.ts` records the book's three parts, 12 chapters, and a curated topic outline.
+- `src/data/topic-coverage.json` maps that outline's 95 entries to published lessons. Closely related entries can share a page; these entries are not the book's complete contents.
+- `src/data/book-sections.json` records the audited source sections, embedded concepts, exact source locations, remaining work, and separate coverage dimensions. Containers are excluded from leaf-objective counts.
+- `src/data/lesson-audit.json`, `proposed-concepts.json`, and `book-notebooks.json` record per-lesson findings, planned destinations/aliases, and pinned official notebook references. See the [audit guide](./docs/audits/README.md).
 - `src/content/docs/concepts/*.mdx` contains concept pages. Its frontmatter supplies the concept ID, chapter, parent, prerequisites, and related links.
 - `src/content/docs/paths/` provides three guided routes through the concepts; `src/content/docs/use-cases/` applies them to classification and RAG.
 - `src/components/ConceptDirectory.astro` provides a chapter-grouped, filterable index. `src/components/ConceptPrimer.astro` offers optional completion tracking stored only in the reader's browser.
@@ -32,7 +36,8 @@ npm run release:build
 - `src/lib/graph.js` combines the book map and concept pages into the atlas data. It rejects duplicate IDs, missing targets, and relationship cycles during the production build.
 - `src/pages/atlas-data.json.ts` exposes the validated graph as static JSON for the interactive view.
 - `src/components/AtlasExplorer.astro` and `src/scripts/atlas-explorer.ts` provide the graph, filters, search-to-focus, topic inspector, shareable `?focus=` links, and a keyboard-accessible topic directory. The graph opens on a chapter overview on wide screens and a simpler part overview on narrow screens.
-- `tests/content.test.mjs` checks that every published concept remains a full lesson and that internal lesson links resolve.
+- `tests/content.test.mjs` checks the existing lesson structure and internal source links; it does not certify teaching depth.
+- `npm run check:coverage` checks source mappings, anchors, page ranges, review evidence, stale source hashes, and report drift. `npm run coverage:report` regenerates the audit reports after reviewed changes.
 - `scripts/check-code-examples.mjs` runs the 76 new Python teaching examples and compares their output with the lesson text.
 - `scripts/check-internal-links.mjs` checks links and assets in the production build. The GitHub Pages workflow runs the complete `release:build` gate before deployment.
 

@@ -302,7 +302,7 @@ async function startAtlas(root: HTMLElement) {
     card.className = `atlas-inspector-card part-${node.part}`;
     const kicker = document.createElement('p');
     kicker.className = 'atlas-inspector-kicker';
-    kicker.textContent = node.kind === 'part' ? 'Book part' : node.kind === 'chapter' ? `Chapter ${node.chapter}` : `Chapter ${node.chapter} · ${node.lessonStatus === 'full' ? 'Full lesson' : 'Introductory note'}`;
+    kicker.textContent = node.kind === 'part' ? 'Book part' : node.kind === 'chapter' ? `Chapter ${node.chapter}` : `Chapter ${node.chapter} · ${node.lessonStatus === 'full' ? 'Concept lesson' : 'Introductory note'}`;
     const heading = document.createElement('h3');
     heading.textContent = node.title;
     const summary = document.createElement('p');
@@ -311,7 +311,7 @@ async function startAtlas(root: HTMLElement) {
     const link = document.createElement('a');
     link.className = 'atlas-open-link';
     link.href = `${base}${node.href.replace(/^\/+/, '')}`;
-    link.textContent = node.kind === 'concept' ? node.lessonStatus === 'full' ? 'Read full lesson ↗' : 'Read introductory note ↗' : 'Open overview ↗';
+    link.textContent = node.kind === 'concept' ? node.lessonStatus === 'full' ? 'Read lesson ↗' : 'Read introductory note ↗' : 'Open overview ↗';
     card.append(kicker, heading, summary, link);
     const children = graph.nodes.filter((item) => item.parent === node.id).map((item) => item.id);
     const next = edgeRecords.filter((edge) => edge.type === 'prerequisite' && edge.source === node.id).map((edge) => edge.target);

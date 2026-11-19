@@ -10,13 +10,13 @@ const chapter = chapterByNumber(Number(node.chapter));
 if (!chapter) throw new Error(`Concept ${id} has an unknown chapter`);
 const part = parts.find((item) => item.id === node.part);
 const parent = graph.nodes.find((item) => item.id === node.parent);
-const fullLessonCount = graph.nodes.filter((item) => item.kind === 'concept' && item.lessonStatus === 'full').length;
+const lessonCount = graph.nodes.filter((item) => item.kind === 'concept').length;
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const url = (path: string) => base + path.replace(/^\/+/, '');
 ---
 
 <div class={`concept-primer part-${node.part}`}>
-  <div class="concept-kicker"><span class="eyebrow">{node.lessonStatus === 'full' ? 'Full lesson' : 'Introductory note'}</span><span class="meta-dot"></span><span>{part?.shortTitle}</span><span class="meta-dot"></span><span>Chapter {node.chapter}</span></div>
+  <div class="concept-kicker"><span class="eyebrow">{node.lessonStatus === 'full' ? 'Concept lesson' : 'Introductory note'}</span><span class="meta-dot"></span><span>{part?.shortTitle}</span><span class="meta-dot"></span><span>Chapter {node.chapter}</span></div>
   <p class="concept-definition">{node.summary}</p>
   <div class="concept-trail" aria-label="Concept hierarchy">
     <a href={url(`parts/${node.part}/`)}>{part?.shortTitle}</a><span>→</span>
@@ -24,7 +24,7 @@ const url = (path: string) => base + path.replace(/^\/+/, '');
     {parent?.kind === 'concept' && <><a href={url(parent.href)}>{parent.title}</a><span>→</span></>}
     <strong>{node.title}</strong>
   </div>
-  <div class="lesson-progress" data-lesson-progress data-concept-id={id} data-total={fullLessonCount}>
+  <div class="lesson-progress" data-lesson-progress data-concept-id={id} data-total={lessonCount}>
     <button type="button" aria-pressed="false">Mark lesson complete</button>
     <span class="lesson-progress-count" aria-live="polite"></span>
     <small>Progress is saved only in this browser.</small>

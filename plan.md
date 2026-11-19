@@ -1,6 +1,6 @@
 # llm-concept-atlas — implementation plan
 
-**Status (2026-11-13): Phases 1–5 implemented; final reader and editorial review pending.** The [public site](https://shadril238.github.io/llm-concept-atlas/) has 96 full concept lessons mapped to every chapter-topic entry, 11 teaching simulations, an interactive atlas graph, three guided paths, and classification and RAG use cases. The Phase 5 production build and local release checks pass; GitHub Pages deployment follows the repository workflow.
+**Status (2026-11-19): Original Phases 1–5 delivered the curated chapter companion; enhancement E0 audit completed.** The project has 96 concept lessons, 11 illustrative simulations, an atlas graph, three paths, and two use cases. The earlier 95-entry topic map is a curated outline, not exhaustive book coverage. Passing structural and snippet checks did not establish book-level teaching depth. The [source inventory and gap report](./docs/audits/book-gap-report.md) now records partial and missing coverage; [enhancement.md](./enhancement.md) governs the next implementation phases.
 
 ## 1. Goal
 
@@ -181,7 +181,9 @@ llm-concept-atlas/
 - Configure GitHub Actions deployment and publish GitHub Pages.
 - **Done when:** the public site loads from the repository URL and its main learning flows work in a production build.
 
-### Phase 5 — full book coverage
+### Phase 5 — curated chapter expansion (historical scope correction)
+
+The initial implementation expanded the curated topic map. The intended exhaustive-coverage gate below was not established by that map; the E0 audit and enhancement phases now address the missing source sections and lesson depth.
 
 - Expand the concept catalog and graph across chapters 4–12. Each new public concept receives a full lesson, not only a glossary definition.
 - Add labs for clustering, prompting, multimodal models, contrastive learning, LoRA/QLoRA, and preference tuning.

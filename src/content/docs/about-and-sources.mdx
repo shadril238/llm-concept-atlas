@@ -1,16 +1,20 @@
 ---
 title: About and sources
 description: What this atlas covers, how it relates to the book, and where to go deeper.
-lastReviewed: 2026-11-13
+lastReviewed: 2026-11-19
 ---
 
 **LLM Concept Atlas** is an independent, open-source learning companion to *Hands-On Large Language Models* by Jay Alammar and Maarten Grootendorst. It is not affiliated with the authors, O’Reilly Media, or the publisher. The lessons, diagrams, simulations, and examples on this site are original. The book’s PDF, text, and artwork are not included in this repository.
 
 ## What is covered now
 
-The atlas has **96 full concept lessons** across all 12 chapters. Every entry in the book's 95-topic chapter outline links to a lesson; some closely related entries share a page. Start with [how an LLM processes a sentence](/llm-concept-atlas/paths/how-an-llm-processes-a-sentence/), [from semantic search to RAG](/llm-concept-atlas/paths/from-semantic-search-to-rag/), or [the applications-to-fine-tuning route](/llm-concept-atlas/paths/from-applications-to-fine-tuning/). The [concept directory](/llm-concept-atlas/concept-directory/) and [relationship graph](/llm-concept-atlas/atlas/) offer two other ways to find a topic.
+The atlas has **96 concept lessons** spanning all 12 chapters, linked through a curated outline of 95 topic entries. This outline is not the book's complete contents. Lessons currently provide introductory explanations and examples of varying depth; missing sections and deeper practical work are tracked in the [book coverage audit](https://github.com/shadril238/llm-concept-atlas/blob/main/docs/audits/book-gap-report.md) and [lesson depth report](https://github.com/shadril238/llm-concept-atlas/blob/main/docs/audits/lesson-depth-report.md).
 
-The browser labs and short Python examples are deliberately small and deterministic. They expose a calculation or decision step; they are **not** the output of a trained model. For an implementation with pretrained weights or substantial training data, follow the authors' chapter notebooks linked from each lesson. The examples in this atlas explain the mechanism before that larger run.
+Start with [how an LLM processes a sentence](/llm-concept-atlas/paths/how-an-llm-processes-a-sentence/), [from semantic search to RAG](/llm-concept-atlas/paths/from-semantic-search-to-rag/), or [the applications-to-fine-tuning route](/llm-concept-atlas/paths/from-applications-to-fine-tuning/). The [concept directory](/llm-concept-atlas/concept-directory/) and [relationship graph](/llm-concept-atlas/atlas/) offer two other ways to find a topic.
+
+The browser simulations use illustrative data. Most concept-page Python snippets are small teaching calculations; some need replacement because they do not demonstrate the central mechanism of their topic. The tokenization lesson includes a real-tokenizer sketch, and the classification and RAG use cases include real-model sketches. These do not yet have pinned environments and recorded clean-run verification. The enhancement work adds reproducible workflows, evaluation, and richer explanations.
+
+The initial audit maps the first edition's sections and embedded concepts to existing or planned destinations. A mapped page, working toy snippet, or reader completion marker does not certify complete teaching coverage. The authors' linked chapter notebooks remain valuable external implementations; their presence does not mean the same workflow has been implemented in this atlas.
 
 ## Primary sources and further reading
 
@@ -20,7 +24,7 @@ The browser labs and short Python examples are deliberately small and determinis
 - [Hugging Face Transformers documentation](https://huggingface.co/docs/transformers/) — tokenizer, model, pipeline, and generation APIs used in examples.
 - [Sentence Transformers documentation](https://www.sbert.net/) — sentence embeddings and semantic search used in retrieval examples.
 
-Each concept lesson links the relevant chapter notebook near the end. The site's teaching snippets use Python's standard library; the linked notebooks have their own package, model, and hardware requirements. Check a model's license and model card before adapting a notebook to your own use.
+Each concept lesson links the relevant chapter notebook near the end. Most teaching snippets use Python's standard library; the tokenizer and real-model sketches require additional packages and downloads. The linked notebooks have their own model, package, and hardware requirements. Check the associated model cards and licenses before adapting them.
 
 ## Contribute a correction or lesson
 

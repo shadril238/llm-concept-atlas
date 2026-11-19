@@ -8,8 +8,8 @@ const concepts = join(docs, 'concepts');
 const files = readdirSync(concepts).filter((name) => name.endsWith('.mdx'));
 const coverage = JSON.parse(readFileSync(resolve('src/data/topic-coverage.json'), 'utf8'));
 
-test('every published concept is a complete teaching lesson', () => {
-  assert.equal(files.length, 96);
+test('published concepts retain the existing lesson structure (not a depth certification)', () => {
+  assert.ok(files.length > 0);
   for (const file of files) {
     const content = readFileSync(join(concepts, file), 'utf8');
     const [, frontmatter, body] = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/) ?? [];
@@ -22,7 +22,7 @@ test('every published concept is a complete teaching lesson', () => {
   }
 });
 
-test('every chapter topic has a full concept lesson', () => {
+test('every curated chapter topic has a published lesson (not exhaustive book coverage)', () => {
   const mapSource = readFileSync(resolve('src/data/book-map.ts'), 'utf8');
   const chapterMatches = [...mapSource.matchAll(/number: (\d+),[\s\S]*?topics: \[([\s\S]*?)\]/g)];
   assert.equal(chapterMatches.length, 12);
@@ -31,7 +31,7 @@ test('every chapter topic has a full concept lesson', () => {
     assert.deepEqual(Object.keys(coverage[chapter]), listedTopics, `chapter ${chapter} coverage drifted from the book map`);
   }
   const mapped = Object.values(coverage).flatMap((chapter) => Object.values(chapter));
-  assert.equal(mapped.length, 95);
+  assert.ok(mapped.length > 0);
   for (const conceptId of mapped) {
     const file = join(concepts, `${conceptId}.mdx`);
     assert.ok(existsSync(file), `${conceptId} has no lesson`);

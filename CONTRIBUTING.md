@@ -27,7 +27,9 @@ A complete lesson should include:
 6. Use cases, decisions, limits, common misconceptions, and at least two self-checks with answers.
 7. The relevant book chapter and the authors’ notebook; add a primary paper or official documentation when it supports a technical detail.
 
-Label invented vectors, token IDs, probabilities, and fixed-answer demos as **illustrative**. Do not present them as the output of a trained model. Check code snippets by running them, and keep external model examples compatible with their documented APIs. Use `lessonStatus: full` only when the lesson meets this standard.
+Label invented vectors, token IDs, probabilities, and fixed-answer demos as **illustrative**. Do not present them as the output of a trained model. Check code snippets by running them, and keep external model examples compatible with their documented APIs. The existing `lessonStatus: full` value describes the original lesson format; it does not certify enhancement review or book completeness.
+
+Follow [enhancement.md](./enhancement.md) for the deeper teaching standard and the [audit guide](./docs/audits/README.md) for source mapping, per-lesson findings, and report maintenance. When changing a lesson, reassess its audit before updating the source hash. Run `npm run coverage:report` after reviewed data changes; the release gate rejects broken mappings, stale audits, and stale reports. Keep proposed destinations separate from implemented lessons and real-model execution evidence separate from structural checks.
 
 ## Sources and rights
 

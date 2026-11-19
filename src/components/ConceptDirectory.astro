@@ -6,14 +6,14 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
 <div class="concept-directory" data-concept-directory>
-  <div class="directory-search"><label for="directory-query">Find a concept</label><input id="directory-query" type="search" placeholder="Try LoRA, clustering, or attention" autocomplete="off" /><p class="directory-count" aria-live="polite">{entries.length} full lessons</p></div>
+  <div class="directory-search"><label for="directory-query">Find a concept</label><input id="directory-query" type="search" placeholder="Try LoRA, clustering, or attention" autocomplete="off" /><p class="directory-count" aria-live="polite">{entries.length} concept lessons</p></div>
   <nav class="directory-jump" aria-label="Jump to a chapter">{parts.map((part) => <span><strong>{part.shortTitle}</strong>{part.chapters.map((number) => <a href={`#directory-chapter-${number}`}>{String(number).padStart(2, '0')}</a>)}</span>)}</nav>
   <p class="directory-empty" hidden>No concepts match this search. Try another word or use the site-wide search.</p>
   {chapters.map((chapter) => {
     const concepts = entries.filter((entry) => entry.data.chapter === chapter.number).sort((a, b) => a.data.title.localeCompare(b.data.title));
     return <section class="directory-chapter" id={`directory-chapter-${chapter.number}`} data-chapter>
       <div class="directory-chapter-head"><div><span class="eyebrow">Chapter {String(chapter.number).padStart(2, '0')} · {parts.find((part) => part.id === chapter.part)?.shortTitle}</span><h2>{chapter.title}</h2></div><a href={`${base}chapters/${chapter.part}/${String(chapter.number).padStart(2, '0')}/`}>Chapter overview ↗</a></div>
-      <div class="directory-grid">{concepts.map((entry) => <a class="directory-card" data-title={entry.data.title.toLowerCase()} data-summary={entry.data.summary?.toLowerCase()} href={`${base}concepts/${entry.data.conceptId}/`}><strong>{entry.data.title}</strong><span>{entry.data.summary}</span><small>Read full lesson ↗</small></a>)}</div>
+      <div class="directory-grid">{concepts.map((entry) => <a class="directory-card" data-title={entry.data.title.toLowerCase()} data-summary={entry.data.summary?.toLowerCase()} href={`${base}concepts/${entry.data.conceptId}/`}><strong>{entry.data.title}</strong><span>{entry.data.summary}</span><small>Read lesson ↗</small></a>)}</div>
     </section>;
   })}
 </div>
@@ -36,7 +36,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       root.querySelectorAll<HTMLElement>('[data-chapter]').forEach((chapter) => {
         chapter.hidden = !chapter.querySelector('.directory-card:not([hidden])');
       });
-      count.textContent = `${visible} of ${cards.length} full lessons`;
+      count.textContent = `${visible} of ${cards.length} concept lessons`;
       empty.hidden = visible > 0;
     });
   });
