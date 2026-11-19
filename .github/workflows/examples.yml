@@ -1,0 +1,38 @@
+name: Verify examples
+on:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: Run the pinned public CPU model smoke example
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  foundations:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+        with:
+          version: "0.13.9"
+      - run: uv sync --locked --project examples/foundations
+      - run: python3 scripts/sync-examples.py --check
+      - run: python3 -m unittest discover -s tests/examples -v
+      - run: python3 scripts/run-examples.py
+  model:
+    if: github.event_name == 'workflow_dispatch' && inputs.model
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+        with:
+          version: "0.13.9"
+      - run: uv sync --locked --project examples/applications
+      - run: python3 scripts/run-examples.py --id embedding-retrieval --allow-network --record
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: cpu-model-verification
+          path: examples/verification/records/embedding-retrieval*.json

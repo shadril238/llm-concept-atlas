@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-llm",
+  "status": "passed",
+  "date": "2026-11-19T06:54:23.455782+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-llm.py"
+  ],
+  "sourceSha256": "565e391823fc1e91c4d19108dc780aa8c4b35f75aa46f88a6ce6a0670d0b0d71",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "3daac93e5461ec4a1993991b6379b0c4dbf05558395c80c1bd06020a6d2795ca",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "{'blue': 0.665, 'clear': 0.245, 'other': 0.09}\n",
+  "stderr": "",
+  "error": null
+}

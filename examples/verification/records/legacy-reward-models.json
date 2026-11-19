@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-reward-models",
+  "status": "passed",
+  "date": "2026-11-19T06:54:27.077426+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-reward-models.py"
+  ],
+  "sourceSha256": "8c0e50c9cc6557009d869e520a3c0d373d82a1137eb4eca17b865b36d356cfd5",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "82ae1e22cff7fd4a65ed705a3c6a3e8d544d20ce92d710af38b1167b25bc15b0",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "0.576\n",
+  "stderr": "",
+  "error": null
+}

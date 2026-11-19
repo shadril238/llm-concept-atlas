@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-encoder-only",
+  "status": "passed",
+  "date": "2026-11-19T06:54:21.643504+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-encoder-only.py"
+  ],
+  "sourceSha256": "e5a38cf5bb2747298e68b8892bcbf80f55899e01f4d236b9c606c4c14004cf8b",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "eae00683e25016dd8d4698f75663b8b4a7b8b7df2d7d52be4a6cb495f20d903c",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "river edge\nfinancial institution\n",
+  "stderr": "",
+  "error": null
+}

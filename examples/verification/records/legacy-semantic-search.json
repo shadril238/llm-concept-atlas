@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-semantic-search",
+  "status": "passed",
+  "date": "2026-11-19T06:54:27.730594+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-semantic-search.py"
+  ],
+  "sourceSha256": "33a0f65ed7d627e4b05168fb2d126a0eba85e2a169af9b19d450a519943a0b56",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "d75f5335c32f506e66ddb7684f84a9322ffa7ab2eb231c3ec15056e4e455ea21",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "['power-saving tips', 'billing policy']\n",
+  "stderr": "",
+  "error": null
+}

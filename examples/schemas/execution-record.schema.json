@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Atlas execution record",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "exampleId",
+    "status",
+    "date",
+    "gitCommit",
+    "workingTreeDirty",
+    "command",
+    "python",
+    "packages",
+    "platform",
+    "device",
+    "durationSeconds",
+    "peakMemoryMiB",
+    "memoryMeasurement",
+    "networkMode",
+    "models",
+    "stdout",
+    "stderr",
+    "error",
+    "sourceSha256",
+    "lockSha256",
+    "contractSha256",
+    "fixtureSha256"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "exampleId": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "passed",
+        "failed"
+      ]
+    },
+    "date": {
+      "type": "string"
+    },
+    "gitCommit": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "workingTreeDirty": {
+      "type": "boolean"
+    },
+    "command": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "python": {
+      "type": "string"
+    },
+    "packages": {
+      "type": "object"
+    },
+    "platform": {
+      "type": "string"
+    },
+    "device": {
+      "enum": [
+        "cpu"
+      ]
+    },
+    "durationSeconds": {
+      "type": "number",
+      "minimum": 0
+    },
+    "peakMemoryMiB": {
+      "type": "number",
+      "minimum": 0
+    },
+    "memoryMeasurement": {
+      "type": "string"
+    },
+    "networkMode": {
+      "enum": [
+        "allowed",
+        "offline-cache"
+      ]
+    },
+    "models": {
+      "type": "array"
+    },
+    "stdout": {
+      "type": "string"
+    },
+    "stderr": {
+      "type": "string"
+    },
+    "error": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sourceSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "lockSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "contractSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "fixtureSha256": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

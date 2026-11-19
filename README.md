@@ -4,7 +4,7 @@
 
 The original Phases 1–5 produced a **curated companion across all 12 chapters**: 96 concept lessons, an interactive relationship graph, 11 teaching simulations, three guided paths, and two use cases. The explanations and examples vary in depth; this is not yet exhaustive book coverage or a complete set of evaluated model workflows.
 
-**Enhancement E0 is complete:** the [book gap report](./docs/audits/book-gap-report.md) inventories 231 source entries and distinguishes partial explanations, missing topics, and practical implementation gaps. The [lesson depth audit](./docs/audits/lesson-depth-report.md) records findings for every existing concept. Follow [enhancement.md](./enhancement.md) for E1–E10; independent teaching acceptance and real-model execution verification remain pending.
+**Enhancements E0 and E1 are complete:** the [book gap report](./docs/audits/book-gap-report.md) inventories 231 source entries and distinguishes partial explanations, missing topics, and practical implementation gaps. The [lesson depth audit](./docs/audits/lesson-depth-report.md) records findings for every existing concept. The [example guide](./examples/README.md) provides locked environments, a 100-example registry, synchronized lesson/notebook source, and recorded CPU verification. Follow [enhancement.md](./enhancement.md) for E2–E10; independent teaching acceptance and verification of the remaining model workflows are pending.
 
 **Read the site:** [llm-concept-atlas on GitHub Pages](https://shadril238.github.io/llm-concept-atlas/).
 
@@ -20,6 +20,7 @@ npm run dev
 The site uses the `/llm-concept-atlas/` base path. Open the local URL printed by Astro. To verify the release build and relationship rules:
 
 ```bash
+uv sync --locked --project examples/foundations
 npm run release:build
 ```
 
@@ -38,7 +39,7 @@ npm run release:build
 - `src/components/AtlasExplorer.astro` and `src/scripts/atlas-explorer.ts` provide the graph, filters, search-to-focus, topic inspector, shareable `?focus=` links, and a keyboard-accessible topic directory. The graph opens on a chapter overview on wide screens and a simpler part overview on narrow screens.
 - `tests/content.test.mjs` checks the existing lesson structure and internal source links; it does not certify teaching depth.
 - `npm run check:coverage` checks source mappings, anchors, page ranges, review evidence, stale source hashes, and report drift. `npm run coverage:report` regenerates the audit reports after reviewed changes.
-- `scripts/check-code-examples.mjs` runs the 76 new Python teaching examples and compares their output with the lesson text.
+- `scripts/check-code-examples.mjs` runs the 96 registered offline examples, including all 76 existing exact-output comparisons. The three legacy model sketches remain unverified; the new CPU model example has separate recorded verification.
 - `scripts/check-internal-links.mjs` checks links and assets in the production build. The GitHub Pages workflow runs the complete `release:build` gate before deployment.
 
 The book and its artwork are copyrighted. This project uses original explanations and visuals and links to the [authors' official notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models). It is not affiliated with the authors or publisher. See the [site sources page](./src/content/docs/about-and-sources.mdx) and [contribution guide](./CONTRIBUTING.md).

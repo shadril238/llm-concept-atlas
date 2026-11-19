@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-decoder-only",
+  "status": "passed",
+  "date": "2026-11-19T06:54:20.348582+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-decoder-only.py"
+  ],
+  "sourceSha256": "bba0e7dae7d65603e91cd6bf156308c4e48f17179752427f345122a4c2115557",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "da5fce2b7b1de4dd3e7d0ccf2c56ebc690ffb511f0fc7937abb4deb64d38e09c",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "A <- A\ncat <- A cat\nsat <- A cat sat\non <- A cat sat on\nthe <- A cat sat on the\n",
+  "stderr": "",
+  "error": null
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-topic-representations",
+  "status": "passed",
+  "date": "2026-11-19T06:54:29.026622+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-topic-representations.py"
+  ],
+  "sourceSha256": "e121db27ba30ce062e80cfb67150c93c8ab486e00f26f7c0232583c588f82118",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "70fee16bb41329c922291ece22070cffe611e30466d00d0a44d265459393c28d",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "0 ['cloud', 'rain', 'storm']\n1 ['beach', 'sun', 'warm']\n",
+  "stderr": "",
+  "error": null
+}

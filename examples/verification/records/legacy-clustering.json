@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-clustering",
+  "status": "passed",
+  "date": "2026-11-19T06:54:19.312768+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-clustering.py"
+  ],
+  "sourceSha256": "4ec0d58a266f7f8767e536e57f865dd833d73ff823fa2402ca64b4b775593fda",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "1e49ffd7b5ce2e1d2f2c9189bd3ea6c5a706b1e3b63740f0886055f2205c9fa4",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "a near\nb near\nc far\n",
+  "stderr": "",
+  "error": null
+}

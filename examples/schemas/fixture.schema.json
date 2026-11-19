@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Atlas fixture provenance",
+  "type": "object",
+  "required": [
+    "id",
+    "revision",
+    "path",
+    "sha256",
+    "source",
+    "license",
+    "split",
+    "training",
+    "leakagePolicy"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string"
+    },
+    "sha256": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "license": {
+      "type": "string"
+    },
+    "split": {
+      "type": "string"
+    },
+    "leakagePolicy": {
+      "type": "string"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "training": {
+      "type": "boolean"
+    }
+  }
+}

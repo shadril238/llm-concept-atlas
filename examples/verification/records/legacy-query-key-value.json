@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-query-key-value",
+  "status": "passed",
+  "date": "2026-11-19T06:54:25.908859+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-query-key-value.py"
+  ],
+  "sourceSha256": "b7f8477332b4dc04ea0ab6c57277125bbd48ccdc515511d154e507fb6ad111ca",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "50b7a3610b53574e2a1d8b87c62523470c55a1d17cfe2d5c33611f6087f348cd",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "0.18\n",
+  "stderr": "",
+  "error": null
+}

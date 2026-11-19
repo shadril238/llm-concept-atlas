@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-tsdae",
+  "status": "passed",
+  "date": "2026-11-19T06:54:29.414415+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-tsdae.py"
+  ],
+  "sourceSha256": "66f6727ed6514c8b37f62fc21bb2ba266319f9d52be2b2d2efe332bb0b38e91f",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "41f66edf484d8e459fb15e37b5226ef73003a9f23e4c862fd13cfef06d030635",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "['the', '[MASK]', 'reads'] target: model\n",
+  "stderr": "",
+  "error": null
+}

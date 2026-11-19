@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-dpo",
+  "status": "passed",
+  "date": "2026-11-19T06:54:21.129249+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-dpo.py"
+  ],
+  "sourceSha256": "8c0e50c9cc6557009d869e520a3c0d373d82a1137eb4eca17b865b36d356cfd5",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "00d5dc6f8ea533f7b5130f986355a8acc35690ebbd0e51df1c372ce3c6c3199d",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "0.576\n",
+  "stderr": "",
+  "error": null
+}

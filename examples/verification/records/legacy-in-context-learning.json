@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-in-context-learning",
+  "status": "passed",
+  "date": "2026-11-19T06:54:22.938337+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-in-context-learning.py"
+  ],
+  "sourceSha256": "5f5d18d00449e68d00f2a4707b963bc3b1b33b786f680ac5e730fc67b56d7226",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "9d4c1247a127ef65e43ac23b59b4250ed3096b856b68e48b69ca019574e1e5b8",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "Return one label: positive or negative.\nText: I loved it. Label: positive\nText: The ending was dull. Label:\n",
+  "stderr": "",
+  "error": null
+}

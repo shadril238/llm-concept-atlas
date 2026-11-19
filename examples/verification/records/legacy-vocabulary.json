@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-vocabulary",
+  "status": "passed",
+  "date": "2026-11-19T06:54:29.676532+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-vocabulary.py"
+  ],
+  "sourceSha256": "ba7c545a5afd838ac76458c946fbf997e9ccd9b240c44c79cfb912224ac9e8f1",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "1608b62041ca4e68b81f63c053a232e146605b9b5379a9e9e695fecb9f5b08cc",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "[42, 17, 2] ['cat', '##s', '[SEP]']\n",
+  "stderr": "",
+  "error": null
+}

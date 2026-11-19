@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-frozen-layers",
+  "status": "passed",
+  "date": "2026-11-19T06:54:22.161150+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-frozen-layers.py"
+  ],
+  "sourceSha256": "8b9929f4cddb30122cee582ab3eb657d9cd79ad39ed27e22374987d7e20d9df0",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "e82129966bd68e2e2dc4f5f8c1e76cd1f7edd5d647b2c72d8e393c503209f6b0",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "{'encoder': 0.5, 'head': 0.23}\n",
+  "stderr": "",
+  "error": null
+}

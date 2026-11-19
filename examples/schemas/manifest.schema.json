@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Atlas example registry",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "environments",
+    "examples"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "environments": {
+      "type": "object"
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "concepts",
+          "sourceSections",
+          "level",
+          "kind",
+          "entrypoint",
+          "environment",
+          "workingDirectory",
+          "lesson",
+          "region",
+          "models",
+          "dataset",
+          "seed",
+          "reproducibility",
+          "runtime",
+          "network",
+          "auth",
+          "inputSchema",
+          "outputSchema",
+          "validation",
+          "verificationRecord",
+          "troubleshooting"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "title": {
+            "type": "string"
+          },
+          "concepts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sourceSections": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "level": {
+            "enum": [
+              "A",
+              "B",
+              "C"
+            ]
+          },
+          "kind": {
+            "type": "string"
+          },
+          "entrypoint": {
+            "type": "string"
+          },
+          "environment": {
+            "enum": [
+              "foundations",
+              "applications",
+              "legacy-unverified"
+            ]
+          },
+          "workingDirectory": {
+            "type": "string"
+          },
+          "lesson": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "region": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "models": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "revision"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "revision": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{40}$"
+                }
+              }
+            }
+          },
+          "dataset": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "seed": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "reproducibility": {
+            "type": "string"
+          },
+          "runtime": {
+            "type": "object",
+            "required": [
+              "device",
+              "timeoutSeconds",
+              "measured"
+            ],
+            "properties": {
+              "device": {
+                "enum": [
+                  "cpu"
+                ]
+              },
+              "timeoutSeconds": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3600
+              },
+              "measured": {
+                "type": "null"
+              }
+            }
+          },
+          "network": {
+            "type": "string"
+          },
+          "auth": {
+            "type": "boolean"
+          },
+          "inputSchema": {
+            "type": "string"
+          },
+          "outputSchema": {
+            "type": "string"
+          },
+          "validation": {
+            "type": "object",
+            "required": [
+              "method"
+            ],
+            "properties": {
+              "method": {
+                "enum": [
+                  "exact-stdout",
+                  "exit-success",
+                  "json-invariants"
+                ]
+              }
+            }
+          },
+          "verificationRecord": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "troubleshooting": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

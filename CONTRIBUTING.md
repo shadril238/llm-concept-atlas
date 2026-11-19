@@ -44,3 +44,7 @@ This is an independent companion to *Hands-On Large Language Models* by Jay Alam
 - Run `npm run release:build`; fix the cause of any failed check.
 
 For corrections, please describe what a reader could misunderstand and how your change resolves it. For new concepts, mention the book chapter and the intended parent and prerequisites in the pull request.
+
+## Example infrastructure
+
+Follow [examples/README.md](./examples/README.md). Register every Python block, use named source regions for new examples, run the declared locked environment, and regenerate synchronized lessons/notebooks. Ordinary site builds execute the foundation suite; CPU model runs are explicit. Preserve the legacy exact-output validations while migrating examples. Passing execution does not resolve an E0 teaching finding or award editorial acceptance.

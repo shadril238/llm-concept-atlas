@@ -1,0 +1,4119 @@
+{
+  "schemaVersion": 1,
+  "environments": {
+    "foundations": {
+      "project": "examples/foundations",
+      "python": "3.11",
+      "lock": "examples/foundations/uv.lock"
+    },
+    "applications": {
+      "project": "examples/applications",
+      "python": "3.11",
+      "lock": "examples/applications/uv.lock"
+    },
+    "legacy-unverified": {
+      "project": null,
+      "python": null,
+      "lock": null
+    }
+  },
+  "examples": [
+    {
+      "id": "legacy-agents",
+      "title": "Existing agents example",
+      "concepts": [
+        "agents"
+      ],
+      "sourceSections": [
+        "book-ch07-agents"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-agents.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/agents.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "lookup hours -> 5 pm",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-agents.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-attention",
+      "title": "Existing attention example",
+      "concepts": [
+        "attention"
+      ],
+      "sourceSections": [
+        "book-ch03-block",
+        "book-ch03-attention-calculation",
+        "book-ch03-multi-head"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-attention.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/attention.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exit-success",
+        "origin": "mechanism-only; teaching correctness tracked by E0"
+      },
+      "verificationRecord": "examples/verification/records/legacy-attention.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-bag-of-words",
+      "title": "Existing bag-of-words example",
+      "concepts": [
+        "bag-of-words"
+      ],
+      "sourceSections": [
+        "book-ch01-bag-of-words"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-bag-of-words.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/bag-of-words.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "{'red': 2, 'fox': 1, 'meets': 1, 'bird': 1}",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-bag-of-words.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-bert-fine-tuning",
+      "title": "Existing bert-fine-tuning example",
+      "concepts": [
+        "bert-fine-tuning"
+      ],
+      "sourceSections": [
+        "book-ch11-supervised",
+        "book-ch11-bert-training"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-bert-fine-tuning.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/bert-fine-tuning.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.39",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-bert-fine-tuning.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-bertopic",
+      "title": "Existing bertopic example",
+      "concepts": [
+        "bertopic"
+      ],
+      "sourceSections": [
+        "book-ch05-bertopic"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-bertopic.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/bertopic.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0 ['cloud', 'rain', 'storm']\n1 ['beach', 'sun', 'warm']",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-bertopic.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-blip-2",
+      "title": "Existing blip-2 example",
+      "concepts": [
+        "blip-2"
+      ],
+      "sourceSections": [
+        "book-ch09-multimodal-generation",
+        "book-ch09-blip2"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-blip-2.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/blip-2.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "An animal is in the picture.",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-blip-2.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-chain-prompting",
+      "title": "Existing chain-prompting example",
+      "concepts": [
+        "chain-prompting"
+      ],
+      "sourceSections": [
+        "book-ch06-chain-prompting",
+        "book-ch07-multi-prompt"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-chain-prompting.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/chain-prompting.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "Question: When does the library close?\nSource: Library closes at 5 pm Saturday.",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-chain-prompting.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-chains",
+      "title": "Existing chains example",
+      "concepts": [
+        "chains"
+      ],
+      "sourceSections": [
+        "book-ch07-chains",
+        "book-ch07-multi-prompt"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-chains.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/chains.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "Question: When does the library close?\nSource: Library closes at 5 pm Saturday.",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-chains.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-clip",
+      "title": "Existing clip example",
+      "concepts": [
+        "clip"
+      ],
+      "sourceSections": [
+        "book-ch09-clip",
+        "book-ch09-clip-training"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-clip.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/clip.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "a dog",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-clip.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-cluster-inspection",
+      "title": "Existing cluster-inspection example",
+      "concepts": [
+        "cluster-inspection"
+      ],
+      "sourceSections": [
+        "book-ch05-inspection",
+        "book-ch05-topic-visualization"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-cluster-inspection.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/cluster-inspection.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0 ['cloud', 'rain', 'storm']\n1 ['beach', 'sun', 'warm']",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-cluster-inspection.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-clustering",
+      "title": "Existing clustering example",
+      "concepts": [
+        "clustering"
+      ],
+      "sourceSections": [
+        "book-ch05-clustering-pipeline",
+        "book-ch05-density-clusters",
+        "book-ch05-hdbscan"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-clustering.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/clustering.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "a near\nb near\nc far",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-clustering.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-constrained-sampling",
+      "title": "Existing constrained-sampling example",
+      "concepts": [
+        "constrained-sampling"
+      ],
+      "sourceSections": [
+        "book-ch06-constrained-sampling"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-constrained-sampling.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/constrained-sampling.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "True\naccept shape",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-constrained-sampling.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-context-size",
+      "title": "Existing context-size example",
+      "concepts": [
+        "context-size"
+      ],
+      "sourceSections": [
+        "book-ch03-parallel-context"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-context-size.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/context-size.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "query token: cat visible context: ['The', 'cat']",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-context-size.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-contextualized-embeddings",
+      "title": "Existing contextualized-embeddings example",
+      "concepts": [
+        "contextualized-embeddings"
+      ],
+      "sourceSections": [
+        "book-ch02-contextual-embeddings"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-contextualized-embeddings.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/contextualized-embeddings.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.99",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-contextualized-embeddings.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-contrastive-examples",
+      "title": "Existing contrastive-examples example",
+      "concepts": [
+        "contrastive-examples"
+      ],
+      "sourceSections": [
+        "book-ch10-contrastive-examples",
+        "book-ch10-hard-negatives"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-contrastive-examples.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/contrastive-examples.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.797",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-contrastive-examples.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-contrastive-learning",
+      "title": "Existing contrastive-learning example",
+      "concepts": [
+        "contrastive-learning"
+      ],
+      "sourceSections": [
+        "book-ch09-clip-training",
+        "book-ch10-contrastive",
+        "book-ch10-mnr-loss"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-contrastive-learning.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/contrastive-learning.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.797",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-contrastive-learning.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-contrastive-training",
+      "title": "Existing contrastive-training example",
+      "concepts": [
+        "contrastive-training"
+      ],
+      "sourceSections": [
+        "book-ch02-word2vec-training",
+        "book-ch02-negative-sampling"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-contrastive-training.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/contrastive-training.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.797",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-contrastive-training.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-conversation-memory",
+      "title": "Existing conversation-memory example",
+      "concepts": [
+        "conversation-memory"
+      ],
+      "sourceSections": [
+        "book-ch07-memory",
+        "book-ch07-buffer"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-conversation-memory.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/conversation-memory.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "user: My name is Sam\nassistant: Hello Sam\nuser: What is my name?",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-conversation-memory.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-decoder-only",
+      "title": "Existing decoder-only example",
+      "concepts": [
+        "decoder-only"
+      ],
+      "sourceSections": [
+        "book-ch01-decoder-models",
+        "book-ch03-parallel-context"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-decoder-only.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/decoder-only.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exit-success",
+        "origin": "mechanism-only; teaching correctness tracked by E0"
+      },
+      "verificationRecord": "examples/verification/records/legacy-decoder-only.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-decoding",
+      "title": "Existing decoding example",
+      "concepts": [
+        "decoding"
+      ],
+      "sourceSections": [
+        "book-ch03-decoding",
+        "book-ch06-output-controls"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-decoding.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/decoding.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exit-success",
+        "origin": "mechanism-only; teaching correctness tracked by E0"
+      },
+      "verificationRecord": "examples/verification/records/legacy-decoding.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-dense-retrieval",
+      "title": "Existing dense-retrieval example",
+      "concepts": [
+        "dense-retrieval"
+      ],
+      "sourceSections": [
+        "book-ch08-dense-retrieval",
+        "book-ch08-vector-index"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-dense-retrieval.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/dense-retrieval.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "['A', 'B']",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-dense-retrieval.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-dimensionality-reduction",
+      "title": "Existing dimensionality-reduction example",
+      "concepts": [
+        "dimensionality-reduction"
+      ],
+      "sourceSections": [
+        "book-ch05-reduction",
+        "book-ch05-umap"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-dimensionality-reduction.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/dimensionality-reduction.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "{'A': (0.9, 0.1), 'B': (0.1, 0.8)}",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-dimensionality-reduction.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-document-embeddings",
+      "title": "Existing document-embeddings example",
+      "concepts": [
+        "document-embeddings"
+      ],
+      "sourceSections": [
+        "book-ch05-document-embedding"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-document-embeddings.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/document-embeddings.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.99",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-document-embeddings.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-domain-adaptation",
+      "title": "Existing domain-adaptation example",
+      "concepts": [
+        "domain-adaptation"
+      ],
+      "sourceSections": [
+        "book-ch10-domain-adaptation"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-domain-adaptation.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/domain-adaptation.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.797",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-domain-adaptation.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-dpo",
+      "title": "Existing dpo example",
+      "concepts": [
+        "dpo"
+      ],
+      "sourceSections": [
+        "book-ch12-no-reward-model",
+        "book-ch12-dpo-workflow",
+        "book-ch12-dpo-quantization",
+        "book-ch12-dpo-config",
+        "book-ch12-dpo-training",
+        "book-ch12-dpo-logprobs"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-dpo.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/dpo.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.576",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-dpo.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-efficient-attention",
+      "title": "Existing efficient-attention example",
+      "concepts": [
+        "efficient-attention"
+      ],
+      "sourceSections": [
+        "book-ch03-architecture-improvements",
+        "book-ch03-efficient-attention",
+        "book-ch03-local-attention",
+        "book-ch03-flash-attention"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-efficient-attention.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/efficient-attention.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "1.329",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-efficient-attention.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-embedding-evaluation",
+      "title": "Existing embedding-evaluation example",
+      "concepts": [
+        "embedding-evaluation"
+      ],
+      "sourceSections": [
+        "book-ch10-evaluation"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-embedding-evaluation.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/embedding-evaluation.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.5",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-embedding-evaluation.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-embeddings-for-classification",
+      "title": "Existing embeddings-for-classification example",
+      "concepts": [
+        "embeddings-for-classification"
+      ],
+      "sourceSections": [
+        "book-ch04-representation-classification",
+        "book-ch04-embedding-classification",
+        "book-ch04-class-prototypes"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-embeddings-for-classification.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/embeddings-for-classification.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.99",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-embeddings-for-classification.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-encoder-only",
+      "title": "Existing encoder-only example",
+      "concepts": [
+        "encoder-only"
+      ],
+      "sourceSections": [
+        "book-ch01-encoder-models"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-encoder-only.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/encoder-only.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exit-success",
+        "origin": "mechanism-only; teaching correctness tracked by E0"
+      },
+      "verificationRecord": "examples/verification/records/legacy-encoder-only.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-few-shot-classification",
+      "title": "Existing few-shot-classification example",
+      "concepts": [
+        "few-shot-classification"
+      ],
+      "sourceSections": [
+        "book-ch11-few-shot",
+        "book-ch11-few-shot-training"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-few-shot-classification.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/few-shot-classification.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "[('a wonderful film', 'positive'), ('a dull film', 'negative')]",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-few-shot-classification.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-few-shot-examples",
+      "title": "Existing few-shot-examples example",
+      "concepts": [
+        "few-shot-examples"
+      ],
+      "sourceSections": [
+        "book-ch06-in-context",
+        "book-ch06-output-examples"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-few-shot-examples.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/few-shot-examples.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "Return one label: positive or negative.\nText: I loved it. Label: positive\nText: The ending was dull. Label:",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-few-shot-examples.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-fine-tuning-embeddings",
+      "title": "Existing fine-tuning-embeddings example",
+      "concepts": [
+        "fine-tuning-embeddings"
+      ],
+      "sourceSections": [
+        "book-ch10-create-embeddings",
+        "book-ch10-train-model",
+        "book-ch10-fine-tuning",
+        "book-ch10-supervised",
+        "book-ch08-retrieval-adaptation"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-fine-tuning-embeddings.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/fine-tuning-embeddings.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.797",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-fine-tuning-embeddings.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-frozen-layers",
+      "title": "Existing frozen-layers example",
+      "concepts": [
+        "frozen-layers"
+      ],
+      "sourceSections": [
+        "book-ch11-freezing"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-frozen-layers.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/frozen-layers.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "{'encoder': 0.5, 'head': 0.23}",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-frozen-layers.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-generative-classification",
+      "title": "Existing generative-classification example",
+      "concepts": [
+        "generative-classification"
+      ],
+      "sourceSections": [
+        "book-ch04-generative-classification"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-generative-classification.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/generative-classification.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "Return one label: positive or negative.\nText: I loved it. Label: positive\nText: The ending was dull. Label:",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-generative-classification.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-generative-evaluation",
+      "title": "Existing generative-evaluation example",
+      "concepts": [
+        "generative-evaluation"
+      ],
+      "sourceSections": [
+        "book-ch12-evaluation",
+        "book-ch12-word-metrics",
+        "book-ch12-automated-evaluation",
+        "book-ch12-human-evaluation"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-generative-evaluation.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/generative-evaluation.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.667",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-generative-evaluation.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-generative-model",
+      "title": "Existing generative-model example",
+      "concepts": [
+        "generative-model"
+      ],
+      "sourceSections": [
+        "book-ch01-decoder-models",
+        "book-ch03-inputs-outputs",
+        "book-ch06-generation-models",
+        "book-ch03-lm-head"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-generative-model.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/generative-model.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exit-success",
+        "origin": "mechanism-only; teaching correctness tracked by E0"
+      },
+      "verificationRecord": "examples/verification/records/legacy-generative-model.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-grounded-generation",
+      "title": "Existing grounded-generation example",
+      "concepts": [
+        "grounded-generation"
+      ],
+      "sourceSections": [
+        "book-ch08-search-to-rag"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-grounded-generation.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/grounded-generation.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "['A', 'B']",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-grounded-generation.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-image-captioning",
+      "title": "Existing image-captioning example",
+      "concepts": [
+        "image-captioning"
+      ],
+      "sourceSections": [
+        "book-ch09-captioning"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-image-captioning.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/image-captioning.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "An animal is in the picture.",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-image-captioning.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-in-context-learning",
+      "title": "Existing in-context-learning example",
+      "concepts": [
+        "in-context-learning"
+      ],
+      "sourceSections": [
+        "book-ch06-in-context"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-in-context-learning.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/in-context-learning.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "Return one label: positive or negative.\nText: I loved it. Label: positive\nText: The ending was dull. Label:",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-in-context-learning.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-instruction-prompting",
+      "title": "Existing instruction-prompting example",
+      "concepts": [
+        "instruction-prompting"
+      ],
+      "sourceSections": [
+        "book-ch06-instruction-prompting"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-instruction-prompting.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/instruction-prompting.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "Return one label: positive or negative.\nText: I loved it. Label: positive\nText: The ending was dull. Label:",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-instruction-prompting.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-kv-cache",
+      "title": "Existing kv-cache example",
+      "concepts": [
+        "kv-cache"
+      ],
+      "sourceSections": [
+        "book-ch03-kv-cache"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-kv-cache.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/kv-cache.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exit-success",
+        "origin": "mechanism-only; teaching correctness tracked by E0"
+      },
+      "verificationRecord": "examples/verification/records/legacy-kv-cache.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-language-ai",
+      "title": "Existing language-ai example",
+      "concepts": [
+        "language-ai"
+      ],
+      "sourceSections": [
+        "book-ch01-language-ai",
+        "book-ch01-applications"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-language-ai.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/language-ai.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exit-success",
+        "origin": "mechanism-only; teaching correctness tracked by E0"
+      },
+      "verificationRecord": "examples/verification/records/legacy-language-ai.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-llm",
+      "title": "Existing llm example",
+      "concepts": [
+        "llm"
+      ],
+      "sourceSections": [
+        "book-ch01-llm-definition",
+        "book-ch03-lm-head"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-llm.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/llm.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exit-success",
+        "origin": "mechanism-only; teaching correctness tracked by E0"
+      },
+      "verificationRecord": "examples/verification/records/legacy-llm.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-local-model-rag",
+      "title": "Existing local-model-rag example",
+      "concepts": [
+        "local-model-rag"
+      ],
+      "sourceSections": [
+        "book-ch08-local-rag"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-local-model-rag.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/local-model-rag.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "Question: When does the library close?\nSource: Library closes at 5 pm Saturday.",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-local-model-rag.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-lora",
+      "title": "Existing lora example",
+      "concepts": [
+        "lora"
+      ],
+      "sourceSections": [
+        "book-ch12-peft",
+        "book-ch12-lora-config",
+        "book-ch12-low-rank"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-lora.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/lora.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "[[1.03, -0.01], [0.06, 0.98]]",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-lora.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-loss-functions",
+      "title": "Existing loss-functions example",
+      "concepts": [
+        "loss-functions"
+      ],
+      "sourceSections": [
+        "book-ch10-losses",
+        "book-ch10-mnr-loss"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-loss-functions.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/loss-functions.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.797",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-loss-functions.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-masked-language-modeling",
+      "title": "Existing masked-language-modeling example",
+      "concepts": [
+        "masked-language-modeling"
+      ],
+      "sourceSections": [
+        "book-ch11-mlm",
+        "book-ch11-masking-policy"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-masked-language-modeling.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/masked-language-modeling.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "['the', '[MASK]', 'reads'] target: model",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-masked-language-modeling.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-multimodal-chat",
+      "title": "Existing multimodal-chat example",
+      "concepts": [
+        "multimodal-chat"
+      ],
+      "sourceSections": [
+        "book-ch09-multimodal-chat"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-multimodal-chat.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/multimodal-chat.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "An animal is in the picture.",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-multimodal-chat.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-multimodal-embeddings",
+      "title": "Existing multimodal-embeddings example",
+      "concepts": [
+        "multimodal-embeddings"
+      ],
+      "sourceSections": [
+        "book-ch01-embedding-types",
+        "book-ch09-multimodal-embeddings"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-multimodal-embeddings.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/multimodal-embeddings.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "a dog",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-multimodal-embeddings.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-named-entity-recognition",
+      "title": "Existing named-entity-recognition example",
+      "concepts": [
+        "named-entity-recognition"
+      ],
+      "sourceSections": [
+        "book-ch11-ner",
+        "book-ch11-ner-data",
+        "book-ch11-ner-training",
+        "book-ch11-bio-alignment",
+        "book-ch11-entity-metrics"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-named-entity-recognition.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/named-entity-recognition.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "[('Ada', 'B-PER'), ('works', 'O'), ('at', 'O'), ('Acme', 'B-ORG')]",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-named-entity-recognition.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-openclip",
+      "title": "Existing openclip example",
+      "concepts": [
+        "openclip"
+      ],
+      "sourceSections": [
+        "book-ch09-openclip"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-openclip.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/openclip.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "a dog",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-openclip.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-output-verification",
+      "title": "Existing output-verification example",
+      "concepts": [
+        "output-verification"
+      ],
+      "sourceSections": [
+        "book-ch06-verification",
+        "book-ch06-output-examples"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-output-verification.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/output-verification.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "True\naccept shape",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-output-verification.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-peft",
+      "title": "Existing peft example",
+      "concepts": [
+        "peft"
+      ],
+      "sourceSections": [
+        "book-ch12-peft",
+        "book-ch12-adapters"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-peft.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/peft.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "[[1.03, -0.01], [0.06, 0.98]]",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-peft.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-positional-embeddings-and-rope",
+      "title": "Existing positional-embeddings-and-rope example",
+      "concepts": [
+        "positional-embeddings-and-rope"
+      ],
+      "sourceSections": [
+        "book-ch03-rope"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-positional-embeddings-and-rope.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/positional-embeddings-and-rope.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "1.329",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-positional-embeddings-and-rope.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-pretraining-and-sft",
+      "title": "Existing pretraining-and-sft example",
+      "concepts": [
+        "pretraining-and-sft"
+      ],
+      "sourceSections": [
+        "book-ch01-training-paradigm",
+        "book-ch12-training-stages",
+        "book-ch12-sft"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-pretraining-and-sft.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/pretraining-and-sft.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.39",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-pretraining-and-sft.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-pretraining",
+      "title": "Existing pretraining example",
+      "concepts": [
+        "pretraining"
+      ],
+      "sourceSections": [
+        "book-ch01-training-paradigm"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-pretraining.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/pretraining.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.39",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-pretraining.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-prompt-structure",
+      "title": "Existing prompt-structure example",
+      "concepts": [
+        "prompt-structure"
+      ],
+      "sourceSections": [
+        "book-ch06-prompt-introduction",
+        "book-ch06-prompt-ingredients",
+        "book-ch06-advanced-prompting",
+        "book-ch06-prompt-complexity"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-prompt-structure.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/prompt-structure.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "Return one label: positive or negative.\nText: I loved it. Label: positive\nText: The ending was dull. Label:",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-prompt-structure.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-prompt-templates",
+      "title": "Existing prompt-templates example",
+      "concepts": [
+        "prompt-templates"
+      ],
+      "sourceSections": [
+        "book-ch07-prompt-template"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-prompt-templates.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/prompt-templates.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "Return one label: positive or negative.\nText: I loved it. Label: positive\nText: The ending was dull. Label:",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-prompt-templates.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-qlora",
+      "title": "Existing qlora example",
+      "concepts": [
+        "qlora"
+      ],
+      "sourceSections": [
+        "book-ch12-peft",
+        "book-ch12-instruction-qlora",
+        "book-ch12-sft-quantization",
+        "book-ch12-dpo-quantization",
+        "book-ch12-blockwise-quantization"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-qlora.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/qlora.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "[[1.03, -0.01], [0.06, 0.98]]",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-qlora.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-quantization",
+      "title": "Existing quantization example",
+      "concepts": [
+        "quantization"
+      ],
+      "sourceSections": [
+        "book-ch12-sft-quantization",
+        "book-ch12-blockwise-quantization"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-quantization.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/quantization.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "[1, 5, -3] [0.1, 0.5, -0.30000000000000004]",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-quantization.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-quantized-models",
+      "title": "Existing quantized-models example",
+      "concepts": [
+        "quantized-models"
+      ],
+      "sourceSections": [
+        "book-ch07-gguf"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-quantized-models.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/quantized-models.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "[1, 5, -3] [0.1, 0.5, -0.30000000000000004]",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-quantized-models.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-query-key-value",
+      "title": "Existing query-key-value example",
+      "concepts": [
+        "query-key-value"
+      ],
+      "sourceSections": [
+        "book-ch03-block",
+        "book-ch03-attention-calculation"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-query-key-value.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/query-key-value.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exit-success",
+        "origin": "mechanism-only; teaching correctness tracked by E0"
+      },
+      "verificationRecord": "examples/verification/records/legacy-query-key-value.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-rag-evaluation",
+      "title": "Existing rag-evaluation example",
+      "concepts": [
+        "rag-evaluation"
+      ],
+      "sourceSections": [
+        "book-ch08-rag-evaluation"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-rag-evaluation.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/rag-evaluation.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.5",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-rag-evaluation.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-rag",
+      "title": "Existing rag example",
+      "concepts": [
+        "rag"
+      ],
+      "sourceSections": [
+        "book-ch08-overview",
+        "book-ch08-rag",
+        "book-ch08-search-to-rag"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-rag.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/rag.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exit-success",
+        "origin": "mechanism-only; teaching correctness tracked by E0"
+      },
+      "verificationRecord": "examples/verification/records/legacy-rag.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-react",
+      "title": "Existing react example",
+      "concepts": [
+        "react"
+      ],
+      "sourceSections": [
+        "book-ch07-agent-reasoning"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-react.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/react.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "lookup hours -> 5 pm",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-react.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-recommendation-embeddings",
+      "title": "Existing recommendation-embeddings example",
+      "concepts": [
+        "recommendation-embeddings"
+      ],
+      "sourceSections": [
+        "book-ch02-recommendations"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-recommendation-embeddings.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/recommendation-embeddings.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.99",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-recommendation-embeddings.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-representation-model",
+      "title": "Existing representation-model example",
+      "concepts": [
+        "representation-model"
+      ],
+      "sourceSections": [
+        "book-ch01-encoder-models"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-representation-model.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/representation-model.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exit-success",
+        "origin": "mechanism-only; teaching correctness tracked by E0"
+      },
+      "verificationRecord": "examples/verification/records/legacy-representation-model.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-reranking",
+      "title": "Existing reranking example",
+      "concepts": [
+        "reranking"
+      ],
+      "sourceSections": [
+        "book-ch08-reranking",
+        "book-ch10-encoder-comparison"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-reranking.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/reranking.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "['A', 'B']",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-reranking.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-responsible-use",
+      "title": "Existing responsible-use example",
+      "concepts": [
+        "responsible-use"
+      ],
+      "sourceSections": [
+        "book-ch01-responsible-use"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-responsible-use.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/responsible-use.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.667",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-responsible-use.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-retrieval-metrics",
+      "title": "Existing retrieval-metrics example",
+      "concepts": [
+        "retrieval-metrics"
+      ],
+      "sourceSections": [
+        "book-ch08-retrieval-metrics",
+        "book-ch08-ndcg"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-retrieval-metrics.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/retrieval-metrics.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.5",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-retrieval-metrics.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-reward-models",
+      "title": "Existing reward-models example",
+      "concepts": [
+        "reward-models"
+      ],
+      "sourceSections": [
+        "book-ch12-reward-models",
+        "book-ch12-reward-io",
+        "book-ch12-reward-training",
+        "book-ch12-preference-pairs",
+        "book-ch12-reward-loss"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-reward-models.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/reward-models.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.576",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-reward-models.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-rlhf",
+      "title": "Existing rlhf example",
+      "concepts": [
+        "rlhf"
+      ],
+      "sourceSections": [
+        "book-ch12-training-stages",
+        "book-ch12-alignment"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-rlhf.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/rlhf.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.576",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-rlhf.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-sbert",
+      "title": "Existing sbert example",
+      "concepts": [
+        "sbert"
+      ],
+      "sourceSections": [
+        "book-ch10-embedding-models",
+        "book-ch10-sbert",
+        "book-ch10-encoder-comparison"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-sbert.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/sbert.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.99",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-sbert.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-self-attention",
+      "title": "Existing self-attention example",
+      "concepts": [
+        "self-attention"
+      ],
+      "sourceSections": [
+        "book-ch03-block",
+        "book-ch03-attention-calculation"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-self-attention.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/self-attention.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exit-success",
+        "origin": "mechanism-only; teaching correctness tracked by E0"
+      },
+      "verificationRecord": "examples/verification/records/legacy-self-attention.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-self-consistency",
+      "title": "Existing self-consistency example",
+      "concepts": [
+        "self-consistency"
+      ],
+      "sourceSections": [
+        "book-ch06-self-consistency"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-self-consistency.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/self-consistency.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.667",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-self-consistency.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-semantic-search",
+      "title": "Existing semantic-search example",
+      "concepts": [
+        "semantic-search"
+      ],
+      "sourceSections": [
+        "book-ch08-overview",
+        "book-ch08-semantic-search"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-semantic-search.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/semantic-search.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exit-success",
+        "origin": "mechanism-only; teaching correctness tracked by E0"
+      },
+      "verificationRecord": "examples/verification/records/legacy-semantic-search.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-sentiment-analysis",
+      "title": "Existing sentiment-analysis example",
+      "concepts": [
+        "sentiment-analysis"
+      ],
+      "sourceSections": [
+        "book-ch04-sentiment-task"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-sentiment-analysis.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/sentiment-analysis.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "[('a wonderful film', 'positive'), ('a dull film', 'negative')]",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-sentiment-analysis.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-setfit",
+      "title": "Existing setfit example",
+      "concepts": [
+        "setfit"
+      ],
+      "sourceSections": [
+        "book-ch11-setfit",
+        "book-ch11-few-shot-training"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-setfit.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/setfit.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0.797",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-setfit.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-summarized-memory",
+      "title": "Existing summarized-memory example",
+      "concepts": [
+        "summarized-memory"
+      ],
+      "sourceSections": [
+        "book-ch07-summary"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-summarized-memory.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/summarized-memory.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "user: My name is Sam\nassistant: Hello Sam\nuser: What is my name?",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-summarized-memory.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-supervised-classification",
+      "title": "Existing supervised-classification example",
+      "concepts": [
+        "supervised-classification"
+      ],
+      "sourceSections": [
+        "book-ch04-supervised",
+        "book-ch04-classification-metrics"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-supervised-classification.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/supervised-classification.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "[('a wonderful film', 'positive'), ('a dull film', 'negative')]",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-supervised-classification.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-task-specific-models",
+      "title": "Existing task-specific-models example",
+      "concepts": [
+        "task-specific-models"
+      ],
+      "sourceSections": [
+        "book-ch04-representation-classification",
+        "book-ch04-task-specific"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-task-specific-models.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/task-specific-models.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "[('a wonderful film', 'positive'), ('a dull film', 'negative')]",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-task-specific-models.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-text-embedding",
+      "title": "Existing text-embedding example",
+      "concepts": [
+        "text-embedding"
+      ],
+      "sourceSections": [
+        "book-ch01-dense-vectors",
+        "book-ch01-embedding-types",
+        "book-ch02-text-embeddings",
+        "book-ch10-embedding-models"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-text-embedding.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/text-embedding.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exit-success",
+        "origin": "mechanism-only; teaching correctness tracked by E0"
+      },
+      "verificationRecord": "examples/verification/records/legacy-text-embedding.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-token-embedding",
+      "title": "Existing token-embedding example",
+      "concepts": [
+        "token-embedding"
+      ],
+      "sourceSections": [
+        "book-ch01-embedding-types",
+        "book-ch02-token-embeddings",
+        "book-ch02-embedding-table",
+        "book-ch03-forward-pass"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-token-embedding.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/token-embedding.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exit-success",
+        "origin": "mechanism-only; teaching correctness tracked by E0"
+      },
+      "verificationRecord": "examples/verification/records/legacy-token-embedding.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-token",
+      "title": "Existing token example",
+      "concepts": [
+        "token"
+      ],
+      "sourceSections": [
+        "book-ch02-tokenization"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-token.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/token.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exit-success",
+        "origin": "mechanism-only; teaching correctness tracked by E0"
+      },
+      "verificationRecord": "examples/verification/records/legacy-token.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-tokenization",
+      "title": "Existing tokenization example",
+      "concepts": [
+        "tokenization"
+      ],
+      "sourceSections": [
+        "book-ch02-tokenization",
+        "book-ch02-prepare-inputs",
+        "book-ch02-segmentation",
+        "book-ch02-token-units",
+        "book-ch02-tokenizer-properties",
+        "book-ch02-tokenizer-algorithms",
+        "book-ch02-special-tokens"
+      ],
+      "level": "B",
+      "kind": "pretrained-inference-sketch",
+      "entrypoint": "examples/legacy/legacy-tokenization.py",
+      "environment": "legacy-unverified",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/tokenization.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Unpinned model/library sketch; excluded from automatic execution.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "downloads",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exit-success",
+        "origin": "mechanism-only; teaching correctness tracked by E0"
+      },
+      "verificationRecord": null,
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-topic-modeling",
+      "title": "Existing topic-modeling example",
+      "concepts": [
+        "topic-modeling"
+      ],
+      "sourceSections": [
+        "book-ch05-topic-modeling"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-topic-modeling.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/topic-modeling.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0 ['cloud', 'rain', 'storm']\n1 ['beach', 'sun', 'warm']",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-topic-modeling.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-topic-representations",
+      "title": "Existing topic-representations example",
+      "concepts": [
+        "topic-representations"
+      ],
+      "sourceSections": [
+        "book-ch05-representation-blocks"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-topic-representations.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/topic-representations.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0 ['cloud', 'rain', 'storm']\n1 ['beach', 'sun', 'warm']",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-topic-representations.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-transformer-block",
+      "title": "Existing transformer-block example",
+      "concepts": [
+        "transformer-block"
+      ],
+      "sourceSections": [
+        "book-ch03-block",
+        "book-ch03-modern-block",
+        "book-ch03-feedforward"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-transformer-block.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/transformer-block.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "1.329",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-transformer-block.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-transformer",
+      "title": "Existing transformer example",
+      "concepts": [
+        "transformer"
+      ],
+      "sourceSections": [
+        "book-ch01-transformer-history",
+        "book-ch03-transformer-overview",
+        "book-ch03-forward-pass"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-transformer.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/transformer.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exit-success",
+        "origin": "mechanism-only; teaching correctness tracked by E0"
+      },
+      "verificationRecord": "examples/verification/records/legacy-transformer.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-tsdae",
+      "title": "Existing tsdae example",
+      "concepts": [
+        "tsdae"
+      ],
+      "sourceSections": [
+        "book-ch10-unsupervised",
+        "book-ch10-tsdae",
+        "book-ch10-domain-adaptation"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-tsdae.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/tsdae.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "['the', '[MASK]', 'reads'] target: model",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-tsdae.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-vision-transformers",
+      "title": "Existing vision-transformers example",
+      "concepts": [
+        "vision-transformers"
+      ],
+      "sourceSections": [
+        "book-ch09-vision-transformers",
+        "book-ch09-image-patches"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-vision-transformers.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/vision-transformers.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "1.329",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-vision-transformers.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-vocabulary",
+      "title": "Existing vocabulary example",
+      "concepts": [
+        "vocabulary"
+      ],
+      "sourceSections": [
+        "book-ch02-prepare-inputs",
+        "book-ch02-tokenizer-properties",
+        "book-ch02-embedding-table",
+        "book-ch02-special-tokens"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-vocabulary.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/vocabulary.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exit-success",
+        "origin": "mechanism-only; teaching correctness tracked by E0"
+      },
+      "verificationRecord": "examples/verification/records/legacy-vocabulary.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-windowed-memory",
+      "title": "Existing windowed-memory example",
+      "concepts": [
+        "windowed-memory"
+      ],
+      "sourceSections": [
+        "book-ch07-window"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-windowed-memory.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/windowed-memory.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "user: My name is Sam\nassistant: Hello Sam\nuser: What is my name?",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-windowed-memory.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-word-and-subword-tokens",
+      "title": "Existing word-and-subword-tokens example",
+      "concepts": [
+        "word-and-subword-tokens"
+      ],
+      "sourceSections": [
+        "book-ch02-token-units"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-word-and-subword-tokens.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/word-and-subword-tokens.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "query token: cat visible context: ['The', 'cat']",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-word-and-subword-tokens.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-word2vec",
+      "title": "Existing word2vec example",
+      "concepts": [
+        "word2vec"
+      ],
+      "sourceSections": [
+        "book-ch01-dense-vectors",
+        "book-ch02-word-embeddings",
+        "book-ch02-word2vec-training",
+        "book-ch02-negative-sampling"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-word2vec.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/word2vec.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exit-success",
+        "origin": "mechanism-only; teaching correctness tracked by E0"
+      },
+      "verificationRecord": "examples/verification/records/legacy-word2vec.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-zero-shot-classification",
+      "title": "Existing zero-shot-classification example",
+      "concepts": [
+        "zero-shot-classification"
+      ],
+      "sourceSections": [
+        "book-ch04-zero-shot"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/legacy/legacy-zero-shot-classification.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/zero-shot-classification.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Legacy mechanism; E0 findings still apply.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "sports {'sports': 2, 'food': 0}",
+        "origin": "existing-published-output"
+      },
+      "verificationRecord": "examples/verification/records/legacy-zero-shot-classification.json",
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-rag-question-answering",
+      "title": "Existing rag-question-answering example",
+      "concepts": [],
+      "sourceSections": [
+        "book-ch08-rag",
+        "book-ch08-search-to-rag",
+        "book-ch08-local-rag"
+      ],
+      "level": "B",
+      "kind": "pretrained-inference-sketch",
+      "entrypoint": "examples/legacy/legacy-rag-question-answering.py",
+      "environment": "legacy-unverified",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/use-cases/rag-question-answering.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Unpinned model/library sketch; excluded from automatic execution.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "downloads",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exit-success",
+        "origin": "mechanism-only; teaching correctness tracked by E0"
+      },
+      "verificationRecord": null,
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "legacy-text-classification",
+      "title": "Existing text-classification example",
+      "concepts": [],
+      "sourceSections": [
+        "book-ch04-sentiment-task",
+        "book-ch04-task-specific"
+      ],
+      "level": "B",
+      "kind": "pretrained-inference-sketch",
+      "entrypoint": "examples/legacy/legacy-text-classification.py",
+      "environment": "legacy-unverified",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/use-cases/text-classification.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Unpinned model/library sketch; excluded from automatic execution.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 5,
+        "measured": null
+      },
+      "network": "downloads",
+      "auth": false,
+      "inputSchema": "Inputs are literals in the source.",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exit-success",
+        "origin": "mechanism-only; teaching correctness tracked by E0"
+      },
+      "verificationRecord": null,
+      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
+    },
+    {
+      "id": "attention-softmax",
+      "title": "Trace stable softmax attention",
+      "concepts": [
+        "attention"
+      ],
+      "sourceSections": [
+        "book-ch03-block"
+      ],
+      "level": "A",
+      "kind": "mechanism",
+      "entrypoint": "examples/foundations/src/atlas_foundations/attention.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/first-verified-examples.mdx",
+        "block": 0
+      },
+      "region": "demonstration",
+      "models": [],
+      "dataset": null,
+      "seed": 0,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Two equal nonempty finite scalar lists",
+      "outputSchema": "stdout text",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "weights: [0.7311, 0.2689]\nweighted value: 7.3106",
+        "origin": "analytical result"
+      },
+      "verificationRecord": "examples/verification/records/attention-softmax.json",
+      "troubleshooting": "See examples/README.md. Download failures require network/cache repair; do not relabel a failed run verified."
+    },
+    {
+      "id": "embedding-retrieval",
+      "title": "Search with pretrained sentence embeddings",
+      "concepts": [
+        "semantic-search",
+        "text-embedding"
+      ],
+      "sourceSections": [
+        "book-ch08-overview"
+      ],
+      "level": "B",
+      "kind": "pretrained-inference",
+      "entrypoint": "examples/applications/src/atlas_applications/retrieval.py",
+      "environment": "applications",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/first-verified-examples.mdx",
+        "block": 1
+      },
+      "region": "demonstration",
+      "models": [
+        {
+          "id": "sentence-transformers/paraphrase-MiniLM-L3-v2",
+          "revision": "4ca70771034acceecb2e72475f72050fcdde4ddc",
+          "license": "apache-2.0",
+          "url": "https://huggingface.co/sentence-transformers/paraphrase-MiniLM-L3-v2"
+        }
+      ],
+      "dataset": "examples/data/manifests/retrieval.json",
+      "seed": 0,
+      "reproducibility": "CPU only. Numerical tolerance; package/platform changes can alter floating-point results.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 240,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "3 document strings and 2 query strings; tokenizer returns padded int64 token IDs/mask [5,L]",
+      "outputSchema": "JSON: shape [5,384], 2 top document IDs, cosine scores [2,3]; saved embeddings.npy",
+      "validation": {
+        "method": "json-invariants",
+        "shape": [
+          5,
+          384
+        ],
+        "top_documents": [
+          "cat",
+          "energy"
+        ]
+      },
+      "verificationRecord": "examples/verification/records/embedding-retrieval.json",
+      "troubleshooting": "See examples/README.md. Download failures require network/cache repair; do not relabel a failed run verified."
+    }
+  ]
+}

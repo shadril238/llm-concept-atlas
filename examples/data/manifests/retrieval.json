@@ -1,0 +1,11 @@
+{
+  "id": "atlas-retrieval-v1",
+  "revision": 1,
+  "path": "examples/data/fixtures/retrieval.json",
+  "sha256": "27c4d517a4ba4e17b915bfcd49f9f95ca927416c3455fb8857040f25cadee1a8",
+  "source": "Original atlas-authored sentences",
+  "license": "MIT (repository LICENSE)",
+  "split": "demonstration-only",
+  "training": false,
+  "leakagePolicy": "No fitting or tuning. These five sentences test wiring and ranking only; they are not a quality benchmark."
+}

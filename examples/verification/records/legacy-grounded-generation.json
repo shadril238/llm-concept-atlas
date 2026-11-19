@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-grounded-generation",
+  "status": "passed",
+  "date": "2026-11-19T06:54:22.678229+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-grounded-generation.py"
+  ],
+  "sourceSha256": "84a666d04370604276d0fd8b0fc63fe7345a4878b6c8966688014bc8f1e1fada",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "c1221953919148c85799a2a7c236e69019fe3b2582b63d24567591caf4d7b9c5",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "['A', 'B']\n",
+  "stderr": "",
+  "error": null
+}

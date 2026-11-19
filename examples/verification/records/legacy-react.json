@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-react",
+  "status": "passed",
+  "date": "2026-11-19T06:54:26.293562+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-react.py"
+  ],
+  "sourceSha256": "f7586ac8b08beb394ea3bdec8a547f29310c26bf7789c26c804a7eeb7f0be3b7",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "05edb4d563a6fcc089575f6178a77e05907182a11ee4c89490c97f3abb5f05ef",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "lookup hours -> 5 pm\n",
+  "stderr": "",
+  "error": null
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-kv-cache",
+  "status": "passed",
+  "date": "2026-11-19T06:54:23.194781+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-kv-cache.py"
+  ],
+  "sourceSha256": "2c1f7462484770a6fb24ea69ad01fe48f90ac2f49d739477f5cf335e07146651",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "124689094f7f66c69909deb3c2bce8954f44837fa2034664ce06c3f21b2b3dd8",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "cats can use 1 stored positions\nsleep can use 2 stored positions\n",
+  "stderr": "",
+  "error": null
+}

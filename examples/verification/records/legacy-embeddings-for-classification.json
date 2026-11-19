@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-embeddings-for-classification",
+  "status": "passed",
+  "date": "2026-11-19T06:54:21.515058+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-embeddings-for-classification.py"
+  ],
+  "sourceSha256": "1d303f69fda272102a43cb998219dab761a5d61eb43e7306c32de785f165f684",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "d331250a0a77fc7cf2306013208a40350a450bdceb23da2c9c47712ba0653cd2",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "0.99\n",
+  "stderr": "",
+  "error": null
+}

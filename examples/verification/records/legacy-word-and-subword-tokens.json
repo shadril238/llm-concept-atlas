@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-word-and-subword-tokens",
+  "status": "passed",
+  "date": "2026-11-19T06:54:29.933467+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-word-and-subword-tokens.py"
+  ],
+  "sourceSha256": "2b2c22532b5a58cdc3a8eb9224279a46a7337ae5bf0d0f02b3f6655ba6cc7a6e",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "9a961663f8020abfd33c15fd7f63ee1c7d952e1f4725fe3d469038a8cb191f6c",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "query token: cat visible context: ['The', 'cat']\n",
+  "stderr": "",
+  "error": null
+}

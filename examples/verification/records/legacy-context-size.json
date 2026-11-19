@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-context-size",
+  "status": "passed",
+  "date": "2026-11-19T06:54:19.574330+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-context-size.py"
+  ],
+  "sourceSha256": "2b2c22532b5a58cdc3a8eb9224279a46a7337ae5bf0d0f02b3f6655ba6cc7a6e",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "bca148af316bea8cc2c476c8dc29ce9b3bd90f9ec524cee49cff85c0c129e597",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "query token: cat visible context: ['The', 'cat']\n",
+  "stderr": "",
+  "error": null
+}

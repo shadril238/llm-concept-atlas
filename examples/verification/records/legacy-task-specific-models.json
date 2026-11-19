@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-task-specific-models",
+  "status": "passed",
+  "date": "2026-11-19T06:54:28.375063+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-task-specific-models.py"
+  ],
+  "sourceSha256": "68017589f5fdb83619c1f966daabea3667772a6e0d91d06784181b962a9c34b0",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "66d68b19703609247071e2f1b19bed0473fe27c3e298b1f2b7653a95767cb30d",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "[('a wonderful film', 'positive'), ('a dull film', 'negative')]\n",
+  "stderr": "",
+  "error": null
+}

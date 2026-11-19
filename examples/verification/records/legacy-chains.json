@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-chains",
+  "status": "passed",
+  "date": "2026-11-19T06:54:18.918898+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-chains.py"
+  ],
+  "sourceSha256": "45e9ae020ffbd541770ea0ffb320b0bf96052c07724b25ced642f5b4c4168a2c",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "165be5056e1d3cb66c0c93ad6c69d7ed31f8f993614c5a3356539dcba61c3020",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "Question: When does the library close?\nSource: Library closes at 5 pm Saturday.\n",
+  "stderr": "",
+  "error": null
+}

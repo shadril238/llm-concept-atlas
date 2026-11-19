@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-summarized-memory",
+  "status": "passed",
+  "date": "2026-11-19T06:54:28.116943+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-summarized-memory.py"
+  ],
+  "sourceSha256": "660e8fce476863066dfaf84391c3555866c693f07fbde62fd0a59ff3c8945c06",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "e6d14444365edfd8675f2d1bb0d579f8cddca805b73e50ac1a3b09d549802478",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "user: My name is Sam\nassistant: Hello Sam\nuser: What is my name?\n",
+  "stderr": "",
+  "error": null
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-language-ai",
+  "status": "passed",
+  "date": "2026-11-19T06:54:23.325866+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-language-ai.py"
+  ],
+  "sourceSha256": "858dc1f48423fbcac3a9501ea30833302b916f438a77a79ca49f3f25eab9b20e",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "308347fb8b9c47458174c4208d18f4bfda91533d998e20733068f8270ab55ee7",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "account support\n",
+  "stderr": "",
+  "error": null
+}

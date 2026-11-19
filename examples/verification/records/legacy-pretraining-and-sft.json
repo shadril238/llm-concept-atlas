@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-pretraining-and-sft",
+  "status": "passed",
+  "date": "2026-11-19T06:54:25.003754+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-pretraining-and-sft.py"
+  ],
+  "sourceSha256": "ad52b94d6779d81e4a1b52f22f023710c4d0002fdeb8dc45a04dff92046ccabb",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "df32c0c0b7328ec90d544cebf5d75a7a954464496f14e3b1aa98218d2d5f16b8",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "0.39\n",
+  "stderr": "",
+  "error": null
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-clip",
+  "status": "passed",
+  "date": "2026-11-19T06:54:19.055269+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-clip.py"
+  ],
+  "sourceSha256": "7b4a3c867417b8c3bfd2a827cb8025f4fa734790a95579725dcb81df576a37ef",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "0c004e1b170fca1c7405edf8bc7e44660eef16e58cac1a2e4d69c008b11a45a1",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "a dog\n",
+  "stderr": "",
+  "error": null
+}

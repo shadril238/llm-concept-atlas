@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-text-embedding",
+  "status": "passed",
+  "date": "2026-11-19T06:54:28.508325+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-text-embedding.py"
+  ],
+  "sourceSha256": "e7f2b2ed91a2a1b854277cddc337d6f8cd9fcde6de2a6632130778232f7fcb21",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "8c7d9dae09e1cced49adef43058ab5050fbb7adc2b4827695a5b512761a6c3dc",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "electricity tip 0.99\nenergy drink 0.33\n",
+  "stderr": "",
+  "error": null
+}

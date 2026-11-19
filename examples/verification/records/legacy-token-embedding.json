@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-token-embedding",
+  "status": "passed",
+  "date": "2026-11-19T06:54:28.638126+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-token-embedding.py"
+  ],
+  "sourceSha256": "13417c0a7e9d749025cb0e60a5122b5d9f4c4740c26639aa5a8f8e2cbe701779",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "2d9fb87b14472afb8b16d119888fcfd3e7b2194fbba60463290d3982315ca121",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "[[0.8, 0.3], [0.1, 0.9]]\n",
+  "stderr": "",
+  "error": null
+}

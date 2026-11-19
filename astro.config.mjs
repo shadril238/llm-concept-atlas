@@ -24,6 +24,7 @@ export default defineConfig({
             { label: "How an LLM processes a sentence", slug: "paths/how-an-llm-processes-a-sentence" },
             { label: "From semantic search to RAG", slug: "paths/from-semantic-search-to-rag" },
             { label: "From applications to fine-tuning", slug: "paths/from-applications-to-fine-tuning" },
+            { label: "Run verified examples", slug: "labs/first-verified-examples" },
             { label: "About and sources", slug: "about-and-sources" },
           ],
         },

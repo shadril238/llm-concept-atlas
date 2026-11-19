@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-zero-shot-classification",
+  "status": "passed",
+  "date": "2026-11-19T06:54:30.191894+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-zero-shot-classification.py"
+  ],
+  "sourceSha256": "ad8b9b5a72be9e2aa619ade1e90d0d6945172f0afe277fd69ef4f75cc311d954",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "dab3bd8a1c6925874a9d38aaf3086dec888b7bcab486c2b5bb7e2676395ecb6f",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "sports {'sports': 2, 'food': 0}\n",
+  "stderr": "",
+  "error": null
+}

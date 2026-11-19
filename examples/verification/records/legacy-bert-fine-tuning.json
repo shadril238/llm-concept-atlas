@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-bert-fine-tuning",
+  "status": "passed",
+  "date": "2026-11-19T06:54:18.395078+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-bert-fine-tuning.py"
+  ],
+  "sourceSha256": "ad52b94d6779d81e4a1b52f22f023710c4d0002fdeb8dc45a04dff92046ccabb",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "9e1aa8f0a9446c5eb43e2d826d679216a0165e9b80e3f06bbdae3445f5f4f000",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.2,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "0.39\n",
+  "stderr": "",
+  "error": null
+}

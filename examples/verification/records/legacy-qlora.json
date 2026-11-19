@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-qlora",
+  "status": "passed",
+  "date": "2026-11-19T06:54:25.522923+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-qlora.py"
+  ],
+  "sourceSha256": "c006509147e71d86bae6a67e9e384ecb3725e26ed541b6c4445d4f66cf18a832",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "74289d7b6e65e41b7dbf91b997b9621bfcdb2d6e7c12f5fd8723ac009f947b9b",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "[[1.03, -0.01], [0.06, 0.98]]\n",
+  "stderr": "",
+  "error": null
+}

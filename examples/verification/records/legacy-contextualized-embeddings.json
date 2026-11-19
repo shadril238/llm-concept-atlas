@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-contextualized-embeddings",
+  "status": "passed",
+  "date": "2026-11-19T06:54:19.702721+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-contextualized-embeddings.py"
+  ],
+  "sourceSha256": "1d303f69fda272102a43cb998219dab761a5d61eb43e7306c32de785f165f684",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "b0c70b3e0e1070e3968dbae00b25d07f942291453b60a5a486b88419048b5f2c",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "0.99\n",
+  "stderr": "",
+  "error": null
+}

@@ -1,0 +1,148 @@
+---
+title: Run the first verified examples
+description: Trace attention, then run a pretrained sentence embedding model on your CPU.
+---
+
+import { Card, CardGrid } from "@astrojs/starlight/components";
+
+# From a calculation to a model
+
+Start with a visible calculation, then use pretrained weights to retrieve a sentence. Both examples run locally. The page shows source and output from recorded runs.
+
+<CardGrid>
+  <Card title="1 · Trace attention" icon="pencil">Invented scores → normalized weights → weighted value. CPU, offline, Python standard library.</Card>
+  <Card title="2 · Retrieve by meaning" icon="magnifier">Real pretrained model → 384-dimensional embeddings → cosine ranking. CPU; initial model download required.</Card>
+</CardGrid>
+
+## Set up
+
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/), clone the repository, and run these commands from its root. `uv sync --locked` installs the exact resolved environment.
+
+```bash
+uv sync --locked --project examples/foundations
+uv sync --locked --project examples/applications
+python3 scripts/run-examples.py --id attention-softmax
+python3 scripts/run-examples.py --id embedding-retrieval --allow-network
+```
+
+The model is Apache-2.0 licensed. It is the 3-layer `sentence-transformers/paraphrase-MiniLM-L3-v2` checkpoint, with its exact revision recorded below. Its small fixture tests inference and ranking, with no training or quality benchmark claim.
+
+## Predict before running
+
+For scores 2 and 1, should the first value receive more than half the weight? For the query “A kitten is resting on a couch”, predict which of the three document sentences will rank first.
+
+## Trace the calculation
+
+```python
+from math import exp, isclose, isfinite
+
+
+def attend(scores: list[float], values: list[float]) -> tuple[list[float], float]:
+    if not scores or len(scores) != len(values):
+        raise ValueError("Provide equal nonempty score and value lists")
+    if not all(isfinite(x) for x in scores + values):
+        raise ValueError("Scores and values must be finite")
+    # Subtracting the maximum preserves softmax and prevents overflow.
+    shifted = [exp(score - max(scores)) for score in scores]
+    weights = [value / sum(shifted) for value in shifted]
+    return weights, sum(weight * value for weight, value in zip(weights, values))
+
+
+def main() -> None:
+    weights, output = attend([2.0, 1.0], [10.0, 0.0])
+    assert isclose(sum(weights), 1.0)
+    assert isclose(output, 7.3105857863, abs_tol=1e-9)
+    shifted_weights, _ = attend([1002.0, 1001.0], [10.0, 0.0])
+    assert all(isclose(a, b) for a, b in zip(weights, shifted_weights))
+    print("weights:", [round(weight, 4) for weight in weights])
+    print("weighted value:", round(output, 4))
+
+
+if __name__ == "__main__":
+    main()
+```
+
+**Recorded output**
+
+```text
+weights: [0.7311, 0.2689]
+weighted value: 7.3106
+```
+
+Verified 2026-11-19T06:54:30.321174+00:00 on Darwin 27.2.0 arm64 / Python 3.11.18. Elapsed 0.011 s; peak child memory 29.4 MiB. These measurements describe this run only.
+
+[Source and run instructions](https://github.com/shadril238/llm-concept-atlas/tree/main/examples/foundations)
+
+## Run the pretrained model
+
+```python
+import json
+import os
+from pathlib import Path
+
+import numpy as np
+import torch
+from transformers import AutoModel, AutoTokenizer
+
+MODEL_ID = "sentence-transformers/paraphrase-MiniLM-L3-v2"
+REVISION = "4ca70771034acceecb2e72475f72050fcdde4ddc"
+ROOT = Path(__file__).resolve().parents[4]
+
+
+def main() -> None:
+    torch.manual_seed(0)
+    torch.set_num_threads(1)
+    # A local snapshot can be supplied for a fully offline rerun.
+    location = os.environ.get("ATLAS_MODEL_PATH", MODEL_ID)
+    tokenizer = AutoTokenizer.from_pretrained(location, revision=REVISION)
+    model = AutoModel.from_pretrained(location, revision=REVISION).eval().to("cpu")
+    data = json.loads((ROOT / "examples/data/fixtures/retrieval.json").read_text())
+    texts = [row["text"] for row in data["documents"] + data["queries"]]
+    encoded = tokenizer(texts, padding=True, truncation=True, max_length=128, return_tensors="pt")
+    with torch.inference_mode():
+        hidden = model(**encoded).last_hidden_state  # [5, sequence length, 384]
+        mask = encoded["attention_mask"].unsqueeze(-1)
+        pooled = (hidden * mask).sum(dim=1) / mask.sum(dim=1).clamp(min=1)
+        vectors = torch.nn.functional.normalize(pooled, p=2, dim=1).numpy()
+    assert vectors.shape == (5, 384) and np.isfinite(vectors).all()
+    assert np.allclose(np.linalg.norm(vectors, axis=1), 1.0, atol=1e-5)
+    scores = vectors[3:] @ vectors[:3].T
+    rankings = [data["documents"][int(index)]["id"] for index in scores.argmax(axis=1)]
+    expected = [query["relevant"] for query in data["queries"]]
+    assert rankings == expected, (rankings, expected)
+    artifact = Path(os.environ.get("ATLAS_ARTIFACT_DIR", str(ROOT / "examples/artifacts/retrieval")))
+    artifact.mkdir(parents=True, exist_ok=True)
+    np.save(artifact / "embeddings.npy", vectors)
+    assert np.allclose(np.load(artifact / "embeddings.npy"), vectors)
+    print(json.dumps({"shape": list(vectors.shape), "top_documents": rankings,
+                      "cosine_scores": [[round(float(value), 4) for value in row] for row in scores],
+                      "fixture_hits": len(rankings), "fixture_queries": len(expected)}))
+
+
+if __name__ == "__main__":
+    main()
+```
+
+**Recorded output**
+
+```text
+{"shape": [5, 384], "top_documents": ["cat", "energy"], "cosine_scores": [[0.7516, 0.0184, -0.0882], [0.0417, 0.64, 0.0151]], "fixture_hits": 2, "fixture_queries": 2}
+```
+
+Verified 2026-11-19T07:33:39.132970+00:00 on Darwin 27.2.0 arm64 / Python 3.11.18. Elapsed 1.948 s; peak child memory 316.3 MiB. These measurements describe this run only.
+
+[Source and run instructions](https://github.com/shadril238/llm-concept-atlas/tree/main/examples/applications)
+
+## Interpret and investigate
+
+Attention uses invented scores to isolate normalization; the transformer normally learns projections that produce these scores. Adding the same constant to both scores preserves the weights. Try scores 1002 and 1001 and explain why subtracting the maximum avoids overflow.
+
+The model converts token vectors into sentence vectors by averaging only positions allowed by the padding mask, then normalizes each vector. The dot product of normalized vectors is cosine similarity. It is a ranking score, not a probability. The run saves and reloads `embeddings.npy` as an artifact check.
+
+The five authored sentences form a demonstration fixture. The two correct rankings show that the wiring works for these cases. Add an ambiguous query and inspect all scores; this fixture cannot establish general retrieval quality.
+
+## Troubleshoot and continue
+
+A first model download needs internet access and roughly 70 MB of model weights plus tokenizer files. Package installation also downloads PyTorch. No account or API key is required. Later runs can use the cached snapshot with `--offline`; a missing cache causes a recorded failure. See the [example guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/README.md) for environments, records, and troubleshooting.
+
+Return to [attention](/llm-concept-atlas/concepts/attention/) or [semantic search](/llm-concept-atlas/concepts/semantic-search/). Deeper lessons and training workflows follow in later enhancement phases.

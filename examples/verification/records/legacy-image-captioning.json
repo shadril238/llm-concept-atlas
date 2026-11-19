@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-image-captioning",
+  "status": "passed",
+  "date": "2026-11-19T06:54:22.808690+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-image-captioning.py"
+  ],
+  "sourceSha256": "1aea49f6a846322938c90c177469acc27d8558d1555196480ef6d0c800d9f7a2",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "01e5be64aa029745c65a99482a7d09f73efa3287c7bb56139b9b9cce72039f51",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "An animal is in the picture.\n",
+  "stderr": "",
+  "error": null
+}

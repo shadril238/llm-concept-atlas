@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-generative-model",
+  "status": "passed",
+  "date": "2026-11-19T06:54:22.549060+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-generative-model.py"
+  ],
+  "sourceSha256": "86da36cafd54664c880cd9775585a1e7461ef1347dcc766fd57eedb0ca6fca87",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "347cbcb05bfabf6d2536f1a94afc44df71f89b032700d227f20c78633a043d98",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "The cup is on the table\n",
+  "stderr": "",
+  "error": null
+}

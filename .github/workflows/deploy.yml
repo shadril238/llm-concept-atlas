@@ -20,6 +20,12 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v7
+      - name: Set up locked Python examples
+        uses: astral-sh/setup-uv@v7
+        with:
+          version: "0.13.9"
+      - name: Install foundation environment
+        run: uv sync --locked --project examples/foundations
       - name: Test, build, and upload site
         uses: withastro/action@v6
         with:

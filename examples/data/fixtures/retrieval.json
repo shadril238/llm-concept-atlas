@@ -1,0 +1,28 @@
+{
+  "documents": [
+    {
+      "id": "cat",
+      "text": "A cat is sleeping on the sofa."
+    },
+    {
+      "id": "energy",
+      "text": "Solar panels convert sunlight into electricity."
+    },
+    {
+      "id": "recipe",
+      "text": "Boil pasta in salted water before adding sauce."
+    }
+  ],
+  "queries": [
+    {
+      "id": "q-cat",
+      "text": "A kitten is resting on a couch.",
+      "relevant": "cat"
+    },
+    {
+      "id": "q-energy",
+      "text": "How can sunshine generate electric power?",
+      "relevant": "energy"
+    }
+  ]
+}

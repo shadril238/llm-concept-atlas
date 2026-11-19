@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-word2vec",
+  "status": "passed",
+  "date": "2026-11-19T06:54:30.062696+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-word2vec.py"
+  ],
+  "sourceSha256": "feb8f17d193f1aa469f8640fbad6f53077ec5f60f86691228ef52617ce50a24f",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "f0e13822a0e5bc4287513010fb042ed45b9a8d053c21638f4b449e0ee67c27da",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "[('the', 'cat'), ('cat', 'the'), ('cat', 'chased'), ('chased', 'cat')]\n",
+  "stderr": "",
+  "error": null
+}

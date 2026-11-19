@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-few-shot-examples",
+  "status": "passed",
+  "date": "2026-11-19T06:54:21.899859+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-few-shot-examples.py"
+  ],
+  "sourceSha256": "5f5d18d00449e68d00f2a4707b963bc3b1b33b786f680ac5e730fc67b56d7226",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "650833defceaf5e750960da0ea2cd7e23b933423f32c6b7f82148f04a03921d2",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "Return one label: positive or negative.\nText: I loved it. Label: positive\nText: The ending was dull. Label:\n",
+  "stderr": "",
+  "error": null
+}

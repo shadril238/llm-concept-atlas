@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-bag-of-words",
+  "status": "passed",
+  "date": "2026-11-19T06:54:18.267356+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-bag-of-words.py"
+  ],
+  "sourceSha256": "e2017d067242190c0c1f0555f3284f5f62190b71e404329bc423e3798493b618",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "117bd7ba41246b3f60c384e5dc13470a8872faef3228ea7abfeef35e41b42cea",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.015,
+  "peakMemoryMiB": 29.2,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "{'red': 2, 'fox': 1, 'meets': 1, 'bird': 1}\n",
+  "stderr": "",
+  "error": null
+}

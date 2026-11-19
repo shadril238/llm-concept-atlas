@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "embedding-retrieval",
+  "status": "failed",
+  "date": "2026-11-19T06:54:50.197760+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/applications/src/atlas_applications/retrieval.py"
+  ],
+  "sourceSha256": "8e15a33d0073be257258e87ffc99d69a4f99edcb688a6bbd0d2faa269095865a",
+  "lockSha256": "7e7c326c2b12974f5d6c7f3855e5b1fbf756712b886154faa2be0b96398347a6",
+  "contractSha256": "63a90248602bfa962d7c1be2ddbb9a321505a43bf37dcb3512a7e6eb1e7f23d0",
+  "fixtureSha256": "27c4d517a4ba4e17b915bfcd49f9f95ca927416c3455fb8857040f25cadee1a8",
+  "models": [
+    {
+      "id": "sentence-transformers/paraphrase-MiniLM-L3-v2",
+      "revision": "4ca70771034acceecb2e72475f72050fcdde4ddc",
+      "license": "apache-2.0",
+      "url": "https://huggingface.co/sentence-transformers/paraphrase-MiniLM-L3-v2"
+    }
+  ],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.014,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "allowed",
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<repository>/examples/applications/src/atlas_applications/retrieval.py\", line 7, in <module>\n    import numpy as np\nModuleNotFoundError: No module named 'numpy'\n",
+  "error": "process exit 1"
+}

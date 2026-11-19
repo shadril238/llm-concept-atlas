@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-transformer",
+  "status": "passed",
+  "date": "2026-11-19T06:54:29.285509+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-transformer.py"
+  ],
+  "sourceSha256": "672258438508188fb3eeaedc51b7f6d939fa99386bfdc44ba4ac490444a79b54",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "7aebed4200288ae15df26c8fa5cbbc2690bd3cfef2e002524856e2097f04a96a",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "[1.6, 3.0, 4.4]\n",
+  "stderr": "",
+  "error": null
+}

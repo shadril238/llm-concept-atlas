@@ -2,7 +2,7 @@
 
 **Prepared:** 2026-11-18  
 **Last updated:** 2026-11-19  
-**Status:** E0 source inventory and initial lesson audit implemented; E1–E10 pending. See the [gap report](./docs/audits/book-gap-report.md) and [audit guide](./docs/audits/README.md).  
+**Status:** E0 source inventory and initial lesson audit, and E1 reproducible example infrastructure implemented; E2–E10 pending. See the [gap report](./docs/audits/book-gap-report.md) and [audit guide](./docs/audits/README.md).
 **Baseline:** Repository commit `a6b3ec4`, following the original Phases 1–5 in [plan.md](./plan.md).  
 **Source edition:** _Hands-On Large Language Models_, Jay Alammar and Maarten Grootendorst, first edition, September 2024.  
 **Primary goal:** A learner can explain, trace, implement, evaluate, and apply the book's ideas without depending on unexplained terminology or disconnected code snippets.
@@ -807,17 +807,17 @@ Use enhancement phase IDs **E0–E10** to distinguish this work from the origina
 
 **Depends on:** E0's identifiers and source mapping contract.
 
-- [ ] Implement the example manifest and schema; register existing snippets before replacing their checker.
-- [ ] Create a verified foundation environment and one supported application/training environment slice; document later environment families.
-- [ ] Add fixture provenance, data split manifests, artifact conventions, and execution-record schemas.
-- [ ] Implement source-region inclusion/synchronization for lesson snippets and notebook imports/generation.
-- [ ] Add example discovery, environment checks, timeouts, output/invariant validation, and verification report generation.
-- [ ] Replace exact 76-example assumptions with manifest completeness checks; do not silently stop checking the old examples.
-- [ ] Separate quick PR checks from model/GPU/API execution. Document every supported command in the relevant README.
+- [x] Implement the example manifest and schema; register existing snippets before replacing their checker.
+- [x] Create a verified foundation environment and one supported application/training environment slice; document later environment families.
+- [x] Add fixture provenance, data split manifests, artifact conventions, and execution-record schemas.
+- [x] Implement source-region inclusion/synchronization for lesson snippets and notebook imports/generation.
+- [x] Add example discovery, environment checks, timeouts, output/invariant validation, and verification report generation.
+- [x] Replace exact 76-example assumptions with manifest completeness checks; do not silently stop checking the old examples.
+- [x] Separate quick PR checks from model/GPU/API execution. Document every supported command in the relevant README.
 
 **Gate:** One offline mechanism example and one small real-model example run from clean environments, produce traceable records, and display synchronized code/output in a lesson. Existing example coverage does not regress.
 
-**Review artifact:** Manifest, lockfiles, example runner, generated source sample, and two real verification records.
+**Review artifact:** [Manifest](./examples/manifest.json), [environment and execution guide](./examples/README.md), [generated lab](./src/content/docs/labs/first-verified-examples.mdx), [verification report](./examples/verification/README.md), and committed run records. E1 verifies CPU inference and mechanisms; training environments follow in E2 and later phases.
 
 ### E2 — finish the three reference lessons and shared UI
 
@@ -1048,7 +1048,7 @@ These references support the implementation direction, not a claim that all prop
 | Phase                                 | Status      | Evidence required to close                                                                      |
 | ------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------- |
 | E0: audit and honest coverage         | Complete    | Source inventory, two generated reports, per-lesson findings, pinned notebooks, and validation. |
-| E1: executable-example foundation     | Not started | Manifest, environments, runner, synchronized code, real execution records.                      |
+| E1: executable-example foundation     | Complete | 100-example registry, two locked environments, runner, synchronized lesson/notebooks, and CPU execution records. |
 | E2: three reference lessons           | Not started | Tokenization, LoRA, and NER pass teaching and execution gates.                                  |
 | E3: foundations                       | Not started | Chapter 1–3 objectives and L01–L06 accepted.                                                    |
 | E4: classification and topics         | Not started | Chapter 4–5 objectives and L07–L08 accepted.                                                    |
@@ -1059,4 +1059,4 @@ These references support the implementation direction, not a claim that all prop
 | E9: integrated learner experience     | Not started | Discovery, navigation, practice, and accessibility/performance checks.                          |
 | E10: review and release               | Not started | Reconciled coverage, execution evidence, learner feedback, and release report.                  |
 
-**Next: E1.** E0 has produced the source inventory, per-lesson depth findings, and prioritized work list. Build reproducible example infrastructure, then finish the three E2 reference lessons before scaling the approach across the remaining chapters.
+**Next: E2.** E1 provides the [example infrastructure](./examples/README.md), [execution report](./examples/verification/README.md), and [first verified lab](./src/content/docs/labs/first-verified-examples.mdx). All 98 existing blocks are registered; 96 offline examples execute, the 76 existing exact-output comparisons remain, and the new pinned CPU embedding example has recorded online and offline execution. Three legacy model sketches remain unverified. Finish the tokenization, LoRA, and NER reference lessons before scaling across chapters.

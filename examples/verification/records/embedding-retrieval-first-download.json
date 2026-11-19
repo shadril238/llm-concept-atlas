@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "embedding-retrieval",
+  "status": "passed",
+  "date": "2026-11-19T06:57:39.926418+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/applications/src/atlas_applications/retrieval.py"
+  ],
+  "sourceSha256": "8e15a33d0073be257258e87ffc99d69a4f99edcb688a6bbd0d2faa269095865a",
+  "lockSha256": "7e7c326c2b12974f5d6c7f3855e5b1fbf756712b886154faa2be0b96398347a6",
+  "contractSha256": "63a90248602bfa962d7c1be2ddbb9a321505a43bf37dcb3512a7e6eb1e7f23d0",
+  "fixtureSha256": "27c4d517a4ba4e17b915bfcd49f9f95ca927416c3455fb8857040f25cadee1a8",
+  "models": [
+    {
+      "id": "sentence-transformers/paraphrase-MiniLM-L3-v2",
+      "revision": "4ca70771034acceecb2e72475f72050fcdde4ddc",
+      "license": "apache-2.0",
+      "url": "https://huggingface.co/sentence-transformers/paraphrase-MiniLM-L3-v2"
+    }
+  ],
+  "python": "3.11.18",
+  "packages": {
+    "numpy": "2.2.6",
+    "packaging": "26.3",
+    "requests": "2.34.2",
+    "certifi": "2026.10.23",
+    "networkx": "3.6.1",
+    "torch": "2.8.0",
+    "filelock": "4.2.12",
+    "sympy": "1.14.0",
+    "huggingface_hub": "0.36.2",
+    "safetensors": "0.8.0",
+    "tqdm": "4.70.1",
+    "urllib3": "2.8.0",
+    "mpmath": "1.3.0",
+    "PyYAML": "6.0.3",
+    "fsspec": "2026.9.0",
+    "Jinja2": "3.1.6",
+    "regex": "2026.11.19",
+    "transformers": "4.57.1",
+    "typing_extensions": "4.16.0",
+    "MarkupSafe": "3.0.4",
+    "hf-xet": "1.8.0",
+    "tokenizers": "0.22.2",
+    "charset-normalizer": "3.5.2",
+    "idna": "3.20"
+  },
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 23.877,
+  "peakMemoryMiB": 433.6,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "allowed",
+  "stdout": "{\"shape\": [5, 384], \"top_documents\": [\"cat\", \"energy\"], \"cosine_scores\": [[0.7516000270843506, 0.018400000408291817, -0.08820000290870667], [0.04170000180602074, 0.6399999856948853, 0.01510000042617321]], \"fixture_hits\": 2, \"fixture_queries\": 2}\n",
+  "stderr": "",
+  "error": null
+}

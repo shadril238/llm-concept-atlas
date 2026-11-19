@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-efficient-attention",
+  "status": "passed",
+  "date": "2026-11-19T06:54:21.258289+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-efficient-attention.py"
+  ],
+  "sourceSha256": "6f9979031f8857a24349f427ea5c23c3d3a97a3ff8ce27baadc6b7d0ef28e02a",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "97f4053649f0f3ffc224304187420cae9c564efc1de5220d5802d02bc77c120b",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "1.329\n",
+  "stderr": "",
+  "error": null
+}

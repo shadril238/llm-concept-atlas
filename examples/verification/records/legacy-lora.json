@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "legacy-lora",
+  "status": "passed",
+  "date": "2026-11-19T06:54:23.713367+00:00",
+  "gitCommit": "324626d4c86baaea7668d62e03bc3375c0488ea9",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/legacy/legacy-lora.py"
+  ],
+  "sourceSha256": "c006509147e71d86bae6a67e9e384ecb3725e26ed541b6c4445d4f66cf18a832",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "ef7b4bda9542c6928a03ea89d98d1e7d0be1b793e60be176b8ca583d1713246a",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 29.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "[[1.03, -0.01], [0.06, 0.98]]\n",
+  "stderr": "",
+  "error": null
+}
