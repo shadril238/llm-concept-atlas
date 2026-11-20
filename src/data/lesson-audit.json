@@ -115,30 +115,27 @@
       "conceptId": "bertopic",
       "chapter": 5,
       "path": "src/content/docs/concepts/bertopic.mdx",
-      "sourceSha256": "c05d50a4cd16e4457416b7e1ba1ca9fdccf315a5f6ea824c12ed8d2d02f37e81",
+      "sourceSha256": "5a6c2830a2886906f50db67f2e1fb5b8d18283193bc034b59d998563ea877a2f",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch05-bertopic"],
+      "sourceSectionIds": ["book-ch05-bertopic", "book-ch05-arxiv-data"],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "Supplied groups and raw word counts omit embedding, clustering, c-TF-IDF, and BERTopic fitting.",
+      "finding": "E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "e121db27ba30ce062e80cfb67150c93c8ab486e00f26f7c0232583c588f82118",
-      "codeFirstLine": "documents = [\"rain storm cloud\", \"sun warm beach\", \"cloud rain wind\"]",
-      "sharedExampleWith": [
-        "cluster-inspection",
-        "topic-modeling",
-        "topic-representations"
-      ],
-      "genericExercise": true,
+      "exampleKind": "evaluated-discovery-workflow",
+      "codeSha256": "5e059ff2b68c92c364968fd17207e557c52e8e1c7e897f4cadc4941ac7c99359",
+      "codeFirstLine": "def fit_pipeline(documents, embeddings, backend):",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Fit the full modular pipeline and trace computed topic assignments and representations."
+        "Independent technical/editorial review and beginner feedback; full-data and hosted execution require their own evidence."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E4"
+      "executionStatus": "cpu-classification-and-topics-verified",
+      "nextPhase": "E4",
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "conceptId": "blip-2",
@@ -254,44 +251,40 @@
       "conceptId": "cluster-inspection",
       "chapter": 5,
       "path": "src/content/docs/concepts/cluster-inspection.mdx",
-      "sourceSha256": "a5cbe463cc747c253fb7f45103bf12b922ab90f40e4b0af22d6ca0a7c92f055d",
+      "sourceSha256": "b5b91b213a92b7d81f2bac53810e8ba707ca1a87b6874a4cd1728454c11d0472",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch05-inspection",
         "book-ch05-topic-visualization"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The snippet counts words in fixed groups; add actual cluster members, outliers, and representative-document inspection.",
+      "finding": "E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "e121db27ba30ce062e80cfb67150c93c8ab486e00f26f7c0232583c588f82118",
-      "codeFirstLine": "documents = [\"rain storm cloud\", \"sun warm beach\", \"cloud rain wind\"]",
-      "sharedExampleWith": [
-        "bertopic",
-        "topic-modeling",
-        "topic-representations"
-      ],
-      "genericExercise": true,
+      "exampleKind": "evaluated-discovery-workflow",
+      "codeSha256": "107ecbc1d38f7a005bdfe2daa9e76e6d879a81763bdfb0a801c66219e52513ff",
+      "codeFirstLine": "inspected = {",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Inspect representative and borderline documents and distinguish clusters from plot artifacts.",
-        "Link term bars, similarity heatmaps, and hierarchy views to actual topic data."
+        "Independent technical/editorial review and beginner feedback; full-data and hosted execution require their own evidence."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E4"
+      "executionStatus": "cpu-classification-and-topics-verified",
+      "nextPhase": "E4",
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "conceptId": "clustering",
       "chapter": 5,
       "path": "src/content/docs/concepts/clustering.mdx",
-      "sourceSha256": "640ffa3f64c953ade2d17b0228b2fa9ca8886e00bf3cce7005de40d752efe9f2",
+      "sourceSha256": "6649dc269d8ffa0f541dd1c35fae95eed723b9186fc8e2f552e6ccf5e54558d6",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch05-clustering-pipeline",
@@ -299,20 +292,19 @@
         "book-ch05-hdbscan"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "Nearest fixed-center assignment is a useful calculation; it does not fit clusters or show HDBSCAN noise.",
+      "finding": "E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "4ec0d58a266f7f8767e536e57f865dd833d73ff823fa2402ca64b4b775593fda",
-      "codeFirstLine": "points = {\"a\": (0, 0), \"b\": (1, 0), \"c\": (8, 8)}",
+      "exampleKind": "evaluated-discovery-workflow",
+      "codeSha256": "4df5272620baa91eb93dd83d70c31212b7c6225560a27c58fe14a9b34f375318",
+      "codeFirstLine": "a = [0, 0, 1, 1]",
       "sharedExampleWith": [],
-      "genericExercise": true,
+      "genericExercise": false,
       "requiredWork": [
-        "Trace documents through embeddings, reduction, and actual cluster assignment.",
-        "Run density-based clustering, explain its parameters, and inspect noise labels.",
-        "Explain density, minimum cluster size, and noise assignment with an actual fitted model."
+        "Independent technical/editorial review and beginner feedback; full-data and hosted execution require their own evidence."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E4"
+      "executionStatus": "cpu-classification-and-topics-verified",
+      "nextPhase": "E4",
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "conceptId": "constrained-sampling",
@@ -632,52 +624,53 @@
       "conceptId": "dimensionality-reduction",
       "chapter": 5,
       "path": "src/content/docs/concepts/dimensionality-reduction.mdx",
-      "sourceSha256": "8d5a313f0e4eee34df49018db45d9e492f7f10bfd7d4d49f94d4d921638c8338",
+      "sourceSha256": "a7696dd3dfe05169eff6dc0f95e9280d55df9882f7c50a8b9ed6e66cce52f583",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": ["book-ch05-reduction", "book-ch05-umap"],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "Dropping the final coordinate is a projection, not fitted PCA or UMAP.",
+      "finding": "E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "d31f5b4e2933e5b54047d44ab4881a679f3f17b4002bcc189461fb955db629e3",
-      "codeFirstLine": "documents = {\"A\": (0.9, 0.1, 0.3), \"B\": (0.1, 0.8, 0.4)}",
+      "exampleKind": "evaluated-discovery-workflow",
+      "codeSha256": "097cdd9e35ecaf527a9c86ef3cd14fa9414a819825a5b0fc9e46fe58692a3f64",
+      "codeFirstLine": "from math import dist",
       "sharedExampleWith": [],
-      "genericExercise": true,
+      "genericExercise": false,
       "requiredWork": [
-        "Fit UMAP and distinguish clustering-space reduction from display-only projection.",
-        "Fit a nonlinear reduction and explain parameter and projection limitations."
+        "Independent technical/editorial review and beginner feedback; full-data and hosted execution require their own evidence."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E4"
+      "executionStatus": "cpu-classification-and-topics-verified",
+      "nextPhase": "E4",
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "conceptId": "document-embeddings",
       "chapter": 5,
       "path": "src/content/docs/concepts/document-embeddings.mdx",
-      "sourceSha256": "418d77b4f64239899d26bb6a494fc6db346c8d7525d78012452ef27dfc814eea",
+      "sourceSha256": "13cff2667ac1975528c65f77f4fc4f5ed20b202b1b956b56038f3aff4fc39d7b",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": ["book-ch05-document-embedding"],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The example compares supplied vectors; it neither encodes documents nor demonstrates pooling/chunking.",
+      "finding": "E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "1d303f69fda272102a43cb998219dab761a5d61eb43e7306c32de785f165f684",
+      "exampleKind": "evaluated-discovery-workflow",
+      "codeSha256": "ff24f9cc8d99e449f20afd9c9ab2e3c82ea9de0a94239da174d2c36b94838608",
       "codeFirstLine": "from math import sqrt",
-      "sharedExampleWith": ["embeddings-for-classification", "sbert"],
-      "genericExercise": true,
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Produce document embeddings from real text and retain source IDs."
+        "Independent technical/editorial review and beginner feedback; full-data and hosted execution require their own evidence."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E4"
+      "executionStatus": "cpu-classification-and-topics-verified",
+      "nextPhase": "E4",
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "conceptId": "domain-adaptation",
@@ -808,32 +801,30 @@
       "conceptId": "embeddings-for-classification",
       "chapter": 4,
       "path": "src/content/docs/concepts/embeddings-for-classification.mdx",
-      "sourceSha256": "e01e55aff2393afbf45a848af328282b4470560184aa3123e31c31efd323b95d",
+      "sourceSha256": "5c3e37934c8316f730bc4260a415e0f3fcfc1e665077ab9766d271d3fc951604",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
-        "book-ch04-representation-classification",
         "book-ch04-embedding-classification",
         "book-ch04-class-prototypes"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The cosine calculation never predicts labels from prototypes or a trained classifier.",
+      "finding": "E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "1d303f69fda272102a43cb998219dab761a5d61eb43e7306c32de785f165f684",
-      "codeFirstLine": "from math import sqrt",
-      "sharedExampleWith": ["document-embeddings", "sbert"],
-      "genericExercise": true,
+      "exampleKind": "evaluated-discovery-workflow",
+      "codeSha256": "e9eccc3453b19ebd048cf269949a63e560509be8fb5c7207f1b6c6d3b74bcb48",
+      "codeFirstLine": "from math import exp",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Compare a trained task head with a separate classifier over fixed embeddings.",
-        "Encode documents and compare a learned head with class prototypes.",
-        "Build actual class prototypes and compare their predictions with a learned head."
+        "Independent technical/editorial review and beginner feedback; full-data and hosted execution require their own evidence."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E4"
+      "executionStatus": "cpu-classification-and-topics-verified",
+      "nextPhase": "E4",
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "conceptId": "encoder-only",
@@ -878,11 +869,7 @@
       "exampleKind": "illustrative-python",
       "codeSha256": "68017589f5fdb83619c1f966daabea3667772a6e0d91d06784181b962a9c34b0",
       "codeFirstLine": "examples = [\"a wonderful film\", \"a dull film\"]",
-      "sharedExampleWith": [
-        "sentiment-analysis",
-        "supervised-classification",
-        "task-specific-models"
-      ],
+      "sharedExampleWith": [],
       "genericExercise": true,
       "requiredWork": [
         "Define the label budget and evaluate sensitivity to support-set sampling.",
@@ -909,7 +896,6 @@
       "codeSha256": "5f5d18d00449e68d00f2a4707b963bc3b1b33b786f680ac5e730fc67b56d7226",
       "codeFirstLine": "instruction = \"Return one label: positive or negative.\"",
       "sharedExampleWith": [
-        "generative-classification",
         "in-context-learning",
         "instruction-prompting",
         "prompt-structure",
@@ -993,32 +979,31 @@
       "conceptId": "generative-classification",
       "chapter": 4,
       "path": "src/content/docs/concepts/generative-classification.mdx",
-      "sourceSha256": "27596b0aa9d656b7ec31f357512bb6fc71044fd4f25219c4c1bdb3397d8bbc74",
+      "sourceSha256": "8f0bd1d91745980d1f0a4f9f6cd190703917828254a20a6c77ae8898142a1c68",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch04-generative-classification"],
+      "sourceSectionIds": [
+        "book-ch04-generative-classification",
+        "book-ch04-t5",
+        "book-ch04-chatgpt"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The code builds a prompt and stops before generation, parsing, or classification evaluation.",
+      "finding": "E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "5f5d18d00449e68d00f2a4707b963bc3b1b33b786f680ac5e730fc67b56d7226",
-      "codeFirstLine": "instruction = \"Return one label: positive or negative.\"",
-      "sharedExampleWith": [
-        "few-shot-examples",
-        "in-context-learning",
-        "instruction-prompting",
-        "prompt-structure",
-        "prompt-templates"
-      ],
-      "genericExercise": true,
+      "exampleKind": "evaluated-discovery-workflow",
+      "codeSha256": "548cf946398d3735cd3f1fbcc9020dfafad14c8da1581c7b81fc4ebb9e75b4d3",
+      "codeFirstLine": "outputs = [\" negative \", \"POSITIVE\", \"not negative\", \"positive because it is funny\"]",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Generate class labels, validate outputs, and evaluate task accuracy separately from formatting."
+        "Independent technical/editorial review and beginner feedback; full-data and hosted execution require their own evidence."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E4"
+      "executionStatus": "cpu-classification-and-topics-verified",
+      "nextPhase": "E4",
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "conceptId": "generative-evaluation",
@@ -1156,7 +1141,6 @@
       "codeFirstLine": "instruction = \"Return one label: positive or negative.\"",
       "sharedExampleWith": [
         "few-shot-examples",
-        "generative-classification",
         "instruction-prompting",
         "prompt-structure",
         "prompt-templates"
@@ -1187,7 +1171,6 @@
       "codeFirstLine": "instruction = \"Return one label: positive or negative.\"",
       "sharedExampleWith": [
         "few-shot-examples",
-        "generative-classification",
         "in-context-learning",
         "prompt-structure",
         "prompt-templates"
@@ -1700,7 +1683,6 @@
       "codeFirstLine": "instruction = \"Return one label: positive or negative.\"",
       "sharedExampleWith": [
         "few-shot-examples",
-        "generative-classification",
         "in-context-learning",
         "instruction-prompting",
         "prompt-templates"
@@ -1734,7 +1716,6 @@
       "codeFirstLine": "instruction = \"Return one label: positive or negative.\"",
       "sharedExampleWith": [
         "few-shot-examples",
-        "generative-classification",
         "in-context-learning",
         "instruction-prompting",
         "prompt-structure"
@@ -2046,7 +2027,7 @@
       "evidenceAnchor": "implement-it",
       "exampleKind": "foundation-reference-workflow",
       "codeSha256": "45d1bd93fd41acaf16a567fc21d5b922e5029c3271c5dee61fb2c1562dfcd8bf",
-      "codeFirstLine": "source = {\"Saturday\": \"10:00\u201316:00\"}",
+      "codeFirstLine": "source = {\"Saturday\": \"10:00–16:00\"}",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
@@ -2164,10 +2145,7 @@
       "exampleKind": "illustrative-python",
       "codeSha256": "1d303f69fda272102a43cb998219dab761a5d61eb43e7306c32de785f165f684",
       "codeFirstLine": "from math import sqrt",
-      "sharedExampleWith": [
-        "document-embeddings",
-        "embeddings-for-classification"
-      ],
+      "sharedExampleWith": [],
       "genericExercise": true,
       "requiredWork": [
         "Define task-dependent similarity and representation objectives.",
@@ -2261,30 +2239,27 @@
       "conceptId": "sentiment-analysis",
       "chapter": 4,
       "path": "src/content/docs/concepts/sentiment-analysis.mdx",
-      "sourceSha256": "c4a4d3b55d95b9e1c67969bf7dc863c7fbfef4d0bfbc2db00aafb085f3f6d3ef",
+      "sourceSha256": "bce19b65e455a92e84499d11d5b6d9be633930ac16c54faf99c4396c2d3b22d1",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": ["book-ch04-sentiment-task"],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The keyword rule is a useful baseline; add real classifier outputs and ambiguous review evaluation.",
+      "finding": "E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "68017589f5fdb83619c1f966daabea3667772a6e0d91d06784181b962a9c34b0",
-      "codeFirstLine": "examples = [\"a wonderful film\", \"a dull film\"]",
-      "sharedExampleWith": [
-        "few-shot-classification",
-        "supervised-classification",
-        "task-specific-models"
-      ],
-      "genericExercise": true,
+      "exampleKind": "evaluated-discovery-workflow",
+      "codeSha256": "c3bb2675c59065b6dae5cb83db28e7804258ac3eeef2d0206dcaefee05d1235b",
+      "codeFirstLine": "text = \"not good\"",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Inspect a real review dataset, label conventions, and ambiguous or mixed sentiment."
+        "Independent technical/editorial review and beginner feedback; full-data and hosted execution require their own evidence."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E4"
+      "executionStatus": "cpu-classification-and-topics-verified",
+      "nextPhase": "E4",
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "conceptId": "sequence-packing",
@@ -2402,67 +2377,60 @@
       "conceptId": "supervised-classification",
       "chapter": 4,
       "path": "src/content/docs/concepts/supervised-classification.mdx",
-      "sourceSha256": "6bb5b218f7acd4b9d61de66578519aabc27e072eb7d02650df488c08996a873d",
+      "sourceSha256": "4ef37bca6943b21f185537bad54e3b609585651b2fa9f78d5d959b06305e5149",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch04-supervised",
         "book-ch04-classification-metrics"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The supplied labels are never used to fit a model; the rule is handwritten.",
+      "finding": "E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "68017589f5fdb83619c1f966daabea3667772a6e0d91d06784181b962a9c34b0",
-      "codeFirstLine": "examples = [\"a wonderful film\", \"a dull film\"]",
-      "sharedExampleWith": [
-        "few-shot-classification",
-        "sentiment-analysis",
-        "task-specific-models"
-      ],
-      "genericExercise": true,
+      "exampleKind": "evaluated-discovery-workflow",
+      "codeSha256": "42be7c3f7cc484bdf4541650592f4f49b83ef53a2ac42f2d4c8ebd09e8f8cf92",
+      "codeFirstLine": "gold = [0, 0, 1, 1, 1]",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Train and evaluate a classifier over fixed vectors using disjoint data splits.",
-        "Compute classification metrics from a hand-labeled confusion matrix and distinguish averaging choices."
+        "Independent technical/editorial review and beginner feedback; full-data and hosted execution require their own evidence."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E4"
+      "executionStatus": "cpu-classification-and-topics-verified",
+      "nextPhase": "E4",
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "conceptId": "task-specific-models",
       "chapter": 4,
       "path": "src/content/docs/concepts/task-specific-models.mdx",
-      "sourceSha256": "ac1e42f68c2d6ff486742ca45a5e0b78a1c7754238de35ea5bc139702bc0b31d",
+      "sourceSha256": "1b795a079525b5bca489ebdf0723e5a192a52bb5bf6714056d250a6936961260",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch04-representation-classification",
-        "book-ch04-task-specific"
+        "book-ch04-task-specific",
+        "book-ch04-model-selection"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "A handwritten rule does not load a trained task-specific model; a separate use-case sketch does.",
+      "finding": "E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "68017589f5fdb83619c1f966daabea3667772a6e0d91d06784181b962a9c34b0",
-      "codeFirstLine": "examples = [\"a wonderful film\", \"a dull film\"]",
-      "sharedExampleWith": [
-        "few-shot-classification",
-        "sentiment-analysis",
-        "supervised-classification"
-      ],
-      "genericExercise": true,
+      "exampleKind": "evaluated-discovery-workflow",
+      "codeSha256": "36415254301399788aaaa271e9d4ac8678052a35ffbc5df6efc57cbd5e596fd0",
+      "codeFirstLine": "model_labels = {0: \"POSITIVE\", 1: \"NEGATIVE\"}",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Compare a trained task head with a separate classifier over fixed embeddings.",
-        "Run an actual encoder classifier and interpret label mappings and class scores."
+        "Independent technical/editorial review and beginner feedback; full-data and hosted execution require their own evidence."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E4"
+      "executionStatus": "cpu-classification-and-topics-verified",
+      "nextPhase": "E4",
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "conceptId": "text-embedding",
@@ -2591,55 +2559,57 @@
       "conceptId": "topic-modeling",
       "chapter": 5,
       "path": "src/content/docs/concepts/topic-modeling.mdx",
-      "sourceSha256": "916e40da095bab637706adabe04d9e0e1dea6808358d43bfd54c2cd3490c96a4",
+      "sourceSha256": "43f5b3a7dd864aa104be6995ba6f4564007add8e1996d2456d37b29d5e6021d9",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": ["book-ch05-topic-modeling"],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "Raw word frequency over supplied groups does not compute topic weighting or validate interpretation.",
+      "finding": "E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "e121db27ba30ce062e80cfb67150c93c8ab486e00f26f7c0232583c588f82118",
-      "codeFirstLine": "documents = [\"rain storm cloud\", \"sun warm beach\", \"cloud rain wind\"]",
-      "sharedExampleWith": [
-        "bertopic",
-        "cluster-inspection",
-        "topic-representations"
-      ],
-      "genericExercise": true,
+      "exampleKind": "evaluated-discovery-workflow",
+      "codeSha256": "595ffd889b3eb82c44c7c578e44ac2dcfcda75cdaf5458a2dd7343ba0bedb290",
+      "codeFirstLine": "groups = {",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Explain why interpretation requires a term-weighting and inspection stage beyond grouping."
+        "Independent technical/editorial review and beginner feedback; full-data and hosted execution require their own evidence."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E4"
+      "executionStatus": "cpu-classification-and-topics-verified",
+      "nextPhase": "E4",
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "conceptId": "topic-representations",
       "chapter": 5,
       "path": "src/content/docs/concepts/topic-representations.mdx",
-      "sourceSha256": "6b7fc0598d7b1e6ba3c195f743b3806a3a8c5fe12b882347011995d6d8cad1b8",
+      "sourceSha256": "36b0000b2439004b0aee2e462b5767d0ba22bb7e1cb040f7f9bf7787a1212b98",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch05-representation-blocks"],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "Raw word counts do not implement c-TF-IDF, semantic keyword reranking, or diversity refinement.",
-      "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "e121db27ba30ce062e80cfb67150c93c8ab486e00f26f7c0232583c588f82118",
-      "codeFirstLine": "documents = [\"rain storm cloud\", \"sun warm beach\", \"cloud rain wind\"]",
-      "sharedExampleWith": ["bertopic", "cluster-inspection", "topic-modeling"],
-      "genericExercise": true,
-      "requiredWork": [
-        "Implement keyword reranking and diversity refinement without changing document assignments."
+      "sourceSectionIds": [
+        "book-ch05-representation-blocks",
+        "book-ch05-keybert",
+        "book-ch05-generation-block"
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E4"
+      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
+      "finding": "E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "evaluated-discovery-workflow",
+      "codeSha256": "fe3b1940b9259251ea054d5623c298726dd41c97dd04861db7efa4027e031ab7",
+      "codeFirstLine": "assignments_before = [0, 0, 1, -1]",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner feedback; full-data and hosted execution require their own evidence."
+      ],
+      "executionStatus": "cpu-classification-and-topics-verified",
+      "nextPhase": "E4",
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "conceptId": "transformer",
@@ -2836,7 +2806,7 @@
       "evidenceAnchor": "implement-it",
       "exampleKind": "foundation-reference-workflow",
       "codeSha256": "664de99e680172346ee0fc0caffafec72568b63e49380b335475a3ec65cf539c",
-      "codeFirstLine": "text = \"cats \ud83d\udc4b\"",
+      "codeFirstLine": "text = \"cats 👋\"",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
@@ -2882,37 +2852,90 @@
       "conceptId": "zero-shot-classification",
       "chapter": 4,
       "path": "src/content/docs/concepts/zero-shot-classification.mdx",
-      "sourceSha256": "82a6e8478ac5f657454638629c842f7ffb86225cfea108c4ce59a4585dd4e63c",
+      "sourceSha256": "6061eca990daf19def0e8690bee0496ccb7c207f7592ee5855e51ea1b5888477",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": ["book-ch04-zero-shot"],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "Keyword sets are a rule baseline, not embedding- or entailment-based zero-shot classification.",
+      "finding": "E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "ad8b9b5a72be9e2aa619ade1e90d0d6945172f0afe277fd69ef4f75cc311d954",
-      "codeFirstLine": "labels = {\"sports\": {\"goal\", \"team\"}, \"food\": {\"meal\", \"recipe\"}}",
+      "exampleKind": "evaluated-discovery-workflow",
+      "codeSha256": "e36964d021675e238b8266e54d5d1a7ac33aac84b3f08027df5d299601795c55",
+      "codeFirstLine": "from math import exp",
       "sharedExampleWith": [],
-      "genericExercise": true,
+      "genericExercise": false,
       "requiredWork": [
-        "Compare real document and label-description vectors and test wording sensitivity."
+        "Independent technical/editorial review and beginner feedback; full-data and hosted execution require their own evidence."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E4"
+      "executionStatus": "cpu-classification-and-topics-verified",
+      "nextPhase": "E4",
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
+    },
+    {
+      "conceptId": "maximal-marginal-relevance",
+      "chapter": 5,
+      "path": "src/content/docs/concepts/maximal-marginal-relevance.mdx",
+      "sourceSha256": "e429d577d5481bb5ad85da1026f143a8d79a1640409564a252700b7fbabcafa8",
+      "legacyStatus": "full",
+      "reviewStatus": "changes-required",
+      "auditStatus": "assessed",
+      "priority": "P2",
+      "reviewRecord": "e0-static-audit-2026-11-19",
+      "sourceSectionIds": ["book-ch05-mmr"],
+      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
+      "finding": "E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "evaluated-discovery-workflow",
+      "codeSha256": "27cb8c87eafb6b0ff6c9b0cc48c736549f8949dbc62b5215f5e46cf29858a87e",
+      "codeFirstLine": "relevance = {\"translations\": 0.88, \"evaluation\": 0.65}",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner feedback; full-data and hosted execution require their own evidence."
+      ],
+      "executionStatus": "cpu-classification-and-topics-verified",
+      "nextPhase": "E4",
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
+    },
+    {
+      "conceptId": "class-based-tf-idf",
+      "chapter": 5,
+      "path": "src/content/docs/concepts/class-based-tf-idf.mdx",
+      "sourceSha256": "0e81b38563db3291cad24bac77b1487dc0e79e4199824ba061064e1c3f90903d",
+      "legacyStatus": "full",
+      "reviewStatus": "changes-required",
+      "auditStatus": "assessed",
+      "priority": "P2",
+      "reviewRecord": "e0-static-audit-2026-11-19",
+      "sourceSectionIds": ["book-ch05-ctfidf"],
+      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
+      "finding": "E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "evaluated-discovery-workflow",
+      "codeSha256": "d05b08022d097842f3bf935bc41ba7a0cfcb8c4115aeba91edf852ed0274fe53",
+      "codeFirstLine": "from math import log",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner feedback; full-data and hosted execution require their own evidence."
+      ],
+      "executionStatus": "cpu-classification-and-topics-verified",
+      "nextPhase": "E4",
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     }
   ],
   "useCases": [
     {
       "path": "src/content/docs/use-cases/text-classification.mdx",
-      "anchor": "run-a-real-model",
+      "anchor": "2-fit-and-compare-fairly",
       "chapter": 4,
-      "implementation": "pretrained-inference-sketch",
-      "gap": "Unpinned model/dependencies; no recorded clean run, comparison baseline, or executable held-out evaluation.",
-      "sourceSha256": "99adc9b9a81e82c500e9a791a4274dcc3448ecd536609505a019ce1e039c6d26",
-      "executionStatus": "not-verified"
+      "implementation": "evaluated-seven-method-comparison-and-saved-head",
+      "gap": "Independent reader review and larger-data validation remain pending; hosted provider execution is optional and not claimed.",
+      "sourceSha256": "22225cb749ba4b860ef28731327d039d76f9aae9e336c46d27b00b64e2b0aa3e",
+      "executionStatus": "cpu-classification-verified"
     },
     {
       "path": "src/content/docs/use-cases/rag-question-answering.mdx",
@@ -2922,6 +2945,15 @@
       "gap": "Unpinned dependencies; one selected passage and generated draft; no recorded run, absence tests, reranking, or executable citation evaluation.",
       "sourceSha256": "23a79f07657120f1035733fd72d76dbb1486a0f34f11b27fea05ca92a7152842",
       "executionStatus": "not-verified"
+    },
+    {
+      "path": "src/content/docs/use-cases/research-collection-explorer.mdx",
+      "anchor": "2-run-the-actual-topic-model",
+      "chapter": 5,
+      "implementation": "fitted-topic-pipeline-with-controlled-representation-and-density-comparisons",
+      "gap": "Independent reader review and a realistic licensed external research collection remain pending.",
+      "sourceSha256": "875be6aabbd4d56780dc0c75fac09c053e37795bf559fefc7d37d07b39155b07",
+      "executionStatus": "cpu-topic-workflow-verified"
     }
   ],
   "lastUpdated": "2026-11-20"

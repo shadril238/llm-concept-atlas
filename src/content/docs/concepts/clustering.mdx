@@ -1,100 +1,102 @@
 ---
-title: Clustering
-description: Clustering groups unlabeled items according to a chosen representation and distance or density rule.
-kind: concept
+title: "Clustering"
+description: "Text clustering fits groups from feature geometry without target class labels. HDBSCAN uses density structure and can mark points as noise; its group IDs are local identifiers, not predefined semantic classes."
+kind: "concept"
 conceptId: clustering
 chapter: 5
-part: applications
-summary: Clustering groups unlabeled items according to a chosen representation and distance or density rule.
-parent: chapter-05
-prerequisites: [dimensionality-reduction]
-related: [dimensionality-reduction, cluster-inspection]
-level: intermediate
-tags: [applications, chapter-05]
+part: "applications"
+summary: "Text clustering fits groups from feature geometry without target class labels. HDBSCAN uses density structure and can mark points as noise; its group IDs are local identifiers, not predefined semantic classes."
+parent: "chapter-05"
+prerequisites: ["dimensionality-reduction"]
+related: ["dimensionality-reduction", "cluster-inspection"]
+level: "intermediate"
+tags: ["applications", "chapter-05"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-20"
+reviewStatus: "author-reviewed"
+reviewRecord: e4-discovery-author-review-2026-11-20
+learningObjectives: ["Distinguish fitted density clusters from nearest preassigned centers.", "Explain minimum cluster size, min_samples, and noise label −1.", "Compare partitions without assuming equal numeric topic IDs."]
+bookSections: ["book-ch05-clustering-pipeline", "book-ch05-density-clusters", "book-ch05-hdbscan"]
+labHref: "/labs/classification-and-topics/"
+aliases: ["HDBSCAN", "density clustering", "noise points", "outliers"]
+exampleIds: ["discovery-clustering", "modular-bertopic"]
+relationshipReasons: {"dimensionality-reduction": "This prerequisite supplies the input representation or task contract used in the worked trace."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { ClusteringLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import DiscoveryEvidence from '../../../components/DiscoveryEvidence.astro';
+import { ClassificationComparison, LabelValidator, CtfidfCalculator, DiversityExplorer, TopicExplorer } from '../../../components/simulations/DiscoveryLabs';
 
 <ConceptPrimer id="clustering" />
 
 ## Definition and intuition
 
-Clustering groups unlabeled items according to a chosen representation and distance or density rule.
+Text clustering fits groups from feature geometry without target class labels. HDBSCAN uses density structure and can mark points as noise; its group IDs are local identifiers, not predefined semantic classes.
 
-Chapter 5 explores unlabeled collections. A cluster is a geometric grouping, while a useful topic also needs an interpretable description and inspection by a person.
+Clustering is useful when you do not yet have a trustworthy taxonomy. It cannot decide by itself whether a group is meaningful for a reader or useful for a product. The chosen representation and density assumptions determine what can become a group.
 
-## Before you start
+<ReferenceBrief objectives={["Distinguish fitted density clusters from nearest preassigned centers.", "Explain minimum cluster size, min_samples, and noise label \u22121.", "Compare partitions without assuming equal numeric topic IDs."]} prerequisites="dimensionality-reduction" scope="A small recorded CPU workflow plus explicit teaching calculations. Published results are not independent lesson acceptance." />
 
-Read [Dimensionality reduction](/llm-concept-atlas/concepts/dimensionality-reduction/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **Clustering** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Density rather than fixed class centers
 
-1. **Prepare:** Embed documents in a consistent space
-2. **Transform:** Choose a grouping method and tune its assumptions
-3. **Inspect:** Inspect representative members and outliers rather than trusting cluster IDs.
+HDBSCAN builds and condenses a hierarchy based on density-related distances, then selects stable groups under a specified selection rule. min_cluster_size sets a minimum retained group size; min_samples changes how conservatively density is assessed. The result may contain −1 points that do not satisfy the grouping criterion. −1 is not a new coherent semantic topic and does not mean the document is useless.
 
-### The important distinction
+### The actual fitted experiment
 
-K-means assigns points to a fixed number of centers and assumes roughly compact groups. Density methods can identify irregular groups and mark noise but introduce their own sensitivity to scale and neighborhood settings. The choice of embedding and distance often matters more than a small change in clustering code.
+L08 clusters a real UMAP reduction of pretrained document vectors. Its baseline uses min_cluster_size 5, min_samples 8, Euclidean distance in the five-dimensional reduction, and excess-of-mass selection. It finds three topics and one noise document in this recorded run. The control experiment changes only min_samples to 3 on exactly those same points. The bridge document about speech, translation, and summaries joins a group under the less conservative setting.
+
+### Compare membership, not names
+
+A rerun can call the same groups 0,1,2 in a different order. Compare a contingency table, outlier transitions, and a label-permutation-invariant partition measure such as adjusted Rand index. L08 reports ARI with all −1 points treated as a group; that convention is explicit because noise is not one semantic class. The measured value describes these two partitions only.
 
 ## Worked example
 
-Three notes about pets and two about vehicles may form two clusters in a toy 2D space. A borderline note about a pet in a car could move as the representation changes. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+Partitions [0,0,1,1] and [7,7,3,3] agree on every same-group pair even though none of their numeric IDs match. A raw equality rate would report zero agreement. The code below checks pair membership. The real lab fits HDBSCAN rather than supplying these example groups to it.
 
-<LessonFlow steps={["Embed documents in a consistent space", "Choose a grouping method and tune its assumptions", "Inspect representative members and outliers rather than trusting cluster IDs."]} caption="A teaching diagram for Clustering. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
 
-## Try the interactive lab
-
-<ClusteringLab client:visible />
-
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+<TopicExplorer client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+This small mechanism uses Python’s standard library and illustrative values; it does not claim to run a pretrained model. Run `python3 scripts/run-examples.py --id discovery-clustering`. The connected workflow below supplies the actual model, data, and evaluation.
+
+{/* example:discovery-clustering:start */}
 
 ```python
-points = {"a": (0, 0), "b": (1, 0), "c": (8, 8)}
-centers = {"near": (0, 0), "far": (8, 8)}
-for name, point in points.items():
-    group = min(centers, key=lambda k: sum((x-y)**2 for x,y in zip(point, centers[k])))
-    print(name, group)
+a = [0, 0, 1, 1]
+b = [7, 7, 3, 3]
+pairs = [(i, j) for i in range(len(a)) for j in range(i + 1, len(a))]
+agreement = sum((a[i] == a[j]) == (b[i] == b[j]) for i, j in pairs) / len(pairs)
+print("raw ID equality:", sum(x == y for x, y in zip(a, b)) / len(a))
+print("pair agreement:", agreement)
+assert agreement == 1
 ```
 
-**Expected output:**
+{/* example:discovery-clustering:end */}
 
-```text
-a near
-b near
-c far
-```
-
-**What the code shows:** Each point is assigned to the nearest fixed center by squared Euclidean distance. Moving a point or center can change the group even though the documents remain the same. The [official chapter 5 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter05) develops the corresponding model-based implementation.
+<DiscoveryEvidence id="modular-bertopic" />
 
 ## When to use it
 
-Use it to explore collections before labels exist or to find candidate segments for review. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use clustering to explore a collection, support manual labeling, or identify groups needing separate review. Inspect small groups, borderline documents, and outliers, then test whether the resulting organization serves the intended use case.
 
 ## Limits and common mistakes
 
-- Cluster IDs have no intrinsic meaning, and changing the embedding changes the grouping.
-- **Failure to look for:** A cluster is named “health” from one example even though most members are about insurance billing.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Density groups in a distorted reduction are not objective categories. The curated corpus includes unrelated texts that can still be absorbed into a plausible-looking group. Do not present membership strength as probability that the topic meaning is correct.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First embed documents in a consistent space Then choose a grouping method and tune its assumptions Finally inspect representative members and outliers rather than trusting cluster IDs.</p></details>
+<details><summary>Must every document belong to a cluster?</summary><p>No. HDBSCAN can return −1. Inspect those texts and decide whether they are rare, ambiguous, poorly represented, or outside the collection’s purpose.</p></details>
 
-<details><summary>What would make the result misleading?</summary><p>A cluster is named “health” from one example even though most members are about insurance billing.</p></details>
+<details><summary>Why is renumbering 0→7 not a semantic change?</summary><p>The IDs are arbitrary. Membership relations and the associated evidence define a partition; the integer names do not.</p></details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 5 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 5 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter05). Continue through the linked prerequisites and nearby concepts below.
+Book scope: Chapter 5, printed pp. 139–146; printed pp. 142–144. Precise objective IDs are recorded in the [source inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The CPU model choices, licensed sentiment subset, original fictional corpus, arithmetic traces, and controls are atlas adaptations. Read the [pinned official chapter notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter05) and the [E4 execution guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/applications/discovery/README.md) for versioned implementation sources and provenance.
 
 <ConceptConnections id="clustering" />

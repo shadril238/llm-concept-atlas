@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "discovery-maximal-marginal-relevance",
+  "status": "passed",
+  "date": "2026-11-20T14:48:28.275431+00:00",
+  "gitCommit": "7ea038d4a6c5fd39942722ec7e7be0bf96cd3a1f",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e4/lesson_snippets/maximal_marginal_relevance.py"
+  ],
+  "sourceSha256": "d4da583fb83c8a2d1baec8ffb84a4b6652bdb64efd78e212025462c66ffb11c9",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "81b3e1eab1f2e86cc13f25237275832fc0aedd480c6a8c83baea852b6bf48e68",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "{'translations': 0.322, 'evaluation': 0.395}\n",
+  "stderr": "",
+  "error": null
+}

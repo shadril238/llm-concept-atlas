@@ -61,6 +61,37 @@
         "Beginner pilot feedback"
       ],
       "accepted": false
+    },
+    {
+      "id": "e4-discovery-author-review-2026-11-20",
+      "date": "2026-11-20",
+      "status": "author-reviewed",
+      "independentReview": false,
+      "reviewer": "Implementing assistant (author technical pass)",
+      "concepts": [
+        "bertopic",
+        "class-based-tf-idf",
+        "cluster-inspection",
+        "clustering",
+        "dimensionality-reduction",
+        "document-embeddings",
+        "embeddings-for-classification",
+        "generative-classification",
+        "maximal-marginal-relevance",
+        "sentiment-analysis",
+        "supervised-classification",
+        "task-specific-models",
+        "topic-modeling",
+        "topic-representations",
+        "zero-shot-classification"
+      ],
+      "evidence": "docs/reviews/e4-discovery.md",
+      "pending": [
+        "Independent technical/editorial review",
+        "Beginner pilot feedback",
+        "Optional live hosted comparison if separately authorized"
+      ],
+      "accepted": false
     }
   ]
 }

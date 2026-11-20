@@ -1,98 +1,103 @@
 ---
-title: Task-specific models
-description: A task-specific model is trained or adapted to produce one target kind of output, such as sentiment labels.
-kind: concept
+title: "Task-specific models"
+description: "A task-specific text classifier is a pretrained representation model with a head trained to score a particular label set. Loading its tokenizer and label map correctly is part of using the model."
+kind: "concept"
 conceptId: task-specific-models
 chapter: 4
-part: applications
-summary: A task-specific model is trained or adapted to produce one target kind of output, such as sentiment labels.
-parent: chapter-04
-prerequisites: [encoder-only]
-related: [sentiment-analysis, embeddings-for-classification]
-level: beginner
-tags: [applications, chapter-04]
+part: "applications"
+summary: "A task-specific text classifier is a pretrained representation model with a head trained to score a particular label set. Loading its tokenizer and label map correctly is part of using the model."
+parent: "chapter-04"
+prerequisites: ["encoder-only"]
+related: ["sentiment-analysis", "embeddings-for-classification"]
+level: "beginner"
+tags: ["applications", "chapter-04"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-20"
+reviewStatus: "author-reviewed"
+reviewRecord: e4-discovery-author-review-2026-11-20
+learningObjectives: ["Trace token IDs through an encoder and classification head.", "Map config.id2label into the application label IDs.", "Choose a model using task, language, evaluation, and resource constraints."]
+bookSections: ["book-ch04-representation-classification", "book-ch04-task-specific", "book-ch04-model-selection"]
+labHref: "/labs/classification-and-topics/"
+aliases: ["classification head", "label map", "DistilBERT", "model selection"]
+exampleIds: ["discovery-task-specific-models", "classification-comparison"]
+relationshipReasons: {"encoder-only": "This prerequisite supplies the input representation or task contract used in the worked trace."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { ClassificationLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import DiscoveryEvidence from '../../../components/DiscoveryEvidence.astro';
+import { ClassificationComparison, LabelValidator, CtfidfCalculator, DiversityExplorer, TopicExplorer } from '../../../components/simulations/DiscoveryLabs';
 
 <ConceptPrimer id="task-specific-models" />
 
 ## Definition and intuition
 
-**Task-specific models**: A task-specific model is trained or adapted to produce one target kind of output, such as sentiment labels.
+A task-specific text classifier is a pretrained representation model with a head trained to score a particular label set. Loading its tokenizer and label map correctly is part of using the model.
 
-Chapter 4 compares classification with specialized encoders, reusable embeddings, and generators. Label definitions, labeled data, and evaluation examples determine which approach fits.
+A sentiment model is already a learned decision function. It is not necessary to fit a new head merely to inspect its predictions, but its existing labels constrain what it can say. A positive/negative head cannot supply a reliable third “billing” label by renaming its output.
 
-## Before you start
+<ReferenceBrief objectives={["Trace token IDs through an encoder and classification head.", "Map config.id2label into the application label IDs.", "Choose a model using task, language, evaluation, and resource constraints."]} prerequisites="encoder-only" scope="A small recorded CPU workflow plus explicit teaching calculations. Published results are not independent lesson acceptance." />
 
-Read [Encoder-Only Model](/llm-concept-atlas/concepts/encoder-only/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **task-specific models** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### From states to label logits
 
-1. **Prepare:** Choose a model whose output head matches the task
-2. **Transform:** Prepare labeled examples in the expected format
-3. **Inspect:** Fine-tune or apply the model and measure task performance.
+A tokenizer produces IDs and an attention mask. The encoder builds contextual states; the checkpoint’s classification layers reduce those states to one logit per trained class. Softmax converts the logits into a distribution over that head’s classes. Architectures differ in their pooling and head details, so do not assume every model averages token states.
 
-### The important distinction
+### Read the map rather than guessing
 
-A classifier head commonly maps one pooled encoder representation to class logits, then softmax turns logits into relative probabilities. Those probabilities may be badly calibrated after domain shift. Compare latency and task quality with a simpler embedding classifier before choosing full model adaptation.
+L07 loads the pinned SST-2 DistilBERT checkpoint in evaluation mode and reads config.id2label. It parses NEGATIVE/POSITIVE into canonical 0/1 and reorders probability columns accordingly. A different checkpoint might put positive in column 0 or include neutral. Treat an unknown mapping as a contract error instead of assuming the highest column has a universal meaning.
+
+### Model selection
+
+Start with the required labels and language, then inspect provenance, input length, artifact/license constraints, and representative validation cases. Compare a TF-IDF baseline before selecting a larger encoder. An encoder trained on tweets and one trained on movie sentences can have different domain behavior. The atlas uses a small CPU checkpoint as a reproducible choice, not a current best-model recommendation. A hub leaderboard cannot replace evaluation on your own input distribution.
 
 ## Worked example
 
-A sentiment encoder with a two-class head returns positive or negative scores directly. It may outperform a general text generator on a stable, narrow labeling task. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+Imagine model columns [POSITIVE, NEGATIVE] with probabilities [0.8,0.2], while the application expects [negative,positive]. The prediction is application ID 1, and canonical probabilities are [0.2,0.8]. Simply taking argmax and calling it the application ID would invert the result. The live comparison uses an explicitly inspected map even though this particular checkpoint happens to agree with 0/1.
 
-<LessonFlow steps={["Choose a model whose output head matches the task", "Prepare labeled examples in the expected format", "Fine-tune or apply the model and measure task performance."]} caption="A teaching diagram for Task-specific models. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
 
-## Try the interactive lab
-
-<ClassificationLab client:visible />
-
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+<ClassificationComparison client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+This small mechanism uses Python’s standard library and illustrative values; it does not claim to run a pretrained model. Run `python3 scripts/run-examples.py --id discovery-task-specific-models`. The connected workflow below supplies the actual model, data, and evaluation.
+
+{/* example:discovery-task-specific-models:start */}
 
 ```python
-examples = ["a wonderful film", "a dull film"]
-labels = ["positive", "negative"]
-def classify(text):
-    return "positive" if "wonderful" in text else "negative"
-print([(text, classify(text)) for text in examples])
+model_labels = {0: "POSITIVE", 1: "NEGATIVE"}
+application_ids = {"negative": 0, "positive": 1}
+model_scores = [0.8, 0.2]
+canonical = [0.0, 0.0]
+for column, label in model_labels.items():
+    canonical[application_ids[label.casefold()]] = model_scores[column]
+print("[negative, positive]:", canonical)
+assert max(range(2), key=canonical.__getitem__) == 1
 ```
 
-**Expected output:**
+{/* example:discovery-task-specific-models:end */}
 
-```text
-[('a wonderful film', 'positive'), ('a dull film', 'negative')]
-```
-
-**What the code shows:** The function uses one word as a simple classification baseline. Change the rule or input text and compare the predicted label with the intended label. The [official chapter 4 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter04) develops the corresponding model-based implementation.
+<DiscoveryEvidence id="classification-comparison" />
 
 ## When to use it
 
-Use a specialized model when labels are stable, latency matters, and relevant training data exists. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use a task head when its trained label scheme matches the decision you need and held-out results justify it. Add an abstention/review policy for unfamiliar or uncertain cases. If you need new labels, collect evidence for a new head or evaluate a suitable zero-shot/generative method.
 
 ## Limits and common mistakes
 
-- It may not transfer to new labels or domains without retraining or recalibration.
-- **Failure to look for:** A movie-review model is deployed on medical feedback and misreads domain-specific terms.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Class scores are not an explanation and can be miscalibrated. L07 caps inputs at 256 tokens and records that truncation; a long review can lose its final judgment. Checkpoint prior training differs across methods, and possible overlap with review sources remains unknown.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First choose a model whose output head matches the task Then prepare labeled examples in the expected format Finally fine-tune or apply the model and measure task performance.</p></details>
+<details><summary>What if a checkpoint has labels neutral, positive, and negative?</summary><p>Choose a documented policy or a matching task; do not silently discard or relabel neutral. Evaluate the resulting decision rule.</p></details>
 
-<details><summary>What would make the result misleading?</summary><p>A movie-review model is deployed on medical feedback and misreads domain-specific terms.</p></details>
+<details><summary>Does eval mode retrain the model?</summary><p>No. It changes training-dependent module behavior such as dropout. The pinned checkpoint weights remain unchanged during L07 task-head inference.</p></details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 4 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 4 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter04). Continue through the linked prerequisites and nearby concepts below.
+Book scope: Chapter 4, printed pp. 113–127; printed pp. 115–116; printed pp. 116–120. Precise objective IDs are recorded in the [source inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The CPU model choices, licensed sentiment subset, original fictional corpus, arithmetic traces, and controls are atlas adaptations. Read the [pinned official chapter notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter04) and the [E4 execution guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/applications/discovery/README.md) for versioned implementation sources and provenance.
 
 <ConceptConnections id="task-specific-models" />

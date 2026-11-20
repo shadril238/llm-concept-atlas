@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "discovery-topic-representations",
+  "status": "passed",
+  "date": "2026-11-20T14:48:28.130144+00:00",
+  "gitCommit": "7ea038d4a6c5fd39942722ec7e7be0bf96cd3a1f",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e4/lesson_snippets/topic_representations.py"
+  ],
+  "sourceSha256": "18c5e8d194a68916a91fec1d2a74497476cb02674a5b8eeb4d842c3bf3bac8ba",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "ae7f8ff681dce25dfa00af1e0ba1c70b8df2c3f412a11b02148418803a173aa3",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.008,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "unchanged assignments; review name: Filtering\nevidence: translation of code switched text\nevidence: constrained translation decoding\nevidence: parallel corpus filtering\n",
+  "stderr": "",
+  "error": null
+}

@@ -83,6 +83,7 @@
             "enum": [
               "foundations",
               "applications",
+              "discovery",
               "legacy-unverified",
               "reference"
             ]

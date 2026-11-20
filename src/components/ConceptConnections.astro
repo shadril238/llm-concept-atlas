@@ -23,5 +23,5 @@ const url = (path: string) => base + path.replace(/^\/+/, '');
   {children.length > 0 && <div class="connection-row"><span>Go deeper</span><div>{children.map((item) => <a href={url(item.href)}>{item.title}</a>)}</div></div>}
   {related.length > 0 && <div class="connection-row"><span>Also explore</span><div>{related.map((item) => <a href={url(item.href)}>{item.title}</a>)}</div></div>}
   {prerequisites.filter(item => node.relationshipReasons?.[item.id]).map(item => <p class="quiet-note"><strong>{item.title}:</strong> {node.relationshipReasons?.[item.id]}</p>)}
-  {node.labHref && <p><a href={url(node.labHref)}>Run the connected foundation workflows ↗</a></p>}
+  {node.labHref && <p><a href={url(node.labHref)}>Run the connected labs ↗</a></p>}
 </aside>

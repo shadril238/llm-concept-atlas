@@ -45,6 +45,11 @@
         "chapter": 12,
         "printedPages": [364, 364],
         "note": "Reconcile the printed low-rank matrix dimensions with r*(d_in+d_out) before reusing parameter-count examples. Use consistently named A/B matrices and declared shapes."
+      },
+      {
+        "chapter": 4,
+        "printedPages": [120, 120],
+        "note": "Support-weighted F1 does not generally give equal influence to minority classes. Macro-F1 weights class F1 scores equally; values can coincide on a balanced test set."
       }
     ]
   },
@@ -901,7 +906,7 @@
       "id": "book-ch01-llm-definition",
       "chapter": 1,
       "parentId": null,
-      "title": "The Moving Definition of a \u201cLarge Language Model\u201d",
+      "title": "The Moving Definition of a “Large Language Model”",
       "origin": "contents",
       "printedPages": [25, 25],
       "pdfPages": [47, 47],
@@ -3596,13 +3601,8 @@
         {
           "conceptId": "sentiment-analysis",
           "path": "src/content/docs/concepts/sentiment-analysis.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
-        },
-        {
-          "path": "src/content/docs/use-cases/text-classification.mdx",
-          "anchor": "run-a-real-model",
-          "role": "unverified-model-sketch"
         }
       ],
       "plannedDestinations": [],
@@ -3633,14 +3633,13 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Inspect a real review dataset, label conventions, and ambiguous or mixed sentiment.",
-        "The keyword rule is a useful baseline; add real classifier outputs and ambiguous review evaluation."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/sentiment-analysis.mdx",
-          "anchor": "implement-it",
-          "finding": "The keyword rule is a useful baseline; add real classifier outputs and ambiguous review evaluation."
+          "anchor": "how-it-works",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -3648,7 +3647,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 134
-      }
+      },
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "book-ch04-representation-classification",
@@ -3666,13 +3666,7 @@
         {
           "conceptId": "task-specific-models",
           "path": "src/content/docs/concepts/task-specific-models.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
-        },
-        {
-          "conceptId": "embeddings-for-classification",
-          "path": "src/content/docs/concepts/embeddings-for-classification.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -3708,19 +3702,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Compare a trained task head with a separate classifier over fixed embeddings.",
-        "A handwritten rule does not load a trained task-specific model; a separate use-case sketch does."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/task-specific-models.mdx",
-          "anchor": "implement-it",
-          "finding": "A handwritten rule does not load a trained task-specific model; a separate use-case sketch does."
-        },
-        {
-          "path": "src/content/docs/concepts/embeddings-for-classification.mdx",
-          "anchor": "implement-it",
-          "finding": "The cosine calculation never predicts labels from prototypes or a trained classifier."
+          "anchor": "how-it-works",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -3728,7 +3716,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 135
-      }
+      },
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "book-ch04-model-selection",
@@ -3742,12 +3731,19 @@
       "scope": "context",
       "kind": "context",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["classification-model-selection"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "conceptId": "task-specific-models",
+          "path": "src/content/docs/concepts/task-specific-models.mdx",
+          "anchor": "model-selection",
+          "role": "partial-explanation"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E4",
       "plannedLabs": ["L07"],
       "requirements": {
@@ -3763,24 +3759,30 @@
         "evaluation": "Contextual decision/discussion objective; a model execution or benchmark is not required."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Choose a model based on task, language, labels, evaluation, and resource constraints.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/task-specific-models.mdx",
+          "anchor": "model-selection",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 137
-      }
+      },
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "book-ch04-task-specific",
@@ -3798,13 +3800,8 @@
         {
           "conceptId": "task-specific-models",
           "path": "src/content/docs/concepts/task-specific-models.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
-        },
-        {
-          "path": "src/content/docs/use-cases/text-classification.mdx",
-          "anchor": "run-a-real-model",
-          "role": "unverified-model-sketch"
         }
       ],
       "plannedDestinations": [],
@@ -3839,14 +3836,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Run an actual encoder classifier and interpret label mappings and class scores.",
-        "A handwritten rule does not load a trained task-specific model; a separate use-case sketch does."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/task-specific-models.mdx",
-          "anchor": "implement-it",
-          "finding": "A handwritten rule does not load a trained task-specific model; a separate use-case sketch does."
+          "anchor": "how-it-works",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -3854,7 +3850,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 138
-      }
+      },
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "book-ch04-embedding-classification",
@@ -3872,7 +3869,7 @@
         {
           "conceptId": "embeddings-for-classification",
           "path": "src/content/docs/concepts/embeddings-for-classification.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -3908,14 +3905,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Encode documents and compare a learned head with class prototypes.",
-        "The cosine calculation never predicts labels from prototypes or a trained classifier."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/embeddings-for-classification.mdx",
-          "anchor": "implement-it",
-          "finding": "The cosine calculation never predicts labels from prototypes or a trained classifier."
+          "anchor": "how-it-works",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -3923,7 +3919,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 142
-      }
+      },
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "book-ch04-supervised",
@@ -3941,7 +3938,7 @@
         {
           "conceptId": "supervised-classification",
           "path": "src/content/docs/concepts/supervised-classification.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -3977,14 +3974,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Train and evaluate a classifier over fixed vectors using disjoint data splits.",
-        "The supplied labels are never used to fit a model; the rule is handwritten."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/supervised-classification.mdx",
-          "anchor": "implement-it",
-          "finding": "The supplied labels are never used to fit a model; the rule is handwritten."
+          "anchor": "how-it-works",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -3992,7 +3988,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 143
-      }
+      },
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "book-ch04-zero-shot",
@@ -4010,7 +4007,7 @@
         {
           "conceptId": "zero-shot-classification",
           "path": "src/content/docs/concepts/zero-shot-classification.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -4018,7 +4015,7 @@
       "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E4",
       "plannedLabs": ["L07"],
       "requirements": {
@@ -4034,27 +4031,28 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Compare real document and label-description vectors and test wording sensitivity.",
-        "Keyword sets are a rule baseline, not embedding- or entailment-based zero-shot classification."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/zero-shot-classification.mdx",
-          "anchor": "implement-it",
-          "finding": "Keyword sets are a rule baseline, not embedding- or entailment-based zero-shot classification."
+          "anchor": "how-it-works",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 145
-      }
+      },
+      "enhancementReview": "e4-discovery-author-review-2026-11-20",
+      "executionRecord": "examples/verification/records/classification-comparison.json"
     },
     {
       "id": "book-ch04-generative-classification",
@@ -4072,7 +4070,7 @@
         {
           "conceptId": "generative-classification",
           "path": "src/content/docs/concepts/generative-classification.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -4108,14 +4106,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Generate class labels, validate outputs, and evaluate task accuracy separately from formatting.",
-        "The code builds a prompt and stops before generation, parsing, or classification evaluation."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/generative-classification.mdx",
-          "anchor": "implement-it",
-          "finding": "The code builds a prompt and stops before generation, parsing, or classification evaluation."
+          "anchor": "how-it-works",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -4123,7 +4120,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 149
-      }
+      },
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "book-ch04-t5",
@@ -4137,12 +4135,19 @@
       "scope": "core",
       "kind": "workflow",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["t5-classification"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "conceptId": "generative-classification",
+          "path": "src/content/docs/concepts/generative-classification.mdx",
+          "anchor": "t5-classification",
+          "role": "partial-explanation"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E4",
       "plannedLabs": ["L07"],
       "requirements": {
@@ -4155,24 +4160,31 @@
       },
       "notApplicableReasons": {},
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
-        "implementation": "missing",
-        "evaluation": "missing",
-        "exercises": "missing"
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
+        "implementation": "partial",
+        "evaluation": "partial",
+        "exercises": "partial"
       },
       "gaps": [
-        "Explain encoder-decoder T5 and run the text-to-text classification workflow.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/generative-classification.mdx",
+          "anchor": "t5-classification",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 150
-      }
+      },
+      "enhancementReview": "e4-discovery-author-review-2026-11-20",
+      "executionRecord": "examples/verification/records/classification-comparison.json"
     },
     {
       "id": "book-ch04-chatgpt",
@@ -4186,12 +4198,19 @@
       "scope": "core",
       "kind": "workflow",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["hosted-classification"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "conceptId": "generative-classification",
+          "path": "src/content/docs/concepts/generative-classification.mdx",
+          "anchor": "optional-hosted-classification",
+          "role": "partial-explanation"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E4",
       "plannedLabs": ["L07"],
       "requirements": {
@@ -4204,30 +4223,36 @@
       },
       "notApplicableReasons": {},
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
-        "implementation": "missing",
-        "evaluation": "missing",
-        "exercises": "missing"
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
+        "implementation": "partial",
+        "evaluation": "partial",
+        "exercises": "partial"
       },
       "gaps": [
-        "Implement bounded optional hosted classification with label validation and a shared evaluation set.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/generative-classification.mdx",
+          "anchor": "optional-hosted-classification",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 154
-      }
+      },
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "book-ch05-arxiv-data",
       "chapter": 5,
       "parentId": null,
-      "title": "ArXiv\u2019s Articles: Computation and Language",
+      "title": "ArXiv’s Articles: Computation and Language",
       "origin": "contents",
       "printedPages": [138, 139],
       "pdfPages": [160, 161],
@@ -4235,12 +4260,19 @@
       "scope": "core",
       "kind": "workflow",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["research-abstract-corpus"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "conceptId": "bertopic",
+          "path": "src/content/docs/concepts/bertopic.mdx",
+          "anchor": "research-abstract-corpus",
+          "role": "partial-explanation"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E4",
       "plannedLabs": ["L08"],
       "requirements": {
@@ -4253,24 +4285,31 @@
       },
       "notApplicableReasons": {},
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
-        "implementation": "missing",
-        "evaluation": "missing",
-        "exercises": "missing"
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
+        "implementation": "partial",
+        "evaluation": "partial",
+        "exercises": "partial"
       },
       "gaps": [
-        "Introduce the corpus, source fields, sampling, and reproducible data preparation.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/bertopic.mdx",
+          "anchor": "research-abstract-corpus",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 160
-      }
+      },
+      "enhancementReview": "e4-discovery-author-review-2026-11-20",
+      "executionRecord": "examples/verification/records/modular-bertopic.json"
     },
     {
       "id": "book-ch05-clustering-pipeline",
@@ -4288,7 +4327,7 @@
         {
           "conceptId": "clustering",
           "path": "src/content/docs/concepts/clustering.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -4324,14 +4363,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Trace documents through embeddings, reduction, and actual cluster assignment.",
-        "Nearest fixed-center assignment is a useful calculation; it does not fit clusters or show HDBSCAN noise."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/clustering.mdx",
-          "anchor": "implement-it",
-          "finding": "Nearest fixed-center assignment is a useful calculation; it does not fit clusters or show HDBSCAN noise."
+          "anchor": "how-it-works",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -4339,7 +4377,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 161
-      }
+      },
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "book-ch05-document-embedding",
@@ -4357,7 +4396,7 @@
         {
           "conceptId": "document-embeddings",
           "path": "src/content/docs/concepts/document-embeddings.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -4365,7 +4404,7 @@
       "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E4",
       "plannedLabs": ["L08"],
       "requirements": {
@@ -4381,27 +4420,28 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Produce document embeddings from real text and retain source IDs.",
-        "The example compares supplied vectors; it neither encodes documents nor demonstrates pooling/chunking."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/document-embeddings.mdx",
-          "anchor": "implement-it",
-          "finding": "The example compares supplied vectors; it neither encodes documents nor demonstrates pooling/chunking."
+          "anchor": "how-it-works",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 161
-      }
+      },
+      "enhancementReview": "e4-discovery-author-review-2026-11-20",
+      "executionRecord": "examples/verification/records/modular-bertopic.json"
     },
     {
       "id": "book-ch05-reduction",
@@ -4419,7 +4459,7 @@
         {
           "conceptId": "dimensionality-reduction",
           "path": "src/content/docs/concepts/dimensionality-reduction.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -4455,14 +4495,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Fit UMAP and distinguish clustering-space reduction from display-only projection.",
-        "Dropping the final coordinate is a projection, not fitted PCA or UMAP."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/dimensionality-reduction.mdx",
-          "anchor": "implement-it",
-          "finding": "Dropping the final coordinate is a projection, not fitted PCA or UMAP."
+          "anchor": "how-it-works",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -4470,7 +4509,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 162
-      }
+      },
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "book-ch05-density-clusters",
@@ -4488,7 +4528,7 @@
         {
           "conceptId": "clustering",
           "path": "src/content/docs/concepts/clustering.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -4524,14 +4564,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Run density-based clustering, explain its parameters, and inspect noise labels.",
-        "Nearest fixed-center assignment is a useful calculation; it does not fit clusters or show HDBSCAN noise."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/clustering.mdx",
-          "anchor": "implement-it",
-          "finding": "Nearest fixed-center assignment is a useful calculation; it does not fit clusters or show HDBSCAN noise."
+          "anchor": "how-it-works",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -4539,7 +4578,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 164
-      }
+      },
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "book-ch05-inspection",
@@ -4557,7 +4597,7 @@
         {
           "conceptId": "cluster-inspection",
           "path": "src/content/docs/concepts/cluster-inspection.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -4565,7 +4605,7 @@
       "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E4",
       "plannedLabs": ["L08"],
       "requirements": {
@@ -4581,27 +4621,28 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Inspect representative and borderline documents and distinguish clusters from plot artifacts.",
-        "The snippet counts words in fixed groups; add actual cluster members, outliers, and representative-document inspection."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/cluster-inspection.mdx",
-          "anchor": "implement-it",
-          "finding": "The snippet counts words in fixed groups; add actual cluster members, outliers, and representative-document inspection."
+          "anchor": "how-it-works",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 166
-      }
+      },
+      "enhancementReview": "e4-discovery-author-review-2026-11-20",
+      "executionRecord": "examples/verification/records/modular-bertopic.json"
     },
     {
       "id": "book-ch05-topic-modeling",
@@ -4619,7 +4660,7 @@
         {
           "conceptId": "topic-modeling",
           "path": "src/content/docs/concepts/topic-modeling.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -4655,14 +4696,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Explain why interpretation requires a term-weighting and inspection stage beyond grouping.",
-        "Raw word frequency over supplied groups does not compute topic weighting or validate interpretation."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/topic-modeling.mdx",
-          "anchor": "implement-it",
-          "finding": "Raw word frequency over supplied groups does not compute topic weighting or validate interpretation."
+          "anchor": "how-it-works",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -4670,7 +4710,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 168
-      }
+      },
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "book-ch05-bertopic",
@@ -4688,7 +4729,7 @@
         {
           "conceptId": "bertopic",
           "path": "src/content/docs/concepts/bertopic.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -4724,14 +4765,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Fit the full modular pipeline and trace computed topic assignments and representations.",
-        "Supplied groups and raw word counts omit embedding, clustering, c-TF-IDF, and BERTopic fitting."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/bertopic.mdx",
-          "anchor": "implement-it",
-          "finding": "Supplied groups and raw word counts omit embedding, clustering, c-TF-IDF, and BERTopic fitting."
+          "anchor": "how-it-works",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -4739,7 +4779,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 170
-      }
+      },
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "book-ch05-representation-blocks",
@@ -4757,7 +4798,7 @@
         {
           "conceptId": "topic-representations",
           "path": "src/content/docs/concepts/topic-representations.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -4793,14 +4834,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Implement keyword reranking and diversity refinement without changing document assignments.",
-        "Raw word counts do not implement c-TF-IDF, semantic keyword reranking, or diversity refinement."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/topic-representations.mdx",
-          "anchor": "implement-it",
-          "finding": "Raw word counts do not implement c-TF-IDF, semantic keyword reranking, or diversity refinement."
+          "anchor": "how-it-works",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -4808,7 +4848,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 178
-      }
+      },
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "book-ch05-generation-block",
@@ -4822,12 +4863,19 @@
       "scope": "core",
       "kind": "workflow",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["generated-topic-labels"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "conceptId": "topic-representations",
+          "path": "src/content/docs/concepts/topic-representations.mdx",
+          "anchor": "generated-topic-labels",
+          "role": "partial-explanation"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E4",
       "plannedLabs": ["L08"],
       "requirements": {
@@ -4840,24 +4888,31 @@
       },
       "notApplicableReasons": {},
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
-        "implementation": "missing",
-        "evaluation": "missing",
-        "exercises": "missing"
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
+        "implementation": "partial",
+        "evaluation": "partial",
+        "exercises": "partial"
       },
       "gaps": [
-        "Generate topic descriptions from representative documents and verify their support.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/topic-representations.mdx",
+          "anchor": "generated-topic-labels",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 182
-      }
+      },
+      "enhancementReview": "e4-discovery-author-review-2026-11-20",
+      "executionRecord": "examples/verification/records/topic-label-generation.json"
     },
     {
       "id": "book-ch06-generation-models",
@@ -12406,7 +12461,7 @@
         {
           "conceptId": "supervised-classification",
           "path": "src/content/docs/concepts/supervised-classification.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "evaluation-and-confusion-matrices",
           "role": "partial-explanation"
         }
       ],
@@ -12438,18 +12493,18 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Compute classification metrics from a hand-labeled confusion matrix and distinguish averaging choices.",
-        "The supplied labels are never used to fit a model; the rule is handwritten."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/supervised-classification.mdx",
-          "anchor": "implement-it",
-          "finding": "The supplied labels are never used to fit a model; the rule is handwritten."
+          "anchor": "evaluation-and-confusion-matrices",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "book-ch04-class-prototypes",
@@ -12467,7 +12522,7 @@
         {
           "conceptId": "embeddings-for-classification",
           "path": "src/content/docs/concepts/embeddings-for-classification.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "class-average-prototypes",
           "role": "partial-explanation"
         }
       ],
@@ -12499,18 +12554,18 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Build actual class prototypes and compare their predictions with a learned head.",
-        "The cosine calculation never predicts labels from prototypes or a trained classifier."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/embeddings-for-classification.mdx",
-          "anchor": "implement-it",
-          "finding": "The cosine calculation never predicts labels from prototypes or a trained classifier."
+          "anchor": "class-average-prototypes",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "book-ch05-umap",
@@ -12528,7 +12583,7 @@
         {
           "conceptId": "dimensionality-reduction",
           "path": "src/content/docs/concepts/dimensionality-reduction.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -12560,18 +12615,18 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Fit a nonlinear reduction and explain parameter and projection limitations.",
-        "Dropping the final coordinate is a projection, not fitted PCA or UMAP."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/dimensionality-reduction.mdx",
-          "anchor": "implement-it",
-          "finding": "Dropping the final coordinate is a projection, not fitted PCA or UMAP."
+          "anchor": "how-it-works",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "book-ch05-hdbscan",
@@ -12589,7 +12644,7 @@
         {
           "conceptId": "clustering",
           "path": "src/content/docs/concepts/clustering.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -12621,18 +12676,18 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Explain density, minimum cluster size, and noise assignment with an actual fitted model.",
-        "Nearest fixed-center assignment is a useful calculation; it does not fit clusters or show HDBSCAN noise."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/clustering.mdx",
-          "anchor": "implement-it",
-          "finding": "Nearest fixed-center assignment is a useful calculation; it does not fit clusters or show HDBSCAN noise."
+          "anchor": "how-it-works",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "book-ch05-ctfidf",
@@ -12646,12 +12701,19 @@
       "scope": "core",
       "kind": "concept",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["class-based-tf-idf"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "conceptId": "class-based-tf-idf",
+          "path": "src/content/docs/concepts/class-based-tf-idf.mdx",
+          "anchor": "how-it-works",
+          "role": "partial-explanation"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E4",
       "plannedLabs": ["L08"],
       "requirements": {
@@ -12667,20 +12729,26 @@
         "evaluation": "A numerical or reasoning self-check suffices for this mechanism; full task evaluation belongs to its workflow."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Calculate class-normalized term frequency and corpus weighting with the stated convention.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/class-based-tf-idf.mdx",
+          "anchor": "how-it-works",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "book-ch05-topic-visualization",
@@ -12698,7 +12766,7 @@
         {
           "conceptId": "cluster-inspection",
           "path": "src/content/docs/concepts/cluster-inspection.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -12730,18 +12798,18 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Link term bars, similarity heatmaps, and hierarchy views to actual topic data.",
-        "The snippet counts words in fixed groups; add actual cluster members, outliers, and representative-document inspection."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/cluster-inspection.mdx",
-          "anchor": "implement-it",
-          "finding": "The snippet counts words in fixed groups; add actual cluster members, outliers, and representative-document inspection."
+          "anchor": "how-it-works",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "book-ch05-keybert",
@@ -12755,12 +12823,19 @@
       "scope": "core",
       "kind": "concept",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["topic-representation-models"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "conceptId": "topic-representations",
+          "path": "src/content/docs/concepts/topic-representations.mdx",
+          "anchor": "keybertinspired-representation-models",
+          "role": "partial-explanation"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E4",
       "plannedLabs": ["L08"],
       "requirements": {
@@ -12776,20 +12851,26 @@
         "evaluation": "A numerical or reasoning self-check suffices for this mechanism; full task evaluation belongs to its workflow."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Rerank candidate terms using representative-document and term embeddings.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/topic-representations.mdx",
+          "anchor": "keybertinspired-representation-models",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "book-ch05-mmr",
@@ -12803,12 +12884,19 @@
       "scope": "core",
       "kind": "concept",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["maximal-marginal-relevance"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "conceptId": "maximal-marginal-relevance",
+          "path": "src/content/docs/concepts/maximal-marginal-relevance.mdx",
+          "anchor": "how-it-works",
+          "role": "partial-explanation"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "nextPhase": "E4",
       "plannedLabs": ["L08"],
       "requirements": {
@@ -12824,20 +12912,26 @@
         "evaluation": "A numerical or reasoning self-check suffices for this mechanism; full task evaluation belongs to its workflow."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Balance relevance and redundancy with an explicit diversity parameter.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/maximal-marginal-relevance.mdx",
+          "anchor": "how-it-works",
+          "finding": "E4 topic-specific explanation, worked trace, interactive recorded/calculated evidence, implementation connection, and exercises; independent acceptance pending. MMR promoted to a canonical page because its selection rule is also reused for retrieval diversity."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "book-ch06-zero-shot-cot",

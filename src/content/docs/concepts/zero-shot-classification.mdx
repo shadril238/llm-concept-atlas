@@ -1,98 +1,102 @@
 ---
-title: Zero-shot classification
-description: Zero-shot classification applies a model to labels for which no task-specific labeled examples were supplied.
-kind: concept
+title: "Zero-shot classification"
+description: "Zero-shot classification assigns labels without local labeled training examples for that decision rule. Label-description similarity, entailment scoring, and generated labels are distinct mechanisms with different score meanings."
+kind: "concept"
 conceptId: zero-shot-classification
 chapter: 4
-part: applications
-summary: Zero-shot classification applies a model to labels for which no task-specific labeled examples were supplied.
-parent: chapter-04
-prerequisites: [representation-model]
-related: [supervised-classification, generative-classification]
-level: beginner
-tags: [applications, chapter-04]
+part: "applications"
+summary: "Zero-shot classification assigns labels without local labeled training examples for that decision rule. Label-description similarity, entailment scoring, and generated labels are distinct mechanisms with different score meanings."
+parent: "chapter-04"
+prerequisites: ["representation-model"]
+related: ["supervised-classification", "generative-classification"]
+level: "beginner"
+tags: ["applications", "chapter-04"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-20"
+reviewStatus: "author-reviewed"
+reviewRecord: e4-discovery-author-review-2026-11-20
+learningObjectives: ["Contrast description similarity with natural-language inference.", "Inspect label-wording sensitivity on fixed documents.", "Distinguish local zero-shot use from absence of prior model training."]
+bookSections: ["book-ch04-zero-shot"]
+labHref: "/labs/classification-and-topics/"
+aliases: ["NLI", "entailment", "label-description similarity", "zero-shot"]
+exampleIds: ["discovery-zero-shot-classification", "classification-comparison"]
+relationshipReasons: {"representation-model": "Contextual features connect text inputs to the downstream decision."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { ClassificationLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import DiscoveryEvidence from '../../../components/DiscoveryEvidence.astro';
+import { ClassificationComparison, LabelValidator, CtfidfCalculator, DiversityExplorer, TopicExplorer } from '../../../components/simulations/DiscoveryLabs';
 
 <ConceptPrimer id="zero-shot-classification" />
 
 ## Definition and intuition
 
-Zero-shot classification applies a model to labels for which no task-specific labeled examples were supplied.
+Zero-shot classification assigns labels without local labeled training examples for that decision rule. Label-description similarity, entailment scoring, and generated labels are distinct mechanisms with different score meanings.
 
-Chapter 4 compares classification with specialized encoders, reusable embeddings, and generators. Label definitions, labeled data, and evaluation examples determine which approach fits.
+No local labels does not mean no assumptions. You supply class meanings, a prompt or hypothesis template, a candidate set, and a pretrained model. Those choices can materially change predictions without changing the input review.
 
-## Before you start
+<ReferenceBrief objectives={["Contrast description similarity with natural-language inference.", "Inspect label-wording sensitivity on fixed documents.", "Distinguish local zero-shot use from absence of prior model training."]} prerequisites="representation-model" scope="A small recorded CPU workflow plus explicit teaching calculations. Published results are not independent lesson acceptance." />
 
-Read [Representation Model](/llm-concept-atlas/concepts/representation-model/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **zero-shot classification** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Similarity to descriptions
 
-1. **Prepare:** Write clear descriptions for candidate labels
-2. **Transform:** Score the text against each label using a general model
-3. **Inspect:** Calibrate or inspect predictions on a small validation sample.
+L07 embeds fixed negative/positive descriptions with the same frozen MiniLM encoder as the reviews. Dot products between unit vectors are cosines. The larger similarity selects a label, but no learned local boundary or calibrated probability is created. The lab also evaluates a second predeclared wording and lists prediction flips rather than choosing the winner on the test set.
 
-### The important distinction
+### Entailment-style scoring
 
-One common implementation compares the input with candidate label descriptions through an entailment or embedding model. Score differences can be sensitive to how labels are phrased and whether candidates are evaluated together. Validate on a small labeled set even when the method needs no task-specific training.
+An NLI model reads a premise and a hypothesis together. For each review, L07 tests negative and positive sentiment hypotheses, extracts the configured entailment logit, and normalizes those two logits across mutually exclusive candidates. It inspects the actual NLI label map rather than assuming a column number. This two-candidate normalization is different from each pair’s three-way contradiction/entailment/neutral probabilities.
+
+### Candidates define the question
+
+A score can change when a candidate label is renamed or added. Single-label normalization forces competition, whereas multi-label decisions need separate thresholds and evaluation. Generative classification adds another contract: the response must be parsed into a valid label. A pretrained NLI or instruction model has still learned from external labeled tasks; “zero-shot” describes its use on this local label task, not a training-free model.
 
 ## Worked example
 
-A team asks whether a note is about shipping, billing, or account access without training three new classes. Descriptive labels help the model compare candidates. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+Two hypothetical entailment logits [1,2] normalize to [0.269,0.731] over the two labels. They do not say that the model has 73.1% real-world correctness. Adding a third candidate with logit 2 changes the normalization even when the original two logits stay fixed. In the recorded lab, merely changing label-description wording flips 11 of 92 held-out/challenge decisions.
 
-<LessonFlow steps={["Write clear descriptions for candidate labels", "Score the text against each label using a general model", "Calibrate or inspect predictions on a small validation sample."]} caption="A teaching diagram for Zero-shot classification. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
 
-## Try the interactive lab
-
-<ClassificationLab client:visible />
-
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+<ClassificationComparison initialMethod="nli-zero-shot" client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+This small mechanism uses Python’s standard library and illustrative values; it does not claim to run a pretrained model. Run `python3 scripts/run-examples.py --id discovery-zero-shot-classification`. The connected workflow below supplies the actual model, data, and evaluation.
+
+{/* example:discovery-zero-shot-classification:start */}
 
 ```python
-labels = {"sports": {"goal", "team"}, "food": {"meal", "recipe"}}
-text = "the team scored a goal"
-words = set(text.split())
-scores = {label: len(words & cues) for label, cues in labels.items()}
-print(max(scores, key=scores.get), scores)
+from math import exp
+
+logits = [1.0, 2.0]
+weights = [exp(v - max(logits)) for v in logits]
+print("two-label relative scores:", [round(v / sum(weights), 3) for v in weights])
+three = [exp(v - 2) for v in [1.0, 2.0, 2.0]]
+print("with another candidate:", [round(v / sum(three), 3) for v in three])
 ```
 
-**Expected output:**
+{/* example:discovery-zero-shot-classification:end */}
 
-```text
-sports {'sports': 2, 'food': 0}
-```
-
-**What the code shows:** Each label has a short description represented here by cue words. The code counts overlap and chooses the highest score; a real zero-shot model uses learned representations. The [official chapter 4 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter04) develops the corresponding model-based implementation.
+<DiscoveryEvidence id="classification-comparison" />
 
 ## When to use it
 
-Use it for exploratory labeling or rapidly changing label sets, then validate before high-stakes use. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use zero-shot methods for an initial feasibility study or changing label taxonomy when annotation is limited. Still annotate a representative evaluation set and predeclare candidate descriptions. Compare a few-label supervised head before assuming prompt-based methods are the best operational choice.
 
 ## Limits and common mistakes
 
-- Wording of labels can change scores; zero-shot does not mean zero evaluation.
-- **Failure to look for:** A vague label “other” wins because the specific labels were poorly described.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Wording sensitivity, candidate overlap, domain shift, and unknown prior training all limit interpretation. The recorded NLI model uses an explicit pairwise hypothesis and fixed candidate set; it is not the same algorithm as embedding similarity.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First write clear descriptions for candidate labels Then score the text against each label using a general model Finally calibrate or inspect predictions on a small validation sample.</p></details>
+<details><summary>Does the highest cosine imply the review entails a label description?</summary><p>No. Cosine is geometric similarity in an embedding space. NLI uses a separately trained pairwise inference model and a different scoring rule.</p></details>
 
-<details><summary>What would make the result misleading?</summary><p>A vague label “other” wins because the specific labels were poorly described.</p></details>
+<details><summary>May you pick the wording with best test F1 and report that as untouched test performance?</summary><p>No. That uses the test set for selection. Choose descriptions using training/validation evidence, then evaluate on held-out cases or gather a fresh test set.</p></details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 4 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 4 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter04). Continue through the linked prerequisites and nearby concepts below.
+Book scope: Chapter 4, printed pp. 123–127. Precise objective IDs are recorded in the [source inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The CPU model choices, licensed sentiment subset, original fictional corpus, arithmetic traces, and controls are atlas adaptations. Read the [pinned official chapter notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter04) and the [E4 execution guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/applications/discovery/README.md) for versioned implementation sources and provenance.
 
 <ConceptConnections id="zero-shot-classification" />

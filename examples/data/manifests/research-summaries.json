@@ -1,0 +1,11 @@
+{
+  "id": "atlas-research-summaries-v1",
+  "revision": 1,
+  "path": "examples/data/fixtures/research-summaries.json",
+  "sha256": "ae951aa9d85440d1f60e0684a0ce3d16f62b928e1382281c00cfa59755ce2bc1",
+  "source": "Original fictional research-style summaries authored for the atlas. These are not actual arXiv papers, results, or citations.",
+  "license": "MIT (repository LICENSE)",
+  "split": "Unsupervised exploratory corpus: 45 documents; no train/test performance claim. No topic labels supplied. Includes bridge and unrelated documents.",
+  "training": true,
+  "leakagePolicy": "All 45 documents are used to fit the exploratory topic pipeline. Human-readable titles and IDs are retained for inspection; no hidden theme labels enter fit. Small curated themes exaggerate separation. Representation comparison fixes fitted assignments; density comparison fixes embeddings and reduction."
+}

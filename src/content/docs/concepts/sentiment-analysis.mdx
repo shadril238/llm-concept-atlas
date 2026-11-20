@@ -1,98 +1,101 @@
 ---
-title: Sentiment analysis
-description: Sentiment analysis assigns a polarity or more detailed attitude label to text according to a defined target.
-kind: concept
+title: "Sentiment analysis"
+description: "Sentiment analysis assigns an attitude label to a stated target under an explicit annotation policy. Positive and negative are a task-specific choice; mixed, neutral, sarcastic, and uncertain text require deliberate handling."
+kind: "concept"
 conceptId: sentiment-analysis
 chapter: 4
-part: applications
-summary: Sentiment analysis assigns a polarity or more detailed attitude label to text according to a defined target.
-parent: chapter-04
-prerequisites: [representation-model]
-related: [task-specific-models]
-level: beginner
-tags: [applications, chapter-04]
+part: "applications"
+summary: "Sentiment analysis assigns an attitude label to a stated target under an explicit annotation policy. Positive and negative are a task-specific choice; mixed, neutral, sarcastic, and uncertain text require deliberate handling."
+parent: "chapter-04"
+prerequisites: ["representation-model"]
+related: ["task-specific-models"]
+level: "beginner"
+tags: ["applications", "chapter-04"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-20"
+reviewStatus: "author-reviewed"
+reviewRecord: e4-discovery-author-review-2026-11-20
+learningObjectives: ["Define the sentiment target and binary label convention.", "Distinguish mixed sentiment from an invalid generated label.", "Inspect errors separately on movie sentences and transfer probes."]
+bookSections: ["book-ch04-sentiment-task"]
+labHref: "/labs/classification-and-topics/"
+aliases: ["opinion mining", "binary sentiment"]
+exampleIds: ["discovery-sentiment-analysis", "classification-comparison"]
+relationshipReasons: {"representation-model": "Contextual features connect text inputs to the downstream decision."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { ClassificationLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import DiscoveryEvidence from '../../../components/DiscoveryEvidence.astro';
+import { ClassificationComparison, LabelValidator, CtfidfCalculator, DiversityExplorer, TopicExplorer } from '../../../components/simulations/DiscoveryLabs';
 
 <ConceptPrimer id="sentiment-analysis" />
 
 ## Definition and intuition
 
-Sentiment analysis assigns a polarity or more detailed attitude label to text according to a defined target.
+Sentiment analysis assigns an attitude label to a stated target under an explicit annotation policy. Positive and negative are a task-specific choice; mixed, neutral, sarcastic, and uncertain text require deliberate handling.
 
-Chapter 4 compares classification with specialized encoders, reusable embeddings, and generators. Label definitions, labeled data, and evaluation examples determine which approach fits.
+A review can praise the acting while condemning the plot. A useful classifier needs a decision policy before it needs a model: are we predicting the overall opinion of the film, sentiment toward an actor, or a specific aspect? Those are different targets. A forced binary decision cannot represent every reasonable interpretation.
 
-## Before you start
+<ReferenceBrief objectives={["Define the sentiment target and binary label convention.", "Distinguish mixed sentiment from an invalid generated label.", "Inspect errors separately on movie sentences and transfer probes."]} prerequisites="representation-model" scope="A small recorded CPU workflow plus explicit teaching calculations. Published results are not independent lesson acceptance." />
 
-Read [Representation Model](/llm-concept-atlas/concepts/representation-model/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **sentiment analysis** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### The annotation contract
 
-1. **Prepare:** Define the label set and whose opinion is being measured
-2. **Transform:** Encode the text and predict or score each label
-3. **Inspect:** Inspect ambiguous examples and evaluate against annotated cases.
+L07 uses 0 = negative and 1 = positive for a licensed subset of UCI movie-review sentences. UCI deliberately selected positive/negative examples; that does not make neutral inputs disappear in a real application. Twelve original challenge probes add negation, mixed opinions, sarcasm, and software/product language. Their gold labels are author judgments, especially on ambiguous cases, so the browser reports them separately from the 80 UCI test sentences.
 
-### The important distinction
+### Scores and evidence
 
-Decide whether the unit is a whole review, a sentence, or an aspect such as battery life. The same text can legitimately have mixed or neutral sentiment; forcing it into binary labels creates annotation noise. Report class-specific precision and recall when one kind of mistake matters more than another.
+A classifier computes scores conditioned on its training and label set. A large positive softmax value does not establish what the writer intended, and it does not prove that the input is in domain. Keep the original text and inspect false positives as well as false negatives. A label is a prediction about this defined task, not a factual explanation of a customer.
+
+### Negation and target scope
+
+A word-count baseline can treat “not good” like “good”. Contextual models can represent the negation, but still make mistakes on long clauses or sarcasm. “Not a masterpiece, but good entertainment” is not equivalent to “not good entertainment”. The position of a negation and the clause expressing the final judgment both matter.
 
 ## Worked example
 
-“The camera is light, but the battery is awful” contains both praise and criticism. A whole-review label may be negative while an aspect-level label splits camera and battery. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+Consider “The actors are wonderful, but the story is so incoherent that I regret watching it.” Our original probe assigns overall film sentiment 0. The positive word wonderful does not determine that label. If the task were acting quality, a positive label could be correct. Preserve the text, target, and policy together so an apparent model error can be distinguished from an annotation mismatch.
 
-<LessonFlow steps={["Define the label set and whose opinion is being measured", "Encode the text and predict or score each label", "Inspect ambiguous examples and evaluate against annotated cases."]} caption="A teaching diagram for Sentiment analysis. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
 
-## Try the interactive lab
-
-<ClassificationLab client:visible />
-
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+<ClassificationComparison client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+This small mechanism uses Python’s standard library and illustrative values; it does not claim to run a pretrained model. Run `python3 scripts/run-examples.py --id discovery-sentiment-analysis`. The connected workflow below supplies the actual model, data, and evaluation.
+
+{/* example:discovery-sentiment-analysis:start */}
 
 ```python
-examples = ["a wonderful film", "a dull film"]
-labels = ["positive", "negative"]
-def classify(text):
-    return "positive" if "wonderful" in text else "negative"
-print([(text, classify(text)) for text in examples])
+text = "not good"
+positive_words = {"good", "excellent", "wonderful"}
+baseline = int(bool(set(text.split()) & positive_words))
+gold = 0
+print("keyword prediction:", baseline, "policy label:", gold)
+assert baseline != gold  # a deliberately exposed baseline failure
 ```
 
-**Expected output:**
+{/* example:discovery-sentiment-analysis:end */}
 
-```text
-[('a wonderful film', 'positive'), ('a dull film', 'negative')]
-```
-
-**What the code shows:** The function uses one word as a simple classification baseline. Change the rule or input text and compare the predicted label with the intended label. The [official chapter 4 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter04) develops the corresponding model-based implementation.
+<DiscoveryEvidence id="classification-comparison" />
 
 ## When to use it
 
-Use it for review triage or trend analysis when labels are clearly defined and errors are monitored. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use sentiment analysis for an evaluated review-analysis tool or aggregate feedback exploration. For routing billing versus bugs, define an intent taxonomy and train/evaluate that task; sentiment labels are not interchangeable with request types.
 
 ## Limits and common mistakes
 
-- Sarcasm, mixed opinions, and domain shifts complicate simple positive versus negative labels.
-- **Failure to look for:** A model treats “not bad” as negative because it matches the word “bad” without handling negation.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+An English binary model can confidently misread unfamiliar domains or languages. Sentence-level splits also do not prove independence at the reviewer or source-review level when those identifiers are absent. Inspect mixed examples and sampling limits before making product claims.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First define the label set and whose opinion is being measured Then encode the text and predict or score each label Finally inspect ambiguous examples and evaluate against annotated cases.</p></details>
+<details><summary>Can a review be positive about acting and negative overall?</summary><p>Yes. The target and aggregation policy decide which opinion the output represents. Store those choices and inspect aspect conflicts.</p></details>
 
-<details><summary>What would make the result misleading?</summary><p>A model treats “not bad” as negative because it matches the word “bad” without handling negation.</p></details>
+<details><summary>Why report the 12 original probes separately?</summary><p>They intentionally stress transfer and ambiguity and are not a random benchmark sample. Combining them silently with the balanced UCI test set would change what the headline metric measures.</p></details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 4 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 4 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter04). Continue through the linked prerequisites and nearby concepts below.
+Book scope: Chapter 4, printed pp. 112–113. Precise objective IDs are recorded in the [source inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The CPU model choices, licensed sentiment subset, original fictional corpus, arithmetic traces, and controls are atlas adaptations. Read the [pinned official chapter notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter04) and the [E4 execution guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/applications/discovery/README.md) for versioned implementation sources and provenance.
 
 <ConceptConnections id="sentiment-analysis" />

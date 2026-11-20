@@ -181,9 +181,18 @@
       "placement": "subsection",
       "parentConceptId": "generative-classification",
       "aliases": [],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E4",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/concepts/task-specific-models.mdx",
+        "anchor": "model-selection"
+      },
+      "exampleIds": [
+        "discovery-task-specific-models",
+        "classification-comparison"
+      ],
+      "reviewRecord": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "t5-classification",
@@ -193,9 +202,18 @@
       "placement": "subsection",
       "parentConceptId": "generative-classification",
       "aliases": [],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E4",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/concepts/generative-classification.mdx",
+        "anchor": "t5-classification"
+      },
+      "exampleIds": [
+        "discovery-generative-classification",
+        "classification-comparison"
+      ],
+      "reviewRecord": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "hosted-classification",
@@ -205,9 +223,18 @@
       "placement": "subsection",
       "parentConceptId": "generative-classification",
       "aliases": [],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E4",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/concepts/generative-classification.mdx",
+        "anchor": "optional-hosted-classification"
+      },
+      "exampleIds": [
+        "discovery-generative-classification",
+        "classification-comparison"
+      ],
+      "reviewRecord": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "research-abstract-corpus",
@@ -217,9 +244,15 @@
       "placement": "subsection",
       "parentConceptId": "bertopic",
       "aliases": [],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E4",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/concepts/bertopic.mdx",
+        "anchor": "research-abstract-corpus"
+      },
+      "exampleIds": ["bertopic-pipeline", "modular-bertopic"],
+      "reviewRecord": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "generated-topic-labels",
@@ -229,9 +262,15 @@
       "placement": "subsection",
       "parentConceptId": "bertopic",
       "aliases": [],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E4",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/concepts/topic-representations.mdx",
+        "anchor": "generated-topic-labels"
+      },
+      "exampleIds": ["discovery-topic-representations", "modular-bertopic"],
+      "reviewRecord": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "generation-model-selection",
@@ -522,9 +561,15 @@
       "placement": "standalone",
       "parentConceptId": "topic-modeling",
       "aliases": ["c-TF-IDF", "class TF-IDF"],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E4",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/concepts/class-based-tf-idf.mdx",
+        "anchor": "how-it-works"
+      },
+      "exampleIds": ["discovery-class-based-tf-idf", "modular-bertopic"],
+      "reviewRecord": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "topic-representation-models",
@@ -534,21 +579,36 @@
       "placement": "subsection",
       "parentConceptId": "topic-representations",
       "aliases": ["KeyBERTInspired"],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E4",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/concepts/topic-representations.mdx",
+        "anchor": "keybertinspired-representation-models"
+      },
+      "exampleIds": ["discovery-topic-representations", "modular-bertopic"],
+      "reviewRecord": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "maximal-marginal-relevance",
       "title": "Maximal marginal relevance",
       "sourceSectionIds": ["book-ch05-mmr"],
       "chapter": 5,
-      "placement": "subsection",
+      "placement": "standalone",
       "parentConceptId": "topic-representations",
       "aliases": ["MMR"],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E4",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "A reusable selection rule with its own numerical trace and future retrieval use merits a canonical page; existing topic-representation relationships remain linked.",
+      "destination": {
+        "path": "src/content/docs/concepts/maximal-marginal-relevance.mdx",
+        "anchor": "how-it-works"
+      },
+      "exampleIds": [
+        "discovery-maximal-marginal-relevance",
+        "modular-bertopic"
+      ],
+      "reviewRecord": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "document-chunking",

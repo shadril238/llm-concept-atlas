@@ -15,6 +15,10 @@ on:
         description: Run the E3 CPU foundation labs (downloads public models and GloVe)
         type: boolean
         default: false
+      e4:
+        description: Run E4 CPU classification and BERTopic workflows (public model downloads)
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
@@ -85,3 +89,28 @@ jobs:
             examples/verification/records/transparent-transformer*.json
             examples/verification/records/cache-equivalence*.json
             examples/artifacts/e3-*/results.json
+  e4:
+    if: github.event_name == 'workflow_dispatch' && inputs.e4
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+        with:
+          version: "0.13.9"
+      - run: uv sync --locked --project examples/applications/discovery
+      - run: python3 scripts/run-examples.py --id bertopic-pipeline --allow-network --record
+      - run: python3 scripts/run-examples.py --id modular-bertopic --allow-network --record
+      - run: python3 scripts/run-examples.py --id topic-label-generation --allow-network --record
+      - run: python3 scripts/run-examples.py --id classification-comparison --allow-network --record
+      - run: examples/applications/discovery/.venv/bin/python examples/applications/discovery/test_models.py
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: e4-discovery-verification
+          path: |
+            examples/verification/records/classification-comparison*.json
+            examples/verification/records/modular-bertopic*.json
+            examples/verification/records/bertopic-pipeline*.json
+            examples/verification/records/topic-label-generation*.json
+            examples/artifacts/e4-*/results.json

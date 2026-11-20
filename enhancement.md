@@ -2,7 +2,7 @@
 
 **Prepared:** 2026-11-18  
 **Last updated:** 2026-11-19  
-**Status:** E0 source inventory and initial lesson audit, and E1 infrastructure implemented; E2 and E3 implementation delivered, independent review pending; E4–E10 pending. See the [gap report](./docs/audits/book-gap-report.md) and [audit guide](./docs/audits/README.md).
+**Status:** E0 source inventory and initial lesson audit, and E1 infrastructure implemented; E2–E4 implementation delivered, independent review pending; E5–E10 pending. See the [gap report](./docs/audits/book-gap-report.md) and [audit guide](./docs/audits/README.md).
 **Baseline:** Repository commit `a6b3ec4`, following the original Phases 1–5 in [plan.md](./plan.md).  
 **Source edition:** _Hands-On Large Language Models_, Jay Alammar and Maarten Grootendorst, first edition, September 2024.  
 **Primary goal:** A learner can explain, trace, implement, evaluate, and apply the book's ideas without depending on unexplained terminology or disconnected code snippets.
@@ -853,13 +853,15 @@ Use enhancement phase IDs **E0–E10** to distinguish this work from the origina
 
 **Depends on:** E3; application environment from E1.
 
-- [ ] Complete Chapter 4–5 work, including T5 classification, optional hosted classification, and real BERTopic representation modules.
-- [ ] Complete L07–L08 with shared evaluation fixtures and honest baseline comparisons.
-- [ ] Upgrade the classification use case and add the research collection explorer project.
-- [ ] Add confusion-matrix, c-TF-IDF, cluster/outlier, and representation comparison visuals.
-- [ ] Verify data splits, label maps, save/reload, and controlled component comparisons.
+- [x] Complete Chapter 4–5 work, including T5 classification, optional hosted classification, and real BERTopic representation modules.
+- [x] Complete L07–L08 with shared evaluation fixtures and honest baseline comparisons.
+- [x] Upgrade the classification use case and add the research collection explorer project.
+- [x] Add confusion-matrix, c-TF-IDF, cluster/outlier, and representation comparison visuals.
+- [x] Verify data splits, label maps, save/reload, and controlled component comparisons.
 
 **Gate:** Classification and topic discovery are complete evaluated workflows; neither relies on preassigned labels/groups as its claimed model implementation.
+
+**Implementation evidence:** [L07–L08](./src/content/docs/labs/classification-and-topics.mdx), [CPU execution guide](./examples/applications/discovery/README.md), and [author review](./docs/reviews/e4-discovery.md). Seven real classification methods share a fixed held-out fixture; genuine BERTopic representation/density comparisons and local topic-label generation have CPU records. Optional hosted comparison is documented with an offline importer; no live API execution is claimed. Independent review remains pending.
 
 ### E5 — prompting, chains, memory, and agents
 
@@ -1054,7 +1056,7 @@ These references support the implementation direction, not a claim that all prop
 | E1: executable-example foundation     | Complete | 100-example registry, two locked environments, runner, synchronized lesson/notebooks, and CPU execution records. |
 | E2: three reference lessons | Implemented; review pending | Detailed lessons, interactive labs, CPU model/training records, author review; independent acceptance still open. |
 | E3: foundations | Implemented; review pending | 32 rewritten/new lessons plus E2 tokenization, L01–L06 CPU evidence, graph/glossary/path updates; independent acceptance open. |
-| E4: classification and topics         | Not started | Chapter 4–5 objectives and L07–L08 accepted.                                                    |
+| E4: classification and topics         | Implemented; review pending | 15 expanded/new lessons, L07–L08 CPU evidence, explorer projects; hosted importer documented, independent acceptance open.                                                    |
 | E5: prompting and workflows           | Not started | Chapter 6–7 objectives and L09–L11 accepted.                                                    |
 | E6: RAG and multimodal                | Not started | Chapter 8–9 objectives and L12–L14 accepted.                                                    |
 | E7: embedding/representation training | Not started | Chapter 10–11 objectives and L15–L20 accepted.                                                  |
@@ -1062,4 +1064,4 @@ These references support the implementation direction, not a claim that all prop
 | E9: integrated learner experience     | Not started | Discovery, navigation, practice, and accessibility/performance checks.                          |
 | E10: review and release               | Not started | Reconciled coverage, execution evidence, learner feedback, and release report.                  |
 
-**Next:** Independently review the E2/E3 lesson and execution packets. E4 classification/topic-discovery implementation can then build on the supported environments and lesson pattern; full enhancement acceptance remains tied to the documented review gates.
+**Next:** Collect independent review of E2–E4 and proceed to E5 prompting, chains, memory, and agents when authorized. Full enhancement acceptance remains tied to the documented review gates.

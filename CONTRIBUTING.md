@@ -52,3 +52,5 @@ Follow [examples/README.md](./examples/README.md). Register every Python block, 
 Use the [reference lesson template](./docs/templates/reference-lesson.md) and [E2 author review](./docs/reviews/e2-reference-lessons.md) when expanding lessons. Keep author review, independent editorial acceptance, and execution verification distinct.
 
 The [E3 packet](./docs/reviews/e3-foundations.md) adds shared foundation mechanisms and source-to-browser parity tests. When changing a numeric explorer, update/test the Python and browser contracts together, and rerun only affected model workflows before refreshing evidence. Aliases belong to canonical pages; relationship reasons must describe actual prerequisite/related/parent links.
+
+E4 data and model changes must retain [UCI attribution and data licenses](./examples/data/manifests/sentiment.json), preserve split/label/invalid-output contracts, and rerun the [discovery workflows](./examples/applications/discovery/README.md). Representation-only topic comparisons must assert unchanged assignments; a topic-label change is not clustering improvement.

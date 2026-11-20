@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "discovery-document-embeddings",
+  "status": "passed",
+  "date": "2026-11-20T14:48:27.751247+00:00",
+  "gitCommit": "7ea038d4a6c5fd39942722ec7e7be0bf96cd3a1f",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e4/lesson_snippets/document_embeddings.py"
+  ],
+  "sourceSha256": "ffaf33062378d9fb96321e516581fbdc04982f4b2894ee048de105b7ec8b536e",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "c3f3304891446a768b51bc7b814576d14e22269bf91806dd1e001cfdc2df8738",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "masked mean: [1.0, 1.0] unit vector: [0.707, 0.707]\n",
+  "stderr": "",
+  "error": null
+}

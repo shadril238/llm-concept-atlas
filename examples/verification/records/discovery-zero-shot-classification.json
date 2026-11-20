@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "discovery-zero-shot-classification",
+  "status": "passed",
+  "date": "2026-11-20T14:48:27.594996+00:00",
+  "gitCommit": "7ea038d4a6c5fd39942722ec7e7be0bf96cd3a1f",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e4/lesson_snippets/zero_shot_classification.py"
+  ],
+  "sourceSha256": "8fd2c347b5a4cc0bdc806346caa2b47a11e960d03aaaef1df1d4d341056e5717",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "a64c1cd897b9a7887bfd3b57bab62cb6b290ae8f906d1b8603872520f97a28b4",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.3,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "two-label relative scores: [0.269, 0.731]\nwith another candidate: [0.155, 0.422, 0.422]\n",
+  "stderr": "",
+  "error": null
+}

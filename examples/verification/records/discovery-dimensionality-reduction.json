@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "discovery-dimensionality-reduction",
+  "status": "passed",
+  "date": "2026-11-20T14:48:27.829900+00:00",
+  "gitCommit": "7ea038d4a6c5fd39942722ec7e7be0bf96cd3a1f",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e4/lesson_snippets/dimensionality_reduction.py"
+  ],
+  "sourceSha256": "069595cde9c70598eb8b1b3b157a6a4ceb3a9d6bed3004d27f6ecf9bc66a701c",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "43f4a0cd0c237a4d7649f2805c3ab67b1fad85e64255bcfc6bb4acc34f9de195",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "original distance: 10.0\ndisplay distance: 0.0\n",
+  "stderr": "",
+  "error": null
+}

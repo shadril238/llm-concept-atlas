@@ -1,0 +1,15 @@
+{
+  "id": "uci-imdb-atlas-v1",
+  "revision": 1,
+  "path": "examples/data/fixtures/sentiment.json",
+  "sha256": "2b1ed42de710f477062b4385620a72d8a33991828ac863f6508f9d718d43c4c2",
+  "source": "Kotzias, D. (2015). Sentiment Labelled Sentences. UCI Machine Learning Repository. https://doi.org/10.24432/C57604; IMDB subset, plus 12 original atlas challenge probes.",
+  "sourceUrl": "https://archive.ics.uci.edu/static/public/331/sentiment+labelled+sentences.zip",
+  "archiveSha256": "afc26626d710899948693e1a61405dce197f57ffa719fa1130d346b4cc095343",
+  "sourceFileSha256": "aef2e49e3da25714d61175e3a6e68eeef74a20a2f914318dc3be9947ea86512d",
+  "license": "UCI rows: CC BY 4.0 https://creativecommons.org/licenses/by/4.0/ ; original probes: repository MIT. Preserve attribution.",
+  "changes": "Subset, two unlabelled physical-line continuations joined with spaces, canonical exact-duplicate removal, deterministic stratified hash splits; sentence text otherwise preserved. Original probes separately identified.",
+  "split": "200 train / 40 validation / 80 test UCI sentences (balanced); 12 separate original challenge probes.",
+  "training": true,
+  "leakagePolicy": "Fit vectorizer/head/prototypes on train only; choose regularization and review threshold on validation only. Test identical across methods. Canonical text unique across all splits. Pretrained-model data overlap is unknown; this is not a contamination-free benchmark."
+}

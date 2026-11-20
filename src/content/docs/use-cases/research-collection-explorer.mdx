@@ -1,0 +1,64 @@
+---
+title: Build a research collection explorer
+description: Fit a real topic pipeline, inspect source documents and outliers, compare topic representations, and export a reproducible report.
+kind: use-case
+lastReviewed: 2026-11-20
+---
+
+import LessonFlow from '../../../components/LessonFlow.astro';
+import DiscoveryEvidence from '../../../components/DiscoveryEvidence.astro';
+import { TopicExplorer } from '../../../components/simulations/DiscoveryLabs';
+
+**Deliverable:** a browsable corpus with stable document IDs, fitted topic assignments, representative texts, keyword/label comparisons, and a reproducible change report. The explorer below is the working small-corpus version of that project.
+
+A reader wants to understand the themes in a research collection without trusting a generated name at face value. This project follows Chapter 5’s arXiv workflow, adapted to 45 original fictional research summaries so every document and failure can be inspected. The summaries are not real papers, findings, authors, or citations.
+
+<LessonFlow steps={['Versioned corpus + IDs', 'Pretrained document embeddings', 'UMAP + HDBSCAN', 'Terms + representative texts', 'Inspectable report + label review']} caption="Assignments are computed before topic descriptions are refined." />
+
+## 1. Define the collection
+
+The versioned original corpus includes translation, speech recognition, summarization, cross-task bridges, and unrelated subjects. Titles and IDs are retained for display, while no hidden theme labels enter the fit. The small curated themes exaggerate separation, so the result is an educational workflow rather than evidence about literature-wide trends.
+
+For your own research collection, retain paper IDs, source URLs, title/abstract fields, license information, retrieval date or data revision, deterministic sampling rules, and content hashes. Do not assume that metadata access grants rights to redistribute every full paper. Preserve source text separately from generated topic descriptions so a reader can inspect the evidence.
+
+## 2. Run the actual topic model
+
+```bash
+uv sync --locked --project examples/applications/discovery
+python3 scripts/run-examples.py --id modular-bertopic --allow-network
+python3 scripts/run-examples.py --id topic-label-generation --allow-network
+```
+
+Use `--offline` after public models are cached. L08 computes [45,384] document vectors, a five-dimensional UMAP reduction, HDBSCAN assignments, aggregated class counts, and default c-TF-IDF terms. It also fits a separate two-dimensional display projection. HDBSCAN is fitted on the five-dimensional space, not on the picture.
+
+<DiscoveryEvidence id="modular-bertopic" />
+
+## 3. Inspect the evidence
+
+<TopicExplorer client:visible />
+
+Use the map and equivalent document selectors to inspect every source ID. A diamond denotes a recorded outlier; it is not a coherent fourth topic. Membership strength is a density-model quantity, not probability that the semantic interpretation is correct.
+
+In the term view, compare default c-TF-IDF, actual KeyBERTInspired, and two actual MMR settings on the same baseline assignments. The heatmap compares baseline topic-vector cosines. The hierarchy summarizes average-linkage cosine distances among non-outlier topics. Neither view changes document assignments or proves their usefulness.
+
+## 4. Record two controlled comparisons
+
+**Descriptions only:** retain all baseline assignments, refine topic terms/names, and assert membership equality. Read representative and minority documents before accepting a new name. The generated name Filtering is too narrow for a translation group; Summarization describes a majority but conceals unrelated members. Keep those original outputs visible with the review findings.
+
+**Density only:** retain the same document vectors and five-dimensional UMAP coordinates, change only HDBSCAN min_samples from 8 to 3, and inspect the contingency table and outlier transition. Numeric topic IDs can change order, so compare membership rather than raw ID equality. One bridge document moves from noise into a group in the recorded run.
+
+Do not describe an improved name as improved clustering. Conversely, a changed partition may keep a familiar name while moving important documents. Both artifacts need inspection.
+
+## 5. Save a reproducible report
+
+Keep corpus hash, model revisions, dependency lock, settings, ordered IDs, assignments, representative IDs, original/refined terms, actual generation prompts, author label judgments, and change metrics together. The workflow writes these machine-readable results into ignored local artifacts; the site publishes a verified snapshot.
+
+Safetensors reload preserves topic data and stored c-TF-IDF, but lightweight new-document assignment uses cosine to topic vectors instead of the original fitted UMAP/HDBSCAN estimators. The lab checks that rule and reports its agreement with original assignments. A saved model is useful only when its inference contract is documented.
+
+## Transfer questions
+
+<details><summary>Does renaming a topic prove better document discovery?</summary><p>No. A representation-only update keeps the partition fixed. Check full membership, minority documents, outliers, and reader usefulness before claiming better discovery.</p></details>
+
+<details><summary>What would change for a large real arXiv collection?</summary><p>Validate provenance and licensing, sample reproducibly, budget embedding/reduction costs, inspect rare topics and duplicates, and gather human feedback. This tiny fictional corpus does not establish scale, topic stability, or scientific-trend accuracy.</p></details>
+
+Read [L08’s complete source and results](/llm-concept-atlas/labs/classification-and-topics/#l08-modular-bertopic), the [E4 execution guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/applications/discovery/README.md), and the [authors’ pinned Chapter 5 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter05). Independent reader review remains pending.

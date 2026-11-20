@@ -1,0 +1,2345 @@
+{
+  "id": "uci-imdb-atlas-v1",
+  "labels": {
+    "0": "negative",
+    "1": "positive"
+  },
+  "rows": [
+    {
+      "id": "imdb-0128",
+      "text": "My only problem is I thought the actor playing the villain was a low rent Michael Ironside.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0721",
+      "text": "A Lassie movie which should have been \"put to sleep\".... FOREVER.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0150",
+      "text": "The only possible way this movie could be redeemed would be as MST3K fodder.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0045",
+      "text": "But even the talented Carrell can't save this.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0157",
+      "text": "Worst hour and a half of my life!Oh my gosh!",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0836",
+      "text": "Very disappointed and wondered how it could be in the Oscar shortlist.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0439",
+      "text": "But the acting--even that of such professionals as Drago and Debbie Rochon--was terrible, the directing worse (perhaps contributory to the former), the dialog chimp-like, and the camera work, barely tolerable.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0591",
+      "text": "Beware: this is not a trashy cult movie, this is trash -period!",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0563",
+      "text": "The movie is terribly boring in places.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0567",
+      "text": "This convention never worked well in the past, and certainly doesn't work here.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0103",
+      "text": "The acting was bad, the dialogs were extremely shallow and insincere.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0105",
+      "text": "Too politically correct.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0870",
+      "text": "Also the story and acting were weak.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0026",
+      "text": "This short film certainly pulls no punches.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0612",
+      "text": "Don't waste your time watching this rubbish non-researched film.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0464",
+      "text": "Considering the relations off screen between Taylor and Stanwyck, it was surprising how little chemistry there was on screen between the two of them.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0709",
+      "text": "The fat computer geek was unbelievable, the bible thumper, the bad-ass girl, who are these actors???",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0333",
+      "text": "For those that haven't seen it, don't waste your time!",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0431",
+      "text": "Oh yeah, and the storyline was pathetic too.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0196",
+      "text": "But other than that the movie seemed to drag and the heroes didn't really work for their freedom.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0584",
+      "text": "Filmiing was less expansive.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0473",
+      "text": "At no point in the proceedings does it look remotely like America.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0782",
+      "text": "The plot is nonsense that doesn't interest in the slightest way or have any uniqueness to it.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0491",
+      "text": "It is just the sort of pap that is screened in the afternoon to punish the unemployed for not having jobs.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0056",
+      "text": "But I recommend waiting for their future efforts, let this one go.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0872",
+      "text": "Either way, it sucks.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0048",
+      "text": "The only real effects work is the presence of all the animals, and the integration of those into the scenes is some of the worst and most obvious blue/green-screen work I've ever seen.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0290",
+      "text": "Really bad.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0177",
+      "text": "Artless camera-work endlessly presents us with the ugliest setting imaginable, i.e.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0957",
+      "text": "The movie seemed a little slow at first.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0001",
+      "text": "A very, very, very slow-moving, aimless movie about a distressed, drifting young man.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0871",
+      "text": "At around 4 pm I bought it, at around 8pm I started to watch, at around 8.15pm I fast forwarded the remaining film to see if there was anything left watchable for a human being with a brain... but there wasn't.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0741",
+      "text": "What on earth is Irons doing in this film?",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0482",
+      "text": "The acting by the whole cast could be put on a scale and balanced perfectly between overacting and underacting.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0016",
+      "text": "It had some average acting from the main person, and it was a low budget as you clearly can see.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0700",
+      "text": "It's a case of 'so bad it is laughable'.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0242",
+      "text": "If you check the director's filmography on this site you will see why this film didn't have a chance.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0185",
+      "text": "Maybe there would be a reasonable explanation for this atrocity.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0054",
+      "text": "On the negative, it's insipid enough to cause regret for another 2 hours of life wasted in front of the screen.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0350",
+      "text": "It's just lame.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0807",
+      "text": "The only place good for this film is in the garbage.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0722",
+      "text": "That's how I'd describe this painfully dreary time-waster of a film.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0116",
+      "text": "The scenes with the \"oh-so-mature\" neighbour-girl are a misplace.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0467",
+      "text": "The only thing worse than Taylor's acting was Stanwyck's singing.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0066",
+      "text": "One character is totally annoying with a voice that gives me the feeling of fingernails on a chalkboard.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0173",
+      "text": "I certainly do not mean this distinction in a good way.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0067",
+      "text": "There is a totally unnecessary train/roller coaster scene.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0444",
+      "text": "I let my girlfriend talk me into seeing this - bad idea, we both hated it.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0566",
+      "text": "One of the most disappointing aspects is the lack of notable gore.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0154",
+      "text": "No plot whatsoever!",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0956",
+      "text": "It's too bad that everyone else involved didn't share Crowe's level of dedication to quality, for if they did, we'd have a far better film on our hands than this sub-par mess.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0881",
+      "text": "Dee Snider just plain sucks.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0476",
+      "text": "I was very uneasy with how bad this movie was, but not scared at all.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0147",
+      "text": "The fish is badly made and some of its underwater shots are repeated a thousand times in the film.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0138",
+      "text": "IMDB ratings only go as low 1 for awful, it's time to get some negative numbers in there for cases such as these.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0279",
+      "text": "I'm not sure what he was trying to do with this film.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0648",
+      "text": "The film lacks any real scares or tension & some of the medical terminology used throughout is a bit iffy to say the least & I say that as an insulin dependant diabetic myself.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0481",
+      "text": "Of course, the acting is blah.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0530",
+      "text": "Whatever prompted such a documentary is beyond me!",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0471",
+      "text": "A cheap and cheerless heist movie with poor characterisation, lots of underbite style stoic emoting (think Chow Yun Fat in A Better Tomorrow) and some cheesy clichés thrown into an abandoned factory ready for a few poorly executed flying judo rolls a la John Woo.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0141",
+      "text": "These are the central themes of the film and they are handled ineptly, stereotypically and with no depth of imagination.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0200",
+      "text": "So bad.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0510",
+      "text": "What this film lacks is a convincing script.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0618",
+      "text": "My rating: just 3 out of 10.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0239",
+      "text": "But what really made it unwatchable was the direction.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0227",
+      "text": "And the rest of it just sits there being awful... with soldiers singing songs about the masculinity they pledge themselves to, hairsplitting about purity, the admiration of swords, etc.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0895",
+      "text": "The puppets look really cheesy , not in a good way like in the Puppet Master 80's flicks.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0875",
+      "text": "Everything Captain Howdy says is either laughable or just plain stupid.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0140",
+      "text": "Unfortunately, inexperience of direction meant that scene after scene passed with little in the way of dramatic tension or conflict.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0201",
+      "text": "The film is way too long.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0465",
+      "text": "But the premise of the film was so ridiculous: that the President of the U.S.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0475",
+      "text": "The awful dialogue and hopeless overacting by everyone who gets shot top off a real waste of space and time.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0160",
+      "text": "Yeah, the movie pretty much sucked.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0713",
+      "text": "Lame would be the best way to describe it.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0710",
+      "text": "Never heard of any of them except Cole who was totally unbelievable in the part.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0903",
+      "text": "This one just fails to create any real suspense.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0209",
+      "text": "It probably would have been better if the director hadn't spent most of the movie showcasing his own art work, which really isn't that noteworthy.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0593",
+      "text": "Which is precisely why I am giving it such a bad review!",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0254",
+      "text": "The soundtrack sucked.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0397",
+      "text": "Almost all of the songs in Cover Girl are old-fashioned and not very tuneful.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0162",
+      "text": "If you do go see this movie, bring a pillow or a girlfriend/boyfriend to keep you occupied through out.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0419",
+      "text": "Even worse than Ticker!",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0108",
+      "text": "I love Lane, but I've never seen her in a movie this lousy.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0841",
+      "text": "He surely doesn't know how to make a coherent action movie from the screenwriter of Air Force One who was only obliged to write the script just for a big sum of money.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0925",
+      "text": "Bad characters, bad story and bad acting.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0146",
+      "text": "This movie is a pure disaster, the story is stupid and the editing is the worst I have seen, it confuses you incredibly.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0468",
+      "text": "Whatever the producer was going for, he missed entirely.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0805",
+      "text": "The acting from all involved and that includes those like Shatner and Nimoy is bad and washed out and making them seem as old as they look in real life, the special effects are tacky like when Spock has to rescue Kirk on a jet pack when he falls down from a mountain.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0113",
+      "text": "The movie was so boring, that I sometimes found myself occupied peaking in the paper instead of watching (never happened during a Columbo movie before!",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0703",
+      "text": "How awful she is!",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0922",
+      "text": "The story line is totally predictable.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0171",
+      "text": "I was left shattered from the experience of watching this 'film' and I took a good two hours to fully recover.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0708",
+      "text": "The show would begin with smart ass ed comments to each other that would be totally off the wall and uncalled for.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0335",
+      "text": "Started watching this but didn't believe in any of the characters.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0399",
+      "text": "Unfortunately, 'Cover Girl' is an example of how Hollywood used to exploit women for financial gain.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0130",
+      "text": "However, this didn't make up for the fact that overall, this was a tremendously boring movie.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0189",
+      "text": "Yes, it's that bad.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0225",
+      "text": "This is a chilly, unremarkable movie about an author living/working in a chilly abstruse culture.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0409",
+      "text": "I couldn't take them seriously.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0898",
+      "text": "I felt asleep the first time I watched it, so I can recommend it for insomniacs.",
+      "label": 0,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0262",
+      "text": "I came out of it feeling angry.",
+      "label": 0,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0380",
+      "text": "This totally UNfunny movie is so over the top and pathetic and unrealistic that throughout the whole 90 minutes of utter torture I probably looked at my watch about 70000 times!",
+      "label": 0,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0589",
+      "text": "There is no plot here to keep you going in the first place.",
+      "label": 0,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0536",
+      "text": "but the movie makes a lot of serious mistakes.",
+      "label": 0,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0477",
+      "text": "The dialogue is composed of things that make little sense.",
+      "label": 0,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0852",
+      "text": "Now imagine that every single one of those decisions was made wrong.",
+      "label": 0,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0509",
+      "text": "By the time the film ended, I not only disliked it, I despised it.",
+      "label": 0,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0293",
+      "text": "Rating: 1 out of 10.",
+      "label": 0,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0705",
+      "text": "The results, well, are a shame.",
+      "label": 0,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0600",
+      "text": "Every element of this story was so over the top, excessively phony and contrived that it was painful to sit through.",
+      "label": 0,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0235",
+      "text": "Woa, talk about awful.",
+      "label": 0,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0352",
+      "text": "Everything about this movie is stupid.",
+      "label": 0,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0609",
+      "text": "It's just painful!",
+      "label": 0,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0889",
+      "text": "At any rate this film stinks, its not funny, and Fulci should have stayed with giallo and supernatural zombie movies.",
+      "label": 0,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0134",
+      "text": "All in all, a great disappointment.",
+      "label": 0,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0565",
+      "text": "The film looks cheap and bland.",
+      "label": 0,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-1000",
+      "text": "In a word, it is embarrassing.",
+      "label": 0,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0250",
+      "text": "Unfortunately, this is a bad movie that is just plain bad.",
+      "label": 0,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0884",
+      "text": "The acting sucks, the music sucks, the script sucks, the pacing sucks, the special FX suck, the directing sucks... basically, this movie sucks.",
+      "label": 0,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0691",
+      "text": "It's so bad it's actually worth seeing just for that reason.",
+      "label": 0,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0519",
+      "text": "The script is bad, very bad  it contains both cheesiness and unethical joke that you normally see in rated R or NC-17 movie.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0559",
+      "text": "Let's start with all the problemsthe acting, especially from the lead professor, was very, very bad.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0607",
+      "text": "In conclusion, I will not bother with this movie because a volcano in Los Angeles is nothing but nonsense.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0781",
+      "text": "None of them are engaging or exciting.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0260",
+      "text": "Overall, this movie was cheap trash.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0184",
+      "text": "I'll even say it again  this is torture.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0330",
+      "text": "The Malta settings are as dry and as barren as the dialogue.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0728",
+      "text": "It will drive you barking mad!",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0886",
+      "text": "This is probably one of the least effective and utterly unoriginal films I have ever seen in my entire life.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0529",
+      "text": "And if that isn't enough of a mess of a movie for you - the picture is also marred with a constant use of studio sets and indoor exteriors.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0897",
+      "text": "There aren't death scenes like in previous movies and the f/x are terrible.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0508",
+      "text": "About half way through this film I started to dislike it.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0702",
+      "text": "It is a film about nothing, just a pretext to show ridiculous action scenes.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0312",
+      "text": "To those who find this movie intelligent or even masterful, I can only say - it's your intelligence and your imagination you obviously used to try and make some sense of this pitiful attempt (it's in our human nature to try and make sense of things) .",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0706",
+      "text": "DELETE this film from your mind!",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0418",
+      "text": "I am a fan of his ... This movie sucked really bad.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0490",
+      "text": "I particularly remember my senses being assaulted by strident cords of music that would blare out with very little warning, and even less meaning.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0896",
+      "text": "The story is lame, not interesting and NEVER really explains the sinister origins of the puppets.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0557",
+      "text": "I thought it was bad.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0975",
+      "text": "If you act in such a film, you should be glad that you're gonna drift away from earth as far as possible!",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0434",
+      "text": "In short - this was a monumental waste of time and energy and I would not recommend anyone to EVER see this film.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0135",
+      "text": "I cannot believe that the actors agreed to do this \"film\".",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0552",
+      "text": "I don't think there are any redeeming qualities in this remake.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0253",
+      "text": "The cinematography-if it can be called that-sucked.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0924",
+      "text": "I've seen soap operas more intelligent than this movie.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0178",
+      "text": "The story is beyond stupid.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0459",
+      "text": "If only someone involved with it knew how to string together narrative!",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0526",
+      "text": "Full of unconvincing cardboard characters it is blandly written by Edward Chodorov, who also produced, and is surprisingly directed by Jean Negulesco from whom one would expect a great deal more.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0443",
+      "text": "But the convoluted plot just didn't convince me, and much of the film was watched with a weird, questioning glance.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0575",
+      "text": "He is almost unbearable to watch on screen, he has little to no charisma, and terrible comedic timing.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0558",
+      "text": "Both films are terrible, but to the credit of the 1986 version, it was watchable.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0479",
+      "text": "The directing is sloppy at best.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0342",
+      "text": "But it wasn't anything at all just one big yawn...",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0167",
+      "text": "This is a bad film, with bad writing, and good actors....an ugly cartoon crafted by Paul Haggis for people who can't handle anything but the bold strokes in storytelling....a picture painted with crayons.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0521",
+      "text": "Final Word: This Show is a real torture!!",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0247",
+      "text": "The movie lacks visual interest, drama, expression of feeling, and celebration of the very patriotism that underlines the narrative.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0187",
+      "text": "Highly unrecommended.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0761",
+      "text": "This scene is very strong and unpleasant.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0561",
+      "text": "The best example of how dumb the writing is when it's established that you can turn the zombie-students back into humans by removing a necklace containing a piece of the meteorite.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0340",
+      "text": "Glad I didn't pay to see it.",
+      "label": 0,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0364",
+      "text": "Everything from acting to cinematography was solid.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0315",
+      "text": "Highly entertaining at all angles.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0377",
+      "text": "Elias Koteas,Jack Palance play good roles Angelina is hot and gets naked.Billy Drago appears in this and is cool as usual + a cameo by Sven ole Thorsen helps make this a very enjoyable movie with good acting and a decent budget.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0598",
+      "text": "The characters were all funny and had the peculiarity of not having a true lead character.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0880",
+      "text": "She's poised and amazing.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0205",
+      "text": "His on screen presence shined thought even though there were other senior actors on the screen with him.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0992",
+      "text": ":) Anyway, the plot flowed smoothly and the male-bonding scenes were a hoot.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0278",
+      "text": "I thoroughly enjoyed it when Christopher Eccleston took control of the TARDIS and the continuation of the series.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0751",
+      "text": "I guess I liked the details of his dysfunction--he was believable.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0438",
+      "text": "The soundtrack wasn't terrible, either.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0107",
+      "text": "The only thing really worth watching was the scenery and the house, because it is beautiful.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0403",
+      "text": "For people who are first timers in film making, I think they did an excellent job!!",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0018",
+      "text": "I'll put this gem up against any movie in terms of screenplay, cinematography, acting, post-production, editing, directing, or any other aspect of film-making.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0597",
+      "text": "Easily, none other cartoon made me laugh in a tender way (before getting into dark sitcoms oriented for teenagers).",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0449",
+      "text": "I believe the screenwriter did a good job of tying up the loose ends.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0745",
+      "text": "Tom Wilkinson's character is a man who is not prepared for the ordeal that is about to begin, but he takes the matter in hand as the story progresses, and this great actor gives a performance that makes you feel the character's anguish and suffering.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0192",
+      "text": "Garbo, who showed right off the bat that her talents could carry over from the silent era (I wanted to see some of her silent work, but Netflix doesn't seem to be stocking them.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0021",
+      "text": "I can think of no other film where something vitally important occurs every other minute.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0013",
+      "text": "The Songs Were The Best And The Muppets Were So Hilarious.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0062",
+      "text": "All in all I give this one a resounding 9 out of 10.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0025",
+      "text": "Yes, this film does require a rather significant amount of puzzle-solving, but the pieces fit together to create a beautiful picture.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0652",
+      "text": "Nothing short of magnificent photography/cinematography in this film.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0866",
+      "text": "The scripting of the subtle comedy is unmatched by any movie in recent years.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0385",
+      "text": "The sets (especially designed to work with the camera) are amazing....stylized, beautiful and effective.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0123",
+      "text": "The music in the film is really nice too.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0077",
+      "text": "I especially liked the non-cliche choices with the parents; in other movies, I could predict the dialog verbatim, but the writing in this movie made better selections.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0298",
+      "text": "Three of the most visually appealing movies i've ever seen.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0987",
+      "text": "She is as lovely as usual, this cutie!",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0484",
+      "text": "I loved this movie it was a great portrayal of a family who had it's share of ups and down, but in the end they knew that special love they had for each other.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0759",
+      "text": "This is one of the best Italian thrillers of the early 70's.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0126",
+      "text": "10/10",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0506",
+      "text": "Cinematography noteworthy including fine views of Barcelona and its famed Gaudi towers.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0272",
+      "text": "It is an excellent drama, an excellent thriller, and an excellent film.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0492",
+      "text": "Totally different, with loads of understatement and black comedy, this is a film few get to see, but those who do will remember it.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0307",
+      "text": "the story which was told so eloquently by Francis ford Coppola 25 years earlier, really unfolds gradually and leaves room for the characters to develop.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0244",
+      "text": "If good intentions made a film great, then this film might be one of the greatest films ever made.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0656",
+      "text": "There still are good actors around!",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0634",
+      "text": "I'll give this film 10 out of 10!",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0615",
+      "text": "Go watch it!",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0981",
+      "text": "Then I watched it again two Sundays ago (March 20th, 2005) and I began to really enjoy it and this time I taped the entire thing.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0119",
+      "text": "Some applause should be given to the \"prelude\" however.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0297",
+      "text": "His use of the colours of the French flag in the three films was nothing short of incredible, every shot, every scene was like a work of art.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0994",
+      "text": "Fans of the genre will be in heaven.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0776",
+      "text": "Also the music by Mark Snow is possibly the best score I've ever heard.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0969",
+      "text": "Definitely worth seeing  it's the sort of thought provoking film that forces you to question your own threshold of loneliness.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0306",
+      "text": "his performance, as awarded, was stunning.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0644",
+      "text": "There's barely a boring moment in the film and there are plenty of humorous parts.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0594",
+      "text": "Being a 90's child, I truly enjoyed this show and I can proudly say that I enjoyed it big time and even more than the classical WB cartoons.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0367",
+      "text": "This movie has a cutting edge to it.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0811",
+      "text": "Cinematography: The film was shot in an interesting way.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0273",
+      "text": "Up there with the best of Melville.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0295",
+      "text": "Kieslowski never ceases to amaze me.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0796",
+      "text": "Predictable, but not a bad watch.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0470",
+      "text": "I knew when I saw the film that more great things were to come from this gifted actor.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0358",
+      "text": "Now you know why I gave it a 10+!",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0946",
+      "text": "However, after finally watching this film, I realized that not only had I had a closed mind to the brilliance it depicts, I also found myself watching it over and over again.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0268",
+      "text": "Thanks good a movie like this was done and released.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0846",
+      "text": "\" With great sound effects, and impressive special effects, I can't recommend this movie enough.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0833",
+      "text": "See both films if you can.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0392",
+      "text": "Though The Wind and the Lion is told largely through the eyes of the son, every member of the family can identify with one of the characters, whether it be Sean Connery's noble brigand, Candace Bergen's feisty heroine, John Huston's wily John Hay or Steve Kanaly's spiffy, radiant, ruthless can-do lieutenant, Roosevelt's \"Big Stick\".",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0986",
+      "text": "If you have not seen this movie, I definitely recommend it!",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0916",
+      "text": "I saw this short film on HBO the other day and absolutely loved it.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0789",
+      "text": "If you want a real scare rent this one!",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0864",
+      "text": "A film not easily forgotten.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0366",
+      "text": "Damian is so talented and versatile in so many ways of writing and portraying different Characters on screen.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0621",
+      "text": "Don't miss it.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0668",
+      "text": "If you do watch it, however, there are small consolations: The actresses playing Anne's sisters each do a wonderful job with their roles.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0505",
+      "text": "The rest of the cast also play well.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0831",
+      "text": "Trumbull on I LOVE LUCY).",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0967",
+      "text": "The incredible soundtrack truly captures the essence of the film.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0762",
+      "text": "Technically, the film is well made with impressive camera-work, solid acting and effective music from Riz Ortolani  particularly good is a recurring unaccompanied female vocal that sounds like it's coming from a distant hill.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0792",
+      "text": "As a courtroom drama, it's compelling, as an indictment on the American justice system, it's frightening.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0653",
+      "text": "The acting is fantastic, the stories are seamlessly woven together, and the dogs are splendid............. A must rent, view, or see.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0121",
+      "text": "A great film by a great director.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0765",
+      "text": "I liked the way Dustin Hoffman's character was ready to do just about everything to stay with his son.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0423",
+      "text": "This movie is excellent!Angel is beautiful and Scamp is adorable!His little yelps when hes scared,and the funniest parts are when:Scamp is caught under the curtain and when Angel and Scamp are singing 'Ive Never Had This Feeling Before'.I totally recommend this movie,its coming out on special edition on June 20.The cover has scamp on a garbage can and Angel underneath the lid.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0417",
+      "text": "As a European, the movie is a nice throwback to my time as a student in the 1980's and the experiences I had living abroad and interacting with other nationalities, although the circumstances were slightly different.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0943",
+      "text": "People who like European films and \"art movies\" will like this movie.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0542",
+      "text": "STEAMBOAT WILLIE is an amazingly important film to our cinema history.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0793",
+      "text": "This film highlights the fundamental flaws of the legal process, that it's not about discovering guilt or innocence, but rather, is about who presents better in court.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0863",
+      "text": "The result is a powerhouse achievement, made more timely now perhaps because of our culture's disturbing fascination with celebrity, and it's distorted interpretations of fame.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0005",
+      "text": "The best scene in the movie was when Gerardo is trying to find a song that keeps running through his head.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0948",
+      "text": "Brilliance indeed.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0499",
+      "text": "I found this move beautiful, enjoyable, and uplifting.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0681",
+      "text": "The aerial scenes were well-done.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0798",
+      "text": "She carries the movie well.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0408",
+      "text": "I liked it.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0496",
+      "text": "I really hope the team behind this movie makes more movies, and that they will continue to do so in their own, some kinda weird style.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0193",
+      "text": "It's also great to see that renowned silent screenwriter Frances Marion hasn't missed a step going from silent to sound.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0085",
+      "text": "Plus, it was well-paced and suited its relatively short run time.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0400",
+      "text": "Non-linear narration thus many flashbacks and every part are articulated quite well.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0777",
+      "text": "You won't forget this movie!",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0650",
+      "text": "This movie does an excellent job of revealing the complexity of the task and the incredible challenges facing South Africa.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0442",
+      "text": "Both do good jobs and are quite amusing.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0359",
+      "text": "I don't know exactly what it is about this movie, but we latched on to this endearing movie and it has become a special part of our family's memories.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0800",
+      "text": "It is wonderful and inspiring to watch, and I hope that it gets released again on to video or DVD.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0571",
+      "text": "Okay, I like to consider myself a fair critic, so I'll give credit where credit's due--the creature effects were actually pretty cool.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0031",
+      "text": "There are massive levels, massive unlockable characters... it's just a massive game.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0058",
+      "text": "Totally believable.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0785",
+      "text": "But the duet between the astronaut and his doctor at the beginning of the movie is a perfect exchange if one considers that this movie was made well into the Cold War and the astronaut's biggest fear is that he has crashed in the USSR.",
+      "label": 1,
+      "split": "train",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0953",
+      "text": "It's a gloriously fun, fast paced and fairly accurate portrayal of the night of a raver.",
+      "label": 1,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0665",
+      "text": "Also notable is John Bailey's fine crisp beautifully colored cinematography and the great production design & costumes by Eiko Ishioka who went on to do the memorable costumes for Coppola's Dracula for which she received a well deserved Oscar.",
+      "label": 1,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0325",
+      "text": "The ending is so, SO perfect... you'll shed a tear.",
+      "label": 1,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0935",
+      "text": "Kathy Bates is wonderful in her characters subtle desperation and escapism; a variation on her character in \"At Play In The Fields Of The Lord\".",
+      "label": 1,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0231",
+      "text": "I was totally fascinated by the music, the dancing... everything.",
+      "label": 1,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0867",
+      "text": "The characters are interesting, even if a bit predictable.",
+      "label": 1,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0983",
+      "text": "Judith Light is one of my favorite actresses and I think she does a superb job in this film!",
+      "label": 1,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0619",
+      "text": "The characters are interesting and you really care for them.",
+      "label": 1,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0052",
+      "text": "In addition to having one of the most lovely songs ever written, French Cancan also boasts one of the cutest leading ladies ever to grace the screen.",
+      "label": 1,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0744",
+      "text": "A very good film indeed, about great and unconditional love.",
+      "label": 1,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0932",
+      "text": "I rate this movie 9/10.",
+      "label": 1,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0076",
+      "text": "The suspense builders were good, & just cross the line from G to PG.",
+      "label": 1,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0533",
+      "text": "the cast was great.",
+      "label": 1,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0125",
+      "text": "Brilliant!",
+      "label": 1,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0230",
+      "text": "When I first watched this movie, in the 80s, I loved it.",
+      "label": 1,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0827",
+      "text": "It's pretty surprising that this wonderful film was made in 1949, as Hollywood generally had its collective heads in the sand concerning black and white issues at that time.",
+      "label": 1,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0692",
+      "text": "Punishment Park is a brilliant piece of cinema.",
+      "label": 1,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0786",
+      "text": "This movie is so awesome!",
+      "label": 1,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0299",
+      "text": "And his subtle connections between the three films are awesome.",
+      "label": 1,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0952",
+      "text": "Both Rickman and Stowe play their roles to the hilt in this tale of a childrens' book writer who-- maybe?-- has written a subversive tract.",
+      "label": 1,
+      "split": "validation",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0110",
+      "text": "But in terms of the writing it's very fresh and bold.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0039",
+      "text": "It's PURE BRILLIANCE.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0498",
+      "text": "This movie is a good and humorous comment on life in 2006.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0795",
+      "text": "This mostly routine fact-based TV drama gets a boost from the fine performance by Cole.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0716",
+      "text": "The attractive set used throughout most of the film is an eye-pleasing gem.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0216",
+      "text": "Ray Charles' life provided excellent biographical material for the film, which goes well beyond being just another movie about a musician.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0368",
+      "text": "I am so pleased to know such a modern day genius is out there , letting is passion for Art drive him and taking us as an audience with him.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0064",
+      "text": "I enjoyed reading this book to my children when they were little.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0993",
+      "text": "The opening sequence of this gem is a classic, and the cat n mouse games that follow are a delight to watch.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0099",
+      "text": "Ursula Burton's portrayal of the nun is both touching and funny at the same time with out making fun of nuns or the church.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0384",
+      "text": "I think the most wonderful parts (literally, full of \"wonder\") are the excerpts from his works.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0300",
+      "text": "I have to mention this and it is a huge SPOILER, i loved the ending, how all the characters of the three films were the remaining survivors of the ferry disaster, with Valentine and the young judge together, and the old man watching it on her TV, solidifying his happiness over the suffering which he dealt with for those many years.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0638",
+      "text": "Jimmy Stewart is as ever a great hero for Hitchcock, the story rips along to its cool climax at an embassy function, but it lacks the brooding menace of Hitchcock's black and white, low-budget original.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0868",
+      "text": "Highly recommended for all ages, although the younger set will probably not appreciate some of the more subtle references, they will certainly appreciate one galley scene in particular!",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0445",
+      "text": "The last 15 minutes of movie are also not bad as well.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0950",
+      "text": "Think of the film being like a dream.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0488",
+      "text": "Overall I rate this movie a 10 out of a 1-10 scale.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0402",
+      "text": "A good commentary of today's love and undoubtedly a film worth seeing.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0346",
+      "text": "is pretty funny.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0275",
+      "text": "You truly take this journey through the eyes and soul of a child.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0941",
+      "text": "The scenery that the two daughters paint and photograph are beautiful.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0865",
+      "text": "But, Kevin Spacey is an excellent, verbal tsunami as Buddy Ackerman  and totally believable because he is a great actor.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0033",
+      "text": "This is the kind of money that is wasted properly.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0991",
+      "text": "It was a riot to see Hugo Weaving play a sex-obsessed gay real estate salesman who uses his clients' houses for his trysts with the flaming Darren (Tom Hollander).",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0764",
+      "text": "The movie was very interesting from beginning to the end.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0317",
+      "text": "So for our enjoyment we get to see them run around, play games, and be dangerous.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0683",
+      "text": "The film gives meaning to the phrase, \"Never in the history of human conflict has so much been owed by so many to so few.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0513",
+      "text": "The cast is good.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0623",
+      "text": "A mature, subtle script that suggests and occasionally brings into dramatic focus the underlying tensions is well served by perfect performances (apart from the odd inappropriate smiling that Keira Knightley is prone to, though perhaps under direction this time as the other characters themselves often mention it).",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0347",
+      "text": "Babie Bop is very cute.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0327",
+      "text": "I will never forget it now.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0355",
+      "text": "I would give this television series a 10 plus if i could.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0259",
+      "text": "It was so funny.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0394",
+      "text": "I think it was Robert Ryans best film, because he portrayed someone like my father, and he was a schizophrenic in real life,(my father) although he never murdered anyone but was affected more so during the second world war which made him worse.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0973",
+      "text": "Enough can not be said of the remarkable animation in this film.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0316",
+      "text": "It features an outlandish array of memorable, psychotic but lovable nuts.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0962",
+      "text": "I was particularly pleased with the acting ability of Dwight Schultz.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0978",
+      "text": "Still, it makes up for all of this with a super ending that depicts a great sea vessel being taken out by the mighty frost.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0901",
+      "text": "Director Neil LaBute uses brutal violence to seperate dreams from reality, and along with the touching drama, and hilarious comedy, you can never tell what is going to happen next.",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "imdb-0734",
+      "text": ") a happy, wonderful, feel good ending!",
+      "label": 1,
+      "split": "test",
+      "source": "uci-imdb"
+    },
+    {
+      "id": "probe-01",
+      "text": "The film is not boring; its quiet scenes kept me fascinated.",
+      "label": 1,
+      "split": "challenge",
+      "source": "atlas-original",
+      "group": "negation"
+    },
+    {
+      "id": "probe-02",
+      "text": "I cannot recommend this confusing and joyless movie.",
+      "label": 0,
+      "split": "challenge",
+      "source": "atlas-original",
+      "group": "negation"
+    },
+    {
+      "id": "probe-03",
+      "text": "The actors are wonderful, but the story is so incoherent that I regret watching it.",
+      "label": 0,
+      "split": "challenge",
+      "source": "atlas-original",
+      "group": "mixed"
+    },
+    {
+      "id": "probe-04",
+      "text": "The opening drags, yet the ending and performances make the whole film worthwhile.",
+      "label": 1,
+      "split": "challenge",
+      "source": "atlas-original",
+      "group": "mixed"
+    },
+    {
+      "id": "probe-05",
+      "text": "The database migration finished perfectly and every record was preserved.",
+      "label": 1,
+      "split": "challenge",
+      "source": "atlas-original",
+      "group": "domain-shift"
+    },
+    {
+      "id": "probe-06",
+      "text": "The API lost all my saved work and support never replied.",
+      "label": 0,
+      "split": "challenge",
+      "source": "atlas-original",
+      "group": "domain-shift"
+    },
+    {
+      "id": "probe-07",
+      "text": "This router is remarkably reliable during long video calls.",
+      "label": 1,
+      "split": "challenge",
+      "source": "atlas-original",
+      "group": "domain-shift"
+    },
+    {
+      "id": "probe-08",
+      "text": "The backup tool reports success but restores only broken files.",
+      "label": 0,
+      "split": "challenge",
+      "source": "atlas-original",
+      "group": "domain-shift"
+    },
+    {
+      "id": "probe-09",
+      "text": "Wonderful, another two hours I will never get back.",
+      "label": 0,
+      "split": "challenge",
+      "source": "atlas-original",
+      "group": "sarcasm"
+    },
+    {
+      "id": "probe-10",
+      "text": "The film is beautifully photographed and emotionally empty.",
+      "label": 0,
+      "split": "challenge",
+      "source": "atlas-original",
+      "group": "ambiguous"
+    },
+    {
+      "id": "probe-11",
+      "text": "An uneven film, but I am glad I saw it.",
+      "label": 1,
+      "split": "challenge",
+      "source": "atlas-original",
+      "group": "ambiguous"
+    },
+    {
+      "id": "probe-12",
+      "text": "It is not a masterpiece, but it is good entertainment.",
+      "label": 1,
+      "split": "challenge",
+      "source": "atlas-original",
+      "group": "negation"
+    }
+  ]
+}

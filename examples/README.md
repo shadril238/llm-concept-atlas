@@ -52,3 +52,5 @@ Memory is `RUSAGE_CHILDREN`'s cumulative peak within one runner invocation, incl
 Ordinary Pages builds validate manifests, synchronization, coverage, all offline calculations, and site links. They install only the foundation environment. `.github/workflows/examples.yml` separately checks foundations on pull requests; a manual `model` input enables the CPU model job. No secrets are required or exposed. Larger application/training/GPU/API environments will be added by the phases that implement their real workflows. They are not placeholders presented as verified configurations.
 
 E3 foundations use the same locked reference environment. See [E3.md](./training/reference/E3.md) for L01–L06 commands, pretrained-vector provenance, optional larger-data limits, and CPU cache measurement details.
+
+E4 adds [L07–L08 CPU classification and BERTopic workflows](./applications/discovery/README.md), an isolated locked environment, attributed UCI sentiment data, an original fictional summary corpus, and a documented hosted-results importer that makes no API request.

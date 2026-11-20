@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "discovery-embeddings-for-classification",
+  "status": "passed",
+  "date": "2026-11-20T14:48:27.445588+00:00",
+  "gitCommit": "7ea038d4a6c5fd39942722ec7e7be0bf96cd3a1f",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e4/lesson_snippets/embeddings_for_classification.py"
+  ],
+  "sourceSha256": "45d350628a0977f73062035e3ff4053326afb570a0f151d8bb96b3cb7f0cdcfc",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "d5338f171be32a0691eead8f929e357c72428da8e9a6a3b6a55d273d269db81f",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 21.3,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "prototype scores: [0.6, 0.8]\nlinear-head positive probability: 0.599\n",
+  "stderr": "",
+  "error": null
+}

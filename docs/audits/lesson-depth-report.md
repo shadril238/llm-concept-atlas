@@ -1,8 +1,8 @@
 # Existing lesson depth audit
 
-Initial review 2026-11-19; latest lesson update 2026-11-20. Covers **100 concepts**. Source hashes detect stale findings. Independent pedagogical acceptance remains pending; execution claims below refer only to linked workflow evidence.
+Initial review 2026-11-19; latest lesson update 2026-11-20. Covers **102 concepts**. Source hashes detect stale findings. Independent pedagogical acceptance remains pending; execution claims below refer only to linked workflow evidence.
 
-The 100 concept snippets contain **61 distinct Python implementations**. Shared code is not automatically wrong; the finding records whether it demonstrates this lesson's mechanism.
+The 102 concept snippets contain **72 distinct Python implementations**. Shared code is not automatically wrong; the finding records whether it demonstrates this lesson's mechanism.
 
 ## Useful existing work
 
@@ -62,24 +62,26 @@ The site has explanations, labeled illustrative examples, relationship navigatio
 
 | Lesson | Current implementation finding | Priority / next phase |
 | --- | --- | --- |
-| [embeddings-for-classification](../../src/content/docs/concepts/embeddings-for-classification.mdx#implement-it) | The cosine calculation never predicts labels from prototypes or a trained classifier. | P1 / E4 |
-| [generative-classification](../../src/content/docs/concepts/generative-classification.mdx#implement-it) | The code builds a prompt and stops before generation, parsing, or classification evaluation. | P1 / E4 |
-| [sentiment-analysis](../../src/content/docs/concepts/sentiment-analysis.mdx#implement-it) | The keyword rule is a useful baseline; add real classifier outputs and ambiguous review evaluation. | P1 / E4 |
-| [supervised-classification](../../src/content/docs/concepts/supervised-classification.mdx#implement-it) | The supplied labels are never used to fit a model; the rule is handwritten. | P1 / E4 |
-| [task-specific-models](../../src/content/docs/concepts/task-specific-models.mdx#implement-it) | A handwritten rule does not load a trained task-specific model; a separate use-case sketch does. | P1 / E4 |
-| [zero-shot-classification](../../src/content/docs/concepts/zero-shot-classification.mdx#implement-it) | Keyword sets are a rule baseline, not embedding- or entailment-based zero-shot classification. | P1 / E4 |
+| [embeddings-for-classification](../../src/content/docs/concepts/embeddings-for-classification.mdx#implement-it) | E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending. | P2 / E4 |
+| [generative-classification](../../src/content/docs/concepts/generative-classification.mdx#implement-it) | E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending. | P2 / E4 |
+| [sentiment-analysis](../../src/content/docs/concepts/sentiment-analysis.mdx#implement-it) | E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending. | P2 / E4 |
+| [supervised-classification](../../src/content/docs/concepts/supervised-classification.mdx#implement-it) | E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending. | P2 / E4 |
+| [task-specific-models](../../src/content/docs/concepts/task-specific-models.mdx#implement-it) | E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending. | P2 / E4 |
+| [zero-shot-classification](../../src/content/docs/concepts/zero-shot-classification.mdx#implement-it) | E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending. | P2 / E4 |
 
 ### Chapter 5
 
 | Lesson | Current implementation finding | Priority / next phase |
 | --- | --- | --- |
-| [bertopic](../../src/content/docs/concepts/bertopic.mdx#implement-it) | Supplied groups and raw word counts omit embedding, clustering, c-TF-IDF, and BERTopic fitting. | P1 / E4 |
-| [cluster-inspection](../../src/content/docs/concepts/cluster-inspection.mdx#implement-it) | The snippet counts words in fixed groups; add actual cluster members, outliers, and representative-document inspection. | P1 / E4 |
-| [clustering](../../src/content/docs/concepts/clustering.mdx#implement-it) | Nearest fixed-center assignment is a useful calculation; it does not fit clusters or show HDBSCAN noise. | P1 / E4 |
-| [dimensionality-reduction](../../src/content/docs/concepts/dimensionality-reduction.mdx#implement-it) | Dropping the final coordinate is a projection, not fitted PCA or UMAP. | P1 / E4 |
-| [document-embeddings](../../src/content/docs/concepts/document-embeddings.mdx#implement-it) | The example compares supplied vectors; it neither encodes documents nor demonstrates pooling/chunking. | P1 / E4 |
-| [topic-modeling](../../src/content/docs/concepts/topic-modeling.mdx#implement-it) | Raw word frequency over supplied groups does not compute topic weighting or validate interpretation. | P1 / E4 |
-| [topic-representations](../../src/content/docs/concepts/topic-representations.mdx#implement-it) | Raw word counts do not implement c-TF-IDF, semantic keyword reranking, or diversity refinement. | P1 / E4 |
+| [bertopic](../../src/content/docs/concepts/bertopic.mdx#implement-it) | E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending. | P2 / E4 |
+| [cluster-inspection](../../src/content/docs/concepts/cluster-inspection.mdx#implement-it) | E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending. | P2 / E4 |
+| [clustering](../../src/content/docs/concepts/clustering.mdx#implement-it) | E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending. | P2 / E4 |
+| [dimensionality-reduction](../../src/content/docs/concepts/dimensionality-reduction.mdx#implement-it) | E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending. | P2 / E4 |
+| [document-embeddings](../../src/content/docs/concepts/document-embeddings.mdx#implement-it) | E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending. | P2 / E4 |
+| [topic-modeling](../../src/content/docs/concepts/topic-modeling.mdx#implement-it) | E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending. | P2 / E4 |
+| [topic-representations](../../src/content/docs/concepts/topic-representations.mdx#implement-it) | E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending. | P2 / E4 |
+| [maximal-marginal-relevance](../../src/content/docs/concepts/maximal-marginal-relevance.mdx#implement-it) | E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending. | P2 / E4 |
+| [class-based-tf-idf](../../src/content/docs/concepts/class-based-tf-idf.mdx#implement-it) | E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending. | P2 / E4 |
 
 ### Chapter 6
 
@@ -172,8 +174,9 @@ The site has explanations, labeled illustrative examples, relationship navigatio
 
 ## Real-model use-case sketches
 
-- [pretrained-inference-sketch](../../src/content/docs/use-cases/text-classification.mdx#run-a-real-model): Unpinned model/dependencies; no recorded clean run, comparison baseline, or executable held-out evaluation.
+- [evaluated-seven-method-comparison-and-saved-head](../../src/content/docs/use-cases/text-classification.mdx#2-fit-and-compare-fairly): Independent reader review and larger-data validation remain pending; hosted provider execution is optional and not claimed.
 - [local-rag-sketch](../../src/content/docs/use-cases/rag-question-answering.mdx#run-a-small-local-pipeline): Unpinned dependencies; one selected passage and generated draft; no recorded run, absence tests, reranking, or executable citation evaluation.
+- [fitted-topic-pipeline-with-controlled-representation-and-density-comparisons](../../src/content/docs/use-cases/research-collection-explorer.mdx#2-run-the-actual-topic-model): Independent reader review and a realistic licensed external research collection remain pending.
 
 ## How to act on a finding
 

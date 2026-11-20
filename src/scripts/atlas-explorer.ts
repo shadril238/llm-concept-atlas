@@ -314,7 +314,7 @@ async function startAtlas(root: HTMLElement) {
     link.textContent = node.kind === 'concept' ? node.lessonStatus === 'full' ? 'Read lesson ↗' : 'Read introductory note ↗' : 'Open overview ↗';
     card.append(kicker, heading, summary, link);
     if (node.labHref) {
-      const lab = document.createElement('a'); lab.href = `${base}${node.labHref.replace(/^\/+/, '')}`; lab.textContent = 'Run connected foundation labs ↗'; card.append(lab);
+      const lab = document.createElement('a'); lab.href = `${base}${node.labHref.replace(/^\/+/, '')}`; lab.textContent = 'Run connected labs ↗'; card.append(lab);
     }
     for (const prerequisite of node.prerequisites) {
       const reason = node.relationshipReasons?.[prerequisite];

@@ -13,3 +13,5 @@ Run from repository root. The first run downloads the public Apache-2.0 `sentenc
 The model's [official card](https://huggingface.co/sentence-transformers/paraphrase-MiniLM-L3-v2) describes mask-aware mean pooling. This example shows that operation directly, followed by L2 normalization and cosine ranking. It is an inference smoke exercise, with five original sentences and no training. Later phases add full evaluated workflows.
 
 Source: `src/atlas_applications/retrieval.py`. Notebook: `notebooks/embedding-retrieval.ipynb`; use this environment's Python kernel. Records and measured resources: `../verification/records/embedding-retrieval.json`. See the [shared guide](../README.md) for failure handling, artifacts, and reproducibility limits.
+
+E4 now provides complete evaluated classification and topic-discovery workflows in the isolated [discovery environment](./discovery/README.md). Its lock extends the CPU approach without invalidating this E1 smoke record.

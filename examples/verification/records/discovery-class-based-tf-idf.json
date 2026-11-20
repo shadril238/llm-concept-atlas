@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "discovery-class-based-tf-idf",
+  "status": "passed",
+  "date": "2026-11-20T14:48:28.202105+00:00",
+  "gitCommit": "7ea038d4a6c5fd39942722ec7e7be0bf96cd3a1f",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e4/lesson_snippets/class_based_tf_idf.py"
+  ],
+  "sourceSha256": "85728f9a6d427d27ab5210a55c709596f8ef4f9ed5caf3d792e730c1308ef468",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "fe82a602930ed43639b1d3676179e369b538e5b69a37cfa7df06a167924fa021",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "A: 4 f: [3, 2, 3]\n[[0.635473, 0.274653, 0.0], [0.0, 0.274653, 0.635473]]\n",
+  "stderr": "",
+  "error": null
+}

@@ -1,62 +1,63 @@
 ---
-title: Text classification
-description: Turn a sentence into a fixed label with a pretrained classifier.
+title: Build an evaluated review classifier
+description: Compare real sentiment classifiers, inspect errors, reload a fitted head, and define a review policy.
 kind: use-case
-lastReviewed: 2026-11-12
+lastReviewed: 2026-11-20
 ---
 
 import LessonFlow from '../../../components/LessonFlow.astro';
+import DiscoveryEvidence from '../../../components/DiscoveryEvidence.astro';
+import { ClassificationComparison } from '../../../components/simulations/DiscoveryLabs';
 
-**Problem:** A product team wants to route feedback by sentiment. The input is a review; the output is one label from a known set. This is a classification task, not open-ended text generation. Chapter 4 of *Hands-On Large Language Models* develops several classification approaches.
+**Deliverable:** a versioned comparison report, an error-analysis notebook, a portable embedding-head artifact, and an inference command that emits a label, score, and review flag.
 
-<LessonFlow steps={['Review text', 'Tokenizer and encoder', 'Classification head', 'Label and score', 'Human review for uncertain cases']} caption="A text classification workflow with a review step." />
+The concrete task is binary sentiment of a movie-review sentence, with 0 = negative and 1 = positive. This project follows Chapter 4 while using a licensed UCI subset and smaller CPU checkpoints. A sentence can contain mixed opinions; the label policy must say which target and overall judgment are being evaluated. Sentiment does not substitute for a billing/bug/feature-request taxonomy.
 
-## Understand the decision
+<LessonFlow steps={['Versioned reviews + label policy', 'Train / validation / test roles', 'Baseline and model decisions', 'Metrics + error inspection', 'Saved head + review rule']} caption="Every reported decision retains its source ID and evaluation role." />
 
-The tokenizer maps a review to IDs. A [representation model](/llm-concept-atlas/concepts/representation-model/) builds contextual features. A trained classification head maps those features to scores for the model’s labels. The largest score determines the predicted label in a simple pipeline. A returned score reflects the model’s output for its label set; it is not a universal probability that the review is correctly interpreted.
+## 1. Inspect the inputs
 
-The example below uses a pretrained **English positive/negative sentiment** model. It is appropriate for a first experiment, not a ready-made router for every kind of product feedback. If your labels are “billing,” “bug,” and “feature request,” collect representative labeled examples and train or choose a classifier for those labels.
+Start with [L07 setup and provenance](/llm-concept-atlas/labs/classification-and-topics/#l07-classification-comparison). The fixture has 200 training, 40 validation, and 80 test UCI movie sentences. It removes canonical exact duplicates and retains IDs. Twelve separately reported original probes stress negation, mixed sentiment, sarcasm, and domain shift. UCI data attribution and its CC BY 4.0 license remain with those rows; repository MIT does not replace that license.
 
-## Run a real model
+Inspect class counts, text lengths, ambiguous cases, and available source identifiers before fitting. The source lacks reviewer IDs, so exact text deduplication cannot prove reviewer-level separation. Pretrained-model overlap with review sources is unknown. The atlas reports these limits instead of treating a small split as a contamination-free benchmark.
 
-Install dependencies, then run the script. The first run downloads model files; later runs can use the local cache.
+## 2. Fit and compare fairly
 
 ```bash
-python -m pip install transformers torch
+uv sync --locked --project examples/applications/discovery
+python3 scripts/run-examples.py --id classification-comparison --allow-network
 ```
 
-```python
-from transformers import pipeline
+Use `--offline` after the public models are cached. Compare TF-IDF + logistic regression, fixed embeddings + logistic regression, class-average vectors, label-description similarity, a task-specific encoder, NLI zero-shot, and actual FLAN-T5 generation. They use the same test IDs but have different prior training and assumptions.
 
-classifier = pipeline(
-    task="text-classification",
-    model="distilbert/distilbert-base-uncased-finetuned-sst-2-english",
-)
-reviews = [
-    "The setup was simple and the result was excellent.",
-    "The app crashes every time I open it.",
-]
-for review, prediction in zip(reviews, classifier(reviews)):
-    print(review, "=>", prediction["label"], round(prediction["score"], 3))
+Fit vocabulary/IDF and local heads on training data only. Select C and the embedding-head review threshold using validation, then report final test results without selecting settings from them. A deliberate wording-sensitivity experiment reports both descriptions rather than silently picking the best test score.
+
+<ClassificationComparison initialMethod="embedding-logistic" client:visible />
+
+## 3. Turn numbers into an error report
+
+Keep accuracy, macro-F1, each class’s precision/recall/F1/support, invalid-output rate, and the confusion matrix together. Click false-positive and false-negative cells and read the original text. Compare negation, overall versus aspect sentiment, and out-of-domain cases. A high score with a wrong label is especially useful evidence for the limits of a review threshold.
+
+For generative classification, parse exactly the allowed labels. Refusals, timeouts, missing responses, and unfamiliar text must remain visible in evaluation. Do not treat every non-negative output as positive. Report the original challenge probes separately because their sampling and annotation policy differ from the UCI test set.
+
+Create an error log with source ID, gold label, each method’s prediction, raw generated text where applicable, and a short author diagnosis. Distinguish a model error from an ambiguous annotation instead of changing the label just to improve a metric.
+
+## 4. Reload and run inference
+
+The lab writes an embedding-head JSON artifact with exact encoder revision, coefficients, intercept, class IDs, truncation contract, and validation-selected review threshold. It checks reloaded probabilities against the fitted head before using the artifact.
+
+```bash
+examples/applications/discovery/.venv/bin/python examples/applications/discovery/src/atlas_discovery/predict.py "The film is not perfect, but I enjoyed it."
 ```
 
-The first review should receive a positive label and the second a negative label; exact scores can vary by package and model version. `pipeline` loads the model and tokenizer together. The model returns label scores; it does not explain why a review was written.
+The original text stays available for inspection. The score describes this head’s output; it does not guarantee correctness or suitability for a new domain. A production version also needs representative fresh evaluation, a measured review process, and a way to detect changing inputs. Editing the model/encoder contract requires a new run and new evidence.
 
-## Make it useful in a product
+<DiscoveryEvidence id="classification-comparison" />
 
-1. Define labels with examples and clear boundaries. “Bug” and “negative sentiment” are different label schemes.
-2. Keep a held-out evaluation set covering short messages, negation, sarcasm, languages, and changing product terms. Inspect a confusion matrix, not only overall accuracy.
-3. Choose a review rule for uncertain or high-impact cases. Capture examples of mistakes for future improvements.
-4. Compare a simple keyword or linear baseline with the neural model. Complexity is useful only if it improves the relevant metric enough to justify it.
+## Transfer questions
 
-## Limits and questions
+<details><summary>What changes for billing versus bug reports?</summary><p>Define those labels and their overlap rules, collect representative labeled examples, choose splits that reflect source/customer independence where possible, and evaluate a matching classifier. Renaming sentiment outputs cannot perform that task.</p></details>
 
-- A positive/negative model cannot supply labels it was not trained to predict.
-- A high output score can still accompany an error, especially on unfamiliar data.
-- Do not treat a label as an explanation of the customer’s intent; keep the original text available for review.
+<details><summary>What if a stricter threshold improves accepted accuracy but accepts only ten percent of cases?</summary><p>Report both quantities and the review workload. The tradeoff may be unsuitable even if accepted accuracy looks attractive; the threshold was not a free accuracy improvement on all cases.</p></details>
 
-<details><summary>Why is a generation model unnecessary here?</summary><p>The required output is a fixed label. A classifier maps directly to that label set and is easier to evaluate for this task.</p></details>
-
-<details><summary>What would you change to classify bug reports versus feature requests?</summary><p>Define and collect examples for those labels, then choose or train a classifier for that specific scheme.</p></details>
-
-Read the [official chapter 4 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter04) for the book’s broader treatment and the [Transformers pipeline reference](https://huggingface.co/docs/transformers/en/main_classes/pipelines) for current API behavior. This page’s workflow and examples are original.
+The optional hosted-results notebook is separate from the required local workflow and makes no API request. Read the [complete E4 execution guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/applications/discovery/README.md) and the [authors’ pinned Chapter 4 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter04). Independent reader review remains pending.

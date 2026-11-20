@@ -1,0 +1,1004 @@
+---
+title: Classification and topic discovery · L07–L08
+description: Compare seven real classification methods on shared reviews, then fit and inspect a modular BERTopic pipeline.
+kind: path
+lastReviewed: 2026-11-20
+---
+
+import VerifiedRun from '../../../components/VerifiedRun.astro';
+import { ClassificationComparison, LabelValidator, CtfidfCalculator, DiversityExplorer, TopicExplorer } from '../../../components/simulations/DiscoveryLabs';
+
+E4 connects Chapters 4–5 through two complete CPU workflows. The first predicts an existing label scheme; the second discovers groups without target class labels and inspects their descriptions. Both preserve intermediate evidence. **Implementation and author checks are separate from independent technical/editorial review, which remains pending.**
+
+## Setup and reproducibility
+
+From the repository root:
+
+```bash
+uv sync --locked --project examples/applications/discovery
+python3 scripts/run-examples.py --id classification-comparison --id modular-bertopic --allow-network
+python3 scripts/run-examples.py --id topic-label-generation --allow-network
+```
+
+The first run downloads pinned public models. Later replace `--allow-network` with `--offline` to use cached artifacts. No API key or GPU is required. The isolated environment reuses the E1 CPU model approach and adds pinned scikit-learn, sentence-transformers, BERTopic, UMAP, and HDBSCAN; its own lock avoids changing earlier evidence. It uses Python 3.11, PyTorch 2.8.0, Transformers 4.57.1, and NumPy 2.3.5. NumPy was upgraded in this environment after matrix-operation warnings on the author’s Mac; finite-value, probability, and reference checks remain enabled.
+
+Use the generated notebooks in `examples/applications/discovery/notebooks/` with this interpreter. Their executable cells import the same source as the CLI. Loading large model weights and first-time UMAP/Numba initialization can dominate a first run. Record hardware and library versions before comparing timings.
+
+Read the [complete execution/provenance guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/applications/discovery/README.md). The book uses a larger Rotten Tomatoes classification dataset and an arXiv abstract corpus; these smaller atlas adaptations teach the same workflow contracts without claiming to reproduce the book’s benchmark scores.
+
+## L07: classification comparison
+
+**Question:** Which decision rule works on the same held-out movie sentences, and why do methods disagree?
+
+The fixture contains 200 training, 40 validation, and 80 test sentences, stratified by 0 = negative and 1 = positive. Those rows come from the IMDB portion of **Kotzias (2015), Sentiment Labelled Sentences, UCI Machine Learning Repository, DOI [10.24432/C57604](https://doi.org/10.24432/C57604)**, licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The atlas removes canonical exact duplicates, joins two physical-line continuations, selects a deterministic subset, and adds stable source IDs/splits. The UCI rows retain that attribution/license; repository MIT covers original code and the separately identified original probes.
+
+Twelve original challenge sentences test negation, mixed sentiment, sarcasm, and transfer to software/products. Their labels are author interpretations, so they have their own report. The source lacks reviewer/source-review IDs; exact deduplication does not establish reviewer-level independence. Pretrained-model overlap with review data is unknown.
+
+### What is compared
+
+| Method | Local labels used? | Actual decision rule |
+| --- | --- | --- |
+| TF-IDF + logistic regression | Training labels | Fit vocabulary/IDF and head on train only |
+| Frozen embeddings + logistic regression | Training labels | Mask-aware mean-pooled 384D vectors; fitted linear head |
+| Class-average vectors | Training labels | Cosine to normalized per-class training means |
+| Label-description similarity | No local fitting labels | Cosine between a review and two fixed description vectors |
+| Task-specific encoder | No local fitting | Pinned SST-2 DistilBERT head with explicit label mapping |
+| NLI zero-shot | No local fitting | Candidate-relative softmax of configured entailment logits |
+| FLAN-T5 | No local fitting | Greedy label-token generation with strict parsing |
+
+Different methods have different prior training. This is a workflow comparison, not a controlled proof that one architecture is superior. All seven use the identical 80 test IDs and the same 12 separate challenge IDs.
+
+### Selection and evaluation contract
+
+The two fitted heads select C from 0.1, 1, and 10 on validation macro-F1, preferring smaller C on ties. No test score chooses C. The embedding-head review threshold is selected on validation only, maximizing retained coverage subject to at least 90% validation accuracy; the small validation sample cannot guarantee deployment performance.
+
+Report accuracy, macro-F1, weighted-F1, each class’s precision/recall/F1/support, the full confusion matrix, and invalid-output rate. Invalid labels stay in the full denominator. Macro-F1 weights the two class scores equally; weighted-F1 follows class support and can hide poor minority performance. A model confidence score is not a universal correctness probability.
+
+<ClassificationComparison client:visible />
+
+### Error analysis to perform
+
+1. Select a false-positive or false-negative cell and read the original text. Decide whether the target, annotation, or model interpretation explains the disagreement.
+2. Compare a short negation probe with a mixed-sentiment probe. A positive word alone does not establish overall sentiment.
+3. Compare the embedding classifier with class averages and label descriptions. Their rules use different information despite sharing an encoder.
+4. Inspect the description-wording experiment: the two predeclared descriptions changed 11 of 92 decisions in the recorded run. This is sensitivity evidence, not permission to pick wording on test performance.
+5. Increase the review threshold. Report both retained coverage and accepted accuracy. No accepted cases means undefined accepted accuracy.
+
+The recorded TF-IDF baseline has test macro-F1 about 0.633; the fitted embedding head about 0.850; the task encoder about 0.875; and this NLI setup about 0.887. These small-sample values have substantial uncertainty and must not be presented as a leaderboard. The interactive table shows every measured method and the actual warmed CPU timings.
+
+### Label generation and validation
+
+FLAN-T5 uses an encoder-decoder architecture, a fixed prompt, a 256-token input cap, greedy generation, and a maximum of eight new tokens. Trim and case-fold the complete output, then accept exactly positive or negative. Every other response is invalid. No local model weights are trained for this step. All recorded test outputs happened to be valid; future inputs still need validation.
+
+<LabelValidator client:visible />
+
+### Save, reload, and predict
+
+The workflow saves the embedding head as `examples/artifacts/e4-classification/classifier.json`, containing its coefficient row, intercept, class IDs, exact encoder revision, input cap, and selected review threshold. It recomputes sigmoid probabilities after reload and checks agreement to 1e-10. Model binaries and generated artifacts stay outside Git.
+
+```bash
+examples/applications/discovery/.venv/bin/python examples/applications/discovery/src/atlas_discovery/predict.py "The film is not perfect, but I enjoyed it."
+```
+
+Preserving width alone is insufficient: a different 384D encoder has a different coordinate system. This artifact requires its exact encoding contract. The inference script emits a label, score, and human-review flag without claiming that a high score proves correctness.
+
+<VerifiedRun id="classification-comparison" />
+
+<details>
+<summary>Complete runnable L07 source · synchronized with the CLI</summary>
+
+{/* example:classification-comparison:start */}
+
+```python
+"""L07: same-case comparison of seven actual classification methods."""
+
+import json
+from pathlib import Path
+import sys
+import time
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from atlas_discovery.common import (
+    ROOT,
+    Encoder,
+    NLI,
+    NLI_REV,
+    SENTIMENT,
+    SENTIMENT_REV,
+    T5,
+    T5_REV,
+    measure,
+    save_result,
+    setup,
+)
+from atlas_foundations.e4.metrics import (
+    classification_metrics,
+    parse_label,
+    selective_metrics,
+)
+
+import numpy as np
+import torch
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from transformers import (
+    AutoModelForSequenceClassification,
+    AutoModelForSeq2SeqLM,
+    AutoTokenizer,
+)
+
+
+def probability_rows(scores):
+    scores = np.asarray(scores)
+    assert np.isfinite(scores).all() and np.allclose(scores.sum(1), 1, atol=1e-5)
+    return [
+        {
+            "prediction": int(row.argmax()),
+            "confidence": float(row.max()),
+            "scores": row.tolist(),
+        }
+        for row in scores
+    ]
+
+
+def main():
+    setup()
+    data = json.loads((ROOT / "examples/data/fixtures/sentiment.json").read_text())
+    train = [r for r in data["rows"] if r["split"] == "train"]
+    valid = [r for r in data["rows"] if r["split"] == "validation"]
+    held = [r for r in data["rows"] if r["split"] in ["test", "challenge"]]
+    assert len({r["id"] for r in data["rows"]}) == len(data["rows"])
+    text = lambda rows: [r["text"] for r in rows]
+    labels = lambda rows: [r["label"] for r in rows]
+    methods = {}
+
+    def evaluate(name, predict, contract, training_seconds=0.0):
+        validation_predictions = predict(valid)
+        predictions, timing = measure(predict, held)
+        summary = {
+            "contract": contract,
+            "fit_seconds": training_seconds,
+            "timing": timing,
+            "validation": classification_metrics(
+                labels(valid), [r["prediction"] for r in validation_predictions]
+            ),
+            "cases": [
+                dict(id=row["id"], **prediction)
+                for row, prediction in zip(held, predictions)
+            ],
+        }
+        for split in ["test", "challenge"]:
+            positions = [i for i, row in enumerate(held) if row["split"] == split]
+            summary[split] = classification_metrics(
+                [held[i]["label"] for i in positions],
+                [predictions[i]["prediction"] for i in positions],
+            )
+        methods[name] = summary
+        return validation_predictions, predictions
+
+    def fit_head(features, validation_features):
+        candidates = []
+        for regularization in [0.1, 1.0, 10.0]:
+            head = LogisticRegression(
+                C=regularization, max_iter=1000, random_state=37
+            ).fit(features, labels(train))
+            score = classification_metrics(
+                labels(valid), head.predict(validation_features).tolist()
+            )["macro_f1"]
+            candidates.append((score, regularization, head))
+        best = max(candidates, key=lambda item: (item[0], -item[1]))
+        return best[2], [
+            {"C": c, "validation_macro_f1": score} for score, c, _ in candidates
+        ]
+
+    # Fit vocabulary and IDF on training rows only, never all documents.
+    start = time.perf_counter()
+    vectorizer = TfidfVectorizer(ngram_range=(1, 2), min_df=1, max_features=8000)
+    bow = vectorizer.fit_transform(text(train))
+    baseline, baseline_candidates = fit_head(bow, vectorizer.transform(text(valid)))
+    evaluate(
+        "tfidf-logistic",
+        lambda rows: probability_rows(
+            baseline.predict_proba(vectorizer.transform(text(rows)))
+        ),
+        "Train-only TF-IDF features + fitted logistic head; C selected on validation macro-F1.",
+        time.perf_counter() - start,
+    )
+
+    encoder = Encoder()
+    start = time.perf_counter()
+    train_vectors, valid_vectors = (
+        encoder.encode(text(train)),
+        encoder.encode(text(valid)),
+    )
+    head, embedding_candidates = fit_head(train_vectors, valid_vectors)
+    fit_seconds = time.perf_counter() - start
+    head_predict = lambda rows: probability_rows(
+        head.predict_proba(encoder.encode(text(rows)))
+    )
+    val_predictions, held_predictions = evaluate(
+        "embedding-logistic",
+        head_predict,
+        "Frozen 384D MiniLM vectors + train-only logistic head; C selected on validation macro-F1.",
+        fit_seconds,
+    )
+    means = np.stack(
+        [train_vectors[np.array(labels(train)) == label].mean(0) for label in [0, 1]]
+    )
+    means /= np.linalg.norm(means, axis=1, keepdims=True)
+
+    def similarity_predict(rows, references):
+        scores = encoder.encode(text(rows)) @ references.T
+        assert np.isfinite(scores).all() and np.abs(scores).max() <= 1.00001
+        return [
+            {"prediction": int(r.argmax()), "confidence": None, "scores": r.tolist()}
+            for r in scores
+        ]
+
+    evaluate(
+        "class-prototypes",
+        lambda rows: similarity_predict(rows, means),
+        "Cosine to normalized mean training vectors per class. Uses training labels; this is supervised, not zero-shot.",
+    )
+    descriptions = [
+        "A negative movie review expressing disappointment and dislike.",
+        "A positive movie review expressing enjoyment and praise.",
+    ]
+    references = encoder.encode(descriptions)
+    evaluate(
+        "description-similarity",
+        lambda rows: similarity_predict(rows, references),
+        "Cosine to fixed label-description vectors. Scores are similarities, not calibrated probabilities; no local example labels used.",
+    )
+    alternate = encoder.encode(
+        ["The viewer disliked this film.", "The viewer liked this film."]
+    )
+    wording_predictions = similarity_predict(held, alternate)
+    wording_changes = [
+        row["id"]
+        for row, a, b in zip(
+            held, methods["description-similarity"]["cases"], wording_predictions
+        )
+        if a["prediction"] != b["prediction"]
+    ]
+
+    tokenizer = AutoTokenizer.from_pretrained(SENTIMENT, revision=SENTIMENT_REV)
+    task_model = AutoModelForSequenceClassification.from_pretrained(
+        SENTIMENT, revision=SENTIMENT_REV
+    ).eval()
+    mapping = {int(k): parse_label(v) for k, v in task_model.config.id2label.items()}
+    assert sorted(mapping.values()) == [0, 1]
+
+    def task_predict(rows):
+        outputs = []
+        for start in range(0, len(rows), 16):
+            batch = tokenizer(
+                text(rows[start : start + 16]),
+                padding=True,
+                truncation=True,
+                max_length=256,
+                return_tensors="pt",
+            )
+            with torch.inference_mode():
+                probabilities = task_model(**batch).logits.softmax(-1).numpy()
+            canonical = np.zeros_like(probabilities)
+            for model_id, label in mapping.items():
+                canonical[:, label] = probabilities[:, model_id]
+            outputs.extend(probability_rows(canonical))
+        return outputs
+
+    evaluate(
+        "task-encoder",
+        task_predict,
+        "Frozen SST-2 DistilBERT classification head; config.id2label explicitly mapped to atlas 0=negative/1=positive. No local fitting.",
+    )
+    nli_tokenizer = AutoTokenizer.from_pretrained(NLI, revision=NLI_REV)
+    nli_model = AutoModelForSequenceClassification.from_pretrained(
+        NLI, revision=NLI_REV
+    ).eval()
+    entailment = next(
+        int(k)
+        for k, v in nli_model.config.id2label.items()
+        if v.lower() == "entailment"
+    )
+    hypotheses = [
+        "This movie review expresses negative sentiment.",
+        "This movie review expresses positive sentiment.",
+    ]
+
+    def nli_predict(rows):
+        outputs = []
+        for start in range(0, len(rows), 16):
+            texts = text(rows[start : start + 16])
+            batch = nli_tokenizer(
+                [s for s in texts for _ in hypotheses],
+                hypotheses * len(texts),
+                padding=True,
+                truncation="only_first",
+                max_length=256,
+                return_tensors="pt",
+            )
+            with torch.inference_mode():
+                logits = nli_model(**batch).logits[:, entailment].reshape(-1, 2)
+                outputs.extend(probability_rows(logits.softmax(-1).numpy()))
+        return outputs
+
+    evaluate(
+        "nli-zero-shot",
+        nli_predict,
+        "Pair each review with two hypotheses; softmax of entailment logits across the mutually exclusive candidates. This is relative candidate scoring, not a three-way NLI probability or calibrated confidence.",
+    )
+    t5_tokenizer = AutoTokenizer.from_pretrained(T5, revision=T5_REV)
+    generator = AutoModelForSeq2SeqLM.from_pretrained(T5, revision=T5_REV).eval()
+    prompt = "Is the following movie review positive or negative? Answer with exactly positive or negative. Review: "
+
+    def t5_predict(rows):
+        outputs = []
+        for start in range(0, len(rows), 16):
+            batch = t5_tokenizer(
+                [prompt + s for s in text(rows[start : start + 16])],
+                padding=True,
+                truncation=True,
+                max_length=256,
+                return_tensors="pt",
+            )
+            with torch.inference_mode():
+                tokens = generator.generate(**batch, max_new_tokens=8, do_sample=False)
+            outputs.extend(
+                {
+                    "prediction": parse_label(raw),
+                    "confidence": None,
+                    "scores": None,
+                    "raw": raw,
+                }
+                for raw in t5_tokenizer.batch_decode(tokens, skip_special_tokens=True)
+            )
+        return outputs
+
+    evaluate(
+        "flan-t5",
+        t5_predict,
+        "Greedy encoder-decoder label generation; max 8 new tokens. Trim/case-fold then exact positive/negative lookup; every other output is invalid=-1 and counts as an error.",
+    )
+
+    # Select a review threshold using validation only. Maximize retained coverage
+    # subject to >=90% validation accuracy; if none qualifies, review every case.
+    thresholds = []
+    for threshold in [0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 1.0]:
+        thresholds.append(
+            dict(
+                threshold=threshold,
+                **selective_metrics(
+                    labels(valid),
+                    [p["prediction"] for p in val_predictions],
+                    [p["confidence"] for p in val_predictions],
+                    threshold,
+                ),
+            )
+        )
+    feasible = [
+        r
+        for r in thresholds
+        if r["accepted_accuracy"] is not None and r["accepted_accuracy"] >= 0.9
+    ]
+    selected_threshold = (
+        max(feasible, key=lambda r: (r["coverage"], -r["threshold"]))["threshold"]
+        if feasible
+        else 1.0
+    )
+
+    # Portable JSON inference artifact, no pickled executable estimator required.
+    out = ROOT / "examples/artifacts/e4-classification"
+    out.mkdir(parents=True, exist_ok=True)
+    saved = {
+        "always_review": not bool(feasible),
+        "classes": head.classes_.tolist(),
+        "coef": head.coef_.tolist(),
+        "intercept": head.intercept_.tolist(),
+        "C": head.C,
+        "embedding_model": "sentence-transformers/paraphrase-MiniLM-L3-v2",
+        "embedding_revision": "4ca70771034acceecb2e72475f72050fcdde4ddc",
+        "review_threshold": selected_threshold,
+        "max_length": 256,
+    }
+    (out / "classifier.json").write_text(json.dumps(saved, indent=2) + "\n")
+    loaded = json.loads((out / "classifier.json").read_text())
+    check_vectors = encoder.encode(text(held))
+    restored_logits = check_vectors @ np.asarray(loaded["coef"]).T + np.asarray(
+        loaded["intercept"]
+    )
+    restored_probability = 1 / (1 + np.exp(-restored_logits[:, 0]))
+    assert np.allclose(
+        restored_probability, head.predict_proba(check_vectors)[:, 1], atol=1e-10
+    )
+    result = {
+        "fixture": data["id"],
+        "label_map": data["labels"],
+        "split_counts": {
+            s: sum(r["split"] == s for r in data["rows"])
+            for s in ["train", "validation", "test", "challenge"]
+        },
+        "rows": held,
+        "methods": methods,
+        "model_label_mapping": mapping,
+        "nli_entailment_id": entailment,
+        "selection": {
+            "tfidf": baseline_candidates,
+            "embedding": embedding_candidates,
+            "thresholds": thresholds,
+            "review_threshold": selected_threshold,
+            "constraint_met": bool(feasible),
+        },
+        "wording": {
+            "original": descriptions,
+            "alternate": [
+                "The viewer disliked this film.",
+                "The viewer liked this film.",
+            ],
+            "changed_ids": wording_changes,
+            "alternate_cases": [
+                dict(id=r["id"], **p) for r, p in zip(held, wording_predictions)
+            ],
+        },
+        "t5_prompt": prompt,
+        "reload_checked": True,
+        "shared_test_ids_checked": all(
+            [r["id"] for r in m["cases"]] == [r["id"] for r in held]
+            for m in methods.values()
+        ),
+        "truncation": "All transformer inputs cap at 256 tokens; prompts/hypotheses consume part of that budget. Raw sentence text remains visible.",
+        "limitations": [
+            "80 balanced test sentences; substantial sampling uncertainty.",
+            "Pretrained and instruction-training overlap with review sources is unknown.",
+            "Challenge gold labels are author judgments, especially on mixed sentiment.",
+            "Different methods have different prior training; this is a workflow comparison, not an architecture-controlled benchmark.",
+            "Timing uses one CPU thread, batch 16, three warmed passes; model loading excluded.",
+        ],
+    }
+    save_result("e4-classification", result)
+    print(
+        json.dumps(
+            {
+                "reload_checked": True,
+                "shared_test_ids_checked": result["shared_test_ids_checked"],
+                "test_count": 80,
+                "method_count": len(methods),
+                "macro_f1": {
+                    name: row["test"]["macro_f1"] for name, row in methods.items()
+                },
+            }
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()
+```
+
+{/* example:classification-comparison:end */}
+
+</details>
+
+## Optional hosted comparison
+
+The separate `hosted-comparison.ipynb` documents a bounded hosted workflow and evaluates externally collected results. It **makes no API request** and needs no credential. A live hosted run is not claimed in the published evidence.
+
+Before collecting results, freeze the same 80 test IDs, prompt version, label schema, provider/model revision where available, output-token cap, and maximum call count. Treat each sentence as data inside a clearly delimited field. Use an enum-constrained label response, and still record refusals, errors, and missing outputs. Keep retries bounded and separately recorded; do not quietly omit failed requests or select a better answer after reading the gold label.
+
+The importer accepts this envelope with one output per returned test ID:
+
+```json
+{
+  "provider": "provider name",
+  "model": "exact model or snapshot ID",
+  "prompt_version": "atlas-sentiment-v1",
+  "collected_at": "actual ISO timestamp",
+  "outputs": [
+    {"id": "an actual test ID", "raw": "{\"label\":\"negative\"}", "latency_seconds": 0.75}
+  ]
+}
+```
+
+This is a **format illustration**, not a measured provider result. Only claim token usage, price/cost, or latency when actually observed. Unknown/duplicate IDs are rejected; missing responses and provider-error rows become invalid predictions in the shared denominator. A returned structured object must contain exactly the label field. The output report explicitly labels provider execution as externally collected and unverified by the atlas.
+
+```bash
+python3 examples/foundations/src/atlas_foundations/e4/hosted_results.py /path/to/collected-results.json --out /path/to/report.json
+```
+
+Current hosted output-schema concepts are documented in the [official Structured Outputs guide](https://platform.openai.com/docs/guides/structured-outputs); provider APIs and model availability should be checked when a live integration is implemented. Do not embed an API secret in this static GitHub Pages website.
+
+## L08: modular BERTopic
+
+**Question:** Which operations change the document partition, and which only change its description?
+
+The input is an original, openly inspectable corpus of **45 fictional research-style summaries**. It contains recurring translation, speech-recognition, and summarization themes, plus bridge and unrelated documents. There are no supplied topic labels. These are not actual arXiv papers, scientific results, or citations. The provenance manifest records the corpus hash and these limits.
+
+### Fit a real pipeline
+
+1. Encode each ordered document into a normalized 384D vector using the pinned MiniLM backend.
+2. Fit UMAP into five dimensions, with cosine neighborhoods, eight neighbors, min_dist 0, and seed 42.
+3. Fit HDBSCAN with minimum cluster size 5 and min_samples 8, using Euclidean distances in that reduction.
+4. Aggregate text by the **computed** assignments, remove English stop words, and fit class-based TF-IDF.
+5. Retain document IDs, terms, representative IDs, density membership strength, and an independent 2D display projection.
+
+The recorded baseline has three non-noise topics and one noise document. Noise label −1 is not a fourth coherent topic. The bridge document spans speech recognition, translation, and summarization; its noise assignment reflects the selected density rule.
+
+<TopicExplorer client:visible />
+
+### Work the c-TF-IDF calculation
+
+Default BERTopic 0.17.4 uses class-normalized term frequency and IDF = ln(1 + A/f), where A is the integer mean class token count and f is a term’s total frequency across class documents. This is not ordinary document-frequency TF-IDF. For counts [[3,1,0],[0,1,3]], A=4 and the model term receives class-0 weight (1/4)ln(3) ≈ 0.274653. The workflow checks its hand calculation against the actual library to 1e-12.
+
+<CtfidfCalculator client:visible />
+
+### Controlled experiment 1: descriptions only
+
+Retain the original assignments and update representations with actual KeyBERTInspired, MMR diversity 0.2, and MMR diversity 0.8 modules. Assert unchanged assignments after each update. KeyBERTInspired’s semantic similarity weights differ from c-TF-IDF weights; compare their meaning before comparing numerical magnitudes.
+
+MMR can remove redundant forms, but high diversity can surface misleading words from unrelated group members. That is evidence to inspect the partition, not a universal improvement. This experiment does not update neural encoder weights.
+
+<DiversityExplorer client:visible />
+
+### Controlled experiment 2: density only
+
+Keep the exact document vectors and five-dimensional reduction, and change only min_samples from 8 to 3. Inspect the transition table, noise changes, and adjusted Rand index, about 0.970 in this run. Numeric topic IDs can be permuted, so raw ID equality is not an appropriate partition comparison. The ARI summary treats all noise labels as one group, an explicit convention rather than a semantic assertion.
+
+### Save and reload honestly
+
+The lab writes a lightweight safetensors model, reloads it with the explicitly supplied pinned backend, and checks stored assignments, topic words, and c-TF-IDF weights. New-document transform in this format uses cosine to saved topic embeddings; it does **not** retain the fitted UMAP/HDBSCAN estimators. A separate assertion checks that cosine calculation. Its agreement with original training assignments is reported in the explorer rather than silently assumed to be 100%.
+
+<VerifiedRun id="modular-bertopic" />
+
+<details>
+<summary>Complete runnable L08 source · synchronized with the CLI</summary>
+
+{/* example:modular-bertopic:start */}
+
+```python
+"""L08: fitted BERTopic, controlled representation/density changes, safe reload."""
+
+from copy import deepcopy
+import json
+from pathlib import Path
+import sys
+import time
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from atlas_discovery.common import ROOT, Encoder, save_result, setup
+from atlas_foundations.e4.topic_math import class_tfidf
+
+import numpy as np
+from bertopic import BERTopic
+from bertopic.backend import BaseEmbedder
+from bertopic.representation import KeyBERTInspired, MaximalMarginalRelevance
+from bertopic.vectorizers import ClassTfidfTransformer
+from hdbscan import HDBSCAN
+from scipy.cluster.hierarchy import linkage
+from scipy.spatial.distance import squareform
+from scipy.sparse import csr_matrix
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics import adjusted_rand_score
+from sklearn.metrics.pairwise import cosine_similarity
+from umap import UMAP
+
+
+class PinnedBackend(BaseEmbedder):
+    def __init__(self):
+        super().__init__()
+        self.encoder = Encoder()
+
+    def embed(self, documents, verbose=False):
+        return self.encoder.encode(documents)
+
+
+def terms(model):
+    return {
+        str(topic): [
+            {"term": word, "weight": float(weight)} for word, weight in values[:5]
+        ]
+        for topic, values in model.get_topics().items()
+    }
+
+
+# region pipeline
+def fit_pipeline(documents, embeddings, backend):
+    """Documents -> real UMAP -> real HDBSCAN -> class-based TF-IDF."""
+    from bertopic import BERTopic
+    from bertopic.vectorizers import ClassTfidfTransformer
+    from hdbscan import HDBSCAN
+    from sklearn.feature_extraction.text import CountVectorizer
+    from umap import UMAP
+
+    reducer = UMAP(
+        n_neighbors=8,
+        n_components=5,
+        min_dist=0.0,
+        metric="cosine",
+        random_state=42,
+        n_jobs=1,
+    )
+    clusterer = HDBSCAN(
+        min_cluster_size=5,
+        min_samples=8,
+        metric="euclidean",
+        cluster_selection_method="eom",
+        prediction_data=True,
+    )
+    vectorizer = CountVectorizer(stop_words="english", ngram_range=(1, 1))
+    model = BERTopic(
+        embedding_model=backend,
+        umap_model=reducer,
+        hdbscan_model=clusterer,
+        vectorizer_model=vectorizer,
+        ctfidf_model=ClassTfidfTransformer(),
+        top_n_words=5,
+        calculate_probabilities=False,
+    )
+    assignments, strengths = model.fit_transform(documents, embeddings)
+    return model, assignments, strengths
+
+
+# endregion pipeline
+
+
+def main():
+    setup()
+    corpus = json.loads(
+        (ROOT / "examples/data/fixtures/research-summaries.json").read_text()
+    )
+    rows = corpus["documents"]
+    documents = [row["text"] for row in rows]
+    backend = PinnedBackend()
+    embeddings = backend.embed(documents)
+    start = time.perf_counter()
+    model, assignments, probabilities = fit_pipeline(documents, embeddings, backend)
+    fit_seconds = time.perf_counter() - start
+    assignments = np.asarray(assignments)
+    assert len(assignments) == len(documents)
+    assert len(set(assignments) - {-1}) >= 2, (
+        "Inspect corpus/settings; fewer than two fitted topics"
+    )
+    reduced = np.asarray(model.umap_model.embedding_)
+    vectorizer = model.vectorizer_model
+    display = UMAP(
+        n_neighbors=8,
+        n_components=2,
+        min_dist=0.1,
+        metric="cosine",
+        random_state=42,
+        n_jobs=1,
+    ).fit_transform(embeddings)
+    baseline = terms(model)
+    representative = model.get_representative_docs()
+    topic_ids = sorted(int(topic) for topic in baseline)
+    topic_embeddings = np.array(model.topic_embeddings_)
+    similarities = cosine_similarity(topic_embeddings)
+    non_outlier = [i for i, topic in enumerate(topic_ids) if topic != -1]
+    # An inspectable hierarchy uses average linkage on cosine distances between
+    # the original fitted topic vectors. It does not change assignments.
+    distance = np.clip(1 - similarities[np.ix_(non_outlier, non_outlier)], 0, 2)
+    np.fill_diagonal(distance, 0)
+    hierarchy = linkage(
+        squareform((distance + distance.T) / 2, checks=True), method="average"
+    ).tolist()
+    out = ROOT / "examples/artifacts/e4-topics"
+    out.mkdir(parents=True, exist_ok=True)
+    model.save(
+        str(out / "model"),
+        serialization="safetensors",
+        save_ctfidf=True,
+        save_embedding_model=False,
+    )
+    restored = BERTopic.load(str(out / "model"), embedding_model=backend)
+    assert np.array_equal(np.asarray(restored.topics_), assignments)
+    for topic in topic_ids:
+        assert [w for w, _ in restored.get_topic(topic)] == [
+            w for w, _ in model.get_topic(topic)
+        ]
+    assert np.allclose(
+        restored.c_tf_idf_.toarray(), model.c_tf_idf_.toarray(), atol=1e-7
+    )
+    restored_predictions, _ = restored.transform(documents, embeddings=embeddings)
+    expected = cosine_similarity(embeddings, restored.topic_embeddings_).argmax(
+        1
+    ) - int(-1 in topic_ids)
+    assert np.array_equal(restored_predictions, expected)
+    baseline_reloaded_agreement = float(np.mean(assignments == restored_predictions))
+
+    # Both membership and geometry are frozen for each representation-only pass.
+    representations = {"ctfidf": baseline}
+    for name, representation in [
+        (
+            "keybert",
+            KeyBERTInspired(
+                top_n_words=5,
+                nr_repr_docs=3,
+                nr_samples=100,
+                nr_candidate_words=30,
+                random_state=42,
+            ),
+        ),
+        ("mmr-0.2", MaximalMarginalRelevance(diversity=0.2, top_n_words=5)),
+        ("mmr-0.8", MaximalMarginalRelevance(diversity=0.8, top_n_words=5)),
+    ]:
+        model.update_topics(
+            documents,
+            topics=assignments.tolist(),
+            vectorizer_model=vectorizer,
+            ctfidf_model=ClassTfidfTransformer(),
+            representation_model=representation,
+            top_n_words=5,
+        )
+        assert np.array_equal(np.asarray(model.topics_), assignments)
+        representations[name] = terms(model)
+
+    # Change one density control on the SAME five-dimensional points; compare
+    # label-invariant ARI and membership/noise transitions, not raw ID equality.
+    changed = HDBSCAN(
+        min_cluster_size=5,
+        min_samples=3,
+        metric="euclidean",
+        cluster_selection_method="eom",
+    ).fit_predict(reduced)
+    contingency = [
+        {
+            "before": int(a),
+            "after": int(b),
+            "count": int(np.sum((assignments == a) & (changed == b))),
+        }
+        for a in sorted(set(assignments))
+        for b in sorted(set(changed))
+        if np.any((assignments == a) & (changed == b))
+    ]
+    arithmetic_counts = [[3, 1, 0], [0, 1, 3]]
+    arithmetic = class_tfidf(arithmetic_counts)
+    actual = (
+        ClassTfidfTransformer().fit_transform(csr_matrix(arithmetic_counts)).toarray()
+    )
+    assert np.allclose(actual, arithmetic["weights"], atol=1e-12)
+    result = {
+        "corpus": corpus["id"],
+        "fit_seconds": fit_seconds,
+        "shapes": {
+            "embeddings": list(embeddings.shape),
+            "clustering_space": list(reduced.shape),
+            "display_space": list(display.shape),
+            "ctfidf": list(restored.c_tf_idf_.shape),
+        },
+        "settings": {
+            "umap_neighbors": 8,
+            "cluster_dimensions": 5,
+            "display_dimensions": 2,
+            "umap_seed": 42,
+            "hdbscan_min_cluster_size": 5,
+            "hdbscan_min_samples": 8,
+            "changed_min_samples": 3,
+            "stop_words": "scikit-learn English",
+            "top_n_words": 5,
+        },
+        "documents": [
+            dict(
+                row,
+                topic=int(topic),
+                changed_topic=int(other),
+                membership_strength=float(strength),
+                cluster_coordinates=point.tolist(),
+                display_coordinates=xy.tolist(),
+            )
+            for row, topic, other, strength, point, xy in zip(
+                rows, assignments, changed, probabilities, reduced, display
+            )
+        ],
+        "topics": [
+            {
+                "id": topic,
+                "count": int(np.sum(assignments == topic)),
+                "representative_ids": [
+                    row["id"]
+                    for row in rows
+                    if row["text"] in representative.get(topic, [])
+                ],
+            }
+            for topic in topic_ids
+        ],
+        "representations": representations,
+        "topic_similarity": {"topic_ids": topic_ids, "cosines": similarities.tolist()},
+        "hierarchy": {
+            "topic_ids": [topic_ids[i] for i in non_outlier],
+            "linkage": hierarchy,
+            "method": "average linkage of cosine distances between baseline topic embeddings; excludes -1",
+        },
+        "density_comparison": {
+            "ari_including_noise": float(adjusted_rand_score(assignments, changed)),
+            "before_noise": int(np.sum(assignments == -1)),
+            "after_noise": int(np.sum(changed == -1)),
+            "contingency": contingency,
+            "new_noise_ids": [
+                row["id"]
+                for row, a, b in zip(rows, assignments, changed)
+                if a != -1 and b == -1
+            ],
+        },
+        "ctfidf_arithmetic": dict(
+            arithmetic,
+            counts=arithmetic_counts,
+            vocabulary=["translation", "model", "speech"],
+            trusted_library_match=True,
+        ),
+        "representation_assignments_unchanged": True,
+        "reload_checked": True,
+        "reload_inference": {
+            "method": "cosine to saved topic embeddings; lightweight safetensors does not retain the fitted UMAP/HDBSCAN estimators",
+            "agreement_with_original_training_assignments": baseline_reloaded_agreement,
+            "reference_calculation_checked": True,
+        },
+        "limitations": [
+            "Original fictional summaries, not actual arXiv findings; curated themes are intentionally visible.",
+            "All documents participate in exploratory fitting; no held-out topic-accuracy claim.",
+            "Membership strength is a density-model quantity, not the probability that a semantic topic is correct.",
+            "The independent 2D UMAP display is not the 5D clustering space; apparent separation can mislead.",
+            "Topic IDs are run-local. ARI compares partitions without assuming topic ID equality; -1 is treated as a group in that summary.",
+            "A coherent label cannot establish topic stability or factual support.",
+        ],
+    }
+    save_result("e4-topics", result)
+    print(
+        json.dumps(
+            {
+                "document_count": len(rows),
+                "topic_count": len(non_outlier),
+                "outliers": int(np.sum(assignments == -1)),
+                "representation_assignments_unchanged": True,
+                "reload_checked": True,
+                "ctfidf_library_match": True,
+                "density_ari": result["density_comparison"]["ari_including_noise"],
+            }
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()
+```
+
+{/* example:modular-bertopic:end */}
+
+</details>
+
+## Optional local topic labels
+
+Run `topic-label-generation` after fitting L08. The actual BERTopic TextGeneration module uses pinned FLAN-T5-small, representative excerpts and keywords, greedy decoding, and at most 24 new tokens. The assignments remain unchanged.
+
+The author inspected the actual prompts, representative documents, and minority members:
+
+| Baseline group | Generated name | Author finding |
+| --- | --- | --- |
+| −1 noise | Acoustic errors in acoustic languages | Reject: the bridge text combines recognition, translation, and summarization; the name invents an unsupported focus, and noise is not a coherent topic |
+| 0 | Summarization | Fits the majority/representatives, but hides unrelated members such as irrigation and ceramics; it does not validate every assignment |
+| 1 | Filtering | Too narrow: representatives also cover code-switched and constrained translation |
+| 2 | Acoustic speech recognition | Fits the inspected representatives; still inspect the full group before accepting a collection-wide label |
+
+These are author inspection findings, not independent semantic scores. The original outputs remain visible. A smooth label can conceal weak group membership and must not be treated as scientific evidence.
+
+<VerifiedRun id="topic-label-generation" />
+
+<details>
+<summary>Complete local representation-generation source</summary>
+
+{/* example:topic-label-generation:start */}
+
+```python
+"""Optional local TextGeneration representation using the fitted L08 artifact."""
+
+import json
+import hashlib
+from pathlib import Path
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from atlas_discovery.common import ROOT, T5, T5_REV, save_result, setup
+from atlas_discovery.topics import PinnedBackend
+
+import numpy as np
+from bertopic import BERTopic
+from bertopic.representation import TextGeneration
+from bertopic.vectorizers import ClassTfidfTransformer
+from sklearn.feature_extraction.text import CountVectorizer
+from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, pipeline
+
+
+def main():
+    setup()
+    source = ROOT / "examples/artifacts/e4-topics"
+    if not (source / "model").exists():
+        raise ValueError(
+            "Run modular-bertopic first; the safe fitted artifact is required"
+        )
+    recorded = json.loads((source / "results.json").read_text())
+    rows = recorded["documents"]
+    documents = [r["text"] for r in rows]
+    assignments = [r["topic"] for r in rows]
+    model = BERTopic.load(str(source / "model"), embedding_model=PinnedBackend())
+    tokenizer = AutoTokenizer.from_pretrained(T5, revision=T5_REV)
+    generator = AutoModelForSeq2SeqLM.from_pretrained(T5, revision=T5_REV).eval()
+    generate = pipeline(
+        "text2text-generation", model=generator, tokenizer=tokenizer, device=-1
+    )
+    prompt = "Give a short research topic name supported by these excerpts. Do not invent a finding.\nExcerpts:\n[DOCUMENTS]\nCandidate terms: [KEYWORDS]\nTopic name:"
+    representation = TextGeneration(
+        generate,
+        prompt=prompt,
+        nr_docs=2,
+        doc_length=35,
+        tokenizer="whitespace",
+        random_state=42,
+        pipeline_kwargs={"max_new_tokens": 24, "do_sample": False, "truncation": True},
+    )
+    model.update_topics(
+        documents,
+        topics=assignments,
+        vectorizer_model=CountVectorizer(stop_words="english"),
+        ctfidf_model=ClassTfidfTransformer(),
+        representation_model=representation,
+        top_n_words=5,
+    )
+    assert np.array_equal(model.topics_, assignments)
+    topic_ids = sorted(model.get_topics())
+    generated = [
+        {
+            "topic": topic,
+            "label": model.get_topic(topic)[0][0],
+            "prompt": actual_prompt,
+            "review_status": "author-review-required",
+        }
+        for topic, actual_prompt in zip(topic_ids, representation.prompts_)
+    ]
+    assert len(generated) == len(topic_ids)
+    result = {
+        "parent_artifact_sha256": hashlib.sha256(
+            (source / "results.json").read_bytes()
+        ).hexdigest(),
+        "model": T5,
+        "revision": T5_REV,
+        "prompt_template": prompt,
+        "labels": generated,
+        "assignments_unchanged": True,
+        "status": "executed-local-model; labels need human support review",
+        "limitations": [
+            "No new clustering or model-weight fine-tuning occurs.",
+            "A short fluent name can ignore minority documents or invent an unsupported focus.",
+            "The -1 group contains noise, not one coherent semantic topic; its generated name is not accepted as a topic.",
+            "Prompt excerpts are capped at 35 whitespace words per representative document; full source documents remain visible.",
+        ],
+    }
+    save_result("e4-topic-labels", result)
+    print(
+        json.dumps(
+            {
+                "assignments_unchanged": True,
+                "generated_count": len(generated),
+                "labels": [
+                    {"topic": r["topic"], "label": r["label"]} for r in generated
+                ],
+            }
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()
+```
+
+{/* example:topic-label-generation:end */}
+
+</details>
+
+## Practice and transfer
+
+<details><summary>Why does changing a label description affect classification but changing a BERTopic description leave assignments fixed here?</summary><p>The classification rule uses description vectors as its decision references. BERTopic’s controlled representation update happens after the partition is fitted, so that update changes names/terms rather than the grouping.</p></details>
+
+<details><summary>A concise topic name looks correct for three representatives. What remains to check?</summary><p>Read minority and weak members, outliers, the prompt’s truncation, and results under a controlled upstream change. Representative coverage and label fluency cannot establish whole-group correctness.</p></details>
+
+<details><summary>Why are the published CPU times not a production ranking?</summary><p>They describe one host, one thread, batch size, fixed short dataset, warm-up policy, and dependency lock. Loading is excluded, prior training differs, and larger inputs/hardware can change costs and quality.</p></details>
+
+Continue with the [classification project](/llm-concept-atlas/use-cases/text-classification/) or the [research collection explorer project](/llm-concept-atlas/use-cases/research-collection-explorer/). The [authors’ pinned Chapter 4](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter04) and [Chapter 5](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter05) notebooks supply the original larger workflows.

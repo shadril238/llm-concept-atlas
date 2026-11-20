@@ -43,6 +43,9 @@ for family, eid in [
     ("reference", "playlist-embeddings"),
     ("reference", "transparent-transformer"),
     ("reference", "cache-equivalence"),
+    ("discovery", "classification-comparison"),
+    ("discovery", "modular-bertopic"),
+    ("discovery", "topic-label-generation"),
 ]:
     entry = next(e for e in manifest["examples"] if e["id"] == eid)
     directory = ROOT / manifest["environments"][family]["project"]
@@ -58,6 +61,9 @@ for family, eid in [
         "playlist-embeddings": "atlas_reference.e3.playlists",
         "transparent-transformer": "atlas_reference.e3.transformer",
         "cache-equivalence": "atlas_reference.e3.cache",
+        "classification-comparison": "atlas_discovery.classification",
+        "modular-bertopic": "atlas_discovery.topics",
+        "topic-label-generation": "atlas_discovery.topic_labels",
     }[eid]
     # Generated notebooks import the same source used by the CLI; no copied algorithm.
     code = f'import sys\nfrom pathlib import Path\nproject = Path.cwd()\nif project.name == "notebooks": project = project.parent\nsys.path.insert(0, str(project / "src"))\nfrom {module} import main\nmain()'
@@ -98,6 +104,15 @@ for family, eid in [
     outputs[f"{manifest['environments'][family]['project']}/notebooks/{eid}.ipynb"] = (
         json.dumps(notebook, indent=2) + "\n"
     )
+hosted_notebook = {
+    "nbformat": 4, "nbformat_minor": 5,
+    "metadata": {"kernelspec": {"display_name": "Python 3.11 (offline importer)", "language": "python", "name": "python3"}},
+    "cells": [
+        {"cell_type": "markdown", "id": "workflow", "metadata": {}, "source": ["# Optional hosted classification: collect separately, evaluate offline\n", "This notebook makes **zero API requests**. Read the E4 README before a separate provider run. Freeze the 80 test IDs, label policy, prompt/model revision, output-token cap, and call/retry limit. Record refusals/errors/missing outputs, real token usage/cost/latency only when measured, and retain source IDs. Store the collected envelope at repository `.cache/hosted-e4-results.json`. Never put credentials in this notebook or the static site.\n", "Required envelope fields: provider, model, prompt_version, collected_at, outputs. Each output has id, raw (plain label or JSON string with exactly label), optional error/latency_seconds. This importer rejects unknown/duplicate IDs and includes missing/error outputs as invalid predictions. External provider execution is not verified by the atlas.\n"]},
+        {"cell_type": "code", "id": "import-offline", "metadata": {}, "execution_count": None, "outputs": [], "source": ["import sys, json\n", "from pathlib import Path\n", "project = Path.cwd()\n", "if project.name == 'notebooks': project = project.parent\n", "root = project.parents[2]\n", "sys.path.insert(0, str(root / 'examples/foundations/src'))\n", "from atlas_foundations.e4.hosted_results import evaluate_external\n", "fixture = json.loads((root / 'examples/data/fixtures/sentiment.json').read_text())\n", "collected = root / '.cache/hosted-e4-results.json'\n", "if collected.exists():\n", "    report = evaluate_external(fixture, json.loads(collected.read_text()))\n", "    print(json.dumps(report, indent=2))\n", "else:\n", "    print('No hosted results supplied; no API was called and no hosted metrics are claimed.')\n", "    print('Required test IDs:', [r['id'] for r in fixture['rows'] if r['split'] == 'test'])\n"]}
+    ]
+}
+outputs["examples/applications/discovery/notebooks/hosted-comparison.ipynb"] = json.dumps(hosted_notebook, indent=2) + "\n"
 if not args.check:
     artifacts = {"tokenizers": "tokenizers", "lora": "lora-model", "ner": "ner-model"}
     paths = {
@@ -132,6 +147,11 @@ if not args.check:
             + "\n"
         )
 # Replace only explicit source regions; surrounding explanations stay authored.
+if not args.check:
+    discovery = {"classification": "e4-classification", "topics": "e4-topics", "generation": "e4-topic-labels"}
+    paths = {key: ROOT / "examples/artifacts" / name / "results.json" for key, name in discovery.items()}
+    if all(path.exists() for path in paths.values()):
+        outputs["src/data/discovery-results.json"] = json.dumps({key: json.loads(path.read_text()) for key, path in paths.items()}, indent=2, ensure_ascii=False, allow_nan=False) + "\n"
 for entry in manifest["examples"]:
     if not entry.get("lesson"):
         continue

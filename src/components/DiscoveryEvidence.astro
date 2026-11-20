@@ -1,0 +1,7 @@
+---
+import VerifiedRun from './VerifiedRun.astro';
+const {id}=Astro.props as {id:string};
+const anchors:Record<string,string>={'classification-comparison':'l07-classification-comparison','modular-bertopic':'l08-modular-bertopic','topic-label-generation':'optional-local-topic-labels'};
+---
+<aside class="reference-brief"><strong>Run the connected E4 workflow</strong><p><a href={`/llm-concept-atlas/labs/classification-and-topics/#${anchors[id]}`}>Open setup, complete source, recorded results, and error analysis ↗</a></p><p><code>python3 scripts/run-examples.py --id {id} --offline</code>. Use <code>--allow-network</code> for an initial public-model download. Topic-label generation requires the fitted L08 artifact first.</p></aside>
+<VerifiedRun id={id} />

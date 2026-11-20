@@ -26,6 +26,7 @@ export default defineConfig({
             { label: "From applications to fine-tuning", slug: "paths/from-applications-to-fine-tuning" },
             { label: "Run verified examples", slug: "labs/first-verified-examples" },
             { label: "Foundation labs · L01–L06", slug: "labs/foundations" },
+            { label: "Classification + topics · L07–L08", slug: "labs/classification-and-topics" },
             { label: "Concept glossary", slug: "glossary" },
             { label: "About and sources", slug: "about-and-sources" },
           ],
@@ -34,6 +35,7 @@ export default defineConfig({
           label: "Use cases",
           items: [
             { label: "Text classification", slug: "use-cases/text-classification" },
+            { label: "Research collection explorer", slug: "use-cases/research-collection-explorer" },
             { label: "RAG question answering", slug: "use-cases/rag-question-answering" },
           ],
         },

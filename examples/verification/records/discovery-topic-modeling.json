@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "discovery-topic-modeling",
+  "status": "passed",
+  "date": "2026-11-20T14:48:28.058305+00:00",
+  "gitCommit": "7ea038d4a6c5fd39942722ec7e7be0bf96cd3a1f",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e4/lesson_snippets/topic_modeling.py"
+  ],
+  "sourceSha256": "4885232ec21763ef7d72ff0a0ba28245e1a001abe0c59f40525e87981bb82342",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "3840f5d07fce18dfcda0d5dd03e0379897f5d6acc38bd443ff48df73ba430f64",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.008,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "class document 0 : ['translation', 'model', 'translation', 'errors']\nclass document 1 : ['speech', 'model', 'speech', 'recognition']\nNext stage: class-normalized term counts and corpus weighting, not just common-word counts.\n",
+  "stderr": "",
+  "error": null
+}

@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "classification-comparison",
+  "status": "passed",
+  "date": "2026-11-20T14:46:54.025578+00:00",
+  "gitCommit": "7ea038d4a6c5fd39942722ec7e7be0bf96cd3a1f",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/applications/discovery/src/atlas_discovery/classification.py"
+  ],
+  "sourceSha256": "5e42826c1a23ea98f37395d1dab4ddab76ee6ab5e6a18a5b5d703cca498ec0b9",
+  "lockSha256": "055a9a17b3e9e4dbc02f5b2a99025872f00b59d1bb623c99b44121767caa0b83",
+  "contractSha256": "19baa10f48f3bf9e482d09624b046ad3db86068579decf6a8ed46f5320495668",
+  "fixtureSha256": "2b1ed42de710f477062b4385620a72d8a33991828ac863f6508f9d718d43c4c2",
+  "models": [
+    {
+      "id": "sentence-transformers/paraphrase-MiniLM-L3-v2",
+      "revision": "4ca70771034acceecb2e72475f72050fcdde4ddc"
+    },
+    {
+      "id": "distilbert/distilbert-base-uncased-finetuned-sst-2-english",
+      "revision": "714eb0fa89d2f80546fda750413ed43d93601a13"
+    },
+    {
+      "id": "cross-encoder/nli-MiniLM2-L6-H768",
+      "revision": "b95119ce93d3e065de6214e38cd4a97b0f2f2c6d"
+    },
+    {
+      "id": "google/flan-t5-small",
+      "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab"
+    }
+  ],
+  "python": "3.11.18",
+  "packages": {
+    "pandas": "3.1.1",
+    "packaging": "26.3",
+    "joblib": "1.6.0",
+    "scikit-learn": "1.7.2",
+    "requests": "2.34.2",
+    "plotly": "7.1.0",
+    "certifi": "2026.10.23",
+    "networkx": "3.6.1",
+    "torch": "2.8.0",
+    "cloudpickle": "3.1.3",
+    "filelock": "4.2.12",
+    "numpy": "2.3.5",
+    "pynndescent": "0.7.0",
+    "umap-learn": "0.5.9.post2",
+    "pillow": "13.0.0",
+    "sympy": "1.14.0",
+    "huggingface_hub": "0.36.2",
+    "safetensors": "0.8.0",
+    "hdbscan": "0.8.40",
+    "numba": "0.68.1",
+    "tqdm": "4.70.1",
+    "urllib3": "2.8.0",
+    "sentencepiece": "0.2.1",
+    "bertopic": "0.17.4",
+    "mpmath": "1.3.0",
+    "PyYAML": "6.0.3",
+    "fsspec": "2026.9.0",
+    "sentence-transformers": "5.1.2",
+    "narwhals": "2.29.0",
+    "llvmlite": "0.50.0",
+    "scipy": "1.17.1",
+    "Jinja2": "3.1.6",
+    "tzdata": "2026.6",
+    "regex": "2026.11.19",
+    "transformers": "4.57.1",
+    "typing_extensions": "4.16.0",
+    "MarkupSafe": "3.0.4",
+    "hf-xet": "1.8.0",
+    "python-dateutil": "4.0.0",
+    "tokenizers": "0.22.2",
+    "threadpoolctl": "3.8.0",
+    "charset-normalizer": "3.5.2",
+    "idna": "3.20"
+  },
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 11.884,
+  "peakMemoryMiB": 1327.8,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "{\"reload_checked\": true, \"shared_test_ids_checked\": true, \"test_count\": 80, \"method_count\": 7, \"macro_f1\": {\"tfidf-logistic\": 0.6328532995727172, \"embedding-logistic\": 0.849624060150376, \"class-prototypes\": 0.849906191369606, \"description-similarity\": 0.7748592870544091, \"task-encoder\": 0.8749218261413383, \"nli-zero-shot\": 0.8874824191279886, \"flan-t5\": 0.8749218261413383}}\n",
+  "stderr": "",
+  "error": null,
+  "artifactSha256": "5400abdc45aa8ac935f66521ea3963c6780af08087aa84d5ac44b8a65c733638",
+  "supportHashes": {
+    "examples/applications/discovery/src/atlas_discovery/common.py": "80de89d0f3acc2b923da88a3796a31baf73f627d8d76ef1f8613b09937585a43",
+    "examples/foundations/src/atlas_foundations/e4/metrics.py": "5f489de68e0849ec0c4f93dc17c7da78d9429b747dd4d598930b14ea083b9ec5",
+    "examples/applications/discovery/prepare_sentiment.py": "a9068a6fcdbf5a116e00919e3407974dcff16b7cb995d5251b33f77cd98107bb"
+  }
+}

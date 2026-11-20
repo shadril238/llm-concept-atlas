@@ -1,99 +1,111 @@
 ---
-title: Topic representations
-description: A topic representation summarizes what a cluster is about using words, examples, or generated descriptions.
-kind: concept
+title: "Topic representations"
+description: "A topic representation describes a fixed group with terms, phrases, or a generated name. Refining the representation can change its wording without changing document assignments or model weights."
+kind: "concept"
 conceptId: topic-representations
 chapter: 5
-part: applications
-summary: A topic representation summarizes what a cluster is about using words, examples, or generated descriptions.
-parent: topic-modeling
-prerequisites: [topic-modeling]
-related: [bertopic]
-level: intermediate
-tags: [applications, chapter-05]
+part: "applications"
+summary: "A topic representation describes a fixed group with terms, phrases, or a generated name. Refining the representation can change its wording without changing document assignments or model weights."
+parent: "topic-modeling"
+prerequisites: ["topic-modeling"]
+related: ["bertopic"]
+level: "intermediate"
+tags: ["applications", "chapter-05"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-20"
+reviewStatus: "author-reviewed"
+reviewRecord: e4-discovery-author-review-2026-11-20
+learningObjectives: ["Compare c-TF-IDF, KeyBERTInspired, MMR, and generated names.", "Distinguish representation refinement from weight fine-tuning.", "Reject fluent names unsupported by representative and minority documents."]
+bookSections: ["book-ch05-representation-blocks", "book-ch05-keybert", "book-ch05-generation-block"]
+labHref: "/labs/classification-and-topics/"
+aliases: ["KeyBERTInspired", "topic labels", "representation refinement"]
+exampleIds: ["discovery-topic-representations", "modular-bertopic"]
+relationshipReasons: {"topic-modeling": "Understand how assignments and descriptions serve different roles before extending the pipeline."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { ClusteringLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import DiscoveryEvidence from '../../../components/DiscoveryEvidence.astro';
+import { ClassificationComparison, LabelValidator, CtfidfCalculator, DiversityExplorer, TopicExplorer } from '../../../components/simulations/DiscoveryLabs';
 
 <ConceptPrimer id="topic-representations" />
 
 ## Definition and intuition
 
-**Topic representations**: A topic representation summarizes what a cluster is about using words, examples, or generated descriptions.
+A topic representation describes a fixed group with terms, phrases, or a generated name. Refining the representation can change its wording without changing document assignments or model weights.
 
-Chapter 5 explores unlabeled collections. A cluster is a geometric grouping, while a useful topic also needs an interpretable description and inspection by a person.
+The same group can be described by speech/recognition/acoustic terms or by the name “Acoustic speech recognition”. That difference concerns the description. It says nothing by itself about whether the documents were grouped well.
 
-## Before you start
+<ReferenceBrief objectives={["Compare c-TF-IDF, KeyBERTInspired, MMR, and generated names.", "Distinguish representation refinement from weight fine-tuning.", "Reject fluent names unsupported by representative and minority documents."]} prerequisites="topic-modeling" scope="A small recorded CPU workflow plus explicit teaching calculations. Published results are not independent lesson acceptance." />
 
-Read [Topic modeling](/llm-concept-atlas/concepts/topic-modeling/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **topic representations** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Baseline term weights
 
-1. **Prepare:** Collect documents assigned to one group
-2. **Transform:** Rank distinctive words or select representative passages
-3. **Inspect:** Validate the proposed label against sampled members and outliers.
+Default c-TF-IDF ranks candidate terms from aggregated class documents. Its weights express the declared frequency convention. Terms are grounded in the corpus but can include noise, generic words, or redundant variants. Vectorizer preprocessing determines which terms are even available to later refiners.
 
-### The important distinction
+### KeyBERTInspired representation models
 
-A term can be common in a cluster yet uninformative if it appears everywhere in the corpus. A class-based TF-IDF style score discounts such global terms and favors cluster-specific ones. Generated descriptions can be more readable, but they should be checked against representative passages before publication.
+KeyBERTInspired uses c-TF-IDF information to identify representative documents and candidate words, embeds representative content and candidate terms, then reranks by semantic similarity. L08 runs the real BERTopic module with the same pinned embedding backend. Its returned similarity scores have a different meaning from c-TF-IDF weights. Semantic reranking can omit an informative domain abbreviation that the encoder poorly represents.
+
+### Diversity without reassignment
+
+MMR chooses terms that balance topic relevance against redundancy with selected terms. L08 compares diversity 0.2 and 0.8 while keeping assignments fixed. Higher diversity may surface less redundant but less helpful words. The implementation keeps c-TF-IDF weights for selected words; do not interpret the final displayed order as the chronological MMR selection order.
+
+### Generated topic labels
+
+The optional local workflow runs BERTopic TextGeneration with pinned FLAN-T5-small, two representative excerpts capped at 35 whitespace words each, keywords, and a maximum of 24 new tokens. It asserts assignment equality after generation. In this actual run, Summarization broadly describes one group, Filtering is too narrow for a translation group, and the noise-group name invents an unsupported acoustic-language focus. Read full source texts before accepting any generated description.
 
 ## Worked example
 
-For a cluster of refund tickets, “refund”, “return”, and “payment” may form a useful label. A generated phrase such as “payment disputes” must still fit the members. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+Topic 1 has representative documents about code-switched translation, constrained translation decoding, and filtering parallel text. A generated name “Filtering” describes only one part of that evidence. The assignment did not change, but the name underrepresents the group. The noise document combines speech recognition, translation, and summaries; its generated name is not accepted as a coherent topic.
 
-<LessonFlow steps={["Collect documents assigned to one group", "Rank distinctive words or select representative passages", "Validate the proposed label against sampled members and outliers."]} caption="A teaching diagram for Topic representations. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
 
-## Try the interactive lab
-
-<ClusteringLab client:visible />
-
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+<TopicExplorer client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+This small mechanism uses Python’s standard library and illustrative values; it does not claim to run a pretrained model. Run `python3 scripts/run-examples.py --id discovery-topic-representations`. The connected workflow below supplies the actual model, data, and evaluation.
+
+{/* example:discovery-topic-representations:start */}
 
 ```python
-documents = ["rain storm cloud", "sun warm beach", "cloud rain wind"]
-groups = [0, 1, 0]
-for group in sorted(set(groups)):
-    words = [word for text, label in zip(documents, groups) if label == group for word in text.split()]
-    print(group, sorted(set(words), key=lambda word: (-words.count(word), word))[:3])
+assignments_before = [0, 0, 1, -1]
+assignments_after = [0, 0, 1, -1]
+representatives = [
+    "translation of code switched text",
+    "constrained translation decoding",
+    "parallel corpus filtering",
+]
+proposed_name = "Filtering"
+assert assignments_before == assignments_after
+print("unchanged assignments; review name:", proposed_name)
+for document in representatives:
+    print("evidence:", document)
 ```
 
-**Expected output:**
+{/* example:discovery-topic-representations:end */}
 
-```text
-0 ['cloud', 'rain', 'storm']
-1 ['beach', 'sun', 'warm']
-```
-
-**What the code shows:** Documents are grouped first, then common words are counted within each group. Real topic pipelines use more careful term weighting and human inspection. The [official chapter 5 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter05) develops the corresponding model-based implementation.
+<DiscoveryEvidence id="modular-bertopic" />
 
 ## When to use it
 
-Use it to turn clusters into browsable, human-readable themes. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use representation refinement when initial terms are redundant or hard to read, and preserve the original representation for comparison. Publish the source documents and label-review notes with a collection explorer so users can question a name.
 
 ## Limits and common mistakes
 
-- A plausible generated label may overstate what the documents support.
-- **Failure to look for:** The label says “fraud” although the documents only describe ordinary payment questions.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+This use of “fine-tuning topic representations” does not mean gradient training of the encoder or generator. Generated labels can be fluent, narrow, unsupported, or misleading about mixed/noise groups. A more readable label is not a measured improvement in clustering.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First collect documents assigned to one group Then rank distinctive words or select representative passages Finally validate the proposed label against sampled members and outliers.</p></details>
+<details><summary>Does KeyBERTInspired retrain the encoder in this lab?</summary><p>No. It reuses frozen embeddings to rerank candidates. L08 changes descriptions and checks unchanged assignments; it does not optimize neural model weights.</p></details>
 
-<details><summary>What would make the result misleading?</summary><p>The label says “fraud” although the documents only describe ordinary payment questions.</p></details>
+<details><summary>Why keep the original c-TF-IDF representation?</summary><p>It provides a reference for what changed, which terms were removed, and whether a more fluent or diverse description lost important evidence.</p></details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 5 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 5 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter05). Continue through the linked prerequisites and nearby concepts below.
+Book scope: Chapter 5, printed pp. 156–160; printed pp. 158–159; printed pp. 160–164. Precise objective IDs are recorded in the [source inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The CPU model choices, licensed sentiment subset, original fictional corpus, arithmetic traces, and controls are atlas adaptations. Read the [pinned official chapter notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter05) and the [E4 execution guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/applications/discovery/README.md) for versioned implementation sources and provenance.
 
 <ConceptConnections id="topic-representations" />

@@ -20,6 +20,11 @@
       "project": "examples/training/reference",
       "python": "3.11",
       "lock": "examples/training/reference/uv.lock"
+    },
+    "discovery": {
+      "project": "examples/applications/discovery",
+      "python": "3.11",
+      "lock": "examples/applications/discovery/uv.lock"
     }
   },
   "examples": [
@@ -193,10 +198,7 @@
       "entrypoint": "examples/legacy/legacy-bertopic.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/bertopic.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -398,10 +400,7 @@
       "entrypoint": "examples/legacy/legacy-cluster-inspection.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/cluster-inspection.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -440,10 +439,7 @@
       "entrypoint": "examples/legacy/legacy-clustering.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/clustering.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -872,10 +868,7 @@
       "entrypoint": "examples/legacy/legacy-dimensionality-reduction.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/dimensionality-reduction.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -912,10 +905,7 @@
       "entrypoint": "examples/legacy/legacy-document-embeddings.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/document-embeddings.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -1119,10 +1109,7 @@
       "entrypoint": "examples/legacy/legacy-embeddings-for-classification.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/embeddings-for-classification.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -1361,10 +1348,7 @@
       "entrypoint": "examples/legacy/legacy-generative-classification.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/generative-classification.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3076,10 +3060,7 @@
       "entrypoint": "examples/legacy/legacy-sentiment-analysis.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/sentiment-analysis.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3198,10 +3179,7 @@
       "entrypoint": "examples/legacy/legacy-supervised-classification.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/supervised-classification.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3239,10 +3217,7 @@
       "entrypoint": "examples/legacy/legacy-task-specific-models.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/task-specific-models.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3435,10 +3410,7 @@
       "entrypoint": "examples/legacy/legacy-topic-modeling.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/topic-modeling.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3475,10 +3447,7 @@
       "entrypoint": "examples/legacy/legacy-topic-representations.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/topic-representations.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3830,10 +3799,7 @@
       "entrypoint": "examples/legacy/legacy-zero-shot-classification.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/zero-shot-classification.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3908,10 +3874,7 @@
       "entrypoint": "examples/legacy/legacy-text-classification.py",
       "environment": "legacy-unverified",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/use-cases/text-classification.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -6026,6 +5989,804 @@
       },
       "verificationRecord": "examples/verification/records/foundation-kv-cache.json",
       "troubleshooting": "See examples/training/reference/README.md; CPU smoke fixtures are not quality benchmarks."
+    },
+    {
+      "id": "discovery-sentiment-analysis",
+      "title": "Sentiment analysis mechanism",
+      "concepts": [
+        "sentiment-analysis"
+      ],
+      "sourceSections": [
+        "book-ch04-sentiment-task"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e4/lesson_snippets/sentiment_analysis.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/sentiment-analysis.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Fixed illustrative values; real fitted workflow and evaluation are linked separately.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Declared literals in synchronized source",
+      "outputSchema": "stdout values and assertions",
+      "validation": {
+        "method": "exit-success"
+      },
+      "verificationRecord": "examples/verification/records/discovery-sentiment-analysis.json",
+      "troubleshooting": "Read the distinction between the arithmetic and the linked actual model workflow."
+    },
+    {
+      "id": "discovery-task-specific-models",
+      "title": "Task-specific models mechanism",
+      "concepts": [
+        "task-specific-models"
+      ],
+      "sourceSections": [
+        "book-ch04-representation-classification",
+        "book-ch04-task-specific",
+        "book-ch04-model-selection"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e4/lesson_snippets/task_specific_models.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/task-specific-models.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Fixed illustrative values; real fitted workflow and evaluation are linked separately.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Declared literals in synchronized source",
+      "outputSchema": "stdout values and assertions",
+      "validation": {
+        "method": "exit-success"
+      },
+      "verificationRecord": "examples/verification/records/discovery-task-specific-models.json",
+      "troubleshooting": "Read the distinction between the arithmetic and the linked actual model workflow."
+    },
+    {
+      "id": "discovery-embeddings-for-classification",
+      "title": "Embeddings for classification mechanism",
+      "concepts": [
+        "embeddings-for-classification"
+      ],
+      "sourceSections": [
+        "book-ch04-embedding-classification",
+        "book-ch04-class-prototypes"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e4/lesson_snippets/embeddings_for_classification.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/embeddings-for-classification.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Fixed illustrative values; real fitted workflow and evaluation are linked separately.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Declared literals in synchronized source",
+      "outputSchema": "stdout values and assertions",
+      "validation": {
+        "method": "exit-success"
+      },
+      "verificationRecord": "examples/verification/records/discovery-embeddings-for-classification.json",
+      "troubleshooting": "Read the distinction between the arithmetic and the linked actual model workflow."
+    },
+    {
+      "id": "discovery-supervised-classification",
+      "title": "Supervised classification mechanism",
+      "concepts": [
+        "supervised-classification"
+      ],
+      "sourceSections": [
+        "book-ch04-supervised",
+        "book-ch04-classification-metrics"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e4/lesson_snippets/supervised_classification.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/supervised-classification.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Fixed illustrative values; real fitted workflow and evaluation are linked separately.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Declared literals in synchronized source",
+      "outputSchema": "stdout values and assertions",
+      "validation": {
+        "method": "exit-success"
+      },
+      "verificationRecord": "examples/verification/records/discovery-supervised-classification.json",
+      "troubleshooting": "Read the distinction between the arithmetic and the linked actual model workflow."
+    },
+    {
+      "id": "discovery-zero-shot-classification",
+      "title": "Zero-shot classification mechanism",
+      "concepts": [
+        "zero-shot-classification"
+      ],
+      "sourceSections": [
+        "book-ch04-zero-shot"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e4/lesson_snippets/zero_shot_classification.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/zero-shot-classification.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Fixed illustrative values; real fitted workflow and evaluation are linked separately.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Declared literals in synchronized source",
+      "outputSchema": "stdout values and assertions",
+      "validation": {
+        "method": "exit-success"
+      },
+      "verificationRecord": "examples/verification/records/discovery-zero-shot-classification.json",
+      "troubleshooting": "Read the distinction between the arithmetic and the linked actual model workflow."
+    },
+    {
+      "id": "discovery-generative-classification",
+      "title": "Generative classification mechanism",
+      "concepts": [
+        "generative-classification"
+      ],
+      "sourceSections": [
+        "book-ch04-generative-classification",
+        "book-ch04-t5",
+        "book-ch04-chatgpt"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e4/lesson_snippets/generative_classification.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/generative-classification.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Fixed illustrative values; real fitted workflow and evaluation are linked separately.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Declared literals in synchronized source",
+      "outputSchema": "stdout values and assertions",
+      "validation": {
+        "method": "exit-success"
+      },
+      "verificationRecord": "examples/verification/records/discovery-generative-classification.json",
+      "troubleshooting": "Read the distinction between the arithmetic and the linked actual model workflow."
+    },
+    {
+      "id": "discovery-document-embeddings",
+      "title": "Document embeddings mechanism",
+      "concepts": [
+        "document-embeddings"
+      ],
+      "sourceSections": [
+        "book-ch05-document-embedding"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e4/lesson_snippets/document_embeddings.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/document-embeddings.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Fixed illustrative values; real fitted workflow and evaluation are linked separately.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Declared literals in synchronized source",
+      "outputSchema": "stdout values and assertions",
+      "validation": {
+        "method": "exit-success"
+      },
+      "verificationRecord": "examples/verification/records/discovery-document-embeddings.json",
+      "troubleshooting": "Read the distinction between the arithmetic and the linked actual model workflow."
+    },
+    {
+      "id": "discovery-dimensionality-reduction",
+      "title": "Dimensionality reduction mechanism",
+      "concepts": [
+        "dimensionality-reduction"
+      ],
+      "sourceSections": [
+        "book-ch05-reduction",
+        "book-ch05-umap"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e4/lesson_snippets/dimensionality_reduction.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/dimensionality-reduction.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Fixed illustrative values; real fitted workflow and evaluation are linked separately.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Declared literals in synchronized source",
+      "outputSchema": "stdout values and assertions",
+      "validation": {
+        "method": "exit-success"
+      },
+      "verificationRecord": "examples/verification/records/discovery-dimensionality-reduction.json",
+      "troubleshooting": "Read the distinction between the arithmetic and the linked actual model workflow."
+    },
+    {
+      "id": "discovery-clustering",
+      "title": "Clustering mechanism",
+      "concepts": [
+        "clustering"
+      ],
+      "sourceSections": [
+        "book-ch05-clustering-pipeline",
+        "book-ch05-density-clusters",
+        "book-ch05-hdbscan"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e4/lesson_snippets/clustering.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/clustering.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Fixed illustrative values; real fitted workflow and evaluation are linked separately.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Declared literals in synchronized source",
+      "outputSchema": "stdout values and assertions",
+      "validation": {
+        "method": "exit-success"
+      },
+      "verificationRecord": "examples/verification/records/discovery-clustering.json",
+      "troubleshooting": "Read the distinction between the arithmetic and the linked actual model workflow."
+    },
+    {
+      "id": "discovery-cluster-inspection",
+      "title": "Cluster inspection mechanism",
+      "concepts": [
+        "cluster-inspection"
+      ],
+      "sourceSections": [
+        "book-ch05-inspection",
+        "book-ch05-topic-visualization"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e4/lesson_snippets/cluster_inspection.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/cluster-inspection.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Fixed illustrative values; real fitted workflow and evaluation are linked separately.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Declared literals in synchronized source",
+      "outputSchema": "stdout values and assertions",
+      "validation": {
+        "method": "exit-success"
+      },
+      "verificationRecord": "examples/verification/records/discovery-cluster-inspection.json",
+      "troubleshooting": "Read the distinction between the arithmetic and the linked actual model workflow."
+    },
+    {
+      "id": "discovery-topic-modeling",
+      "title": "Topic modeling mechanism",
+      "concepts": [
+        "topic-modeling"
+      ],
+      "sourceSections": [
+        "book-ch05-topic-modeling"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e4/lesson_snippets/topic_modeling.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/topic-modeling.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Fixed illustrative values; real fitted workflow and evaluation are linked separately.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Declared literals in synchronized source",
+      "outputSchema": "stdout values and assertions",
+      "validation": {
+        "method": "exit-success"
+      },
+      "verificationRecord": "examples/verification/records/discovery-topic-modeling.json",
+      "troubleshooting": "Read the distinction between the arithmetic and the linked actual model workflow."
+    },
+    {
+      "id": "discovery-topic-representations",
+      "title": "Topic representations mechanism",
+      "concepts": [
+        "topic-representations"
+      ],
+      "sourceSections": [
+        "book-ch05-representation-blocks",
+        "book-ch05-keybert",
+        "book-ch05-generation-block"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e4/lesson_snippets/topic_representations.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/topic-representations.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Fixed illustrative values; real fitted workflow and evaluation are linked separately.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Declared literals in synchronized source",
+      "outputSchema": "stdout values and assertions",
+      "validation": {
+        "method": "exit-success"
+      },
+      "verificationRecord": "examples/verification/records/discovery-topic-representations.json",
+      "troubleshooting": "Read the distinction between the arithmetic and the linked actual model workflow."
+    },
+    {
+      "id": "discovery-class-based-tf-idf",
+      "title": "Class-based TF-IDF mechanism",
+      "concepts": [
+        "class-based-tf-idf"
+      ],
+      "sourceSections": [
+        "book-ch05-ctfidf"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e4/lesson_snippets/class_based_tf_idf.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/class-based-tf-idf.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Fixed illustrative values; real fitted workflow and evaluation are linked separately.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Declared literals in synchronized source",
+      "outputSchema": "stdout values and assertions",
+      "validation": {
+        "method": "exit-success"
+      },
+      "verificationRecord": "examples/verification/records/discovery-class-based-tf-idf.json",
+      "troubleshooting": "Read the distinction between the arithmetic and the linked actual model workflow."
+    },
+    {
+      "id": "discovery-maximal-marginal-relevance",
+      "title": "Maximal marginal relevance mechanism",
+      "concepts": [
+        "maximal-marginal-relevance"
+      ],
+      "sourceSections": [
+        "book-ch05-mmr"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e4/lesson_snippets/maximal_marginal_relevance.py",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/maximal-marginal-relevance.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Fixed illustrative values; real fitted workflow and evaluation are linked separately.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Declared literals in synchronized source",
+      "outputSchema": "stdout values and assertions",
+      "validation": {
+        "method": "exit-success"
+      },
+      "verificationRecord": "examples/verification/records/discovery-maximal-marginal-relevance.json",
+      "troubleshooting": "Read the distinction between the arithmetic and the linked actual model workflow."
+    },
+    {
+      "id": "classification-comparison",
+      "title": "L07 same-case classification comparison",
+      "concepts": [
+        "sentiment-analysis",
+        "task-specific-models",
+        "embeddings-for-classification",
+        "supervised-classification",
+        "zero-shot-classification",
+        "generative-classification"
+      ],
+      "sourceSections": [
+        "book-ch04-supervised",
+        "book-ch04-classification-metrics"
+      ],
+      "level": "C",
+      "kind": "evaluated-workflow",
+      "entrypoint": "examples/applications/discovery/src/atlas_discovery/classification.py",
+      "environment": "discovery",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/classification-and-topics.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [
+        {
+          "id": "sentence-transformers/paraphrase-MiniLM-L3-v2",
+          "revision": "4ca70771034acceecb2e72475f72050fcdde4ddc"
+        },
+        {
+          "id": "distilbert/distilbert-base-uncased-finetuned-sst-2-english",
+          "revision": "714eb0fa89d2f80546fda750413ed43d93601a13"
+        },
+        {
+          "id": "cross-encoder/nli-MiniLM2-L6-H768",
+          "revision": "b95119ce93d3e065de6214e38cd4a97b0f2f2c6d"
+        },
+        {
+          "id": "google/flan-t5-small",
+          "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab"
+        }
+      ],
+      "dataset": "examples/data/manifests/sentiment.json",
+      "seed": 37,
+      "reproducibility": "Pinned CPU workflow; corpus and settings fixed. Hardware/library numerical differences and timing variability remain possible.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 1800,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Versioned fixture; optional local labels require the freshly fitted L08 artifact.",
+      "outputSchema": "JSON assertions; inspectable results.json and local model/head artifacts",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "reload_checked": true,
+          "shared_test_ids_checked": true,
+          "method_count": 7,
+          "test_count": 80
+        }
+      },
+      "verificationRecord": "examples/verification/records/classification-comparison.json",
+      "supportFiles": [
+        "examples/applications/discovery/src/atlas_discovery/common.py",
+        "examples/foundations/src/atlas_foundations/e4/metrics.py",
+        "examples/applications/discovery/prepare_sentiment.py"
+      ],
+      "troubleshooting": "Read examples/applications/discovery/README.md for setup, cold caches, data contracts, reload semantics, and retained limitations.",
+      "resultArtifact": "examples/artifacts/e4-classification/results.json",
+      "resultFile": "src/data/discovery-results.json",
+      "resultKey": "classification"
+    },
+    {
+      "id": "modular-bertopic",
+      "title": "L08 fitted modular BERTopic",
+      "concepts": [
+        "document-embeddings",
+        "dimensionality-reduction",
+        "clustering",
+        "cluster-inspection",
+        "topic-modeling",
+        "bertopic",
+        "topic-representations",
+        "class-based-tf-idf",
+        "maximal-marginal-relevance"
+      ],
+      "sourceSections": [
+        "book-ch05-bertopic",
+        "book-ch05-arxiv-data"
+      ],
+      "level": "B",
+      "kind": "evaluated-workflow",
+      "entrypoint": "examples/applications/discovery/src/atlas_discovery/topics.py",
+      "environment": "discovery",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/classification-and-topics.mdx",
+        "block": 1
+      },
+      "region": null,
+      "models": [
+        {
+          "id": "sentence-transformers/paraphrase-MiniLM-L3-v2",
+          "revision": "4ca70771034acceecb2e72475f72050fcdde4ddc"
+        }
+      ],
+      "dataset": "examples/data/manifests/research-summaries.json",
+      "seed": 42,
+      "reproducibility": "Pinned CPU workflow; corpus and settings fixed. Hardware/library numerical differences and timing variability remain possible.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 1800,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Versioned fixture; optional local labels require the freshly fitted L08 artifact.",
+      "outputSchema": "JSON assertions; inspectable results.json and local model/head artifacts",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "document_count": 45,
+          "representation_assignments_unchanged": true,
+          "reload_checked": true,
+          "ctfidf_library_match": true
+        }
+      },
+      "verificationRecord": "examples/verification/records/modular-bertopic.json",
+      "supportFiles": [
+        "examples/applications/discovery/src/atlas_discovery/common.py",
+        "examples/foundations/src/atlas_foundations/e4/topic_math.py"
+      ],
+      "troubleshooting": "Read examples/applications/discovery/README.md for setup, cold caches, data contracts, reload semantics, and retained limitations.",
+      "resultArtifact": "examples/artifacts/e4-topics/results.json",
+      "resultFile": "src/data/discovery-results.json",
+      "resultKey": "topics"
+    },
+    {
+      "id": "topic-label-generation",
+      "title": "Optional local topic-label generation",
+      "concepts": [
+        "topic-representations"
+      ],
+      "sourceSections": [
+        "book-ch05-representation-blocks",
+        "book-ch05-keybert",
+        "book-ch05-generation-block"
+      ],
+      "level": "B",
+      "kind": "evaluated-workflow",
+      "entrypoint": "examples/applications/discovery/src/atlas_discovery/topic_labels.py",
+      "environment": "discovery",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/classification-and-topics.mdx",
+        "block": 2
+      },
+      "region": null,
+      "models": [
+        {
+          "id": "sentence-transformers/paraphrase-MiniLM-L3-v2",
+          "revision": "4ca70771034acceecb2e72475f72050fcdde4ddc"
+        },
+        {
+          "id": "google/flan-t5-small",
+          "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab"
+        }
+      ],
+      "dataset": "examples/data/manifests/research-summaries.json",
+      "seed": 42,
+      "reproducibility": "Pinned CPU workflow; corpus and settings fixed. Hardware/library numerical differences and timing variability remain possible.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 1800,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Versioned fixture; optional local labels require the freshly fitted L08 artifact.",
+      "outputSchema": "JSON assertions; inspectable results.json and local model/head artifacts",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "assignments_unchanged": true
+        }
+      },
+      "verificationRecord": "examples/verification/records/topic-label-generation.json",
+      "supportFiles": [
+        "examples/applications/discovery/src/atlas_discovery/common.py",
+        "examples/foundations/src/atlas_foundations/e4/topic_math.py",
+        "examples/applications/discovery/src/atlas_discovery/topics.py",
+        "examples/data/fixtures/research-summaries.json"
+      ],
+      "troubleshooting": "Read examples/applications/discovery/README.md for setup, cold caches, data contracts, reload semantics, and retained limitations.",
+      "resultArtifact": "examples/artifacts/e4-topic-labels/results.json",
+      "resultFile": "src/data/discovery-results.json",
+      "resultKey": "generation"
+    },
+    {
+      "id": "bertopic-pipeline",
+      "title": "Fitted BERTopic pipeline function",
+      "concepts": [
+        "bertopic"
+      ],
+      "sourceSections": [
+        "book-ch05-bertopic",
+        "book-ch05-arxiv-data"
+      ],
+      "level": "B",
+      "kind": "evaluated-workflow",
+      "entrypoint": "examples/applications/discovery/src/atlas_discovery/topics.py",
+      "environment": "discovery",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/bertopic.mdx",
+        "block": 0
+      },
+      "region": "pipeline",
+      "models": [
+        {
+          "id": "sentence-transformers/paraphrase-MiniLM-L3-v2",
+          "revision": "4ca70771034acceecb2e72475f72050fcdde4ddc"
+        }
+      ],
+      "dataset": "examples/data/manifests/research-summaries.json",
+      "seed": 42,
+      "reproducibility": "Pinned CPU workflow; corpus and settings fixed. Hardware/library numerical differences and timing variability remain possible.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 1800,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Versioned fixture; optional local labels require the freshly fitted L08 artifact.",
+      "outputSchema": "JSON assertions; inspectable results.json and local model/head artifacts",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "document_count": 45,
+          "representation_assignments_unchanged": true,
+          "reload_checked": true
+        }
+      },
+      "verificationRecord": "examples/verification/records/bertopic-pipeline.json",
+      "supportFiles": [
+        "examples/applications/discovery/src/atlas_discovery/common.py",
+        "examples/foundations/src/atlas_foundations/e4/topic_math.py"
+      ],
+      "troubleshooting": "Read examples/applications/discovery/README.md for setup, cold caches, data contracts, reload semantics, and retained limitations."
     }
   ]
 }

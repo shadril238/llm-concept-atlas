@@ -6,7 +6,7 @@ Generated from the E0 inventory dated 2026-11-19; latest enhancement update 2026
 
 The inventory records **231 source entries** (170 contents entries and 61 embedded concepts). It counts **160 leaf objectives**; 71 parent containers are excluded from the denominator. This inventory is a reviewed edition-specific work list, not a universal count of all AI terms.
 
-Of the leaf objectives, **118 have partial atlas mappings** and **42 have no direct atlas mapping**. **0 have passed enhancement acceptance**. Planned destinations are not published lessons.
+Of the leaf objectives, **126 have partial atlas mappings** and **34 have no direct atlas mapping**. **0 have passed enhancement acceptance**. Planned destinations are not published lessons.
 
 ## Read this report
 
@@ -24,8 +24,8 @@ Of the leaf objectives, **118 have partial atlas mappings** and **42 have no dir
 | 1. An Introduction to Large Language Models | 22 | 10 | 8 | 18 | 0 | 0 | E3 |
 | 2. Tokens and Embeddings | 20 | 14 | 0 | 14 | 0 | 0 | E3 |
 | 3. Looking Inside Large Language Models | 22 | 15 | 1 | 16 | 0 | 0 | E3 |
-| 4. Text Classification | 12 | 6 | 1 | 4 | 3 | 0 | E4 |
-| 5. Text Clustering and Topic Modeling | 16 | 10 | 0 | 5 | 5 | 0 | E4 |
+| 4. Text Classification | 12 | 6 | 1 | 7 | 0 | 0 | E4 |
+| 5. Text Clustering and Topic Modeling | 16 | 10 | 0 | 10 | 0 | 0 | E4 |
 | 6. Prompt Engineering | 19 | 12 | 1 | 10 | 3 | 0 | E5 |
 | 7. Advanced Text Generation Techniques and Tools | 12 | 8 | 0 | 7 | 1 | 0 | E5 |
 | 8. Semantic Search and Retrieval-Augmented Generation | 23 | 17 | 0 | 7 | 10 | 0 | E6 |
@@ -38,12 +38,12 @@ Of the leaf objectives, **118 have partial atlas mappings** and **42 have no dir
 
 | Dimension | Required leaf objectives | Missing | Partial | Sufficient |
 | --- | ---: | ---: | ---: | ---: |
-| explanation | 160 | 43 | 117 | 0 |
-| workedExample | 160 | 43 | 117 | 0 |
-| visual | 160 | 43 | 117 | 0 |
-| implementation | 51 | 40 | 11 | 0 |
-| evaluation | 51 | 41 | 10 | 0 |
-| exercises | 160 | 43 | 117 | 0 |
+| explanation | 160 | 35 | 125 | 0 |
+| workedExample | 160 | 35 | 125 | 0 |
+| visual | 160 | 35 | 125 | 0 |
+| implementation | 51 | 33 | 18 | 0 |
+| evaluation | 51 | 34 | 17 | 0 |
+| exercises | 160 | 35 | 125 | 0 |
 
 ## Priority corrections
 
@@ -67,11 +67,6 @@ The placement decision avoids creating a separate page for every subsection. IDs
 
 | Proposed ID | Placement | Existing parent | Aliases | Source references |
 | --- | --- | --- | --- | --- |
-| classification-model-selection | subsection | generative-classification | — | book-ch04-model-selection |
-| t5-classification | subsection | generative-classification | — | book-ch04-t5 |
-| hosted-classification | subsection | generative-classification | — | book-ch04-chatgpt |
-| research-abstract-corpus | subsection | bertopic | — | book-ch05-arxiv-data |
-| generated-topic-labels | subsection | bertopic | — | book-ch05-generation-block |
 | generation-model-selection | subsection | generative-model | — | book-ch06-model-selection |
 | chain-of-thought | standalone | prompt-structure | CoT, zero-shot CoT | book-ch06-reasoning, book-ch06-chain-of-thought, book-ch06-zero-shot-cot |
 | tree-of-thought | standalone | prompt-structure | ToT | book-ch06-tree-of-thought |
@@ -87,9 +82,6 @@ The placement decision avoids creating a separate page for every subsection. IDs
 | adapter-merging | subsection | lora | merge weights, merge_and_unload | book-ch12-merge |
 | generation-benchmarks | subsection | generative-evaluation | — | book-ch12-benchmarks, book-ch12-leaderboards |
 | preference-data-templating | subsection | dpo | chosen rejected pairs | book-ch12-alignment-template |
-| class-based-tf-idf | standalone | topic-modeling | c-TF-IDF, class TF-IDF | book-ch05-ctfidf |
-| topic-representation-models | subsection | topic-representations | KeyBERTInspired | book-ch05-keybert |
-| maximal-marginal-relevance | subsection | topic-representations | MMR | book-ch05-mmr |
 | document-chunking | standalone | dense-retrieval | chunk overlap, passage chunking | book-ch08-chunking |
 | average-precision | subsection | retrieval-metrics | AP | book-ch08-average-precision |
 | mean-average-precision | subsection | retrieval-metrics | MAP | book-ch08-mean-average-precision |
@@ -197,18 +189,18 @@ Printed pages 111–135; PDF pages 133–157. [Pinned official notebook](https:/
 
 | Source ID / location | Objective and remaining work | Existing destination | Status / priority |
 | --- | --- | --- | --- |
-| **book-ch04-sentiment-task**<br>The Sentiment of Movie Reviews; pp. 112–113 (contents) | Inspect a real review dataset, label conventions, and ambiguous or mixed sentiment. | [sentiment-analysis](../../src/content/docs/concepts/sentiment-analysis.mdx#the-important-distinction), [use-case sketch](../../src/content/docs/use-cases/text-classification.mdx#run-a-real-model) | partial; P2; E4 |
-| **book-ch04-representation-classification**<br>Text Classification with Representation Models; pp. 113–127 (contents; container, not counted) | Compare a trained task head with a separate classifier over fixed embeddings. | [task-specific-models](../../src/content/docs/concepts/task-specific-models.mdx#the-important-distinction), [embeddings-for-classification](../../src/content/docs/concepts/embeddings-for-classification.mdx#the-important-distinction) | partial; P2; E4 |
-| **book-ch04-model-selection**<br>Model Selection; pp. 115–116 (contents) | Choose a model based on task, language, labels, evaluation, and resource constraints. | Proposed: classification-model-selection | unmapped; P1; E4 |
-| **book-ch04-task-specific**<br>Using a Task-Specific Model; pp. 116–120 (contents; container, not counted) | Run an actual encoder classifier and interpret label mappings and class scores. | [task-specific-models](../../src/content/docs/concepts/task-specific-models.mdx#the-important-distinction), [use-case sketch](../../src/content/docs/use-cases/text-classification.mdx#run-a-real-model) | partial; P2; E4 |
-| **book-ch04-embedding-classification**<br>Classification Tasks That Leverage Embeddings; pp. 120–127 (contents; container, not counted) | Encode documents and compare a learned head with class prototypes. | [embeddings-for-classification](../../src/content/docs/concepts/embeddings-for-classification.mdx#the-important-distinction) | partial; P2; E4 |
-| **book-ch04-supervised**<br>Supervised Classification; pp. 121–123 (contents; container, not counted) | Train and evaluate a classifier over fixed vectors using disjoint data splits. | [supervised-classification](../../src/content/docs/concepts/supervised-classification.mdx#the-important-distinction) | partial; P2; E4 |
-| **book-ch04-zero-shot**<br>What If We Do Not Have Labeled Data?; pp. 123–127 (contents) | Compare real document and label-description vectors and test wording sensitivity. | [zero-shot-classification](../../src/content/docs/concepts/zero-shot-classification.mdx#the-important-distinction) | partial; P1; E4 |
-| **book-ch04-generative-classification**<br>Text Classification with Generative Models; pp. 127–135 (contents; container, not counted) | Generate class labels, validate outputs, and evaluate task accuracy separately from formatting. | [generative-classification](../../src/content/docs/concepts/generative-classification.mdx#the-important-distinction) | partial; P2; E4 |
-| **book-ch04-t5**<br>Using the Text-to-Text Transfer Transformer; pp. 128–132 (contents) | Explain encoder-decoder T5 and run the text-to-text classification workflow. | Proposed: t5-classification | unmapped; P1; E4 |
-| **book-ch04-chatgpt**<br>ChatGPT for Classification; pp. 132–135 (contents) | Implement bounded optional hosted classification with label validation and a shared evaluation set. | Proposed: hosted-classification | unmapped; P1; E4 |
-| **book-ch04-classification-metrics**<br>Confusion matrix, precision, recall, and F1; pp. 118–120 (body-concept) | Compute classification metrics from a hand-labeled confusion matrix and distinguish averaging choices. | [supervised-classification](../../src/content/docs/concepts/supervised-classification.mdx#the-important-distinction) | partial; P2; E4 |
-| **book-ch04-class-prototypes**<br>Class-average embedding classification; pp. 123–123 (body-concept) | Build actual class prototypes and compare their predictions with a learned head. | [embeddings-for-classification](../../src/content/docs/concepts/embeddings-for-classification.mdx#the-important-distinction) | partial; P2; E4 |
+| **book-ch04-sentiment-task**<br>The Sentiment of Movie Reviews; pp. 112–113 (contents) | Inspect a real review dataset, label conventions, and ambiguous or mixed sentiment. | [sentiment-analysis](../../src/content/docs/concepts/sentiment-analysis.mdx#how-it-works) | partial; P2; E4 |
+| **book-ch04-representation-classification**<br>Text Classification with Representation Models; pp. 113–127 (contents; container, not counted) | Compare a trained task head with a separate classifier over fixed embeddings. | [task-specific-models](../../src/content/docs/concepts/task-specific-models.mdx#how-it-works) | partial; P2; E4 |
+| **book-ch04-model-selection**<br>Model Selection; pp. 115–116 (contents) | Choose a model based on task, language, labels, evaluation, and resource constraints. | [task-specific-models](../../src/content/docs/concepts/task-specific-models.mdx#model-selection) | partial; P2; E4 |
+| **book-ch04-task-specific**<br>Using a Task-Specific Model; pp. 116–120 (contents; container, not counted) | Run an actual encoder classifier and interpret label mappings and class scores. | [task-specific-models](../../src/content/docs/concepts/task-specific-models.mdx#how-it-works) | partial; P2; E4 |
+| **book-ch04-embedding-classification**<br>Classification Tasks That Leverage Embeddings; pp. 120–127 (contents; container, not counted) | Encode documents and compare a learned head with class prototypes. | [embeddings-for-classification](../../src/content/docs/concepts/embeddings-for-classification.mdx#how-it-works) | partial; P2; E4 |
+| **book-ch04-supervised**<br>Supervised Classification; pp. 121–123 (contents; container, not counted) | Train and evaluate a classifier over fixed vectors using disjoint data splits. | [supervised-classification](../../src/content/docs/concepts/supervised-classification.mdx#how-it-works) | partial; P2; E4 |
+| **book-ch04-zero-shot**<br>What If We Do Not Have Labeled Data?; pp. 123–127 (contents) | Compare real document and label-description vectors and test wording sensitivity. | [zero-shot-classification](../../src/content/docs/concepts/zero-shot-classification.mdx#how-it-works) | partial; P2; E4 |
+| **book-ch04-generative-classification**<br>Text Classification with Generative Models; pp. 127–135 (contents; container, not counted) | Generate class labels, validate outputs, and evaluate task accuracy separately from formatting. | [generative-classification](../../src/content/docs/concepts/generative-classification.mdx#how-it-works) | partial; P2; E4 |
+| **book-ch04-t5**<br>Using the Text-to-Text Transfer Transformer; pp. 128–132 (contents) | Explain encoder-decoder T5 and run the text-to-text classification workflow. | [generative-classification](../../src/content/docs/concepts/generative-classification.mdx#t5-classification) | partial; P2; E4 |
+| **book-ch04-chatgpt**<br>ChatGPT for Classification; pp. 132–135 (contents) | Implement bounded optional hosted classification with label validation and a shared evaluation set. | [generative-classification](../../src/content/docs/concepts/generative-classification.mdx#optional-hosted-classification) | partial; P2; E4 |
+| **book-ch04-classification-metrics**<br>Confusion matrix, precision, recall, and F1; pp. 118–120 (body-concept) | Compute classification metrics from a hand-labeled confusion matrix and distinguish averaging choices. | [supervised-classification](../../src/content/docs/concepts/supervised-classification.mdx#evaluation-and-confusion-matrices) | partial; P2; E4 |
+| **book-ch04-class-prototypes**<br>Class-average embedding classification; pp. 123–123 (body-concept) | Build actual class prototypes and compare their predictions with a learned head. | [embeddings-for-classification](../../src/content/docs/concepts/embeddings-for-classification.mdx#class-average-prototypes) | partial; P2; E4 |
 
 ## Chapter 5: Text Clustering and Topic Modeling
 
@@ -216,22 +208,22 @@ Printed pages 137–164; PDF pages 159–186. [Pinned official notebook](https:/
 
 | Source ID / location | Objective and remaining work | Existing destination | Status / priority |
 | --- | --- | --- | --- |
-| **book-ch05-arxiv-data**<br>ArXiv’s Articles: Computation and Language; pp. 138–139 (contents) | Introduce the corpus, source fields, sampling, and reproducible data preparation. | Proposed: research-abstract-corpus | unmapped; P1; E4 |
-| **book-ch05-clustering-pipeline**<br>A Common Pipeline for Text Clustering; pp. 139–146 (contents; container, not counted) | Trace documents through embeddings, reduction, and actual cluster assignment. | [clustering](../../src/content/docs/concepts/clustering.mdx#the-important-distinction) | partial; P2; E4 |
-| **book-ch05-document-embedding**<br>Embedding Documents; pp. 139–140 (contents) | Produce document embeddings from real text and retain source IDs. | [document-embeddings](../../src/content/docs/concepts/document-embeddings.mdx#the-important-distinction) | partial; P1; E4 |
-| **book-ch05-reduction**<br>Reducing the Dimensionality of Embeddings; pp. 140–142 (contents; container, not counted) | Fit UMAP and distinguish clustering-space reduction from display-only projection. | [dimensionality-reduction](../../src/content/docs/concepts/dimensionality-reduction.mdx#the-important-distinction) | partial; P2; E4 |
-| **book-ch05-density-clusters**<br>Cluster the Reduced Embeddings; pp. 142–144 (contents; container, not counted) | Run density-based clustering, explain its parameters, and inspect noise labels. | [clustering](../../src/content/docs/concepts/clustering.mdx#the-important-distinction) | partial; P2; E4 |
-| **book-ch05-inspection**<br>Inspecting the Clusters; pp. 144–146 (contents) | Inspect representative and borderline documents and distinguish clusters from plot artifacts. | [cluster-inspection](../../src/content/docs/concepts/cluster-inspection.mdx#the-important-distinction) | partial; P1; E4 |
-| **book-ch05-topic-modeling**<br>From Text Clustering to Topic Modeling; pp. 146–164 (contents; container, not counted) | Explain why interpretation requires a term-weighting and inspection stage beyond grouping. | [topic-modeling](../../src/content/docs/concepts/topic-modeling.mdx#the-important-distinction) | partial; P2; E4 |
-| **book-ch05-bertopic**<br>BERTopic: A Modular Topic Modeling Framework; pp. 148–156 (contents; container, not counted) | Fit the full modular pipeline and trace computed topic assignments and representations. | [bertopic](../../src/content/docs/concepts/bertopic.mdx#the-important-distinction) | partial; P2; E4 |
-| **book-ch05-representation-blocks**<br>Adding a Special Lego Block; pp. 156–160 (contents; container, not counted) | Implement keyword reranking and diversity refinement without changing document assignments. | [topic-representations](../../src/content/docs/concepts/topic-representations.mdx#the-important-distinction) | partial; P2; E4 |
-| **book-ch05-generation-block**<br>The Text Generation Lego Block; pp. 160–164 (contents) | Generate topic descriptions from representative documents and verify their support. | Proposed: generated-topic-labels | unmapped; P1; E4 |
-| **book-ch05-umap**<br>UMAP neighborhood reduction; pp. 140–142 (body-concept) | Fit a nonlinear reduction and explain parameter and projection limitations. | [dimensionality-reduction](../../src/content/docs/concepts/dimensionality-reduction.mdx#the-important-distinction) | partial; P2; E4 |
-| **book-ch05-hdbscan**<br>HDBSCAN density clustering and outliers; pp. 142–144 (body-concept) | Explain density, minimum cluster size, and noise assignment with an actual fitted model. | [clustering](../../src/content/docs/concepts/clustering.mdx#the-important-distinction) | partial; P2; E4 |
-| **book-ch05-ctfidf**<br>Class-based TF-IDF; pp. 148–151 (body-concept) | Calculate class-normalized term frequency and corpus weighting with the stated convention. | Proposed: class-based-tf-idf | unmapped; P1; E4 |
-| **book-ch05-topic-visualization**<br>Topic and document visualizations; pp. 153–156 (body-concept) | Link term bars, similarity heatmaps, and hierarchy views to actual topic data. | [cluster-inspection](../../src/content/docs/concepts/cluster-inspection.mdx#the-important-distinction) | partial; P2; E4 |
-| **book-ch05-keybert**<br>KeyBERTInspired representation refinement; pp. 158–159 (body-concept) | Rerank candidate terms using representative-document and term embeddings. | Proposed: topic-representation-models | unmapped; P1; E4 |
-| **book-ch05-mmr**<br>Maximal marginal relevance; pp. 159–160 (body-concept) | Balance relevance and redundancy with an explicit diversity parameter. | Proposed: maximal-marginal-relevance | unmapped; P1; E4 |
+| **book-ch05-arxiv-data**<br>ArXiv’s Articles: Computation and Language; pp. 138–139 (contents) | Introduce the corpus, source fields, sampling, and reproducible data preparation. | [bertopic](../../src/content/docs/concepts/bertopic.mdx#research-abstract-corpus) | partial; P2; E4 |
+| **book-ch05-clustering-pipeline**<br>A Common Pipeline for Text Clustering; pp. 139–146 (contents; container, not counted) | Trace documents through embeddings, reduction, and actual cluster assignment. | [clustering](../../src/content/docs/concepts/clustering.mdx#how-it-works) | partial; P2; E4 |
+| **book-ch05-document-embedding**<br>Embedding Documents; pp. 139–140 (contents) | Produce document embeddings from real text and retain source IDs. | [document-embeddings](../../src/content/docs/concepts/document-embeddings.mdx#how-it-works) | partial; P2; E4 |
+| **book-ch05-reduction**<br>Reducing the Dimensionality of Embeddings; pp. 140–142 (contents; container, not counted) | Fit UMAP and distinguish clustering-space reduction from display-only projection. | [dimensionality-reduction](../../src/content/docs/concepts/dimensionality-reduction.mdx#how-it-works) | partial; P2; E4 |
+| **book-ch05-density-clusters**<br>Cluster the Reduced Embeddings; pp. 142–144 (contents; container, not counted) | Run density-based clustering, explain its parameters, and inspect noise labels. | [clustering](../../src/content/docs/concepts/clustering.mdx#how-it-works) | partial; P2; E4 |
+| **book-ch05-inspection**<br>Inspecting the Clusters; pp. 144–146 (contents) | Inspect representative and borderline documents and distinguish clusters from plot artifacts. | [cluster-inspection](../../src/content/docs/concepts/cluster-inspection.mdx#how-it-works) | partial; P2; E4 |
+| **book-ch05-topic-modeling**<br>From Text Clustering to Topic Modeling; pp. 146–164 (contents; container, not counted) | Explain why interpretation requires a term-weighting and inspection stage beyond grouping. | [topic-modeling](../../src/content/docs/concepts/topic-modeling.mdx#how-it-works) | partial; P2; E4 |
+| **book-ch05-bertopic**<br>BERTopic: A Modular Topic Modeling Framework; pp. 148–156 (contents; container, not counted) | Fit the full modular pipeline and trace computed topic assignments and representations. | [bertopic](../../src/content/docs/concepts/bertopic.mdx#how-it-works) | partial; P2; E4 |
+| **book-ch05-representation-blocks**<br>Adding a Special Lego Block; pp. 156–160 (contents; container, not counted) | Implement keyword reranking and diversity refinement without changing document assignments. | [topic-representations](../../src/content/docs/concepts/topic-representations.mdx#how-it-works) | partial; P2; E4 |
+| **book-ch05-generation-block**<br>The Text Generation Lego Block; pp. 160–164 (contents) | Generate topic descriptions from representative documents and verify their support. | [topic-representations](../../src/content/docs/concepts/topic-representations.mdx#generated-topic-labels) | partial; P2; E4 |
+| **book-ch05-umap**<br>UMAP neighborhood reduction; pp. 140–142 (body-concept) | Fit a nonlinear reduction and explain parameter and projection limitations. | [dimensionality-reduction](../../src/content/docs/concepts/dimensionality-reduction.mdx#how-it-works) | partial; P2; E4 |
+| **book-ch05-hdbscan**<br>HDBSCAN density clustering and outliers; pp. 142–144 (body-concept) | Explain density, minimum cluster size, and noise assignment with an actual fitted model. | [clustering](../../src/content/docs/concepts/clustering.mdx#how-it-works) | partial; P2; E4 |
+| **book-ch05-ctfidf**<br>Class-based TF-IDF; pp. 148–151 (body-concept) | Calculate class-normalized term frequency and corpus weighting with the stated convention. | [class-based-tf-idf](../../src/content/docs/concepts/class-based-tf-idf.mdx#how-it-works) | partial; P2; E4 |
+| **book-ch05-topic-visualization**<br>Topic and document visualizations; pp. 153–156 (body-concept) | Link term bars, similarity heatmaps, and hierarchy views to actual topic data. | [cluster-inspection](../../src/content/docs/concepts/cluster-inspection.mdx#how-it-works) | partial; P2; E4 |
+| **book-ch05-keybert**<br>KeyBERTInspired representation refinement; pp. 158–159 (body-concept) | Rerank candidate terms using representative-document and term embeddings. | [topic-representations](../../src/content/docs/concepts/topic-representations.mdx#keybertinspired-representation-models) | partial; P2; E4 |
+| **book-ch05-mmr**<br>Maximal marginal relevance; pp. 159–160 (body-concept) | Balance relevance and redundancy with an explicit diversity parameter. | [maximal-marginal-relevance](../../src/content/docs/concepts/maximal-marginal-relevance.mdx#how-it-works) | partial; P2; E4 |
 
 ## Chapter 6: Prompt Engineering
 
@@ -430,6 +422,7 @@ Printed pages 355–389; PDF pages 377–411. [Pinned official notebook](https:/
 - Chapter 5, notebook cells 53, 57: The word-cloud section is explicitly notebook bonus material and is excluded from book-core counts.
 - Chapter 10, printed pages 300–300: Re-derive metric definitions: Pearson correlation across predictions and labels can be negative; do not use the printed 0-to-1 description as its general range.
 - Chapter 12, printed pages 364–364: Reconcile the printed low-rank matrix dimensions with r*(d_in+d_out) before reusing parameter-count examples. Use consistently named A/B matrices and declared shapes.
+- Chapter 4, printed pages 120–120: Support-weighted F1 does not generally give equal influence to minority classes. Macro-F1 weights class F1 scores equally; values can coincide on a balanced test set.
 
 ## Scope and exclusions
 

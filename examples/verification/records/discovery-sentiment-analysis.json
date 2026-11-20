@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "discovery-sentiment-analysis",
+  "status": "passed",
+  "date": "2026-11-20T14:48:27.284774+00:00",
+  "gitCommit": "7ea038d4a6c5fd39942722ec7e7be0bf96cd3a1f",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e4/lesson_snippets/sentiment_analysis.py"
+  ],
+  "sourceSha256": "dcff9682941d1d9fcfe8bae470120e7b31e6a3e5670b571c0bb5a8f8f6f8e7d0",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "5baecde348051fc1434221c389b4dd7af44137e54829899e85b4c2f4589aadb2",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.2,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "keyword prediction: 1 policy label: 0\n",
+  "stderr": "",
+  "error": null
+}

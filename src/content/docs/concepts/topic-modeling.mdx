@@ -1,99 +1,105 @@
 ---
-title: Topic modeling
-description: Topic modeling discovers recurring themes and gives them interpretable descriptions from a document collection.
-kind: concept
+title: "Topic modeling"
+description: "Topic modeling creates interpretable descriptions of recurring themes in a collection. A clustering-based topic model adds term weighting and evidence inspection to document groups; a group ID alone is not a topic explanation."
+kind: "concept"
 conceptId: topic-modeling
 chapter: 5
-part: applications
-summary: Topic modeling discovers recurring themes and gives them interpretable descriptions from a document collection.
-parent: chapter-05
-prerequisites: [clustering]
-related: [cluster-inspection, bertopic]
-level: intermediate
-tags: [applications, chapter-05]
+part: "applications"
+summary: "Topic modeling creates interpretable descriptions of recurring themes in a collection. A clustering-based topic model adds term weighting and evidence inspection to document groups; a group ID alone is not a topic explanation."
+parent: "chapter-05"
+prerequisites: ["clustering"]
+related: ["cluster-inspection", "bertopic"]
+level: "intermediate"
+tags: ["applications", "chapter-05"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-20"
+reviewStatus: "author-reviewed"
+reviewRecord: e4-discovery-author-review-2026-11-20
+learningObjectives: ["Separate assignments from topic descriptions.", "Trace class documents into distinctive term weights.", "Compare topic usefulness with stability and human support."]
+bookSections: ["book-ch05-topic-modeling"]
+labHref: "/labs/classification-and-topics/"
+aliases: ["topic discovery", "topic coherence"]
+exampleIds: ["discovery-topic-modeling", "modular-bertopic"]
+relationshipReasons: {"clustering": "This prerequisite supplies the input representation or task contract used in the worked trace."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { ClusteringLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import DiscoveryEvidence from '../../../components/DiscoveryEvidence.astro';
+import { ClassificationComparison, LabelValidator, CtfidfCalculator, DiversityExplorer, TopicExplorer } from '../../../components/simulations/DiscoveryLabs';
 
 <ConceptPrimer id="topic-modeling" />
 
 ## Definition and intuition
 
-Topic modeling discovers recurring themes and gives them interpretable descriptions from a document collection.
+Topic modeling creates interpretable descriptions of recurring themes in a collection. A clustering-based topic model adds term weighting and evidence inspection to document groups; a group ID alone is not a topic explanation.
 
-Chapter 5 explores unlabeled collections. A cluster is a geometric grouping, while a useful topic also needs an interpretable description and inspection by a person.
+“Group 2” tells a reader nothing about the documents. A topic model should supply evidence for a concise interpretation while allowing the reader to inspect exceptions. Its descriptions are an aid to understanding a collection, not a discovery of immutable categories.
 
-## Before you start
+<ReferenceBrief objectives={["Separate assignments from topic descriptions.", "Trace class documents into distinctive term weights.", "Compare topic usefulness with stability and human support."]} prerequisites="clustering" scope="A small recorded CPU workflow plus explicit teaching calculations. Published results are not independent lesson acceptance." />
 
-Read [Clustering](/llm-concept-atlas/concepts/clustering/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **topic modeling** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Different model families make different assumptions
 
-1. **Prepare:** Embed or represent documents
-2. **Transform:** Group or decompose them into recurring patterns
-3. **Inspect:** Extract words and representative documents to name and validate topics.
+Probabilistic topic models can represent documents as mixtures of word-distribution topics. BERTopic’s common recipe instead clusters embedding-based document features, then represents each group with weighted terms or another representation model. Do not assume its c-TF-IDF values are normalized topic probabilities, or that every document has a meaningful mixture distribution simply because the word topic is used.
 
-### The important distinction
+### From groups to class documents
 
-A topic model adds interpretation to grouping by ranking characteristic words or passages. In BERTopic, class-based TF-IDF helps identify words distinctive for each cluster. High-scoring words are candidate descriptions, not a semantic proof; human review decides whether they form a useful topic.
+Concatenate or aggregate the text belonging to each fitted group, build a vocabulary/count table, and apply a declared weighting convention. Frequent terms inside a group matter, but terms common throughout the corpus may be less distinctive. Default c-TF-IDF normalizes class counts and applies a corpus-wide frequency weight. Stop-word and n-gram choices change what becomes a candidate description.
+
+### Meaning needs a reader
+
+Topic coherence measures and attractive names can help compare outputs but do not establish that a topic serves a research question. Read representatives, inspect outliers, examine coverage of important minority material, and record what changes under a controlled parameter adjustment. The explorer deliberately retains weak examples instead of deleting them to make its display look cleaner.
 
 ## Worked example
 
-A set of support tickets may yield shipping delays and refund questions as two themes. One ticket could mention both, so a single hard label is only an approximation. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+Imagine two fitted groups: one about translation, one about speech recognition. The term model occurs in both; translation is concentrated in one. Raw frequency can rank model first in both, while class-based weighting can prefer a more distinctive term. L08 checks the exact weight formula against BERTopic, then refines descriptions without rerunning clustering.
 
-<LessonFlow steps={["Embed or represent documents", "Group or decompose them into recurring patterns", "Extract words and representative documents to name and validate topics."]} caption="A teaching diagram for Topic modeling. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
 
-## Try the interactive lab
-
-<ClusteringLab client:visible />
-
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+<TopicExplorer client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+This small mechanism uses Python’s standard library and illustrative values; it does not claim to run a pretrained model. Run `python3 scripts/run-examples.py --id discovery-topic-modeling`. The connected workflow below supplies the actual model, data, and evaluation.
+
+{/* example:discovery-topic-modeling:start */}
 
 ```python
-documents = ["rain storm cloud", "sun warm beach", "cloud rain wind"]
-groups = [0, 1, 0]
-for group in sorted(set(groups)):
-    words = [word for text, label in zip(documents, groups) if label == group for word in text.split()]
-    print(group, sorted(set(words), key=lambda word: (-words.count(word), word))[:3])
+groups = {
+    0: ["translation model", "translation errors"],
+    1: ["speech model", "speech recognition"],
+}
+for topic, documents in groups.items():
+    tokens = " ".join(documents).split()
+    print("class document", topic, ":", tokens)
+print(
+    "Next stage: class-normalized term counts and corpus weighting, not just common-word counts."
+)
 ```
 
-**Expected output:**
+{/* example:discovery-topic-modeling:end */}
 
-```text
-0 ['cloud', 'rain', 'storm']
-1 ['beach', 'sun', 'warm']
-```
-
-**What the code shows:** Documents are grouped first, then common words are counted within each group. Real topic pipelines use more careful term weighting and human inspection. The [official chapter 5 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter05) develops the corresponding model-based implementation.
+<DiscoveryEvidence id="modular-bertopic" />
 
 ## When to use it
 
-Use it to summarize large unlabeled corpora and track broad themes over time. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use topic modeling to make a collection browsable, guide human annotation, or identify recurring issues worth investigating. The research collection project delivers an inspectable report with source IDs, terms, document evidence, and a record of controlled changes.
 
 ## Limits and common mistakes
 
-- Topic count and labels depend on preprocessing, model settings, and human interpretation.
-- **Failure to look for:** A high-frequency boilerplate word dominates the label even though it does not describe the underlying issue.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Topic counts and labels depend on representation, corpus selection, reduction, clustering, and human interpretation. A label refinement may make a group easier to read while leaving a bad assignment untouched. The atlas’s small fictional corpus is a teaching workflow, not evidence about scientific literature trends.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First embed or represent documents Then group or decompose them into recurring patterns Finally extract words and representative documents to name and validate topics.</p></details>
+<details><summary>If a topic name improves, did the document grouping improve?</summary><p>Not necessarily. Representation-only changes keep assignments fixed. Inspect membership before claiming improved discovery.</p></details>
 
-<details><summary>What would make the result misleading?</summary><p>A high-frequency boilerplate word dominates the label even though it does not describe the underlying issue.</p></details>
+<details><summary>Are c-TF-IDF weights probabilities of a document’s topic?</summary><p>No. They weight vocabulary terms in aggregated class documents under a stated convention; they do not provide that probability interpretation.</p></details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 5 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 5 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter05). Continue through the linked prerequisites and nearby concepts below.
+Book scope: Chapter 5, printed pp. 146–164. Precise objective IDs are recorded in the [source inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The CPU model choices, licensed sentiment subset, original fictional corpus, arithmetic traces, and controls are atlas adaptations. Read the [pinned official chapter notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter05) and the [E4 execution guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/applications/discovery/README.md) for versioned implementation sources and provenance.
 
 <ConceptConnections id="topic-modeling" />

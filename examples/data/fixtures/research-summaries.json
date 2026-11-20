@@ -1,0 +1,275 @@
+{
+  "id": "atlas-research-summaries-v1",
+  "documents": [
+    {
+      "id": "research-001",
+      "title": "Character translation for noisy subtitles",
+      "text": "We study machine translation of misspelled subtitles from French into English. A character encoder reduces untranslated words, while human raters still find errors in jokes.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-002",
+      "title": "Terminology constraints in medical translation",
+      "text": "Our translation system preserves a bilingual glossary when translating clinical instructions. Automatic terminology scores improve, but reviewers find grammatical errors around constrained phrases.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-003",
+      "title": "Low resource translation with aligned phrases",
+      "text": "We align small parallel corpora to train a translation model for a low resource language. Phrase retrieval helps rare expressions and fails when word order differs greatly.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-004",
+      "title": "Measuring gender errors in translation",
+      "text": "This study evaluates gender agreement in translated occupational sentences. Counterfactual source pairs reveal systematic translation errors hidden by an aggregate BLEU score.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-005",
+      "title": "Document context for pronoun translation",
+      "text": "A document translation model uses neighboring source sentences to resolve pronouns. Context improves selected ambiguous examples but can propagate a mistaken earlier reference.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-006",
+      "title": "Interactive translation with human corrections",
+      "text": "Translators correct partial machine translations in an editing interface. The system adapts suggestions to accepted edits, reducing repeated terminology errors in a small pilot.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-007",
+      "title": "Synthetic parallel text for translation",
+      "text": "We create parallel training examples through back translation of monolingual news. Translation quality improves in the news domain but remains weak on informal conversation.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-008",
+      "title": "Translation evaluation beyond word overlap",
+      "text": "Human judges compare adequacy and fluency for translated legal sentences. A learned translation evaluator agrees with some preferences while overlooking omitted negations.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-009",
+      "title": "Code switched machine translation",
+      "text": "A bilingual translation benchmark mixes Spanish and English within sentences. Translation systems preserve named entities poorly when the input switches language near a proper noun.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-010",
+      "title": "Constrained decoding for translation names",
+      "text": "We constrain machine translation decoding to retain product names. The translation model respects most constraints but occasionally repeats the required phrase.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-011",
+      "title": "Parallel corpus filtering with embeddings",
+      "text": "Sentence embeddings identify mismatched source and target sentences in a parallel translation corpus. Filtering improves later translation training while discarding some valid paraphrases.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-012",
+      "title": "Evaluating translation of idioms",
+      "text": "We compare literal and meaning preserving translations of common idioms. Expert evaluation finds that fluent machine translations can still reverse the intended meaning.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-013",
+      "title": "Noise robust speech recognition",
+      "text": "We evaluate automatic speech recognition on recordings with traffic noise. Acoustic augmentation reduces word error rate, but distant microphones still cause deletion errors.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-014",
+      "title": "Accents in automatic transcription",
+      "text": "A speech recognizer transcribes speakers with different regional accents. Disaggregated word error rates reveal uneven recognition performance despite a good overall score.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-015",
+      "title": "Streaming speech recognition latency",
+      "text": "We compare streaming acoustic encoders for live transcription. Smaller audio windows reduce recognition latency but lose words near utterance boundaries.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-016",
+      "title": "Domain adaptation for spoken commands",
+      "text": "An acoustic speech recognizer adapts to factory commands using a small audio corpus. Recognition improves for familiar machinery terms and remains unreliable under alarms.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-017",
+      "title": "Speaker overlap in meeting transcription",
+      "text": "A meeting transcription pipeline separates overlapping voices before speech recognition. Speaker attribution improves, though simultaneous speech still produces missing words.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-018",
+      "title": "Whispered speech recognition",
+      "text": "We study recognition of whispered audio with limited acoustic training data. A recognizer trained on normal speech misses consonants and benefits from targeted whispered examples.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-019",
+      "title": "Confidence estimates for speech transcripts",
+      "text": "We evaluate confidence scores from an automatic speech recognizer. High confidence sometimes accompanies substitutions of rare names, motivating manual review of critical utterances.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-020",
+      "title": "Microphone transfer in speech recognition",
+      "text": "The same speech recordings are captured with phone and headset microphones. Recognition errors shift with microphone response, especially for soft consonants.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-021",
+      "title": "Disfluencies in speech transcription",
+      "text": "A speech recognizer is tested on hesitations and false starts in interviews. Removing disfluencies improves readability but can erase evidence needed for linguistic analysis.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-022",
+      "title": "Vocabulary bias in audio transcription",
+      "text": "We bias a speech recognition decoder toward a domain vocabulary. Rare technical words become easier to recognize, but similar sounding common words are sometimes replaced incorrectly.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-023",
+      "title": "Child speech acoustic modeling",
+      "text": "An automatic speech recognition system is evaluated on children reading short stories. Acoustic differences and pronunciation variation produce higher word error rates than adult speech.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-024",
+      "title": "Speech recognition after audio compression",
+      "text": "We transcribe audio saved at several compression levels. Aggressive compression distorts acoustic cues and increases recognition errors for quiet speakers.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-025",
+      "title": "Faithfulness in news summarization",
+      "text": "We compare generated summaries against news source documents. Human annotators identify unsupported claims even when automatic overlap metrics reward the summaries.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-026",
+      "title": "Long document summarization with sections",
+      "text": "A summarization model selects evidence from sections of long reports. Coverage improves over truncating the input, but conclusions from tables are often omitted.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-027",
+      "title": "Query focused meeting summaries",
+      "text": "We generate meeting summaries conditioned on a user question. Relevant decisions are easier to find, while summaries sometimes omit disagreement among participants.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-028",
+      "title": "Extractive summarization under a word budget",
+      "text": "An extractive summarizer selects source sentences under a fixed length budget. Redundancy penalties improve coverage, although selected sentences can contain unresolved references.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-029",
+      "title": "Evaluating scientific abstract summaries",
+      "text": "Experts evaluate summaries generated from scientific articles. Concise outputs often preserve the research question while overstating uncertain experimental conclusions.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-030",
+      "title": "Summarization of customer conversations",
+      "text": "We summarize long support conversations into issue and resolution fields. The summarizer sometimes mistakes an unsuccessful proposed fix for the final resolution.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-031",
+      "title": "Citation support in generated summaries",
+      "text": "A summarization system attaches source sentence citations to each generated claim. Citation presence alone does not establish that the referenced passage supports the summary.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-032",
+      "title": "Controlling summary length",
+      "text": "We compare instruction based and constrained decoding methods for summary length. Short summaries meet the requested budget but may omit conditions required to interpret a result.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-033",
+      "title": "Summarizing conflicting documents",
+      "text": "A multi document summarizer receives reports with contradictory observations. Generated summaries often merge incompatible statements instead of preserving the disagreement.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-034",
+      "title": "Human editing of machine summaries",
+      "text": "Editors correct generated summaries of policy documents. Editing time falls for well structured inputs but increases when fluent summaries contain subtle factual changes.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-035",
+      "title": "Entity preservation in summarization",
+      "text": "We test whether a summarizer preserves names, dates, and quantities from source reports. Copying entities reduces some mistakes but does not prevent incorrect relations between them.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-036",
+      "title": "Summary evaluation with targeted questions",
+      "text": "Question answering probes check whether generated summaries preserve source evidence. Some summaries score well on word overlap while failing questions about causes and exceptions.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-037",
+      "title": "Summaries of translated interviews",
+      "text": "We translate spoken interviews and then summarize the translated transcripts. Translation omissions and speech recognition errors can silently change the final summary.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-038",
+      "title": "Speech to translated summaries",
+      "text": "An audio pipeline recognizes speech, translates the transcript, and produces a concise summary. We inspect how acoustic errors propagate into translation and summarization.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-039",
+      "title": "Cross language summary evaluation",
+      "text": "Bilingual judges evaluate summaries written in a different language from the source. They separate translation errors from missing information in the summary.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-040",
+      "title": "Garden irrigation with soil sensors",
+      "text": "A field study schedules irrigation using soil moisture sensors. Battery failures and local soil variation complicate estimates of water savings.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-041",
+      "title": "Ceramic glazes at high temperature",
+      "text": "We measure color changes in ceramic glazes across kiln temperatures. Small differences in cooling rate affect the final surface texture.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-042",
+      "title": "Orbital debris tracking",
+      "text": "A telescope system estimates trajectories of orbital debris from repeated night observations. Cloud cover causes gaps in the measurements.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-043",
+      "title": "Bread fermentation under cool conditions",
+      "text": "We compare sourdough fermentation at several kitchen temperatures. Dough expansion varies with starter age and flour hydration.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-044",
+      "title": "Urban bicycle lane safety",
+      "text": "We inspect intersection designs along a city bicycle route. Observed conflicts depend on traffic volume and turning visibility.",
+      "source": "atlas-original-fictional-summary"
+    },
+    {
+      "id": "research-045",
+      "title": "Uncertain labels for interdisciplinary studies",
+      "text": "This exploratory note discusses whether a document about translated speech summaries belongs to one research area. Several plausible descriptions emphasize different parts of the same pipeline.",
+      "source": "atlas-original-fictional-summary"
+    }
+  ]
+}

@@ -1,96 +1,102 @@
 ---
-title: Dimensionality reduction
-description: Dimensionality reduction maps high-dimensional vectors to fewer dimensions while trying to retain chosen structure.
-kind: concept
+title: "Dimensionality reduction"
+description: "Dimensionality reduction constructs a lower-dimensional representation of data while preserving selected structure. UMAP emphasizes a neighborhood-based objective; a 2D plot is an approximation, not an undistorted map of semantic distance."
+kind: "concept"
 conceptId: dimensionality-reduction
 chapter: 5
-part: applications
-summary: Dimensionality reduction maps high-dimensional vectors to fewer dimensions while trying to retain chosen structure.
-parent: chapter-05
-prerequisites: [document-embeddings]
-related: [document-embeddings, clustering]
-level: intermediate
-tags: [applications, chapter-05]
+part: "applications"
+summary: "Dimensionality reduction constructs a lower-dimensional representation of data while preserving selected structure. UMAP emphasizes a neighborhood-based objective; a 2D plot is an approximation, not an undistorted map of semantic distance."
+parent: "chapter-05"
+prerequisites: ["document-embeddings"]
+related: ["document-embeddings", "clustering"]
+level: "intermediate"
+tags: ["applications", "chapter-05"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-20"
+reviewStatus: "author-reviewed"
+reviewRecord: e4-discovery-author-review-2026-11-20
+learningObjectives: ["Distinguish clustering-space coordinates from a display projection.", "Explain n_neighbors, n_components, min_dist, and random_state.", "Recognize apparent plot separation as insufficient evidence for topics."]
+bookSections: ["book-ch05-reduction", "book-ch05-umap"]
+labHref: "/labs/classification-and-topics/"
+aliases: ["UMAP", "PCA", "display projection"]
+exampleIds: ["discovery-dimensionality-reduction", "modular-bertopic"]
+relationshipReasons: {"document-embeddings": "This prerequisite supplies the input representation or task contract used in the worked trace."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { ClusteringLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import DiscoveryEvidence from '../../../components/DiscoveryEvidence.astro';
+import { ClassificationComparison, LabelValidator, CtfidfCalculator, DiversityExplorer, TopicExplorer } from '../../../components/simulations/DiscoveryLabs';
 
 <ConceptPrimer id="dimensionality-reduction" />
 
 ## Definition and intuition
 
-Dimensionality reduction maps high-dimensional vectors to fewer dimensions while trying to retain chosen structure.
+Dimensionality reduction constructs a lower-dimensional representation of data while preserving selected structure. UMAP emphasizes a neighborhood-based objective; a 2D plot is an approximation, not an undistorted map of semantic distance.
 
-Chapter 5 explores unlabeled collections. A cluster is a geometric grouping, while a useful topic also needs an interpretable description and inspection by a person.
+A 384D embedding cannot be directly drawn on a page. Reducing it can help a density method work with neighborhood structure and can support visualization, but those two purposes should be configured and interpreted separately.
 
-## Before you start
+<ReferenceBrief objectives={["Distinguish clustering-space coordinates from a display projection.", "Explain n_neighbors, n_components, min_dist, and random_state.", "Recognize apparent plot separation as insufficient evidence for topics."]} prerequisites="document-embeddings" scope="A small recorded CPU workflow plus explicit teaching calculations. Published results are not independent lesson acceptance." />
 
-Read [Document embeddings](/llm-concept-atlas/concepts/document-embeddings/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **dimensionality reduction** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### What UMAP tries to preserve
 
-1. **Prepare:** Start with embeddings and decide which structure matters
-2. **Transform:** Fit a projection or nonlinear reduction on an appropriate dataset
-3. **Inspect:** Compare neighborhood or variance preservation before interpreting a plot.
+UMAP estimates a neighborhood graph in the source space and optimizes a low-dimensional layout representing that structure. n_neighbors changes the scale of neighborhood evidence; n_components sets output width; min_dist affects how tightly points can pack in the output. These controls interact with corpus size and geometry. They are not universal switches for “more correct topics”. The implementation is nonlinear and cannot generally be understood as simply dropping unused coordinates.
 
-### The important distinction
+### Two reductions in L08
 
-PCA chooses directions that retain variance under a linear projection, while UMAP focuses on preserving neighborhood structure under a nonlinear map. Neither guarantees that distances in a 2D plot match the original vector space. Use the projection as an exploratory view and validate conclusions on the original embeddings.
+The clustering path uses 384D normalized vectors, cosine input neighborhoods, eight neighbors, five output dimensions, min_dist 0, and random_state 42. A separate two-dimensional UMAP fit with min_dist 0.1 supports the display. HDBSCAN never clusters those display points in this lab. Recoloring the map for another density setting therefore holds display coordinates fixed while changing the recorded partition.
+
+### Reproducibility and limits
+
+Pin the implementation, corpus order, seed, and settings. A seed reduces one source of variation; hardware and dependency changes can still matter. A rotation or reflection of the 2D plot is not a semantic change. Large visual distances and empty gaps can be layout artifacts, while a nearby plotted pair can be less related in the original representation.
 
 ## Worked example
 
-A 384-dimensional document vector cannot be drawn directly. A 2D map can show broad groupings, but two points that look close may have been farther apart in the original space. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+A simple projection from [x,y,z] to [x,y] maps [0,0,0] and [0,0,10] to the same point despite their original distance of ten. This is not a UMAP implementation; it isolates the information-loss problem. In the actual lab, each stage is fitted by the real library and retains its shape and configuration.
 
-<LessonFlow steps={["Start with embeddings and decide which structure matters", "Fit a projection or nonlinear reduction on an appropriate dataset", "Compare neighborhood or variance preservation before interpreting a plot."]} caption="A teaching diagram for Dimensionality reduction. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
 
-## Try the interactive lab
-
-<ClusteringLab client:visible />
-
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+<TopicExplorer client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+This small mechanism uses Python’s standard library and illustrative values; it does not claim to run a pretrained model. Run `python3 scripts/run-examples.py --id discovery-dimensionality-reduction`. The connected workflow below supplies the actual model, data, and evaluation.
+
+{/* example:discovery-dimensionality-reduction:start */}
 
 ```python
-documents = {"A": (0.9, 0.1, 0.3), "B": (0.1, 0.8, 0.4)}
-projection = {name: (vector[0], vector[1]) for name, vector in documents.items()}
-print(projection)
+from math import dist
+
+points = [[0.0, 0.0, 0.0], [0.0, 0.0, 10.0]]
+projection = [point[:2] for point in points]
+print("original distance:", dist(*points))
+print("display distance:", dist(*projection))
+assert dist(*points) != dist(*projection)
 ```
 
-**Expected output:**
+{/* example:discovery-dimensionality-reduction:end */}
 
-```text
-{'A': (0.9, 0.1), 'B': (0.1, 0.8)}
-```
-
-**What the code shows:** The projection keeps only the first two of three coordinates. This makes a drawable point but discards the third coordinate, showing why a plot can lose distinctions. The [official chapter 5 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter05) develops the corresponding model-based implementation.
+<DiscoveryEvidence id="modular-bertopic" />
 
 ## When to use it
 
-Use it for visualization or as a preprocessing step when a clustering method benefits from lower dimension. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use a reduction when its preserved structure fits the downstream objective and a controlled evaluation/inspection supports it. For exploratory plots, keep source documents selectable and show outliers instead of treating the picture itself as a clustering metric.
 
 ## Limits and common mistakes
 
-- Every projection loses information; different seeds or parameters can change the visible map.
-- **Failure to look for:** A colorful 2D island is declared a real topic without checking its original-space neighbors.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+UMAP is not a guarantee of global distance preservation. A changed reduction can change density groups even with the same clusterer. L08 isolates a density change first so learners can attribute differences to one component; it makes no broad stability claim from one seed.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First start with embeddings and decide which structure matters Then fit a projection or nonlinear reduction on an appropriate dataset Finally compare neighborhood or variance preservation before interpreting a plot.</p></details>
+<details><summary>Would moving a point in the display necessarily change its HDBSCAN group?</summary><p>No. The lab clusters a separate five-dimensional reduction. The 2D layout is only a display; its plotted coordinates are not the fitted clustering inputs.</p></details>
 
-<details><summary>What would make the result misleading?</summary><p>A colorful 2D island is declared a real topic without checking its original-space neighbors.</p></details>
+<details><summary>Why hold the reduction fixed when comparing min_samples?</summary><p>Otherwise both neighborhood geometry and density selection change, making it unclear which component caused a membership or noise transition.</p></details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 5 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 5 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter05). Continue through the linked prerequisites and nearby concepts below.
+Book scope: Chapter 5, printed pp. 140–142. Precise objective IDs are recorded in the [source inventory](https://github.com/shadril238/llm-concept-atlas/blob/main/src/data/book-sections.json). The CPU model choices, licensed sentiment subset, original fictional corpus, arithmetic traces, and controls are atlas adaptations. Read the [pinned official chapter notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter05) and the [E4 execution guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/applications/discovery/README.md) for versioned implementation sources and provenance.
 
 <ConceptConnections id="dimensionality-reduction" />
