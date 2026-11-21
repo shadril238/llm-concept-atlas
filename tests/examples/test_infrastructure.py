@@ -25,10 +25,12 @@ class InfrastructureTests(unittest.TestCase):
         self.assertCountEqual(registered, [value.strip() for value in published])
 
     def test_missing_registration_and_source_drift_fail(self):
-        self.manifest["examples"].pop(0)
+        index = next(i for i, entry in enumerate(self.manifest["examples"]) if entry["lesson"])
+        self.manifest["examples"].pop(index)
         self.assertTrue(any("unregistered" in e for e in validate(self.manifest)))
         self.manifest = load()
-        self.manifest["examples"][0]["lesson"]["block"] = 1000
+        entry = next(e for e in self.manifest["examples"] if e["lesson"])
+        entry["lesson"]["block"] = 1000
         self.assertTrue(any("drift" in e for e in validate(self.manifest)))
 
     def test_duplicate_ids_and_unknown_sources_fail(self):

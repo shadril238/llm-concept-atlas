@@ -1,90 +1,119 @@
 ---
-title: Agents
-description: An agent is a model-directed system that chooses actions or tools in a loop to reach a goal.
-kind: concept
+title: "Agents"
+parent: "chapter-07"
+related: ["summarized-memory", "react"]
+description: "An agent workflow uses a controller to choose actions, execute permitted tools, observe results, and decide whether to continue or finish. Its capabilities and limits come from the actual action space, validation, and stopping rules."
+kind: "concept"
 conceptId: agents
 chapter: 7
-part: applications
-summary: An agent is a model-directed system that chooses actions or tools in a loop to reach a goal.
-parent: chapter-07
-prerequisites: [chains]
-related: [summarized-memory, react]
-level: intermediate
-tags: [applications, chapter-07]
+part: "applications"
+summary: "An agent workflow uses a controller to choose actions, execute permitted tools, observe results, and decide whether to continue or finish. Its capabilities and limits come from the actual action space, validation, and stopping rules."
+prerequisites: ["chains"]
+level: "intermediate"
+tags: ["applications", "chapter-07"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-21"
+reviewStatus: "author-reviewed"
+reviewRecord: e5-workflows-author-review-2026-11-21
+learningObjectives: ["Trace actual model choices through a bounded tool controller.", "Compare plain Python with current LangChain tools.", "Exercise invalid arguments and maximum-step termination."]
+bookSections: ["book-ch07-agents", "book-ch07-agent-reasoning"]
+labHref: "/labs/prompting-and-workflows/"
+aliases: ["tool controller", "StructuredTool", "bounded agent"]
+exampleIds: ["e5-agents", "bounded-tool-workflow"]
+relationshipReasons: {"chains": "A controller extends stage composition with action selection, real observations, and an explicit termination rule."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import WorkflowEvidence from '../../../components/WorkflowEvidence.astro';
+import { WorkflowTrace } from '../../../components/simulations/WorkflowLabs';
 
 <ConceptPrimer id="agents" />
 
 ## Definition and intuition
 
-**Agents**: An agent is a model-directed system that chooses actions or tools in a loop to reach a goal.
+An agent workflow uses a controller to choose actions, execute permitted tools, observe results, and decide whether to continue or finish. Its capabilities and limits come from the actual action space, validation, and stopping rules.
 
-Chapter 7 combines model calls with templates, memory, and tools. Trace the inputs and outputs of each step so an error can be located rather than hidden inside a chain.
+A tool name in a generated paragraph does not mean a tool ran. The trace must show the selected action, validated arguments, executed function, returned observation, and next decision. L11 keeps all five visible.
 
-## Before you start
+<ReferenceBrief objectives={["Trace actual model choices through a bounded tool controller.", "Compare plain Python with current LangChain tools.", "Exercise invalid arguments and maximum-step termination."]} prerequisites="chains" scope="Original teaching mechanism plus recorded local-model evidence. Independent teaching review is pending." />
 
-Read [Chains](/llm-concept-atlas/concepts/chains/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **Agents** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### A deliberately bounded action space
 
-1. **Prepare:** Define the goal, available tools, and stop conditions
-2. **Transform:** Select an action, execute it, and observe the result
-3. **Inspect:** Repeat with limits and validate the final outcome.
+The actual local model selects a finite action ID using native JSON-string grammar. IDs resolve to allowlisted calculator operations or local fixture lookups. Calculator operands come from predeclared task operands, and lookup keys come from a small fixture. After a tool observation, the model can select a final value from a common predeclared domain. The domain is not narrowed to each gold answer.
 
-### The important distinction
+### Tools and equivalent paths
 
-The model proposes actions, while application code decides which tools exist and enforces limits. A useful agent trace records tool inputs, outputs, and stop reasons. Reserve user approval for consequential external actions; a successful-looking plan is not evidence that the action completed.
+Plain Python dispatch and actual LangChain StructuredTool objects use the same finite-number, operation, and lookup contracts. Strict argument models reject booleans as numbers, unknown fields, invalid operations, division by zero, and unknown keys. RunnableLambda wraps the bounded loop without claiming a general autonomous framework agent. The model chooses actions, but it does not freely extract arbitrary operands in this lab.
+
+### Termination and test doubles
+
+The controller requires a tool observation before finishing and permits at most three steps. Deterministic scripted and actual FakeListLLM paths test successful completion, invalid-argument recovery, and endless tool selection ending at max_steps. Those are labeled fake-model contract tests. Separate actual GGUF cases record model-choice IDs, resolved calls, observations, and final correctness.
 
 ## Worked example
 
-A travel assistant looks up train times, compares routes, and drafts an itinerary. Each tool result is evidence to inspect; the model's plan alone is not a booking. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+For seven plus eight, the controller exposes legal calculator operations. The model may choose subtraction or repeat a lookup instead of finishing correctly. A valid tool call is not a correct plan. The real tiny-model run gets only two of six plain/framework task cases right; all still respect the declared termination boundary.
 
-<LessonFlow steps={["Define the goal, available tools, and stop conditions", "Select an action, execute it, and observe the result", "Repeat with limits and validate the final outcome."]} caption="A teaching diagram for Agents. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
+
+Predict the outcome before changing a control. The explorer shows recorded real runs or explicitly labeled deterministic calculations; it does not call a model in your browser.
+
+<WorkflowTrace initial="realtools" client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+Run this small standard-library mechanism with Python 3. It illustrates the stated contract or calculation. The connected L09–L11 source below performs the actual local-model workflow; this short snippet is not a substitute for those model calls.
+
+{/* example:e5-agents:start */}
 
 ```python
-tools = {"lookup": lambda item: {"hours": "5 pm"}.get(item, "unknown")}
-plan = [("lookup", "hours")]
-for tool, argument in plan:
-    print(tool, argument, "->", tools[tool](argument))
+allowed = {"sum": lambda: 7 + 8, "difference": lambda: 7 - 8}
+choice = "sum"
+observation = allowed[choice]()
+trace = [{"action": choice, "observation": observation}, {"final": str(observation)}]
+print(trace)
+assert len(trace) <= 3
 ```
 
-**Expected output:**
+{/* example:e5-agents:end */}
+
+Expected mechanism output:
 
 ```text
-lookup hours -> 5 pm
+[{'action': 'sum', 'observation': 15}, {'final': '15'}]
 ```
 
-**What the code shows:** The code executes a named tool with an argument and records its observation. A real agent chooses actions dynamically, but application code must still enforce the tool boundary. The [official chapter 7 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter07) develops the corresponding model-based implementation.
+<WorkflowEvidence id="bounded-tool-workflow" />
 
 ## When to use it
 
-Use an agent when the needed sequence depends on information discovered during execution. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use a bounded controller when tools can add verifiable information or calculation. Start with a small allowlist, typed arguments, explicit observations, and a hard call budget before expanding the action space.
 
 ## Limits and common mistakes
 
-- Tool calls can have side effects, so permissions, logs, and bounded loops matter.
-- **Failure to look for:** The agent claims a reservation was made after only reading a timetable.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+This is a restricted local controller, not an unrestricted browsing, file-writing, or production agent. Native action validity does not establish good choices. Fake-model success tests mechanics and must not be reported as real model competence.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First define the goal, available tools, and stop conditions Then select an action, execute it, and observe the result Finally repeat with limits and validate the final outcome.</p></details>
+<details>
+<summary>Does a valid calculator call establish task success?</summary>
 
-<details><summary>What would make the result misleading?</summary><p>The agent claims a reservation was made after only reading a timetable.</p></details>
+No. The model can choose the wrong operation, ignore the observation, or return the wrong final answer.
+
+</details>
+
+<details>
+<summary>What happens if the model keeps asking for tools?</summary>
+
+The controller stops at the declared maximum step count and reports max_steps rather than claiming an answer.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 7 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 7 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter07). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 7 of *Hands-On Large Language Models*. Read the [complete execution guide](/llm-concept-atlas/labs/prompting-and-workflows/) for artifact identity, predeclared tasks, error analysis, and implementation differences from the [authors’ chapter 7 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter07). The source PDF and book artwork are not redistributed.
 
 <ConceptConnections id="agents" />

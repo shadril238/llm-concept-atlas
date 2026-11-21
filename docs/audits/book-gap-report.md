@@ -6,7 +6,7 @@ Generated from the E0 inventory dated 2026-11-19; latest enhancement update 2026
 
 The inventory records **231 source entries** (170 contents entries and 61 embedded concepts). It counts **160 leaf objectives**; 71 parent containers are excluded from the denominator. This inventory is a reviewed edition-specific work list, not a universal count of all AI terms.
 
-Of the leaf objectives, **126 have partial atlas mappings** and **34 have no direct atlas mapping**. **0 have passed enhancement acceptance**. Planned destinations are not published lessons.
+Of the leaf objectives, **130 have partial atlas mappings** and **30 have no direct atlas mapping**. **0 have passed enhancement acceptance**. Planned destinations are not published lessons.
 
 ## Read this report
 
@@ -26,8 +26,8 @@ Of the leaf objectives, **126 have partial atlas mappings** and **34 have no dir
 | 3. Looking Inside Large Language Models | 22 | 15 | 1 | 16 | 0 | 0 | E3 |
 | 4. Text Classification | 12 | 6 | 1 | 7 | 0 | 0 | E4 |
 | 5. Text Clustering and Topic Modeling | 16 | 10 | 0 | 10 | 0 | 0 | E4 |
-| 6. Prompt Engineering | 19 | 12 | 1 | 10 | 3 | 0 | E5 |
-| 7. Advanced Text Generation Techniques and Tools | 12 | 8 | 0 | 7 | 1 | 0 | E5 |
+| 6. Prompt Engineering | 19 | 12 | 1 | 13 | 0 | 0 | E5 |
+| 7. Advanced Text Generation Techniques and Tools | 12 | 8 | 0 | 8 | 0 | 0 | E5 |
 | 8. Semantic Search and Retrieval-Augmented Generation | 23 | 17 | 0 | 7 | 10 | 0 | E6 |
 | 9. Multimodal Large Language Models | 14 | 8 | 0 | 5 | 3 | 0 | E6 |
 | 10. Creating Text Embedding Models | 21 | 14 | 0 | 9 | 5 | 0 | E7 |
@@ -38,26 +38,26 @@ Of the leaf objectives, **126 have partial atlas mappings** and **34 have no dir
 
 | Dimension | Required leaf objectives | Missing | Partial | Sufficient |
 | --- | ---: | ---: | ---: | ---: |
-| explanation | 160 | 35 | 125 | 0 |
-| workedExample | 160 | 35 | 125 | 0 |
-| visual | 160 | 35 | 125 | 0 |
-| implementation | 51 | 33 | 18 | 0 |
-| evaluation | 51 | 34 | 17 | 0 |
-| exercises | 160 | 35 | 125 | 0 |
+| explanation | 160 | 30 | 130 | 0 |
+| workedExample | 160 | 30 | 130 | 0 |
+| visual | 160 | 30 | 130 | 0 |
+| implementation | 51 | 21 | 30 | 0 |
+| evaluation | 51 | 22 | 29 | 0 |
+| exercises | 160 | 30 | 130 | 0 |
 
 ## Priority corrections
 
 | Existing lesson | Evidence and correction | Next phase |
 | --- | --- | --- |
-| [constrained-sampling](../../src/content/docs/concepts/constrained-sampling.mdx#implement-it) | Post-generation membership checking is validation, not constraints on the decoder token choices. | E5 |
+| [constrained-sampling](../../src/content/docs/concepts/constrained-sampling.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | E5 |
 | [dense-retrieval](../../src/content/docs/concepts/dense-retrieval.mdx#implement-it) | The code counts keyword intersection, which is lexical retrieval rather than dense vector retrieval. | E6 |
 | [grounded-generation](../../src/content/docs/concepts/grounded-generation.mdx#implement-it) | The code ranks keyword overlap and never generates an evidence-supported answer. | E6 |
 | [reranking](../../src/content/docs/concepts/reranking.mdx#implement-it) | The code performs keyword overlap once and does not rerank first-stage candidates with a joint scorer. | E6 |
 | [reward-models](../../src/content/docs/concepts/reward-models.mdx#implement-it) | The code uses policy/reference log probabilities and beta: it is a DPO loss, not reward-model training. | E8 |
 | [rlhf](../../src/content/docs/concepts/rlhf.mdx#implement-it) | A DPO scalar loss does not show the reward-model and policy-optimization stages described in the lesson. | E8 |
-| [self-consistency](../../src/content/docs/concepts/self-consistency.mdx#implement-it) | Accuracy over supplied labels contains no sampling, answer normalization, or vote aggregation. | E5 |
+| [self-consistency](../../src/content/docs/concepts/self-consistency.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | E5 |
 | [setfit](../../src/content/docs/concepts/setfit.mdx#implement-it) | The snippet has no labeled-pair generation, sentence-model adaptation, or classifier fitting. | E7 |
-| [summarized-memory](../../src/content/docs/concepts/summarized-memory.mdx#implement-it) | The code prints the last three messages; it never creates or updates a summary. | E5 |
+| [summarized-memory](../../src/content/docs/concepts/summarized-memory.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | E5 |
 | [tsdae](../../src/content/docs/concepts/tsdae.mdx#implement-it) | A single MLM-style mask omits deletion noise, sentence reconstruction, decoder training, and embedding evaluation. | E7 |
 | [vision-transformers](../../src/content/docs/concepts/vision-transformers.mdx#implement-it) | The code never reads pixels, extracts patches, or creates projected image tokens. | E6 |
 
@@ -67,10 +67,6 @@ The placement decision avoids creating a separate page for every subsection. IDs
 
 | Proposed ID | Placement | Existing parent | Aliases | Source references |
 | --- | --- | --- | --- | --- |
-| generation-model-selection | subsection | generative-model | — | book-ch06-model-selection |
-| chain-of-thought | standalone | prompt-structure | CoT, zero-shot CoT | book-ch06-reasoning, book-ch06-chain-of-thought, book-ch06-zero-shot-cot |
-| tree-of-thought | standalone | prompt-structure | ToT | book-ch06-tree-of-thought |
-| langchain-workflows | lab | chains | LangChain, LlamaCpp, GGUF | book-ch07-quantized-langchain, book-ch07-react-langchain |
 | api-grounded-generation | subsection | grounded-generation | — | book-ch08-api-rag |
 | advanced-rag | subsection | rag | advanced retrieval | book-ch08-advanced-rag |
 | multimodal-preprocessing | standalone | multimodal-embeddings | image preprocessing, pixel_values | book-ch09-preprocessing, book-ch09-image-preprocessing, book-ch09-text-preprocessing |
@@ -231,25 +227,25 @@ Printed pages 167–198; PDF pages 189–220. [Pinned official notebook](https:/
 
 | Source ID / location | Objective and remaining work | Existing destination | Status / priority |
 | --- | --- | --- | --- |
-| **book-ch06-generation-models**<br>Using Text Generation Models; pp. 167–173 (contents; container, not counted) | Explain model loading, message formatting, and controlled generation in one workflow. | [generative-model](../../src/content/docs/concepts/generative-model.mdx#how-it-works) | partial; P2; E5 |
-| **book-ch06-model-selection**<br>Choosing a Text Generation Model; pp. 167–168 (contents) | Choose an accessible base or instruction model based on the task and runtime. | Proposed: generation-model-selection | unmapped; P1; E5 |
-| **book-ch06-model-loading**<br>Loading a Text Generation Model; pp. 168–170 (contents) | Load matching artifacts and inspect the model-specific rendered chat prompt. | [generative-model](../../src/content/docs/concepts/generative-model.mdx#implement-it) | partial; P1; E5 |
-| **book-ch06-output-controls**<br>Controlling Model Output; pp. 170–173 (contents) | Run controlled generation comparisons with fixed inputs, seeds, and output budgets. | [decoding](../../src/content/docs/concepts/decoding.mdx#how-it-works) | partial; P1; E5 |
-| **book-ch06-prompt-introduction**<br>Intro to Prompt Engineering; pp. 173–177 (contents; container, not counted) | Explain how input structure conditions behavior and how to test the result. | [prompt-structure](../../src/content/docs/concepts/prompt-structure.mdx#the-important-distinction) | partial; P2; E5 |
-| **book-ch06-prompt-ingredients**<br>The Basic Ingredients of a Prompt; pp. 173–175 (contents) | Distinguish instruction, context, role, examples, and requested output format. | [prompt-structure](../../src/content/docs/concepts/prompt-structure.mdx#the-important-distinction) | partial; P2; E5 |
-| **book-ch06-instruction-prompting**<br>Instruction-Based Prompting; pp. 175–177 (contents) | Evaluate concrete instructions rather than only constructing a string. | [instruction-prompting](../../src/content/docs/concepts/instruction-prompting.mdx#the-important-distinction) | partial; P1; E5 |
-| **book-ch06-advanced-prompting**<br>Advanced Prompt Engineering; pp. 177–184 (contents; container, not counted) | Compare strategies on fixed tasks with measurable outcomes. | [prompt-structure](../../src/content/docs/concepts/prompt-structure.mdx#the-important-distinction) | partial; P2; E5 |
-| **book-ch06-prompt-complexity**<br>The Potential Complexity of a Prompt; pp. 177–180 (contents) | Inspect the full assembled prompt and diagnose conflicting or redundant requirements. | [prompt-structure](../../src/content/docs/concepts/prompt-structure.mdx#the-important-distinction) | partial; P2; E5 |
-| **book-ch06-in-context**<br>In-Context Learning: Providing Examples; pp. 180–182 (contents) | Evaluate example selection and ordering while keeping weights fixed. | [in-context-learning](../../src/content/docs/concepts/in-context-learning.mdx#the-important-distinction), [few-shot-examples](../../src/content/docs/concepts/few-shot-examples.mdx#the-important-distinction) | partial; P1; E5 |
-| **book-ch06-chain-prompting**<br>Chain Prompting: Breaking up the Problem; pp. 182–184 (contents) | Run multiple model calls with explicit intermediate inputs, outputs, and validation. | [chain-prompting](../../src/content/docs/concepts/chain-prompting.mdx#the-important-distinction) | partial; P1; E5 |
-| **book-ch06-reasoning**<br>Reasoning with Generative Models; pp. 184–191 (contents; container, not counted) | Distinguish observable generated solutions from internal computation and task correctness. | Proposed: chain-of-thought | unmapped; P1; E5 |
-| **book-ch06-chain-of-thought**<br>Chain-of-Thought: Think Before Answering; pp. 185–188 (contents; container, not counted) | Compare worked reasoning demonstrations and zero-shot prompting on verifiable tasks. | Proposed: chain-of-thought | unmapped; P1; E5 |
-| **book-ch06-self-consistency**<br>Self-Consistency: Sampling Outputs; pp. 188–189 (contents) | Sample candidate answers, normalize final answers, and aggregate votes with failure analysis. | [self-consistency](../../src/content/docs/concepts/self-consistency.mdx#the-important-distinction) | partial; P0; E5 |
-| **book-ch06-tree-of-thought**<br>Tree-of-Thought: Exploring Intermediate Steps; pp. 189–191 (contents) | Explain candidate branching, evaluation, pruning, and the limits of simulating experts in one prompt. | Proposed: tree-of-thought | unmapped; P1; E5 |
-| **book-ch06-verification**<br>Output Verification; pp. 191–198 (contents; container, not counted) | Separate structure validation from semantic correctness and bounded retry behavior. | [output-verification](../../src/content/docs/concepts/output-verification.mdx#the-important-distinction) | partial; P2; E5 |
-| **book-ch06-output-examples**<br>Providing Examples; pp. 192–194 (contents) | Compare format demonstrations with actual generated outputs and schema checks. | [few-shot-examples](../../src/content/docs/concepts/few-shot-examples.mdx#the-important-distinction), [output-verification](../../src/content/docs/concepts/output-verification.mdx#the-important-distinction) | partial; P2; E5 |
-| **book-ch06-constrained-sampling**<br>Grammar: Constrained Sampling; pp. 194–198 (contents) | Constrain decoding itself and show why post-generation membership checks are different. | [constrained-sampling](../../src/content/docs/concepts/constrained-sampling.mdx#the-important-distinction) | partial; P0; E5 |
-| **book-ch06-zero-shot-cot**<br>Zero-shot chain-of-thought; pp. 187–188 (body-concept) | Compare direct and step-by-step prompts on held-out verifiable tasks. | Proposed: chain-of-thought | unmapped; P1; E5 |
+| **book-ch06-generation-models**<br>Using Text Generation Models; pp. 167–173 (contents; container, not counted) | Explain model loading, message formatting, and controlled generation in one workflow. | [generative-model](../../src/content/docs/concepts/generative-model.mdx#how-it-works), [prompt-structure](../../src/content/docs/concepts/prompt-structure.mdx#how-it-works) | partial; P2; E5 |
+| **book-ch06-model-selection**<br>Choosing a Text Generation Model; pp. 167–168 (contents) | Choose an accessible base or instruction model based on the task and runtime. | [prompt-structure](../../src/content/docs/concepts/prompt-structure.mdx#how-it-works), [prompt-structure](../../src/content/docs/concepts/prompt-structure.mdx#how-it-works), [prompt-structure](../../src/content/docs/concepts/prompt-structure.mdx#how-it-works), [prompt-structure](../../src/content/docs/concepts/prompt-structure.mdx#how-it-works), [prompt-structure](../../src/content/docs/concepts/prompt-structure.mdx#how-it-works), [prompt-structure](../../src/content/docs/concepts/prompt-structure.mdx#how-it-works), [prompt-structure](../../src/content/docs/concepts/prompt-structure.mdx#how-it-works), [prompt-structure](../../src/content/docs/concepts/prompt-structure.mdx#generation-model-selection) | partial; P1; E5 |
+| **book-ch06-model-loading**<br>Loading a Text Generation Model; pp. 168–170 (contents) | Load matching artifacts and inspect the model-specific rendered chat prompt. | [generative-model](../../src/content/docs/concepts/generative-model.mdx#implement-it), [prompt-structure](../../src/content/docs/concepts/prompt-structure.mdx#how-it-works) | partial; P1; E5 |
+| **book-ch06-output-controls**<br>Controlling Model Output; pp. 170–173 (contents) | Run controlled generation comparisons with fixed inputs, seeds, and output budgets. | [decoding](../../src/content/docs/concepts/decoding.mdx#how-it-works), [prompt-structure](../../src/content/docs/concepts/prompt-structure.mdx#how-it-works) | partial; P1; E5 |
+| **book-ch06-prompt-introduction**<br>Intro to Prompt Engineering; pp. 173–177 (contents; container, not counted) | Explain how input structure conditions behavior and how to test the result. | [prompt-structure](../../src/content/docs/concepts/prompt-structure.mdx#how-it-works) | partial; P2; E5 |
+| **book-ch06-prompt-ingredients**<br>The Basic Ingredients of a Prompt; pp. 173–175 (contents) | Distinguish instruction, context, role, examples, and requested output format. | [prompt-structure](../../src/content/docs/concepts/prompt-structure.mdx#how-it-works) | partial; P2; E5 |
+| **book-ch06-instruction-prompting**<br>Instruction-Based Prompting; pp. 175–177 (contents) | Evaluate concrete instructions rather than only constructing a string. | [instruction-prompting](../../src/content/docs/concepts/instruction-prompting.mdx#how-it-works) | partial; P1; E5 |
+| **book-ch06-advanced-prompting**<br>Advanced Prompt Engineering; pp. 177–184 (contents; container, not counted) | Compare strategies on fixed tasks with measurable outcomes. | [prompt-structure](../../src/content/docs/concepts/prompt-structure.mdx#how-it-works), [few-shot-examples](../../src/content/docs/concepts/few-shot-examples.mdx#how-it-works) | partial; P2; E5 |
+| **book-ch06-prompt-complexity**<br>The Potential Complexity of a Prompt; pp. 177–180 (contents) | Inspect the full assembled prompt and diagnose conflicting or redundant requirements. | [prompt-structure](../../src/content/docs/concepts/prompt-structure.mdx#how-it-works) | partial; P2; E5 |
+| **book-ch06-in-context**<br>In-Context Learning: Providing Examples; pp. 180–182 (contents) | Evaluate example selection and ordering while keeping weights fixed. | [in-context-learning](../../src/content/docs/concepts/in-context-learning.mdx#how-it-works), [few-shot-examples](../../src/content/docs/concepts/few-shot-examples.mdx#how-it-works) | partial; P1; E5 |
+| **book-ch06-chain-prompting**<br>Chain Prompting: Breaking up the Problem; pp. 182–184 (contents) | Run multiple model calls with explicit intermediate inputs, outputs, and validation. | [chain-prompting](../../src/content/docs/concepts/chain-prompting.mdx#how-it-works) | partial; P1; E5 |
+| **book-ch06-reasoning**<br>Reasoning with Generative Models; pp. 184–191 (contents; container, not counted) | Distinguish observable generated solutions from internal computation and task correctness. | [chain-of-thought](../../src/content/docs/concepts/chain-of-thought.mdx#how-it-works) | partial; P1; E5 |
+| **book-ch06-chain-of-thought**<br>Chain-of-Thought: Think Before Answering; pp. 185–188 (contents; container, not counted) | Compare worked reasoning demonstrations and zero-shot prompting on verifiable tasks. | [chain-of-thought](../../src/content/docs/concepts/chain-of-thought.mdx#how-it-works) | partial; P1; E5 |
+| **book-ch06-self-consistency**<br>Self-Consistency: Sampling Outputs; pp. 188–189 (contents) | Sample candidate answers, normalize final answers, and aggregate votes with failure analysis. | [self-consistency](../../src/content/docs/concepts/self-consistency.mdx#how-it-works) | partial; P0; E5 |
+| **book-ch06-tree-of-thought**<br>Tree-of-Thought: Exploring Intermediate Steps; pp. 189–191 (contents) | Explain candidate branching, evaluation, pruning, and the limits of simulating experts in one prompt. | [tree-of-thought](../../src/content/docs/concepts/tree-of-thought.mdx#how-it-works) | partial; P1; E5 |
+| **book-ch06-verification**<br>Output Verification; pp. 191–198 (contents; container, not counted) | Separate structure validation from semantic correctness and bounded retry behavior. | [output-verification](../../src/content/docs/concepts/output-verification.mdx#how-it-works) | partial; P2; E5 |
+| **book-ch06-output-examples**<br>Providing Examples; pp. 192–194 (contents) | Compare format demonstrations with actual generated outputs and schema checks. | [few-shot-examples](../../src/content/docs/concepts/few-shot-examples.mdx#how-it-works), [output-verification](../../src/content/docs/concepts/output-verification.mdx#how-it-works) | partial; P2; E5 |
+| **book-ch06-constrained-sampling**<br>Grammar: Constrained Sampling; pp. 194–198 (contents) | Constrain decoding itself and show why post-generation membership checks are different. | [constrained-sampling](../../src/content/docs/concepts/constrained-sampling.mdx#how-it-works) | partial; P0; E5 |
+| **book-ch06-zero-shot-cot**<br>Zero-shot chain-of-thought; pp. 187–188 (body-concept) | Compare direct and step-by-step prompts on held-out verifiable tasks. | [chain-of-thought](../../src/content/docs/concepts/chain-of-thought.mdx#how-it-works) | partial; P1; E5 |
 
 ## Chapter 7: Advanced Text Generation Techniques and Tools
 
@@ -257,18 +253,18 @@ Printed pages 199–224; PDF pages 221–246. [Pinned official notebook](https:/
 
 | Source ID / location | Objective and remaining work | Existing destination | Status / priority |
 | --- | --- | --- | --- |
-| **book-ch07-quantized-langchain**<br>Model I/O: Loading Quantized Models with LangChain; pp. 200–202 (contents; container, not counted) | Load a supported local runtime and connect it to a documented framework adapter. | Proposed: langchain-workflows | unmapped; P1; E5 |
-| **book-ch07-chains**<br>Chains: Extending the Capabilities of LLMs; pp. 202–209 (contents; container, not counted) | Compose model calls with inspectable input/output contracts. | [chains](../../src/content/docs/concepts/chains.mdx#the-important-distinction) | partial; P2; E5 |
-| **book-ch07-prompt-template**<br>A Single Link in the Chain: Prompt Template; pp. 203–206 (contents) | Render named inputs and model-specific role boundaries in a real chain. | [prompt-templates](../../src/content/docs/concepts/prompt-templates.mdx#the-important-distinction) | partial; P2; E5 |
-| **book-ch07-multi-prompt**<br>A Chain with Multiple Prompts; pp. 206–209 (contents) | Pass actual generated intermediate outputs through a multistep workflow. | [chains](../../src/content/docs/concepts/chains.mdx#the-important-distinction), [chain-prompting](../../src/content/docs/concepts/chain-prompting.mdx#the-important-distinction) | partial; P1; E5 |
-| **book-ch07-memory**<br>Memory: Helping LLMs to Remember Conversations; pp. 209–218 (contents; container, not counted) | Explain application state, prompt reconstruction, and resource limits. | [conversation-memory](../../src/content/docs/concepts/conversation-memory.mdx#the-important-distinction) | partial; P2; E5 |
-| **book-ch07-buffer**<br>Conversation Buffer; pp. 210–212 (contents) | Replay actual conversation history and test what the model can recover. | [conversation-memory](../../src/content/docs/concepts/conversation-memory.mdx#the-important-distinction) | partial; P1; E5 |
-| **book-ch07-window**<br>Windowed Conversation Buffer; pp. 212–214 (contents) | Compare bounded windows on a conversation whose earlier constraint is removed. | [windowed-memory](../../src/content/docs/concepts/windowed-memory.mdx#the-important-distinction) | partial; P1; E5 |
-| **book-ch07-summary**<br>Conversation Summary; pp. 214–218 (contents) | Generate and update a summary, measure lost facts, and inspect source-message support. | [summarized-memory](../../src/content/docs/concepts/summarized-memory.mdx#the-important-distinction) | partial; P0; E5 |
-| **book-ch07-agents**<br>Agents: Creating a System of LLMs; pp. 218–224 (contents; container, not counted) | Connect model-selected actions to tools, observations, and termination conditions. | [agents](../../src/content/docs/concepts/agents.mdx#the-important-distinction) | partial; P2; E5 |
-| **book-ch07-agent-reasoning**<br>The Driving Power Behind Agents: Step-by-step Reasoning; pp. 219–221 (contents) | Trace observable planning and tool use without treating generated explanations as faithful internals. | [react](../../src/content/docs/concepts/react.mdx#the-important-distinction) | partial; P2; E5 |
-| **book-ch07-react-langchain**<br>ReAct in LangChain; pp. 221–224 (contents) | Run a bounded framework tool loop with actual observations and invalid-call handling. | Proposed: langchain-workflows | unmapped; P1; E5 |
-| **book-ch07-gguf**<br>GGUF and llama.cpp model loading; pp. 200–202 (body-concept) | Explain model format, context settings, hardware layers, and actual runtime configuration. | [quantized-models](../../src/content/docs/concepts/quantized-models.mdx#the-important-distinction) | partial; P2; E5 |
+| **book-ch07-quantized-langchain**<br>Model I/O: Loading Quantized Models with LangChain; pp. 200–202 (contents; container, not counted) | Load a supported local runtime and connect it to a documented framework adapter. | [quantized-models](../../src/content/docs/concepts/quantized-models.mdx#how-it-works), [use-case sketch](../../src/content/docs/labs/prompting-and-workflows.mdx#l11-local-model-and-chains) | partial; P1; E5 |
+| **book-ch07-chains**<br>Chains: Extending the Capabilities of LLMs; pp. 202–209 (contents; container, not counted) | Compose model calls with inspectable input/output contracts. | [chains](../../src/content/docs/concepts/chains.mdx#how-it-works) | partial; P2; E5 |
+| **book-ch07-prompt-template**<br>A Single Link in the Chain: Prompt Template; pp. 203–206 (contents) | Render named inputs and model-specific role boundaries in a real chain. | [prompt-templates](../../src/content/docs/concepts/prompt-templates.mdx#how-it-works) | partial; P2; E5 |
+| **book-ch07-multi-prompt**<br>A Chain with Multiple Prompts; pp. 206–209 (contents) | Pass actual generated intermediate outputs through a multistep workflow. | [chains](../../src/content/docs/concepts/chains.mdx#how-it-works), [chain-prompting](../../src/content/docs/concepts/chain-prompting.mdx#how-it-works) | partial; P1; E5 |
+| **book-ch07-memory**<br>Memory: Helping LLMs to Remember Conversations; pp. 209–218 (contents; container, not counted) | Explain application state, prompt reconstruction, and resource limits. | [conversation-memory](../../src/content/docs/concepts/conversation-memory.mdx#how-it-works) | partial; P2; E5 |
+| **book-ch07-buffer**<br>Conversation Buffer; pp. 210–212 (contents) | Replay actual conversation history and test what the model can recover. | [conversation-memory](../../src/content/docs/concepts/conversation-memory.mdx#how-it-works) | partial; P1; E5 |
+| **book-ch07-window**<br>Windowed Conversation Buffer; pp. 212–214 (contents) | Compare bounded windows on a conversation whose earlier constraint is removed. | [windowed-memory](../../src/content/docs/concepts/windowed-memory.mdx#how-it-works) | partial; P1; E5 |
+| **book-ch07-summary**<br>Conversation Summary; pp. 214–218 (contents) | Generate and update a summary, measure lost facts, and inspect source-message support. | [summarized-memory](../../src/content/docs/concepts/summarized-memory.mdx#how-it-works) | partial; P0; E5 |
+| **book-ch07-agents**<br>Agents: Creating a System of LLMs; pp. 218–224 (contents; container, not counted) | Connect model-selected actions to tools, observations, and termination conditions. | [agents](../../src/content/docs/concepts/agents.mdx#how-it-works) | partial; P2; E5 |
+| **book-ch07-agent-reasoning**<br>The Driving Power Behind Agents: Step-by-step Reasoning; pp. 219–221 (contents) | Trace observable planning and tool use without treating generated explanations as faithful internals. | [react](../../src/content/docs/concepts/react.mdx#how-it-works), [agents](../../src/content/docs/concepts/agents.mdx#how-it-works) | partial; P2; E5 |
+| **book-ch07-react-langchain**<br>ReAct in LangChain; pp. 221–224 (contents) | Run a bounded framework tool loop with actual observations and invalid-call handling. | [react](../../src/content/docs/concepts/react.mdx#how-it-works), [use-case sketch](../../src/content/docs/labs/prompting-and-workflows.mdx#l11-local-model-and-chains) | partial; P1; E5 |
+| **book-ch07-gguf**<br>GGUF and llama.cpp model loading; pp. 200–202 (body-concept) | Explain model format, context settings, hardware layers, and actual runtime configuration. | [quantized-models](../../src/content/docs/concepts/quantized-models.mdx#how-it-works) | partial; P2; E5 |
 
 ## Chapter 8: Semantic Search and Retrieval-Augmented Generation
 
@@ -423,6 +419,7 @@ Printed pages 355–389; PDF pages 377–411. [Pinned official notebook](https:/
 - Chapter 10, printed pages 300–300: Re-derive metric definitions: Pearson correlation across predictions and labels can be negative; do not use the printed 0-to-1 description as its general range.
 - Chapter 12, printed pages 364–364: Reconcile the printed low-rank matrix dimensions with r*(d_in+d_out) before reusing parameter-count examples. Use consistently named A/B matrices and declared shapes.
 - Chapter 4, printed pages 120–120: Support-weighted F1 does not generally give equal influence to minority classes. Macro-F1 weights class F1 scores equally; values can coincide on a balanced test set.
+- Chapter 7, printed pages 201–202: Distinguish GGUF container from tensor precision. The text says eight-bit while the following FP16 filename denotes sixteen-bit; E5 verifies its actual pinned Q8 artifact metadata instead.
 
 ## Scope and exclusions
 

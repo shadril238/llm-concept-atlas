@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e5-summarized-memory",
+  "status": "passed",
+  "date": "2026-11-20T17:09:21.244070+00:00",
+  "gitCommit": "051efc998b79fc5b75149d7288744afd24f957c2",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e5/summarized_memory.py"
+  ],
+  "sourceSha256": "921e2a10d56e926ad41115fb724f8ad140ec541833f56e11c36fff270eac7775",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "7c9fbf8dd5341d37adb783f142b99aa829bc239468cca62f90764bc8d83c94eb",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "code literal present: False\nday literal present: False\nunits literal present: False\nstale Friday present: True\n",
+  "stderr": "",
+  "error": null
+}

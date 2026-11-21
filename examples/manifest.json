@@ -25,6 +25,11 @@
       "project": "examples/applications/discovery",
       "python": "3.11",
       "lock": "examples/applications/discovery/uv.lock"
+    },
+    "workflows": {
+      "project": "examples/applications/workflows",
+      "python": "3.11",
+      "lock": "examples/applications/workflows/uv.lock"
     }
   },
   "examples": [
@@ -42,10 +47,7 @@
       "entrypoint": "examples/legacy/legacy-agents.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/agents.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -277,10 +279,7 @@
       "entrypoint": "examples/legacy/legacy-chain-prompting.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/chain-prompting.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -318,10 +317,7 @@
       "entrypoint": "examples/legacy/legacy-chains.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/chains.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -476,10 +472,7 @@
       "entrypoint": "examples/legacy/legacy-constrained-sampling.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/constrained-sampling.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -712,10 +705,7 @@
       "entrypoint": "examples/legacy/legacy-conversation-memory.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/conversation-memory.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -1224,10 +1214,7 @@
       "entrypoint": "examples/legacy/legacy-few-shot-examples.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/few-shot-examples.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -1547,10 +1534,7 @@
       "entrypoint": "examples/legacy/legacy-in-context-learning.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/in-context-learning.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -1587,10 +1571,7 @@
       "entrypoint": "examples/legacy/legacy-instruction-prompting.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/instruction-prompting.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -2061,10 +2042,7 @@
       "entrypoint": "examples/legacy/legacy-output-verification.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/output-verification.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -2261,10 +2239,7 @@
       "entrypoint": "examples/legacy/legacy-prompt-structure.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/prompt-structure.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -2301,10 +2276,7 @@
       "entrypoint": "examples/legacy/legacy-prompt-templates.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/prompt-templates.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -2426,10 +2398,7 @@
       "entrypoint": "examples/legacy/legacy-quantized-models.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/quantized-models.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -2584,10 +2553,7 @@
       "entrypoint": "examples/legacy/legacy-react.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/react.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -2980,10 +2946,7 @@
       "entrypoint": "examples/legacy/legacy-self-consistency.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/self-consistency.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3138,10 +3101,7 @@
       "entrypoint": "examples/legacy/legacy-summarized-memory.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/summarized-memory.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3683,10 +3643,7 @@
       "entrypoint": "examples/legacy/legacy-windowed-memory.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/windowed-memory.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -6787,6 +6744,1064 @@
         "examples/foundations/src/atlas_foundations/e4/topic_math.py"
       ],
       "troubleshooting": "Read examples/applications/discovery/README.md for setup, cold caches, data contracts, reload semantics, and retained limitations."
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/prompt-structure.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e5-prompt-structure.json",
+      "troubleshooting": "Read the connected E5 lesson and L09\u2013L11 execution guide.",
+      "id": "e5-prompt-structure",
+      "title": "Prompt structure mechanism",
+      "concepts": [
+        "prompt-structure"
+      ],
+      "sourceSections": [
+        "book-ch06-generation-models",
+        "book-ch06-model-selection",
+        "book-ch06-model-loading",
+        "book-ch06-output-controls",
+        "book-ch06-prompt-introduction",
+        "book-ch06-prompt-ingredients",
+        "book-ch06-prompt-complexity"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e5/prompt_structure.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "system: Return one integer only.\nuser: Add the two counts. Data: 7 books and 8 books",
+        "origin": "author-checked-mechanism"
+      }
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/instruction-prompting.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e5-instruction-prompting.json",
+      "troubleshooting": "Read the connected E5 lesson and L09\u2013L11 execution guide.",
+      "id": "e5-instruction-prompting",
+      "title": "Instruction prompting mechanism",
+      "concepts": [
+        "instruction-prompting"
+      ],
+      "sourceSections": [
+        "book-ch06-instruction-prompting"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e5/instruction_prompting.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "15 format: True answer: True\n14 format: True answer: False\nAnswer: 15 format: False answer: True",
+        "origin": "author-checked-mechanism"
+      }
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/in-context-learning.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e5-in-context-learning.json",
+      "troubleshooting": "Read the connected E5 lesson and L09\u2013L11 execution guide.",
+      "id": "e5-in-context-learning",
+      "title": "In context learning mechanism",
+      "concepts": [
+        "in-context-learning"
+      ],
+      "sourceSections": [
+        "book-ch06-in-context"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e5/in_context_learning.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "demonstrations: [('2 + 3', 5), ('9 - 4', 5)]\nevaluation input: 7 + 8\ndemonstrations: [('9 - 4', 5), ('2 + 3', 5)]\nevaluation input: 7 + 8",
+        "origin": "author-checked-mechanism"
+      }
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/few-shot-examples.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e5-few-shot-examples.json",
+      "troubleshooting": "Read the connected E5 lesson and L09\u2013L11 execution guide.",
+      "id": "e5-few-shot-examples",
+      "title": "Few shot examples mechanism",
+      "concepts": [
+        "few-shot-examples"
+      ],
+      "sourceSections": [
+        "book-ch06-advanced-prompting"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e5/few_shot_examples.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "example IDs: ['design-add', 'design-sub']\ndistinct demonstrated answers: 1\nreversed IDs: ['design-sub', 'design-add']",
+        "origin": "author-checked-mechanism"
+      }
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/chain-prompting.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e5-chain-prompting.json",
+      "troubleshooting": "Read the connected E5 lesson and L09\u2013L11 execution guide.",
+      "id": "e5-chain-prompting",
+      "title": "Chain prompting mechanism",
+      "concepts": [
+        "chain-prompting"
+      ],
+      "sourceSections": [
+        "book-ch06-chain-prompting"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e5/chain_prompting.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "arithmetic for extraction: 16\ncopy consistent: True\nend-to-end correct: False",
+        "origin": "author-checked-mechanism"
+      }
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/chain-of-thought.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e5-chain-of-thought.json",
+      "troubleshooting": "Read the connected E5 lesson and L09\u2013L11 execution guide.",
+      "id": "e5-chain-of-thought",
+      "title": "Chain of thought mechanism",
+      "concepts": [
+        "chain-of-thought"
+      ],
+      "sourceSections": [
+        "book-ch06-reasoning",
+        "book-ch06-chain-of-thought",
+        "book-ch06-zero-shot-cot"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e5/chain_of_thought.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "7 + 8 = 14 verified: False\n7 + 8 = 15 verified: True",
+        "origin": "author-checked-mechanism"
+      }
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/self-consistency.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e5-self-consistency.json",
+      "troubleshooting": "Read the connected E5 lesson and L09\u2013L11 execution guide.",
+      "id": "e5-self-consistency",
+      "title": "Self consistency mechanism",
+      "concepts": [
+        "self-consistency"
+      ],
+      "sourceSections": [
+        "book-ch06-self-consistency"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e5/self_consistency.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "winner: 15 strict majority: False\ninvalid: 2",
+        "origin": "author-checked-mechanism"
+      }
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/tree-of-thought.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e5-tree-of-thought.json",
+      "troubleshooting": "Read the connected E5 lesson and L09\u2013L11 execution guide.",
+      "id": "e5-tree-of-thought",
+      "title": "Tree of thought mechanism",
+      "concepts": [
+        "tree-of-thought"
+      ],
+      "sourceSections": [
+        "book-ch06-tree-of-thought"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e5/tree_of_thought.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "8 / (3 - 8/3) = 24\ninputs used: 8, 3, 8, 3",
+        "origin": "author-checked-mechanism"
+      }
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/output-verification.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e5-output-verification.json",
+      "troubleshooting": "Read the connected E5 lesson and L09\u2013L11 execution guide.",
+      "id": "e5-output-verification",
+      "title": "Output verification mechanism",
+      "concepts": [
+        "output-verification"
+      ],
+      "sourceSections": [
+        "book-ch06-verification",
+        "book-ch06-output-examples"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e5/output_verification.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "basic shape: True content correct: False",
+        "origin": "author-checked-mechanism"
+      }
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/constrained-sampling.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e5-constrained-sampling.json",
+      "troubleshooting": "Read the connected E5 lesson and L09\u2013L11 execution guide.",
+      "id": "e5-constrained-sampling",
+      "title": "Constrained sampling mechanism",
+      "concepts": [
+        "constrained-sampling"
+      ],
+      "sourceSections": [
+        "book-ch06-constrained-sampling"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e5/constrained_sampling.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "domain valid: True\ncontent correct: False\nincomplete JSON: {\"item\":",
+        "origin": "author-checked-mechanism"
+      }
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/quantized-models.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e5-quantized-models.json",
+      "troubleshooting": "Read the connected E5 lesson and L09\u2013L11 execution guide.",
+      "id": "e5-quantized-models",
+      "title": "Quantized models mechanism",
+      "concepts": [
+        "quantized-models"
+      ],
+      "sourceSections": [
+        "book-ch07-quantized-langchain",
+        "book-ch07-gguf"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e5/quantized_models.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "artifact MiB: 138.1\ndeclared runtime: {'n_ctx': 768, 'n_batch': 256, 'n_threads': 1, 'n_gpu_layers': 0}",
+        "origin": "author-checked-mechanism"
+      }
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/prompt-templates.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e5-prompt-templates.json",
+      "troubleshooting": "Read the connected E5 lesson and L09\u2013L11 execution guide.",
+      "id": "e5-prompt-templates",
+      "title": "Prompt templates mechanism",
+      "concepts": [
+        "prompt-templates"
+      ],
+      "sourceSections": [
+        "book-ch07-prompt-template"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e5/prompt_templates.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "Task: 7 + 8\nReturn one integer.",
+        "origin": "author-checked-mechanism"
+      }
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/chains.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e5-chains.json",
+      "troubleshooting": "Read the connected E5 lesson and L09\u2013L11 execution guide.",
+      "id": "e5-chains",
+      "title": "Chains mechanism",
+      "concepts": [
+        "chains"
+      ],
+      "sourceSections": [
+        "book-ch07-chains",
+        "book-ch07-multi-prompt"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e5/chains.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "{'item': 'pen', 'quantity': 8, 'total': 16}",
+        "origin": "author-checked-mechanism"
+      }
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/conversation-memory.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e5-conversation-memory.json",
+      "troubleshooting": "Read the connected E5 lesson and L09\u2013L11 execution guide.",
+      "id": "e5-conversation-memory",
+      "title": "Conversation memory mechanism",
+      "concepts": [
+        "conversation-memory"
+      ],
+      "sourceSections": [
+        "book-ch07-memory",
+        "book-ch07-buffer"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e5/conversation_memory.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "buffer: ['u1: code LARK-27', 'a1: noted', 'u2: Friday, metric', 'a2: noted', 'u3: correction Monday', 'a3: noted', 'u4: blue paint', 'a4: noted']\ntwo recent turn pairs: ['u3: correction Monday', 'a3: noted', 'u4: blue paint', 'a4: noted']",
+        "origin": "author-checked-mechanism"
+      }
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/windowed-memory.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e5-windowed-memory.json",
+      "troubleshooting": "Read the connected E5 lesson and L09\u2013L11 execution guide.",
+      "id": "e5-windowed-memory",
+      "title": "Windowed memory mechanism",
+      "concepts": [
+        "windowed-memory"
+      ],
+      "sourceSections": [
+        "book-ch07-window"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e5/windowed_memory.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "kept pairs: [('u3', 'a3'), ('u4', 'a4')]\npolicy omissions: [('u1', 'a1'), ('u2', 'a2')]",
+        "origin": "author-checked-mechanism"
+      }
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/summarized-memory.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e5-summarized-memory.json",
+      "troubleshooting": "Read the connected E5 lesson and L09\u2013L11 execution guide.",
+      "id": "e5-summarized-memory",
+      "title": "Summarized memory mechanism",
+      "concepts": [
+        "summarized-memory"
+      ],
+      "sourceSections": [
+        "book-ch07-summary"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e5/summarized_memory.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "code literal present: False\nday literal present: False\nunits literal present: False\nstale Friday present: True",
+        "origin": "author-checked-mechanism"
+      }
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/agents.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e5-agents.json",
+      "troubleshooting": "Read the connected E5 lesson and L09\u2013L11 execution guide.",
+      "id": "e5-agents",
+      "title": "Agents mechanism",
+      "concepts": [
+        "agents"
+      ],
+      "sourceSections": [
+        "book-ch07-agents",
+        "book-ch07-agent-reasoning"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e5/agents.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "[{'action': 'sum', 'observation': 15}, {'final': '15'}]",
+        "origin": "author-checked-mechanism"
+      }
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/react.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e5-react.json",
+      "troubleshooting": "Read the connected E5 lesson and L09\u2013L11 execution guide.",
+      "id": "e5-react",
+      "title": "React mechanism",
+      "concepts": [
+        "react"
+      ],
+      "sourceSections": [
+        "book-ch07-react-langchain"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e5/react.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "actual observation: {'tool': 'lookup', 'result': '17:30'}\nnext decision input: [{'tool': 'lookup', 'result': '17:30'}]",
+        "origin": "author-checked-mechanism"
+      }
+    },
+    {
+      "level": "B",
+      "kind": "evaluated-workflow",
+      "environment": "workflows",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/prompting-and-workflows.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [
+        {
+          "id": "bartowski/SmolLM2-135M-Instruct-GGUF",
+          "revision": "09816acd5d99df7be770d85ea30822623dab342c"
+        }
+      ],
+      "dataset": "examples/data/manifests/workflow-tasks.json",
+      "seed": 37,
+      "reproducibility": "Pinned GGUF/hash, CPU settings, original fixtures and prompts. Actual failures retained; timings and cross-hardware output may vary.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 600,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Versioned original task fixture; declared design/evaluation split and finite schemas.",
+      "outputSchema": "JSON invariant report plus inspectable results.json and traces.",
+      "verificationRecord": "examples/verification/records/prompt-evaluation.json",
+      "troubleshooting": "Read the connected E5 lesson and L09\u2013L11 execution guide.",
+      "id": "prompt-evaluation",
+      "title": "Prompt evaluation and native constraints",
+      "concepts": [
+        "prompt-structure",
+        "instruction-prompting",
+        "in-context-learning",
+        "few-shot-examples",
+        "chain-of-thought",
+        "output-verification",
+        "constrained-sampling"
+      ],
+      "sourceSections": [
+        "book-ch06-generation-models",
+        "book-ch06-model-selection",
+        "book-ch06-model-loading",
+        "book-ch06-output-controls",
+        "book-ch06-prompt-introduction",
+        "book-ch06-prompt-ingredients",
+        "book-ch06-prompt-complexity",
+        "book-ch06-instruction-prompting",
+        "book-ch06-in-context",
+        "book-ch06-advanced-prompting",
+        "book-ch06-reasoning",
+        "book-ch06-chain-of-thought",
+        "book-ch06-zero-shot-cot",
+        "book-ch06-verification",
+        "book-ch06-output-examples",
+        "book-ch06-constrained-sampling"
+      ],
+      "entrypoint": "examples/applications/workflows/src/atlas_workflows/prompts.py",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "native_constraint_verified": true,
+          "design_evaluation_disjoint": true
+        }
+      },
+      "supportFiles": [
+        "examples/applications/workflows/src/atlas_workflows/runtime.py",
+        "examples/foundations/src/atlas_foundations/e5/contracts.py",
+        "examples/foundations/src/atlas_foundations/e5/search.py",
+        "examples/data/fixtures/workflow-tasks.json"
+      ],
+      "resultArtifact": "examples/artifacts/e5-prompts/results.json",
+      "resultFile": "src/data/workflow-results.json",
+      "resultKey": "prompts"
+    },
+    {
+      "level": "B",
+      "kind": "evaluated-workflow",
+      "environment": "workflows",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/prompting-and-workflows.mdx",
+        "block": 1
+      },
+      "region": null,
+      "models": [
+        {
+          "id": "bartowski/SmolLM2-135M-Instruct-GGUF",
+          "revision": "09816acd5d99df7be770d85ea30822623dab342c"
+        }
+      ],
+      "dataset": "examples/data/manifests/workflow-tasks.json",
+      "seed": 37,
+      "reproducibility": "Pinned GGUF/hash, CPU settings, original fixtures and prompts. Actual failures retained; timings and cross-hardware output may vary.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 600,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Versioned original task fixture; declared design/evaluation split and finite schemas.",
+      "outputSchema": "JSON invariant report plus inspectable results.json and traces.",
+      "verificationRecord": "examples/verification/records/search-and-voting.json",
+      "troubleshooting": "Read the connected E5 lesson and L09\u2013L11 execution guide.",
+      "id": "search-and-voting",
+      "title": "Sampled voting and bounded search",
+      "concepts": [
+        "self-consistency",
+        "tree-of-thought"
+      ],
+      "sourceSections": [
+        "book-ch06-self-consistency",
+        "book-ch06-tree-of-thought"
+      ],
+      "entrypoint": "examples/applications/workflows/src/atlas_workflows/search_vote.py",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "search_verified": true,
+          "model_path_executed": true
+        }
+      },
+      "supportFiles": [
+        "examples/applications/workflows/src/atlas_workflows/runtime.py",
+        "examples/foundations/src/atlas_foundations/e5/contracts.py",
+        "examples/foundations/src/atlas_foundations/e5/search.py",
+        "examples/data/fixtures/workflow-tasks.json",
+        "examples/applications/workflows/src/atlas_workflows/prompts.py"
+      ],
+      "resultArtifact": "examples/artifacts/e5-search/results.json",
+      "resultFile": "src/data/workflow-results.json",
+      "resultKey": "search"
+    },
+    {
+      "level": "B",
+      "kind": "evaluated-workflow",
+      "environment": "workflows",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/prompting-and-workflows.mdx",
+        "block": 2
+      },
+      "region": null,
+      "models": [
+        {
+          "id": "bartowski/SmolLM2-135M-Instruct-GGUF",
+          "revision": "09816acd5d99df7be770d85ea30822623dab342c"
+        }
+      ],
+      "dataset": "examples/data/manifests/workflow-tasks.json",
+      "seed": 37,
+      "reproducibility": "Pinned GGUF/hash, CPU settings, original fixtures and prompts. Actual failures retained; timings and cross-hardware output may vary.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 600,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Versioned original task fixture; declared design/evaluation split and finite schemas.",
+      "outputSchema": "JSON invariant report plus inspectable results.json and traces.",
+      "verificationRecord": "examples/verification/records/local-model-chain.json",
+      "troubleshooting": "Read the connected E5 lesson and L09\u2013L11 execution guide.",
+      "id": "local-model-chain",
+      "title": "Local GGUF and actual multi-prompt chain",
+      "concepts": [
+        "chain-prompting",
+        "quantized-models",
+        "prompt-templates",
+        "chains"
+      ],
+      "sourceSections": [
+        "book-ch06-chain-prompting",
+        "book-ch07-quantized-langchain",
+        "book-ch07-gguf",
+        "book-ch07-prompt-template",
+        "book-ch07-chains",
+        "book-ch07-multi-prompt"
+      ],
+      "entrypoint": "examples/applications/workflows/src/atlas_workflows/chains.py",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "equivalent_prompt_checked": true,
+          "equivalent_output_checked": true,
+          "gguf_template_checked": true,
+          "quantization_type_checked": true
+        }
+      },
+      "supportFiles": [
+        "examples/applications/workflows/src/atlas_workflows/runtime.py",
+        "examples/foundations/src/atlas_foundations/e5/contracts.py",
+        "examples/foundations/src/atlas_foundations/e5/search.py",
+        "examples/data/fixtures/workflow-tasks.json"
+      ],
+      "resultArtifact": "examples/artifacts/e5-chains/results.json",
+      "resultFile": "src/data/workflow-results.json",
+      "resultKey": "chains"
+    },
+    {
+      "level": "B",
+      "kind": "evaluated-workflow",
+      "environment": "workflows",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/prompting-and-workflows.mdx",
+        "block": 3
+      },
+      "region": null,
+      "models": [
+        {
+          "id": "bartowski/SmolLM2-135M-Instruct-GGUF",
+          "revision": "09816acd5d99df7be770d85ea30822623dab342c"
+        }
+      ],
+      "dataset": "examples/data/manifests/workflow-tasks.json",
+      "seed": 37,
+      "reproducibility": "Pinned GGUF/hash, CPU settings, original fixtures and prompts. Actual failures retained; timings and cross-hardware output may vary.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 600,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Versioned original task fixture; declared design/evaluation split and finite schemas.",
+      "outputSchema": "JSON invariant report plus inspectable results.json and traces.",
+      "verificationRecord": "examples/verification/records/memory-policies.json",
+      "troubleshooting": "Read the connected E5 lesson and L09\u2013L11 execution guide.",
+      "id": "memory-policies",
+      "title": "Conversation memory policy comparison",
+      "concepts": [
+        "conversation-memory",
+        "windowed-memory",
+        "summarized-memory"
+      ],
+      "sourceSections": [
+        "book-ch07-memory",
+        "book-ch07-buffer",
+        "book-ch07-window",
+        "book-ch07-summary"
+      ],
+      "entrypoint": "examples/applications/workflows/src/atlas_workflows/memory.py",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "framework_equivalent_checked": true,
+          "budget_accounting_checked": true
+        }
+      },
+      "supportFiles": [
+        "examples/applications/workflows/src/atlas_workflows/runtime.py",
+        "examples/foundations/src/atlas_foundations/e5/contracts.py",
+        "examples/foundations/src/atlas_foundations/e5/search.py",
+        "examples/data/fixtures/workflow-tasks.json",
+        "examples/foundations/src/atlas_foundations/e5/memory.py",
+        "examples/applications/workflows/src/atlas_workflows/chains.py"
+      ],
+      "resultArtifact": "examples/artifacts/e5-memory/results.json",
+      "resultFile": "src/data/workflow-results.json",
+      "resultKey": "memory"
+    },
+    {
+      "level": "B",
+      "kind": "evaluated-workflow",
+      "environment": "workflows",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/prompting-and-workflows.mdx",
+        "block": 4
+      },
+      "region": null,
+      "models": [
+        {
+          "id": "bartowski/SmolLM2-135M-Instruct-GGUF",
+          "revision": "09816acd5d99df7be770d85ea30822623dab342c"
+        }
+      ],
+      "dataset": "examples/data/manifests/workflow-tasks.json",
+      "seed": 37,
+      "reproducibility": "Pinned GGUF/hash, CPU settings, original fixtures and prompts. Actual failures retained; timings and cross-hardware output may vary.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 600,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Versioned original task fixture; declared design/evaluation split and finite schemas.",
+      "outputSchema": "JSON invariant report plus inspectable results.json and traces.",
+      "verificationRecord": "examples/verification/records/bounded-tool-workflow.json",
+      "troubleshooting": "Read the connected E5 lesson and L09\u2013L11 execution guide.",
+      "id": "bounded-tool-workflow",
+      "title": "Bounded model-controlled tools",
+      "concepts": [
+        "agents",
+        "react"
+      ],
+      "sourceSections": [
+        "book-ch07-agents",
+        "book-ch07-agent-reasoning",
+        "book-ch07-react-langchain"
+      ],
+      "entrypoint": "examples/applications/workflows/src/atlas_workflows/agents.py",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "termination_checked": true,
+          "invalid_arguments_checked": true,
+          "framework_tools_executed": true
+        }
+      },
+      "supportFiles": [
+        "examples/applications/workflows/src/atlas_workflows/runtime.py",
+        "examples/foundations/src/atlas_foundations/e5/contracts.py",
+        "examples/foundations/src/atlas_foundations/e5/search.py",
+        "examples/data/fixtures/workflow-tasks.json"
+      ],
+      "resultArtifact": "examples/artifacts/e5-agents/results.json",
+      "resultFile": "src/data/workflow-results.json",
+      "resultKey": "agents"
     }
   ]
 }

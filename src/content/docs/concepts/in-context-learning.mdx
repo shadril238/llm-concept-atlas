@@ -1,100 +1,121 @@
 ---
-title: In-context learning
-description: In-context learning uses examples in a prompt to guide a model on a task without changing its weights.
-kind: concept
+title: "In-context learning"
+parent: "chapter-06"
+related: ["instruction-prompting", "few-shot-examples"]
+description: "In-context learning uses task descriptions or demonstrations inside the current input to influence a model’s predictions, without updating its weights. Which examples appear and how they are ordered are part of the input contract."
+kind: "concept"
 conceptId: in-context-learning
 chapter: 6
-part: applications
-summary: In-context learning uses examples in a prompt to guide a model on a task without changing its weights.
-parent: chapter-06
-prerequisites: [instruction-prompting]
-related: [instruction-prompting, few-shot-examples]
-level: intermediate
-tags: [applications, chapter-06]
+part: "applications"
+summary: "In-context learning uses task descriptions or demonstrations inside the current input to influence a model’s predictions, without updating its weights. Which examples appear and how they are ordered are part of the input contract."
+prerequisites: ["instruction-prompting"]
+level: "intermediate"
+tags: ["applications", "chapter-06"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-21"
+reviewStatus: "author-reviewed"
+reviewRecord: e5-workflows-author-review-2026-11-21
+learningObjectives: ["Distinguish demonstrations from parameter training.", "Compare fixed example sets and reversed ordering.", "Keep design examples separate from evaluation answers."]
+bookSections: ["book-ch06-in-context"]
+labHref: "/labs/prompting-and-workflows/"
+aliases: ["ICL", "in-context learning"]
+exampleIds: ["e5-in-context-learning", "prompt-evaluation"]
+relationshipReasons: {"instruction-prompting": "Demonstrations add input/output patterns to the instruction while leaving the checkpoint weights fixed."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { PromptLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import WorkflowEvidence from '../../../components/WorkflowEvidence.astro';
+import { PromptExperiment } from '../../../components/simulations/WorkflowLabs';
 
 <ConceptPrimer id="in-context-learning" />
 
 ## Definition and intuition
 
-In-context learning uses examples in a prompt to guide a model on a task without changing its weights.
+In-context learning uses task descriptions or demonstrations inside the current input to influence a model’s predictions, without updating its weights. Which examples appear and how they are ordered are part of the input contract.
 
-Chapter 6 treats a prompt as a task specification. A prompt can guide output, but it does not change model weights or guarantee that an answer is correct.
+A model can imitate an example’s format while failing its underlying task. Showing two arithmetic demonstrations does not prove that it learned a general arithmetic algorithm. Inspect both the examples and the generated answer.
 
-## Before you start
+<ReferenceBrief objectives={["Distinguish demonstrations from parameter training.", "Compare fixed example sets and reversed ordering.", "Keep design examples separate from evaluation answers."]} prerequisites="instruction-prompting" scope="Original teaching mechanism plus recorded local-model evidence. Independent teaching review is pending." />
 
-Read [Instruction prompting](/llm-concept-atlas/concepts/instruction-prompting/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **in-context learning** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Examples live in context
 
-1. **Prepare:** Select demonstrations that show the desired input-output mapping
-2. **Transform:** Place them in a consistent format before the new query
-3. **Inspect:** Measure whether the model applies the pattern to new cases.
+Each demonstration contributes tokens and role boundaries. A user question followed by an assistant demonstration communicates both a task mapping and a response style. The application reconstructs those messages for every call. They do not become persistent weight changes merely because the model responds differently.
 
-### The important distinction
+### Selection and order
 
-The model's weights stay fixed while examples influence the next-token prediction in the current context. Example order, formatting, and similarity to the test case can change performance. Distinguish this from supervised fine-tuning, where gradient updates persist after the examples are removed.
+L09 predeclares a balanced addition/subtraction example pair, its reversed order, and an addition-only pair. They use design IDs only. The evaluation questions are identical across conditions. Compare format following, extracted answers, and token work; do not silently select the best evaluation condition and report it as an untouched test result.
+
+### What a comparison can establish
+
+Ordering can change an output even when the same two examples are present. The source records example IDs and complete prompts so the difference can be inspected. One small run does not reveal a universal primacy/recency law, nor does it establish how a larger model would behave. A longer prompt also changes context usage and prefix processing work.
 
 ## Worked example
 
-Two examples map short reviews to positive and negative. The model then labels a third review by following the shown format, although no gradient update occurred. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+Two demonstrations both end with 5, even though one is addition and one subtraction. A small model may copy 5 on later questions instead of solving them. The balanced pair is not label-balanced in the sense of a classifier dataset, and its repeated answer is a real limitation worth inspecting rather than hiding. Reversed-order and different-answer design examples help reveal these sensitivities.
 
-<LessonFlow steps={["Select demonstrations that show the desired input-output mapping", "Place them in a consistent format before the new query", "Measure whether the model applies the pattern to new cases."]} caption="A teaching diagram for In-context learning. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
 
-## Try the interactive lab
+Predict the outcome before changing a control. The explorer shows recorded real runs or explicitly labeled deterministic calculations; it does not call a model in your browser.
 
-<PromptLab client:visible />
-
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+<PromptExperiment initial="few-shot-balanced" client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+Run this small standard-library mechanism with Python 3. It illustrates the stated contract or calculation. The connected L09–L11 source below performs the actual local-model workflow; this short snippet is not a substitute for those model calls.
+
+{/* example:e5-in-context-learning:start */}
 
 ```python
-instruction = "Return one label: positive or negative."
-example = "Text: I loved it. Label: positive"
-query = "Text: The ending was dull. Label:"
-prompt = "\n".join([instruction, example, query])
-print(prompt)
+design = [("2 + 3", 5), ("9 - 4", 5)]
+for order in [design, list(reversed(design))]:
+    print("demonstrations:", order)
+    print("evaluation input:", "7 + 8")
+assert all(question != "7 + 8" for question, _ in design)
 ```
 
-**Expected output:**
+{/* example:e5-in-context-learning:end */}
+
+Expected mechanism output:
 
 ```text
-Return one label: positive or negative.
-Text: I loved it. Label: positive
-Text: The ending was dull. Label:
+demonstrations: [('2 + 3', 5), ('9 - 4', 5)]
+evaluation input: 7 + 8
+demonstrations: [('9 - 4', 5), ('2 + 3', 5)]
+evaluation input: 7 + 8
 ```
 
-**What the code shows:** The final string contains the instruction, demonstration, and new query in that order. Inspect the rendered string before sending it to a real generator. The [official chapter 6 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter06) develops the corresponding model-based implementation.
+<WorkflowEvidence id="prompt-evaluation" />
 
 ## When to use it
 
-Use it when a few examples clarify a task faster than fine-tuning. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use demonstrations when they clarify an unfamiliar mapping, domain convention, or desired response style. Version their IDs and compare them against an instruction-only baseline with a fresh evaluation set.
 
 ## Limits and common mistakes
 
-- Performance depends on example choice, order, and context capacity.
-- **Failure to look for:** Examples contain a shortcut word that the model imitates instead of learning the intended rule.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Examples can encode misleading patterns or use most of the token budget. Reordering them is not a guaranteed improvement. The atlas keeps all reported variants visible and makes no broad learning-capability claim from this small CPU experiment.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First select demonstrations that show the desired input-output mapping Then place them in a consistent format before the new query Finally measure whether the model applies the pattern to new cases.</p></details>
+<details>
+<summary>Why not include the evaluation answer as a demonstration?</summary>
 
-<details><summary>What would make the result misleading?</summary><p>Examples contain a shortcut word that the model imitates instead of learning the intended rule.</p></details>
+That leaks the target into the input and invalidates the claimed held-out comparison. Demonstrations come from the separate design split.
+
+</details>
+
+<details>
+<summary>If the model copies the right format but a wrong number, what did the result show?</summary>
+
+It showed format following under that input, not reliable task generalization. The two metrics must remain separate.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 6 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 6 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter06). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 6 of *Hands-On Large Language Models*. Read the [complete execution guide](/llm-concept-atlas/labs/prompting-and-workflows/) for artifact identity, predeclared tasks, error analysis, and implementation differences from the [authors’ chapter 6 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter06). The source PDF and book artwork are not redistributed.
 
 <ConceptConnections id="in-context-learning" />

@@ -27,6 +27,7 @@ export default defineConfig({
             { label: "Run verified examples", slug: "labs/first-verified-examples" },
             { label: "Foundation labs · L01–L06", slug: "labs/foundations" },
             { label: "Classification + topics · L07–L08", slug: "labs/classification-and-topics" },
+            { label: "Prompting + workflows · L09–L11", slug: "labs/prompting-and-workflows" },
             { label: "Concept glossary", slug: "glossary" },
             { label: "About and sources", slug: "about-and-sources" },
           ],

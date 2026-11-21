@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e5-conversation-memory",
+  "status": "passed",
+  "date": "2026-11-20T17:09:21.101736+00:00",
+  "gitCommit": "051efc998b79fc5b75149d7288744afd24f957c2",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e5/conversation_memory.py"
+  ],
+  "sourceSha256": "26b94c04ff6187a3fc6306a836abf68f9220d7792c16a6d8baf187d7c20b8662",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "1ec8f369e79a363af598a999f792bc858626c67232dbb20effe5f49d4caf6287",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.008,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "buffer: ['u1: code LARK-27', 'a1: noted', 'u2: Friday, metric', 'a2: noted', 'u3: correction Monday', 'a3: noted', 'u4: blue paint', 'a4: noted']\ntwo recent turn pairs: ['u3: correction Monday', 'a3: noted', 'u4: blue paint', 'a4: noted']\n",
+  "stderr": "",
+  "error": null
+}

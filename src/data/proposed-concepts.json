@@ -278,11 +278,17 @@
       "sourceSectionIds": ["book-ch06-model-selection"],
       "chapter": 6,
       "placement": "subsection",
-      "parentConceptId": "generative-model",
+      "parentConceptId": "prompt-structure",
       "aliases": [],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E5",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/concepts/prompt-structure.mdx",
+        "anchor": "generation-model-selection"
+      },
+      "exampleIds": ["prompt-evaluation"],
+      "reviewRecord": "e5-workflows-author-review-2026-11-21"
     },
     {
       "id": "chain-of-thought",
@@ -296,9 +302,15 @@
       "placement": "standalone",
       "parentConceptId": "prompt-structure",
       "aliases": ["CoT", "zero-shot CoT"],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E5",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/concepts/chain-of-thought.mdx",
+        "anchor": "how-it-works"
+      },
+      "exampleIds": ["e5-chain-of-thought", "prompt-evaluation"],
+      "reviewRecord": "e5-workflows-author-review-2026-11-21"
     },
     {
       "id": "tree-of-thought",
@@ -308,9 +320,15 @@
       "placement": "standalone",
       "parentConceptId": "prompt-structure",
       "aliases": ["ToT"],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E5",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/concepts/tree-of-thought.mdx",
+        "anchor": "how-it-works"
+      },
+      "exampleIds": ["e5-tree-of-thought", "search-and-voting"],
+      "reviewRecord": "e5-workflows-author-review-2026-11-21"
     },
     {
       "id": "langchain-workflows",
@@ -323,9 +341,15 @@
       "placement": "lab",
       "parentConceptId": "chains",
       "aliases": ["LangChain", "LlamaCpp", "GGUF"],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E5",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "path": "src/content/docs/labs/prompting-and-workflows.mdx",
+        "anchor": "l11-local-model-and-chains"
+      },
+      "exampleIds": ["local-model-chain", "bounded-tool-workflow"],
+      "reviewRecord": "e5-workflows-author-review-2026-11-21"
     },
     {
       "id": "api-grounded-generation",

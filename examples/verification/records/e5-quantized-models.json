@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e5-quantized-models",
+  "status": "passed",
+  "date": "2026-11-20T17:09:20.892122+00:00",
+  "gitCommit": "051efc998b79fc5b75149d7288744afd24f957c2",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e5/quantized_models.py"
+  ],
+  "sourceSha256": "8903fbaa9114d917757962767d3395993ebdc7cab37bb467c9f36b84ad182a54",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "77fb13105cc80849f8085b6f01401ffb651c42558a44a51f0171038919dda27f",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "artifact MiB: 138.1\ndeclared runtime: {'n_ctx': 768, 'n_batch': 256, 'n_threads': 1, 'n_gpu_layers': 0}\n",
+  "stderr": "",
+  "error": null
+}

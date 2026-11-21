@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e5-instruction-prompting",
+  "status": "passed",
+  "date": "2026-11-20T17:09:20.255377+00:00",
+  "gitCommit": "051efc998b79fc5b75149d7288744afd24f957c2",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e5/instruction_prompting.py"
+  ],
+  "sourceSha256": "fc750ac8eaa3ab9c62fbef5f0de7210ff55db6c5e6f0193442aba9d280aa3988",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "c9f2bf8753dba4fddd86946588c8c419d903606fabd3137026b2de02cc84c38c",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.011,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "15 format: True answer: True\n14 format: True answer: False\nAnswer: 15 format: False answer: True\n",
+  "stderr": "",
+  "error": null
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e5-chain-of-thought",
+  "status": "passed",
+  "date": "2026-11-20T17:09:20.535012+00:00",
+  "gitCommit": "051efc998b79fc5b75149d7288744afd24f957c2",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e5/chain_of_thought.py"
+  ],
+  "sourceSha256": "1000aa1bb47c4bddf965aa0e62bd507b075f4151dd51503dc677ee1e19acfb7d",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "9f3abb548ba67a18d7f50dd8f941ab94dba78afb4c56ba1b92bbd112c7566cd5",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "7 + 8 = 14 verified: False\n7 + 8 = 15 verified: True\n",
+  "stderr": "",
+  "error": null
+}

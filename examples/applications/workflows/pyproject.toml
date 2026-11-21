@@ -1,0 +1,23 @@
+[project]
+name = "atlas-workflows"
+version = "0.1.0"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+  "llama-cpp-python==0.3.37",
+  "langchain-core==1.8.4",
+  "numpy==2.3.5",
+  "pydantic==2.12.5",
+  "jinja2==3.1.6",
+  "ipykernel==7.1.0",
+  "nbclient==0.10.4",
+  "nbformat==5.10.4",
+]
+
+[tool.uv]
+no-binary-package = ["llama-cpp-python"]
+
+[tool.uv.config-settings-package]
+llama-cpp-python = { "cmake.define.GGML_NATIVE" = "OFF", "cmake.define.GGML_OPENMP" = "OFF" }
+
+[tool.uv.extra-build-variables]
+llama-cpp-python = { CMAKE_BUILD_PARALLEL_LEVEL = "4" }

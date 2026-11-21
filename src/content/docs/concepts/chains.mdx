@@ -1,91 +1,122 @@
 ---
-title: Chains
-description: A chain links several operations so one step's output becomes another step's input.
-kind: concept
+title: "Chains"
+parent: "chapter-07"
+related: ["prompt-templates", "conversation-memory"]
+description: "A chain composes transformations so each stage receives a defined output from the previous stage. Model calls, parsers, and deterministic functions can all be stages, with explicit contracts and visible intermediate state."
+kind: "concept"
 conceptId: chains
 chapter: 7
-part: applications
-summary: A chain links several operations so one step's output becomes another step's input.
-parent: chapter-07
-prerequisites: [prompt-templates]
-related: [prompt-templates, conversation-memory]
-level: intermediate
-tags: [applications, chapter-07]
+part: "applications"
+summary: "A chain composes transformations so each stage receives a defined output from the previous stage. Model calls, parsers, and deterministic functions can all be stages, with explicit contracts and visible intermediate state."
+prerequisites: ["prompt-templates"]
+level: "intermediate"
+tags: ["applications", "chapter-07"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-21"
+reviewStatus: "author-reviewed"
+reviewRecord: e5-workflows-author-review-2026-11-21
+learningObjectives: ["Compare modern Runnable composition with ordinary Python.", "Inspect actual multi-prompt inputs and outputs.", "Locate an error at the stage where it first appears."]
+bookSections: ["book-ch07-chains", "book-ch07-multi-prompt"]
+labHref: "/labs/prompting-and-workflows/"
+aliases: ["LangChain", "LCEL", "RunnableLambda", "RunnablePassthrough"]
+exampleIds: ["e5-chains", "local-model-chain"]
+relationshipReasons: {"prompt-templates": "Compose rendered prompts and typed stage outputs while preserving the actual state passed between calls."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import WorkflowEvidence from '../../../components/WorkflowEvidence.astro';
+import { WorkflowTrace } from '../../../components/simulations/WorkflowLabs';
 
 <ConceptPrimer id="chains" />
 
 ## Definition and intuition
 
-**Chains**: A chain links several operations so one step's output becomes another step's input.
+A chain composes transformations so each stage receives a defined output from the previous stage. Model calls, parsers, and deterministic functions can all be stages, with explicit contracts and visible intermediate state.
 
-Chapter 7 combines model calls with templates, memory, and tools. Trace the inputs and outputs of each step so an error can be located rather than hidden inside a chain.
+Framework composition is useful when it clarifies dataflow. A short pipeline expression should not hide which fields are generated, validated, calculated, or copied. The plain-Python equivalent remains available as a reference.
 
-## Before you start
+<ReferenceBrief objectives={["Compare modern Runnable composition with ordinary Python.", "Inspect actual multi-prompt inputs and outputs.", "Locate an error at the stage where it first appears."]} prerequisites="prompt-templates" scope="Original teaching mechanism plus recorded local-model evidence. Independent teaching review is pending." />
 
-Read [Prompt templates](/llm-concept-atlas/concepts/prompt-templates/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **Chains** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Modern LangChain composition
 
-1. **Prepare:** Define each operation's input and output contract
-2. **Transform:** Pass data between retrieval, formatting, model, or parsing stages
-3. **Inspect:** Log and evaluate intermediate results.
+The pinned workflow uses RunnableLambda, RunnablePassthrough.assign, ChatPromptTemplate, and StrOutputParser from langchain_core. It avoids removed or deprecated book-era chain imports. A Runnable is a composable invocation interface; it is not inherently an autonomous agent. The adapter ultimately calls the same native local runtime.
 
-### The important distinction
+### Actual stage boundaries
 
-Each chain stage should have an explicit input type, output type, and failure behavior. That turns a multi-call process into a system that can be measured. A chain is not automatically an agent: the sequence can be fixed, while an agent selects its next action based on observations.
+The first model extracts an order. A deterministic stage validates it and computes a total using fixed item prices. A second model receives the actual intermediate object and calculated total. The resulting artifact contains both calls and independent checks for original extraction, supplied-total copying, and end-to-end answer quality.
+
+### Failure propagation
+
+A downstream stage can be internally consistent with an incorrect upstream value. Preserve the original task and intermediate provenance when grading. If a schema check fails, a declared error outcome is preferable to silently replacing missing fields. Adding retries, fallback models, or parallel branches changes the workflow and requires separate trace and work accounting.
 
 ## Worked example
 
-A question enters retrieval, then a prompt builder, then a generator, then a validator. If the final answer is wrong, inspect the retrieved passage before changing the generator. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+Three requested pens at price two should total six. If extraction chooses eight, multiplication yields sixteen. A later model may correctly copy sixteen; that successful copy cannot repair the original wrong quantity. The real recorded chain makes the separate pass/fail checks visible rather than collapsing them into one success label.
 
-<LessonFlow steps={["Define each operation's input and output contract", "Pass data between retrieval, formatting, model, or parsing stages", "Log and evaluate intermediate results."]} caption="A teaching diagram for Chains. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
+
+Predict the outcome before changing a control. The explorer shows recorded real runs or explicitly labeled deterministic calculations; it does not call a model in your browser.
+
+<WorkflowTrace client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+Run this small standard-library mechanism with Python 3. It illustrates the stated contract or calculation. The connected L09–L11 source below performs the actual local-model workflow; this short snippet is not a substitute for those model calls.
+
+{/* example:e5-chains:start */}
 
 ```python
-def retrieve(question): return "Library closes at 5 pm Saturday."
-def format_prompt(question, source): return f"Question: {question}\nSource: {source}"
-question = "When does the library close?"
-print(format_prompt(question, retrieve(question)))
+def compute(order):
+    prices = {"pen": 2, "book": 8}
+    return {**order, "total": prices[order["item"]] * order["quantity"]}
+
+
+first = {"item": "pen", "quantity": 8}
+second_input = compute(first)
+print(second_input)
+assert second_input["total"] == 16
 ```
 
-**Expected output:**
+{/* example:e5-chains:end */}
+
+Expected mechanism output:
 
 ```text
-Question: When does the library close?
-Source: Library closes at 5 pm Saturday.
+{'item': 'pen', 'quantity': 8, 'total': 16}
 ```
 
-**What the code shows:** The output of `retrieve` becomes an argument to `format_prompt`. Replace that returned passage with irrelevant text to see why downstream fluency cannot fix retrieval. The [official chapter 7 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter07) develops the corresponding model-based implementation.
+<WorkflowEvidence id="local-model-chain" />
 
 ## When to use it
 
-Use chains for repeatable multi-step workflows where intermediate outputs have meaning. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use chains for workflows with meaningful intermediate artifacts and deterministic checks. Compare the plain implementation first so framework overhead serves readability or reuse instead of obscuring a simple function call.
 
 ## Limits and common mistakes
 
-- Long chains add latency and can hide error propagation if stages are opaque.
-- **Failure to look for:** The retrieval stage returns no source but the generation stage still produces a fluent answer.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Composition does not guarantee quality or termination of arbitrary user stages. More calls add work and possible errors. This two-call chain is small and local; its observed failure is retained, not presented as production readiness.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First define each operation's input and output contract Then pass data between retrieval, formatting, model, or parsing stages Finally log and evaluate intermediate results.</p></details>
+<details>
+<summary>Is Runnable composition itself a reasoning algorithm?</summary>
 
-<details><summary>What would make the result misleading?</summary><p>The retrieval stage returns no source but the generation stage still produces a fluent answer.</p></details>
+No. It connects stages. Their algorithms and contracts determine what the workflow does.
+
+</details>
+
+<details>
+<summary>Which reference catches an upstream extraction error?</summary>
+
+The original task’s independently authored reference, rather than a later stage’s consistency with the extracted value.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 7 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 7 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter07). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 7 of *Hands-On Large Language Models*. Read the [complete execution guide](/llm-concept-atlas/labs/prompting-and-workflows/) for artifact identity, predeclared tasks, error analysis, and implementation differences from the [authors’ chapter 7 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter07). The source PDF and book artwork are not redistributed.
 
 <ConceptConnections id="chains" />

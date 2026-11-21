@@ -1,0 +1,11 @@
+{
+  "id": "atlas-workflow-tasks-v1",
+  "revision": 1,
+  "path": "examples/data/fixtures/workflow-tasks.json",
+  "sha256": "16c3d20713d7cdaa17e991e3d9a2ba989aca245492325643fdd11bc7fb41612b",
+  "source": "Original arithmetic, order-extraction, fictional conversation, fixture lookup, and Game-24 tasks authored for the atlas. No private or external dataset inputs.",
+  "license": "MIT (repository LICENSE)",
+  "split": "Arithmetic: 4 design / 8 evaluation. Extraction: 3 design / 9 evaluation. Memory/tool/search cases are explicit mechanism probes, not held-out generalization benchmarks.",
+  "training": false,
+  "leakagePolicy": "Prompt demonstrations use design IDs only. Evaluation answers never enter prompts, candidate ranking, grammar selection, or tool choice. Schema domains and tool allowlists are predeclared across tasks. No tuning on evaluation cases; no model weights updated. Small author-written probes do not establish broad reasoning or agent capability."
+}

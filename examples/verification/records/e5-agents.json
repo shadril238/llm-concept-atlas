@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e5-agents",
+  "status": "passed",
+  "date": "2026-11-20T17:09:21.313768+00:00",
+  "gitCommit": "051efc998b79fc5b75149d7288744afd24f957c2",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e5/agents.py"
+  ],
+  "sourceSha256": "0478caeb1cf723d6ce61b83a5eb77d92331f18b23a6073672c8e7732306b7f9f",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "3b2510f0a4e343f5b964cd2b9271053fa70d27d16fb761ef8f6293ebb99c17c9",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "[{'action': 'sum', 'observation': 15}, {'final': '15'}]\n",
+  "stderr": "",
+  "error": null
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e5-prompt-templates",
+  "status": "passed",
+  "date": "2026-11-20T17:09:20.962852+00:00",
+  "gitCommit": "051efc998b79fc5b75149d7288744afd24f957c2",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e5/prompt_templates.py"
+  ],
+  "sourceSha256": "1cfd36d451d42b58e4937389b87f531ba545fd544d062716b0c37851928c4ef1",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "5be504549c75efa3ccf226f7f283b374022361ea3ddb26b719c140684e5014eb",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.008,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "Task: 7 + 8\nReturn one integer.\n",
+  "stderr": "",
+  "error": null
+}

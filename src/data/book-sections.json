@@ -50,6 +50,11 @@
         "chapter": 4,
         "printedPages": [120, 120],
         "note": "Support-weighted F1 does not generally give equal influence to minority classes. Macro-F1 weights class F1 scores equally; values can coincide on a balanced test set."
+      },
+      {
+        "chapter": 7,
+        "printedPages": [201, 202],
+        "note": "Distinguish GGUF container from tensor precision. The text says eight-bit while the following FP16 filename denotes sixteen-bit; E5 verifies its actual pinned Q8 artifact metadata instead."
       }
     ]
   },
@@ -4932,6 +4937,12 @@
           "path": "src/content/docs/concepts/generative-model.mdx",
           "anchor": "how-it-works",
           "role": "partial-explanation"
+        },
+        {
+          "conceptId": "prompt-structure",
+          "path": "src/content/docs/concepts/prompt-structure.mdx",
+          "anchor": "how-it-works",
+          "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
@@ -4966,14 +4977,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Explain model loading, message formatting, and controlled generation in one workflow.",
-        "Greedy selection from supplied probabilities is useful; add actual model scoring and multi-step generation."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
       "evidence": [
         {
-          "path": "src/content/docs/concepts/generative-model.mdx",
-          "anchor": "implement-it",
-          "finding": "Greedy selection from supplied probabilities is useful; add actual model scoring and multi-step generation."
+          "path": "src/content/docs/concepts/prompt-structure.mdx",
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -4981,7 +4991,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 189
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21"
     },
     {
       "id": "book-ch06-model-selection",
@@ -4995,9 +5006,58 @@
       "scope": "context",
       "kind": "context",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["generation-model-selection"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "conceptId": "prompt-structure",
+          "path": "src/content/docs/concepts/prompt-structure.mdx",
+          "anchor": "how-it-works",
+          "role": "partial-explanation"
+        },
+        {
+          "path": "src/content/docs/concepts/prompt-structure.mdx",
+          "anchor": "how-it-works",
+          "role": "partial-explanation",
+          "conceptId": "prompt-structure"
+        },
+        {
+          "path": "src/content/docs/concepts/prompt-structure.mdx",
+          "anchor": "how-it-works",
+          "role": "partial-explanation",
+          "conceptId": "prompt-structure"
+        },
+        {
+          "path": "src/content/docs/concepts/prompt-structure.mdx",
+          "anchor": "how-it-works",
+          "role": "partial-explanation",
+          "conceptId": "prompt-structure"
+        },
+        {
+          "path": "src/content/docs/concepts/prompt-structure.mdx",
+          "anchor": "how-it-works",
+          "role": "partial-explanation",
+          "conceptId": "prompt-structure"
+        },
+        {
+          "path": "src/content/docs/concepts/prompt-structure.mdx",
+          "anchor": "how-it-works",
+          "role": "partial-explanation",
+          "conceptId": "prompt-structure"
+        },
+        {
+          "path": "src/content/docs/concepts/prompt-structure.mdx",
+          "anchor": "how-it-works",
+          "role": "partial-explanation",
+          "conceptId": "prompt-structure"
+        },
+        {
+          "path": "src/content/docs/concepts/prompt-structure.mdx",
+          "anchor": "generation-model-selection",
+          "role": "partial-explanation",
+          "conceptId": "prompt-structure"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -5016,24 +5076,31 @@
         "evaluation": "Contextual decision/discussion objective; a model execution or benchmark is not required."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Choose an accessible base or instruction model based on the task and runtime.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/prompt-structure.mdx",
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 189
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21",
+      "executionRecord": "docs/reviews/e5-workflows.md"
     },
     {
       "id": "book-ch06-model-loading",
@@ -5052,66 +5119,10 @@
           "path": "src/content/docs/concepts/generative-model.mdx",
           "anchor": "implement-it",
           "conceptId": "generative-model"
-        }
-      ],
-      "plannedDestinations": [],
-      "mappingStatus": "partial",
-      "reviewStatus": "changes-required",
-      "auditStatus": "assessed",
-      "priority": "P1",
-      "nextPhase": "E5",
-      "plannedLabs": ["L09", "L10"],
-      "requirements": {
-        "explanation": true,
-        "workedExample": true,
-        "visual": true,
-        "implementation": true,
-        "evaluation": true,
-        "exercises": true
-      },
-      "notApplicableReasons": {},
-      "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
-        "implementation": "missing",
-        "evaluation": "missing",
-        "exercises": "missing"
-      },
-      "gaps": [
-        "Load matching artifacts and inspect the model-specific rendered chat prompt.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
-      ],
-      "evidence": [
+        },
         {
-          "path": "src/content/docs/concepts/generative-model.mdx",
-          "anchor": "implement-it",
-          "finding": "E3 delivers the dedicated explanation, worked trace, practice, and connected verified foundation workflow."
-        }
-      ],
-      "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
-      "sourceLocationCheck": {
-        "method": "normalized-heading-match-in-source-page",
-        "pdfPage": 190
-      }
-    },
-    {
-      "id": "book-ch06-output-controls",
-      "chapter": 6,
-      "parentId": "book-ch06-generation-models",
-      "title": "Controlling Model Output",
-      "origin": "contents",
-      "printedPages": [170, 173],
-      "pdfPages": [192, 195],
-      "objective": "Run controlled generation comparisons with fixed inputs, seeds, and output budgets.",
-      "scope": "core",
-      "kind": "workflow",
-      "coverageUnit": true,
-      "mappings": [
-        {
-          "conceptId": "decoding",
-          "path": "src/content/docs/concepts/decoding.mdx",
+          "conceptId": "prompt-structure",
+          "path": "src/content/docs/concepts/prompt-structure.mdx",
           "anchor": "how-it-works",
           "role": "partial-explanation"
         }
@@ -5136,27 +5147,97 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Run controlled generation comparisons with fixed inputs, seeds, and output budgets.",
-        "Greedy and seeded choice are useful; temperature and top-k/top-p described in the text are not implemented."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
       "evidence": [
         {
-          "path": "src/content/docs/concepts/decoding.mdx",
-          "anchor": "implement-it",
-          "finding": "Greedy and seeded choice are useful; temperature and top-k/top-p described in the text are not implemented."
+          "path": "src/content/docs/concepts/prompt-structure.mdx",
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
+      "sourceLocationCheck": {
+        "method": "normalized-heading-match-in-source-page",
+        "pdfPage": 190
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21",
+      "executionRecord": "docs/reviews/e5-workflows.md"
+    },
+    {
+      "id": "book-ch06-output-controls",
+      "chapter": 6,
+      "parentId": "book-ch06-generation-models",
+      "title": "Controlling Model Output",
+      "origin": "contents",
+      "printedPages": [170, 173],
+      "pdfPages": [192, 195],
+      "objective": "Run controlled generation comparisons with fixed inputs, seeds, and output budgets.",
+      "scope": "core",
+      "kind": "workflow",
+      "coverageUnit": true,
+      "mappings": [
+        {
+          "conceptId": "decoding",
+          "path": "src/content/docs/concepts/decoding.mdx",
+          "anchor": "how-it-works",
+          "role": "partial-explanation"
+        },
+        {
+          "conceptId": "prompt-structure",
+          "path": "src/content/docs/concepts/prompt-structure.mdx",
+          "anchor": "how-it-works",
+          "role": "partial-explanation"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
+      "reviewStatus": "changes-required",
+      "auditStatus": "assessed",
+      "priority": "P1",
+      "nextPhase": "E5",
+      "plannedLabs": ["L09", "L10"],
+      "requirements": {
+        "explanation": true,
+        "workedExample": true,
+        "visual": true,
+        "implementation": true,
+        "evaluation": true,
+        "exercises": true
+      },
+      "notApplicableReasons": {},
+      "coverage": {
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
+        "implementation": "partial",
+        "evaluation": "partial",
+        "exercises": "partial"
+      },
+      "gaps": [
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
+      ],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/prompt-structure.mdx",
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
+        }
+      ],
+      "reviewRecord": "e0-static-audit-2026-11-19",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 192
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21",
+      "executionRecord": "docs/reviews/e5-workflows.md"
     },
     {
       "id": "book-ch06-prompt-introduction",
@@ -5174,7 +5255,7 @@
         {
           "conceptId": "prompt-structure",
           "path": "src/content/docs/concepts/prompt-structure.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -5210,14 +5291,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Explain how input structure conditions behavior and how to test the result.",
-        "Prompt composition is relevant; add annotated roles and a real input/output comparison."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/prompt-structure.mdx",
-          "anchor": "implement-it",
-          "finding": "Prompt composition is relevant; add annotated roles and a real input/output comparison."
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -5225,7 +5305,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 195
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21"
     },
     {
       "id": "book-ch06-prompt-ingredients",
@@ -5243,7 +5324,7 @@
         {
           "conceptId": "prompt-structure",
           "path": "src/content/docs/concepts/prompt-structure.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -5275,22 +5356,23 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Distinguish instruction, context, role, examples, and requested output format.",
-        "Prompt composition is relevant; add annotated roles and a real input/output comparison."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/prompt-structure.mdx",
-          "anchor": "implement-it",
-          "finding": "Prompt composition is relevant; add annotated roles and a real input/output comparison."
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 195
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21",
+      "executionRecord": "docs/reviews/e5-workflows.md"
     },
     {
       "id": "book-ch06-instruction-prompting",
@@ -5308,7 +5390,7 @@
         {
           "conceptId": "instruction-prompting",
           "path": "src/content/docs/concepts/instruction-prompting.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -5332,27 +5414,28 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Evaluate concrete instructions rather than only constructing a string.",
-        "The prompt is printed without a model response or a test of instruction following."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/instruction-prompting.mdx",
-          "anchor": "implement-it",
-          "finding": "The prompt is printed without a model response or a test of instruction following."
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 197
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21",
+      "executionRecord": "docs/reviews/e5-workflows.md"
     },
     {
       "id": "book-ch06-advanced-prompting",
@@ -5370,7 +5453,13 @@
         {
           "conceptId": "prompt-structure",
           "path": "src/content/docs/concepts/prompt-structure.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
+          "role": "partial-explanation"
+        },
+        {
+          "conceptId": "few-shot-examples",
+          "path": "src/content/docs/concepts/few-shot-examples.mdx",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -5406,14 +5495,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Compare strategies on fixed tasks with measurable outcomes.",
-        "Prompt composition is relevant; add annotated roles and a real input/output comparison."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
       "evidence": [
         {
-          "path": "src/content/docs/concepts/prompt-structure.mdx",
-          "anchor": "implement-it",
-          "finding": "Prompt composition is relevant; add annotated roles and a real input/output comparison."
+          "path": "src/content/docs/concepts/few-shot-examples.mdx",
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -5421,7 +5509,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 199
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21"
     },
     {
       "id": "book-ch06-prompt-complexity",
@@ -5439,7 +5528,7 @@
         {
           "conceptId": "prompt-structure",
           "path": "src/content/docs/concepts/prompt-structure.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -5471,22 +5560,23 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Inspect the full assembled prompt and diagnose conflicting or redundant requirements.",
-        "Prompt composition is relevant; add annotated roles and a real input/output comparison."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/prompt-structure.mdx",
-          "anchor": "implement-it",
-          "finding": "Prompt composition is relevant; add annotated roles and a real input/output comparison."
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 199
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21",
+      "executionRecord": "docs/reviews/e5-workflows.md"
     },
     {
       "id": "book-ch06-in-context",
@@ -5504,13 +5594,13 @@
         {
           "conceptId": "in-context-learning",
           "path": "src/content/docs/concepts/in-context-learning.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         },
         {
           "conceptId": "few-shot-examples",
           "path": "src/content/docs/concepts/few-shot-examples.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -5534,32 +5624,28 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Evaluate example selection and ordering while keeping weights fixed.",
-        "The prompt demonstrates formatting but not measured behavior with versus without examples."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
       "evidence": [
         {
-          "path": "src/content/docs/concepts/in-context-learning.mdx",
-          "anchor": "implement-it",
-          "finding": "The prompt demonstrates formatting but not measured behavior with versus without examples."
-        },
-        {
           "path": "src/content/docs/concepts/few-shot-examples.mdx",
-          "anchor": "implement-it",
-          "finding": "The prompt is assembled but no output or demonstration-selection comparison is evaluated."
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 202
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21",
+      "executionRecord": "docs/reviews/e5-workflows.md"
     },
     {
       "id": "book-ch06-chain-prompting",
@@ -5577,7 +5663,7 @@
         {
           "conceptId": "chain-prompting",
           "path": "src/content/docs/concepts/chain-prompting.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -5601,27 +5687,28 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Run multiple model calls with explicit intermediate inputs, outputs, and validation.",
-        "The snippet formats a prompt with fixed retrieval text; it never executes a chain of model calls."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/chain-prompting.mdx",
-          "anchor": "implement-it",
-          "finding": "The snippet formats a prompt with fixed retrieval text; it never executes a chain of model calls."
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 204
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21",
+      "executionRecord": "docs/reviews/e5-workflows.md"
     },
     {
       "id": "book-ch06-reasoning",
@@ -5635,9 +5722,16 @@
       "scope": "core",
       "kind": "container",
       "coverageUnit": false,
-      "mappings": [],
-      "plannedDestinations": ["chain-of-thought"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "conceptId": "chain-of-thought",
+          "path": "src/content/docs/concepts/chain-of-thought.mdx",
+          "anchor": "how-it-works",
+          "role": "partial-explanation"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -5668,16 +5762,22 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Distinguish observable generated solutions from internal computation and task correctness.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/chain-of-thought.mdx",
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 206
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21"
     },
     {
       "id": "book-ch06-chain-of-thought",
@@ -5691,9 +5791,16 @@
       "scope": "core",
       "kind": "container",
       "coverageUnit": false,
-      "mappings": [],
-      "plannedDestinations": ["chain-of-thought"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "conceptId": "chain-of-thought",
+          "path": "src/content/docs/concepts/chain-of-thought.mdx",
+          "anchor": "how-it-works",
+          "role": "partial-explanation"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -5724,16 +5831,22 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Compare worked reasoning demonstrations and zero-shot prompting on verifiable tasks.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/chain-of-thought.mdx",
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 207
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21"
     },
     {
       "id": "book-ch06-self-consistency",
@@ -5751,7 +5864,7 @@
         {
           "conceptId": "self-consistency",
           "path": "src/content/docs/concepts/self-consistency.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -5775,27 +5888,28 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Sample candidate answers, normalize final answers, and aggregate votes with failure analysis.",
-        "Accuracy over supplied labels contains no sampling, answer normalization, or vote aggregation."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/self-consistency.mdx",
-          "anchor": "implement-it",
-          "finding": "Accuracy over supplied labels contains no sampling, answer normalization, or vote aggregation."
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 210
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21",
+      "executionRecord": "docs/reviews/e5-workflows.md"
     },
     {
       "id": "book-ch06-tree-of-thought",
@@ -5809,9 +5923,16 @@
       "scope": "core",
       "kind": "concept",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["tree-of-thought"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "conceptId": "tree-of-thought",
+          "path": "src/content/docs/concepts/tree-of-thought.mdx",
+          "anchor": "how-it-works",
+          "role": "partial-explanation"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -5830,24 +5951,31 @@
         "evaluation": "A numerical or reasoning self-check suffices for this mechanism; full task evaluation belongs to its workflow."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Explain candidate branching, evaluation, pruning, and the limits of simulating experts in one prompt.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/tree-of-thought.mdx",
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 211
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21",
+      "executionRecord": "docs/reviews/e5-workflows.md"
     },
     {
       "id": "book-ch06-verification",
@@ -5865,7 +5993,7 @@
         {
           "conceptId": "output-verification",
           "path": "src/content/docs/concepts/output-verification.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -5901,14 +6029,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Separate structure validation from semantic correctness and bounded retry behavior.",
-        "Allowed-label membership is a useful first check; add parsing, semantic checks, and bounded retries."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/output-verification.mdx",
-          "anchor": "implement-it",
-          "finding": "Allowed-label membership is a useful first check; add parsing, semantic checks, and bounded retries."
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -5916,7 +6043,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 213
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21"
     },
     {
       "id": "book-ch06-output-examples",
@@ -5934,13 +6062,13 @@
         {
           "conceptId": "few-shot-examples",
           "path": "src/content/docs/concepts/few-shot-examples.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         },
         {
           "conceptId": "output-verification",
           "path": "src/content/docs/concepts/output-verification.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -5972,27 +6100,23 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Compare format demonstrations with actual generated outputs and schema checks.",
-        "The prompt is assembled but no output or demonstration-selection comparison is evaluated."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
       "evidence": [
         {
-          "path": "src/content/docs/concepts/few-shot-examples.mdx",
-          "anchor": "implement-it",
-          "finding": "The prompt is assembled but no output or demonstration-selection comparison is evaluated."
-        },
-        {
           "path": "src/content/docs/concepts/output-verification.mdx",
-          "anchor": "implement-it",
-          "finding": "Allowed-label membership is a useful first check; add parsing, semantic checks, and bounded retries."
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 214
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21",
+      "executionRecord": "docs/reviews/e5-workflows.md"
     },
     {
       "id": "book-ch06-constrained-sampling",
@@ -6010,7 +6134,7 @@
         {
           "conceptId": "constrained-sampling",
           "path": "src/content/docs/concepts/constrained-sampling.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -6034,27 +6158,28 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Constrain decoding itself and show why post-generation membership checks are different.",
-        "Post-generation membership checking is validation, not constraints on the decoder token choices."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/constrained-sampling.mdx",
-          "anchor": "implement-it",
-          "finding": "Post-generation membership checking is validation, not constraints on the decoder token choices."
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 216
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21",
+      "executionRecord": "docs/reviews/e5-workflows.md"
     },
     {
       "id": "book-ch07-quantized-langchain",
@@ -6068,9 +6193,21 @@
       "scope": "core",
       "kind": "container",
       "coverageUnit": false,
-      "mappings": [],
-      "plannedDestinations": ["langchain-workflows"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "conceptId": "quantized-models",
+          "path": "src/content/docs/concepts/quantized-models.mdx",
+          "anchor": "how-it-works",
+          "role": "partial-explanation"
+        },
+        {
+          "path": "src/content/docs/labs/prompting-and-workflows.mdx",
+          "anchor": "l11-local-model-and-chains",
+          "role": "partial-explanation"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -6101,16 +6238,22 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Load a supported local runtime and connect it to a documented framework adapter.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/labs/prompting-and-workflows.mdx",
+          "anchor": "l11-local-model-and-chains",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 222
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21"
     },
     {
       "id": "book-ch07-chains",
@@ -6128,7 +6271,7 @@
         {
           "conceptId": "chains",
           "path": "src/content/docs/concepts/chains.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -6164,14 +6307,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Compose model calls with inspectable input/output contracts.",
-        "The snippet assembles one prompt but has no multiple generated stages or stage contracts."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/chains.mdx",
-          "anchor": "implement-it",
-          "finding": "The snippet assembles one prompt but has no multiple generated stages or stage contracts."
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -6179,7 +6321,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 224
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21"
     },
     {
       "id": "book-ch07-prompt-template",
@@ -6197,7 +6340,7 @@
         {
           "conceptId": "prompt-templates",
           "path": "src/content/docs/concepts/prompt-templates.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -6229,22 +6372,23 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Render named inputs and model-specific role boundaries in a real chain.",
-        "One fixed string assembly omits reusable named-slot validation and actual model-specific templates."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/prompt-templates.mdx",
-          "anchor": "implement-it",
-          "finding": "One fixed string assembly omits reusable named-slot validation and actual model-specific templates."
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 225
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21",
+      "executionRecord": "docs/reviews/e5-workflows.md"
     },
     {
       "id": "book-ch07-multi-prompt",
@@ -6262,13 +6406,13 @@
         {
           "conceptId": "chains",
           "path": "src/content/docs/concepts/chains.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         },
         {
           "conceptId": "chain-prompting",
           "path": "src/content/docs/concepts/chain-prompting.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -6292,32 +6436,28 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Pass actual generated intermediate outputs through a multistep workflow.",
-        "The snippet assembles one prompt but has no multiple generated stages or stage contracts."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
       "evidence": [
         {
-          "path": "src/content/docs/concepts/chains.mdx",
-          "anchor": "implement-it",
-          "finding": "The snippet assembles one prompt but has no multiple generated stages or stage contracts."
-        },
-        {
           "path": "src/content/docs/concepts/chain-prompting.mdx",
-          "anchor": "implement-it",
-          "finding": "The snippet formats a prompt with fixed retrieval text; it never executes a chain of model calls."
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 228
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21",
+      "executionRecord": "docs/reviews/e5-workflows.md"
     },
     {
       "id": "book-ch07-memory",
@@ -6335,7 +6475,7 @@
         {
           "conceptId": "conversation-memory",
           "path": "src/content/docs/concepts/conversation-memory.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -6371,14 +6511,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Explain application state, prompt reconstruction, and resource limits.",
-        "Stored history is shown, but not supplied to a real model or tested for remembered facts."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/conversation-memory.mdx",
-          "anchor": "implement-it",
-          "finding": "Stored history is shown, but not supplied to a real model or tested for remembered facts."
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -6386,7 +6525,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 231
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21"
     },
     {
       "id": "book-ch07-buffer",
@@ -6404,7 +6544,7 @@
         {
           "conceptId": "conversation-memory",
           "path": "src/content/docs/concepts/conversation-memory.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -6428,27 +6568,28 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Replay actual conversation history and test what the model can recover.",
-        "Stored history is shown, but not supplied to a real model or tested for remembered facts."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/conversation-memory.mdx",
-          "anchor": "implement-it",
-          "finding": "Stored history is shown, but not supplied to a real model or tested for remembered facts."
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 232
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21",
+      "executionRecord": "docs/reviews/e5-workflows.md"
     },
     {
       "id": "book-ch07-window",
@@ -6466,7 +6607,7 @@
         {
           "conceptId": "windowed-memory",
           "path": "src/content/docs/concepts/windowed-memory.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -6490,27 +6631,28 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Compare bounded windows on a conversation whose earlier constraint is removed.",
-        "The fixed three-message slice needs a variable window and a concrete forgotten-constraint experiment."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/windowed-memory.mdx",
-          "anchor": "implement-it",
-          "finding": "The fixed three-message slice needs a variable window and a concrete forgotten-constraint experiment."
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 234
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21",
+      "executionRecord": "docs/reviews/e5-workflows.md"
     },
     {
       "id": "book-ch07-summary",
@@ -6528,7 +6670,7 @@
         {
           "conceptId": "summarized-memory",
           "path": "src/content/docs/concepts/summarized-memory.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -6552,27 +6694,28 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Generate and update a summary, measure lost facts, and inspect source-message support.",
-        "The code prints the last three messages; it never creates or updates a summary."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/summarized-memory.mdx",
-          "anchor": "implement-it",
-          "finding": "The code prints the last three messages; it never creates or updates a summary."
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 236
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21",
+      "executionRecord": "docs/reviews/e5-workflows.md"
     },
     {
       "id": "book-ch07-agents",
@@ -6590,7 +6733,7 @@
         {
           "conceptId": "agents",
           "path": "src/content/docs/concepts/agents.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -6626,14 +6769,13 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Connect model-selected actions to tools, observations, and termination conditions.",
-        "The tool plan is hardcoded; there is no model-selected action or observation-driven loop."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/agents.mdx",
-          "anchor": "implement-it",
-          "finding": "The tool plan is hardcoded; there is no model-selected action or observation-driven loop."
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -6641,7 +6783,8 @@
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 240
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21"
     },
     {
       "id": "book-ch07-agent-reasoning",
@@ -6659,7 +6802,13 @@
         {
           "conceptId": "react",
           "path": "src/content/docs/concepts/react.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
+          "role": "partial-explanation"
+        },
+        {
+          "conceptId": "agents",
+          "path": "src/content/docs/concepts/agents.mdx",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -6691,22 +6840,23 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Trace observable planning and tool use without treating generated explanations as faithful internals.",
-        "The example shares a fixed lookup plan with Agents; it has no ReAct iteration or model observation handling."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
       "evidence": [
         {
-          "path": "src/content/docs/concepts/react.mdx",
-          "anchor": "implement-it",
-          "finding": "The example shares a fixed lookup plan with Agents; it has no ReAct iteration or model observation handling."
+          "path": "src/content/docs/concepts/agents.mdx",
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 241
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21",
+      "executionRecord": "docs/reviews/e5-workflows.md"
     },
     {
       "id": "book-ch07-react-langchain",
@@ -6720,9 +6870,21 @@
       "scope": "core",
       "kind": "workflow",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["langchain-workflows"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "conceptId": "react",
+          "path": "src/content/docs/concepts/react.mdx",
+          "anchor": "how-it-works",
+          "role": "partial-explanation"
+        },
+        {
+          "path": "src/content/docs/labs/prompting-and-workflows.mdx",
+          "anchor": "l11-local-model-and-chains",
+          "role": "partial-explanation"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -6738,24 +6900,31 @@
       },
       "notApplicableReasons": {},
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
-        "implementation": "missing",
-        "evaluation": "missing",
-        "exercises": "missing"
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
+        "implementation": "partial",
+        "evaluation": "partial",
+        "exercises": "partial"
       },
       "gaps": [
-        "Run a bounded framework tool loop with actual observations and invalid-call handling.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/labs/prompting-and-workflows.mdx",
+          "anchor": "l11-local-model-and-chains",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 243
-      }
+      },
+      "enhancementReview": "e5-workflows-author-review-2026-11-21",
+      "executionRecord": "docs/reviews/e5-workflows.md"
     },
     {
       "id": "book-ch08-overview",
@@ -12945,9 +13114,16 @@
       "scope": "core",
       "kind": "concept",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": ["chain-of-thought"],
-      "mappingStatus": "unmapped",
+      "mappings": [
+        {
+          "conceptId": "chain-of-thought",
+          "path": "src/content/docs/concepts/chain-of-thought.mdx",
+          "anchor": "how-it-works",
+          "role": "partial-explanation"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "partial",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -12966,20 +13142,27 @@
         "evaluation": "A numerical or reasoning self-check suffices for this mechanism; full task evaluation belongs to its workflow."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Compare direct and step-by-step prompts on held-out verifiable tasks.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/chain-of-thought.mdx",
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "verified",
+      "enhancementReview": "e5-workflows-author-review-2026-11-21",
+      "executionRecord": "docs/reviews/e5-workflows.md"
     },
     {
       "id": "book-ch07-gguf",
@@ -12997,7 +13180,7 @@
         {
           "conceptId": "quantized-models",
           "path": "src/content/docs/concepts/quantized-models.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -13029,18 +13212,19 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Explain model format, context settings, hardware layers, and actual runtime configuration.",
-        "The arithmetic illustrates rounding but never loads a quantized runtime or measures its supported resources."
+        "E5 author implementation and execution delivered. Independent technical/editorial acceptance and beginner feedback remain pending."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/quantized-models.mdx",
-          "anchor": "implement-it",
-          "finding": "The arithmetic illustrates rounding but never loads a quantized runtime or measures its supported resources."
+          "anchor": "how-it-works",
+          "finding": "E5: topic-specific explanation, recorded native execution, interactive trace, and bounded verification. Author-reviewed; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "verified",
+      "enhancementReview": "e5-workflows-author-review-2026-11-21",
+      "executionRecord": "docs/reviews/e5-workflows.md"
     },
     {
       "id": "book-ch08-chunking",

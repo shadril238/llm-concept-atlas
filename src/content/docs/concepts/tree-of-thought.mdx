@@ -1,0 +1,120 @@
+---
+title: "Tree-of-thought"
+description: "Tree-of-thought is an explicit search workflow over candidate intermediate states. It needs branching, state evaluation, a frontier policy, and a stopping rule; a list of ideas in one answer is not an executed search tree."
+kind: "concept"
+conceptId: tree-of-thought
+chapter: 6
+part: "applications"
+summary: "Tree-of-thought is an explicit search workflow over candidate intermediate states. It needs branching, state evaluation, a frontier policy, and a stopping rule; a list of ideas in one answer is not an executed search tree."
+parent: "prompt-structure"
+prerequisites: ["chain-of-thought", "output-verification"]
+related: ["chain-of-thought", "chain-prompting"]
+level: "intermediate"
+tags: ["applications", "chapter-06"]
+lessonStatus: full
+lastReviewed: "2026-11-21"
+reviewStatus: "author-reviewed"
+reviewRecord: e5-workflows-author-review-2026-11-21
+learningObjectives: ["Explore actual generated search nodes and verified solution paths.", "Explain how beam pruning and node budgets can lose solutions.", "Separate deterministic search from model-guided candidate ranking."]
+bookSections: ["book-ch06-tree-of-thought"]
+labHref: "/labs/prompting-and-workflows/"
+aliases: ["ToT", "thought tree", "bounded search"]
+exampleIds: ["e5-tree-of-thought", "search-and-voting"]
+relationshipReasons: {"chain-of-thought": "A search tree makes alternative intermediate states explicit rather than treating one visible explanation as an executed search.", "output-verification": "Use an external state evaluator and exact solution check to distinguish promising branches from verified success."}
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import WorkflowEvidence from '../../../components/WorkflowEvidence.astro';
+import { SearchExplorer } from '../../../components/simulations/WorkflowLabs';
+
+<ConceptPrimer id="tree-of-thought" />
+
+## Definition and intuition
+
+Tree-of-thought is an explicit search workflow over candidate intermediate states. It needs branching, state evaluation, a frontier policy, and a stopping rule; a list of ideas in one answer is not an executed search tree.
+
+A search tree makes alternatives concrete. Each node records a state; each edge records a legal action. The evaluator decides which states deserve more work or already satisfy the task. That control flow is visible and independently testable.
+
+<ReferenceBrief objectives={["Explore actual generated search nodes and verified solution paths.", "Explain how beam pruning and node budgets can lose solutions.", "Separate deterministic search from model-guided candidate ranking."]} prerequisites="chain-of-thought, output-verification" scope="Original teaching mechanism plus recorded local-model evidence. Independent teaching review is pending." />
+
+## How it works
+
+### A bounded, exact problem
+
+L10 combines four small integers using addition, subtraction, multiplication, and division to make 24. Every input must be used exactly once. States contain exact rational values and their expression provenance. The solver generates legal pairwise combinations, excludes division by zero, and memoizes duplicate value states. A bounded AST interpreter checks the final expression and leaf multiset without evaluating arbitrary Python.
+
+### Frontier and stopping
+
+Complete breadth-first search, beam widths one and four, and a sixteen-node budget are compared on identical puzzles. Beam variants rank all generated candidates using a declared distance heuristic before retaining the beam. Beam exhaustion means the retained path failed; node-budget exhaustion means work stopped early. Only an exhaustive frontier exhaustion establishes no solution under these operators and duplicate-state convention.
+
+### Where the model enters
+
+A separate actual model ranks one of up to eight pre-generated legal next candidates, with at most three calls. A native index grammar prevents out-of-range selections. The exact solver still constructs operations and checks success. This restricted model-guided search is not a demonstration that the model independently invents, evaluates, and proves arithmetic plans. The displayed first hundred nodes plus solution ancestors are an explicitly labeled subset; full traces are saved locally.
+
+## Worked example
+
+The inputs 3, 3, 8, 8 have the fractional solution 8/(3-8/3)=24. A heuristic that prefers values immediately near 24 can discard the fractional route. Compare the complete run with beam-one and inspect where the frontier becomes narrow. A failed beam is a limitation of that search policy, not proof that the puzzle is impossible.
+
+## Try the experiment
+
+Predict the outcome before changing a control. The explorer shows recorded real runs or explicitly labeled deterministic calculations; it does not call a model in your browser.
+
+<SearchExplorer client:visible />
+
+## Implement it
+
+Run this small standard-library mechanism with Python 3. It illustrates the stated contract or calculation. The connected L09–L11 source below performs the actual local-model workflow; this short snippet is not a substitute for those model calls.
+
+{/* example:e5-tree-of-thought:start */}
+
+```python
+from fractions import Fraction
+
+answer = Fraction(8) / (Fraction(3) - Fraction(8, 3))
+print("8 / (3 - 8/3) =", answer)
+assert answer == 24
+print("inputs used: 8, 3, 8, 3")
+```
+
+{/* example:e5-tree-of-thought:end */}
+
+Expected mechanism output:
+
+```text
+8 / (3 - 8/3) = 24
+inputs used: 8, 3, 8, 3
+```
+
+<WorkflowEvidence id="search-and-voting" />
+
+## When to use it
+
+Use explicit search when intermediate states and success can be represented and evaluated, such as constrained puzzles or bounded planning. Define work budgets and compare a transparent baseline before adding a model ranker.
+
+## Limits and common mistakes
+
+Branching can grow quickly. Heuristics and duplicate-state conventions influence which paths survive. A Game-24 solver is a controlled illustration, not evidence of general language reasoning or a universal planning agent.
+
+## Check your understanding
+
+<details>
+<summary>Does budget exhaustion prove no solution exists?</summary>
+
+No. It says the search stopped before exhausting the permitted state space.
+
+</details>
+
+<details>
+<summary>What does the local model decide in this lab?</summary>
+
+It chooses an index from a bounded pool of legal candidates. The deterministic solver generates operations and verifies the final expression.
+
+</details>
+
+## Connections and sources
+
+This original lesson follows Chapter 6 of *Hands-On Large Language Models*. Read the [complete execution guide](/llm-concept-atlas/labs/prompting-and-workflows/) for artifact identity, predeclared tasks, error analysis, and implementation differences from the [authors’ chapter 6 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter06). The source PDF and book artwork are not redistributed.
+
+<ConceptConnections id="tree-of-thought" />

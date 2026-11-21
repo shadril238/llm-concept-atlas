@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-21T17:56:42.856449+00:00",
+  "platform": "macOS-27.2.1-arm64-arm-64bit",
+  "lockSha256": "c0989636e54c938619b18e2844c922b6d864862333eb3c76f24191304f7693b7",
+  "verifierSha256": "255e6cf1ca454e7ed174d974df0afe854c50aa3d04487a784d0ef41c2b3945e4",
+  "python": "3.11.18",
+  "records": [
+    {
+      "path": "examples/applications/workflows/notebooks/bounded-tool-workflow.ipynb",
+      "sha256": "63aacbe457a6f6094d33e0cca3197cb8392e511cb01ed050f8b0edc1cf489567",
+      "method": "Fresh actual Jupyter kernel; all cells executed in order via nbclient",
+      "codeCells": 4,
+      "status": "passed"
+    },
+    {
+      "path": "examples/applications/workflows/notebooks/local-model-chain.ipynb",
+      "sha256": "c13fc6c4f42081d952d921cb46244d6996250601fb5e359e1480a213f9c3619e",
+      "method": "Fresh actual Jupyter kernel; all cells executed in order via nbclient",
+      "codeCells": 4,
+      "status": "passed"
+    },
+    {
+      "path": "examples/applications/workflows/notebooks/memory-policies.ipynb",
+      "sha256": "66d2b1fcd15e00522b7ce49f19f1b5882c50814b33f9a8b6cb5dadbebd39d6b8",
+      "method": "Fresh actual Jupyter kernel; all cells executed in order via nbclient",
+      "codeCells": 4,
+      "status": "passed"
+    },
+    {
+      "path": "examples/applications/workflows/notebooks/prompt-evaluation.ipynb",
+      "sha256": "ab1de072fc10aae3e68a3fe61bcf542e6b0d05b54d1a87015aac668351a0c5a9",
+      "method": "Fresh actual Jupyter kernel; all cells executed in order via nbclient",
+      "codeCells": 4,
+      "status": "passed"
+    },
+    {
+      "path": "examples/applications/workflows/notebooks/search-and-voting.ipynb",
+      "sha256": "e569cc45ebefce602d291067cccdcee579a9b5165e9aea713760739135c88e47",
+      "method": "Fresh actual Jupyter kernel; all cells executed in order via nbclient",
+      "codeCells": 4,
+      "status": "passed"
+    }
+  ]
+}

@@ -54,3 +54,5 @@ Ordinary Pages builds validate manifests, synchronization, coverage, all offline
 E3 foundations use the same locked reference environment. See [E3.md](./training/reference/E3.md) for L01–L06 commands, pretrained-vector provenance, optional larger-data limits, and CPU cache measurement details.
 
 E4 adds [L07–L08 CPU classification and BERTopic workflows](./applications/discovery/README.md), an isolated locked environment, attributed UCI sentiment data, an original fictional summary corpus, and a documented hosted-results importer that makes no API request.
+
+E5 adds [L09–L11 local prompting and application workflows](./applications/workflows/README.md): native constrained decoding, actual sampled voting, exact bounded search, real multi-call chains, three memory policies, and finite tools. Its five notebook views share the verified sources; all original task fixtures are MIT. The registry now contains 185 examples (163 offline foundation mechanisms).

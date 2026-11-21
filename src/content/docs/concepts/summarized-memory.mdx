@@ -1,91 +1,121 @@
 ---
-title: Summarized memory
-description: Summarized memory compresses earlier conversation into a shorter note that is passed to later requests.
-kind: concept
+title: "Summarized memory"
+parent: "chapter-07"
+related: ["windowed-memory", "agents"]
+description: "Summarized memory compresses earlier conversation into generated notes that are supplied to later calls. It can preserve distant information within a smaller prompt, but compression and repeated rewriting can lose or distort facts."
+kind: "concept"
 conceptId: summarized-memory
 chapter: 7
-part: applications
-summary: Summarized memory compresses earlier conversation into a shorter note that is passed to later requests.
-parent: chapter-07
-prerequisites: [conversation-memory]
-related: [windowed-memory, agents]
-level: intermediate
-tags: [applications, chapter-07]
+part: "applications"
+summary: "Summarized memory compresses earlier conversation into generated notes that are supplied to later calls. It can preserve distant information within a smaller prompt, but compression and repeated rewriting can lose or distort facts."
+prerequisites: ["conversation-memory"]
+level: "intermediate"
+tags: ["applications", "chapter-07"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-21"
+reviewStatus: "author-reviewed"
+reviewRecord: e5-workflows-author-review-2026-11-21
+learningObjectives: ["Inspect real running-summary updates and their source messages.", "Track lost facts and unresolved corrections.", "Separate summary generation work from final-answer work."]
+bookSections: ["book-ch07-summary"]
+labHref: "/labs/prompting-and-workflows/"
+aliases: ["running summary", "summary memory"]
+exampleIds: ["e5-summarized-memory", "memory-policies"]
+relationshipReasons: {"conversation-memory": "Generated notes replace part of the stored history, introducing compression errors and additional model calls."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import WorkflowEvidence from '../../../components/WorkflowEvidence.astro';
+import { MemoryExplorer } from '../../../components/simulations/WorkflowLabs';
 
 <ConceptPrimer id="summarized-memory" />
 
 ## Definition and intuition
 
-Summarized memory compresses earlier conversation into a shorter note that is passed to later requests.
+Summarized memory compresses earlier conversation into generated notes that are supplied to later calls. It can preserve distant information within a smaller prompt, but compression and repeated rewriting can lose or distort facts.
 
-Chapter 7 combines model calls with templates, memory, and tools. Trace the inputs and outputs of each step so an error can be located rather than hidden inside a chain.
+A summary is an output of a model, with its own prompt, budget, and errors. Reusing it as memory can carry those errors into every later answer. The original messages remain the audit reference.
 
-## Before you start
+<ReferenceBrief objectives={["Inspect real running-summary updates and their source messages.", "Track lost facts and unresolved corrections.", "Separate summary generation work from final-answer work."]} prerequisites="conversation-memory" scope="Original teaching mechanism plus recorded local-model evidence. Independent teaching review is pending." />
 
-Read [Conversation memory](/llm-concept-atlas/concepts/conversation-memory/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **summarized memory** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### A real update process
 
-1. **Prepare:** Extract durable facts and unresolved goals from old messages
-2. **Transform:** Write a compact summary with provenance and update rules
-3. **Inspect:** Include the summary and recent turns in new prompts.
+L11 first summarizes the initial four messages, then asks a second real model call to update those notes using the remaining four. Each update has an eighty-token output cap. The final policy combines the generated running summary with the last two verbatim turn pairs. This is actual generated compression, not an ideal hand-authored memory string.
 
-### The important distinction
+### Corrections and provenance
 
-A summary is a derived record that can drift from the source messages. Keep a distinction between confirmed facts, user preferences, and unresolved questions. Recompute or correct the summary when new turns contradict it instead of appending every new statement indefinitely.
+The user initially says Friday and later corrects the meeting to Monday. A faithful summary should preserve the current value and enough provenance to avoid treating both as equally current. The model may instead repeat earlier text, omit the project code, or invent a request. Both raw summary updates and their exact inputs are shown so these errors can be attributed.
+
+### Fit and evaluate
+
+At each final-answer budget, the packer may remove the summary before dropping recent pairs if the input is too long. The artifact records whether it survived. Actual final answers are graded against three original facts; literal fact presence and stale-value presence are separate diagnostics. Summary-generation token work is recorded separately and should be included when estimating the total application cost.
 
 ## Worked example
 
-A long support conversation becomes “User needs invoice for order 123; refund pending.” The summary saves tokens but must be updated if the refund resolves. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+The recorded second summary invents a request for a new code rather than faithfully retaining LARK-27. At the larger budget the summary policy answers none of the three fields correctly while the buffer gets all three. This failure is an important learning result: compressed context is useful only if its information survives and the answering model uses it.
 
-<LessonFlow steps={["Extract durable facts and unresolved goals from old messages", "Write a compact summary with provenance and update rules", "Include the summary and recent turns in new prompts."]} caption="A teaching diagram for Summarized memory. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
+
+Predict the outcome before changing a control. The explorer shows recorded real runs or explicitly labeled deterministic calculations; it does not call a model in your browser.
+
+<MemoryExplorer initial="summary" client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+Run this small standard-library mechanism with Python 3. It illustrates the stated contract or calculation. The connected L09–L11 source below performs the actual local-model workflow; this short snippet is not a substitute for those model calls.
+
+{/* example:e5-summarized-memory:start */}
 
 ```python
-history = [("user", "My name is Sam"), ("assistant", "Hello Sam")]
-history.append(("user", "What is my name?"))
-print("\n".join(f"{role}: {text}" for role, text in history[-3:]))
+reference = {"code": "LARK-27", "day": "Monday", "units": "metric"}
+notes = "Meeting Friday. Please provide a new project code."
+for field, value in reference.items():
+    print(field, "literal present:", value.casefold() in notes.casefold())
+print("stale Friday present:", "friday" in notes.casefold())
 ```
 
-**Expected output:**
+{/* example:e5-summarized-memory:end */}
+
+Expected mechanism output:
 
 ```text
-user: My name is Sam
-assistant: Hello Sam
-user: What is my name?
+code literal present: False
+day literal present: False
+units literal present: False
+stale Friday present: True
 ```
 
-**What the code shows:** The slice keeps the last three messages and formats them for a future request. Earlier messages are absent unless the application explicitly stores and reinserts them. The [official chapter 7 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter07) develops the corresponding model-based implementation.
+<WorkflowEvidence id="memory-policies" />
 
 ## When to use it
 
-Use it when conversation length exceeds the practical context budget. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use summaries when conversation length outgrows a useful window and the required facts can be checked. Preserve source messages, correction rules, and summary versions; compare against structured memory or retrieval for facts that must not be lost.
 
 ## Limits and common mistakes
 
-- Summaries can omit nuance or preserve mistakes and must be checked against source messages.
-- **Failure to look for:** An incorrect summary says the user agreed to a refund and later steps rely on that claim.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Compression is lossy, model errors can accumulate, and summary calls add work. Literal presence is not semantic correctness. The lab’s small model failure does not establish that every summarizer is worse than a buffer.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First extract durable facts and unresolved goals from old messages Then write a compact summary with provenance and update rules Finally include the summary and recent turns in new prompts.</p></details>
+<details>
+<summary>Can a generated summary be treated as verified ground truth?</summary>
 
-<details><summary>What would make the result misleading?</summary><p>An incorrect summary says the user agreed to a refund and later steps rely on that claim.</p></details>
+No. Compare it with original messages and validate the facts that matter.
+
+</details>
+
+<details>
+<summary>Why retain each summary version?</summary>
+
+It reveals when a fact was dropped or distorted and whether an error was introduced during an update.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 7 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 7 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter07). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 7 of *Hands-On Large Language Models*. Read the [complete execution guide](/llm-concept-atlas/labs/prompting-and-workflows/) for artifact identity, predeclared tasks, error analysis, and implementation differences from the [authors’ chapter 7 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter07). The source PDF and book artwork are not redistributed.
 
 <ConceptConnections id="summarized-memory" />

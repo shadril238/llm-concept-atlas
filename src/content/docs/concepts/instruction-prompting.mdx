@@ -1,100 +1,122 @@
 ---
-title: Instruction prompting
-description: Instruction prompting states the requested behavior directly in natural language.
-kind: concept
+title: "Instruction prompting"
+parent: "chapter-06"
+related: ["prompt-structure", "in-context-learning"]
+description: "Instruction prompting specifies the task and output contract in the model input. It conditions generation without updating model weights, and it must be evaluated on actual outputs rather than on how clear the instruction sounds."
+kind: "concept"
 conceptId: instruction-prompting
 chapter: 6
-part: applications
-summary: Instruction prompting states the requested behavior directly in natural language.
-parent: chapter-06
-prerequisites: [prompt-structure]
-related: [prompt-structure, in-context-learning]
-level: intermediate
-tags: [applications, chapter-06]
+part: "applications"
+summary: "Instruction prompting specifies the task and output contract in the model input. It conditions generation without updating model weights, and it must be evaluated on actual outputs rather than on how clear the instruction sounds."
+prerequisites: ["prompt-structure"]
+level: "intermediate"
+tags: ["applications", "chapter-06"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-21"
+reviewStatus: "author-reviewed"
+reviewRecord: e5-workflows-author-review-2026-11-21
+learningObjectives: ["Write a testable instruction with a declared output contract.", "Measure extracted-answer correctness separately from format validity.", "Recognize the limits of a clear instruction on a small model."]
+bookSections: ["book-ch06-instruction-prompting"]
+labHref: "/labs/prompting-and-workflows/"
+aliases: ["instruction", "zero-shot prompting"]
+exampleIds: ["e5-instruction-prompting", "prompt-evaluation"]
+relationshipReasons: {"prompt-structure": "Locate the instruction, task data, and output contract before testing whether the model follows them."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { PromptLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import WorkflowEvidence from '../../../components/WorkflowEvidence.astro';
+import { PromptExperiment } from '../../../components/simulations/WorkflowLabs';
 
 <ConceptPrimer id="instruction-prompting" />
 
 ## Definition and intuition
 
-Instruction prompting states the requested behavior directly in natural language.
+Instruction prompting specifies the task and output contract in the model input. It conditions generation without updating model weights, and it must be evaluated on actual outputs rather than on how clear the instruction sounds.
 
-Chapter 6 treats a prompt as a task specification. A prompt can guide output, but it does not change model weights or guarantee that an answer is correct.
+“Be accurate” does not specify what a program should parse. A testable instruction identifies the input, permitted output shape, and what to do when information is missing. It still leaves the language model responsible for following the request.
 
-## Before you start
+<ReferenceBrief objectives={["Write a testable instruction with a declared output contract.", "Measure extracted-answer correctness separately from format validity.", "Recognize the limits of a clear instruction on a small model."]} prerequisites="prompt-structure" scope="Original teaching mechanism plus recorded local-model evidence. Independent teaching review is pending." />
 
-Read [Prompt structure](/llm-concept-atlas/concepts/prompt-structure/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **instruction prompting** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### State a verifiable task
 
-1. **Prepare:** Describe the role and task in concrete terms
-2. **Transform:** Provide the input and necessary constraints
-3. **Inspect:** Check the output against the instruction and examples.
+L09 uses original arithmetic questions and order-extraction messages with design/evaluation splits. The arithmetic answer is checked using a complete integer or a terminal Answer: integer line under a predeclared parser. Requested-format validity is measured separately. A narrative that a human might interpret but that this parser cannot extract is marked unextractable; the metric is not a comprehensive semantic judgment.
 
-### The important distinction
+### Control what else changes
 
-An instruction can state constraints such as length, tone, or permitted labels. Make success observable: “return one of these labels” is easier to verify than “be helpful.” If a prompt demands facts not available in context or model knowledge, the appropriate behavior may be uncertainty rather than confident completion.
+Prompt comparisons use the same Q8 artifact, greedy configuration, output caps, and case IDs. Six arithmetic variants and three extraction variants are reported rather than choosing a winner on the evaluation set. Instructions, examples, and requested format can interact. The extraction instruction-only and native-schema conditions use identical messages, isolating the added native decoding constraint.
+
+### No weight update
+
+The model uses the current prompt as input and predicts a continuation. Neither a better instruction nor a new demonstration is gradient training. The application may retain the instruction template for later calls, but that persistence belongs to the application. A model can still ignore, misunderstand, or incompletely satisfy a concise request.
 
 ## Worked example
 
-“Return only a JSON object with a `label` field” is clearer than “analyze this”. The model may still add prose, so the parser must validate the shape. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+For a contract “one integer only”, the output “Answer: 15” contains an extractable answer but violates the requested bare-integer format. The output “15” meets both shape and content requirements for the seven-plus-eight case. The output “14” meets the shape requirement but is wrong. Three different outcomes need separate checks.
 
-<LessonFlow steps={["Describe the role and task in concrete terms", "Provide the input and necessary constraints", "Check the output against the instruction and examples."]} caption="A teaching diagram for Instruction prompting. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
 
-## Try the interactive lab
+Predict the outcome before changing a control. The explorer shows recorded real runs or explicitly labeled deterministic calculations; it does not call a model in your browser.
 
-<PromptLab client:visible />
-
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+<PromptExperiment client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+Run this small standard-library mechanism with Python 3. It illustrates the stated contract or calculation. The connected L09–L11 source below performs the actual local-model workflow; this short snippet is not a substitute for those model calls.
+
+{/* example:e5-instruction-prompting:start */}
 
 ```python
-instruction = "Return one label: positive or negative."
-example = "Text: I loved it. Label: positive"
-query = "Text: The ending was dull. Label:"
-prompt = "\n".join([instruction, example, query])
-print(prompt)
+import re
+
+expected = 15
+for raw in ["15", "14", "Answer: 15"]:
+    valid = re.fullmatch(r"-?\d+", raw) is not None
+    normalized = int(raw.removeprefix("Answer: "))
+    print(raw, "format:", valid, "answer:", normalized == expected)
 ```
 
-**Expected output:**
+{/* example:e5-instruction-prompting:end */}
+
+Expected mechanism output:
 
 ```text
-Return one label: positive or negative.
-Text: I loved it. Label: positive
-Text: The ending was dull. Label:
+15 format: True answer: True
+14 format: True answer: False
+Answer: 15 format: False answer: True
 ```
 
-**What the code shows:** The final string contains the instruction, demonstration, and new query in that order. Inspect the rendered string before sending it to a real generator. The [official chapter 6 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter06) develops the corresponding model-based implementation.
+<WorkflowEvidence id="prompt-evaluation" />
 
 ## When to use it
 
-Use it for straightforward tasks where the model already has relevant capabilities. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use instruction prompting as a measured baseline before adding examples, additional calls, or search. A simple task-specific contract is easier to test and debug than a broad request for generally better answers.
 
 ## Limits and common mistakes
 
-- Instructions are not weight updates and can conflict with context, ambiguity, or model behavior.
-- **Failure to look for:** An instruction says “cite evidence” but no evidence is provided, so the model invents citations.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Formatting requests are not grammar masks. Low sampling randomness does not make a wrong answer correct. The local model can fail elementary tasks; inspect the original outputs and the exact grading policy before interpreting a zero score.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First describe the role and task in concrete terms Then provide the input and necessary constraints Finally check the output against the instruction and examples.</p></details>
+<details>
+<summary>Can a valid integer be an incorrect answer?</summary>
 
-<details><summary>What would make the result misleading?</summary><p>An instruction says “cite evidence” but no evidence is provided, so the model invents citations.</p></details>
+Yes. Format validation answers whether the output fits the contract; a reference answer or independent verifier checks the task result.
+
+</details>
+
+<details>
+<summary>Does changing an instruction fine-tune the checkpoint?</summary>
+
+No. It changes the supplied input. Model weights remain fixed in these workflows.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 6 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 6 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter06). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 6 of *Hands-On Large Language Models*. Read the [complete execution guide](/llm-concept-atlas/labs/prompting-and-workflows/) for artifact identity, predeclared tasks, error analysis, and implementation differences from the [authors’ chapter 6 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter06). The source PDF and book artwork are not redistributed.
 
 <ConceptConnections id="instruction-prompting" />

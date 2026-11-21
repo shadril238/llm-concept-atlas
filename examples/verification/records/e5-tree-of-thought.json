@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e5-tree-of-thought",
+  "status": "passed",
+  "date": "2026-11-20T17:09:20.679992+00:00",
+  "gitCommit": "051efc998b79fc5b75149d7288744afd24f957c2",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e5/tree_of_thought.py"
+  ],
+  "sourceSha256": "7b3624db1b6cdea836f36fd3f37102fdd6f2fe7751389329c5bff3647d666c53",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "7fc6906f729771a3e06d7bd82e5b972b37d465caee4b39db5c2467653493dc34",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.013,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "8 / (3 - 8/3) = 24\ninputs used: 8, 3, 8, 3\n",
+  "stderr": "",
+  "error": null
+}

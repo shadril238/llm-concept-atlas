@@ -19,6 +19,10 @@ on:
         description: Run E4 CPU classification and BERTopic workflows (public model downloads)
         type: boolean
         default: false
+      e5:
+        description: Run E5 local GGUF prompting, search, memory, and tools
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
@@ -114,3 +118,27 @@ jobs:
             examples/verification/records/bertopic-pipeline*.json
             examples/verification/records/topic-label-generation*.json
             examples/artifacts/e4-*/results.json
+
+  e5:
+    if: github.event_name == 'workflow_dispatch' && inputs.e5
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+        with:
+          version: "0.13.9"
+      - run: uv sync --locked --project examples/applications/workflows
+      - run: examples/applications/workflows/.venv/bin/python examples/applications/workflows/verify_notebooks.py --allow-network
+      - run: python3 scripts/run-examples.py --id prompt-evaluation --id search-and-voting --id local-model-chain --id memory-policies --id bounded-tool-workflow --offline --record
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: e5-workflow-verification
+          path: |
+            examples/verification/records/prompt-evaluation*.json
+            examples/verification/records/search-and-voting*.json
+            examples/verification/records/local-model-chain*.json
+            examples/verification/records/memory-policies*.json
+            examples/verification/records/bounded-tool-workflow*.json
+            examples/artifacts/e5-*/results.json

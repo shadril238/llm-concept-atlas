@@ -1,0 +1,1092 @@
+---
+title: "Prompting, search, memory, and tools · L09–L11"
+description: "Run pinned local-model experiments, inspect failures, and connect prompting to bounded search and application state."
+---
+
+import VerifiedRun from '../../../components/VerifiedRun.astro';
+import { PromptExperiment, VotingLab, SearchExplorer, MemoryExplorer, WorkflowTrace, OutputValidator } from '../../../components/simulations/WorkflowLabs';
+
+A readable explanation should connect **definition → mechanism → experiment → implementation → verification**. These labs do that with original small tasks, a pinned local GGUF model, actual recorded calls, and explicit failure cases. The browser explores recorded evidence and deterministic calculators; it makes no API requests or model calls.
+
+## Start here
+
+Read [prompt structure](/llm-concept-atlas/concepts/prompt-structure/), [output verification](/llm-concept-atlas/concepts/output-verification/), and [quantized models](/llm-concept-atlas/concepts/quantized-models/). Then run the sections in order. Each connected lesson has its own worked example and exercises.
+
+From the repository root:
+
+```sh
+uv sync --locked --project examples/applications/workflows
+python3 scripts/run-examples.py --id prompt-evaluation --allow-network
+python3 scripts/run-examples.py --id search-and-voting --offline
+python3 scripts/run-examples.py --id local-model-chain --offline
+python3 scripts/run-examples.py --id memory-policies --offline
+python3 scripts/run-examples.py --id bounded-tool-workflow --offline
+```
+
+The first command installs the isolated Python 3.11 environment and compiles llama-cpp-python; a C++ compiler/CMake are needed. The first model run downloads one public 144,811,360-byte artifact and checks SHA-256. Later runs use repository `.cache/e5/`. There is no hosted provider, account, key, or paid inference. Read the [execution guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/applications/workflows/README.md) for exact package pins, native macOS behavior, notebooks, and failure diagnosis. On the author's macOS build, Metal initializes even with CPU execution settings; a sandbox that denies that initialization needs the same command in a normal host terminal.
+
+### Experimental contract
+
+The artifact is `bartowski/SmolLM2-135M-Instruct-GGUF`, revision `09816acd5d99df7be770d85ea30822623dab342c`, file `SmolLM2-135M-Instruct-Q8_0.gguf`. SHA-256 is `5a1395716f7913741cc51d98581b9b1228d80987a9f7d3664106742eb06bba83`. Runtime metadata verifies mostly-Q8_0 file type 7, embedded ChatML formatting, and a 768-token context with one CPU thread, zero GPU layers, CPU KV and operator settings. Model storage size is not measured peak memory. The original model author is Hugging Face; the GGUF repository is a separate quantization artifact.
+
+Original MIT fixtures have stable IDs: 4 arithmetic design / 8 evaluation cases, 3 extraction design / 9 evaluation cases, one fictional conversation, bounded calculator/lookup tasks, and four Game-24 puzzles. No model weights are trained. Demonstrations come only from design IDs. Evaluation references are not inserted into prompts or gold-only decoding domains. The domains are predeclared for the task as a whole. Search, memory, and tools are mechanism probes, not broad capability benchmarks.
+
+The small model is intentionally accessible and demonstrably unreliable. All generated text is retained, including wrong values, invalid prose, missing facts, and poor tool choices. Assertions check execution contracts; they do not impose an invented high accuracy threshold. Author execution and review are complete only when linked records pass; independent teaching review and beginner feedback remain pending.
+
+## L09 prompt evaluation
+
+Compare six predeclared arithmetic prompts on the same eight cases. Direct instruction, a step instruction, a worked design example, balanced few-shot examples, reversed order, and addition-only examples change specific input components. Inspect demonstration IDs, role serialization, output cap, normalized answer, and requested-format validity.
+
+Arithmetic extraction accepts a complete integer or terminal `Answer: INTEGER` line under the declared parser; prose outside that contract stays unextractable even if a human could infer its answer. Therefore zero extracted-answer accuracy is not a full semantic judgment of every narrative. The worked-example condition obtains 4/8 extracted answers in the recorded run; the result is small-sample evidence, not a general prompting ranking.
+
+Extraction compares instruction-only, a design-split format example, and native schema. Instruction-only and native schema use identical messages. Native `LlamaGrammar.from_json_schema` constrains generation itself; no regex cleanup or JSON repair occurs. It produces 9/9 valid objects but only 2/9 fully correct orders in this run. The separate one-token probe stops at an incomplete allowed prefix and fails validation.
+
+<PromptExperiment client:visible />
+
+<OutputValidator client:visible />
+
+**Exercise:** Find a format-valid but wrong order. Identify the field that conflicts with the source text. Then find an arithmetic narrative with an unextractable final answer and explain what the published metric does and does not measure. Before designing another prompt, declare a new design set and fresh evaluation set rather than selecting on these reported cases.
+
+
+<VerifiedRun id="prompt-evaluation" />
+
+<details>
+<summary>Complete source · prompts.py</summary>
+
+{/* example:prompt-evaluation:start */}
+
+```python
+"""L09: predeclared prompt comparisons and genuine native schema constraints."""
+
+import json
+from pathlib import Path
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from atlas_workflows.runtime import LocalModel, fixture, messages, save
+from atlas_foundations.e5.contracts import ORDER_SCHEMA, extract_answer, validate_order
+
+VARIANTS = [
+    "direct",
+    "step-instruction",
+    "worked-example",
+    "few-shot-balanced",
+    "few-shot-reversed",
+    "few-shot-add-only",
+]
+
+
+def arithmetic_messages(case, variant, design):
+    step = variant in ["step-instruction", "worked-example"]
+    instruction = (
+        "Give one short checkable calculation. End with a separate line Answer: INTEGER."
+        if step
+        else "Return only one integer, with no explanation or other text."
+    )
+    result = [{"role": "system", "content": instruction}]
+    ids = []
+    if variant == "worked-example":
+        examples = design[:1]
+    elif variant.startswith("few-shot"):
+        examples = (
+            [design[0], design[2]] if variant == "few-shot-add-only" else design[:2]
+        )
+        if variant == "few-shot-reversed":
+            examples = list(reversed(examples))
+    else:
+        examples = []
+    for example in examples:
+        result += [
+            {"role": "user", "content": example["question"]},
+            {
+                "role": "assistant",
+                "content": f"{example['worked']}\nAnswer: {example['answer']}"
+                if step
+                else str(example["answer"]),
+            },
+        ]
+        ids.append(example["id"])
+    result.append({"role": "user", "content": case["question"]})
+    return result, ids, "answer-line" if step else "integer"
+
+
+def main():
+    model = LocalModel()
+    data = fixture()
+    design = [r for r in data["arithmetic"] if r["split"] == "design"]
+    evaluation = [r for r in data["arithmetic"] if r["split"] == "evaluation"]
+    arithmetic = []
+    for variant in VARIANTS:
+        for row in evaluation:
+            assembled, example_ids, mode = arithmetic_messages(row, variant, design)
+            call = model.generate(assembled, max_tokens=64)
+            strict = extract_answer(call["raw"], mode)
+            normalized = extract_answer(call["raw"], "integer")
+            if normalized is None:
+                normalized = extract_answer(call["raw"], "answer-line")
+            arithmetic.append(
+                {
+                    "id": row["id"],
+                    "variant": variant,
+                    "question": row["question"],
+                    "expected": row["answer"],
+                    "reference_calculation": row["worked"],
+                    "example_ids": example_ids,
+                    "format_contract": mode,
+                    "format_valid": strict is not None,
+                    "normalized_answer": normalized,
+                    "answer_correct": normalized == row["answer"],
+                    "call": call,
+                }
+            )
+    extraction = []
+    schema_design = next(r for r in data["extraction"] if r["split"] == "design")
+    instruction = "Extract the current order. Return exactly one JSON object with keys item, quantity, priority. item is book or pen; quantity is an integer 1 through 9; priority is normal or urgent. Standard delivery and no urgency mean normal. No extra fields or prose."
+    for variant in ["instruction-only", "format-example", "native-schema"]:
+        for row in data["extraction"]:
+            if row["split"] != "evaluation":
+                continue
+            assembled = [{"role": "system", "content": instruction}]
+            if variant == "format-example":
+                assembled += [
+                    {"role": "user", "content": schema_design["text"]},
+                    {
+                        "role": "assistant",
+                        "content": json.dumps(schema_design["expected"]),
+                    },
+                ]
+            assembled.append({"role": "user", "content": row["text"]})
+            call = model.generate(
+                assembled,
+                max_tokens=128,
+                schema=ORDER_SCHEMA if variant == "native-schema" else None,
+            )
+            checked = validate_order(call["raw"])
+            extraction.append(
+                {
+                    "id": row["id"],
+                    "variant": variant,
+                    "text": row["text"],
+                    "expected": row["expected"],
+                    "example_ids": [schema_design["id"]]
+                    if variant == "format-example"
+                    else [],
+                    "validation": checked,
+                    "answer_correct": checked["valid"]
+                    and checked["value"] == row["expected"],
+                    "call": call,
+                }
+            )
+    summary = []
+    for group, rows in [("arithmetic", arithmetic), ("extraction", extraction)]:
+        for variant in dict.fromkeys(row["variant"] for row in rows):
+            selected = [row for row in rows if row["variant"] == variant]
+            summary.append(
+                {
+                    "suite": group,
+                    "variant": variant,
+                    "cases": len(selected),
+                    "answer_accuracy": sum(row["answer_correct"] for row in selected)
+                    / len(selected),
+                    "format_validity": sum(
+                        row["format_valid"]
+                        if group == "arithmetic"
+                        else row["validation"]["valid"]
+                        for row in selected
+                    )
+                    / len(selected),
+                    "prompt_tokens": sum(
+                        row["call"]["prompt_tokens"] for row in selected
+                    ),
+                    "output_tokens": sum(
+                        row["call"]["output_tokens"] for row in selected
+                    ),
+                    "seconds": sum(row["call"]["seconds"] for row in selected),
+                }
+            )
+    assert all(
+        set(row["example_ids"]) <= {d["id"] for d in design} for row in arithmetic
+    )
+    assert all(
+        len({r["id"] for r in arithmetic if r["variant"] == v}) == 8 for v in VARIANTS
+    )
+    # Validity is reported, not silently repaired or treated as correctness.
+    native_valid = sum(
+        row["validation"]["valid"]
+        for row in extraction
+        if row["variant"] == "native-schema"
+    )
+    assert native_valid == 9, (
+        "Native decoding failed to complete the supported schema within its output budget"
+    )
+    for row in extraction:
+        if row["variant"] == "native-schema":
+            baseline = next(
+                r
+                for r in extraction
+                if r["id"] == row["id"] and r["variant"] == "instruction-only"
+            )
+            assert baseline["call"]["messages"] == row["call"]["messages"]
+    truncation = model.generate(
+        extraction[-1]["call"]["messages"], max_tokens=1, schema=ORDER_SCHEMA
+    )
+    assert (
+        not validate_order(truncation["raw"])["valid"]
+        and truncation["finish_reason"] == "length"
+    )
+    result = {
+        "model": model.metadata,
+        "fixture": data["id"],
+        "arithmetic": arithmetic,
+        "extraction": extraction,
+        "summary": summary,
+        "schema": ORDER_SCHEMA,
+        "truncation_probe": truncation,
+        "design_evaluation_disjoint": True,
+        "native_constraint_verified": True,
+        "measurement": "One sequential run per prompt/case; native token usage and wall seconds. Reused model/prefix cache; no financial cost or production speed ranking.",
+        "grading": "Answer extraction accepts a complete integer or a terminal Answer: integer line. Requested-format validity is checked separately. Other prose is not heuristically repaired. Structured correctness requires a valid exact-key object equal to the reference.",
+        "limitations": [
+            "Eight arithmetic and nine extraction evaluation cases; no general reasoning benchmark.",
+            "A small Q8 model can fail simple arithmetic and produce plausible explanations.",
+            "Native grammar constrains structure, not factual correctness; truncated output can still be incomplete.",
+            "Examples are predeclared design cases; no variant is selected using final evaluation results.",
+        ],
+    }
+    save("e5-prompts", result)
+    print(
+        json.dumps(
+            {
+                "evaluation_cases": 17,
+                "arithmetic_variants": len(VARIANTS),
+                "native_constraint_verified": True,
+                "design_evaluation_disjoint": True,
+                "summary": summary,
+            }
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()
+```
+
+{/* example:prompt-evaluation:end */}
+
+</details>
+
+## L10 search voting and constraints
+
+A visible worked explanation, a multi-call chain, sampled voting, and a search tree are different mechanisms. This lab implements actual repeated calls and an explicit bounded frontier, with independent checks for the arithmetic problem.
+
+Each sampling path makes five real temperature-0.7 calls with seeds 101–105. The free-format calculation path and native integer-domain path change both prompt and decoding and are labeled separately, not treated as an isolated causal comparison. Invalids remain visible. A unique plurality wins; tied or empty votes abstain. A separate strict-majority flag uses all samples, including invalids. Agreement is not an independent correctness proof.
+
+<VotingLab client:visible />
+
+Game 24 uses exact rational intermediate states, legal pairwise operations, divide-by-zero exclusion, duplicate-state memoization, and an independent bounded AST/leaf verifier. Compare complete breadth-first search, beam one, beam four, and a sixteen-node cap. A distance heuristic can prune a fractional route that temporarily moves away from 24. Budget exhaustion is not proof of impossibility.
+
+<SearchExplorer client:visible />
+
+The model-guided adaptation ranks at most eight already legal candidates with at most three actual model calls. It does not invent operators or independently verify the solution. Published nodes are the first hundred plus all solution ancestors; full traces are written locally. The SVG overview is an explicitly selected subset of those published nodes.
+
+**Exercise:** Inspect the 3,3,8,8 fractional solution. Compare the complete trace with beam one and identify what the stop reason permits you to conclude. In the vote calculator try `15,15,14,invalid,invalid`, then a tie. Explain why a plurality, strict majority, and correct answer are separate properties.
+
+
+<VerifiedRun id="search-and-voting" />
+
+<details>
+<summary>Complete source · search_vote.py</summary>
+
+{/* example:search-and-voting:start */}
+
+```python
+"""L10: real sampled answers, exact bounded search, and model-guided candidate ranking."""
+
+import json
+from pathlib import Path
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from atlas_workflows.runtime import ROOT, LocalModel, fixture, messages, save
+from atlas_workflows.prompts import arithmetic_messages
+from atlas_foundations.e5.contracts import extract_answer, vote
+from atlas_foundations.e5.search import search
+
+
+def main():
+    model = LocalModel()
+    data = fixture()
+    sampled = []
+    design = [r for r in data["arithmetic"] if r["split"] == "design"]
+    for case in [r for r in data["arithmetic"] if r["split"] == "evaluation"][:4]:
+        assembled, _, _ = arithmetic_messages(case, "step-instruction", design)
+        samples = []
+        for seed in [101, 102, 103, 104, 105]:
+            call = model.generate(assembled, max_tokens=64, temperature=0.7, seed=seed)
+            answer = extract_answer(call["raw"], "integer")
+            if answer is None:
+                answer = extract_answer(call["raw"], "answer-line")
+            samples.append(
+                {"answer": answer, "correct": answer == case["answer"], "call": call}
+            )
+        aggregation = vote([row["answer"] for row in samples])
+        sampled.append(
+            {
+                "id": case["id"],
+                "variant": "format-probe",
+                "question": case["question"],
+                "expected": case["answer"],
+                "samples": samples,
+                "aggregation": aggregation,
+                "aggregate_correct": aggregation["winner"] == case["answer"],
+            }
+        )
+        constrained = []
+        for seed in [101, 102, 103, 104, 105]:
+            call = model.generate(
+                messages(
+                    case["question"],
+                    "Solve the arithmetic task. Return only one integer.",
+                ),
+                max_tokens=8,
+                temperature=0.7,
+                seed=seed,
+                schema={"type": "integer", "enum": list(range(101))},
+            )
+            answer = json.loads(call["raw"])
+            constrained.append(
+                {"answer": answer, "correct": answer == case["answer"], "call": call}
+            )
+        aggregation = vote([row["answer"] for row in constrained])
+        sampled.append(
+            {
+                "id": case["id"],
+                "variant": "bounded-integer",
+                "question": case["question"],
+                "expected": case["answer"],
+                "samples": constrained,
+                "aggregation": aggregation,
+                "aggregate_correct": aggregation["winner"] == case["answer"],
+            }
+        )
+    games = []
+    trace_dir = ROOT / "examples/artifacts/e5-search"
+    trace_dir.mkdir(parents=True, exist_ok=True)
+    for case in data["games"]:
+        for strategy, beam, budget in [
+            ("complete", None, 4000),
+            ("beam-1", 1, 4000),
+            ("beam-4", 4, 4000),
+            ("budget-16", None, 16),
+        ]:
+            outcome = search(case["numbers"], beam=beam, max_nodes=budget)
+            full = outcome.pop("full_trace")
+            name = f"{case['id']}-{strategy}.json"
+            (trace_dir / name).write_text(json.dumps(full, indent=2) + "\n")
+            games.append(
+                dict(id=case["id"], strategy=strategy, full_trace_file=name, **outcome)
+            )
+    model_choices = []
+
+    def ranker(candidates, state):
+        options = "\n".join(
+            f"{i}: {action}; remaining {', '.join(str(v) for v, _ in next_state)}"
+            for i, (next_state, action) in enumerate(candidates)
+        )
+        call = model.generate(
+            messages(
+                f"Game 24: combine all four input numbers exactly once using + - * /. Current remaining values: {state['values']}. Choose a next candidate that may lead to 24. Return only its integer index.\n{options}"
+            ),
+            max_tokens=8,
+            schema={"type": "integer", "enum": list(range(len(candidates)))},
+        )
+        selected = json.loads(call["raw"])
+        model_choices.append(
+            {
+                "state": state["values"],
+                "options": [action for _, action in candidates],
+                "selected": selected,
+                "call": call,
+            }
+        )
+        return selected
+
+    guided = search(data["games"][0]["numbers"], beam=1, ranker=ranker)
+    (trace_dir / "model-guided.json").write_text(
+        json.dumps(guided.pop("full_trace"), indent=2) + "\n"
+    )
+    assert len(model_choices) <= 3
+    assert all(not row["solution"] or row["verified"] for row in games)
+    result = {
+        "model": model.metadata,
+        "samples": sampled,
+        "vote_policy": "Unique highest valid count; ties/empty votes abstain. strict_majority separately counts all samples, including invalids. Correlated samples can agree on a wrong answer.",
+        "sampling_paths": "Two mechanism probes, not an isolated intervention comparison: a free-format calculation prompt and a direct integer prompt with native enum grammar over the same predeclared 0..100 domain. Neither uses a gold-only answer domain.",
+        "games": games,
+        "guided": guided,
+        "model_choices": model_choices,
+        "search_verified": True,
+        "model_path_executed": True,
+        "limits": {
+            "full_node_budget": 4000,
+            "display_first_nodes": 100,
+            "model_rank_pool": 8,
+            "model_max_calls": 3,
+        },
+        "limitations": [
+            "Exact arithmetic solver, not a language-model reasoning benchmark.",
+            "Model variant ranks a pre-generated legal candidate pool; it does not invent or validate arithmetic operators.",
+            "Beam pruning can discard every solution. Node-budget exhaustion is not proof of impossibility.",
+            "The displayed trace is a declared subset plus solution ancestors; complete trace files remain local.",
+            "Visible model text is an output artifact, not access to hidden computation.",
+        ],
+    }
+    save("e5-search", result)
+    print(
+        json.dumps(
+            {
+                "search_verified": True,
+                "model_path_executed": True,
+                "sampled_cases": len(sampled),
+                "model_calls": len(model_choices),
+                "complete_solutions": sum(
+                    r["verified"] for r in games if r["strategy"] == "complete"
+                ),
+            }
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()
+```
+
+{/* example:search-and-voting:end */}
+
+</details>
+
+## L11 local model and chains
+
+This notebook first verifies the actual artifact chat template and quantization metadata. A plain-Python message list and a current LangChain ChatPromptTemplate/RunnableLambda adapter generate identical serialized inputs and greedy outputs for the declared case. That is an adapter check, not a correctness guarantee.
+
+The second workflow makes two actual model calls. The first extracts an order; application code computes a total from that generated object; the second model receives that actual object and total. Extraction correctness, supplied-total copying, and end-to-end correctness are reported separately. A correct copy of a total derived from the wrong order remains wrong for the user.
+
+<WorkflowTrace client:visible />
+
+The implementation uses pinned `langchain_core` Runnable APIs rather than deprecated LLMChain imports. The adapter is small enough to inspect and has a plain-Python equivalent. It disables cloud tracing and never executes remote custom model code. The local recorded chain fails end-to-end; the source preserves that result.
+
+**Exercise:** Trace the requested quantity, generated quantity, calculated total, second prompt, and final total. At which first boundary does the result disagree with the original request? Propose a deterministic check that would catch the problem before the next call, and state what information that check needs.
+
+
+<VerifiedRun id="local-model-chain" />
+
+<details>
+<summary>Complete source · chains.py</summary>
+
+{/* example:local-model-chain:start */}
+
+```python
+"""L11a: plain Python first, then the same local model through current Runnables."""
+
+import json
+from pathlib import Path
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from atlas_workflows.runtime import LocalModel, fixture, messages, render, save
+from atlas_foundations.e5.contracts import ORDER_SCHEMA, validate_order
+from jinja2.sandbox import ImmutableSandboxedEnvironment
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.runnables import RunnableLambda, RunnablePassthrough
+from langchain_core.output_parsers import StrOutputParser
+
+
+def model_adapter(model, schema=None, max_tokens=64):
+    def invoke(value):
+        roles = {"human": "user", "ai": "assistant", "system": "system"}
+        converted = [
+            {"role": roles[m.type], "content": m.content} for m in value.to_messages()
+        ]
+        return model.generate(converted, schema=schema, max_tokens=max_tokens)["raw"]
+
+    return RunnableLambda(invoke)
+
+
+def checked_order(raw):
+    checked = validate_order(raw)
+    if not checked["valid"]:
+        raise ValueError(checked["error"])
+    return checked["value"]
+
+
+def main():
+    model = LocalModel()
+    data = fixture()
+    system = "Return only one integer."
+    question = data["arithmetic"][4]["question"]
+    plain = model.generate(messages(question, system), max_tokens=32)
+    prompt = ChatPromptTemplate.from_messages(
+        [("system", system), ("human", "{question}")]
+    )
+    chain = prompt | model_adapter(model, max_tokens=32) | StrOutputParser()
+    framework_raw = chain.invoke({"question": question})
+    framework_call = model.calls[-1]
+    assert plain["rendered_prompt"] == framework_call["rendered_prompt"]
+    assert plain["raw"] == framework_raw
+    template = ImmutableSandboxedEnvironment().from_string(
+        model.metadata["chat_template"]
+    )
+    rendered_reference = template.render(
+        messages=plain["messages"], add_generation_prompt=True
+    )
+    assert rendered_reference == render(plain["messages"])
+    assert (
+        int(model.metadata["general_file_type"]) == 7
+    )  # GGUF mostly-Q8_0, not an FP16 filename guess.
+
+    # A real first model output becomes input to a real second prompt.
+    row = next(r for r in data["extraction"] if r["split"] == "evaluation")
+    extract_prompt = ChatPromptTemplate.from_messages(
+        [
+            (
+                "system",
+                "Extract the current order into item, quantity, priority. item is book or pen; quantity is integer 1..9; priority is normal or urgent. Return only JSON.",
+            ),
+            ("human", "{request}"),
+        ]
+    )
+    extract_chain = (
+        extract_prompt
+        | model_adapter(model, schema=ORDER_SCHEMA, max_tokens=96)
+        | RunnableLambda(checked_order)
+    )
+    prices = {"book": 8, "pen": 2}
+
+    def quote(payload):
+        extracted = payload["extracted"]
+        return dict(
+            payload, calculated_total=extracted["quantity"] * prices[extracted["item"]]
+        )
+
+    quote_schema = {
+        "type": "object",
+        "properties": {"total": {"type": "integer", "enum": list(range(1, 73))}},
+        "required": ["total"],
+        "additionalProperties": False,
+    }
+    quote_prompt = ChatPromptTemplate.from_messages(
+        [
+            (
+                "system",
+                "Copy the supplied calculated total into one JSON object with key total. Do not recalculate or change the number.",
+            ),
+            (
+                "human",
+                "Order extraction: {extracted}. Calculated total: {calculated_total}.",
+            ),
+        ]
+    )
+    pipeline = RunnablePassthrough.assign(extracted=extract_chain) | RunnableLambda(
+        quote
+    )
+    state = pipeline.invoke({"request": row["text"]})
+    first_call = model.calls[-1]
+    final_raw = (
+        quote_prompt
+        | model_adapter(model, schema=quote_schema, max_tokens=24)
+        | StrOutputParser()
+    ).invoke(state)
+    final = json.loads(final_raw)
+    expected_total = row["expected"]["quantity"] * prices[row["expected"]["item"]]
+    result = {
+        "model": model.metadata,
+        "plain": plain,
+        "framework": framework_call,
+        "equivalent_prompt_checked": True,
+        "equivalent_output_checked": True,
+        "gguf_template_checked": True,
+        "quantization_type_checked": True,
+        "multi_prompt": {
+            "source_id": row["id"],
+            "request": row["text"],
+            "expected_extraction": row["expected"],
+            "state": state,
+            "first_call": first_call,
+            "second_call": model.calls[-1],
+            "final": final,
+            "expected_total": expected_total,
+            "extraction_correct": state["extracted"] == row["expected"],
+            "copy_consistent": final.get("total") == state["calculated_total"],
+            "end_to_end_correct": final.get("total") == expected_total,
+        },
+        "modernization": [
+            "langchain_core ChatPromptTemplate, RunnableLambda, RunnablePassthrough.assign, and StrOutputParser replace book-era LLMChain imports.",
+            "An explicitly implemented local GGUF adapter converts typed roles; no provider credentials or cloud tracing.",
+            "GGUF is a container; this actual artifact reports file type 7/Q8_0. Book text discussing eight-bit loading links an FP16 filename, so format and quantization are separated here.",
+        ],
+        "limitations": [
+            "The 135M model can fail simple arithmetic despite a valid prompt and grammar.",
+            "A correct deterministic total for a wrong extraction is still wrong for the original order.",
+            "This is a small declared local Runnable workflow, not an implementation of every current LangChain agent harness.",
+        ],
+    }
+    save("e5-chains", result)
+    print(
+        json.dumps(
+            {
+                "equivalent_prompt_checked": True,
+                "equivalent_output_checked": True,
+                "gguf_template_checked": True,
+                "quantization_type_checked": True,
+                "multi_prompt_correct": result["multi_prompt"]["end_to_end_correct"],
+            }
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()
+```
+
+{/* example:local-model-chain:end */}
+
+</details>
+
+## L11 memory policies
+
+Compare buffer, last-two-turn-pair window, and actual running-summary policies on one eight-message conversation. The early project code appears before the recent window, and a later message corrects Friday to Monday. These details distinguish distant-fact retention from correction handling.
+
+The native tokenizer counts the final rendered input. Application budgets 192/384 include a 64-token output reserve; native capacity 768 is a different limit. If needed, an optional summary is removed first, then whole oldest pairs are evicted. The record separates policy omissions from budget evictions and shows whether a summary survived.
+
+<MemoryExplorer client:visible />
+
+Running summaries come from two actual eighty-token calls. Their invented or missing facts are not replaced with ideal notes. At budget 384 the recorded full buffer gets all three fields right, the window one, and the summary zero. This is one model/conversation, not a universal policy ranking. Literal evidence presence does not imply correct use. Include summary-generation work when estimating total application work.
+
+The framework equivalent uses MessagesPlaceholder and a plain list of typed messages, with exact prompt/output checks. Deprecated convenience memory classes are avoided.
+
+**Exercise:** Locate when the code disappears under each policy. Distinguish removal from summarization distortion and from answering failure. Explain why increasing the recent window might still fail under a smaller token budget, and identify the stale value the summary must supersede.
+
+
+<VerifiedRun id="memory-policies" />
+
+<details>
+<summary>Complete source · memory.py</summary>
+
+{/* example:memory-policies:start */}
+
+```python
+"""L11b: actual summary updates, token budgets, and three memory policies."""
+
+import json
+from pathlib import Path
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from atlas_workflows.runtime import LocalModel, fixture, messages, save
+from atlas_workflows.chains import model_adapter
+from langchain_core.messages import AIMessage, HumanMessage
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+
+ANSWER_SCHEMA = {
+    "type": "object",
+    "properties": {key: {"type": "string"} for key in ["code", "day", "units"]},
+    "required": ["code", "day", "units"],
+    "additionalProperties": False,
+}
+from atlas_foundations.e5.memory import SYSTEM, pack
+
+
+def main():
+    model = LocalModel()
+    data = fixture()
+    history = data["conversation"]
+    summary = ""
+    updates = []
+    for offset in [0, 4]:
+        chunk = history[offset : offset + 4]
+        prompt = (
+            f"Update concise conversation notes from the existing notes and new messages. Preserve exact codes, unit preferences, and the latest correction to the day.\nExisting notes: {summary or 'none'}\nNew messages:\n"
+            + "\n".join(f"{r['role']}: {r['content']}" for r in chunk)
+        )
+        call = model.generate(messages(prompt), max_tokens=80)
+        updates.append(
+            {
+                "prior_summary": summary,
+                "new_message_ids": [r["id"] for r in chunk],
+                "call": call,
+                "summary": call["raw"],
+            }
+        )
+        summary = call["raw"]
+    cases = []
+    for limit in [192, 384]:
+        for policy in ["buffer", "window", "summary"]:
+            packed = pack(
+                model, history, data["memory_question"], policy, summary, limit
+            )
+            call = model.generate(
+                packed["messages"], max_tokens=64, schema=ANSWER_SCHEMA
+            )
+            assert call["prompt_tokens"] + 64 <= limit
+            try:
+                parsed = json.loads(call["raw"])
+            except json.JSONDecodeError:
+                parsed = {}
+            scores = {
+                key: isinstance(parsed, dict)
+                and type(parsed.get(key)) is str
+                and parsed[key].strip().casefold() == expected.casefold()
+                for key, expected in data["memory_facts"].items()
+            }
+            evidence_text = "\n".join(
+                r["content"] for r in packed["messages"][:-1]
+            ).casefold()
+            presence = {
+                key: expected.casefold() in evidence_text
+                for key, expected in data["memory_facts"].items()
+            }
+            cases.append(
+                {
+                    "policy": policy,
+                    "budget": limit,
+                    "packed": packed,
+                    "call": call,
+                    "parsed": parsed,
+                    "field_correct": scores,
+                    "literal_evidence_presence": presence,
+                    "stale_friday_present": "friday" in evidence_text,
+                }
+            )
+    # Framework equivalent uses explicit application history, not a deprecated memory class.
+    reference = next(r for r in cases if r["policy"] == "window" and r["budget"] == 384)
+    store = [
+        HumanMessage(content=r["content"])
+        if r["role"] == "user"
+        else AIMessage(content=r["content"])
+        for r in reference["packed"]["messages"][1:-1]
+    ]
+    prompt = ChatPromptTemplate.from_messages(
+        [("system", SYSTEM), MessagesPlaceholder("history"), ("human", "{question}")]
+    )
+    framework_raw = (
+        prompt | model_adapter(model, schema=ANSWER_SCHEMA, max_tokens=64)
+    ).invoke({"history": store, "question": data["memory_question"]})
+    assert model.calls[-1]["rendered_prompt"] == reference["call"]["rendered_prompt"]
+    assert framework_raw == reference["call"]["raw"]
+    result = {
+        "model": model.metadata,
+        "history": history,
+        "question": data["memory_question"],
+        "expected_facts": data["memory_facts"],
+        "summary_updates": updates,
+        "cases": cases,
+        "answer_schema": ANSWER_SCHEMA,
+        "framework_equivalent_checked": True,
+        "framework_call": model.calls[-1],
+        "budget_accounting_checked": True,
+        "limitations": [
+            "Memory is application-retained prompt data; no model weights change.",
+            "A fixed two-turn window is not a token guarantee; whole turns are dropped again when required by the application budget.",
+            "Summary memory here means running summary plus two recent turns; summaries are generated outputs, not an accurate database.",
+            "Literal evidence presence is a text diagnostic, not proof the model used or interpreted a fact correctly.",
+            "The field checker uses exact normalized strings on three declared facts; it is not general semantic evaluation.",
+            "The application budgets 192/384 include reserved output; native runtime capacity is separately 768 tokens.",
+        ],
+    }
+    save("e5-memory", result)
+    print(
+        json.dumps(
+            {
+                "framework_equivalent_checked": True,
+                "budget_accounting_checked": True,
+                "cases": len(cases),
+                "field_scores": [
+                    {
+                        "policy": r["policy"],
+                        "budget": r["budget"],
+                        "correct": sum(r["field_correct"].values()),
+                    }
+                    for r in cases
+                ],
+            }
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()
+```
+
+{/* example:memory-policies:end */}
+
+</details>
+
+## L11 bounded tools
+
+The controller exposes only an allowlisted finite calculator and local fixture lookup. Real model calls choose a bounded action ID, which resolves to a predeclared tool call. Operands come from explicit fixture fields; this is not arbitrary model extraction of tool arguments. After an observation, the model chooses from a common final-value domain. This restricted ReAct-style workflow is deliberately described at its actual level of autonomy.
+
+<WorkflowTrace initial="realtools" client:visible />
+
+Plain Python and actual LangChain StructuredTool paths validate finite numeric inputs, operations, zero division, extra fields, and lookup keys. The controller requires a tool observation before final output and stops after three steps. Actual model raw IDs, resolved calls, observations, and final results are distinct trace fields. Two of six real task/path cases succeed in the recorded run; tool validity is not good planning.
+
+Separate scripted and actual FakeListLLM tests force success, invalid-argument recovery, and endless selection ending at max_steps. These validate controller mechanics, not model competence. No tool browses, writes files, runs shell commands, or evaluates arbitrary Python.
+
+**Exercise:** Switch to fake tests and inspect the rejected boolean operand. Then inspect a real wrong task: did failure come from tool choice or final-value choice? Compare a final stop with max_steps and explain why both bounded termination and answer correctness need tests.
+
+
+<VerifiedRun id="bounded-tool-workflow" />
+
+<details>
+<summary>Complete source · agents.py</summary>
+
+{/* example:bounded-tool-workflow:start */}
+
+```python
+"""L11c: real model choices inside a bounded controller, plus explicit fake tests."""
+
+import json
+from pathlib import Path
+import sys
+from typing import Literal
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from atlas_workflows.runtime import LocalModel, fixture, messages, save
+from atlas_foundations.e5.contracts import bounded_loop, calculator, dispatch
+from langchain_core.language_models.fake import FakeListLLM
+from langchain_core.runnables import RunnableLambda
+from langchain_core.tools import StructuredTool
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
+
+
+class CalculatorArguments(BaseModel):
+    model_config = ConfigDict(extra="forbid", strict=True)
+    operation: Literal["add", "subtract", "multiply", "divide"]
+    left: StrictInt = Field(ge=-1_000_000, le=1_000_000)
+    right: StrictInt = Field(ge=-1_000_000, le=1_000_000)
+
+
+class LookupArguments(BaseModel):
+    model_config = ConfigDict(extra="forbid", strict=True)
+    key: Literal["library_closes", "workshop_day", "servings"]
+
+
+def framework_dispatcher(fixtures):
+    def lookup(key):
+        return fixtures[key]
+
+    tools = {
+        "calculator": StructuredTool.from_function(
+            calculator,
+            name="calculator",
+            description="Four explicit arithmetic operations on bounded integer operands.",
+            args_schema=CalculatorArguments,
+        ),
+        "lookup": StructuredTool.from_function(
+            lookup,
+            name="lookup",
+            description="Read a named value from the original local fixture only.",
+            args_schema=LookupArguments,
+        ),
+    }
+
+    def execute(action):
+        if (
+            not isinstance(action, dict)
+            or set(action) != {"tool", "arguments"}
+            or action["tool"] not in tools
+            or not isinstance(action["arguments"], dict)
+        ):
+            raise ValueError("Unsupported tool call")
+        return tools[action["tool"]].invoke(action["arguments"])
+
+    return execute
+
+
+def main():
+    data = fixture()
+    fixtures = data["tool_fixtures"]
+    execute_plain = lambda action: dispatch(action, fixtures)
+    execute_framework = framework_dispatcher(fixtures)
+    scripts = {
+        "success": [
+            json.dumps({"tool": "lookup", "arguments": {"key": "library_closes"}}),
+            json.dumps({"final": "17:30"}),
+        ],
+        "repair": [
+            json.dumps(
+                {
+                    "tool": "calculator",
+                    "arguments": {"operation": "add", "left": True, "right": 8},
+                }
+            ),
+            json.dumps({"tool": "lookup", "arguments": {"key": "library_closes"}}),
+            json.dumps({"final": "17:30"}),
+        ],
+        "loop": [json.dumps({"tool": "lookup", "arguments": {"key": "servings"}})] * 3,
+    }
+    fake_cases = []
+    for name, script in scripts.items():
+        stream = iter(script)
+        plain = bounded_loop(
+            lambda q, trace: next(stream), execute_plain, "Find library closing time", 3
+        )
+        fake_model = FakeListLLM(responses=script)
+        choose = lambda q, trace: fake_model.invoke(q + "\n" + json.dumps(trace))
+        framework = RunnableLambda(
+            lambda payload: bounded_loop(
+                choose, execute_framework, payload["question"], 3
+            )
+        ).invoke({"question": "Find library closing time"})
+        # Error wording can differ between explicit and Pydantic validation.
+        assert [r["kind"] for r in plain["trace"]] == [
+            r["kind"] for r in framework["trace"]
+        ]
+        assert (
+            plain["answer"] == framework["answer"]
+            and plain["stop_reason"] == framework["stop_reason"]
+        )
+        fake_cases.append(
+            {
+                "id": name,
+                "path": "scripted fake-model harness test; no model competence claim",
+                "plain": plain,
+                "framework": framework,
+            }
+        )
+    assert fake_cases[-1]["framework"]["stop_reason"] == "max_steps"
+
+    model = LocalModel()
+    real_cases = []
+    for task in data["tool_tasks"]:
+        for engine, execute in [
+            ("plain", execute_plain),
+            ("langchain", execute_framework),
+        ]:
+            decisions = []
+
+            def choose(question, trace):
+                if not trace:
+                    candidates = {
+                        "lookup-" + key: {"tool": "lookup", "arguments": {"key": key}}
+                        for key in fixtures
+                    }
+                    if "left" in task:
+                        candidates.update(
+                            {
+                                operation: {
+                                    "tool": "calculator",
+                                    "arguments": {
+                                        "operation": operation,
+                                        "left": task["left"],
+                                        "right": task["right"],
+                                    },
+                                }
+                                for operation in [
+                                    "add",
+                                    "subtract",
+                                    "multiply",
+                                    "divide",
+                                ]
+                            }
+                        )
+                    prompt = f"Choose the best available tool action for the question. Return only its JSON string ID.\nQuestion: {question}\nActions: {json.dumps(candidates)}"
+                else:
+                    # This domain is predeclared, never the case's expected answer alone.
+                    answers = list(
+                        dict.fromkeys(
+                            [str(i) for i in range(101)]
+                            + list(fixtures.values())
+                            + ["unknown"]
+                        )
+                    )
+                    candidates = {answer: {"final": answer} for answer in answers}
+                    prompt = f"Answer the question using the actual tool observation. Return only the answer as a JSON string.\nQuestion: {question}\nObservation: {json.dumps(trace[-1])}"
+                call = model.generate(
+                    messages(prompt),
+                    max_tokens=20,
+                    schema={"type": "string", "enum": list(candidates)},
+                )
+                selected = json.loads(call["raw"])
+                assert selected in candidates
+                decisions.append(
+                    {
+                        "step": len(trace),
+                        "choice_ids": list(candidates),
+                        "selected_id": selected,
+                        "resolved_action": candidates[selected],
+                        "call": call,
+                    }
+                )
+                return json.dumps(candidates[selected])
+
+            if engine == "plain":
+                outcome = bounded_loop(choose, execute, task["question"], 3)
+            else:
+                outcome = RunnableLambda(
+                    lambda payload: bounded_loop(
+                        choose, execute, payload["question"], 3
+                    )
+                ).invoke({"question": task["question"]})
+            assert len(outcome["trace"]) <= 3
+            real_cases.append(
+                {
+                    "id": task["id"],
+                    "engine": engine,
+                    "question": task["question"],
+                    "expected": task["expected"],
+                    "outcome": outcome,
+                    "correct": outcome["answer"] == task["expected"],
+                    "decisions": decisions,
+                }
+            )
+    result = {
+        "model": model.metadata,
+        "fixtures": fixtures,
+        "fake_cases": fake_cases,
+        "real_cases": real_cases,
+        "termination_checked": True,
+        "invalid_arguments_checked": True,
+        "framework_tools_executed": True,
+        "policy": {
+            "max_steps": 3,
+            "observation_character_cap": 160,
+            "required_tool_before_final": True,
+            "operand_source": "Explicit versioned task fields; model selects operation/tool, not arbitrary operand extraction",
+            "final_domain": "Integers 0..100, all fixture values, unknown; same predeclared domain for every case",
+            "tools": ["bounded integer calculator", "exact local fixture lookup"],
+        },
+        "limitations": [
+            "A small model controls a restricted choice inside an explicit state machine, not an unrestricted autonomous agent.",
+            "The controller resolves a generated choice ID to a validated call; actual model IDs and resolved arguments are shown separately.",
+            "Native grammar enforces choice format, not correct tool selection or answer.",
+            "The fake-model tests verify harness behavior and are labeled separately from real model execution.",
+            "No arbitrary eval, shell, browser, private file, or write tool is available. Tool observations are data, not authority to expand permissions.",
+        ],
+    }
+    save("e5-agents", result)
+    print(
+        json.dumps(
+            {
+                "termination_checked": True,
+                "invalid_arguments_checked": True,
+                "framework_tools_executed": True,
+                "real_cases": len(real_cases),
+                "correct": sum(r["correct"] for r in real_cases),
+            }
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()
+```
+
+{/* example:bounded-tool-workflow:end */}
+
+</details>
+
+## Source and modernization notes
+
+The scope follows Chapters 6–7 of *Hands-On Large Language Models* and the [pinned official notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada). Original tasks, prose, diagrams, and implementations are atlas adaptations. The book-era FP16 filename does not demonstrate eight-bit quantization; this workflow verifies its actual Q8 artifact. Visible reasoning text is not a hidden computation trace, and a locally generated explanation is not an external verifier.
+
+Current implementation references: [llama-cpp-python structured generation](https://llama-cpp-python.readthedocs.io/en/latest/), [LangChain core reference](https://reference.langchain.com/python/langchain_core/), and [original SmolLM2 model card](https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct). Exact tested versions are in the lockfile. Read the [author review packet](https://github.com/shadril238/llm-concept-atlas/blob/main/docs/reviews/e5-workflows.md) for evidence and pending independent review.

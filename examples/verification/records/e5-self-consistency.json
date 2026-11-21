@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e5-self-consistency",
+  "status": "passed",
+  "date": "2026-11-20T17:09:20.605432+00:00",
+  "gitCommit": "051efc998b79fc5b75149d7288744afd24f957c2",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e5/self_consistency.py"
+  ],
+  "sourceSha256": "4c61f5d3b55f7f11ea74edb7017f0ed4e193eb68ad78c0b1301a6743d2c50c82",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "8cb53d6120be4b47edf485c656e2d20ea1f5919b280ee1c3cf421da9431b967e",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "winner: 15 strict majority: False\ninvalid: 2\n",
+  "stderr": "",
+  "error": null
+}

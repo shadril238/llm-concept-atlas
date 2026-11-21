@@ -1,98 +1,121 @@
 ---
-title: Chain prompting
-description: Chain prompting splits a difficult task into dependent, inspectable model calls or subprompts.
-kind: concept
+title: "Chain prompting"
+parent: "chapter-06"
+related: ["few-shot-examples", "self-consistency", "tree-of-thought", "chain-of-thought"]
+description: "Chain prompting sends the actual output of one model call into a later prompt. It creates an explicit multi-call dataflow, which is different from requesting several written steps in one response."
+kind: "concept"
 conceptId: chain-prompting
 chapter: 6
-part: applications
-summary: Chain prompting splits a difficult task into dependent, inspectable model calls or subprompts.
-parent: chapter-06
-prerequisites: [prompt-structure]
-related: [few-shot-examples, self-consistency]
-level: intermediate
-tags: [applications, chapter-06]
+part: "applications"
+summary: "Chain prompting sends the actual output of one model call into a later prompt. It creates an explicit multi-call dataflow, which is different from requesting several written steps in one response."
+prerequisites: ["prompt-structure"]
+level: "intermediate"
+tags: ["applications", "chapter-06"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-21"
+reviewStatus: "author-reviewed"
+reviewRecord: e5-workflows-author-review-2026-11-21
+learningObjectives: ["Trace a generated extraction into a later model prompt.", "Separate intermediate validation from end-to-end correctness.", "Count model calls and inspect propagated errors."]
+bookSections: ["book-ch06-chain-prompting"]
+labHref: "/labs/prompting-and-workflows/"
+aliases: ["prompt chaining", "multi-call workflow"]
+exampleIds: ["e5-chain-prompting", "local-model-chain"]
+relationshipReasons: {"prompt-structure": "Each stage needs its own explicit input and output contract before generated state can cross a call boundary."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { PromptLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import WorkflowEvidence from '../../../components/WorkflowEvidence.astro';
+import { WorkflowTrace } from '../../../components/simulations/WorkflowLabs';
 
 <ConceptPrimer id="chain-prompting" />
 
 ## Definition and intuition
 
-Chain prompting splits a difficult task into dependent, inspectable model calls or subprompts.
+Chain prompting sends the actual output of one model call into a later prompt. It creates an explicit multi-call dataflow, which is different from requesting several written steps in one response.
 
-Chapter 6 treats a prompt as a task specification. A prompt can guide output, but it does not change model weights or guarantee that an answer is correct.
+A multi-step workflow can isolate smaller tasks, but it also creates new places for errors to propagate. A later model can fluently continue an earlier mistake unless the application checks the intermediate contract.
 
-## Before you start
+<ReferenceBrief objectives={["Trace a generated extraction into a later model prompt.", "Separate intermediate validation from end-to-end correctness.", "Count model calls and inspect propagated errors."]} prerequisites="prompt-structure" scope="Original teaching mechanism plus recorded local-model evidence. Independent teaching review is pending." />
 
-Read [Prompt structure](/llm-concept-atlas/concepts/prompt-structure/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **chain prompting** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### A concrete dataflow
 
-1. **Prepare:** Define a first subtask with a verifiable output
-2. **Transform:** Pass that output into a second prompt with clear provenance
-3. **Inspect:** Check each stage before accepting the final result.
+L11 first generates a structured order extraction under a native schema. The application validates the object and computes a total from the extracted item/quantity and fixed unit prices. A second actual model prompt receives that generated object and calculated total, then produces a total object. Both calls, the intermediate state, and the reference order remain visible.
 
-### The important distinction
+### Three correctness questions
 
-A chain can turn an uncheckable final answer into inspectable intermediate artifacts, such as retrieved passage IDs and a structured summary. Define contracts between stages so the next stage does not silently accept an empty or malformed result. The weakest upstream step often bounds final quality.
+Was the extraction correct for the original order? Was the arithmetic correct for the extracted order? Did the second call preserve the supplied total? These checks can disagree. A correct total for an incorrectly extracted quantity is still wrong for the user’s request. A second model call does not independently verify facts just because it comes later.
+
+### Distinguish the vocabulary
+
+A chain-of-thought-style prompt may generate a visible worked solution within one call. A chain is application dataflow across stages, which may include deterministic functions. A tree search branches across candidate states and uses an evaluator. These mechanisms can be combined, but their traces and costs are not interchangeable.
 
 ## Worked example
 
-A research assistant first retrieves document IDs, then summarizes only those passages. If the first stage picked irrelevant documents, the final prose cannot repair missing evidence. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+If a request asks for three pens at two units each, the reference total is six. If the first model extracts eight pens, a deterministic total of sixteen is internally correct for that extraction but wrong for the request. If the second model copies sixteen, copy consistency passes while end-to-end accuracy fails. L11 reports these checks separately.
 
-<LessonFlow steps={["Define a first subtask with a verifiable output", "Pass that output into a second prompt with clear provenance", "Check each stage before accepting the final result."]} caption="A teaching diagram for Chain prompting. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
 
-## Try the interactive lab
+Predict the outcome before changing a control. The explorer shows recorded real runs or explicitly labeled deterministic calculations; it does not call a model in your browser.
 
-<PromptLab client:visible />
-
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+<WorkflowTrace client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+Run this small standard-library mechanism with Python 3. It illustrates the stated contract or calculation. The connected L09–L11 source below performs the actual local-model workflow; this short snippet is not a substitute for those model calls.
+
+{/* example:e5-chain-prompting:start */}
 
 ```python
-def retrieve(question): return "Library closes at 5 pm Saturday."
-def format_prompt(question, source): return f"Question: {question}\nSource: {source}"
-question = "When does the library close?"
-print(format_prompt(question, retrieve(question)))
+requested_quantity, extracted_quantity, price = 3, 8, 2
+calculated = extracted_quantity * price
+copied = calculated
+print("arithmetic for extraction:", calculated)
+print("copy consistent:", copied == calculated)
+print("end-to-end correct:", copied == requested_quantity * price)
 ```
 
-**Expected output:**
+{/* example:e5-chain-prompting:end */}
+
+Expected mechanism output:
 
 ```text
-Question: When does the library close?
-Source: Library closes at 5 pm Saturday.
+arithmetic for extraction: 16
+copy consistent: True
+end-to-end correct: False
 ```
 
-**What the code shows:** The output of `retrieve` becomes an argument to `format_prompt`. Replace that returned passage with irrelevant text to see why downstream fluency cannot fix retrieval. The [official chapter 6 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter06) develops the corresponding model-based implementation.
+<WorkflowEvidence id="local-model-chain" />
 
 ## When to use it
 
-Use it when intermediate results can be checked and reused. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use multiple prompts when intermediate artifacts have clear roles and checks, or when stages need distinct instructions and output budgets. Preserve source IDs and stage inputs so a failure can be attributed rather than hidden in the final response.
 
 ## Limits and common mistakes
 
-- Each additional call adds latency and another failure point.
-- **Failure to look for:** A mistaken intermediate fact is copied into later prompts and amplified into a confident conclusion.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Every additional call adds work and another failure opportunity. Separating prompts is not proof of better answers. L11 retains its observed incorrect chain result and explains the stage at which it arose.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First define a first subtask with a verifiable output Then pass that output into a second prompt with clear provenance Finally check each stage before accepting the final result.</p></details>
+<details>
+<summary>Does a correct second-stage copy prove the original extraction?</summary>
 
-<details><summary>What would make the result misleading?</summary><p>A mistaken intermediate fact is copied into later prompts and amplified into a confident conclusion.</p></details>
+No. It only checks consistency with the supplied intermediate total. The original input/reference must be evaluated separately.
+
+</details>
+
+<details>
+<summary>Is a paragraph with three numbered steps necessarily a three-call chain?</summary>
+
+No. Call boundaries come from the application, not from the number of steps written in one generated response.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 6 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 6 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter06). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 6 of *Hands-On Large Language Models*. Read the [complete execution guide](/llm-concept-atlas/labs/prompting-and-workflows/) for artifact identity, predeclared tasks, error analysis, and implementation differences from the [authors’ chapter 6 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter06). The source PDF and book artwork are not redistributed.
 
 <ConceptConnections id="chain-prompting" />

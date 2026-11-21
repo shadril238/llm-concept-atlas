@@ -1,0 +1,335 @@
+{
+  "id": "atlas-workflow-tasks-v1",
+  "arithmetic": [
+    {
+      "id": "design-add",
+      "question": "A tray has 2 cups and receives 3 more. How many cups are on the tray?",
+      "answer": 5,
+      "worked": "2 + 3 = 5",
+      "split": "design",
+      "operation": "add"
+    },
+    {
+      "id": "design-sub",
+      "question": "A box holds 9 pencils. Remove 4 pencils. How many remain?",
+      "answer": 5,
+      "worked": "9 - 4 = 5",
+      "split": "design",
+      "operation": "subtract"
+    },
+    {
+      "id": "design-add2",
+      "question": "A basket has 1 pear and receives 6 more. How many pears are there?",
+      "answer": 7,
+      "worked": "1 + 6 = 7",
+      "split": "design",
+      "operation": "add"
+    },
+    {
+      "id": "design-mul",
+      "question": "There are 3 packets with 2 stickers each. How many stickers are there?",
+      "answer": 6,
+      "worked": "3 * 2 = 6",
+      "split": "design",
+      "operation": "multiply"
+    },
+    {
+      "id": "eval-a",
+      "question": "A shelf has 7 books and receives 8 more. How many books are on the shelf?",
+      "answer": 15,
+      "worked": "7 + 8 = 15",
+      "split": "evaluation",
+      "operation": "add"
+    },
+    {
+      "id": "eval-b",
+      "question": "A cart carries 14 boxes. Take away 5 boxes. How many remain?",
+      "answer": 9,
+      "worked": "14 - 5 = 9",
+      "split": "evaluation",
+      "operation": "subtract"
+    },
+    {
+      "id": "eval-c",
+      "question": "There are 4 bags with 3 marbles each. How many marbles are there?",
+      "answer": 12,
+      "worked": "4 * 3 = 12",
+      "split": "evaluation",
+      "operation": "multiply"
+    },
+    {
+      "id": "eval-d",
+      "question": "A jar has 6 tokens, gains 5, then loses 3. How many tokens remain?",
+      "answer": 8,
+      "worked": "6 + 5 - 3 = 8",
+      "split": "evaluation",
+      "operation": "multi-step"
+    },
+    {
+      "id": "eval-e",
+      "question": "A gardener plants 3 rows with 5 seeds each, then adds 2 seeds. How many seeds?",
+      "answer": 17,
+      "worked": "3 * 5 + 2 = 17",
+      "split": "evaluation",
+      "operation": "multi-step"
+    },
+    {
+      "id": "eval-f",
+      "question": "A shop has 20 notebooks and sells 7, then sells 4 more. How many are left?",
+      "answer": 9,
+      "worked": "20 - 7 - 4 = 9",
+      "split": "evaluation",
+      "operation": "multi-step"
+    },
+    {
+      "id": "eval-g",
+      "question": "There are 18 cookies shared equally among 3 plates. How many cookies per plate?",
+      "answer": 6,
+      "worked": "18 / 3 = 6",
+      "split": "evaluation",
+      "operation": "divide"
+    },
+    {
+      "id": "eval-h",
+      "question": "A drawer has 4 rulers and receives 9 more. How many rulers are there?",
+      "answer": 13,
+      "worked": "4 + 9 = 13",
+      "split": "evaluation",
+      "operation": "add"
+    }
+  ],
+  "extraction": [
+    {
+      "id": "schema-design-1",
+      "text": "Please send 2 books with urgent delivery.",
+      "expected": {
+        "item": "book",
+        "quantity": 2,
+        "priority": "urgent"
+      },
+      "split": "design"
+    },
+    {
+      "id": "schema-design-2",
+      "text": "I need 4 pens with normal delivery.",
+      "expected": {
+        "item": "pen",
+        "quantity": 4,
+        "priority": "normal"
+      },
+      "split": "design"
+    },
+    {
+      "id": "schema-design-3",
+      "text": "Order 1 book. There is no urgency.",
+      "expected": {
+        "item": "book",
+        "quantity": 1,
+        "priority": "normal"
+      },
+      "split": "design"
+    },
+    {
+      "id": "schema-eval-1",
+      "text": "Please send 3 pens with urgent delivery.",
+      "expected": {
+        "item": "pen",
+        "quantity": 3,
+        "priority": "urgent"
+      },
+      "split": "evaluation"
+    },
+    {
+      "id": "schema-eval-2",
+      "text": "Order 5 books with normal delivery.",
+      "expected": {
+        "item": "book",
+        "quantity": 5,
+        "priority": "normal"
+      },
+      "split": "evaluation"
+    },
+    {
+      "id": "schema-eval-3",
+      "text": "I need 1 pen, urgently.",
+      "expected": {
+        "item": "pen",
+        "quantity": 1,
+        "priority": "urgent"
+      },
+      "split": "evaluation"
+    },
+    {
+      "id": "schema-eval-4",
+      "text": "Send 7 pens. Normal delivery is fine.",
+      "expected": {
+        "item": "pen",
+        "quantity": 7,
+        "priority": "normal"
+      },
+      "split": "evaluation"
+    },
+    {
+      "id": "schema-eval-5",
+      "text": "Please deliver 2 books urgently.",
+      "expected": {
+        "item": "book",
+        "quantity": 2,
+        "priority": "urgent"
+      },
+      "split": "evaluation"
+    },
+    {
+      "id": "schema-eval-6",
+      "text": "Order 8 books with standard delivery.",
+      "expected": {
+        "item": "book",
+        "quantity": 8,
+        "priority": "normal"
+      },
+      "split": "evaluation"
+    },
+    {
+      "id": "schema-eval-7",
+      "text": "Please send 6 pens with normal delivery.",
+      "expected": {
+        "item": "pen",
+        "quantity": 6,
+        "priority": "normal"
+      },
+      "split": "evaluation"
+    },
+    {
+      "id": "schema-eval-8",
+      "text": "Urgent order: 9 books.",
+      "expected": {
+        "item": "book",
+        "quantity": 9,
+        "priority": "urgent"
+      },
+      "split": "evaluation"
+    },
+    {
+      "id": "schema-eval-9",
+      "text": "The previous draft said book; this order is 4 pens with normal delivery.",
+      "expected": {
+        "item": "pen",
+        "quantity": 4,
+        "priority": "normal"
+      },
+      "split": "evaluation"
+    }
+  ],
+  "conversation": [
+    {
+      "id": "u1",
+      "role": "user",
+      "content": "My name is Mira. My workshop code is LARK-27."
+    },
+    {
+      "id": "a1",
+      "role": "assistant",
+      "content": "Your name is Mira and your workshop code is LARK-27."
+    },
+    {
+      "id": "u2",
+      "role": "user",
+      "content": "The workshop is on Friday. Use metric units."
+    },
+    {
+      "id": "a2",
+      "role": "assistant",
+      "content": "Friday, with metric units."
+    },
+    {
+      "id": "u3",
+      "role": "user",
+      "content": "We moved the workshop to Monday. Keep metric units."
+    },
+    {
+      "id": "a3",
+      "role": "assistant",
+      "content": "The current workshop day is Monday; units remain metric."
+    },
+    {
+      "id": "u4",
+      "role": "user",
+      "content": "The shelves will be cedar and the paint blue."
+    },
+    {
+      "id": "a4",
+      "role": "assistant",
+      "content": "Cedar shelves and blue paint are the material choices."
+    }
+  ],
+  "memory_question": "What are my workshop code, current workshop day, and unit system? State each, or unknown if the conversation does not supply it.",
+  "memory_facts": {
+    "code": "LARK-27",
+    "day": "Monday",
+    "units": "metric"
+  },
+  "tool_fixtures": {
+    "library_closes": "17:30",
+    "workshop_day": "Monday",
+    "servings": "4"
+  },
+  "tool_tasks": [
+    {
+      "id": "tool-add",
+      "question": "Use the calculator to add 7 and 8, then give the number.",
+      "left": 7,
+      "right": 8,
+      "expected": "15"
+    },
+    {
+      "id": "tool-sub",
+      "question": "Use the calculator to subtract 4 from 12, then give the number.",
+      "left": 12,
+      "right": 4,
+      "expected": "8"
+    },
+    {
+      "id": "tool-lookup",
+      "question": "Use fixture lookup to find when the library closes. Return the time.",
+      "expected": "17:30"
+    }
+  ],
+  "games": [
+    {
+      "id": "game-simple",
+      "numbers": [
+        2,
+        3,
+        4,
+        6
+      ]
+    },
+    {
+      "id": "game-fraction",
+      "numbers": [
+        3,
+        3,
+        8,
+        8
+      ]
+    },
+    {
+      "id": "game-other",
+      "numbers": [
+        1,
+        3,
+        4,
+        6
+      ]
+    },
+    {
+      "id": "game-impossible",
+      "numbers": [
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  ]
+}

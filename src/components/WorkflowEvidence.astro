@@ -1,0 +1,7 @@
+---
+import VerifiedRun from './VerifiedRun.astro';
+const {id}=Astro.props as {id:string};
+const anchors:Record<string,string>={'prompt-evaluation':'l09-prompt-evaluation','search-and-voting':'l10-search-voting-and-constraints','local-model-chain':'l11-local-model-and-chains','memory-policies':'l11-memory-policies','bounded-tool-workflow':'l11-bounded-tools'};
+---
+<aside class="reference-brief"><strong>Run the connected E5 workflow</strong><p><a href={`/llm-concept-atlas/labs/prompting-and-workflows/#${anchors[id]}`}>Open setup, complete source, recorded outputs, and error analysis ↗</a></p><p><code>python3 scripts/run-examples.py --id {id} --offline</code>. Use <code>--allow-network</code> for the first pinned public-model download. No hosted API is used.</p></aside>
+<VerifiedRun id={id} />

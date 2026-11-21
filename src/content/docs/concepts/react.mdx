@@ -1,90 +1,120 @@
 ---
-title: ReAct
-description: ReAct interleaves reasoning about the next step with tool actions and observations.
-kind: concept
+title: "ReAct"
+parent: "chapter-07"
+related: ["agents"]
+description: "ReAct interleaves reasoning-oriented decisions with actions and returned observations. In an implemented workflow, the important evidence is the actual interaction between decisions, permitted tools, and their observations."
+kind: "concept"
 conceptId: react
 chapter: 7
-part: applications
-summary: ReAct interleaves reasoning about the next step with tool actions and observations.
-parent: chapter-07
-prerequisites: [agents]
-related: [agents]
-level: intermediate
-tags: [applications, chapter-07]
+part: "applications"
+summary: "ReAct interleaves reasoning-oriented decisions with actions and returned observations. In an implemented workflow, the important evidence is the actual interaction between decisions, permitted tools, and their observations."
+prerequisites: ["agents"]
+level: "intermediate"
+tags: ["applications", "chapter-07"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-21"
+reviewStatus: "author-reviewed"
+reviewRecord: e5-workflows-author-review-2026-11-21
+learningObjectives: ["Distinguish an action request from an executed tool observation.", "Follow the next decision after a real result or validation error.", "Explain the restrictions of the local ReAct-style controller."]
+bookSections: ["book-ch07-react-langchain"]
+labHref: "/labs/prompting-and-workflows/"
+aliases: ["ReAct", "reasoning and acting", "action-observation loop"]
+exampleIds: ["e5-react", "bounded-tool-workflow"]
+relationshipReasons: {"agents": "Interleave decisions with executed actions and returned observations while retaining the controller boundaries."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import WorkflowEvidence from '../../../components/WorkflowEvidence.astro';
+import { WorkflowTrace } from '../../../components/simulations/WorkflowLabs';
 
 <ConceptPrimer id="react" />
 
 ## Definition and intuition
 
-ReAct interleaves reasoning about the next step with tool actions and observations.
+ReAct interleaves reasoning-oriented decisions with actions and returned observations. In an implemented workflow, the important evidence is the actual interaction between decisions, permitted tools, and their observations.
 
-Chapter 7 combines model calls with templates, memory, and tools. Trace the inputs and outputs of each step so an error can be located rather than hidden inside a chain.
+ReAct in this lesson refers to the reasoning-and-acting method, not the React frontend library used by the website. A written “Observation” supplied by a model is not automatically a genuine tool result.
 
-## Before you start
+<ReferenceBrief objectives={["Distinguish an action request from an executed tool observation.", "Follow the next decision after a real result or validation error.", "Explain the restrictions of the local ReAct-style controller."]} prerequisites="agents" scope="Original teaching mechanism plus recorded local-model evidence. Independent teaching review is pending." />
 
-Read [Agents](/llm-concept-atlas/concepts/agents/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **ReAct** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### The interaction loop
 
-1. **Prepare:** State the current question and choose a permitted action
-2. **Transform:** Run the tool and treat its result as new evidence
-3. **Inspect:** Update the plan or stop with a supported answer.
+A controller assembles the task and prior observations, asks for a next action, validates it, runs the allowed tool, appends the actual result, and invokes the next decision. The trace preserves model outputs separately from resolved tool calls. When a tool rejects arguments, that validation error becomes an observation under the same bounded policy.
 
-### The important distinction
+### A measured adaptation
 
-ReAct is often described as an alternation of reasoning, action, and observation. The observation must come from the actual tool result, not a fabricated continuation. In a production system, concise internal plans and explicit tool calls are more useful than an unbounded visible reasoning transcript.
+The book’s broader ReAct discussion is adapted into a finite local action-ID workflow because the small GGUF model is unreliable at arbitrary tool-call text. It selects among pre-generated legal calls, then a final-value domain after observing a result. This is explicitly a restricted ReAct-style mechanism demonstration. No claim is made that it produced faithful hidden reasoning or a fully autonomous plan.
+
+### Real and fake traces
+
+L11 executes actual GGUF choices through plain-Python and LangChain tool paths. It also runs clearly labeled scripted/FakeListLLM cases that force invalid arguments and maximum-step exhaustion. The fake cases establish controller behavior under specified decisions, while the real cases show the weak model’s actual choices and errors. Current core Runnable and StructuredTool APIs replace historical agent-executor imports.
 
 ## Worked example
 
-To answer store hours, the system decides to search, reads the returned hours page, then answers with that source. If the lookup is empty, it should not invent a time. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+A lookup returns the fixture value 17:30 for library closing time. The next decision should use that observation. If the model instead selects another tool, the controller records the repetition and continues only within the three-step bound. If a fake test supplies a boolean calculator operand, strict validation produces an error rather than treating true as one.
 
-<LessonFlow steps={["State the current question and choose a permitted action", "Run the tool and treat its result as new evidence", "Update the plan or stop with a supported answer."]} caption="A teaching diagram for ReAct. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
+
+Predict the outcome before changing a control. The explorer shows recorded real runs or explicitly labeled deterministic calculations; it does not call a model in your browser.
+
+<WorkflowTrace initial="realtools" client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+Run this small standard-library mechanism with Python 3. It illustrates the stated contract or calculation. The connected L09–L11 source below performs the actual local-model workflow; this short snippet is not a substitute for those model calls.
+
+{/* example:e5-react:start */}
 
 ```python
-tools = {"lookup": lambda item: {"hours": "5 pm"}.get(item, "unknown")}
-plan = [("lookup", "hours")]
-for tool, argument in plan:
-    print(tool, argument, "->", tools[tool](argument))
+observations = []
+fixture = {"library_closes": "17:30"}
+observations.append({"tool": "lookup", "result": fixture["library_closes"]})
+print("actual observation:", observations[-1])
+print("next decision input:", observations)
+assert observations[-1]["result"] == "17:30"
 ```
 
-**Expected output:**
+{/* example:e5-react:end */}
+
+Expected mechanism output:
 
 ```text
-lookup hours -> 5 pm
+actual observation: {'tool': 'lookup', 'result': '17:30'}
+next decision input: [{'tool': 'lookup', 'result': '17:30'}]
 ```
 
-**What the code shows:** The code executes a named tool with an argument and records its observation. A real agent chooses actions dynamically, but application code must still enforce the tool boundary. The [official chapter 7 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter07) develops the corresponding model-based implementation.
+<WorkflowEvidence id="bounded-tool-workflow" />
 
 ## When to use it
 
-Use it for inspectable tool-based workflows where actions depend on observations. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use the action-observation loop when external calculations or retrieved facts can improve a task and can be audited. Keep actual tool evidence separate from generated explanations and enforce an explicit stopping policy.
 
 ## Limits and common mistakes
 
-- A trace can still contain wrong assumptions, unsafe actions, or misread tool output.
-- **Failure to look for:** A retrieved snippet is mistaken for an instruction and redirects the action plan.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+A convincing narrative can invent observations. This lab has local fixtures and calculators only, no web navigation or write access. Its restricted action grammar and predeclared operands substantially limit generality; those boundaries are part of the lesson.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First state the current question and choose a permitted action Then run the tool and treat its result as new evidence Finally update the plan or stop with a supported answer.</p></details>
+<details>
+<summary>Is a generated “Observation: 17:30” proof that lookup ran?</summary>
 
-<details><summary>What would make the result misleading?</summary><p>A retrieved snippet is mistaken for an instruction and redirects the action plan.</p></details>
+No. The controller’s executed function and returned result provide that evidence.
+
+</details>
+
+<details>
+<summary>What do fake-model recovery tests prove?</summary>
+
+They prove the controller responds as specified to scripted decisions. They do not measure the actual model’s ability to choose or recover.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 7 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 7 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter07). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 7 of *Hands-On Large Language Models*. Read the [complete execution guide](/llm-concept-atlas/labs/prompting-and-workflows/) for artifact identity, predeclared tasks, error analysis, and implementation differences from the [authors’ chapter 7 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter07). The source PDF and book artwork are not redistributed.
 
 <ConceptConnections id="react" />

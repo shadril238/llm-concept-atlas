@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e5-chain-prompting",
+  "status": "passed",
+  "date": "2026-11-20T17:09:20.464907+00:00",
+  "gitCommit": "051efc998b79fc5b75149d7288744afd24f957c2",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e5/chain_prompting.py"
+  ],
+  "sourceSha256": "989d427980456d8f4f1aff9378e0939498a67191655836c603c9d87d189051f1",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "06fec0d76cc94221a05f0debe727125ac7910e455fc656c23cf6191cce7248a2",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "arithmetic for extraction: 16\ncopy consistent: True\nend-to-end correct: False\n",
+  "stderr": "",
+  "error": null
+}

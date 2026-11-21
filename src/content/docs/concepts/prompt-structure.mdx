@@ -1,100 +1,131 @@
 ---
-title: Prompt structure
-description: Prompt structure arranges task instructions, context, examples, and output requirements so their roles are clear.
-kind: concept
+title: "Prompt structure"
+parent: "chapter-06"
+related: ["instruction-prompting"]
+description: "A prompt is the model input assembled from roles, instructions, task data, demonstrations, and output requirements. A chat model also expects a particular serialization of role boundaries; the visible text alone is not the whole input."
+kind: "concept"
 conceptId: prompt-structure
 chapter: 6
-part: applications
-summary: Prompt structure arranges task instructions, context, examples, and output requirements so their roles are clear.
-parent: chapter-06
-prerequisites: [generative-model]
-related: [instruction-prompting]
-level: intermediate
-tags: [applications, chapter-06]
+part: "applications"
+summary: "A prompt is the model input assembled from roles, instructions, task data, demonstrations, and output requirements. A chat model also expects a particular serialization of role boundaries; the visible text alone is not the whole input."
+prerequisites: ["generative-model"]
+level: "intermediate"
+tags: ["applications", "chapter-06"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-21"
+reviewStatus: "author-reviewed"
+reviewRecord: e5-workflows-author-review-2026-11-21
+learningObjectives: ["Inspect roles and the actual rendered ChatML prompt.", "Separate task data, examples, instructions, and output contracts.", "Select a generation model using measured task and runtime requirements."]
+bookSections: ["book-ch06-generation-models", "book-ch06-model-selection", "book-ch06-model-loading", "book-ch06-output-controls", "book-ch06-prompt-introduction", "book-ch06-prompt-ingredients", "book-ch06-prompt-complexity"]
+labHref: "/labs/prompting-and-workflows/"
+aliases: ["prompt assembly", "chat template", "role boundaries"]
+exampleIds: ["e5-prompt-structure", "prompt-evaluation"]
+relationshipReasons: {"generative-model": "A generative model continues the serialized input; prompt design specifies that input without changing weights."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { PromptLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import WorkflowEvidence from '../../../components/WorkflowEvidence.astro';
+import { PromptExperiment } from '../../../components/simulations/WorkflowLabs';
 
 <ConceptPrimer id="prompt-structure" />
 
 ## Definition and intuition
 
-Prompt structure arranges task instructions, context, examples, and output requirements so their roles are clear.
+A prompt is the model input assembled from roles, instructions, task data, demonstrations, and output requirements. A chat model also expects a particular serialization of role boundaries; the visible text alone is not the whole input.
 
-Chapter 6 treats a prompt as a task specification. A prompt can guide output, but it does not change model weights or guarantee that an answer is correct.
+A prompt can be concise and precise or long and contradictory. Adding more components is not automatically an improvement. The useful question is which change affects a defined task under a fixed model and generation configuration.
 
-## Before you start
+<ReferenceBrief objectives={["Inspect roles and the actual rendered ChatML prompt.", "Separate task data, examples, instructions, and output contracts.", "Select a generation model using measured task and runtime requirements."]} prerequisites="generative-model" scope="Original teaching mechanism plus recorded local-model evidence. Independent teaching review is pending." />
 
-Read [Generative Model](/llm-concept-atlas/concepts/generative-model/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **prompt structure** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Prompt ingredients
 
-1. **Prepare:** State the task and permitted source material
-2. **Transform:** Separate examples from the new input with consistent delimiters
-3. **Inspect:** Specify output shape and inspect whether the response follows it.
+The instruction states the requested action; context supplies relevant background; task data is what must be processed; examples demonstrate input/output behavior; the output contract defines what a downstream program may accept. A role such as system or user is serialized into special delimiters for the chosen chat model. Putting the words “system instruction” inside ordinary data does not create a genuine system boundary.
 
-### The important distinction
+### Generation model selection
 
-Separate trusted task instructions from untrusted source material with explicit roles or delimiters. This does not make the source harmless, but it clarifies which text is evidence and which text defines the task. Inspect the fully rendered prompt during development because a correct template can still be filled incorrectly.
+Start with task language, expected input/output length, hardware, artifact license, supported decoding controls, and representative validation cases. A base model and an instruction-tuned chat model may need different input conventions. E5 uses a small pinned Q8 GGUF instruction model to make CPU execution accessible. Its failures are displayed; size and quantization do not establish adequate task quality. No current-best-model recommendation is inferred from this tiny suite.
+
+### Inspect the assembled input
+
+The runtime exposes each typed message, its serialized ChatML text, exact native input-token count, output cap, stop reason, and generated text. It verifies the renderer against the template stored in the GGUF artifact. Named fields and role boundaries are inspected before generation so formatting errors are distinguishable from model errors. The adapter rejects literal role delimiters inside this lab’s content; broader production input handling requires its own contract.
+
+### Generation controls
+
+Temperature changes sampling probabilities when it is positive; smaller values concentrate mass and larger values flatten it. This runtime treats temperature zero as greedy decoding, not a division by zero in a softmax formula. Top-k limits candidates by rank; top-p keeps a probability-mass nucleus under the backend's sampler order. These affect selection, not the truth of the selected token. A fixed seed helps reproduce a configuration but does not guarantee identical output across devices or native-library versions.
+
+`max_tokens` caps generated output; stop sequences terminate at declared role boundaries. Both can end a response before it satisfies the requested contract, so inspect the finish reason and parse the complete output. The prompt plus reserved output must fit the context cap. L09 holds its greedy settings fixed across prompt comparisons; L10 separately records temperature 0.7, top-p 0.9, top-k 40, and five seeds. Those are different experimental questions. The [decoding lesson](/llm-concept-atlas/concepts/decoding/) develops the distribution calculation.
 
 ## Worked example
 
-A support prompt gives a labeling rule, two labeled examples, then one new message. If the new message is not separated, the model may treat it as part of an example. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+An instruction asks for only an integer, while a later format block asks for a paragraph. The model receives conflicting requirements even if both components look sensible separately. Resolve the contract before comparing methods. The code labels these components; the actual L09 workflow evaluates predeclared prompt variants on identical held-out cases.
 
-<LessonFlow steps={["State the task and permitted source material", "Separate examples from the new input with consistent delimiters", "Specify output shape and inspect whether the response follows it."]} caption="A teaching diagram for Prompt structure. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
 
-## Try the interactive lab
+Predict the outcome before changing a control. The explorer shows recorded real runs or explicitly labeled deterministic calculations; it does not call a model in your browser.
 
-<PromptLab client:visible />
-
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+<PromptExperiment client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+Run this small standard-library mechanism with Python 3. It illustrates the stated contract or calculation. The connected L09–L11 source below performs the actual local-model workflow; this short snippet is not a substitute for those model calls.
+
+{/* example:e5-prompt-structure:start */}
 
 ```python
-instruction = "Return one label: positive or negative."
-example = "Text: I loved it. Label: positive"
-query = "Text: The ending was dull. Label:"
-prompt = "\n".join([instruction, example, query])
-print(prompt)
+parts = {
+    "instruction": "Add the two counts.",
+    "data": "7 books and 8 books",
+    "format": "Return one integer only.",
+}
+for role, text in [
+    ("system", parts["format"]),
+    ("user", parts["instruction"] + " Data: " + parts["data"]),
+]:
+    print(role + ":", text)
+assert "7" not in parts["format"]  # task data is separate from the contract
 ```
 
-**Expected output:**
+{/* example:e5-prompt-structure:end */}
+
+Expected mechanism output:
 
 ```text
-Return one label: positive or negative.
-Text: I loved it. Label: positive
-Text: The ending was dull. Label:
+system: Return one integer only.
+user: Add the two counts. Data: 7 books and 8 books
 ```
 
-**What the code shows:** The final string contains the instruction, demonstration, and new query in that order. Inspect the rendered string before sending it to a real generator. The [official chapter 6 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter06) develops the corresponding model-based implementation.
+<WorkflowEvidence id="prompt-evaluation" />
 
 ## When to use it
 
-Use a stable structure when prompts become reused, tested, or assembled from multiple inputs. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use an explicit prompt assembly layer whenever a model is part of a program. Preserve versions and rendered inputs so changes can be reviewed and evaluated rather than judged by one pleasing answer.
 
 ## Limits and common mistakes
 
-- A well-formatted prompt cannot guarantee truth or protect against every malicious instruction in retrieved text.
-- **Failure to look for:** A retrieved document is inserted as if it were a trusted instruction and changes the assistant's task.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+A correct template does not guarantee an answer. Prompt tokens consume context capacity alongside reserved output. E5 uses original tasks and a small model; its measured results are not a general ranking of model families.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First state the task and permitted source material Then separate examples from the new input with consistent delimiters Finally specify output shape and inspect whether the response follows it.</p></details>
+<details>
+<summary>Is a task paragraph beginning “system:” a system message?</summary>
 
-<details><summary>What would make the result misleading?</summary><p>A retrieved document is inserted as if it were a trusted instruction and changes the assistant's task.</p></details>
+No. Roles are structured by the application and the model-specific renderer. An ordinary string that names a role does not create that boundary.
+
+</details>
+
+<details>
+<summary>Why inspect the rendered prompt before comparing accuracy?</summary>
+
+A role or delimiter mismatch can change the actual model input. Without inspecting it, a formatting bug can be mistaken for a model or prompting result.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 6 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 6 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter06). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 6 of *Hands-On Large Language Models*. Read the [complete execution guide](/llm-concept-atlas/labs/prompting-and-workflows/) for artifact identity, predeclared tasks, error analysis, and implementation differences from the [authors’ chapter 6 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter06). The source PDF and book artwork are not redistributed.
 
 <ConceptConnections id="prompt-structure" />

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e5-chains",
+  "status": "passed",
+  "date": "2026-11-20T17:09:21.032671+00:00",
+  "gitCommit": "051efc998b79fc5b75149d7288744afd24f957c2",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e5/chains.py"
+  ],
+  "sourceSha256": "f6919c80af42cc6b8f97cf1ce4f75e3f3b3aa6120ca745ecc39159ce9b052ccc",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "28fc14713408d6eef2de2db89dd3039e06ed1795d09afbca565b08862043d906",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "{'item': 'pen', 'quantity': 8, 'total': 16}\n",
+  "stderr": "",
+  "error": null
+}

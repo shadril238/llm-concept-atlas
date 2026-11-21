@@ -1,0 +1,118 @@
+---
+title: "Chain-of-thought"
+description: "Chain-of-thought prompting asks for intermediate reasoning text before an answer. That visible text is a generated explanation, not a faithful readout of hidden computation or a guarantee of correctness."
+kind: "concept"
+conceptId: chain-of-thought
+chapter: 6
+part: "applications"
+summary: "Chain-of-thought prompting asks for intermediate reasoning text before an answer. That visible text is a generated explanation, not a faithful readout of hidden computation or a guarantee of correctness."
+parent: "prompt-structure"
+prerequisites: ["prompt-structure", "output-verification"]
+related: ["tree-of-thought", "chain-prompting"]
+level: "intermediate"
+tags: ["applications", "chapter-06"]
+lessonStatus: full
+lastReviewed: "2026-11-21"
+reviewStatus: "author-reviewed"
+reviewRecord: e5-workflows-author-review-2026-11-21
+learningObjectives: ["Distinguish visible calculations from hidden model computation.", "Compare worked-example and step-instruction prompts on fixed tasks.", "Verify the final answer independently of the explanation."]
+bookSections: ["book-ch06-reasoning", "book-ch06-chain-of-thought", "book-ch06-zero-shot-cot"]
+labHref: "/labs/prompting-and-workflows/"
+aliases: ["CoT", "zero-shot CoT", "step-by-step prompting"]
+exampleIds: ["e5-chain-of-thought", "prompt-evaluation"]
+relationshipReasons: {"prompt-structure": "Worked examples and step instructions are prompt components that change the visible continuation.", "output-verification": "Check generated calculations independently; an explanation is not a hidden execution trace or correctness proof."}
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import WorkflowEvidence from '../../../components/WorkflowEvidence.astro';
+import { PromptExperiment } from '../../../components/simulations/WorkflowLabs';
+
+<ConceptPrimer id="chain-of-thought" />
+
+## Definition and intuition
+
+Chain-of-thought prompting asks for intermediate reasoning text before an answer. That visible text is a generated explanation, not a faithful readout of hidden computation or a guarantee of correctness.
+
+A useful worked solution exposes checkable operations. An impressive explanation can also rationalize a wrong result. The aim is to make claims testable, not to assume that more words imply better reasoning.
+
+<ReferenceBrief objectives={["Distinguish visible calculations from hidden model computation.", "Compare worked-example and step-instruction prompts on fixed tasks.", "Verify the final answer independently of the explanation."]} prerequisites="prompt-structure, output-verification" scope="Original teaching mechanism plus recorded local-model evidence. Independent teaching review is pending." />
+
+## How it works
+
+### Within one generation
+
+A model predicts output tokens conditioned on its input and earlier generated tokens. Asking it to write intermediate steps changes that continuation. It does not create separate application calls, a search tree, or an external arithmetic verifier. Visible reasoning can contain arithmetic mistakes, omitted assumptions, or a correct answer supported by an incorrect explanation.
+
+### Two prompt families
+
+The book discusses worked demonstrations and a zero-shot step-by-step instruction. L09 keeps these distinct: step-instruction has no demonstration, while worked-example includes a design-split calculation and Answer line. Both use the same evaluation questions. The comparison reports answer extraction, format following, and actual token work rather than assuming either instruction improves results.
+
+### What can be inspected
+
+The displayed text is an observable output artifact. It is not evidence that every internal operation followed the narrative. Check intermediate arithmetic when it is relevant, and separately check the final reference answer. For a production workflow, concise justifications, executable calculations, or cited evidence can provide more useful verification targets than an unrestricted narrative.
+
+## Worked example
+
+For seven plus eight, “7 + 8 = 14; Answer: 14” has a clear structure and a wrong calculation. “Answer: 15” is correct under the answer-line parser but supplies no checkable intermediate reasoning. L09 retains both format and answer metrics. Its tiny model often fails to produce an extractable final line; those failures are not silently discarded.
+
+## Try the experiment
+
+Predict the outcome before changing a control. The explorer shows recorded real runs or explicitly labeled deterministic calculations; it does not call a model in your browser.
+
+<PromptExperiment initial="worked-example" client:visible />
+
+## Implement it
+
+Run this small standard-library mechanism with Python 3. It illustrates the stated contract or calculation. The connected L09–L11 source below performs the actual local-model workflow; this short snippet is not a substitute for those model calls.
+
+{/* example:e5-chain-of-thought:start */}
+
+```python
+steps = [(7, 8, 14), (7, 8, 15)]
+for left, right, claimed in steps:
+    print(f"{left} + {right} = {claimed}", "verified:", left + right == claimed)
+assert 7 + 8 == 15
+```
+
+{/* example:e5-chain-of-thought:end */}
+
+Expected mechanism output:
+
+```text
+7 + 8 = 14 verified: False
+7 + 8 = 15 verified: True
+```
+
+<WorkflowEvidence id="prompt-evaluation" />
+
+## When to use it
+
+Use short worked demonstrations when task decomposition is understandable and its intermediate claims can be checked. Compare against a direct-answer baseline and account for the added output budget and work.
+
+## Limits and common mistakes
+
+Longer output may add unsupported steps or hit the token cap. An explanation is not privileged access to internal reasoning. The recorded local results support only this task/model configuration and do not establish a general advantage for visible reasoning.
+
+## Check your understanding
+
+<details>
+<summary>Is a written explanation an internal execution trace?</summary>
+
+No. It is generated text. External checks can assess its claims, but the text does not reveal every hidden model operation.
+
+</details>
+
+<details>
+<summary>Does “think step by step” implement tree search?</summary>
+
+No. Tree search requires explicit candidate states, branching, evaluation, pruning, and stopping logic in the application.
+
+</details>
+
+## Connections and sources
+
+This original lesson follows Chapter 6 of *Hands-On Large Language Models*. Read the [complete execution guide](/llm-concept-atlas/labs/prompting-and-workflows/) for artifact identity, predeclared tasks, error analysis, and implementation differences from the [authors’ chapter 6 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter06). The source PDF and book artwork are not redistributed.
+
+<ConceptConnections id="chain-of-thought" />

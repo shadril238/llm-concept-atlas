@@ -92,6 +92,39 @@
         "Optional live hosted comparison if separately authorized"
       ],
       "accepted": false
+    },
+    {
+      "id": "e5-workflows-author-review-2026-11-21",
+      "date": "2026-11-21",
+      "status": "author-reviewed",
+      "independentReview": false,
+      "reviewer": "Implementing assistant (author technical pass)",
+      "concepts": [
+        "agents",
+        "chain-of-thought",
+        "chain-prompting",
+        "chains",
+        "constrained-sampling",
+        "conversation-memory",
+        "few-shot-examples",
+        "in-context-learning",
+        "instruction-prompting",
+        "output-verification",
+        "prompt-structure",
+        "prompt-templates",
+        "quantized-models",
+        "react",
+        "self-consistency",
+        "summarized-memory",
+        "tree-of-thought",
+        "windowed-memory"
+      ],
+      "evidence": "docs/reviews/e5-workflows.md",
+      "pending": [
+        "Independent technical/editorial review",
+        "Beginner pilot feedback"
+      ],
+      "accepted": false
     }
   ]
 }

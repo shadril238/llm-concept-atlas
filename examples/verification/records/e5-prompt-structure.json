@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e5-prompt-structure",
+  "status": "passed",
+  "date": "2026-11-20T17:09:20.180753+00:00",
+  "gitCommit": "051efc998b79fc5b75149d7288744afd24f957c2",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e5/prompt_structure.py"
+  ],
+  "sourceSha256": "66fdabc4cc54e0415cc3376448f37616fbd03a008fa3ff7758f9cd1a6a1513bb",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "f5fc4ecbba45fed1206c4c91eabb86b21be81b00c41496ece17c87817c2cf1ae",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.2,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "system: Return one integer only.\nuser: Add the two counts. Data: 7 books and 8 books\n",
+  "stderr": "",
+  "error": null
+}

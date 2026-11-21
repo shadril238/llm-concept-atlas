@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e5-few-shot-examples",
+  "status": "passed",
+  "date": "2026-11-20T17:09:20.394688+00:00",
+  "gitCommit": "051efc998b79fc5b75149d7288744afd24f957c2",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e5/few_shot_examples.py"
+  ],
+  "sourceSha256": "ea05def14dd72c24f86c5aa460e8c27653fd2a60c2ebf8646ea2720435032845",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "c3e67ce569111fca92eb1bbfdf7b6849443deb8097f4ddefa20a3601adf5e36a",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.008,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "example IDs: ['design-add', 'design-sub']\ndistinct demonstrated answers: 1\nreversed IDs: ['design-sub', 'design-add']\n",
+  "stderr": "",
+  "error": null
+}

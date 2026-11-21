@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e5-constrained-sampling",
+  "status": "passed",
+  "date": "2026-11-20T17:09:20.822592+00:00",
+  "gitCommit": "051efc998b79fc5b75149d7288744afd24f957c2",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e5/constrained_sampling.py"
+  ],
+  "sourceSha256": "a50f32f108dbafbacd6a32898214f60bb7f73d0f3bf7421ad1a4533208f67952",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "879749956614c8d524242fa1c3175a9722897811aebdc69ecc705d38e6dd6435",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.4,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "domain valid: True\ncontent correct: False\nincomplete JSON: {\"item\":\n",
+  "stderr": "",
+  "error": null
+}

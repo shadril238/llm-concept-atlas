@@ -1,93 +1,120 @@
 ---
-title: Prompt templates
-description: Prompt templates insert changing task data into a tested prompt structure.
-kind: concept
+title: "Prompt templates"
+parent: "chapter-07"
+related: ["quantized-models", "chains"]
+description: "A prompt template turns named application inputs into a concrete model input. It provides repeatable assembly, while role serialization, input validation, and model output verification remain explicit responsibilities."
+kind: "concept"
 conceptId: prompt-templates
 chapter: 7
-part: applications
-summary: Prompt templates insert changing task data into a tested prompt structure.
-parent: chapter-07
-prerequisites: [prompt-structure]
-related: [quantized-models, chains]
-level: intermediate
-tags: [applications, chapter-07]
+part: "applications"
+summary: "A prompt template turns named application inputs into a concrete model input. It provides repeatable assembly, while role serialization, input validation, and model output verification remain explicit responsibilities."
+prerequisites: ["prompt-structure"]
+level: "intermediate"
+tags: ["applications", "chapter-07"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-21"
+reviewStatus: "author-reviewed"
+reviewRecord: e5-workflows-author-review-2026-11-21
+learningObjectives: ["Render typed LangChain messages through a verified local adapter.", "Compare template and plain-Python prompts exactly.", "Keep prompt assembly separate from model correctness."]
+bookSections: ["book-ch07-prompt-template"]
+labHref: "/labs/prompting-and-workflows/"
+aliases: ["ChatPromptTemplate", "template variables"]
+exampleIds: ["e5-prompt-templates", "local-model-chain"]
+relationshipReasons: {"prompt-structure": "A template assembles roles, instructions, and variables into the concrete input the model receives."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import WorkflowEvidence from '../../../components/WorkflowEvidence.astro';
+import { WorkflowTrace } from '../../../components/simulations/WorkflowLabs';
 
 <ConceptPrimer id="prompt-templates" />
 
 ## Definition and intuition
 
-Prompt templates insert changing task data into a tested prompt structure.
+A prompt template turns named application inputs into a concrete model input. It provides repeatable assembly, while role serialization, input validation, and model output verification remain explicit responsibilities.
 
-Chapter 7 combines model calls with templates, memory, and tools. Trace the inputs and outputs of each step so an error can be located rather than hidden inside a chain.
+A reusable template makes a change reviewable. It also makes a mistake reusable. Inspect the final messages and serialized prompt rather than assuming a framework name guarantees the right input.
 
-## Before you start
+<ReferenceBrief objectives={["Render typed LangChain messages through a verified local adapter.", "Compare template and plain-Python prompts exactly.", "Keep prompt assembly separate from model correctness."]} prerequisites="prompt-structure" scope="Original teaching mechanism plus recorded local-model evidence. Independent teaching review is pending." />
 
-Read [Prompt structure](/llm-concept-atlas/concepts/prompt-structure/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **prompt templates** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Current template API
 
-1. **Prepare:** Define fixed instructions and named input fields
-2. **Transform:** Escape or separate inserted content from trusted instructions
-3. **Inspect:** Render the template and inspect the full resulting prompt.
+L11 uses langchain_core.prompts.ChatPromptTemplate and a RunnableLambda adapter around the local GGUF runtime. Templates produce typed messages. The adapter maps their roles into the same explicit ChatML renderer used by the plain-Python path. No hosted provider, hidden API key, or unpinned convenience model is involved.
 
-### The important distinction
+### Equivalence before abstraction
 
-Named slots make it clear which fields must be supplied. Keep the rendered prompt as a test artifact so changes in upstream retrieval or formatting are visible. Treat inserted documents as data and avoid placing them where the model could mistake them for developer instructions.
+The workflow renders the same question with a plain message list and the framework template. It asserts equality of the rendered prompt and greedy generated output. This checks adapter behavior for this input; it does not claim every possible framework transformation is equivalent. The runtime also checks the renderer against the actual GGUF Jinja template.
+
+### Contracts at the boundary
+
+Named variables make required inputs visible, but content inside those variables is still task data. Literal role delimiters are rejected in this controlled renderer. Broader untrusted-input handling needs an application-specific policy. After generation, the output still passes the same parser and reference checks; template correctness alone cannot validate the answer.
 
 ## Worked example
 
-A support template has `{question}` and `{source}` slots. Filling the source with an unrelated page should be visible before a model call, not hidden by the template API. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+A template with a system format instruction and user question should produce the same role sequence as its plain-Python equivalent. If an adapter accidentally maps an AI message to user, the visible words may match while the serialized model input differs. L11 displays both forms and checks the complete serialization.
 
-<LessonFlow steps={["Define fixed instructions and named input fields", "Escape or separate inserted content from trusted instructions", "Render the template and inspect the full resulting prompt."]} caption="A teaching diagram for Prompt templates. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
+
+Predict the outcome before changing a control. The explorer shows recorded real runs or explicitly labeled deterministic calculations; it does not call a model in your browser.
+
+<WorkflowTrace initial="runtime" client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+Run this small standard-library mechanism with Python 3. It illustrates the stated contract or calculation. The connected L09–L11 source below performs the actual local-model workflow; this short snippet is not a substitute for those model calls.
+
+{/* example:e5-prompt-templates:start */}
 
 ```python
-instruction = "Return one label: positive or negative."
-example = "Text: I loved it. Label: positive"
-query = "Text: The ending was dull. Label:"
-prompt = "\n".join([instruction, example, query])
-print(prompt)
+template = "Task: {question}\nReturn one integer."
+question = "7 + 8"
+rendered = template.format(question=question)
+plain = "Task: " + question + "\nReturn one integer."
+assert rendered == plain
+print(rendered)
 ```
 
-**Expected output:**
+{/* example:e5-prompt-templates:end */}
+
+Expected mechanism output:
 
 ```text
-Return one label: positive or negative.
-Text: I loved it. Label: positive
-Text: The ending was dull. Label:
+Task: 7 + 8
+Return one integer.
 ```
 
-**What the code shows:** The final string contains the instruction, demonstration, and new query in that order. Inspect the rendered string before sending it to a real generator. The [official chapter 7 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter07) develops the corresponding model-based implementation.
+<WorkflowEvidence id="local-model-chain" />
 
 ## When to use it
 
-Use templates to keep repeated prompts consistent and reviewable. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use templates when prompts repeat across inputs or need explicit versioning. Keep the variable contract small and test the actual renderer before adding more orchestration.
 
 ## Limits and common mistakes
 
-- Templates do not sanitize untrusted content or guarantee output quality.
-- **Failure to look for:** A user-provided string is concatenated into an instruction slot and changes the intended task.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Templates do not fine-tune models, isolate arbitrary malicious content, or guarantee factual output. The snippet demonstrates string assembly; L11 executes typed framework messages and the actual local model.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First define fixed instructions and named input fields Then escape or separate inserted content from trusted instructions Finally render the template and inspect the full resulting prompt.</p></details>
+<details>
+<summary>What does prompt equivalence check?</summary>
 
-<details><summary>What would make the result misleading?</summary><p>A user-provided string is concatenated into an instruction slot and changes the intended task.</p></details>
+That the concrete serialized input is identical for the declared case. It does not establish semantic correctness of the resulting answer.
+
+</details>
+
+<details>
+<summary>Can variable names create model roles?</summary>
+
+No. Roles are typed application messages and serialized delimiters, not labels embedded in arbitrary text.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 7 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 7 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter07). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 7 of *Hands-On Large Language Models*. Read the [complete execution guide](/llm-concept-atlas/labs/prompting-and-workflows/) for artifact identity, predeclared tasks, error analysis, and implementation differences from the [authors’ chapter 7 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter07). The source PDF and book artwork are not redistributed.
 
 <ConceptConnections id="prompt-templates" />

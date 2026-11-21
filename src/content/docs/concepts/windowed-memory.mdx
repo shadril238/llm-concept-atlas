@@ -1,91 +1,121 @@
 ---
-title: Windowed memory
-description: Windowed memory keeps only a recent slice of messages in the next prompt.
-kind: concept
+title: "Windowed memory"
+parent: "chapter-07"
+related: ["conversation-memory", "summarized-memory"]
+description: "Windowed memory retains a recent slice of a conversation, usually defined in messages, turns, or tokens. The unit and later budget-packing rule must be explicit because they determine which earlier facts disappear."
+kind: "concept"
 conceptId: windowed-memory
 chapter: 7
-part: applications
-summary: Windowed memory keeps only a recent slice of messages in the next prompt.
-parent: chapter-07
-prerequisites: [conversation-memory]
-related: [conversation-memory, summarized-memory]
-level: intermediate
-tags: [applications, chapter-07]
+part: "applications"
+summary: "Windowed memory retains a recent slice of a conversation, usually defined in messages, turns, or tokens. The unit and later budget-packing rule must be explicit because they determine which earlier facts disappear."
+prerequisites: ["conversation-memory"]
+level: "intermediate"
+tags: ["applications", "chapter-07"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-21"
+reviewStatus: "author-reviewed"
+reviewRecord: e5-workflows-author-review-2026-11-21
+learningObjectives: ["Define the window unit as complete user/assistant turn pairs.", "Inspect forgotten facts and retained corrections.", "Distinguish policy removal from token-budget eviction."]
+bookSections: ["book-ch07-window"]
+labHref: "/labs/prompting-and-workflows/"
+aliases: ["sliding window memory", "recent-turn window"]
+exampleIds: ["e5-windowed-memory", "memory-policies"]
+relationshipReasons: {"conversation-memory": "A recent-turn selection policy decides which stored messages remain in the next prompt before token packing."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import WorkflowEvidence from '../../../components/WorkflowEvidence.astro';
+import { MemoryExplorer } from '../../../components/simulations/WorkflowLabs';
 
 <ConceptPrimer id="windowed-memory" />
 
 ## Definition and intuition
 
-Windowed memory keeps only a recent slice of messages in the next prompt.
+Windowed memory retains a recent slice of a conversation, usually defined in messages, turns, or tokens. The unit and later budget-packing rule must be explicit because they determine which earlier facts disappear.
 
-Chapter 7 combines model calls with templates, memory, and tools. Trace the inputs and outputs of each step so an error can be located rather than hidden inside a chain.
+A recent window is predictable and inexpensive to maintain. It can also forget the only occurrence of a project code while keeping several irrelevant recent messages. Recency is a policy choice, not a relevance guarantee.
 
-## Before you start
+<ReferenceBrief objectives={["Define the window unit as complete user/assistant turn pairs.", "Inspect forgotten facts and retained corrections.", "Distinguish policy removal from token-budget eviction."]} prerequisites="conversation-memory" scope="Original teaching mechanism plus recorded local-model evidence. Independent teaching review is pending." />
 
-Read [Conversation memory](/llm-concept-atlas/concepts/conversation-memory/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **windowed memory** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### The exact window
 
-1. **Prepare:** Choose a window length measured in turns or tokens
-2. **Transform:** Include the newest relevant messages within that limit
-3. **Inspect:** Check whether essential older facts were lost.
+L11 selects the last two complete user/assistant pairs from the same eight-message conversation used by all policies. This is four messages, not two messages and not a fixed token count. The runtime then assembles system instructions and the final question and checks the actual rendered input against the application budget plus reserved output.
 
-### The important distinction
+### Two removal stages
 
-A fixed last-N-turn window is simple but can cut a user constraint exactly at the boundary. Token-aware windows handle variable message length better than turn counts, though they still need a policy for durable facts. Test long conversations with corrections and changes of goal.
+Messages outside the selected window are policy omissions. If the selected window is still too large, oldest complete pairs are budget evictions. The display lists both categories. This distinction matters when debugging why a fact disappeared: widening the window cannot help if a smaller budget immediately evicts the same material.
+
+### Current framework equivalent
+
+The workflow uses MessagesPlaceholder with a normal list of typed HumanMessage and AIMessage objects in pinned langchain_core. It verifies the same prompt and greedy output as the plain-Python window policy. It avoids deprecated memory classes and makes the selection rule explicit instead of depending on a historical convenience class’s interpretation of k.
 
 ## Worked example
 
-A six-turn chat retains only the last two turns. The answer uses recent context but forgets a constraint stated at the start unless it is separately preserved. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+The last two pairs contain the Monday correction and paint discussion, while the initial LARK-27 code is outside the window. A model may answer Monday from the retained text while missing the code. That is a predictable information boundary. The actual generated answer and field scores show whether the model uses the available material.
 
-<LessonFlow steps={["Choose a window length measured in turns or tokens", "Include the newest relevant messages within that limit", "Check whether essential older facts were lost."]} caption="A teaching diagram for Windowed memory. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
+
+Predict the outcome before changing a control. The explorer shows recorded real runs or explicitly labeled deterministic calculations; it does not call a model in your browser.
+
+<MemoryExplorer initial="window" client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+Run this small standard-library mechanism with Python 3. It illustrates the stated contract or calculation. The connected L09–L11 source below performs the actual local-model workflow; this short snippet is not a substitute for those model calls.
+
+{/* example:e5-windowed-memory:start */}
 
 ```python
-history = [("user", "My name is Sam"), ("assistant", "Hello Sam")]
-history.append(("user", "What is my name?"))
-print("\n".join(f"{role}: {text}" for role, text in history[-3:]))
+history = [("u1", "a1"), ("u2", "a2"), ("u3", "a3"), ("u4", "a4")]
+k = 2
+kept = history[-k:]
+omitted = history[:-k]
+print("kept pairs:", kept)
+print("policy omissions:", omitted)
+assert len(kept) == 2
 ```
 
-**Expected output:**
+{/* example:e5-windowed-memory:end */}
+
+Expected mechanism output:
 
 ```text
-user: My name is Sam
-assistant: Hello Sam
-user: What is my name?
+kept pairs: [('u3', 'a3'), ('u4', 'a4')]
+policy omissions: [('u1', 'a1'), ('u2', 'a2')]
 ```
 
-**What the code shows:** The slice keeps the last three messages and formats them for a future request. Earlier messages are absent unless the application explicitly stores and reinserts them. The [official chapter 7 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter07) develops the corresponding model-based implementation.
+<WorkflowEvidence id="memory-policies" />
 
 ## When to use it
 
-Use it when recent exchanges matter most and context cost must stay bounded. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use a recent window when tasks mainly depend on nearby turns and predictable context size matters. Test an early unique fact, a later correction, and irrelevant recent chatter before assuming the policy fits your conversation.
 
 ## Limits and common mistakes
 
-- It can drop persistent constraints or facts that remain important.
-- **Failure to look for:** The assistant forgets a dietary restriction because it fell outside the window.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+The window can forget old but essential facts. A message-count window does not impose a token cap, so token packing remains necessary. This lab does not add retrieval to rescue forgotten facts.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First choose a window length measured in turns or tokens Then include the newest relevant messages within that limit Finally check whether essential older facts were lost.</p></details>
+<details>
+<summary>Does k=2 always mean two messages?</summary>
 
-<details><summary>What would make the result misleading?</summary><p>The assistant forgets a dietary restriction because it fell outside the window.</p></details>
+No. Here it explicitly means two complete user/assistant pairs. Different APIs can choose different units.
+
+</details>
+
+<details>
+<summary>Does a wider window guarantee the early code reaches the model?</summary>
+
+No. A later token-budget packing step may still evict the oldest pairs.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 7 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 7 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter07). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 7 of *Hands-On Large Language Models*. Read the [complete execution guide](/llm-concept-atlas/labs/prompting-and-workflows/) for artifact identity, predeclared tasks, error analysis, and implementation differences from the [authors’ chapter 7 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter07). The source PDF and book artwork are not redistributed.
 
 <ConceptConnections id="windowed-memory" />

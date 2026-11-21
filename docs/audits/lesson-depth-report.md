@@ -1,8 +1,8 @@
 # Existing lesson depth audit
 
-Initial review 2026-11-19; latest lesson update 2026-11-20. Covers **102 concepts**. Source hashes detect stale findings. Independent pedagogical acceptance remains pending; execution claims below refer only to linked workflow evidence.
+Initial review 2026-11-19; latest lesson update 2026-11-20. Covers **104 concepts**. Source hashes detect stale findings. Independent pedagogical acceptance remains pending; execution claims below refer only to linked workflow evidence.
 
-The 102 concept snippets contain **72 distinct Python implementations**. Shared code is not automatically wrong; the finding records whether it demonstrates this lesson's mechanism.
+The 104 concept snippets contain **86 distinct Python implementations**. Shared code is not automatically wrong; the finding records whether it demonstrates this lesson's mechanism.
 
 ## Useful existing work
 
@@ -87,27 +87,29 @@ The site has explanations, labeled illustrative examples, relationship navigatio
 
 | Lesson | Current implementation finding | Priority / next phase |
 | --- | --- | --- |
-| [chain-prompting](../../src/content/docs/concepts/chain-prompting.mdx#implement-it) | The snippet formats a prompt with fixed retrieval text; it never executes a chain of model calls. | P1 / E5 |
-| [constrained-sampling](../../src/content/docs/concepts/constrained-sampling.mdx#implement-it) | Post-generation membership checking is validation, not constraints on the decoder token choices. | P0 / E5 |
-| [few-shot-examples](../../src/content/docs/concepts/few-shot-examples.mdx#implement-it) | The prompt is assembled but no output or demonstration-selection comparison is evaluated. | P1 / E5 |
-| [in-context-learning](../../src/content/docs/concepts/in-context-learning.mdx#implement-it) | The prompt demonstrates formatting but not measured behavior with versus without examples. | P1 / E5 |
-| [instruction-prompting](../../src/content/docs/concepts/instruction-prompting.mdx#implement-it) | The prompt is printed without a model response or a test of instruction following. | P1 / E5 |
-| [output-verification](../../src/content/docs/concepts/output-verification.mdx#implement-it) | Allowed-label membership is a useful first check; add parsing, semantic checks, and bounded retries. | P1 / E5 |
-| [prompt-structure](../../src/content/docs/concepts/prompt-structure.mdx#implement-it) | Prompt composition is relevant; add annotated roles and a real input/output comparison. | P1 / E5 |
-| [self-consistency](../../src/content/docs/concepts/self-consistency.mdx#implement-it) | Accuracy over supplied labels contains no sampling, answer normalization, or vote aggregation. | P0 / E5 |
+| [chain-prompting](../../src/content/docs/concepts/chain-prompting.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | P1 / E5 |
+| [constrained-sampling](../../src/content/docs/concepts/constrained-sampling.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | P0 / E5 |
+| [few-shot-examples](../../src/content/docs/concepts/few-shot-examples.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | P1 / E5 |
+| [in-context-learning](../../src/content/docs/concepts/in-context-learning.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | P1 / E5 |
+| [instruction-prompting](../../src/content/docs/concepts/instruction-prompting.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | P1 / E5 |
+| [output-verification](../../src/content/docs/concepts/output-verification.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | P1 / E5 |
+| [prompt-structure](../../src/content/docs/concepts/prompt-structure.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | P1 / E5 |
+| [self-consistency](../../src/content/docs/concepts/self-consistency.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | P0 / E5 |
+| [chain-of-thought](../../src/content/docs/concepts/chain-of-thought.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | P2 / E5 |
+| [tree-of-thought](../../src/content/docs/concepts/tree-of-thought.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | P2 / E5 |
 
 ### Chapter 7
 
 | Lesson | Current implementation finding | Priority / next phase |
 | --- | --- | --- |
-| [agents](../../src/content/docs/concepts/agents.mdx#implement-it) | The tool plan is hardcoded; there is no model-selected action or observation-driven loop. | P1 / E5 |
-| [chains](../../src/content/docs/concepts/chains.mdx#implement-it) | The snippet assembles one prompt but has no multiple generated stages or stage contracts. | P1 / E5 |
-| [conversation-memory](../../src/content/docs/concepts/conversation-memory.mdx#implement-it) | Stored history is shown, but not supplied to a real model or tested for remembered facts. | P1 / E5 |
-| [prompt-templates](../../src/content/docs/concepts/prompt-templates.mdx#implement-it) | One fixed string assembly omits reusable named-slot validation and actual model-specific templates. | P1 / E5 |
-| [quantized-models](../../src/content/docs/concepts/quantized-models.mdx#implement-it) | The arithmetic illustrates rounding but never loads a quantized runtime or measures its supported resources. | P1 / E5 |
-| [react](../../src/content/docs/concepts/react.mdx#implement-it) | The example shares a fixed lookup plan with Agents; it has no ReAct iteration or model observation handling. | P1 / E5 |
-| [summarized-memory](../../src/content/docs/concepts/summarized-memory.mdx#implement-it) | The code prints the last three messages; it never creates or updates a summary. | P0 / E5 |
-| [windowed-memory](../../src/content/docs/concepts/windowed-memory.mdx#implement-it) | The fixed three-message slice needs a variable window and a concrete forgotten-constraint experiment. | P1 / E5 |
+| [agents](../../src/content/docs/concepts/agents.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | P1 / E5 |
+| [chains](../../src/content/docs/concepts/chains.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | P1 / E5 |
+| [conversation-memory](../../src/content/docs/concepts/conversation-memory.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | P1 / E5 |
+| [prompt-templates](../../src/content/docs/concepts/prompt-templates.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | P1 / E5 |
+| [quantized-models](../../src/content/docs/concepts/quantized-models.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | P1 / E5 |
+| [react](../../src/content/docs/concepts/react.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | P1 / E5 |
+| [summarized-memory](../../src/content/docs/concepts/summarized-memory.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | P0 / E5 |
+| [windowed-memory](../../src/content/docs/concepts/windowed-memory.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | P1 / E5 |
 
 ### Chapter 8
 

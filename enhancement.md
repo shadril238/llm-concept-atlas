@@ -2,7 +2,7 @@
 
 **Prepared:** 2026-11-18  
 **Last updated:** 2026-11-19  
-**Status:** E0 source inventory and initial lesson audit, and E1 infrastructure implemented; E2–E4 implementation delivered, independent review pending; E5–E10 pending. See the [gap report](./docs/audits/book-gap-report.md) and [audit guide](./docs/audits/README.md).
+**Status:** E0 source inventory and initial lesson audit, and E1 infrastructure implemented; E2–E5 implementation delivered, independent review pending; E6–E10 pending. See the [gap report](./docs/audits/book-gap-report.md) and [audit guide](./docs/audits/README.md).
 **Baseline:** Repository commit `a6b3ec4`, following the original Phases 1–5 in [plan.md](./plan.md).  
 **Source edition:** _Hands-On Large Language Models_, Jay Alammar and Maarten Grootendorst, first edition, September 2024.  
 **Primary goal:** A learner can explain, trace, implement, evaluate, and apply the book's ideas without depending on unexplained terminology or disconnected code snippets.
@@ -867,13 +867,15 @@ Use enhancement phase IDs **E0–E10** to distinguish this work from the origina
 
 **Depends on:** E3 and the generation setup used in E4 where shared.
 
-- [ ] Complete Chapter 6–7 work, including chain-of-thought, tree-of-thought, real structured-output constraints, and supported LangChain workflows.
-- [ ] Complete L09–L11 with verifiable tasks, bounded tools, and controlled prompt comparisons.
-- [ ] Add explicit state/candidate/memory traces and topic-specific failure exercises.
-- [ ] Record modernization differences from book-era APIs and mark unsupported optional backends honestly.
-- [ ] Add acronym aliases and disambiguate chain prompting, chains, reasoning text, and tree search in lessons and graph links.
+- [x] Complete Chapter 6–7 work, including chain-of-thought, tree-of-thought, real structured-output constraints, and supported LangChain workflows.
+- [x] Complete L09–L11 with verifiable tasks, bounded tools, and controlled prompt comparisons.
+- [x] Add explicit state/candidate/memory traces and topic-specific failure exercises.
+- [x] Record modernization differences from book-era APIs and mark unsupported optional backends honestly.
+- [x] Add acronym aliases and disambiguate chain prompting, chains, reasoning text, and tree search in lessons and graph links.
 
 **Gate:** The learner can compare prompt strategies, inspect a memory policy, and run a terminating tool workflow. Format enforcement and task correctness are measured separately.
+
+**Implementation evidence:** [L09–L11](./src/content/docs/labs/prompting-and-workflows.mdx), [locked local execution guide](./examples/applications/workflows/README.md), and [author review](./docs/reviews/e5-workflows.md). Eighteen detailed lessons connect to real constrained generation, sampled voting, exact bounded search, actual multi-call chains, generated summaries, and terminating tool workflows. Independent teaching acceptance remains pending.
 
 ### E6 — retrieval, RAG, and multimodal workflows
 
@@ -1057,11 +1059,11 @@ These references support the implementation direction, not a claim that all prop
 | E2: three reference lessons | Implemented; review pending | Detailed lessons, interactive labs, CPU model/training records, author review; independent acceptance still open. |
 | E3: foundations | Implemented; review pending | 32 rewritten/new lessons plus E2 tokenization, L01–L06 CPU evidence, graph/glossary/path updates; independent acceptance open. |
 | E4: classification and topics         | Implemented; review pending | 15 expanded/new lessons, L07–L08 CPU evidence, explorer projects; hosted importer documented, independent acceptance open.                                                    |
-| E5: prompting and workflows           | Not started | Chapter 6–7 objectives and L09–L11 accepted.                                                    |
+| E5: prompting and workflows           | Implemented; review pending | 18 expanded/new lessons; five L09–L11 local-model sources/notebooks, interactive traces, and bounded contracts.                                                    |
 | E6: RAG and multimodal                | Not started | Chapter 8–9 objectives and L12–L14 accepted.                                                    |
 | E7: embedding/representation training | Not started | Chapter 10–11 objectives and L15–L20 accepted.                                                  |
 | E8: generation adaptation             | Not started | Chapter 12 objectives and L21–L23 accepted.                                                     |
 | E9: integrated learner experience     | Not started | Discovery, navigation, practice, and accessibility/performance checks.                          |
 | E10: review and release               | Not started | Reconciled coverage, execution evidence, learner feedback, and release report.                  |
 
-**Next:** Collect independent review of E2–E4 and proceed to E5 prompting, chains, memory, and agents when authorized. Full enhancement acceptance remains tied to the documented review gates.
+**Next:** Collect independent review of E2–E5 and proceed to E6 retrieval, RAG, and multimodal workflows when authorized. Full enhancement acceptance remains tied to the documented review gates.
