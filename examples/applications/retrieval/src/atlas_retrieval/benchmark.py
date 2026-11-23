@@ -118,7 +118,24 @@ def main():
                 "metrics": metrics(collapse(hits), query["relevance"], 3),
             }
         )
+    numerical_ids = ["hours-c0", "access-c0", "quiet-c0", "loans-c0"]
+    numerical_query = next(q for q in data["queries"] if q["id"] == "eval-access")
+    numerical = {
+        "query_id": numerical_query["id"],
+        "query_vector": encoder.encode([numerical_query["text"]])[0].tolist(),
+        "passages": [
+            {
+                "id": id,
+                "vector": retriever.vectors[
+                    next(i for i, row in enumerate(retriever.chunks) if row["id"] == id)
+                ].tolist(),
+            }
+            for id in numerical_ids
+        ],
+        "scope": "A declared four-passage subset of actual normalized encoder vectors; not the complete index ranking.",
+    }
     result = {
+        "numerical_example": numerical,
         "models": provenance([encoder.name, reranker.name]),
         "documents": data["documents"],
         "queries": data["queries"],

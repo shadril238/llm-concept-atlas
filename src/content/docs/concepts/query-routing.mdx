@@ -1,0 +1,124 @@
+---
+title: "Query routing"
+description: "Query routing selects an appropriate source or retrieval path before searching. Its source labels, decision rule, invalid-output behavior, and cross-source questions determine whether it preserves the required evidence."
+kind: "concept"
+conceptId: query-routing
+chapter: 8
+part: "applications"
+summary: "Query routing selects an appropriate source or retrieval path before searching. Its source labels, decision rule, invalid-output behavior, and cross-source questions determine whether it preserves the required evidence."
+parent: "rag"
+prerequisites: ["rag", "instruction-prompting"]
+related: []
+level: "intermediate"
+tags: ["applications", "chapter-08"]
+lessonStatus: full
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e6-retrieval-author-review-2026-11-24
+learningObjectives: ["Inspect actual source labels and collection filters.", "Report invalid-route fallback separately.", "Recognize cross-source evidence requirements."]
+bookSections: ["book-ch08-routing"]
+labHref: "/labs/retrieval-and-multimodal/"
+aliases: ["source routing", "retrieval router"]
+exampleIds: ["e6-query-routing", "grounded-retrieval"]
+relationshipReasons: {"rag": "RAG can retrieve from distinct collections with different relevant evidence.", "instruction-prompting": "Instruction prompting selects an allowed collection before retrieval runs."}
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import RetrievalEvidence from '../../../components/RetrievalEvidence.astro';
+import { GroundedExplorer } from '../../../components/simulations/RetrievalLabs';
+
+<ConceptPrimer id="query-routing" />
+
+## Definition and intuition
+
+Query routing selects an appropriate source or retrieval path before searching. Its source labels, decision rule, invalid-output behavior, and cross-source questions determine whether it preserves the required evidence.
+
+Read this lesson as a sequence: identify the input, follow the transformation, inspect the result, and explain a failure. The worked example and recorded lab below make those boundaries visible.
+
+<ReferenceBrief objectives={["Inspect actual source labels and collection filters.", "Report invalid-route fallback separately.", "Recognize cross-source evidence requirements."]} prerequisites="rag, instruction-prompting" scope="A specific teaching calculation or recorded-run replay, connected to actual pinned model execution. Independent teaching review remains pending." />
+
+## How it works
+
+### Declare the available sources
+
+The fixture separates library, rooms, and operations collections. A routing prompt supplies these names and design-only examples. The actual model output is parsed against that finite set. This is a small source-selection mechanism, not a claim that a label word establishes reliable domain classification.
+
+### Invalid choices and fallbacks are behavior
+
+L13 records whether the generated route is valid. Invalid text explicitly falls back to searching all collections. A successful answer after fallback is not evidence that routing worked. The selected collection and actual returned IDs appear in the trace, so readers can distinguish a genuine restricted search from baseline behavior.
+
+### Some questions span sources
+
+Room capacity may belong in rooms, but the maintenance extension requires an operations contact after a room relationship. A single-source router can remove necessary evidence. Multi-source routing or a bounded follow-up controller may be more appropriate, but its extra work and mistakes need separate evaluation. The same design-selected answerability threshold is reused and is not a calibrated route-specific decision boundary.
+
+## Worked example
+
+The question “What extension reaches the team maintaining Wren?” crosses a room guide and a maintenance-contact source. Routing to rooms alone might retain the team name but lose the number. Routing to operations alone might return several numbers without the room relationship. Inspect the actual route and support coverage before accepting its final draft.
+
+## Try the experiment
+
+Predict the outcome before changing a control. Controls either select actual recorded runs or recalculate a clearly labeled mathematical exercise. They do not download model weights or call a hosted provider in your browser.
+
+<GroundedExplorer client:visible />
+
+## Implement it
+
+From the repository root, run `python3 scripts/run-examples.py --id e6-query-routing --offline` after installing the foundation environment. This standard-library example calculates the stated mechanism or replays hash-linked actual model evidence from the published snapshot. It does not perform a fresh neural-model inference. The complete local/CI implementation and execution contract are linked immediately below.
+
+{/* example:e6-query-routing:start */}
+
+```python
+import json
+from pathlib import Path
+data = json.loads(Path('src/data/retrieval-results.json').read_text())
+row = next(r for r in data['grounded']['rows'] if r['id']=='eval-hours' and r['variant']=='routing')
+route = row['plan']['trace'][0]
+print('actual decision:',route['selected'],'valid:',route['valid'])
+print('executed collection:',row['plan']['searches'][0]['collection'])
+if not route['valid']:assert row['plan']['searches'][0]['collection']=='all'
+print('A successful fallback is not evidence of a correct route.')
+```
+
+{/* example:e6-query-routing:end */}
+
+Recorded mechanism output:
+
+```text
+actual decision: saturday valid: False
+executed collection: all
+A successful fallback is not evidence of a correct route.
+```
+
+<RetrievalEvidence id="grounded-retrieval" />
+
+## When to use it
+
+Use routing when collections have meaningful boundaries, distinct permissions or schemas, or specialized retrieval methods. Include cross-source and out-of-domain questions in validation rather than testing only obvious single-source requests.
+
+## Limits and common mistakes
+
+A wrong route can hide all useful evidence. A fallback can obscure poor classifier behavior unless it is reported. The atlas sources are public fictional fixtures; it does not implement authorization rules or infer that a routing prompt enforces access control.
+
+## Check your understanding
+
+<details>
+<summary>Does a correct answer after an invalid-route fallback prove routing success?</summary>
+
+No. It may have succeeded through all-collection baseline search. The route-valid flag and executed filter must be inspected.
+
+</details>
+
+<details>
+<summary>When can a single-source route be structurally insufficient?</summary>
+
+When the required relationship or evidence spans collections, such as room ownership and a separate team contact.
+
+</details>
+
+## Connections and sources
+
+This original lesson follows Chapter 8 of *Hands-On Large Language Models*. The [complete L12–L14 lab](/llm-concept-atlas/labs/retrieval-and-multimodal/) links exact source, pinned environments, data/model provenance, raw failure traces, and author-review limitations. Compare the [authors’ pinned chapter 8 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter08) for the original workflow. The source PDF and book artwork are not redistributed.
+
+<ConceptConnections id="query-routing" />

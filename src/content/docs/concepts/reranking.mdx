@@ -1,90 +1,122 @@
 ---
-title: Reranking
-description: Reranking scores a small candidate set more carefully, often by reading each query-passage pair jointly.
-kind: concept
+title: "Reranking"
+description: "Reranking jointly scores a query and each shortlisted candidate, then changes their order. It spends extra computation on a small candidate set and cannot recover a document that the first-stage retriever never supplied."
+kind: "concept"
 conceptId: reranking
 chapter: 8
-part: applications
-summary: Reranking scores a small candidate set more carefully, often by reading each query-passage pair jointly.
-parent: chapter-08
-prerequisites: [dense-retrieval]
-related: [dense-retrieval, retrieval-metrics]
-level: intermediate
-tags: [applications, chapter-08]
+part: "applications"
+summary: "Reranking jointly scores a query and each shortlisted candidate, then changes their order. It spends extra computation on a small candidate set and cannot recover a document that the first-stage retriever never supplied."
+parent: "semantic-search"
+prerequisites: ["dense-retrieval"]
+related: []
+level: "intermediate"
+tags: ["applications", "chapter-08"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e6-retrieval-author-review-2026-11-24
+learningObjectives: ["Distinguish bi-encoder retrieval from pairwise scoring.", "Inspect the six-candidate ceiling.", "Compare raw scores without treating them as calibrated probabilities."]
+bookSections: ["book-ch08-reranking"]
+labHref: "/labs/retrieval-and-multimodal/"
+aliases: ["cross-encoder", "two-stage retrieval", "pair relevance scoring"]
+exampleIds: ["e6-reranking", "retrieval-benchmark"]
+relationshipReasons: {"dense-retrieval": "A first-stage retriever supplies the candidate set that joint pair scoring can reorder."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import RetrievalEvidence from '../../../components/RetrievalEvidence.astro';
+import { RetrievalExplorer } from '../../../components/simulations/RetrievalLabs';
 
 <ConceptPrimer id="reranking" />
 
 ## Definition and intuition
 
-Reranking scores a small candidate set more carefully, often by reading each query-passage pair jointly.
+Reranking jointly scores a query and each shortlisted candidate, then changes their order. It spends extra computation on a small candidate set and cannot recover a document that the first-stage retriever never supplied.
 
-Chapter 8 separates finding evidence from using evidence. Evaluate retrieval and answer support independently because a fluent answer can still lack a trustworthy source.
+Read this lesson as a sequence: identify the input, follow the transformation, inspect the result, and explain a failure. The worked example and recorded lab below make those boundaries visible.
 
-## Before you start
+<ReferenceBrief objectives={["Distinguish bi-encoder retrieval from pairwise scoring.", "Inspect the six-candidate ceiling.", "Compare raw scores without treating them as calibrated probabilities."]} prerequisites="dense-retrieval" scope="A specific teaching calculation or recorded-run replay, connected to actual pinned model execution. Independent teaching review remains pending." />
 
-Read [Dense retrieval](/llm-concept-atlas/concepts/dense-retrieval/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **Reranking** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Joint scoring differs from reusable embeddings
 
-1. **Prepare:** Retrieve a broad candidate pool with a fast first stage
-2. **Transform:** Score each query and passage together with a more expensive model
-3. **Inspect:** Reorder results and evaluate whether relevant evidence rises.
+A bi-encoder creates separate reusable vectors. A cross-encoder processes the query and passage together, allowing token interactions specific to that pair. L12 uses an actual pinned MS MARCO MiniLM pair scorer, with a declared input cap and raw scalar logits. These logits order candidates; they are not assumed to be calibrated probabilities or restricted to the book example’s provider score scale.
 
-### The important distinction
+### Keep the candidate ceiling visible
 
-A cross-encoder jointly reads a query and passage, so it can notice fine-grained relationships a bi-encoder score misses. Its cost grows with the number of candidates scored per query. Tune the first-stage candidate count for recall before judging the reranker itself.
+The reranker receives the top six dense candidate chunks. It reorders those exact IDs. Because overlaps can consume candidate slots, six chunks may represent fewer than six documents. The explorer shows candidate values and collapses documents before metric calculation. If an important source is absent from the shortlist, changing only the reranker cannot add it.
+
+### Compare the right interventions
+
+L12 holds the corpus, queries, judgments, encoder, and chunk policy fixed for dense versus reranked comparison. The separate word-window experiment changes chunking and is labeled accordingly. Individual improved ranks and the small held-out MAP describe this configured system. They do not establish that every reranker improves every domain or that scores from BM25, cosine, and pair logits can be averaged without a declared fusion rule.
 
 ## Worked example
 
-A dense search returns library hours third. A cross-encoder sees the full question and the Saturday-hours passage together and moves it first. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+For a maintenance-extension question, several candidates mention rooms or telephone numbers. A useful reranker should promote the document matching the requested team, not any document containing a plausible extension. Inspect the shortlist before interpreting its reordered results. A high-quality pair scorer cannot fix a missing team-contact source outside its candidate set.
 
-<LessonFlow steps={["Retrieve a broad candidate pool with a fast first stage", "Score each query and passage together with a more expensive model", "Reorder results and evaluate whether relevant evidence rises."]} caption="A teaching diagram for Reranking. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
+
+Predict the outcome before changing a control. Controls either select actual recorded runs or recalculate a clearly labeled mathematical exercise. They do not download model weights or call a hosted provider in your browser.
+
+<RetrievalExplorer client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+From the repository root, run `python3 scripts/run-examples.py --id e6-reranking --offline` after installing the foundation environment. This standard-library example calculates the stated mechanism or replays hash-linked actual model evidence from the published snapshot. It does not perform a fresh neural-model inference. The complete local/CI implementation and execution contract are linked immediately below.
+
+{/* example:e6-reranking:start */}
 
 ```python
-query = {"saturday", "hours"}
-docs = {"A": {"saturday", "hours", "library"}, "B": {"laptop", "loans"}}
-scores = {name: len(query & words) for name, words in docs.items()}
-print(sorted(scores, key=scores.get, reverse=True))
+import json
+from pathlib import Path
+data = json.loads(Path('src/data/retrieval-results.json').read_text())
+for method in ['dense','reranked']:
+    row = next(r for r in data['retrieval']['rows'] if r['id']=='eval-hop' and r['method']==method)
+    print(method,[(h['id'],round(h['score'],3)) for h in row['hits'][:3]])
+print('Pair scores are raw logits; only six dense candidate chunks are reranked.')
 ```
 
-**Expected output:**
+{/* example:e6-reranking:end */}
+
+Recorded mechanism output:
 
 ```text
-['A', 'B']
+dense [('wren-c1', 0.463), ('aspen-c0', 0.375), ('birch-c0', 0.362)]
+reranked [('wren-c1', 1.234), ('birch-c0', -0.813), ('aspen-c0', -1.945)]
+Pair scores are raw logits; only six dense candidate chunks are reranked.
 ```
 
-**What the code shows:** The set intersection produces a simple keyword-overlap score for each document. A dense retriever replaces these sets with learned vectors and a suitable similarity measure. The [official chapter 8 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter08) develops the corresponding model-based implementation.
+<RetrievalEvidence id="retrieval-benchmark" />
 
 ## When to use it
 
-Use reranking when first-stage recall is acceptable but result order needs improvement. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use reranking when the first stage can cheaply obtain a reasonably complete shortlist and higher relevance near the top is worth extra pair evaluations. Measure candidate recall and final ranking quality separately.
 
 ## Limits and common mistakes
 
-- It cannot recover evidence that never entered the candidate pool and adds latency.
-- **Failure to look for:** The right passage was absent from the first 20 candidates, so reranking cannot find it.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Pair scoring adds work for every candidate. Truncating long pairs can hide evidence, and a good logit does not validate a generated claim. This lab reports one CPU configuration and no independent speed or calibrated-confidence claim.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First retrieve a broad candidate pool with a fast first stage Then score each query and passage together with a more expensive model Finally reorder results and evaluate whether relevant evidence rises.</p></details>
+<details>
+<summary>Can reranking recover a source outside the six supplied chunks?</summary>
 
-<details><summary>What would make the result misleading?</summary><p>The right passage was absent from the first 20 candidates, so reranking cannot find it.</p></details>
+No. First-stage candidate coverage bounds the possible result set.
+
+</details>
+
+<details>
+<summary>Why not interpret a raw logit of 4 as a 400% probability?</summary>
+
+A logit is an unbounded scoring value. Ranking and calibrated probabilities require different contracts.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 8 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 8 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter08). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 8 of *Hands-On Large Language Models*. The [complete L12–L14 lab](/llm-concept-atlas/labs/retrieval-and-multimodal/) links exact source, pinned environments, data/model provenance, raw failure traces, and author-review limitations. Compare the [authors’ pinned chapter 8 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter08) for the original workflow. The source PDF and book artwork are not redistributed.
 
 <ConceptConnections id="reranking" />

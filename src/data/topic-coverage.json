@@ -73,19 +73,27 @@
   "8": {
     "Semantic search": "semantic-search",
     "Dense retrieval": "dense-retrieval",
+    "Document chunking": "document-chunking",
     "Reranking": "reranking",
     "Retrieval metrics": "retrieval-metrics",
     "RAG": "rag",
     "Grounded generation": "grounded-generation",
     "Local-model RAG": "local-model-rag",
-    "RAG evaluation": "rag-evaluation"
+    "RAG evaluation": "rag-evaluation",
+    "Query rewriting": "query-rewriting",
+    "Multi-query RAG": "multi-query-rag",
+    "Multi-hop RAG": "multi-hop-rag",
+    "Query routing": "query-routing",
+    "Agentic RAG": "agentic-rag"
   },
   "9": {
     "Vision transformers": "vision-transformers",
+    "Multimodal preprocessing": "multimodal-preprocessing",
     "Multimodal embeddings": "multimodal-embeddings",
     "CLIP": "clip",
     "OpenCLIP": "openclip",
     "BLIP-2": "blip-2",
+    "Q-Former": "q-former",
     "Image captioning": "image-captioning",
     "Multimodal chat": "multimodal-chat"
   },

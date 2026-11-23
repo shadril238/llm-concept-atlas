@@ -1,88 +1,126 @@
 ---
-title: Retrieval-Augmented Generation
-description: Generating an answer using retrieved source material.
-kind: concept
+title: "Retrieval-Augmented Generation"
+description: "Retrieval-augmented generation supplies retrieved external evidence to a language model before it drafts an answer. Ingestion, ranking, context packing, generation, and support checking are separate stages with separate failure modes."
+kind: "concept"
 conceptId: rag
 chapter: 8
-part: applications
-summary: RAG retrieves relevant information and supplies it as context for a model's generated answer.
-parent: chapter-08
-prerequisites: [semantic-search]
-related: [generative-model, text-embedding]
-level: beginner
-tags: [retrieval, generation, applications]
+part: "applications"
+summary: "Retrieval-augmented generation supplies retrieved external evidence to a language model before it drafts an answer. Ingestion, ranking, context packing, generation, and support checking are separate stages with separate failure modes."
+parent: "chapter-08"
+prerequisites: ["semantic-search", "prompt-structure"]
+related: []
+level: "beginner"
+tags: ["applications", "chapter-08"]
 lessonStatus: full
-lastReviewed: 2026-11-12
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e6-retrieval-author-review-2026-11-24
+learningObjectives: ["Trace source ingestion through actual generation.", "Inspect context omissions and raw model failures.", "Compare bounded advanced retrieval mechanisms."]
+bookSections: ["book-ch08-rag", "book-ch08-search-to-rag", "book-ch08-advanced-rag"]
+labHref: "/labs/retrieval-and-multimodal/"
+aliases: ["retrieval-augmented generation", "grounded QA", "advanced retrieval"]
+exampleIds: ["e6-rag", "grounded-retrieval"]
+relationshipReasons: {"semantic-search": "Semantic search supplies candidate evidence to the generation stage.", "prompt-structure": "Prompt structure separates instructions, the question and retrieved source text."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { RagLab } from '../../../components/simulations/LearningLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import RetrievalEvidence from '../../../components/RetrievalEvidence.astro';
+import { GroundedExplorer } from '../../../components/simulations/RetrievalLabs';
 
 <ConceptPrimer id="rag" />
 
 ## Definition and intuition
 
-**Retrieval-augmented generation (RAG)** combines a retriever with a text generator. The retriever finds source passages relevant to a question; the system puts selected passages into the generator’s context; the generator writes an answer using that evidence. The source material can change without retraining the generator.
+Retrieval-augmented generation supplies retrieved external evidence to a language model before it drafts an answer. Ingestion, ranking, context packing, generation, and support checking are separate stages with separate failure modes.
 
-Think of a librarian handing a writer a small packet of documents. The packet improves the writer’s access to facts, but the writer can still misread it, omit a caveat, or invent a claim.
+Read this lesson as a sequence: identify the input, follow the transformation, inspect the result, and explain a failure. The worked example and recorded lab below make those boundaries visible.
 
-## Before you start
-
-Read [semantic search](/llm-concept-atlas/concepts/semantic-search/) first; return here when the key terms feel familiar.
+<ReferenceBrief objectives={["Trace source ingestion through actual generation.", "Inspect context omissions and raw model failures.", "Compare bounded advanced retrieval mechanisms."]} prerequisites="semantic-search, prompt-structure" scope="A specific teaching calculation or recorded-run replay, connected to actual pinned model execution. Independent teaching review remains pending." />
 
 ## How it works
 
-A practical RAG pipeline has distinct stages: ingest and chunk documents; embed and index them; retrieve candidates for a question; optionally rerank and choose passages; assemble a prompt with source IDs; generate an answer; verify that claims are supported by cited passages. If retrieval misses the right passage, generation cannot recover it from the supplied context. If the relevant passage is found but truncated, context selection fails.
+### A concrete source-to-answer path
 
-Evaluation should separate retrieval quality from grounded answer quality. Check whether relevant evidence appears in the top k, whether the answer addresses the question, and whether each claim is supported. A refusal such as “I cannot answer from these passages” is better than unsupported confidence when evidence is absent.
+L12 indexes original source-preserving passages. L13 retrieves actual candidates, removes duplicate documents, packs whole passages with IDs into a native-token budget, and invokes a pinned local generator. The original question and the actual selected text appear in the saved prompt. Reference answers and support IDs are evaluation inputs, never hidden additions to the model context.
+
+### Evidence is data
+
+Imported documents can contain instructions, outdated rules, or unrelated but similar text. The generator is instructed to treat evidence as untrusted data. This wording is not an isolation guarantee. The fixture includes an explicitly untrusted imported note for inspection; the workflow has no shell, private-file, or write tools. A downstream support check must still distinguish a policy fact from a command quoted inside a source.
+
+### Advanced retrieval
+
+The connected workflow compares a baseline with generated rewriting, complementary queries, dependent follow-up queries, source routing, and a bounded source-selection controller. Their actual search strings, observations, and work are visible. They are purpose-built mechanism probes, including inspected prototypes, not an untouched generative-generalization benchmark. A more elaborate workflow can retrieve worse evidence or propagate an earlier mistake.
 
 ## Worked example
 
-Question: “When does the library close on Saturday?” Retriever returns a library-hours passage saying “Saturday: 5 p.m.” and an unrelated café menu. A grounded answer is “5 p.m. [Library hours].” If the hours passage is removed, the system should withhold the answer rather than guess.
+The Saturday-hours baseline produces the correct 17:30 draft without a citation. An absent swimming-pool question still retrieves nearby opening-time passages and can produce an unsupported time. An application threshold may withhold a draft, but a hidden hallucination is not a grounded model answer. Inspect raw text, selected evidence, and the final display decision independently.
 
-<LessonFlow steps={['Question', 'Retrieve and rank passages', 'Select context with source IDs', 'Generate grounded answer', 'Check citations']} caption="A simplified flow for rag. Follow each labeled step from left to right." />
+## Try the experiment
 
-## Try the RAG lab
+Predict the outcome before changing a control. Controls either select actual recorded runs or recalculate a clearly labeled mathematical exercise. They do not download model weights or call a hosted provider in your browser.
 
-<RagLab client:visible />
+<GroundedExplorer client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+From the repository root, run `python3 scripts/run-examples.py --id e6-rag --offline` after installing the foundation environment. This standard-library example calculates the stated mechanism or replays hash-linked actual model evidence from the published snapshot. It does not perform a fresh neural-model inference. The complete local/CI implementation and execution contract are linked immediately below.
+
+{/* example:e6-rag:start */}
 
 ```python
-question = 'When does the library close on Saturday?'
-passages = {'hours': 'The library closes at 5 p.m. on Saturday.',
-            'cafe': 'The café serves coffee and tea.'}
-selected = ['hours']
-answer = passages['hours'] + ' [hours]' if 'hours' in selected else 'No supported answer.'
-print(answer)
+import json
+from pathlib import Path
+data = json.loads(Path('src/data/retrieval-results.json').read_text())
+row = next(r for r in data['grounded']['rows'] if r['id']=='eval-hours' and r['variant']=='baseline')
+for source in row['context']:
+    assert source['text'] in row['answer_call']['prompt']
+print('actual context IDs:',[s['id'] for s in row['context']])
+print('raw draft:',row['answer_call']['raw'])
+print('model citations:',row['model_citations'])
+print('application display:',row['display_answer'])
 ```
 
-**Expected behavior:** `The library closes at 5 p.m. on Saturday. [hours]`
+{/* example:e6-rag:end */}
 
-This is the evidence-selection boundary, not a live LLM. The code makes source dependence visible. Follow the [RAG use case](/llm-concept-atlas/use-cases/rag-question-answering/) for a real embedding retriever and prompt assembly. Try removing the source in the lab above.
+Recorded mechanism output:
+
+```text
+actual context IDs: ['hours-c0', 'menu-c1', 'event-c1', 'account-c1']
+raw draft: 17:30
+model citations: []
+application display: 17:30
+```
+
+<RetrievalEvidence id="grounded-retrieval" />
 
 ## When to use it
 
-- Use RAG for answers that must reflect a changing document collection and show sources.
-- Use direct classification or search when the user needs only a label or document list.
+Use RAG when answers need a maintained document collection and inspectable sources. Search results alone may be sufficient for navigation; generation is useful when the task requires synthesis or a direct answer backed by evidence.
 
 ## Limits and common mistakes
 
-- Retrieved context does not force a model to obey it. Verify citations and support.
-- RAG quality depends on document freshness, chunking, retrieval, context limits, and generation together.
+Retrieval does not force faithfulness, and citation markers do not establish entailment. A source can be relevant yet insufficient. The local model is small and unreliable; the lab preserves failures instead of repairing answers with reference values or claiming production readiness.
 
 ## Check your understanding
 
-<details><summary>What happens if the retriever misses the answer passage?</summary><p>The generator lacks that evidence and should avoid unsupported claims.</p></details>
+<details>
+<summary>Which stage should be investigated when the right source was never indexed?</summary>
 
-<details><summary>Why evaluate retrieval separately from generation?</summary><p>They fail in different ways and need different fixes.</p></details>
+Ingestion and corpus coverage. A later generator cannot reconstruct missing authoritative evidence.
+
+</details>
+
+<details>
+<summary>Why keep the raw draft when the controller displays UNKNOWN?</summary>
+
+It distinguishes application withholding from the model following the abstention instruction and exposes unsupported generation.
+
+</details>
 
 ## Connections and sources
 
-This lesson follows the topic sequence in chapter 8 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter08) and the [original RAG paper](https://arxiv.org/abs/2005.11401).
+This original lesson follows Chapter 8 of *Hands-On Large Language Models*. The [complete L12–L14 lab](/llm-concept-atlas/labs/retrieval-and-multimodal/) links exact source, pinned environments, data/model provenance, raw failure traces, and author-review limitations. Compare the [authors’ pinned chapter 8 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter08) for the original workflow. The source PDF and book artwork are not redistributed.
 
 <ConceptConnections id="rag" />

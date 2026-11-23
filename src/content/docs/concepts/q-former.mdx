@@ -1,0 +1,125 @@
+---
+title: "Q-Former"
+description: "The Q-Former is BLIP-2’s query-based bridge: a fixed set of learned query vectors attends to visual features and produces a compact image-conditioned representation for language generation. These learned queries are not the user’s written questions."
+kind: "concept"
+conceptId: q-former
+chapter: 9
+part: "applications"
+summary: "The Q-Former is BLIP-2’s query-based bridge: a fixed set of learned query vectors attends to visual features and produces a compact image-conditioned representation for language generation. These learned queries are not the user’s written questions."
+parent: "blip-2"
+prerequisites: ["blip-2", "attention"]
+related: []
+level: "intermediate"
+tags: ["applications", "chapter-09"]
+lessonStatus: full
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e6-retrieval-author-review-2026-11-24
+learningObjectives: ["Distinguish learned queries from user text and patches.", "Explain the three representation-stage objectives.", "Trace query states through the actual language projection."]
+bookSections: ["book-ch09-q-former"]
+labHref: "/labs/retrieval-and-multimodal/"
+aliases: ["Q-Former", "querying transformer", "learned visual queries"]
+exampleIds: ["e6-q-former"]
+relationshipReasons: {"blip-2": "BLIP-2 places the Q-Former between frozen vision and language backbones.", "attention": "Cross-attention lets learned query vectors read image features into a compact representation."}
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import RetrievalEvidence from '../../../components/RetrievalEvidence.astro';
+import { VisualGeneration } from '../../../components/simulations/RetrievalLabs';
+
+<ConceptPrimer id="q-former" />
+
+## Definition and intuition
+
+The Q-Former is BLIP-2’s query-based bridge: a fixed set of learned query vectors attends to visual features and produces a compact image-conditioned representation for language generation. These learned queries are not the user’s written questions.
+
+Read this lesson as a sequence: identify the input, follow the transformation, inspect the result, and explain a failure. The worked example and recorded lab below make those boundaries visible.
+
+<ReferenceBrief objectives={["Distinguish learned queries from user text and patches.", "Explain the three representation-stage objectives.", "Trace query states through the actual language projection."]} prerequisites="blip-2, attention" scope="A specific teaching calculation or recorded-run replay, connected to actual pinned model execution. Independent teaching review remains pending." />
+
+## How it works
+
+### Learned queries extract rather than copy patches
+
+The vision encoder can produce many image tokens. A smaller learned-query set interacts with them through cross-attention, while shared transformer components support the training tasks. A query does not have a guaranteed human meaning such as left eye or price. Its index is a learned representation position, not a detected-object ID.
+
+### Representation learning before generation conditioning
+
+Stage-one image-text contrastive learning aligns paired representations; matching distinguishes compatible pairs; image-grounded text generation encourages useful visual information for text. Different attention masks control which information can be seen. In stage two a trainable projection maps query states into the frozen language model’s input width, and the bridge is optimized for the generation objective.
+
+### Inspect the real boundary
+
+The genuine inference trace records query count and hidden widths from the actual model config and forward outputs. The implementation does not draw the OpenCLIP patch grid and relabel it a Q-Former. The small shape/parameter calculation uses those recorded dimensions; it is not a training run or evidence that every query faithfully preserves each image fact.
+
+## Worked example
+
+For the actual configured query count q and query width d, learned query storage contains q×d values. A linear projection from d to language width h uses d×h + h parameters when biased. Compute these counts from the recorded model, then inspect the [batch,q,h] output. Matching h lets the generator consume the prefix, while the learned bridge determines its usefulness.
+
+## Try the experiment
+
+Predict the outcome before changing a control. Controls either select actual recorded runs or recalculate a clearly labeled mathematical exercise. They do not download model weights or call a hosted provider in your browser.
+
+<VisualGeneration client:visible />
+
+## Implement it
+
+From the repository root, run `python3 scripts/run-examples.py --id e6-q-former --offline` after installing the foundation environment. This standard-library example calculates the stated mechanism or replays hash-linked actual model evidence from the published snapshot. It does not perform a fresh neural-model inference. The complete local/CI implementation and execution contract are linked immediately below.
+
+{/* example:e6-q-former:start */}
+
+```python
+import json
+from pathlib import Path
+data = json.loads(Path('src/data/retrieval-results.json').read_text())
+cfg = data['caption']['bridge_config']
+q,d,h = cfg['query_count'],cfg['query_hidden'],cfg['language_hidden']
+print('learned query values:',q*d)
+print('biased projection parameters:',d*h+h)
+print('actual query output:',data['caption']['rows'][0]['trace']['query_tokens'])
+print('actual projected output:',data['caption']['rows'][0]['trace']['projected_queries'])
+```
+
+{/* example:e6-q-former:end */}
+
+Recorded mechanism output:
+
+```text
+learned query values: 24576
+biased projection parameters: 1968640
+actual query output: [1, 32, 768]
+actual projected output: [1, 32, 2560]
+```
+
+<RetrievalEvidence id="blip2-captioning" />
+
+## When to use it
+
+Use this concept to reason about compact visual conditioning, frozen backbones, and the distinction between feature count and language-input width. Inspect query and projection boundaries when diagnosing a multimodal model that loads successfully but answers poorly.
+
+## Limits and common mistakes
+
+The atlas runs pretrained inference only. It does not train the three stage-one objectives or stage-two bridge and then claim training success. Query count limits representation capacity but is not an interpretable count of objects, facts, or questions answered.
+
+## Check your understanding
+
+<details>
+<summary>Are the learned query vectors the tokenized user question?</summary>
+
+No. They are pretrained parameters used to extract image-conditioned information. User text is a separate input.
+
+</details>
+
+<details>
+<summary>Why is the projection still needed after Q-Former?</summary>
+
+Its output width and learned representation differ from the language model’s input embedding interface. The projection supplies the required conditioning interface.
+
+</details>
+
+## Connections and sources
+
+This original lesson follows Chapter 9 of *Hands-On Large Language Models*. The [complete L12–L14 lab](/llm-concept-atlas/labs/retrieval-and-multimodal/) links exact source, pinned environments, data/model provenance, raw failure traces, and author-review limitations. Compare the [authors’ pinned chapter 9 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter09) for the original workflow. The source PDF and book artwork are not redistributed.
+
+<ConceptConnections id="q-former" />

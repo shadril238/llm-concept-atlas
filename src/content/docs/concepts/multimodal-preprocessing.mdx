@@ -1,0 +1,126 @@
+---
+title: "Multimodal preprocessing"
+description: "Multimodal preprocessing converts an image and text into the exact tensors expected by a checkpoint. Color conversion, resizing, cropping or tiling, normalization, tokenization, masks, and dtypes are part of the experiment—not cosmetic preparation."
+kind: "concept"
+conceptId: multimodal-preprocessing
+chapter: 9
+part: "applications"
+summary: "Multimodal preprocessing converts an image and text into the exact tensors expected by a checkpoint. Color conversion, resizing, cropping or tiling, normalization, tokenization, masks, and dtypes are part of the experiment—not cosmetic preparation."
+parent: "multimodal-embeddings"
+prerequisites: ["vision-transformers", "tokenization"]
+related: []
+level: "intermediate"
+tags: ["applications", "chapter-09"]
+lessonStatus: full
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e6-retrieval-author-review-2026-11-24
+learningObjectives: ["Inspect resize, crop, tiling, and normalization.", "Reconstruct a human-readable model-input view.", "Keep integer IDs distinct from floating pixel tensors."]
+bookSections: ["book-ch09-preprocessing", "book-ch09-image-preprocessing", "book-ch09-text-preprocessing"]
+labHref: "/labs/retrieval-and-multimodal/"
+aliases: ["pixel_values", "image preprocessing", "image normalization", "multimodal tokenizer"]
+exampleIds: ["e6-multimodal-preprocessing", "openclip-retrieval"]
+relationshipReasons: {"vision-transformers": "Vision-transformer patch geometry constrains image size and tensor layout.", "tokenization": "Tokenization supplies integer text IDs and boundaries for the text-side interface."}
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import RetrievalEvidence from '../../../components/RetrievalEvidence.astro';
+import { VisionExplorer } from '../../../components/simulations/RetrievalLabs';
+
+<ConceptPrimer id="multimodal-preprocessing" />
+
+## Definition and intuition
+
+Multimodal preprocessing converts an image and text into the exact tensors expected by a checkpoint. Color conversion, resizing, cropping or tiling, normalization, tokenization, masks, and dtypes are part of the experiment—not cosmetic preparation.
+
+Read this lesson as a sequence: identify the input, follow the transformation, inspect the result, and explain a failure. The worked example and recorded lab below make those boundaries visible.
+
+<ReferenceBrief objectives={["Inspect resize, crop, tiling, and normalization.", "Reconstruct a human-readable model-input view.", "Keep integer IDs distinct from floating pixel tensors."]} prerequisites="vision-transformers, tokenization" scope="A specific teaching calculation or recorded-run replay, connected to actual pinned model execution. Independent teaching review remains pending." />
+
+## How it works
+
+### Three processors can see different images
+
+The recorded OpenCLIP path resizes the shorter side and center-crops to a square, discarding edge content. BLIP-2’s configured image processor resizes to its declared square shape and may change aspect ratio. The small chat processor has its own resizing/tiling settings. The lab shows actual processor outputs and does not assume the same 224×224 preview applies to every model.
+
+### Normalize and display correctly
+
+Raw RGB pixels are scaled before channel-wise normalization, typically (x − mean)/standard deviation. Normalized values can lie outside [0,1]. To show the model view to a person, the atlas reverses normalization and rounds back to display pixels; it does not directly display normalized floats as ordinary colors or reverse channel axes. Exact tensor hashes and ranges accompany the approximate preview.
+
+### Text and tensor types
+
+Text token IDs and masks remain integer or boolean as required, while pixel tensors and model computations use their declared floating types. The checkpoint processor controls image placeholders and chat-template serialization. L14 inspects actual shapes, tokens, and dtypes. Unsupported keyword arguments can be ignored by a processor, so the implementation sets and checks the actual component configuration instead of trusting the requested flag.
+
+## Worked example
+
+A 600×400 coffee photo becomes a 224×224 OpenCLIP crop retaining two-thirds of its original area. That differs from stretching all pixels into a square or tiling the scene into multiple views. A visual answer may change because the model received different pixels, even when the user sees the same original photo on the page.
+
+## Try the experiment
+
+Predict the outcome before changing a control. Controls either select actual recorded runs or recalculate a clearly labeled mathematical exercise. They do not download model weights or call a hosted provider in your browser.
+
+<VisionExplorer client:visible />
+
+## Implement it
+
+From the repository root, run `python3 scripts/run-examples.py --id e6-multimodal-preprocessing --offline` after installing the foundation environment. This standard-library example calculates the stated mechanism or replays hash-linked actual model evidence from the published snapshot. It does not perform a fresh neural-model inference. The complete local/CI implementation and execution contract are linked immediately below.
+
+{/* example:e6-multimodal-preprocessing:start */}
+
+```python
+import json
+from pathlib import Path
+data = json.loads(Path('src/data/retrieval-results.json').read_text())
+v = data['vision']
+coffee = next(r for r in v['images'] if r['id']=='coffee')
+print('source size:',coffee['original_size'],'retained area:',round(coffee['area_retained'],4))
+print('float tensor:',coffee['processed_shape'],coffee['dtype'])
+patch = v['patch_trace']['patches'][0]
+restored = [n*s+m for n,s,m in zip(patch['normalized_channel_mean'],coffee['std'],coffee['mean'])]
+print('Astronaut patch mean restored to [0,1]:',[round(x,4) for x in restored])
+assert all(0<=value<=1 for value in restored)
+```
+
+{/* example:e6-multimodal-preprocessing:end */}
+
+Recorded mechanism output:
+
+```text
+source size: [600, 400] retained area: 0.6667
+float tensor: [3, 224, 224] torch.float32
+Astronaut patch mean restored to [0,1]: [0.3755, 0.3423, 0.4033]
+```
+
+<RetrievalEvidence id="openclip-retrieval" />
+
+## When to use it
+
+Use explicit preprocessing traces to debug image retrieval, captioning, VQA, and multimodal chat. Store source bytes, dimensions, transform settings, token/mask shapes, and a human-readable reconstruction of the actual model input.
+
+## Limits and common mistakes
+
+Preview reconstruction rounds floating values and is not the exact tensor itself. Cropping can remove evidence; resizing can distort it. An image token in a prompt is not a substitute for passing the actual image tensor. Do not cast integer token IDs into floating pixel dtype.
+
+## Check your understanding
+
+<details>
+<summary>Why not display the normalized tensor directly as RGB?</summary>
+
+Its values have shifted/scaled channel distributions and can be negative. Reverse normalization for a meaningful preview while retaining the exact tensor separately.
+
+</details>
+
+<details>
+<summary>Why inspect an image-splitting flag after requesting it?</summary>
+
+A processor may reject or ignore an unsupported argument. The actual component setting and resulting tensor shapes establish what ran.
+
+</details>
+
+## Connections and sources
+
+This original lesson follows Chapter 9 of *Hands-On Large Language Models*. The [complete L12–L14 lab](/llm-concept-atlas/labs/retrieval-and-multimodal/) links exact source, pinned environments, data/model provenance, raw failure traces, and author-review limitations. Compare the [authors’ pinned chapter 9 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter09) for the original workflow. The source PDF and book artwork are not redistributed.
+
+<ConceptConnections id="multimodal-preprocessing" />

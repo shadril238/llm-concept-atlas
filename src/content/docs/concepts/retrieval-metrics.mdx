@@ -1,91 +1,127 @@
 ---
-title: Retrieval metrics
-description: Retrieval metrics measure whether a ranked list contains and prioritizes relevant items.
-kind: concept
+title: "Retrieval metrics"
+description: "Retrieval metrics compare ranked results with declared relevance judgments. Precision, recall, AP/MAP, reciprocal rank, and nDCG emphasize different properties, so their cutoff, denominator, relevance unit, and absent-query policy must be explicit."
+kind: "concept"
 conceptId: retrieval-metrics
 chapter: 8
-part: applications
-summary: Retrieval metrics measure whether a ranked list contains and prioritizes relevant items.
-parent: chapter-08
-prerequisites: [semantic-search]
-related: [reranking, rag]
-level: intermediate
-tags: [applications, chapter-08]
+part: "applications"
+summary: "Retrieval metrics compare ranked results with declared relevance judgments. Precision, recall, AP/MAP, reciprocal rank, and nDCG emphasize different properties, so their cutoff, denominator, relevance unit, and absent-query policy must be explicit."
+parent: "semantic-search"
+prerequisites: ["semantic-search"]
+related: []
+level: "intermediate"
+tags: ["applications", "chapter-08"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e6-retrieval-author-review-2026-11-24
+learningObjectives: ["Calculate AP@k with the complete relevance denominator.", "Explain MAP exclusions and graded nDCG.", "Distinguish ranking metrics from answer support."]
+bookSections: ["book-ch08-retrieval-metrics", "book-ch08-average-precision", "book-ch08-mean-average-precision", "book-ch08-ndcg"]
+labHref: "/labs/retrieval-and-multimodal/"
+aliases: ["AP", "MAP", "nDCG", "MRR", "precision at k", "average precision", "mean average precision"]
+exampleIds: ["e6-retrieval-metrics", "retrieval-benchmark"]
+relationshipReasons: {"semantic-search": "Ranked search needs independently declared relevance judgments before quality can be quantified."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import RetrievalEvidence from '../../../components/RetrievalEvidence.astro';
+import { MetricExplorer } from '../../../components/simulations/RetrievalLabs';
 
 <ConceptPrimer id="retrieval-metrics" />
 
 ## Definition and intuition
 
-Retrieval metrics measure whether a ranked list contains and prioritizes relevant items.
+Retrieval metrics compare ranked results with declared relevance judgments. Precision, recall, AP/MAP, reciprocal rank, and nDCG emphasize different properties, so their cutoff, denominator, relevance unit, and absent-query policy must be explicit.
 
-Chapter 8 separates finding evidence from using evidence. Evaluate retrieval and answer support independently because a fluent answer can still lack a trustworthy source.
+Read this lesson as a sequence: identify the input, follow the transformation, inspect the result, and explain a failure. The worked example and recorded lab below make those boundaries visible.
 
-## Before you start
+<ReferenceBrief objectives={["Calculate AP@k with the complete relevance denominator.", "Explain MAP exclusions and graded nDCG.", "Distinguish ranking metrics from answer support."]} prerequisites="semantic-search" scope="A specific teaching calculation or recorded-run replay, connected to actual pinned model execution. Independent teaching review remains pending." />
 
-Read [Semantic Search](/llm-concept-atlas/concepts/semantic-search/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **retrieval metrics** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Precision and recall at k
 
-1. **Prepare:** Create queries with judged relevant passage IDs
-2. **Transform:** Compute recall, precision, or rank-sensitive scores at a chosen cutoff
-3. **Inspect:** Inspect failures by query type and corpus slice.
+Precision@k counts relevant returned documents among the first k and divides by k; unfilled positions count against this convention. Recall@k divides retrieved relevant documents by all judged relevant documents. The atlas first collapses overlapping chunks to unique document IDs. Binary relevance means grade greater than zero, while the QA support set is stricter than topical relevance.
 
-### The important distinction
+### Average precision and mean average precision
 
-Recall at k asks what fraction of all judged relevant items occur in the first k results. MRR rewards putting the first relevant result early, while nDCG can account for graded relevance and positions. Choose metrics that match how many passages the downstream user or model actually sees.
+AP@k adds precision at each relevant rank up to k, then divides by every relevant document in the judgment set, including relevant documents below k or missing from the returned list. This is not the alternative min(R,k) normalization. MAP is the mean of defined per-query AP values. L12 excludes no-relevant-document queries from MAP and reports the 14-of-16 denominator; it evaluates their withholding behavior separately rather than disguising undefined AP as a perfect score.
+
+### Discount and first-hit metrics
+
+nDCG uses graded gains 2^grade − 1 discounted by log2(rank + 1), then divides by an ideal ordering at the same cutoff. MRR uses only the first relevant rank, so it misses improvements to later relevant results. Neither a high ranking metric nor a topically related passage proves that a generated answer is correct. Preserve per-query results and inspect which relevance judgment changed a score.
+
+### Mean average precision
+
+For Q queries with defined AP, MAP = sum of AP values / Q. Each included query has equal weight, regardless of how many relevant documents it has. The reported L12 comparison uses 14 answerable evaluation queries; its two absent-answer queries remain in the collection and are evaluated separately. A different absent-query policy or AP denominator changes the metric and must be stated before comparing numbers.
 
 ## Worked example
 
-If two passages are relevant but only one appears in the top two, recall at two is one half. A high average can still hide poor results for rare questions. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+With order A,B,C,D and relevance grades 2,0,1,2, there are three relevant documents. At k=3, precision is 2/3. AP contributions are 1 and 2/3, giving AP@3 = (1 + 2/3)/3 = 5/9. The omitted relevant D remains in the denominator. Move C ahead of B and recompute; then compare nDCG, which also rewards higher grades.
 
-<LessonFlow steps={["Create queries with judged relevant passage IDs", "Compute recall, precision, or rank-sensitive scores at a chosen cutoff", "Inspect failures by query type and corpus slice."]} caption="A teaching diagram for Retrieval metrics. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
+
+Predict the outcome before changing a control. Controls either select actual recorded runs or recalculate a clearly labeled mathematical exercise. They do not download model weights or call a hosted provider in your browser.
+
+<MetricExplorer client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+From the repository root, run `python3 scripts/run-examples.py --id e6-retrieval-metrics --offline` after installing the foundation environment. This standard-library example calculates the stated mechanism or replays hash-linked actual model evidence from the published snapshot. It does not perform a fresh neural-model inference. The complete local/CI implementation and execution contract are linked immediately below.
+
+{/* example:e6-retrieval-metrics:start */}
 
 ```python
-relevant = {"A", "C"}
-ranking = ["B", "A", "C"]
-k = 2
-recall_at_k = len(relevant & set(ranking[:k])) / len(relevant)
-print(recall_at_k)
+import sys
+sys.path.insert(0, 'examples/foundations/src')
+from atlas_foundations.e6.retrieval import metrics
+score = metrics(['A','B','C','D'],{'A':2,'B':0,'C':1,'D':2},3)
+assert abs(score['ap']-5/9)<1e-12
+print('AP terms:',score['ap_terms'],'all relevant:',score['relevant_documents'])
+print('P@3:',round(score['precision'],4),'AP@3:',round(score['ap'],4),'nDCG@3:',round(score['ndcg'],4))
+print('Absent-query AP:',metrics(['A'],{},3)['ap'])
 ```
 
-**Expected output:**
+{/* example:e6-retrieval-metrics:end */}
+
+Recorded mechanism output:
 
 ```text
-0.5
+AP terms: [1.0, 0.6666666666666666] all relevant: 3
+P@3: 0.6667 AP@3: 0.5556 nDCG@3: 0.649
+Absent-query AP: None
 ```
 
-**What the code shows:** The numerator counts relevant IDs in the first `k` results; the denominator counts all judged relevant IDs. Changing `k` changes what the metric asks. The [official chapter 8 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter08) develops the corresponding model-based implementation.
+<RetrievalEvidence id="retrieval-benchmark" />
 
 ## When to use it
 
-Use them to compare chunking, embedding, keyword, and reranking choices before evaluating generation. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use a versioned judged query set to compare retrieval changes on identical cases. Select thresholds and parameters on design/validation queries and preserve evaluation questions for the final reported comparison.
 
 ## Limits and common mistakes
 
-- Metrics depend on relevance judgments and the cutoff, and they do not prove answer quality.
-- **Failure to look for:** A system scores well at recall@20 but the generator sees only the top three passages.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Judgments may be subjective, incomplete, or stale. L12’s closed fictional corpus makes the labeling convention inspectable; it does not establish real-world relevance quality. Queries with no relevant documents require an explicit policy, and scores from different relevance units cannot be compared casually.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First create queries with judged relevant passage IDs Then compute recall, precision, or rank-sensitive scores at a chosen cutoff Finally inspect failures by query type and corpus slice.</p></details>
+<details>
+<summary>Why divide AP@3 by three when only two relevant documents were retrieved?</summary>
 
-<details><summary>What would make the result misleading?</summary><p>A system scores well at recall@20 but the generator sees only the top three passages.</p></details>
+The selected convention divides by all relevant documents, penalizing relevant material missing or below the cutoff.
+
+</details>
+
+<details>
+<summary>Can MAP hide a failure on an absent-answer question?</summary>
+
+Yes, because AP is undefined there under this policy. Report the excluded count and separately evaluate abstention or withholding.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 8 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 8 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter08). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 8 of *Hands-On Large Language Models*. The [complete L12–L14 lab](/llm-concept-atlas/labs/retrieval-and-multimodal/) links exact source, pinned environments, data/model provenance, raw failure traces, and author-review limitations. Compare the [authors’ pinned chapter 8 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter08) for the original workflow. The source PDF and book artwork are not redistributed.
 
 <ConceptConnections id="retrieval-metrics" />

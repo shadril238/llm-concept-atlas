@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e6-multimodal-embeddings",
+  "status": "passed",
+  "date": "2026-11-23T18:31:56.510593+00:00",
+  "gitCommit": "cd37282ba4cf353101a2d8a96bdf4ff094188aba",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e6/multimodal_embeddings.py"
+  ],
+  "sourceSha256": "5983f9298067683811459e791db6c4e164494da3341e7c3ec34fed1cffb8ab35",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "532228cbbb09b63584aad7d0ceb88c1c86ec4f2b21900e5626110470ab9e4214",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.019,
+  "peakMemoryMiB": 28.0,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "astronaut -> a photograph of an astronaut in a space suit 0.2942\nchelsea -> a photograph of a tabby cat 0.3085\ncoffee -> a photograph of a cup of coffee on a saucer 0.3212\nshape: {'image': [3, 512], 'text': [5, 512]}\nThese are actual model similarities, not manually assigned semantic vectors.\n",
+  "stderr": "",
+  "error": null,
+  "supportHashes": {
+    "src/data/retrieval-results.json": "32c1fb66c612b89422b2f0e82b4044d5cf3673f195b85d9f26e11498ace47f1d"
+  }
+}

@@ -1,0 +1,121 @@
+---
+title: "Document chunking"
+description: "Document chunking divides a source into bounded passages that can be encoded and retrieved while retaining enough surrounding context. Stable source IDs and exact offsets make each chunk attributable to the original text."
+kind: "concept"
+conceptId: document-chunking
+chapter: 8
+part: "applications"
+summary: "Document chunking divides a source into bounded passages that can be encoded and retrieved while retaining enough surrounding context. Stable source IDs and exact offsets make each chunk attributable to the original text."
+parent: "dense-retrieval"
+prerequisites: ["semantic-search", "tokenization"]
+related: []
+level: "intermediate"
+tags: ["applications", "chapter-08"]
+lessonStatus: full
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e6-retrieval-author-review-2026-11-24
+learningObjectives: ["Preserve exact source offsets while changing boundaries.", "Explain overlap and native-token limits.", "Prevent duplicate chunks from inflating document metrics."]
+bookSections: ["book-ch08-chunking"]
+labHref: "/labs/retrieval-and-multimodal/"
+aliases: ["chunk overlap", "passage chunking", "source offsets"]
+exampleIds: ["e6-document-chunking", "retrieval-benchmark"]
+relationshipReasons: {"semantic-search": "Semantic search retrieves the passage units produced by chunking.", "tokenization": "Tokenization measures the encoder limit that each source-preserving chunk must fit."}
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import RetrievalEvidence from '../../../components/RetrievalEvidence.astro';
+import { ChunkExplorer } from '../../../components/simulations/RetrievalLabs';
+
+<ConceptPrimer id="document-chunking" />
+
+## Definition and intuition
+
+Document chunking divides a source into bounded passages that can be encoded and retrieved while retaining enough surrounding context. Stable source IDs and exact offsets make each chunk attributable to the original text.
+
+Read this lesson as a sequence: identify the input, follow the transformation, inspect the result, and explain a failure. The worked example and recorded lab below make those boundaries visible.
+
+<ReferenceBrief objectives={["Preserve exact source offsets while changing boundaries.", "Explain overlap and native-token limits.", "Prevent duplicate chunks from inflating document metrics."]} prerequisites="semantic-search, tokenization" scope="A specific teaching calculation or recorded-run replay, connected to actual pinned model execution. Independent teaching review remains pending." />
+
+## How it works
+
+### What a boundary can remove
+
+A whole-document vector compresses several facts, while a single isolated sentence can lose the entity or qualification it refers to. A chunk that separates “laptops” from “three days” may damage retrieval or grounding. Overlap can preserve surrounding information, and adding the title can identify the subject. These are design choices to evaluate, not a universal optimal chunk size.
+
+### Offsets are an evidence contract
+
+The calculator uses end-exclusive Unicode code-point offsets, preserving text[start:end] exactly. Its sentence rule splits punctuation followed by whitespace and is explicitly not a general linguistic parser. A whitespace word is not a model token. The actual encoder checks native token counts. A production token-window implementation should use the tokenizer’s offset mapping and protect special tokens rather than assuming characters, words, and tokens are interchangeable.
+
+### Overlap and evaluation
+
+L12 compares two-sentence windows with one-sentence overlap against 24-word windows with six-word overlap, using the same document-level judgments. Several overlapping chunks can point to one document. Before scoring, the lab collapses repeated document IDs so duplicated evidence cannot inflate precision or AP. The chosen context packer also avoids spending its small generation budget on multiple chunks from the same document.
+
+## Worked example
+
+The laptop source contains a loan-duration sentence, a return-location sentence, and a book-duration sentence. Slide the boundary and overlap. Identify which chunk keeps “laptop” attached to “three days,” and which could let a generator copy the twenty-one-day book rule into a laptop answer. The real multi-hop probe exposes exactly this kind of entity mismatch.
+
+## Try the experiment
+
+Predict the outcome before changing a control. Controls either select actual recorded runs or recalculate a clearly labeled mathematical exercise. They do not download model weights or call a hosted provider in your browser.
+
+<ChunkExplorer client:visible />
+
+## Implement it
+
+From the repository root, run `python3 scripts/run-examples.py --id e6-document-chunking --offline` after installing the foundation environment. This standard-library example calculates the stated mechanism or replays hash-linked actual model evidence from the published snapshot. It does not perform a fresh neural-model inference. The complete local/CI implementation and execution contract are linked immediately below.
+
+{/* example:e6-document-chunking:start */}
+
+```python
+import sys
+sys.path.insert(0, 'examples/foundations/src')
+from atlas_foundations.e6.retrieval import chunks
+text = 'Laptop loans last three days. Return them to the desk. Book loans last twenty-one days.'
+for part in chunks(text,size=2,overlap=1,mode='sentence'):
+    assert text[part['start']:part['end']]==part['text']
+    print(part['start'],part['end'],part['text'])
+```
+
+{/* example:e6-document-chunking:end */}
+
+Recorded mechanism output:
+
+```text
+0 54 Laptop loans last three days. Return them to the desk.
+30 87 Return them to the desk. Book loans last twenty-one days.
+```
+
+<RetrievalEvidence id="retrieval-benchmark" />
+
+## When to use it
+
+Use source-preserving chunks for long articles, manuals, and policy collections. Choose boundaries using the kinds of questions readers ask and measure both retrieval quality and downstream evidence sufficiency.
+
+## Limits and common mistakes
+
+Overlap adds storage and repeated context. Small chunks may lose qualifications; large ones may dilute a specific fact or exceed an input cap. The browser recalculates boundaries only; changing its controls does not re-encode passages or rerun the recorded benchmark.
+
+## Check your understanding
+
+<details>
+<summary>Does overlap create additional relevant documents?</summary>
+
+No. It creates additional passages from the same source. Document-level evaluation must collapse their IDs.
+
+</details>
+
+<details>
+<summary>Why preserve offsets instead of only storing copied chunk text?</summary>
+
+Offsets connect a result to its exact source span and allow attribution, coverage checks, and reconstruction after inspecting a failure.
+
+</details>
+
+## Connections and sources
+
+This original lesson follows Chapter 8 of *Hands-On Large Language Models*. The [complete L12–L14 lab](/llm-concept-atlas/labs/retrieval-and-multimodal/) links exact source, pinned environments, data/model provenance, raw failure traces, and author-review limitations. Compare the [authors’ pinned chapter 8 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter08) for the original workflow. The source PDF and book artwork are not redistributed.
+
+<ConceptConnections id="document-chunking" />

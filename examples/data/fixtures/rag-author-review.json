@@ -1,0 +1,871 @@
+{
+  "reviewer": "Implementing assistant (author proposition review)",
+  "date": "2026-11-24",
+  "independent_review": false,
+  "rubric_version": "atlas-rag-author-v1",
+  "rubric": {
+    "answer_correct": "Answers the requested question or explicitly abstains when evidence is absent; independent of the controller override.",
+    "context_faithfulness": "True for supported answer propositions, false for unsupported ones, null for uncertain entailment or no answer proposition.",
+    "fluency": "0 no readable answer; 1 incomplete fragment/repetition; 2 concise readable answer; 3 grammatical full prose. Fluency is independent of truth.",
+    "utility": "0 not usable for the question; 1 partial help; 2 useful requested fact. Citations are measured separately.",
+    "citation_metrics": "Precision over author-judged citation/claim links; recall over generated answer propositions with a supporting citation. No links => precision undefined. No propositions => recall undefined, not perfect.",
+    "limits": "Small author-known mechanism probes and one author, not independent acceptance or an objective general-purpose semantic evaluator."
+  },
+  "rows": [
+    {
+      "id": "eval-hours",
+      "variant": "baseline",
+      "raw_sha256": "c260ed792761d8933edc248b8b3cf6e951a8e6a1950df6727a7c13c4de9f6a0c",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": true,
+      "context_faithfulness": true,
+      "fluency": 2,
+      "utility": 2,
+      "finding": "Correct closing time from hours-c0, but no model citation. A useful short answer is still uncited.",
+      "claims": [
+        {
+          "text": "17:30",
+          "context_support_ids": [
+            "hours-c0"
+          ],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-hours",
+      "variant": "rewrite",
+      "raw_sha256": "29e73a5fa56512c6dddafbb1ab9db1c431f13a3b7ff1695cbc1d94723523c9ce",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": false,
+      "fluency": 2,
+      "utility": 0,
+      "finding": "A date unrelated to the closing-time question, generated with empty evidence. Controller withholding hides the draft; it does not make the draft grounded.",
+      "claims": [
+        {
+          "text": "September 11, 2001",
+          "context_support_ids": [],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-hours",
+      "variant": "multi-query",
+      "raw_sha256": "29e73a5fa56512c6dddafbb1ab9db1c431f13a3b7ff1695cbc1d94723523c9ce",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": false,
+      "fluency": 2,
+      "utility": 0,
+      "finding": "A date unrelated to the closing-time question, generated with empty evidence. Controller withholding hides the draft; it does not make the draft grounded.",
+      "claims": [
+        {
+          "text": "September 11, 2001",
+          "context_support_ids": [],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-hours",
+      "variant": "multi-hop",
+      "raw_sha256": "c260ed792761d8933edc248b8b3cf6e951a8e6a1950df6727a7c13c4de9f6a0c",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": true,
+      "context_faithfulness": true,
+      "fluency": 2,
+      "utility": 2,
+      "finding": "Correct closing time from hours-c0, but no model citation. A useful short answer is still uncited.",
+      "claims": [
+        {
+          "text": "17:30",
+          "context_support_ids": [
+            "hours-c0"
+          ],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-hours",
+      "variant": "routing",
+      "raw_sha256": "c260ed792761d8933edc248b8b3cf6e951a8e6a1950df6727a7c13c4de9f6a0c",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": true,
+      "context_faithfulness": true,
+      "fluency": 2,
+      "utility": 2,
+      "finding": "Correct closing time from hours-c0, but no model citation. A useful short answer is still uncited.",
+      "claims": [
+        {
+          "text": "17:30",
+          "context_support_ids": [
+            "hours-c0"
+          ],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-hours",
+      "variant": "agentic",
+      "raw_sha256": "c260ed792761d8933edc248b8b3cf6e951a8e6a1950df6727a7c13c4de9f6a0c",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": true,
+      "context_faithfulness": true,
+      "fluency": 2,
+      "utility": 2,
+      "finding": "Correct closing time from hours-c0, but no model citation. A useful short answer is still uncited.",
+      "claims": [
+        {
+          "text": "17:30",
+          "context_support_ids": [
+            "hours-c0"
+          ],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-loans",
+      "variant": "baseline",
+      "raw_sha256": "bc706d066b7391c3da51cdcc266e9e4359dc1b99d510a5477e4d462009096fbe",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": true,
+      "context_faithfulness": true,
+      "fluency": 2,
+      "utility": 2,
+      "finding": "Correct laptop duration from loans-c0. No citation was emitted.",
+      "claims": [
+        {
+          "text": "Three days.",
+          "context_support_ids": [
+            "loans-c0"
+          ],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-loans",
+      "variant": "rewrite",
+      "raw_sha256": "bc706d066b7391c3da51cdcc266e9e4359dc1b99d510a5477e4d462009096fbe",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": true,
+      "context_faithfulness": true,
+      "fluency": 2,
+      "utility": 2,
+      "finding": "Correct laptop duration from loans-c0. No citation was emitted.",
+      "claims": [
+        {
+          "text": "Three days.",
+          "context_support_ids": [
+            "loans-c0"
+          ],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-loans",
+      "variant": "multi-query",
+      "raw_sha256": "bc706d066b7391c3da51cdcc266e9e4359dc1b99d510a5477e4d462009096fbe",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": true,
+      "context_faithfulness": true,
+      "fluency": 2,
+      "utility": 2,
+      "finding": "Correct laptop duration from loans-c0. No citation was emitted.",
+      "claims": [
+        {
+          "text": "Three days.",
+          "context_support_ids": [
+            "loans-c0"
+          ],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-loans",
+      "variant": "multi-hop",
+      "raw_sha256": "010d9af1cd548358ec78e3d9b4c021101c8d238532eb63448341f7fb7959e7fa",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": false,
+      "fluency": 2,
+      "utility": 0,
+      "finding": "Twenty-one days applies to books. The question asks about laptops, whose three-day rule was not preserved in this selected context.",
+      "claims": [
+        {
+          "text": "twenty-one days.",
+          "context_support_ids": [],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-loans",
+      "variant": "routing",
+      "raw_sha256": "bc706d066b7391c3da51cdcc266e9e4359dc1b99d510a5477e4d462009096fbe",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": true,
+      "context_faithfulness": true,
+      "fluency": 2,
+      "utility": 2,
+      "finding": "Correct laptop duration from loans-c0. No citation was emitted.",
+      "claims": [
+        {
+          "text": "Three days.",
+          "context_support_ids": [
+            "loans-c0"
+          ],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-loans",
+      "variant": "agentic",
+      "raw_sha256": "73130243bfd0b537da124e63cc41b573f7194b3e9766e61b8c163d5703f0356f",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": false,
+      "fluency": 2,
+      "utility": 0,
+      "finding": "Unsupported duration with no adequate laptop evidence. Controller withholding and model abstention are separate.",
+      "claims": [
+        {
+          "text": "365 days",
+          "context_support_ids": [],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-compare",
+      "variant": "baseline",
+      "raw_sha256": "5a65cd7232c94f2f46bcac7e38c757d39467b4bc1c60759ccf265976ca79f434",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": null,
+      "fluency": 0,
+      "utility": 0,
+      "finding": "A bare source ID is not an answer or an external-world proposition. Citation existence/resolution alone cannot establish correctness; proposition-level metrics are undefined here.",
+      "claims": []
+    },
+    {
+      "id": "eval-compare",
+      "variant": "rewrite",
+      "raw_sha256": "5110464eef82b2a07957f93e35b3d0c32181734ef1dcbd0c43011b803f072143",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": false,
+      "fluency": 2,
+      "utility": 0,
+      "finding": "The sentence does not provide the requested factual answer and is not supported by the selected evidence.",
+      "claims": [
+        {
+          "text": "The seating capacity of Wren and Lark is a metric.",
+          "context_support_ids": [],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-compare",
+      "variant": "multi-query",
+      "raw_sha256": "c93549b1b16bdbf15b105eb50ef3b667c972c9f545e5ccd1e94df0542a5a2a8a",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": null,
+      "fluency": 0,
+      "utility": 0,
+      "finding": "A bare source ID is not an answer or an external-world proposition. Citation existence/resolution alone cannot establish correctness; proposition-level metrics are undefined here.",
+      "claims": []
+    },
+    {
+      "id": "eval-compare",
+      "variant": "multi-hop",
+      "raw_sha256": "41690360981bc0d13a4403e130494e961f31b48769eb83f3052002c7e1334496",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": null,
+      "fluency": 0,
+      "utility": 0,
+      "finding": "A bare source ID is not an answer or an external-world proposition. Citation existence/resolution alone cannot establish correctness; proposition-level metrics are undefined here.",
+      "claims": []
+    },
+    {
+      "id": "eval-compare",
+      "variant": "routing",
+      "raw_sha256": "5110464eef82b2a07957f93e35b3d0c32181734ef1dcbd0c43011b803f072143",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": false,
+      "fluency": 2,
+      "utility": 0,
+      "finding": "The sentence does not provide the requested factual answer and is not supported by the selected evidence.",
+      "claims": [
+        {
+          "text": "The seating capacity of Wren and Lark is a metric.",
+          "context_support_ids": [],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-compare",
+      "variant": "agentic",
+      "raw_sha256": "5110464eef82b2a07957f93e35b3d0c32181734ef1dcbd0c43011b803f072143",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": false,
+      "fluency": 2,
+      "utility": 0,
+      "finding": "The sentence does not provide the requested factual answer and is not supported by the selected evidence.",
+      "claims": [
+        {
+          "text": "The seating capacity of Wren and Lark is a metric.",
+          "context_support_ids": [],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-hop",
+      "variant": "baseline",
+      "raw_sha256": "c837649cce43f2729138e72cc315207057ac82599a59be72765a477f22d14a54",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": false,
+      "fluency": 2,
+      "utility": 0,
+      "finding": "57 is the Aspen contact, while Wren is maintained by Birch at 42. Presence of the number in context does not support the answer to this question.",
+      "claims": [
+        {
+          "text": "57",
+          "context_support_ids": [],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-hop",
+      "variant": "rewrite",
+      "raw_sha256": "c93549b1b16bdbf15b105eb50ef3b667c972c9f545e5ccd1e94df0542a5a2a8a",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": null,
+      "fluency": 0,
+      "utility": 0,
+      "finding": "A bare source ID is not an answer or an external-world proposition. Citation existence/resolution alone cannot establish correctness; proposition-level metrics are undefined here.",
+      "claims": []
+    },
+    {
+      "id": "eval-hop",
+      "variant": "multi-query",
+      "raw_sha256": "73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": true,
+      "context_faithfulness": true,
+      "fluency": 2,
+      "utility": 2,
+      "finding": "Wren names Birch, and the Birch contact passage supplies 42. Both documents are in context, but the correct answer lacks citations.",
+      "claims": [
+        {
+          "text": "42",
+          "context_support_ids": [
+            "wren-c1",
+            "birch-c0"
+          ],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-hop",
+      "variant": "multi-hop",
+      "raw_sha256": "c93549b1b16bdbf15b105eb50ef3b667c972c9f545e5ccd1e94df0542a5a2a8a",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": null,
+      "fluency": 0,
+      "utility": 0,
+      "finding": "A bare source ID is not an answer or an external-world proposition. Citation existence/resolution alone cannot establish correctness; proposition-level metrics are undefined here.",
+      "claims": []
+    },
+    {
+      "id": "eval-hop",
+      "variant": "routing",
+      "raw_sha256": "c837649cce43f2729138e72cc315207057ac82599a59be72765a477f22d14a54",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": false,
+      "fluency": 2,
+      "utility": 0,
+      "finding": "57 is the Aspen contact, while Wren is maintained by Birch at 42. Presence of the number in context does not support the answer to this question.",
+      "claims": [
+        {
+          "text": "57",
+          "context_support_ids": [],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-hop",
+      "variant": "agentic",
+      "raw_sha256": "5b83c08f8b262156337aede051925d10b3d767877a7b8981b520b156022e3253",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": null,
+      "fluency": 1,
+      "utility": 0,
+      "finding": "A vague fragment supplies neither the requested extension nor a checkable answer proposition.",
+      "claims": []
+    },
+    {
+      "id": "eval-project-hop",
+      "variant": "baseline",
+      "raw_sha256": "4097c021643b18ca8f5ba97400818af2f6caee38f27b431eec1d57e656909e0d",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": null,
+      "fluency": 0,
+      "utility": 0,
+      "finding": "A bare source ID is not an answer or an external-world proposition. Citation existence/resolution alone cannot establish correctness; proposition-level metrics are undefined here.",
+      "claims": []
+    },
+    {
+      "id": "eval-project-hop",
+      "variant": "rewrite",
+      "raw_sha256": "e47b65188e0a5ff7435258dc443929f668c2fe263d4b9d27c0dd1ef43e9eb553",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": null,
+      "fluency": 1,
+      "utility": 0,
+      "finding": "A vague fragment supplies neither the requested extension nor a checkable answer proposition.",
+      "claims": []
+    },
+    {
+      "id": "eval-project-hop",
+      "variant": "multi-query",
+      "raw_sha256": "e47b65188e0a5ff7435258dc443929f668c2fe263d4b9d27c0dd1ef43e9eb553",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": null,
+      "fluency": 1,
+      "utility": 0,
+      "finding": "A vague fragment supplies neither the requested extension nor a checkable answer proposition.",
+      "claims": []
+    },
+    {
+      "id": "eval-project-hop",
+      "variant": "multi-hop",
+      "raw_sha256": "71dd94e4cf0773f2a6b82cd7a0798ad3bbf01830a3fafd119c9592ea4a9251c3",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": null,
+      "fluency": 0,
+      "utility": 0,
+      "finding": "A bare source ID is not an answer or an external-world proposition. Citation existence/resolution alone cannot establish correctness; proposition-level metrics are undefined here.",
+      "claims": []
+    },
+    {
+      "id": "eval-project-hop",
+      "variant": "routing",
+      "raw_sha256": "4097c021643b18ca8f5ba97400818af2f6caee38f27b431eec1d57e656909e0d",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": null,
+      "fluency": 0,
+      "utility": 0,
+      "finding": "A bare source ID is not an answer or an external-world proposition. Citation existence/resolution alone cannot establish correctness; proposition-level metrics are undefined here.",
+      "claims": []
+    },
+    {
+      "id": "eval-project-hop",
+      "variant": "agentic",
+      "raw_sha256": "e47b65188e0a5ff7435258dc443929f668c2fe263d4b9d27c0dd1ef43e9eb553",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": null,
+      "fluency": 1,
+      "utility": 0,
+      "finding": "A vague fragment supplies neither the requested extension nor a checkable answer proposition.",
+      "claims": []
+    },
+    {
+      "id": "eval-rewrite",
+      "variant": "baseline",
+      "raw_sha256": "6b6a941024bcea9098210f46b8ae6714db862988a5d2e7fbc91631ecc0622d52",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": true,
+      "fluency": 3,
+      "utility": 0,
+      "finding": "Both access claims match access-c1, but neither answers the assistance-dog question. Context faithfulness and answer relevance disagree.",
+      "claims": [
+        {
+          "text": "The west staircase has no ramp.",
+          "context_support_ids": [
+            "access-c1"
+          ],
+          "citations": [],
+          "fully_supported_by_citations": false
+        },
+        {
+          "text": "An elevator connects the lobby to the upstairs study room.",
+          "context_support_ids": [
+            "access-c1"
+          ],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-rewrite",
+      "variant": "rewrite",
+      "raw_sha256": "f28f4190667fc5282dafaba5d520f84e91ea6a6765103d4d3ed1f2e950dd2686",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": null,
+      "fluency": 3,
+      "utility": 0,
+      "finding": "A plausible broad statement, with uncertain entailment from these passages, that does not answer the access rule. Human review remains uncertain rather than inventing a support score.",
+      "claims": [
+        {
+          "text": "The community center is a place where people can get help.",
+          "context_support_ids": [],
+          "support_judgment": "uncertain",
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-rewrite",
+      "variant": "multi-query",
+      "raw_sha256": "6207377c49100a6e5441dfe2716b2393f11b805594144f2dde25af25dd942888",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": null,
+      "fluency": 1,
+      "utility": 0,
+      "finding": "Repeats the user request without answering the access-policy question. No policy answer proposition to score.",
+      "claims": []
+    },
+    {
+      "id": "eval-rewrite",
+      "variant": "multi-hop",
+      "raw_sha256": "f28f4190667fc5282dafaba5d520f84e91ea6a6765103d4d3ed1f2e950dd2686",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": null,
+      "fluency": 3,
+      "utility": 0,
+      "finding": "A plausible broad statement, with uncertain entailment from these passages, that does not answer the access rule. Human review remains uncertain rather than inventing a support score.",
+      "claims": [
+        {
+          "text": "The community center is a place where people can get help.",
+          "context_support_ids": [],
+          "support_judgment": "uncertain",
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-rewrite",
+      "variant": "routing",
+      "raw_sha256": "6b6a941024bcea9098210f46b8ae6714db862988a5d2e7fbc91631ecc0622d52",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": true,
+      "fluency": 3,
+      "utility": 0,
+      "finding": "Both access claims match access-c1, but neither answers the assistance-dog question. Context faithfulness and answer relevance disagree.",
+      "claims": [
+        {
+          "text": "The west staircase has no ramp.",
+          "context_support_ids": [
+            "access-c1"
+          ],
+          "citations": [],
+          "fully_supported_by_citations": false
+        },
+        {
+          "text": "An elevator connects the lobby to the upstairs study room.",
+          "context_support_ids": [
+            "access-c1"
+          ],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-rewrite",
+      "variant": "agentic",
+      "raw_sha256": "6207377c49100a6e5441dfe2716b2393f11b805594144f2dde25af25dd942888",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": null,
+      "fluency": 1,
+      "utility": 0,
+      "finding": "Repeats the user request without answering the access-policy question. No policy answer proposition to score.",
+      "claims": []
+    },
+    {
+      "id": "eval-absent-1",
+      "variant": "baseline",
+      "raw_sha256": "ec20289cfd32507fc1f0ef770b69b0d71652532252c4477380c03024397e88d4",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": false,
+      "fluency": 2,
+      "utility": 0,
+      "finding": "No document answers this question. The generated number is unsupported; the model did not follow the requested UNKNOWN policy.",
+      "claims": [
+        {
+          "text": "8:00",
+          "context_support_ids": [],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-absent-1",
+      "variant": "rewrite",
+      "raw_sha256": "6bc03202f68bd841b10cb32759439311882f2f88f9c4d673acf80a9a1fb8da3f",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": false,
+      "fluency": 2,
+      "utility": 0,
+      "finding": "No document answers this question. The generated number is unsupported; the model did not follow the requested UNKNOWN policy.",
+      "claims": [
+        {
+          "text": "6:00 PM",
+          "context_support_ids": [],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-absent-1",
+      "variant": "multi-query",
+      "raw_sha256": "6bc03202f68bd841b10cb32759439311882f2f88f9c4d673acf80a9a1fb8da3f",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": false,
+      "fluency": 2,
+      "utility": 0,
+      "finding": "No document answers this question. The generated number is unsupported; the model did not follow the requested UNKNOWN policy.",
+      "claims": [
+        {
+          "text": "6:00 PM",
+          "context_support_ids": [],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-absent-1",
+      "variant": "multi-hop",
+      "raw_sha256": "371894f00eb2c70ae23beffc97d08831542d406f343378ae225316a296f7bce1",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": false,
+      "fluency": 2,
+      "utility": 0,
+      "finding": "This is the cafe hot-drink time, not evidence about a rooftop swimming pool. A retrieved number attached to the wrong entity is unsupported.",
+      "claims": [
+        {
+          "text": "16:45 on Saturday.",
+          "context_support_ids": [],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-absent-1",
+      "variant": "routing",
+      "raw_sha256": "ec20289cfd32507fc1f0ef770b69b0d71652532252c4477380c03024397e88d4",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": false,
+      "fluency": 2,
+      "utility": 0,
+      "finding": "No document answers this question. The generated number is unsupported; the model did not follow the requested UNKNOWN policy.",
+      "claims": [
+        {
+          "text": "8:00",
+          "context_support_ids": [],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-absent-1",
+      "variant": "agentic",
+      "raw_sha256": "7cae6e67ce7f3021eed94d4b697d7d37f31e0c308e73d61d9cdd07293bcbc545",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": false,
+      "fluency": 2,
+      "utility": 0,
+      "finding": "No document answers this question. The generated number is unsupported; the model did not follow the requested UNKNOWN policy.",
+      "claims": [
+        {
+          "text": "7:00 PM.",
+          "context_support_ids": [],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-absent-2",
+      "variant": "baseline",
+      "raw_sha256": "5449b8ac9aa675f9cd0764bcaacd0d6b0e0d8db56ae3db1a2788b47e2bc721f4",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": false,
+      "fluency": 2,
+      "utility": 0,
+      "finding": "No document answers this question. The generated number is unsupported; the model did not follow the requested UNKNOWN policy.",
+      "claims": [
+        {
+          "text": "$500,000",
+          "context_support_ids": [],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-absent-2",
+      "variant": "rewrite",
+      "raw_sha256": "5449b8ac9aa675f9cd0764bcaacd0d6b0e0d8db56ae3db1a2788b47e2bc721f4",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": false,
+      "fluency": 2,
+      "utility": 0,
+      "finding": "No document answers this question. The generated number is unsupported; the model did not follow the requested UNKNOWN policy.",
+      "claims": [
+        {
+          "text": "$500,000",
+          "context_support_ids": [],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-absent-2",
+      "variant": "multi-query",
+      "raw_sha256": "5449b8ac9aa675f9cd0764bcaacd0d6b0e0d8db56ae3db1a2788b47e2bc721f4",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": false,
+      "fluency": 2,
+      "utility": 0,
+      "finding": "No document answers this question. The generated number is unsupported; the model did not follow the requested UNKNOWN policy.",
+      "claims": [
+        {
+          "text": "$500,000",
+          "context_support_ids": [],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-absent-2",
+      "variant": "multi-hop",
+      "raw_sha256": "5449b8ac9aa675f9cd0764bcaacd0d6b0e0d8db56ae3db1a2788b47e2bc721f4",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": false,
+      "fluency": 2,
+      "utility": 0,
+      "finding": "No document answers this question. The generated number is unsupported; the model did not follow the requested UNKNOWN policy.",
+      "claims": [
+        {
+          "text": "$500,000",
+          "context_support_ids": [],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-absent-2",
+      "variant": "routing",
+      "raw_sha256": "5449b8ac9aa675f9cd0764bcaacd0d6b0e0d8db56ae3db1a2788b47e2bc721f4",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": false,
+      "fluency": 2,
+      "utility": 0,
+      "finding": "No document answers this question. The generated number is unsupported; the model did not follow the requested UNKNOWN policy.",
+      "claims": [
+        {
+          "text": "$500,000",
+          "context_support_ids": [],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    },
+    {
+      "id": "eval-absent-2",
+      "variant": "agentic",
+      "raw_sha256": "5449b8ac9aa675f9cd0764bcaacd0d6b0e0d8db56ae3db1a2788b47e2bc721f4",
+      "review_scope": "raw generated draft, before controller withholding",
+      "answer_correct": false,
+      "context_faithfulness": false,
+      "fluency": 2,
+      "utility": 0,
+      "finding": "No document answers this question. The generated number is unsupported; the model did not follow the requested UNKNOWN policy.",
+      "claims": [
+        {
+          "text": "$500,000",
+          "context_support_ids": [],
+          "citations": [],
+          "fully_supported_by_citations": false
+        }
+      ]
+    }
+  ]
+}

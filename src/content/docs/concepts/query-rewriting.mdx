@@ -1,0 +1,125 @@
+---
+title: "Query rewriting"
+description: "Query rewriting transforms a conversational or poorly focused request into a retrieval query while preserving its intended subject and constraints. The rewritten text changes what the retriever sees; it is not itself an answer."
+kind: "concept"
+conceptId: query-rewriting
+chapter: 8
+part: "applications"
+summary: "Query rewriting transforms a conversational or poorly focused request into a retrieval query while preserving its intended subject and constraints. The rewritten text changes what the retriever sees; it is not itself an answer."
+parent: "rag"
+prerequisites: ["rag", "instruction-prompting"]
+related: []
+level: "intermediate"
+tags: ["applications", "chapter-08"]
+lessonStatus: full
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e6-retrieval-author-review-2026-11-24
+learningObjectives: ["Preserve final subject and constraints in a search query.", "Trace an actual generated rewrite into retrieval.", "Diagnose intent drift against a direct-query baseline."]
+bookSections: ["book-ch08-query-rewriting"]
+labHref: "/labs/retrieval-and-multimodal/"
+aliases: ["conversational query rewriting", "search query reformulation"]
+exampleIds: ["e6-query-rewriting", "grounded-retrieval"]
+relationshipReasons: {"rag": "RAG makes query quality part of the evidence-selection path.", "instruction-prompting": "Instruction prompting asks the model to preserve intent while reformulating search text."}
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import RetrievalEvidence from '../../../components/RetrievalEvidence.astro';
+import { GroundedExplorer } from '../../../components/simulations/RetrievalLabs';
+
+<ConceptPrimer id="query-rewriting" />
+
+## Definition and intuition
+
+Query rewriting transforms a conversational or poorly focused request into a retrieval query while preserving its intended subject and constraints. The rewritten text changes what the retriever sees; it is not itself an answer.
+
+Read this lesson as a sequence: identify the input, follow the transformation, inspect the result, and explain a failure. The worked example and recorded lab below make those boundaries visible.
+
+<ReferenceBrief objectives={["Preserve final subject and constraints in a search query.", "Trace an actual generated rewrite into retrieval.", "Diagnose intent drift against a direct-query baseline."]} prerequisites="rag, instruction-prompting" scope="A specific teaching calculation or recorded-run replay, connected to actual pinned model execution. Independent teaching review remains pending." />
+
+## How it works
+
+### Recover the actual information need
+
+A conversation can mention an abandoned option before a final choice. Searching all those words can retrieve the wrong subject. The rewriter receives the actual request and is asked for a short query preserving the final choice. Names, dates, exclusions, and referents are important invariants. A shorter query that drops a crucial qualifier is a failure, even if it sounds cleaner.
+
+### Measure the rewrite as an intervention
+
+L13 records the original question, actual generated rewrite, resulting search, packed passages, and final answer. It does not replace a poor rewrite with a human-crafted ideal. An empty rewrite has an explicit original-query fallback. The model can answer instead of rewriting or introduce a new entity; those strings are still visible. The comparison uses author-known mechanism probes rather than claiming untouched generalization after prototype inspection.
+
+### Preserve the baseline
+
+The unchanged original-question retrieval is a separate condition. Compare support-document coverage and answer behavior, not simply whether the rewrite reads well. Rewriting adds a model call and token work. The answerability threshold was selected on L12 design queries and reused; it is not recalibrated for every changed rewrite distribution. That limitation is visible when a rewrite causes withholding.
+
+## Worked example
+
+The animal-access request mentions a cat, then chooses an assistance dog. A faithful search query should preserve the chosen dog and permission question. A rewrite about a generic community center or an unrelated date can remove the policy evidence. Open the actual rewrite call and trace exactly which phrase altered the search results.
+
+## Try the experiment
+
+Predict the outcome before changing a control. Controls either select actual recorded runs or recalculate a clearly labeled mathematical exercise. They do not download model weights or call a hosted provider in your browser.
+
+<GroundedExplorer client:visible />
+
+## Implement it
+
+From the repository root, run `python3 scripts/run-examples.py --id e6-query-rewriting --offline` after installing the foundation environment. This standard-library example calculates the stated mechanism or replays hash-linked actual model evidence from the published snapshot. It does not perform a fresh neural-model inference. The complete local/CI implementation and execution contract are linked immediately below.
+
+{/* example:e6-query-rewriting:start */}
+
+```python
+import json
+from pathlib import Path
+data = json.loads(Path('src/data/retrieval-results.json').read_text())
+row = next(r for r in data['grounded']['rows'] if r['id']=='eval-rewrite' and r['variant']=='rewrite')
+print('original:',row['question'])
+print('actual rewrite:',row['plan']['calls'][0]['raw'])
+print('actual search:',row['plan']['searches'][0]['query'])
+assert row['plan']['calls'][0]['raw'].strip()==row['plan']['searches'][0]['query']
+print('raw answer:',row['answer_call']['raw'])
+```
+
+{/* example:e6-query-rewriting:end */}
+
+Recorded mechanism output:
+
+```text
+original: I was thinking about bringing my cat, or maybe my trained assistance dog. I will bring the dog. Can it come inside?
+actual rewrite: I was thinking about bringing my cat, or maybe my trained assistance dog.
+actual search: I was thinking about bringing my cat, or maybe my trained assistance dog.
+raw answer: The community center is a place where people can get help.
+```
+
+<RetrievalEvidence id="grounded-retrieval" />
+
+## When to use it
+
+Use rewriting for verbose requests, conversational references, or domain-specific search wording when the necessary context is available. Keep a direct-query baseline and test subjects, negations, dates, and final-choice corrections.
+
+## Limits and common mistakes
+
+A rewriter can hallucinate a subject, answer prematurely, or lose a qualification. More concise text is not necessarily better retrieval. The atlas does not claim general intent preservation from this small model or silently repair its outputs with reference answers.
+
+## Check your understanding
+
+<details>
+<summary>What must survive the cat-versus-assistance-dog rewrite?</summary>
+
+The final chosen subject, assistance dog, and the permission question. Mentioning only animals or the earlier cat changes the information need.
+
+</details>
+
+<details>
+<summary>Which evidence shows a rewrite hurt the pipeline?</summary>
+
+The actual new query, changed retrieved source IDs, lost support documents, and downstream answer—not a subjective preference for its wording.
+
+</details>
+
+## Connections and sources
+
+This original lesson follows Chapter 8 of *Hands-On Large Language Models*. The [complete L12–L14 lab](/llm-concept-atlas/labs/retrieval-and-multimodal/) links exact source, pinned environments, data/model provenance, raw failure traces, and author-review limitations. Compare the [authors’ pinned chapter 8 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter08) for the original workflow. The source PDF and book artwork are not redistributed.
+
+<ConceptConnections id="query-rewriting" />

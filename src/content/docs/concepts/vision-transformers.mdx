@@ -1,99 +1,126 @@
 ---
-title: Vision transformers
-description: A vision transformer converts an image into patch tokens and applies transformer-style processing to them.
-kind: concept
+title: "Vision transformers"
+description: "A Vision Transformer converts image pixels into a sequence of patch representations, adds positional information, and applies attention-based encoder blocks. Patch size and input resolution determine the visible sequence before any semantic image embedding is produced."
+kind: "concept"
 conceptId: vision-transformers
 chapter: 9
-part: applications
-summary: A vision transformer converts an image into patch tokens and applies transformer-style processing to them.
-parent: chapter-09
-prerequisites: [transformer]
-related: [multimodal-embeddings]
-level: intermediate
-tags: [applications, chapter-09]
+part: "applications"
+summary: "A Vision Transformer converts image pixels into a sequence of patch representations, adds positional information, and applies attention-based encoder blocks. Patch size and input resolution determine the visible sequence before any semantic image embedding is produced."
+parent: "chapter-09"
+prerequisites: ["transformer", "attention"]
+related: []
+level: "intermediate"
+tags: ["applications", "chapter-09"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e6-retrieval-author-review-2026-11-24
+learningObjectives: ["Trace actual pixels through patch projection.", "Explain class-token and positional sequence lengths.", "Distinguish OpenCLIP and BLIP-2 vision configurations."]
+bookSections: ["book-ch09-vision-transformers", "book-ch09-image-patches"]
+labHref: "/labs/retrieval-and-multimodal/"
+aliases: ["ViT", "patch embeddings", "image class token"]
+exampleIds: ["e6-vision-transformers", "openclip-retrieval"]
+relationshipReasons: {"transformer": "Transformer blocks process the positioned sequence of projected image patches.", "attention": "Attention lets patch representations exchange information across the image."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { MultimodalLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import RetrievalEvidence from '../../../components/RetrievalEvidence.astro';
+import { PatchExplorer } from '../../../components/simulations/RetrievalLabs';
 
 <ConceptPrimer id="vision-transformers" />
 
 ## Definition and intuition
 
-**Vision transformers**: A vision transformer converts an image into patch tokens and applies transformer-style processing to them.
+A Vision Transformer converts image pixels into a sequence of patch representations, adds positional information, and applies attention-based encoder blocks. Patch size and input resolution determine the visible sequence before any semantic image embedding is produced.
 
-Chapter 9 connects images and language. A shared vector space supports matching, while a generation model needs an additional path from visual features to text tokens.
+Read this lesson as a sequence: identify the input, follow the transformation, inspect the result, and explain a failure. The worked example and recorded lab below make those boundaries visible.
 
-## Before you start
+<ReferenceBrief objectives={["Trace actual pixels through patch projection.", "Explain class-token and positional sequence lengths.", "Distinguish OpenCLIP and BLIP-2 vision configurations."]} prerequisites="transformer, attention" scope="A specific teaching calculation or recorded-run replay, connected to actual pinned model execution. Independent teaching review remains pending." />
 
-Read [Transformer](/llm-concept-atlas/concepts/transformer/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **vision transformers** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Pixels become learned sequence elements
 
-1. **Prepare:** Split and project an image into patches with position information
-2. **Transform:** Mix patch information through attention blocks
-3. **Inspect:** Read the resulting representation for classification or another vision task.
+For the verified OpenCLIP model, a 224×224 RGB tensor is divided into 32×32 patches. Each patch contains 3×32×32 = 3072 normalized values. A learned linear map projects each patch to 768 values. The implementation’s convolution with kernel/stride 32 performs that same operation; the lab independently unfolds actual pixels and checks the projection numerically.
 
-### The important distinction
+### Position and pooling matter
 
-A vision transformer's patch embedding plays a role similar to token embeddings, but patch content comes from pixels. Position signals preserve where patches came from, and attention can combine distant regions. A classification token or pooled representation can summarize the image, depending on architecture.
+A 7×7 grid provides 49 patches. Prepending a learned image class token gives 50 sequence elements, each with learned positional information. Attention mixes information across those positions. The final projected 512-dimensional image representation is different from a raw patch vector or an average RGB color. This checkpoint’s text encoder pools its end-of-text representation; it does not use the image class token to separate text from images.
+
+### Architecture is checkpoint-specific
+
+BLIP-2 uses a different vision encoder and patch configuration, so the OpenCLIP 7×7 grid must not be reused as its claimed trace. L14 records each actual model’s tensor shapes. Changing image resolution, cropping, interpolation, or patch size changes the input sequence or what pixels survive. A visually attractive preview is not proof that the displayed pixels match the processor tensor.
 
 ## Worked example
 
-A photo of a dog is divided into a grid of patches. Some patches contain fur while others contain background; attention can combine evidence across the image. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+Select a numbered patch in the actual astronaut input. Read its row, column, normalized channel means, and first eight projected values. The slice is explicitly only eight of 768 coordinates. Then follow [1,49,3072] unfolded patches to [1,49,768], a class token, and 50 positional vectors. The actual library convolution equality is verified in Python.
 
-<LessonFlow steps={["Split and project an image into patches with position information", "Mix patch information through attention blocks", "Read the resulting representation for classification or another vision task."]} caption="A teaching diagram for Vision transformers. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
 
-## Try the interactive lab
+Predict the outcome before changing a control. Controls either select actual recorded runs or recalculate a clearly labeled mathematical exercise. They do not download model weights or call a hosted provider in your browser.
 
-<MultimodalLab client:visible />
-
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+<PatchExplorer client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+From the repository root, run `python3 scripts/run-examples.py --id e6-vision-transformers --offline` after installing the foundation environment. This standard-library example calculates the stated mechanism or replays hash-linked actual model evidence from the published snapshot. It does not perform a fresh neural-model inference. The complete local/CI implementation and execution contract are linked immediately below.
+
+{/* example:e6-vision-transformers:start */}
 
 ```python
-from math import exp
-scores = [1.2, 0.4, -0.3]
-weights = [exp(x) for x in scores]
-weights = [x / sum(weights) for x in weights]
-values = [2.0, 0.0, 1.0]
-print(round(sum(w*v for w, v in zip(weights, values)), 3))
+import json
+from pathlib import Path
+data = json.loads(Path('src/data/retrieval-results.json').read_text())
+trace = data['vision']['patch_trace']
+print('actual unfolded patches:',trace['unfolded_shape'])
+print('actual projection:',trace['projection_shape'])
+print('with class-token positions:',trace['positional_shape'])
+assert 3*32*32==trace['unfolded_shape'][-1]
+assert 7*7+1==trace['positional_shape'][0]
+print('Native convolution equality:',data['vision']['patch_projection_verified'])
 ```
 
-**Expected output:**
+{/* example:e6-vision-transformers:end */}
+
+Recorded mechanism output:
 
 ```text
-1.329
+actual unfolded patches: [1, 49, 3072]
+actual projection: [1, 49, 768]
+with class-token positions: [50, 768]
+Native convolution equality: True
 ```
 
-**What the code shows:** Exponentiating scores and dividing by their total forms softmax weights. The final line combines the values using those weights, which is the central attention operation. The [official chapter 9 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter09) develops the corresponding model-based implementation.
+<RetrievalEvidence id="openclip-retrieval" />
 
 ## When to use it
 
-Use them as image encoders for visual classification, retrieval, or multimodal systems. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use this trace to understand image encoders, resolution costs, cropping sensitivity, and how vision features feed retrieval or generation. Inspect the checkpoint configuration rather than assuming every ViT uses the same patch grid.
 
 ## Limits and common mistakes
 
-- Patch size and resolution affect detail, cost, and small-object visibility.
-- **Failure to look for:** A tiny sign disappears when the image is resized or patches are too coarse.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+A patch is not a detected object, and a learned coordinate is not a human label such as eye or price. Attention mixing and learned projections are essential. This lab performs frozen inference and a shape/projection check, not vision-model training.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First split and project an image into patches with position information Then mix patch information through attention blocks Finally read the resulting representation for classification or another vision task.</p></details>
+<details>
+<summary>Why are there 50 sequence positions rather than 49?</summary>
 
-<details><summary>What would make the result misleading?</summary><p>A tiny sign disappears when the image is resized or patches are too coarse.</p></details>
+The 49 projected patches are joined by one learned image class token, which also receives positional information.
+
+</details>
+
+<details>
+<summary>Can the displayed first eight projection values represent the entire patch embedding?</summary>
+
+No. They are an inspection slice of a 768-dimensional learned representation; the full model uses every coordinate.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 9 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 9 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter09). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 9 of *Hands-On Large Language Models*. The [complete L12–L14 lab](/llm-concept-atlas/labs/retrieval-and-multimodal/) links exact source, pinned environments, data/model provenance, raw failure traces, and author-review limitations. Compare the [authors’ pinned chapter 9 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter09) for the original workflow. The source PDF and book artwork are not redistributed.
 
 <ConceptConnections id="vision-transformers" />

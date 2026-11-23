@@ -5,11 +5,16 @@
     {
       "id": "language-ai-history",
       "title": "Language ai history",
-      "sourceSectionIds": ["book-ch01-history", "book-ch01-generative-ai-year"],
+      "sourceSectionIds": [
+        "book-ch01-history",
+        "book-ch01-generative-ai-year"
+      ],
       "chapter": 1,
       "placement": "subsection",
       "parentConceptId": "language-ai",
-      "aliases": ["language AI timeline"],
+      "aliases": [
+        "language AI timeline"
+      ],
       "status": "implemented",
       "nextPhase": "E3",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
@@ -17,7 +22,9 @@
         "path": "src/content/docs/concepts/language-ai.mdx",
         "anchor": "historical-context-not-a-market-leaderboard"
       },
-      "exampleIds": ["foundation-language-ai"],
+      "exampleIds": [
+        "foundation-language-ai"
+      ],
       "reviewRecord": "e3-foundations-author-review-2026-11-20"
     },
     {
@@ -30,7 +37,10 @@
       "chapter": 1,
       "placement": "standalone",
       "parentConceptId": "encoder-only",
-      "aliases": ["seq2seq", "encoder-decoder"],
+      "aliases": [
+        "seq2seq",
+        "encoder-decoder"
+      ],
       "status": "implemented",
       "nextPhase": "E3",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
@@ -38,7 +48,9 @@
         "path": "src/content/docs/concepts/sequence-to-sequence.mdx",
         "anchor": "how-it-works"
       },
-      "exampleIds": ["foundation-sequence-to-sequence"],
+      "exampleIds": [
+        "foundation-sequence-to-sequence"
+      ],
       "reviewRecord": "e3-foundations-author-review-2026-11-20"
     },
     {
@@ -54,7 +66,11 @@
       "chapter": 1,
       "placement": "standalone",
       "parentConceptId": "llm",
-      "aliases": ["open weights", "hosted models", "local models"],
+      "aliases": [
+        "open weights",
+        "hosted models",
+        "local models"
+      ],
       "status": "implemented",
       "nextPhase": "E3",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
@@ -62,7 +78,9 @@
         "path": "src/content/docs/concepts/model-access.mdx",
         "anchor": "how-it-works"
       },
-      "exampleIds": ["foundation-model-access"],
+      "exampleIds": [
+        "foundation-model-access"
+      ],
       "reviewRecord": "e3-foundations-author-review-2026-11-20"
     },
     {
@@ -76,7 +94,9 @@
       "chapter": 1,
       "placement": "lab",
       "parentConceptId": "generative-model",
-      "aliases": ["first generation"],
+      "aliases": [
+        "first generation"
+      ],
       "status": "implemented",
       "nextPhase": "E3",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
@@ -84,17 +104,24 @@
         "path": "src/content/docs/concepts/generative-model.mdx",
         "anchor": "implement-it"
       },
-      "exampleIds": ["first-generation", "foundation-generative-model"],
+      "exampleIds": [
+        "first-generation",
+        "foundation-generative-model"
+      ],
       "reviewRecord": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "tokenizer-comparison",
       "title": "Tokenizer comparison",
-      "sourceSectionIds": ["book-ch02-tokenizer-comparison"],
+      "sourceSectionIds": [
+        "book-ch02-tokenizer-comparison"
+      ],
       "chapter": 2,
       "placement": "subsection",
       "parentConceptId": "tokenization",
-      "aliases": ["compare tokenizers"],
+      "aliases": [
+        "compare tokenizers"
+      ],
       "status": "implemented",
       "nextPhase": "E3",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
@@ -102,17 +129,23 @@
         "path": "src/content/docs/concepts/tokenization.mdx",
         "anchor": "see-a-worked-example"
       },
-      "exampleIds": ["tokenizer-comparison"],
+      "exampleIds": [
+        "tokenizer-comparison"
+      ],
       "reviewRecord": "e2-reference-author-review-2026-11-20"
     },
     {
       "id": "pretrained-word-embeddings",
       "title": "Pretrained word embeddings",
-      "sourceSectionIds": ["book-ch02-pretrained-word-vectors"],
+      "sourceSectionIds": [
+        "book-ch02-pretrained-word-vectors"
+      ],
       "chapter": 2,
       "placement": "subsection",
       "parentConceptId": "word2vec",
-      "aliases": ["GloVe"],
+      "aliases": [
+        "GloVe"
+      ],
       "status": "implemented",
       "nextPhase": "E3",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
@@ -137,7 +170,9 @@
       "chapter": 2,
       "placement": "lab",
       "parentConceptId": "recommendation-embeddings",
-      "aliases": ["playlist embeddings"],
+      "aliases": [
+        "playlist embeddings"
+      ],
       "status": "implemented",
       "nextPhase": "E3",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
@@ -154,7 +189,9 @@
     {
       "id": "architecture-research-directions",
       "title": "Architecture research directions",
-      "sourceSectionIds": ["book-ch03-research-directions"],
+      "sourceSectionIds": [
+        "book-ch03-research-directions"
+      ],
       "chapter": 3,
       "placement": "subsection",
       "parentConceptId": "transformer",
@@ -176,7 +213,9 @@
     {
       "id": "classification-model-selection",
       "title": "Classification model selection",
-      "sourceSectionIds": ["book-ch04-model-selection"],
+      "sourceSectionIds": [
+        "book-ch04-model-selection"
+      ],
       "chapter": 4,
       "placement": "subsection",
       "parentConceptId": "generative-classification",
@@ -197,7 +236,9 @@
     {
       "id": "t5-classification",
       "title": "T5 classification",
-      "sourceSectionIds": ["book-ch04-t5"],
+      "sourceSectionIds": [
+        "book-ch04-t5"
+      ],
       "chapter": 4,
       "placement": "subsection",
       "parentConceptId": "generative-classification",
@@ -218,7 +259,9 @@
     {
       "id": "hosted-classification",
       "title": "Hosted classification",
-      "sourceSectionIds": ["book-ch04-chatgpt"],
+      "sourceSectionIds": [
+        "book-ch04-chatgpt"
+      ],
       "chapter": 4,
       "placement": "subsection",
       "parentConceptId": "generative-classification",
@@ -239,7 +282,9 @@
     {
       "id": "research-abstract-corpus",
       "title": "Research abstract corpus",
-      "sourceSectionIds": ["book-ch05-arxiv-data"],
+      "sourceSectionIds": [
+        "book-ch05-arxiv-data"
+      ],
       "chapter": 5,
       "placement": "subsection",
       "parentConceptId": "bertopic",
@@ -251,13 +296,18 @@
         "path": "src/content/docs/concepts/bertopic.mdx",
         "anchor": "research-abstract-corpus"
       },
-      "exampleIds": ["bertopic-pipeline", "modular-bertopic"],
+      "exampleIds": [
+        "bertopic-pipeline",
+        "modular-bertopic"
+      ],
       "reviewRecord": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "generated-topic-labels",
       "title": "Generated topic labels",
-      "sourceSectionIds": ["book-ch05-generation-block"],
+      "sourceSectionIds": [
+        "book-ch05-generation-block"
+      ],
       "chapter": 5,
       "placement": "subsection",
       "parentConceptId": "bertopic",
@@ -269,13 +319,18 @@
         "path": "src/content/docs/concepts/topic-representations.mdx",
         "anchor": "generated-topic-labels"
       },
-      "exampleIds": ["discovery-topic-representations", "modular-bertopic"],
+      "exampleIds": [
+        "discovery-topic-representations",
+        "modular-bertopic"
+      ],
       "reviewRecord": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "generation-model-selection",
       "title": "Generation model selection",
-      "sourceSectionIds": ["book-ch06-model-selection"],
+      "sourceSectionIds": [
+        "book-ch06-model-selection"
+      ],
       "chapter": 6,
       "placement": "subsection",
       "parentConceptId": "prompt-structure",
@@ -287,7 +342,9 @@
         "path": "src/content/docs/concepts/prompt-structure.mdx",
         "anchor": "generation-model-selection"
       },
-      "exampleIds": ["prompt-evaluation"],
+      "exampleIds": [
+        "prompt-evaluation"
+      ],
       "reviewRecord": "e5-workflows-author-review-2026-11-21"
     },
     {
@@ -301,7 +358,10 @@
       "chapter": 6,
       "placement": "standalone",
       "parentConceptId": "prompt-structure",
-      "aliases": ["CoT", "zero-shot CoT"],
+      "aliases": [
+        "CoT",
+        "zero-shot CoT"
+      ],
       "status": "implemented",
       "nextPhase": "E5",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
@@ -309,17 +369,24 @@
         "path": "src/content/docs/concepts/chain-of-thought.mdx",
         "anchor": "how-it-works"
       },
-      "exampleIds": ["e5-chain-of-thought", "prompt-evaluation"],
+      "exampleIds": [
+        "e5-chain-of-thought",
+        "prompt-evaluation"
+      ],
       "reviewRecord": "e5-workflows-author-review-2026-11-21"
     },
     {
       "id": "tree-of-thought",
       "title": "Tree of thought",
-      "sourceSectionIds": ["book-ch06-tree-of-thought"],
+      "sourceSectionIds": [
+        "book-ch06-tree-of-thought"
+      ],
       "chapter": 6,
       "placement": "standalone",
       "parentConceptId": "prompt-structure",
-      "aliases": ["ToT"],
+      "aliases": [
+        "ToT"
+      ],
       "status": "implemented",
       "nextPhase": "E5",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
@@ -327,7 +394,10 @@
         "path": "src/content/docs/concepts/tree-of-thought.mdx",
         "anchor": "how-it-works"
       },
-      "exampleIds": ["e5-tree-of-thought", "search-and-voting"],
+      "exampleIds": [
+        "e5-tree-of-thought",
+        "search-and-voting"
+      ],
       "reviewRecord": "e5-workflows-author-review-2026-11-21"
     },
     {
@@ -340,7 +410,11 @@
       "chapter": 7,
       "placement": "lab",
       "parentConceptId": "chains",
-      "aliases": ["LangChain", "LlamaCpp", "GGUF"],
+      "aliases": [
+        "LangChain",
+        "LlamaCpp",
+        "GGUF"
+      ],
       "status": "implemented",
       "nextPhase": "E5",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
@@ -348,32 +422,57 @@
         "path": "src/content/docs/labs/prompting-and-workflows.mdx",
         "anchor": "l11-local-model-and-chains"
       },
-      "exampleIds": ["local-model-chain", "bounded-tool-workflow"],
+      "exampleIds": [
+        "local-model-chain",
+        "bounded-tool-workflow"
+      ],
       "reviewRecord": "e5-workflows-author-review-2026-11-21"
     },
     {
       "id": "api-grounded-generation",
       "title": "Api grounded generation",
-      "sourceSectionIds": ["book-ch08-api-rag"],
+      "sourceSectionIds": [
+        "book-ch08-api-rag"
+      ],
       "chapter": 8,
       "placement": "subsection",
       "parentConceptId": "grounded-generation",
       "aliases": [],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E6",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "E6 original detailed lesson/subsection, recorded evidence calculation and connected actual workflow; independent teaching review pending.",
+      "destination": {
+        "path": "src/content/docs/concepts/grounded-generation.mdx",
+        "anchor": "api-grounded-generation"
+      },
+      "reviewRecord": "e6-retrieval-author-review-2026-11-24",
+      "exampleIds": [
+        "e6-grounded-generation"
+      ]
     },
     {
       "id": "advanced-rag",
       "title": "Advanced rag",
-      "sourceSectionIds": ["book-ch08-advanced-rag"],
+      "sourceSectionIds": [
+        "book-ch08-advanced-rag"
+      ],
       "chapter": 8,
       "placement": "subsection",
       "parentConceptId": "rag",
-      "aliases": ["advanced retrieval"],
-      "status": "proposed",
+      "aliases": [
+        "advanced retrieval"
+      ],
+      "status": "implemented",
       "nextPhase": "E6",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "E6 original detailed lesson/subsection, recorded evidence calculation and connected actual workflow; independent teaching review pending.",
+      "destination": {
+        "path": "src/content/docs/concepts/rag.mdx",
+        "anchor": "advanced-retrieval"
+      },
+      "reviewRecord": "e6-retrieval-author-review-2026-11-24",
+      "exampleIds": [
+        "e6-rag"
+      ]
     },
     {
       "id": "multimodal-preprocessing",
@@ -386,19 +485,35 @@
       "chapter": 9,
       "placement": "standalone",
       "parentConceptId": "multimodal-embeddings",
-      "aliases": ["image preprocessing", "pixel_values"],
-      "status": "proposed",
+      "aliases": [
+        "image preprocessing",
+        "pixel_values"
+      ],
+      "status": "implemented",
       "nextPhase": "E6",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "E6 original detailed lesson/subsection, recorded evidence calculation and connected actual workflow; independent teaching review pending.",
+      "destination": {
+        "path": "src/content/docs/concepts/multimodal-preprocessing.mdx",
+        "anchor": "definition-and-intuition"
+      },
+      "reviewRecord": "e6-retrieval-author-review-2026-11-24",
+      "exampleIds": [
+        "e6-multimodal-preprocessing"
+      ]
     },
     {
       "id": "augmented-sbert",
       "title": "Augmented sbert",
-      "sourceSectionIds": ["book-ch10-augmented-sbert"],
+      "sourceSectionIds": [
+        "book-ch10-augmented-sbert"
+      ],
       "chapter": 10,
       "placement": "standalone",
       "parentConceptId": "sbert",
-      "aliases": ["AugSBERT", "gold and silver pairs"],
+      "aliases": [
+        "AugSBERT",
+        "gold and silver pairs"
+      ],
       "status": "proposed",
       "nextPhase": "E7",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
@@ -406,11 +521,15 @@
     {
       "id": "full-fine-tuning",
       "title": "Full fine tuning",
-      "sourceSectionIds": ["book-ch12-full-fine-tuning"],
+      "sourceSectionIds": [
+        "book-ch12-full-fine-tuning"
+      ],
       "chapter": 12,
       "placement": "subsection",
       "parentConceptId": "pretraining-and-sft",
-      "aliases": ["full parameter fine-tuning"],
+      "aliases": [
+        "full parameter fine-tuning"
+      ],
       "status": "proposed",
       "nextPhase": "E8",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
@@ -418,11 +537,16 @@
     {
       "id": "instruction-data-templating",
       "title": "Instruction data templating",
-      "sourceSectionIds": ["book-ch12-instruction-template"],
+      "sourceSectionIds": [
+        "book-ch12-instruction-template"
+      ],
       "chapter": 12,
       "placement": "subsection",
       "parentConceptId": "pretraining-and-sft",
-      "aliases": ["chat template", "loss mask"],
+      "aliases": [
+        "chat template",
+        "loss mask"
+      ],
       "status": "proposed",
       "nextPhase": "E8",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
@@ -430,7 +554,9 @@
     {
       "id": "generation-training-configuration",
       "title": "Generation training configuration",
-      "sourceSectionIds": ["book-ch12-sft-config"],
+      "sourceSectionIds": [
+        "book-ch12-sft-config"
+      ],
       "chapter": 12,
       "placement": "subsection",
       "parentConceptId": "generative-evaluation",
@@ -442,7 +568,9 @@
     {
       "id": "instruction-training-workflow",
       "title": "Instruction training workflow",
-      "sourceSectionIds": ["book-ch12-sft-training"],
+      "sourceSectionIds": [
+        "book-ch12-sft-training"
+      ],
       "chapter": 12,
       "placement": "subsection",
       "parentConceptId": "generative-evaluation",
@@ -454,11 +582,16 @@
     {
       "id": "adapter-merging",
       "title": "Adapter merging",
-      "sourceSectionIds": ["book-ch12-merge"],
+      "sourceSectionIds": [
+        "book-ch12-merge"
+      ],
       "chapter": 12,
       "placement": "subsection",
       "parentConceptId": "lora",
-      "aliases": ["merge weights", "merge_and_unload"],
+      "aliases": [
+        "merge weights",
+        "merge_and_unload"
+      ],
       "status": "proposed",
       "nextPhase": "E8",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
@@ -466,7 +599,10 @@
     {
       "id": "generation-benchmarks",
       "title": "Generation benchmarks",
-      "sourceSectionIds": ["book-ch12-benchmarks", "book-ch12-leaderboards"],
+      "sourceSectionIds": [
+        "book-ch12-benchmarks",
+        "book-ch12-leaderboards"
+      ],
       "chapter": 12,
       "placement": "subsection",
       "parentConceptId": "generative-evaluation",
@@ -478,11 +614,15 @@
     {
       "id": "preference-data-templating",
       "title": "Preference data templating",
-      "sourceSectionIds": ["book-ch12-alignment-template"],
+      "sourceSectionIds": [
+        "book-ch12-alignment-template"
+      ],
       "chapter": 12,
       "placement": "subsection",
       "parentConceptId": "dpo",
-      "aliases": ["chosen rejected pairs"],
+      "aliases": [
+        "chosen rejected pairs"
+      ],
       "status": "proposed",
       "nextPhase": "E8",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
@@ -490,7 +630,9 @@
     {
       "id": "cross-attention",
       "title": "Cross attention",
-      "sourceSectionIds": ["book-ch01-cross-attention"],
+      "sourceSectionIds": [
+        "book-ch01-cross-attention"
+      ],
       "chapter": 1,
       "placement": "standalone",
       "parentConceptId": "attention",
@@ -502,17 +644,25 @@
         "path": "src/content/docs/concepts/cross-attention.mdx",
         "anchor": "how-it-works"
       },
-      "exampleIds": ["foundation-cross-attention"],
+      "exampleIds": [
+        "foundation-cross-attention"
+      ],
       "reviewRecord": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "grouped-query-attention",
       "title": "Grouped query attention",
-      "sourceSectionIds": ["book-ch03-shared-kv"],
+      "sourceSectionIds": [
+        "book-ch03-shared-kv"
+      ],
       "chapter": 3,
       "placement": "subsection",
       "parentConceptId": "efficient-attention",
-      "aliases": ["GQA", "MQA", "multi-query attention"],
+      "aliases": [
+        "GQA",
+        "MQA",
+        "multi-query attention"
+      ],
       "status": "implemented",
       "nextPhase": "E3",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
@@ -520,17 +670,26 @@
         "path": "src/content/docs/concepts/efficient-attention.mdx",
         "anchor": "grouped-query-attention"
       },
-      "exampleIds": ["cache-equivalence", "foundation-efficient-attention"],
+      "exampleIds": [
+        "cache-equivalence",
+        "foundation-efficient-attention"
+      ],
       "reviewRecord": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "normalization-and-residuals",
       "title": "Normalization and residuals",
-      "sourceSectionIds": ["book-ch03-normalization"],
+      "sourceSectionIds": [
+        "book-ch03-normalization"
+      ],
       "chapter": 3,
       "placement": "subsection",
       "parentConceptId": "transformer-block",
-      "aliases": ["RMSNorm", "LayerNorm", "residual connection"],
+      "aliases": [
+        "RMSNorm",
+        "LayerNorm",
+        "residual connection"
+      ],
       "status": "implemented",
       "nextPhase": "E3",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
@@ -538,17 +697,24 @@
         "path": "src/content/docs/concepts/transformer-block.mdx",
         "anchor": "normalization-and-residuals"
       },
-      "exampleIds": ["transparent-transformer", "foundation-transformer-block"],
+      "exampleIds": [
+        "transparent-transformer",
+        "foundation-transformer-block"
+      ],
       "reviewRecord": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "feedforward-activations",
       "title": "Feedforward activations",
-      "sourceSectionIds": ["book-ch03-swiglu"],
+      "sourceSectionIds": [
+        "book-ch03-swiglu"
+      ],
       "chapter": 3,
       "placement": "subsection",
       "parentConceptId": "transformer-block",
-      "aliases": ["SwiGLU"],
+      "aliases": [
+        "SwiGLU"
+      ],
       "status": "implemented",
       "nextPhase": "E3",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
@@ -556,17 +722,24 @@
         "path": "src/content/docs/concepts/transformer-block.mdx",
         "anchor": "feedforward-activations"
       },
-      "exampleIds": ["transparent-transformer", "foundation-transformer-block"],
+      "exampleIds": [
+        "transparent-transformer",
+        "foundation-transformer-block"
+      ],
       "reviewRecord": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "sequence-packing",
       "title": "Sequence packing",
-      "sourceSectionIds": ["book-ch03-packing"],
+      "sourceSectionIds": [
+        "book-ch03-packing"
+      ],
       "chapter": 3,
       "placement": "standalone",
       "parentConceptId": "context-size",
-      "aliases": ["packing"],
+      "aliases": [
+        "packing"
+      ],
       "status": "implemented",
       "nextPhase": "E3",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
@@ -574,17 +747,24 @@
         "path": "src/content/docs/concepts/sequence-packing.mdx",
         "anchor": "how-it-works"
       },
-      "exampleIds": ["foundation-sequence-packing"],
+      "exampleIds": [
+        "foundation-sequence-packing"
+      ],
       "reviewRecord": "e3-foundations-author-review-2026-11-20"
     },
     {
       "id": "class-based-tf-idf",
       "title": "Class based tf idf",
-      "sourceSectionIds": ["book-ch05-ctfidf"],
+      "sourceSectionIds": [
+        "book-ch05-ctfidf"
+      ],
       "chapter": 5,
       "placement": "standalone",
       "parentConceptId": "topic-modeling",
-      "aliases": ["c-TF-IDF", "class TF-IDF"],
+      "aliases": [
+        "c-TF-IDF",
+        "class TF-IDF"
+      ],
       "status": "implemented",
       "nextPhase": "E4",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
@@ -592,17 +772,24 @@
         "path": "src/content/docs/concepts/class-based-tf-idf.mdx",
         "anchor": "how-it-works"
       },
-      "exampleIds": ["discovery-class-based-tf-idf", "modular-bertopic"],
+      "exampleIds": [
+        "discovery-class-based-tf-idf",
+        "modular-bertopic"
+      ],
       "reviewRecord": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "topic-representation-models",
       "title": "Topic representation models",
-      "sourceSectionIds": ["book-ch05-keybert"],
+      "sourceSectionIds": [
+        "book-ch05-keybert"
+      ],
       "chapter": 5,
       "placement": "subsection",
       "parentConceptId": "topic-representations",
-      "aliases": ["KeyBERTInspired"],
+      "aliases": [
+        "KeyBERTInspired"
+      ],
       "status": "implemented",
       "nextPhase": "E4",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
@@ -610,17 +797,24 @@
         "path": "src/content/docs/concepts/topic-representations.mdx",
         "anchor": "keybertinspired-representation-models"
       },
-      "exampleIds": ["discovery-topic-representations", "modular-bertopic"],
+      "exampleIds": [
+        "discovery-topic-representations",
+        "modular-bertopic"
+      ],
       "reviewRecord": "e4-discovery-author-review-2026-11-20"
     },
     {
       "id": "maximal-marginal-relevance",
       "title": "Maximal marginal relevance",
-      "sourceSectionIds": ["book-ch05-mmr"],
+      "sourceSectionIds": [
+        "book-ch05-mmr"
+      ],
       "chapter": 5,
       "placement": "standalone",
       "parentConceptId": "topic-representations",
-      "aliases": ["MMR"],
+      "aliases": [
+        "MMR"
+      ],
       "status": "implemented",
       "nextPhase": "E4",
       "reason": "A reusable selection rule with its own numerical trace and future retrieval use merits a canonical page; existing topic-representation relationships remain linked.",
@@ -637,131 +831,250 @@
     {
       "id": "document-chunking",
       "title": "Document chunking",
-      "sourceSectionIds": ["book-ch08-chunking"],
+      "sourceSectionIds": [
+        "book-ch08-chunking"
+      ],
       "chapter": 8,
       "placement": "standalone",
       "parentConceptId": "dense-retrieval",
-      "aliases": ["chunk overlap", "passage chunking"],
-      "status": "proposed",
+      "aliases": [
+        "chunk overlap",
+        "passage chunking"
+      ],
+      "status": "implemented",
       "nextPhase": "E6",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "E6 original detailed lesson/subsection, recorded evidence calculation and connected actual workflow; independent teaching review pending.",
+      "destination": {
+        "path": "src/content/docs/concepts/document-chunking.mdx",
+        "anchor": "definition-and-intuition"
+      },
+      "reviewRecord": "e6-retrieval-author-review-2026-11-24",
+      "exampleIds": [
+        "e6-document-chunking"
+      ]
     },
     {
       "id": "average-precision",
       "title": "Average precision",
-      "sourceSectionIds": ["book-ch08-average-precision"],
+      "sourceSectionIds": [
+        "book-ch08-average-precision"
+      ],
       "chapter": 8,
       "placement": "subsection",
       "parentConceptId": "retrieval-metrics",
-      "aliases": ["AP"],
-      "status": "proposed",
+      "aliases": [
+        "AP"
+      ],
+      "status": "implemented",
       "nextPhase": "E6",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "E6 original detailed lesson/subsection, recorded evidence calculation and connected actual workflow; independent teaching review pending.",
+      "destination": {
+        "path": "src/content/docs/concepts/retrieval-metrics.mdx",
+        "anchor": "average-precision-and-mean-average-precision"
+      },
+      "reviewRecord": "e6-retrieval-author-review-2026-11-24",
+      "exampleIds": [
+        "e6-retrieval-metrics"
+      ]
     },
     {
       "id": "mean-average-precision",
       "title": "Mean average precision",
-      "sourceSectionIds": ["book-ch08-mean-average-precision"],
+      "sourceSectionIds": [
+        "book-ch08-mean-average-precision"
+      ],
       "chapter": 8,
       "placement": "subsection",
       "parentConceptId": "retrieval-metrics",
-      "aliases": ["MAP"],
-      "status": "proposed",
+      "aliases": [
+        "MAP"
+      ],
+      "status": "implemented",
       "nextPhase": "E6",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "E6 original detailed lesson/subsection, recorded evidence calculation and connected actual workflow; independent teaching review pending.",
+      "destination": {
+        "path": "src/content/docs/concepts/retrieval-metrics.mdx",
+        "anchor": "mean-average-precision"
+      },
+      "reviewRecord": "e6-retrieval-author-review-2026-11-24",
+      "exampleIds": [
+        "e6-retrieval-metrics"
+      ]
     },
     {
       "id": "query-rewriting",
       "title": "Query rewriting",
-      "sourceSectionIds": ["book-ch08-query-rewriting"],
+      "sourceSectionIds": [
+        "book-ch08-query-rewriting"
+      ],
       "chapter": 8,
       "placement": "standalone",
       "parentConceptId": "rag",
       "aliases": [],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E6",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "E6 original detailed lesson/subsection, recorded evidence calculation and connected actual workflow; independent teaching review pending.",
+      "destination": {
+        "path": "src/content/docs/concepts/query-rewriting.mdx",
+        "anchor": "definition-and-intuition"
+      },
+      "reviewRecord": "e6-retrieval-author-review-2026-11-24",
+      "exampleIds": [
+        "e6-query-rewriting"
+      ]
     },
     {
       "id": "multi-query-rag",
       "title": "Multi query rag",
-      "sourceSectionIds": ["book-ch08-multi-query"],
+      "sourceSectionIds": [
+        "book-ch08-multi-query"
+      ],
       "chapter": 8,
       "placement": "standalone",
       "parentConceptId": "rag",
       "aliases": [],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E6",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "E6 original detailed lesson/subsection, recorded evidence calculation and connected actual workflow; independent teaching review pending.",
+      "destination": {
+        "path": "src/content/docs/concepts/multi-query-rag.mdx",
+        "anchor": "definition-and-intuition"
+      },
+      "reviewRecord": "e6-retrieval-author-review-2026-11-24",
+      "exampleIds": [
+        "e6-multi-query-rag"
+      ]
     },
     {
       "id": "multi-hop-rag",
       "title": "Multi hop rag",
-      "sourceSectionIds": ["book-ch08-multi-hop"],
+      "sourceSectionIds": [
+        "book-ch08-multi-hop"
+      ],
       "chapter": 8,
       "placement": "standalone",
       "parentConceptId": "rag",
       "aliases": [],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E6",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "E6 original detailed lesson/subsection, recorded evidence calculation and connected actual workflow; independent teaching review pending.",
+      "destination": {
+        "path": "src/content/docs/concepts/multi-hop-rag.mdx",
+        "anchor": "definition-and-intuition"
+      },
+      "reviewRecord": "e6-retrieval-author-review-2026-11-24",
+      "exampleIds": [
+        "e6-multi-hop-rag"
+      ]
     },
     {
       "id": "query-routing",
       "title": "Query routing",
-      "sourceSectionIds": ["book-ch08-routing"],
+      "sourceSectionIds": [
+        "book-ch08-routing"
+      ],
       "chapter": 8,
       "placement": "standalone",
       "parentConceptId": "rag",
       "aliases": [],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E6",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "E6 original detailed lesson/subsection, recorded evidence calculation and connected actual workflow; independent teaching review pending.",
+      "destination": {
+        "path": "src/content/docs/concepts/query-routing.mdx",
+        "anchor": "definition-and-intuition"
+      },
+      "reviewRecord": "e6-retrieval-author-review-2026-11-24",
+      "exampleIds": [
+        "e6-query-routing"
+      ]
     },
     {
       "id": "agentic-rag",
       "title": "Agentic rag",
-      "sourceSectionIds": ["book-ch08-agentic-rag"],
+      "sourceSectionIds": [
+        "book-ch08-agentic-rag"
+      ],
       "chapter": 8,
       "placement": "standalone",
       "parentConceptId": "rag",
       "aliases": [],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E6",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "E6 original detailed lesson/subsection, recorded evidence calculation and connected actual workflow; independent teaching review pending.",
+      "destination": {
+        "path": "src/content/docs/concepts/agentic-rag.mdx",
+        "anchor": "definition-and-intuition"
+      },
+      "reviewRecord": "e6-retrieval-author-review-2026-11-24",
+      "exampleIds": [
+        "e6-agentic-rag"
+      ]
     },
     {
       "id": "citation-evaluation",
       "title": "Citation evaluation",
-      "sourceSectionIds": ["book-ch08-citations"],
+      "sourceSectionIds": [
+        "book-ch08-citations"
+      ],
       "chapter": 8,
       "placement": "subsection",
       "parentConceptId": "rag-evaluation",
-      "aliases": ["citation precision", "citation recall"],
-      "status": "proposed",
+      "aliases": [
+        "citation precision",
+        "citation recall"
+      ],
+      "status": "implemented",
       "nextPhase": "E6",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "E6 original detailed lesson/subsection, recorded evidence calculation and connected actual workflow; independent teaching review pending.",
+      "destination": {
+        "path": "src/content/docs/concepts/rag-evaluation.mdx",
+        "anchor": "citation-precision-and-citation-recall"
+      },
+      "reviewRecord": "e6-retrieval-author-review-2026-11-24",
+      "exampleIds": [
+        "e6-rag-evaluation"
+      ]
     },
     {
       "id": "q-former",
       "title": "Q former",
-      "sourceSectionIds": ["book-ch09-q-former"],
+      "sourceSectionIds": [
+        "book-ch09-q-former"
+      ],
       "chapter": 9,
       "placement": "subsection",
       "parentConceptId": "blip-2",
-      "aliases": ["querying transformer"],
-      "status": "proposed",
+      "aliases": [
+        "querying transformer"
+      ],
+      "status": "implemented",
       "nextPhase": "E6",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "E6 original detailed lesson/subsection, recorded evidence calculation and connected actual workflow; independent teaching review pending.",
+      "destination": {
+        "path": "src/content/docs/concepts/q-former.mdx",
+        "anchor": "definition-and-intuition"
+      },
+      "reviewRecord": "e6-retrieval-author-review-2026-11-24",
+      "exampleIds": [
+        "e6-q-former"
+      ]
     },
     {
       "id": "embedding-losses",
       "title": "Embedding losses",
-      "sourceSectionIds": ["book-ch10-softmax-loss", "book-ch10-cosine-loss"],
+      "sourceSectionIds": [
+        "book-ch10-softmax-loss",
+        "book-ch10-cosine-loss"
+      ],
       "chapter": 10,
       "placement": "subsection",
       "parentConceptId": "loss-functions",
-      "aliases": ["softmax loss", "cosine similarity loss", "MNR loss"],
+      "aliases": [
+        "softmax loss",
+        "cosine similarity loss",
+        "MNR loss"
+      ],
       "status": "proposed",
       "nextPhase": "E7",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
@@ -769,11 +1082,19 @@
     {
       "id": "embedding-evaluation-metrics",
       "title": "Embedding evaluation metrics",
-      "sourceSectionIds": ["book-ch10-sts-correlation", "book-ch10-mteb"],
+      "sourceSectionIds": [
+        "book-ch10-sts-correlation",
+        "book-ch10-mteb"
+      ],
       "chapter": 10,
       "placement": "subsection",
       "parentConceptId": "embedding-evaluation",
-      "aliases": ["STS", "MTEB", "Pearson", "Spearman"],
+      "aliases": [
+        "STS",
+        "MTEB",
+        "Pearson",
+        "Spearman"
+      ],
       "status": "proposed",
       "nextPhase": "E7",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
@@ -781,11 +1102,17 @@
     {
       "id": "qlora-memory",
       "title": "Qlora memory",
-      "sourceSectionIds": ["book-ch12-double-quantization"],
+      "sourceSectionIds": [
+        "book-ch12-double-quantization"
+      ],
       "chapter": 12,
       "placement": "subsection",
       "parentConceptId": "qlora",
-      "aliases": ["NF4", "double quantization", "paged optimizer"],
+      "aliases": [
+        "NF4",
+        "double quantization",
+        "paged optimizer"
+      ],
       "status": "proposed",
       "nextPhase": "E8",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
@@ -793,11 +1120,19 @@
     {
       "id": "generation-evaluation-metrics",
       "title": "Generation evaluation metrics",
-      "sourceSectionIds": ["book-ch12-perplexity", "book-ch12-overlap-metrics"],
+      "sourceSectionIds": [
+        "book-ch12-perplexity",
+        "book-ch12-overlap-metrics"
+      ],
       "chapter": 12,
       "placement": "subsection",
       "parentConceptId": "generative-evaluation",
-      "aliases": ["perplexity", "BLEU", "ROUGE", "BERTScore"],
+      "aliases": [
+        "perplexity",
+        "BLEU",
+        "ROUGE",
+        "BERTScore"
+      ],
       "status": "proposed",
       "nextPhase": "E8",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
@@ -805,11 +1140,16 @@
     {
       "id": "ppo-for-rlhf",
       "title": "Ppo for rlhf",
-      "sourceSectionIds": ["book-ch12-ppo"],
+      "sourceSectionIds": [
+        "book-ch12-ppo"
+      ],
       "chapter": 12,
       "placement": "subsection",
       "parentConceptId": "rlhf",
-      "aliases": ["PPO", "proximal policy optimization"],
+      "aliases": [
+        "PPO",
+        "proximal policy optimization"
+      ],
       "status": "proposed",
       "nextPhase": "E8",
       "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."

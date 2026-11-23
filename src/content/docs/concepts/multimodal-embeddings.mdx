@@ -1,98 +1,126 @@
 ---
-title: Multimodal embeddings
-description: Multimodal embeddings place representations of different media in a space where matched items can be compared.
-kind: concept
+title: "Multimodal embeddings"
+description: "Multimodal embeddings map different input modalities into a compatible representation space so they can be compared. A shared dimension is necessary for a dot product, but learned alignment is what makes cross-modal similarity useful."
+kind: "concept"
 conceptId: multimodal-embeddings
 chapter: 9
-part: applications
-summary: Multimodal embeddings place representations of different media in a space where matched items can be compared.
-parent: chapter-09
-prerequisites: [text-embedding]
-related: [vision-transformers, clip]
-level: intermediate
-tags: [applications, chapter-09]
+part: "applications"
+summary: "Multimodal embeddings map different input modalities into a compatible representation space so they can be compared. A shared dimension is necessary for a dot product, but learned alignment is what makes cross-modal similarity useful."
+parent: "chapter-09"
+prerequisites: ["text-embedding", "vision-transformers"]
+related: []
+level: "intermediate"
+tags: ["applications", "chapter-09"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e6-retrieval-author-review-2026-11-24
+learningObjectives: ["Explain learned compatibility across modalities.", "Inspect actual image/text similarity rankings.", "Distinguish cosine from candidate-normalized softmax."]
+bookSections: ["book-ch09-multimodal-embeddings"]
+labHref: "/labs/retrieval-and-multimodal/"
+aliases: ["cross-modal retrieval", "shared image-text space"]
+exampleIds: ["e6-multimodal-embeddings", "openclip-retrieval"]
+relationshipReasons: {"text-embedding": "Text embeddings provide one side of the shared image/text representation.", "vision-transformers": "A vision transformer creates image features that training aligns with text features."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { MultimodalLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import RetrievalEvidence from '../../../components/RetrievalEvidence.astro';
+import { VisionExplorer } from '../../../components/simulations/RetrievalLabs';
 
 <ConceptPrimer id="multimodal-embeddings" />
 
 ## Definition and intuition
 
-Multimodal embeddings place representations of different media in a space where matched items can be compared.
+Multimodal embeddings map different input modalities into a compatible representation space so they can be compared. A shared dimension is necessary for a dot product, but learned alignment is what makes cross-modal similarity useful.
 
-Chapter 9 connects images and language. A shared vector space supports matching, while a generation model needs an additional path from visual features to text tokens.
+Read this lesson as a sequence: identify the input, follow the transformation, inspect the result, and explain a failure. The worked example and recorded lab below make those boundaries visible.
 
-## Before you start
+<ReferenceBrief objectives={["Explain learned compatibility across modalities.", "Inspect actual image/text similarity rankings.", "Distinguish cosine from candidate-normalized softmax."]} prerequisites="text-embedding, vision-transformers" scope="A specific teaching calculation or recorded-run replay, connected to actual pinned model execution. Independent teaching review remains pending." />
 
-Read [Text Embedding](/llm-concept-atlas/concepts/text-embedding/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **multimodal embeddings** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Two inputs, coordinated representations
 
-1. **Prepare:** Encode each modality with its own input pipeline
-2. **Transform:** Train compatible vectors using paired examples
-3. **Inspect:** Compare vectors for retrieval and validate cross-modal matches.
+The actual image encoder receives processed pixel tensors, while the text encoder receives token IDs and its own sequence convention. Their outputs are projected into a shared 512-dimensional space and normalized. A caption and image can then be compared by cosine. Arbitrary vectors of equal length from unrelated models do not have this property.
 
-### The important distinction
+### Search in either direction
 
-Contrastive image-text training treats matched pairs as positives and other batch pairs as negatives. At inference, one image vector can be compared with many text vectors. A similarity score is relative to the candidates and training distribution, not a calibrated probability that a caption is true.
+Text-to-image retrieval ranks image vectors for a text query. Image-to-text retrieval ranks captions for an image. The same similarity matrix can be inspected by row or column, but the interpretation of a softmax depends on its candidate set. The atlas uses actual OpenCLIP embeddings for three attributed photographs and descriptive text, with unrelated caption distractors retained.
+
+### Similarity is a measured relationship
+
+The frozen pretrained model encodes learned associations, not a guarantee about every visual detail. A correct top match among astronaut, cat, and coffee is a small controlled observation. Familiar sample photos may have appeared in pretraining; their use here is for inspectable mechanisms, not an independent accuracy benchmark. Raw scores and wording variants remain available.
 
 ## Worked example
 
-A picture of a dog and the phrase “a dog running” are close in a shared space. A visually similar wolf photo may also score highly, so scores need task-specific interpretation. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+The coffee photograph can be compared with a descriptive coffee caption, the bare word coffee, and unrelated airplane or car captions. Choose the recorded wording condition and inspect the actual score change. Remove one caption: the underlying cosine remains fixed while the displayed candidate-normalized softmax changes because its denominator changed.
 
-<LessonFlow steps={["Encode each modality with its own input pipeline", "Train compatible vectors using paired examples", "Compare vectors for retrieval and validate cross-modal matches."]} caption="A teaching diagram for Multimodal embeddings. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
 
-## Try the interactive lab
+Predict the outcome before changing a control. Controls either select actual recorded runs or recalculate a clearly labeled mathematical exercise. They do not download model weights or call a hosted provider in your browser.
 
-<MultimodalLab client:visible />
-
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+<VisionExplorer client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+From the repository root, run `python3 scripts/run-examples.py --id e6-multimodal-embeddings --offline` after installing the foundation environment. This standard-library example calculates the stated mechanism or replays hash-linked actual model evidence from the published snapshot. It does not perform a fresh neural-model inference. The complete local/CI implementation and execution contract are linked immediately below.
+
+{/* example:e6-multimodal-embeddings:start */}
 
 ```python
-from math import sqrt
-image = (0.8, 0.6)
-captions = {"a dog": (0.7, 0.7), "a car": (-0.6, 0.8)}
-score = lambda a,b: sum(x*y for x,y in zip(a,b)) / (sqrt(sum(x*x for x in a))*sqrt(sum(y*y for y in b)))
-print(max(captions, key=lambda text: score(image, captions[text])))
+import json
+from pathlib import Path
+data = json.loads(Path('src/data/retrieval-results.json').read_text())
+matrix = data['vision']['cosines']
+for image,row in zip(data['vision']['images'],matrix):
+    best=max(range(len(row)),key=lambda i:row[i])
+    print(image['id'],'->',data['vision']['descriptions'][best],round(row[best],4))
+print('shape:',data['vision']['embedding_shapes'])
+print('These are actual model similarities, not manually assigned semantic vectors.')
 ```
 
-**Expected output:**
+{/* example:e6-multimodal-embeddings:end */}
+
+Recorded mechanism output:
 
 ```text
-a dog
+astronaut -> a photograph of an astronaut in a space suit 0.2942
+chelsea -> a photograph of a tabby cat 0.3085
+coffee -> a photograph of a cup of coffee on a saucer 0.3212
+shape: {'image': [3, 512], 'text': [5, 512]}
+These are actual model similarities, not manually assigned semantic vectors.
 ```
 
-**What the code shows:** The toy image vector is compared with caption vectors using cosine similarity. The highest score wins among the offered candidates; no image pixels are processed. The [official chapter 9 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter09) develops the corresponding model-based implementation.
+<RetrievalEvidence id="openclip-retrieval" />
 
 ## When to use it
 
-Use them for image-to-text search, text-to-image search, and cross-modal ranking. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use aligned multimodal vectors for image search, text-guided collection browsing, candidate-label matching, and evidence discovery. Keep the model, processor, tokenizer, normalization, and candidate texts versioned together.
 
 ## Limits and common mistakes
 
-- A shared space does not prove factual equivalence or make a caption generator by itself.
-- **Failure to look for:** The top text match describes a common object but misses a crucial color or action.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Embedding similarity does not generate a caption or explain why a match occurred. Relative rankings can change with wording and available alternatives. Numeric proximity alone cannot certify object presence, counting, identity, or support for a generated claim.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First encode each modality with its own input pipeline Then train compatible vectors using paired examples Finally compare vectors for retrieval and validate cross-modal matches.</p></details>
+<details>
+<summary>Why can the two modalities be compared here?</summary>
 
-<details><summary>What would make the result misleading?</summary><p>The top text match describes a common object but misses a crucial color or action.</p></details>
+The paired training and learned projections aligned their representations. Matching output widths alone would not be enough.
+
+</details>
+
+<details>
+<summary>Why does removing a candidate change softmax but not cosine?</summary>
+
+Softmax renormalizes over the remaining alternatives. The already computed vector dot product has not changed.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 9 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 9 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter09). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 9 of *Hands-On Large Language Models*. The [complete L12–L14 lab](/llm-concept-atlas/labs/retrieval-and-multimodal/) links exact source, pinned environments, data/model provenance, raw failure traces, and author-review limitations. Compare the [authors’ pinned chapter 9 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter09) for the original workflow. The source PDF and book artwork are not redistributed.
 
 <ConceptConnections id="multimodal-embeddings" />

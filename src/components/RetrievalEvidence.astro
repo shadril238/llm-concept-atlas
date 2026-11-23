@@ -1,0 +1,7 @@
+---
+import VerifiedRun from './VerifiedRun.astro';
+const {id}=Astro.props as {id:string};
+const anchors:Record<string,string>={'retrieval-benchmark':'l12-retrieval-benchmark','grounded-retrieval':'l13-grounded-retrieval','openclip-retrieval':'l14-openclip-retrieval','blip2-captioning':'l14-genuine-blip-2','multimodal-chat':'l14-multimodal-chat'};
+---
+<aside class="reference-brief"><strong>Run the connected model workflow</strong><p><a href={`/llm-concept-atlas/labs/retrieval-and-multimodal/#${anchors[id]}`}>Open setup, complete source, actual outputs, and error analysis</a></p><p><code>python3 scripts/run-examples.py --id {id} --offline</code> after the first public-model download with <code>--allow-network</code>. The genuine BLIP-2 profile is an explicit heavy Linux CPU opt-in; the other profiles have local CPU evidence. Browser exploration makes no model/API calls.</p></aside>
+<VerifiedRun id={id}/>

@@ -39,7 +39,7 @@ SPECS = {
         "L14c · can a visual chatbot infer a price that is not shown?",
         "chat",
         "e6-chat",
-        "The separate 256M instruction model receives real image pixels and actual generated conversation history. It is not BLIP-2. Inspect the chat template, pixel tensor, continuation-only decoding, and the image-splitting setting. Unknown pretraining overlap prevents a held-out benchmark claim.",
+        "The separate 256M instruction model receives real image pixels and actual generated conversation history. It is not BLIP-2. Inspect the chat template, pixel tensor, continuation-only decoding, and both single-image and split-image conditions. The first turn changes preprocessing alone; the second also carries the changed generated history, so it is a mediated comparison rather than an isolated direct effect. Unknown pretraining overlap prevents a held-out benchmark claim.",
         'print(json.dumps(result["rows"],indent=2))',
         "Does a fluent price answer have visual support? Find the first generated answer inside the next prompt. Distinguish application-retained history from a model weight update.",
     ),

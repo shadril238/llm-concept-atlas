@@ -1,98 +1,125 @@
 ---
-title: BLIP-2
-description: BLIP-2 bridges a frozen image encoder and a frozen language model using a trainable query transformer.
-kind: concept
+title: "BLIP-2"
+description: "BLIP-2 connects a pretrained vision encoder to a pretrained language model through learned query representations and a projection layer. Its bridge is trained to turn image features into useful conditioning for language generation."
+kind: "concept"
 conceptId: blip-2
 chapter: 9
-part: applications
-summary: BLIP-2 bridges a frozen image encoder and a frozen language model using a trainable query transformer.
-parent: chapter-09
-prerequisites: [clip]
-related: [openclip, image-captioning]
-level: intermediate
-tags: [applications, chapter-09]
+part: "applications"
+summary: "BLIP-2 connects a pretrained vision encoder to a pretrained language model through learned query representations and a projection layer. Its bridge is trained to turn image features into useful conditioning for language generation."
+parent: "chapter-09"
+prerequisites: ["vision-transformers", "generative-model"]
+related: []
+level: "intermediate"
+tags: ["applications", "chapter-09"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e6-retrieval-author-review-2026-11-24
+learningObjectives: ["Explain frozen backbones and the learned bridge.", "Distinguish the original two training stages.", "Inspect genuine pretrained inference on its verified profile."]
+bookSections: ["book-ch09-multimodal-generation", "book-ch09-blip2"]
+labHref: "/labs/retrieval-and-multimodal/"
+aliases: ["BLIP-2", "vision-language bridge"]
+exampleIds: ["e6-blip-2", "blip2-captioning"]
+relationshipReasons: {"vision-transformers": "A vision transformer produces the visual tokens read by the learned bridge.", "generative-model": "A generative language model receives projected visual query states and predicts text."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { MultimodalLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import RetrievalEvidence from '../../../components/RetrievalEvidence.astro';
+import { VisualGeneration } from '../../../components/simulations/RetrievalLabs';
 
 <ConceptPrimer id="blip-2" />
 
 ## Definition and intuition
 
-BLIP-2 bridges a frozen image encoder and a frozen language model using a trainable query transformer.
+BLIP-2 connects a pretrained vision encoder to a pretrained language model through learned query representations and a projection layer. Its bridge is trained to turn image features into useful conditioning for language generation.
 
-Chapter 9 connects images and language. A shared vector space supports matching, while a generation model needs an additional path from visual features to text tokens.
+Read this lesson as a sequence: identify the input, follow the transformation, inspect the result, and explain a failure. The worked example and recorded lab below make those boundaries visible.
 
-## Before you start
+<ReferenceBrief objectives={["Explain frozen backbones and the learned bridge.", "Distinguish the original two training stages.", "Inspect genuine pretrained inference on its verified profile."]} prerequisites="vision-transformers, generative-model" scope="A specific teaching calculation or recorded-run replay, connected to actual pinned model execution. Independent teaching review remains pending." />
 
-Read [CLIP](/llm-concept-atlas/concepts/clip/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **BLIP-2** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Frozen components and learned bridge
 
-1. **Prepare:** Encode image features with a vision backbone
-2. **Transform:** Use learned queries to select information and map it toward the language model
-3. **Inspect:** Generate or answer from the bridged visual context.
+The original training method keeps the large image encoder and language model frozen while learning the Q-Former, query embeddings, and—in the generation stage—the projection into the language model’s embedding width. Calling the bridge the only trained component should not hide the learned projection. The vision encoder is not retrained merely because its features are used by the bridge.
 
-### The important distinction
+### Two stages have different goals
 
-BLIP-2's query transformer compresses image information into a fixed set of learned query outputs before passing it to a language model. Freezing the large encoders lowers training cost, but the bridge becomes a bottleneck. It is a generation architecture, unlike CLIP's primarily matching-oriented dual encoders.
+Stage one learns useful image/text representations with image-text contrastive, image-text matching, and image-grounded text-generation objectives. Their attention masks serve different information-flow requirements. Stage two connects the learned queries to the frozen language generator and trains generation conditioning. A matching embedding dimension is an interface requirement; the training objectives create the useful relationship.
+
+### Actual inference trace
+
+The separate genuine Salesforce BLIP-2 lab records real vision tokens, query states, projected query shapes, processor IDs, and generated caption/VQA text. It uses an explicitly measured heavy Linux CPU profile, distinct from the small local OpenCLIP/chat labs. The smaller chat model is not reported as BLIP-2, and no successful CUDA, four-bit, or failed disk-offload configuration is claimed.
 
 ## Worked example
 
-A photo contains a dog on a couch. The bridge supplies selected visual features so a language model can answer “Where is the dog?” without retraining both large backbones. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+Follow one actual image through the vision output and the configured learned-query count, then through the projection to the OPT language embedding width. The generated caption is a continuation conditioned on those visual features. It may still introduce a detail absent from the photograph or stop at its output cap; a correct shape is an execution check, not semantic validation.
 
-<LessonFlow steps={["Encode image features with a vision backbone", "Use learned queries to select information and map it toward the language model", "Generate or answer from the bridged visual context."]} caption="A teaching diagram for BLIP-2. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
 
-## Try the interactive lab
+Predict the outcome before changing a control. Controls either select actual recorded runs or recalculate a clearly labeled mathematical exercise. They do not download model weights or call a hosted provider in your browser.
 
-<MultimodalLab client:visible />
-
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+<VisualGeneration client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+From the repository root, run `python3 scripts/run-examples.py --id e6-blip-2 --offline` after installing the foundation environment. This standard-library example calculates the stated mechanism or replays hash-linked actual model evidence from the published snapshot. It does not perform a fresh neural-model inference. The complete local/CI implementation and execution contract are linked immediately below.
+
+{/* example:e6-blip-2:start */}
 
 ```python
-features = {"animal": 0.9, "road": 0.1}
-if features["animal"] > features["road"]:
-    print("An animal is in the picture.")
-else:
-    print("A road is in the picture.")
+import json
+from pathlib import Path
+data = json.loads(Path('src/data/retrieval-results.json').read_text())
+v = data['caption']
+print('genuine checkpoint:',next(iter(v['models'])))
+for row in v['rows']:print(row['image_id'],row['trace'])
+print('Actual CPU profile checked:',v['cpu_profile_verified'])
+print('No BLIP-2 training was performed.')
 ```
 
-**Expected output:**
+{/* example:e6-blip-2:end */}
+
+Recorded mechanism output:
 
 ```text
-An animal is in the picture.
+genuine checkpoint: Salesforce/blip2-opt-2.7b
+astronaut {'vision_tokens': [1, 257, 1408], 'query_tokens': [1, 32, 768], 'projected_queries': [1, 32, 2560]}
+coffee {'vision_tokens': [1, 257, 1408], 'query_tokens': [1, 32, 768], 'projected_queries': [1, 32, 2560]}
+Actual CPU profile checked: True
+No BLIP-2 training was performed.
 ```
 
-**What the code shows:** The two hand-written feature scores choose a fixed sentence. This makes the feature-to-text decision visible, but a real captioner learns visual features and token generation. The [official chapter 9 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter09) develops the corresponding model-based implementation.
+<RetrievalEvidence id="blip2-captioning" />
 
 ## When to use it
 
-Use it to study efficient vision-language bridging and caption or question-answering systems. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use this architecture to understand how pretrained vision and language components can be connected without training both large backbones from scratch. The runnable inference illustrates the bridge; a full training replication requires its own data, losses, and hardware evidence.
 
 ## Limits and common mistakes
 
-- The bridge may omit visual details, and generated text can still hallucinate.
-- **Failure to look for:** The answer names a red couch when color was not reliably represented in the supplied features.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+The genuine checkpoint is large, and the verified heavy profile has explicit platform/memory requirements. The project performs no BLIP-2 training and does not claim a tiny substitute reproduces its behavior. Generated captions and VQA answers need visual support checks.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First encode image features with a vision backbone Then use learned queries to select information and map it toward the language model Finally generate or answer from the bridged visual context.</p></details>
+<details>
+<summary>Which learned part is easy to omit when saying only the bridge trains?</summary>
 
-<details><summary>What would make the result misleading?</summary><p>The answer names a red couch when color was not reliably represented in the supplied features.</p></details>
+The projection into the language model’s embedding width, alongside Q-Former/query parameters in the generation-stage bridge.
+
+</details>
+
+<details>
+<summary>Does a correctly shaped projected query guarantee a correct caption?</summary>
+
+No. Shape compatibility permits computation; learned conditioning and answer reliability are separate questions.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 9 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 9 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter09). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 9 of *Hands-On Large Language Models*. The [complete L12–L14 lab](/llm-concept-atlas/labs/retrieval-and-multimodal/) links exact source, pinned environments, data/model provenance, raw failure traces, and author-review limitations. Compare the [authors’ pinned chapter 9 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter09) for the original workflow. The source PDF and book artwork are not redistributed.
 
 <ConceptConnections id="blip-2" />

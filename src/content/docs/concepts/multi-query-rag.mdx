@@ -1,0 +1,125 @@
+---
+title: "Multi-query RAG"
+description: "Multi-query retrieval issues several complementary searches for one information need and merges their evidence. Parallel subquestions differ from dependent multi-hop searches, whose later questions require earlier results."
+kind: "concept"
+conceptId: multi-query-rag
+chapter: 8
+part: "applications"
+summary: "Multi-query retrieval issues several complementary searches for one information need and merges their evidence. Parallel subquestions differ from dependent multi-hop searches, whose later questions require earlier results."
+parent: "rag"
+prerequisites: ["query-rewriting", "retrieval-metrics"]
+related: []
+level: "intermediate"
+tags: ["applications", "chapter-08"]
+lessonStatus: full
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e6-retrieval-author-review-2026-11-24
+learningObjectives: ["Distinguish independent subqueries from dependent hops.", "Recompute reciprocal-rank fusion and deduplication.", "Account for query work and context dilution."]
+bookSections: ["book-ch08-multi-query"]
+labHref: "/labs/retrieval-and-multimodal/"
+aliases: ["multi-query retrieval", "query decomposition", "reciprocal-rank fusion"]
+exampleIds: ["e6-multi-query-rag", "grounded-retrieval"]
+relationshipReasons: {"query-rewriting": "Query rewriting supplies alternative phrasings to retrieve complementary candidates.", "retrieval-metrics": "Retrieval metrics test whether merging query results improves relevant-source coverage."}
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import RetrievalEvidence from '../../../components/RetrievalEvidence.astro';
+import { GroundedExplorer } from '../../../components/simulations/RetrievalLabs';
+
+<ConceptPrimer id="multi-query-rag" />
+
+## Definition and intuition
+
+Multi-query retrieval issues several complementary searches for one information need and merges their evidence. Parallel subquestions differ from dependent multi-hop searches, whose later questions require earlier results.
+
+Read this lesson as a sequence: identify the input, follow the transformation, inspect the result, and explain a failure. The worked example and recorded lab below make those boundaries visible.
+
+<ReferenceBrief objectives={["Distinguish independent subqueries from dependent hops.", "Recompute reciprocal-rank fusion and deduplication.", "Account for query work and context dilution."]} prerequisites="query-rewriting, retrieval-metrics" scope="A specific teaching calculation or recorded-run replay, connected to actual pinned model execution. Independent teaching review remains pending." />
+
+## How it works
+
+### Decompose independent information needs
+
+A comparison of Wren and Lark capacity may benefit from one query per room. These searches can be planned without first knowing either result. L13 asks the actual generator for at most two query lines and records exactly what it returns. One emitted line remains one query; the application does not invent a second ideal query or pretend a prose answer is a successful decomposition.
+
+### Merge with explicit deduplication
+
+Each search produces ranked chunk IDs. The application uses reciprocal-rank fusion, adding 1/(60 + rank) for each occurrence of a chunk, then sorts the merged candidates. This rank-based rule avoids mixing incompatible raw score scales. A repeated chunk is retained once, while its fusion contribution reflects multiple searches. Context packing subsequently avoids duplicate documents.
+
+### Coverage, dilution, and work
+
+Several queries may cover complementary facts or fill the context with near duplicates. A better merged retrieval set does not guarantee correct synthesis. The actual probe retains a correct 42 answer in one condition and citation-only or unsupported outputs in others. Model calls, search calls, generated tokens, and context omissions remain inspectable. The fixed fusion constant is a declared design choice, not tuned on these displayed answers.
+
+## Worked example
+
+The Wren/Lark question needs both capacities. Inspect the generated query lines, then identify whether both room documents survive merging and the input budget. If the model searches the same wording twice, fusion can reinforce the same source rather than improve coverage. A source token such as [event-c1] alone is not a comparison answer.
+
+## Try the experiment
+
+Predict the outcome before changing a control. Controls either select actual recorded runs or recalculate a clearly labeled mathematical exercise. They do not download model weights or call a hosted provider in your browser.
+
+<GroundedExplorer client:visible />
+
+## Implement it
+
+From the repository root, run `python3 scripts/run-examples.py --id e6-multi-query-rag --offline` after installing the foundation environment. This standard-library example calculates the stated mechanism or replays hash-linked actual model evidence from the published snapshot. It does not perform a fresh neural-model inference. The complete local/CI implementation and execution contract are linked immediately below.
+
+{/* example:e6-multi-query-rag:start */}
+
+```python
+import json
+from pathlib import Path
+data = json.loads(Path('src/data/retrieval-results.json').read_text())
+row = next(r for r in data['grounded']['rows'] if r['id']=='eval-compare' and r['variant']=='multi-query')
+scores = {}
+for search in row['plan']['searches']:
+    print('actual query:',search['query'])
+    for rank,hit in enumerate(search['hits'],1):scores[hit['id']]=scores.get(hit['id'],0)+1/(60+rank)
+ranking = sorted(scores,key=lambda id:(-scores[id],id))
+assert ranking==[h['id'] for h in row['plan']['hits']]
+print('fused first IDs:',ranking[:4])
+```
+
+{/* example:e6-multi-query-rag:end */}
+
+Recorded mechanism output:
+
+```text
+actual query: Wren and Lark are the seating capacities of Wren and Lark.
+fused first IDs: ['lark-c0', 'wren-c0', 'lark-c1', 'project-c0']
+```
+
+<RetrievalEvidence id="grounded-retrieval" />
+
+## When to use it
+
+Use multi-query search when distinct aspects or independently known entities require complementary evidence. Define a merge rule, cap query count, and measure evidence coverage along with added work.
+
+## Limits and common mistakes
+
+Generated queries can repeat, drift, or search only one aspect. Fusion rewards repeated retrieval, not truth. A context cap can remove the very additional evidence the extra search found. This implementation is a bounded local adaptation, not a universal multi-query improvement claim.
+
+## Check your understanding
+
+<details>
+<summary>What makes this parallel rather than multi-hop?</summary>
+
+The planned subquestions do not require an earlier result to determine what to ask next.
+
+</details>
+
+<details>
+<summary>Why fuse ranks instead of adding BM25 and cosine values directly?</summary>
+
+Their score scales differ. A declared rank-based rule has interpretable contributions without assuming score calibration.
+
+</details>
+
+## Connections and sources
+
+This original lesson follows Chapter 8 of *Hands-On Large Language Models*. The [complete L12–L14 lab](/llm-concept-atlas/labs/retrieval-and-multimodal/) links exact source, pinned environments, data/model provenance, raw failure traces, and author-review limitations. Compare the [authors’ pinned chapter 8 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter08) for the original workflow. The source PDF and book artwork are not redistributed.
+
+<ConceptConnections id="multi-query-rag" />

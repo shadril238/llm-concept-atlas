@@ -1,90 +1,126 @@
 ---
-title: Grounded generation
-description: Grounded generation asks a model to make claims supported by supplied source material.
-kind: concept
+title: "Grounded generation"
+description: "Grounded generation asks a model to answer from supplied evidence and ties its claims to inspectable sources. Correct wording, source-ID resolution, and genuine evidential support are distinct checks."
+kind: "concept"
 conceptId: grounded-generation
 chapter: 8
-part: applications
-summary: Grounded generation asks a model to make claims supported by supplied source material.
-parent: chapter-08
-prerequisites: [rag]
-related: [rag, local-model-rag]
-level: intermediate
-tags: [applications, chapter-08]
+part: "applications"
+summary: "Grounded generation asks a model to answer from supplied evidence and ties its claims to inspectable sources. Correct wording, source-ID resolution, and genuine evidential support are distinct checks."
+parent: "rag"
+prerequisites: ["rag", "output-verification"]
+related: []
+level: "intermediate"
+tags: ["applications", "chapter-08"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e6-retrieval-author-review-2026-11-24
+learningObjectives: ["Keep source pointers, model citations, and support separate.", "Inspect packed source evidence for each claim.", "Validate imported citation spans without claiming entailment."]
+bookSections: ["book-ch08-search-to-rag", "book-ch08-api-rag"]
+labHref: "/labs/retrieval-and-multimodal/"
+aliases: ["source-grounded answers", "citation spans", "API grounding"]
+exampleIds: ["e6-grounded-generation", "grounded-retrieval"]
+relationshipReasons: {"rag": "RAG defines how external evidence reaches the generator.", "output-verification": "Output verification checks whether each generated claim is supported by that evidence."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import RetrievalEvidence from '../../../components/RetrievalEvidence.astro';
+import { GroundedExplorer } from '../../../components/simulations/RetrievalLabs';
 
 <ConceptPrimer id="grounded-generation" />
 
 ## Definition and intuition
 
-Grounded generation asks a model to make claims supported by supplied source material.
+Grounded generation asks a model to answer from supplied evidence and ties its claims to inspectable sources. Correct wording, source-ID resolution, and genuine evidential support are distinct checks.
 
-Chapter 8 separates finding evidence from using evidence. Evaluate retrieval and answer support independently because a fluent answer can still lack a trustworthy source.
+Read this lesson as a sequence: identify the input, follow the transformation, inspect the result, and explain a failure. The worked example and recorded lab below make those boundaries visible.
 
-## Before you start
+<ReferenceBrief objectives={["Keep source pointers, model citations, and support separate.", "Inspect packed source evidence for each claim.", "Validate imported citation spans without claiming entailment."]} prerequisites="rag, output-verification" scope="A specific teaching calculation or recorded-run replay, connected to actual pinned model execution. Independent teaching review remains pending." />
 
-Read [Retrieval-Augmented Generation](/llm-concept-atlas/concepts/rag/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **grounded generation** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Pack actual evidence with provenance
 
-1. **Prepare:** Select relevant passages with source IDs
-2. **Transform:** Generate an answer under an explicit evidence constraint
-3. **Inspect:** Check each claim against its cited passage and abstain when evidence is absent.
+L13 preserves chunk and document IDs, source offsets, the original question, and every passage actually included in the prompt. Whole passages fit a 384-token application input budget under a 512-token native cap. Duplicate document chunks and passages that do not fit are explicitly omitted. The system does not silently insert gold support passages after retrieval.
 
-### The important distinction
+### Citations need a semantic check
 
-Grounding requires the source to support each claim, not merely share keywords with it. Keep stable source IDs and quote or link the relevant passage when possible. If retrieved evidence conflicts or is absent, abstention or a qualified answer is a better result than an invented resolution.
+A model can emit a valid source ID without answering, cite a selected passage that does not support its statement, or give a correct short answer without any citation. The parser records actual markers and rejects unknown IDs as unresolved; it never attaches references and calls them model citations. Author proposition review separately checks correctness, context faithfulness, utility, fluency, and citation support, retaining uncertainty.
+
+### API grounded generation
+
+The optional hosted route is a documented workflow plus an actual offline importer, consistent with the project preference. It accepts provider/model/prompt/time provenance, known query IDs, source IDs, answer spans, source spans, and exact quotes. Offsets are Unicode code points. Resolving those objects checks provenance and span integrity, not entailment. No paid API call, hosted quality score, or live-provider execution is claimed.
 
 ## Worked example
 
-An hours passage says the library closes at 5 p.m. Saturday. A grounded answer can cite it; a claim about Sunday hours cannot be justified by the same passage. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+The number 57 appears in the Aspen contact passage. It does not support “the team maintaining Wren is at 57,” because Wren belongs to Birch, whose extension is 42. A citation to a document containing the same number is insufficient. The recorded draft and human rationale make the entity mismatch visible.
 
-<LessonFlow steps={["Select relevant passages with source IDs", "Generate an answer under an explicit evidence constraint", "Check each claim against its cited passage and abstain when evidence is absent."]} caption="A teaching diagram for Grounded generation. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
+
+Predict the outcome before changing a control. Controls either select actual recorded runs or recalculate a clearly labeled mathematical exercise. They do not download model weights or call a hosted provider in your browser.
+
+<GroundedExplorer client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+From the repository root, run `python3 scripts/run-examples.py --id e6-grounded-generation --offline` after installing the foundation environment. This standard-library example calculates the stated mechanism or replays hash-linked actual model evidence from the published snapshot. It does not perform a fresh neural-model inference. The complete local/CI implementation and execution contract are linked immediately below.
+
+{/* example:e6-grounded-generation:start */}
 
 ```python
-query = {"saturday", "hours"}
-docs = {"A": {"saturday", "hours", "library"}, "B": {"laptop", "loans"}}
-scores = {name: len(query & words) for name, words in docs.items()}
-print(sorted(scores, key=scores.get, reverse=True))
+import json
+from pathlib import Path
+data = json.loads(Path('src/data/retrieval-results.json').read_text())
+row = next(r for r in data['grounded']['rows'] if r['id']=='eval-hop' and r['variant']=='baseline')
+print('raw answer:',row['answer_call']['raw'])
+for source in row['context']:
+    if source['document_id'] in ['wren','birch','aspen']:
+        print(source['id'],source['text'])
+print('Reference answer is evaluation-only:',row['reference_answer'])
 ```
 
-**Expected output:**
+{/* example:e6-grounded-generation:end */}
+
+Recorded mechanism output:
 
 ```text
-['A', 'B']
+raw answer: 57
+wren-c1 Wren has a projector and a whiteboard. The Birch team maintains Wren.
+aspen-c0 The Aspen maintenance team can be reached at extension 57. Aspen handles seating repairs for its assigned rooms.
+birch-c0 The Birch maintenance team can be reached at extension 42. Birch handles projector repairs for its assigned rooms.
+Reference answer is evaluation-only: 42
 ```
 
-**What the code shows:** The set intersection produces a simple keyword-overlap score for each document. A dense retriever replaces these sets with learned vectors and a suitable similarity measure. The [official chapter 8 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter08) develops the corresponding model-based implementation.
+<RetrievalEvidence id="grounded-retrieval" />
 
 ## When to use it
 
-Use it for answers that readers must verify against a known corpus. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use grounded drafting for document-based explanations where a reader must inspect the evidence for each material claim. Preserve the exact context and distinguish a model-provided citation from an application-provided source pointer.
 
 ## Limits and common mistakes
 
-- Citations can be fabricated or point to a source that does not support the claim.
-- **Failure to look for:** The model cites a relevant-looking page but invents a time not present on that page.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+An exact quote may be irrelevant to its attached claim. A fluent answer can be unsupported, and a correct answer can be uncited. Provider citation objects and local bracket markers require their own format checks; neither establishes semantic truth automatically.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First select relevant passages with source IDs Then generate an answer under an explicit evidence constraint Finally check each claim against its cited passage and abstain when evidence is absent.</p></details>
+<details>
+<summary>Does a source span matching its quote prove entailment?</summary>
 
-<details><summary>What would make the result misleading?</summary><p>The model cites a relevant-looking page but invents a time not present on that page.</p></details>
+No. It proves where the quoted text occurs. A human or carefully qualified support evaluator must still relate it to the claim.
+
+</details>
+
+<details>
+<summary>Should application-selected source pointers be reported as model citations?</summary>
+
+No. Keep retrieved sources, emitted citation markers, and judged claim support separate.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 8 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 8 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter08). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 8 of *Hands-On Large Language Models*. The [complete L12–L14 lab](/llm-concept-atlas/labs/retrieval-and-multimodal/) links exact source, pinned environments, data/model provenance, raw failure traces, and author-review limitations. Compare the [authors’ pinned chapter 8 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter08) for the original workflow. The source PDF and book artwork are not redistributed.
 
 <ConceptConnections id="grounded-generation" />

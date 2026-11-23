@@ -28,6 +28,8 @@ export default defineConfig({
             { label: "Foundation labs · L01–L06", slug: "labs/foundations" },
             { label: "Classification + topics · L07–L08", slug: "labs/classification-and-topics" },
             { label: "Prompting + workflows · L09–L11", slug: "labs/prompting-and-workflows" },
+            { label: "Retrieval + multimodal · L12–L14", slug: "labs/retrieval-and-multimodal" },
+            { label: "From pixels to multimodal answers", slug: "paths/from-pixels-to-multimodal-answers" },
             { label: "Concept glossary", slug: "glossary" },
             { label: "About and sources", slug: "about-and-sources" },
           ],
@@ -37,7 +39,8 @@ export default defineConfig({
           items: [
             { label: "Text classification", slug: "use-cases/text-classification" },
             { label: "Research collection explorer", slug: "use-cases/research-collection-explorer" },
-            { label: "RAG question answering", slug: "use-cases/rag-question-answering" },
+            { label: "Grounded document assistant", slug: "use-cases/rag-question-answering" },
+            { label: "Image/text collection search", slug: "use-cases/image-text-collection-search" },
           ],
         },
         {

@@ -1,0 +1,125 @@
+---
+title: "Multi-hop RAG"
+description: "Multi-hop retrieval performs dependent searches: evidence from an earlier search determines a later information need. Correctness depends on preserving intermediate entities and relationships, not merely making several calls."
+kind: "concept"
+conceptId: multi-hop-rag
+chapter: 8
+part: "applications"
+summary: "Multi-hop retrieval performs dependent searches: evidence from an earlier search determines a later information need. Correctness depends on preserving intermediate entities and relationships, not merely making several calls."
+parent: "rag"
+prerequisites: ["rag", "chain-prompting"]
+related: []
+level: "intermediate"
+tags: ["applications", "chapter-08"]
+lessonStatus: full
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e6-retrieval-author-review-2026-11-24
+learningObjectives: ["Verify that later queries use actual earlier evidence.", "Trace the room-to-team-to-extension chain.", "Distinguish a stopped loop from a solved question."]
+bookSections: ["book-ch08-multi-hop"]
+labHref: "/labs/retrieval-and-multimodal/"
+aliases: ["dependent retrieval", "multi-hop question answering"]
+exampleIds: ["e6-multi-hop-rag", "grounded-retrieval"]
+relationshipReasons: {"rag": "RAG supplies the evidence that a later dependent search needs.", "chain-prompting": "Chain prompting passes actual earlier search output into the next planning call."}
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import RetrievalEvidence from '../../../components/RetrievalEvidence.astro';
+import { GroundedExplorer } from '../../../components/simulations/RetrievalLabs';
+
+<ConceptPrimer id="multi-hop-rag" />
+
+## Definition and intuition
+
+Multi-hop retrieval performs dependent searches: evidence from an earlier search determines a later information need. Correctness depends on preserving intermediate entities and relationships, not merely making several calls.
+
+Read this lesson as a sequence: identify the input, follow the transformation, inspect the result, and explain a failure. The worked example and recorded lab below make those boundaries visible.
+
+<ReferenceBrief objectives={["Verify that later queries use actual earlier evidence.", "Trace the room-to-team-to-extension chain.", "Distinguish a stopped loop from a solved question."]} prerequisites="rag, chain-prompting" scope="A specific teaching calculation or recorded-run replay, connected to actual pinned model execution. Independent teaching review remains pending." />
+
+## How it works
+
+### A dependency must be real
+
+To find the maintenance extension for a room, first identify the team assigned to that room, then find that team’s contact. The second step depends on the first result. L13 feeds actual returned passage text into its follow-up-query prompt. It records the evidence IDs and next generated string so a claimed multi-hop workflow can be checked against its real dataflow.
+
+### Bound the search and preserve provenance
+
+The workflow permits at most three searches and stops on an empty or repeated query. Ranked results are merged and context packing preserves source IDs. Intermediate information can be wrong, incomplete, or about another entity. The generator must not receive a reference answer as a hidden bridge. The case about Aurora can require project→room→team→extension, making missing links visible.
+
+### Do not confuse repeated search with reasoning success
+
+A model may return an answer instead of a search query or follow a nearby but wrong contact. More hops then propagate the error. The recorded laptop example can select a twenty-one-day book passage after a follow-up search, even though the requested laptop rule is three days. The trace exposes this as a changed evidence path rather than an unexplained final error.
+
+## Worked example
+
+Wren is maintained by Birch, and Birch uses extension 42. Aspen’s extension 57 is a plausible distractor. A complete answer needs the Wren→Birch link and the Birch→42 link. Inspect both actual documents and ask whether a follow-up query preserved Birch or drifted toward another team. A number appearing in context is not enough.
+
+## Try the experiment
+
+Predict the outcome before changing a control. Controls either select actual recorded runs or recalculate a clearly labeled mathematical exercise. They do not download model weights or call a hosted provider in your browser.
+
+<GroundedExplorer client:visible />
+
+## Implement it
+
+From the repository root, run `python3 scripts/run-examples.py --id e6-multi-hop-rag --offline` after installing the foundation environment. This standard-library example calculates the stated mechanism or replays hash-linked actual model evidence from the published snapshot. It does not perform a fresh neural-model inference. The complete local/CI implementation and execution contract are linked immediately below.
+
+{/* example:e6-multi-hop-rag:start */}
+
+```python
+import json
+from pathlib import Path
+data = json.loads(Path('src/data/retrieval-results.json').read_text())
+row = next(r for r in data['grounded']['rows'] if r['id']=='eval-hop' and r['variant']=='multi-hop')
+for step in row['plan']['trace']:
+    print('evidence:',step.get('evidence_ids'),'next query:',step.get('next_query'))
+print('actual searches:',len(row['plan']['searches']))
+print('stop:',row['plan']['stop_reason'])
+assert len(row['plan']['searches'])<=3
+```
+
+{/* example:e6-multi-hop-rag:end */}
+
+Recorded mechanism output:
+
+```text
+evidence: ['wren-c1', 'aspen-c0'] next query: The Aspen maintenance team can be reached at extension 57.
+evidence: ['aspen-c0', 'birch-c0'] next query: The Aspen maintenance team can be reached at extension 57.
+actual searches: 2
+stop: repeated-query
+```
+
+<RetrievalEvidence id="grounded-retrieval" />
+
+## When to use it
+
+Use dependent retrieval when entity resolution or a relationship chain cannot be known before reading earlier evidence. Keep a bounded frontier of needed facts and identify which source supports each link.
+
+## Limits and common mistakes
+
+A chain can amplify a wrong first result. Three searches are a work limit, not proof that the task was solved. The local implementation uses generated follow-up queries over a fixed collection and does not claim broad autonomous reasoning or complete graph traversal.
+
+## Check your understanding
+
+<details>
+<summary>What distinguishes multi-hop from asking three independent searches?</summary>
+
+Later queries must use earlier retrieved information. Call count alone does not establish dependence.
+
+</details>
+
+<details>
+<summary>Why are Wren and Birch both needed to support extension 42?</summary>
+
+One source supplies the room-to-team relationship; the other supplies that team’s number. Either alone leaves part of the claim unsupported.
+
+</details>
+
+## Connections and sources
+
+This original lesson follows Chapter 8 of *Hands-On Large Language Models*. The [complete L12–L14 lab](/llm-concept-atlas/labs/retrieval-and-multimodal/) links exact source, pinned environments, data/model provenance, raw failure traces, and author-review limitations. Compare the [authors’ pinned chapter 8 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter08) for the original workflow. The source PDF and book artwork are not redistributed.
+
+<ConceptConnections id="multi-hop-rag" />

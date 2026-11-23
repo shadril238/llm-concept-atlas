@@ -1,8 +1,8 @@
 # Existing lesson depth audit
 
-Initial review 2026-11-19; latest lesson update 2026-11-20. Covers **104 concepts**. Source hashes detect stale findings. Independent pedagogical acceptance remains pending; execution claims below refer only to linked workflow evidence.
+Initial review 2026-11-19; latest lesson update 2026-11-24. Covers **112 concepts**. Source hashes detect stale findings. Independent pedagogical acceptance remains pending; execution claims below refer only to linked workflow evidence.
 
-The 104 concept snippets contain **86 distinct Python implementations**. Shared code is not automatically wrong; the finding records whether it demonstrates this lesson's mechanism.
+The 112 concept snippets contain **102 distinct Python implementations**. Shared code is not automatically wrong; the finding records whether it demonstrates this lesson's mechanism.
 
 ## Useful existing work
 
@@ -115,26 +115,34 @@ The site has explanations, labeled illustrative examples, relationship navigatio
 
 | Lesson | Current implementation finding | Priority / next phase |
 | --- | --- | --- |
-| [dense-retrieval](../../src/content/docs/concepts/dense-retrieval.mdx#implement-it) | The code counts keyword intersection, which is lexical retrieval rather than dense vector retrieval. | P0 / E6 |
-| [grounded-generation](../../src/content/docs/concepts/grounded-generation.mdx#implement-it) | The code ranks keyword overlap and never generates an evidence-supported answer. | P0 / E6 |
-| [local-model-rag](../../src/content/docs/concepts/local-model-rag.mdx#implement-it) | The concept snippet has fixed retrieval and no generation; the RAG use case contains a separate unverified real-model sketch. | P1 / E6 |
-| [rag](../../src/content/docs/concepts/rag.mdx#implement-it) | The fixed selected passage illustrates support, but is not a retriever/generator; retain the separate real-model use-case sketch. | P1 / E6 |
-| [rag-evaluation](../../src/content/docs/concepts/rag-evaluation.mdx#implement-it) | Retrieval recall alone does not evaluate answer support, citations, relevance, or faithfulness. | P1 / E6 |
-| [reranking](../../src/content/docs/concepts/reranking.mdx#implement-it) | The code performs keyword overlap once and does not rerank first-stage candidates with a joint scorer. | P0 / E6 |
-| [retrieval-metrics](../../src/content/docs/concepts/retrieval-metrics.mdx#implement-it) | The snippet covers recall only; the book devotes a worked sequence to AP and MAP. | P1 / E6 |
-| [semantic-search](../../src/content/docs/concepts/semantic-search.mdx#implement-it) | Invented-vector cosine ranking is relevant; add real encoding, source IDs, indexing, and query evaluation. | P1 / E6 |
+| [dense-retrieval](../../src/content/docs/concepts/dense-retrieval.mdx#implement-it) | E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending. | P2 / E6 |
+| [grounded-generation](../../src/content/docs/concepts/grounded-generation.mdx#implement-it) | E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending. | P2 / E6 |
+| [local-model-rag](../../src/content/docs/concepts/local-model-rag.mdx#implement-it) | E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending. | P2 / E6 |
+| [rag](../../src/content/docs/concepts/rag.mdx#implement-it) | E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending. | P2 / E6 |
+| [rag-evaluation](../../src/content/docs/concepts/rag-evaluation.mdx#implement-it) | E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending. | P2 / E6 |
+| [reranking](../../src/content/docs/concepts/reranking.mdx#implement-it) | E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending. | P2 / E6 |
+| [retrieval-metrics](../../src/content/docs/concepts/retrieval-metrics.mdx#implement-it) | E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending. | P2 / E6 |
+| [semantic-search](../../src/content/docs/concepts/semantic-search.mdx#implement-it) | E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending. | P2 / E6 |
+| [document-chunking](../../src/content/docs/concepts/document-chunking.mdx#implement-it) | E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending. | P2 / E6 |
+| [query-rewriting](../../src/content/docs/concepts/query-rewriting.mdx#implement-it) | E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending. | P2 / E6 |
+| [multi-query-rag](../../src/content/docs/concepts/multi-query-rag.mdx#implement-it) | E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending. | P2 / E6 |
+| [multi-hop-rag](../../src/content/docs/concepts/multi-hop-rag.mdx#implement-it) | E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending. | P2 / E6 |
+| [query-routing](../../src/content/docs/concepts/query-routing.mdx#implement-it) | E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending. | P2 / E6 |
+| [agentic-rag](../../src/content/docs/concepts/agentic-rag.mdx#implement-it) | E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending. | P2 / E6 |
 
 ### Chapter 9
 
 | Lesson | Current implementation finding | Priority / next phase |
 | --- | --- | --- |
-| [blip-2](../../src/content/docs/concepts/blip-2.mdx#implement-it) | A branch on two supplied feature scores omits pixels, a processor, the Q-Former, and generation. | P1 / E6 |
-| [clip](../../src/content/docs/concepts/clip.mdx#implement-it) | Cosine similarity on invented vectors illustrates matching but not CLIP encoding or paired loss. | P1 / E6 |
-| [image-captioning](../../src/content/docs/concepts/image-captioning.mdx#implement-it) | The caption is selected by an if-statement from invented features, not generated from image pixels. | P1 / E6 |
-| [multimodal-chat](../../src/content/docs/concepts/multimodal-chat.mdx#implement-it) | A fixed caption branch has no image-conditioned question or conversational generation. | P1 / E6 |
-| [multimodal-embeddings](../../src/content/docs/concepts/multimodal-embeddings.mdx#implement-it) | Invented vectors illustrate cross-modal comparison but no actual multimodal encoder is run. | P1 / E6 |
-| [openclip](../../src/content/docs/concepts/openclip.mdx#implement-it) | The example never loads OpenCLIP or matching image preprocessing and text artifacts. | P1 / E6 |
-| [vision-transformers](../../src/content/docs/concepts/vision-transformers.mdx#implement-it) | The code never reads pixels, extracts patches, or creates projected image tokens. | P0 / E6 |
+| [blip-2](../../src/content/docs/concepts/blip-2.mdx#implement-it) | E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending. | P2 / E6 |
+| [clip](../../src/content/docs/concepts/clip.mdx#implement-it) | E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending. | P2 / E6 |
+| [image-captioning](../../src/content/docs/concepts/image-captioning.mdx#implement-it) | E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending. | P2 / E6 |
+| [multimodal-chat](../../src/content/docs/concepts/multimodal-chat.mdx#implement-it) | E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending. | P2 / E6 |
+| [multimodal-embeddings](../../src/content/docs/concepts/multimodal-embeddings.mdx#implement-it) | E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending. | P2 / E6 |
+| [openclip](../../src/content/docs/concepts/openclip.mdx#implement-it) | E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending. | P2 / E6 |
+| [vision-transformers](../../src/content/docs/concepts/vision-transformers.mdx#implement-it) | E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending. | P2 / E6 |
+| [multimodal-preprocessing](../../src/content/docs/concepts/multimodal-preprocessing.mdx#implement-it) | E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending. | P2 / E6 |
+| [q-former](../../src/content/docs/concepts/q-former.mdx#implement-it) | E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending. | P2 / E6 |
 
 ### Chapter 10
 
@@ -177,8 +185,9 @@ The site has explanations, labeled illustrative examples, relationship navigatio
 ## Real-model use-case sketches
 
 - [evaluated-seven-method-comparison-and-saved-head](../../src/content/docs/use-cases/text-classification.mdx#2-fit-and-compare-fairly): Independent reader review and larger-data validation remain pending; hosted provider execution is optional and not claimed.
-- [local-rag-sketch](../../src/content/docs/use-cases/rag-question-answering.mdx#run-a-small-local-pipeline): Unpinned dependencies; one selected passage and generated draft; no recorded run, absence tests, reranking, or executable citation evaluation.
+- [actual-retrieval-grounded-generation-and-proposition-review](../../src/content/docs/use-cases/rag-question-answering.mdx#1-establish-a-baseline): Independent review and a new realistic collection remain pending; hosted comparison is documented/imported only.
 - [fitted-topic-pipeline-with-controlled-representation-and-density-comparisons](../../src/content/docs/use-cases/research-collection-explorer.mdx#2-run-the-actual-topic-model): Independent reader review and a realistic licensed external research collection remain pending.
+- [actual-openclip-retrieval-preprocessing-and-patch-projection](../../src/content/docs/use-cases/image-text-collection-search.mdx#1-declare-the-collection-and-representation): Independent review and fresh licensed evaluation images remain pending.
 
 ## How to act on a finding
 

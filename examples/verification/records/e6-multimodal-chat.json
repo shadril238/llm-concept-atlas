@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e6-multimodal-chat",
+  "status": "passed",
+  "date": "2026-11-23T18:31:57.122120+00:00",
+  "gitCommit": "cd37282ba4cf353101a2d8a96bdf4ff094188aba",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e6/multimodal_chat.py"
+  ],
+  "sourceSha256": "fb281828e09d4f1844edaa7eeffb35b0a9f16b8cfd73fb0af3ca5b7b38cbdabb",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "02fb3cbfd8fd5f067a96c2ece687e698bac26463b5efe6ef517ddb956310fd4a",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.019,
+  "peakMemoryMiB": 28.0,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "single-image pixel shape: [1, 1, 3, 512, 512]\nprice answer: The exact price of this drink is not mentioned in the image.\nsplit-images pixel shape: [1, 13, 3, 512, 512]\nprice answer: The drink is priced at 100.\nThe second-turn history also changes with the first generated answer.\n",
+  "stderr": "",
+  "error": null,
+  "supportHashes": {
+    "src/data/retrieval-results.json": "32c1fb66c612b89422b2f0e82b4044d5cf3673f195b85d9f26e11498ace47f1d"
+  }
+}

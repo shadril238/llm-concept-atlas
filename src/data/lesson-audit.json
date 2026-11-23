@@ -14,7 +14,10 @@
       "auditStatus": "assessed",
       "priority": "P1",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch07-agents", "book-ch07-agent-reasoning"],
+      "sourceSectionIds": [
+        "book-ch07-agents",
+        "book-ch07-agent-reasoning"
+      ],
       "retainedStrength": "Specific definition and mechanism connected to runnable local evidence.",
       "finding": "E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -70,7 +73,9 @@
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch01-bag-of-words"],
+      "sourceSectionIds": [
+        "book-ch01-bag-of-words"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -96,14 +101,19 @@
       "auditStatus": "assessed",
       "priority": "P1",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch11-supervised", "book-ch11-bert-training"],
+      "sourceSectionIds": [
+        "book-ch11-supervised",
+        "book-ch11-bert-training"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "A single scalar squared-error update does not train a BERT encoder or task head.",
       "evidenceAnchor": "implement-it",
       "exampleKind": "illustrative-python",
       "codeSha256": "ad52b94d6779d81e4a1b52f22f023710c4d0002fdeb8dc45a04dff92046ccabb",
       "codeFirstLine": "weight = 0.2",
-      "sharedExampleWith": ["pretraining-and-sft"],
+      "sharedExampleWith": [
+        "pretraining-and-sft"
+      ],
       "genericExercise": true,
       "requiredWork": [
         "Compare frozen feature extraction with adaptation of the encoder and task head.",
@@ -122,7 +132,10 @@
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch05-bertopic", "book-ch05-arxiv-data"],
+      "sourceSectionIds": [
+        "book-ch05-bertopic",
+        "book-ch05-arxiv-data"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -142,30 +155,30 @@
       "conceptId": "blip-2",
       "chapter": 9,
       "path": "src/content/docs/concepts/blip-2.mdx",
-      "sourceSha256": "fd5c19da18e249b9a342fbd917eb84598615af04258846344979dc2966f23d01",
+      "sourceSha256": "f02837dcfd948cb3d0f74bdbe6a2014ff727208018190a1c43072d3a335c2e98",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch09-multimodal-generation",
         "book-ch09-blip2"
       ],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "A branch on two supplied feature scores omits pixels, a processor, the Q-Former, and generation.",
+      "retainedStrength": "Detailed specific explanation, worked calculation, actual model traces, interactive experiment and unique exercises.",
+      "finding": "E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "1aea49f6a846322938c90c177469acc27d8558d1555196480ef6d0c800d9f7a2",
-      "codeFirstLine": "features = {\"animal\": 0.9, \"road\": 0.1}",
-      "sharedExampleWith": ["image-captioning", "multimodal-chat"],
-      "genericExercise": true,
+      "exampleKind": "recorded-model-evidence-calculation",
+      "codeSha256": "b127d1adb09122249fbab5f38a7073373bf0eb915772c33b5760e86fde7a939b",
+      "codeFirstLine": "import json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Explain how visual features enter a text generator, distinct from CLIP retrieval.",
-        "Trace the query transformer, frozen components, and two-stage bridge training."
+        "Independent technical/editorial review and beginner pilot. Hosted comparison and optional judge execution remain unverified; fresh data required for broader quality claims."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E6"
+      "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
+      "nextPhase": "E6",
+      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
     },
     {
       "conceptId": "chain-prompting",
@@ -206,7 +219,10 @@
       "auditStatus": "assessed",
       "priority": "P1",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch07-chains", "book-ch07-multi-prompt"],
+      "sourceSectionIds": [
+        "book-ch07-chains",
+        "book-ch07-multi-prompt"
+      ],
       "retainedStrength": "Specific definition and mechanism connected to runnable local evidence.",
       "finding": "E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -226,27 +242,30 @@
       "conceptId": "clip",
       "chapter": 9,
       "path": "src/content/docs/concepts/clip.mdx",
-      "sourceSha256": "5c8590be1fe31ccba9c263f4a727143076da0a47952fe9a5031a75a8ba911104",
+      "sourceSha256": "0e8ca51df8fe8253db89ba354b28df8e7bcd491a5411072dac948bcda27697ad",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch09-clip", "book-ch09-clip-training"],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "Cosine similarity on invented vectors illustrates matching but not CLIP encoding or paired loss.",
-      "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "7b4a3c867417b8c3bfd2a827cb8025f4fa734790a95579725dcb81df576a37ef",
-      "codeFirstLine": "from math import sqrt",
-      "sharedExampleWith": ["multimodal-embeddings", "openclip"],
-      "genericExercise": true,
-      "requiredWork": [
-        "Explain two encoders, paired training, and image-to-text matching.",
-        "Work through the batch similarity matrix and the paired training objective in both directions."
+      "sourceSectionIds": [
+        "book-ch09-clip",
+        "book-ch09-clip-training"
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E6"
+      "retainedStrength": "Detailed specific explanation, worked calculation, actual model traces, interactive experiment and unique exercises.",
+      "finding": "E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "recorded-model-evidence-calculation",
+      "codeSha256": "fa8d93e67bfa402d58f488317a745eddf9eb7d8f8ddce4c7ec0023da3f6b58fe",
+      "codeFirstLine": "import json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner pilot. Hosted comparison and optional judge execution remain unverified; fresh data required for broader quality claims."
+      ],
+      "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
+      "nextPhase": "E6",
+      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
     },
     {
       "conceptId": "cluster-inspection",
@@ -317,7 +336,9 @@
       "auditStatus": "assessed",
       "priority": "P0",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch06-constrained-sampling"],
+      "sourceSectionIds": [
+        "book-ch06-constrained-sampling"
+      ],
       "retainedStrength": "Specific definition and mechanism connected to runnable local evidence.",
       "finding": "E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -343,7 +364,9 @@
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch03-parallel-context"],
+      "sourceSectionIds": [
+        "book-ch03-parallel-context"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -369,7 +392,9 @@
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch02-contextual-embeddings"],
+      "sourceSectionIds": [
+        "book-ch02-contextual-embeddings"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -496,7 +521,10 @@
       "auditStatus": "assessed",
       "priority": "P1",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch07-memory", "book-ch07-buffer"],
+      "sourceSectionIds": [
+        "book-ch07-memory",
+        "book-ch07-buffer"
+      ],
       "retainedStrength": "Specific definition and mechanism connected to runnable local evidence.",
       "finding": "E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -522,7 +550,9 @@
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch01-cross-attention"],
+      "sourceSectionIds": [
+        "book-ch01-cross-attention"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -577,7 +607,10 @@
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch03-decoding", "book-ch06-output-controls"],
+      "sourceSectionIds": [
+        "book-ch03-decoding",
+        "book-ch06-output-controls"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -597,30 +630,31 @@
       "conceptId": "dense-retrieval",
       "chapter": 8,
       "path": "src/content/docs/concepts/dense-retrieval.mdx",
-      "sourceSha256": "a2b429801a8bbb97aa6220d8fb0eca654663887e67d9ebe8af84835c6c708a79",
+      "sourceSha256": "2e3150cff867459d40f871c8746b89d90aad90e06dbad39cd151da8130be6d37",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P0",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch08-dense-retrieval",
-        "book-ch08-vector-index"
+        "book-ch08-vector-index",
+        "book-ch08-retrieval-adaptation"
       ],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The code counts keyword intersection, which is lexical retrieval rather than dense vector retrieval.",
+      "retainedStrength": "Detailed specific explanation, worked calculation, actual model traces, interactive experiment and unique exercises.",
+      "finding": "E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "84a666d04370604276d0fd8b0fc63fe7345a4878b6c8966688014bc8f1e1fada",
-      "codeFirstLine": "query = {\"saturday\", \"hours\"}",
-      "sharedExampleWith": ["grounded-generation", "reranking"],
-      "genericExercise": true,
+      "exampleKind": "recorded-model-evidence-calculation",
+      "codeSha256": "8d741344437dffc7b4d28177d29b75c98ca1cd6d7766141411d0db2234018ca5",
+      "codeFirstLine": "import json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Replace keyword overlap with actual vector encoding, indexing, and nearest-neighbor retrieval.",
-        "Build the actual vector index and explain its similarity/distance convention."
+        "Independent technical/editorial review and beginner pilot. Hosted comparison and optional judge execution remain unverified; fresh data required for broader quality claims."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E6"
+      "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
+      "nextPhase": "E6",
+      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
     },
     {
       "conceptId": "dimensionality-reduction",
@@ -632,7 +666,10 @@
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch05-reduction", "book-ch05-umap"],
+      "sourceSectionIds": [
+        "book-ch05-reduction",
+        "book-ch05-umap"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -658,7 +695,9 @@
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch05-document-embedding"],
+      "sourceSectionIds": [
+        "book-ch05-document-embedding"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -684,7 +723,9 @@
       "auditStatus": "assessed",
       "priority": "P1",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch10-domain-adaptation"],
+      "sourceSectionIds": [
+        "book-ch10-domain-adaptation"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "The reused contrastive-loss calculation has no source/target corpus, adaptation, or transfer evaluation.",
       "evidenceAnchor": "implement-it",
@@ -729,7 +770,10 @@
       "exampleKind": "illustrative-python",
       "codeSha256": "8c0e50c9cc6557009d869e520a3c0d373d82a1137eb4eca17b865b36d356cfd5",
       "codeFirstLine": "from math import log, exp",
-      "sharedExampleWith": ["reward-models", "rlhf"],
+      "sharedExampleWith": [
+        "reward-models",
+        "rlhf"
+      ],
       "genericExercise": true,
       "requiredWork": [
         "Explain direct preference optimization and the role of a frozen reference without a separately trained reward model.",
@@ -784,14 +828,16 @@
       "auditStatus": "assessed",
       "priority": "P1",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch10-evaluation"],
+      "sourceSectionIds": [
+        "book-ch10-evaluation"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "One recall-at-k fixture omits similarity correlations, MTEB, and actual model comparison.",
       "evidenceAnchor": "implement-it",
       "exampleKind": "illustrative-python",
       "codeSha256": "ef8c9cbade5661effcc5c81ab3970e0530a077dc56b619db58e85b4dfa29cf58",
       "codeFirstLine": "relevant = {\"A\", \"C\"}",
-      "sharedExampleWith": ["rag-evaluation", "retrieval-metrics"],
+      "sharedExampleWith": [],
       "genericExercise": true,
       "requiredWork": [
         "Explain STS correlations and run an appropriate MTEB task with versioned results."
@@ -838,7 +884,9 @@
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch01-encoder-models"],
+      "sourceSectionIds": [
+        "book-ch01-encoder-models"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -864,7 +912,10 @@
       "auditStatus": "assessed",
       "priority": "P1",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch11-few-shot", "book-ch11-few-shot-training"],
+      "sourceSectionIds": [
+        "book-ch11-few-shot",
+        "book-ch11-few-shot-training"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "A keyword if-statement uses no labeled support-set learning or sampling comparison.",
       "evidenceAnchor": "implement-it",
@@ -961,7 +1012,9 @@
       "auditStatus": "assessed",
       "priority": "P1",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch11-freezing"],
+      "sourceSectionIds": [
+        "book-ch11-freezing"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "The selective dictionary update is relevant; verify actual parameter freezing and compare held-out model results.",
       "evidenceAnchor": "implement-it",
@@ -1077,51 +1130,58 @@
       "conceptId": "grounded-generation",
       "chapter": 8,
       "path": "src/content/docs/concepts/grounded-generation.mdx",
-      "sourceSha256": "cde07955ea3797674dd06deb9469dfd97ad046136dac94fb6043ef6d91f3cb1a",
+      "sourceSha256": "3705b98bddcff73d2626c3710b3369a1efde5343ec40e6bc73fbb18abc054435",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P0",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch08-search-to-rag"],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The code ranks keyword overlap and never generates an evidence-supported answer.",
-      "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "84a666d04370604276d0fd8b0fc63fe7345a4878b6c8966688014bc8f1e1fada",
-      "codeFirstLine": "query = {\"saturday\", \"hours\"}",
-      "sharedExampleWith": ["dense-retrieval", "reranking"],
-      "genericExercise": true,
-      "requiredWork": [
-        "Turn actual retrieved passages into attributable generated answers."
+      "sourceSectionIds": [
+        "book-ch08-search-to-rag",
+        "book-ch08-api-rag"
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E6"
+      "retainedStrength": "Detailed specific explanation, worked calculation, actual model traces, interactive experiment and unique exercises.",
+      "finding": "E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "recorded-model-evidence-calculation",
+      "codeSha256": "bf4e110fc5a50e6899878ee8053e20956e86c9cea692e7e27432a23fd8f1fac1",
+      "codeFirstLine": "import json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner pilot. Hosted comparison and optional judge execution remain unverified; fresh data required for broader quality claims."
+      ],
+      "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
+      "nextPhase": "E6",
+      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
     },
     {
       "conceptId": "image-captioning",
       "chapter": 9,
       "path": "src/content/docs/concepts/image-captioning.mdx",
-      "sourceSha256": "111ff79c47db62b7224d5188c351fccd997049554f31efe877bb00403aa3d062",
+      "sourceSha256": "d63b2b23fd8c013363faf9b71877f597ea414156157b30f2fd27b821843e8759",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch09-captioning"],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The caption is selected by an if-statement from invented features, not generated from image pixels.",
-      "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "1aea49f6a846322938c90c177469acc27d8558d1555196480ef6d0c800d9f7a2",
-      "codeFirstLine": "features = {\"animal\": 0.9, \"road\": 0.1}",
-      "sharedExampleWith": ["blip-2", "multimodal-chat"],
-      "genericExercise": true,
-      "requiredWork": [
-        "Generate captions from real pixels and inspect unsupported details."
+      "sourceSectionIds": [
+        "book-ch09-captioning"
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E6"
+      "retainedStrength": "Detailed specific explanation, worked calculation, actual model traces, interactive experiment and unique exercises.",
+      "finding": "E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "recorded-model-evidence-calculation",
+      "codeSha256": "23c7c5021bd4bf482e18170c7ed9b664228f9bee00f982e2775e3a05889345ba",
+      "codeFirstLine": "import json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner pilot. Hosted comparison and optional judge execution remain unverified; fresh data required for broader quality claims."
+      ],
+      "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
+      "nextPhase": "E6",
+      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
     },
     {
       "conceptId": "in-context-learning",
@@ -1133,7 +1193,9 @@
       "auditStatus": "assessed",
       "priority": "P1",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch06-in-context"],
+      "sourceSectionIds": [
+        "book-ch06-in-context"
+      ],
       "retainedStrength": "Specific definition and mechanism connected to runnable local evidence.",
       "finding": "E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -1159,7 +1221,9 @@
       "auditStatus": "assessed",
       "priority": "P1",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch06-instruction-prompting"],
+      "sourceSectionIds": [
+        "book-ch06-instruction-prompting"
+      ],
       "retainedStrength": "Specific definition and mechanism connected to runnable local evidence.",
       "finding": "E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -1185,7 +1249,9 @@
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch03-kv-cache"],
+      "sourceSectionIds": [
+        "book-ch03-kv-cache"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -1242,7 +1308,10 @@
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch01-llm-definition", "book-ch03-lm-head"],
+      "sourceSectionIds": [
+        "book-ch01-llm-definition",
+        "book-ch03-lm-head"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -1262,26 +1331,29 @@
       "conceptId": "local-model-rag",
       "chapter": 8,
       "path": "src/content/docs/concepts/local-model-rag.mdx",
-      "sourceSha256": "ed6efcaaca9630455515f236cdc68cd7de86997d843cb481ae61f36480638984",
+      "sourceSha256": "d23b7b5dfda23dec83a5119cd0f9891d6c60c0ee86ce58371c64a1360a757647",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch08-local-rag"],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The concept snippet has fixed retrieval and no generation; the RAG use case contains a separate unverified real-model sketch.",
-      "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "45e9ae020ffbd541770ea0ffb320b0bf96052c07724b25ced642f5b4c4168a2c",
-      "codeFirstLine": "def retrieve(question): return \"Library closes at 5 pm Saturday.\"",
-      "sharedExampleWith": [],
-      "genericExercise": true,
-      "requiredWork": [
-        "Run a local embedding/index/generation pipeline with sources and absent-answer cases."
+      "sourceSectionIds": [
+        "book-ch08-local-rag"
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E6"
+      "retainedStrength": "Detailed specific explanation, worked calculation, actual model traces, interactive experiment and unique exercises.",
+      "finding": "E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "recorded-model-evidence-calculation",
+      "codeSha256": "412f53d1229d24a38acce14a0f90268161baceea9fa929af5a296553659b04f7",
+      "codeFirstLine": "import json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner pilot. Hosted comparison and optional judge execution remain unverified; fresh data required for broader quality claims."
+      ],
+      "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
+      "nextPhase": "E6",
+      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
     },
     {
       "conceptId": "lora",
@@ -1323,7 +1395,10 @@
       "auditStatus": "assessed",
       "priority": "P1",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch10-losses", "book-ch10-mnr-loss"],
+      "sourceSectionIds": [
+        "book-ch10-losses",
+        "book-ch10-mnr-loss"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "One contrastive loss does not teach softmax classification, cosine regression, and MNR separately.",
       "evidenceAnchor": "implement-it",
@@ -1355,14 +1430,19 @@
       "auditStatus": "assessed",
       "priority": "P1",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch11-mlm", "book-ch11-masking-policy"],
+      "sourceSectionIds": [
+        "book-ch11-mlm",
+        "book-ch11-masking-policy"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "Replacing one token is a preprocessing illustration; add corruption policy, ignored labels, and actual MLM training.",
       "evidenceAnchor": "implement-it",
       "exampleKind": "illustrative-python",
       "codeSha256": "66f6727ed6514c8b37f62fc21bb2ba266319f9d52be2b2d2efe332bb0b38e91f",
       "codeFirstLine": "tokens = [\"the\", \"model\", \"reads\"]",
-      "sharedExampleWith": ["tsdae"],
+      "sharedExampleWith": [
+        "tsdae"
+      ],
       "genericExercise": true,
       "requiredWork": [
         "Implement masking/collation and actual domain adaptation with downstream comparison.",
@@ -1407,55 +1487,58 @@
       "conceptId": "multimodal-chat",
       "chapter": 9,
       "path": "src/content/docs/concepts/multimodal-chat.mdx",
-      "sourceSha256": "7498c34f843266fefeb016f504b1dcd2c27185baeded4b311210ce2f7975f605",
+      "sourceSha256": "9c1f1e60c41b39e28fa067de3a811f95df510abab5dc8b1687bfac33710fa8d6",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch09-multimodal-chat"],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "A fixed caption branch has no image-conditioned question or conversational generation.",
-      "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "1aea49f6a846322938c90c177469acc27d8558d1555196480ef6d0c800d9f7a2",
-      "codeFirstLine": "features = {\"animal\": 0.9, \"road\": 0.1}",
-      "sharedExampleWith": ["blip-2", "image-captioning"],
-      "genericExercise": true,
-      "requiredWork": [
-        "Generate image-grounded answers across turns with visible image and conversation inputs."
+      "sourceSectionIds": [
+        "book-ch09-multimodal-chat"
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E6"
+      "retainedStrength": "Detailed specific explanation, worked calculation, actual model traces, interactive experiment and unique exercises.",
+      "finding": "E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "recorded-model-evidence-calculation",
+      "codeSha256": "504a1b26ceab0d19935f9058919a36983621540a395b4734a0da22ead7d129db",
+      "codeFirstLine": "import json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner pilot. Hosted comparison and optional judge execution remain unverified; fresh data required for broader quality claims."
+      ],
+      "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
+      "nextPhase": "E6",
+      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
     },
     {
       "conceptId": "multimodal-embeddings",
       "chapter": 9,
       "path": "src/content/docs/concepts/multimodal-embeddings.mdx",
-      "sourceSha256": "57b05b22f514cbc6b6522d95e8f4bba822461ed156be63530b2458310c93dce0",
+      "sourceSha256": "8af2b6a7b510d3acceb91ec931f1a83be9e8c04f5dbee782d0e574d07bb8f573",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch01-embedding-types",
         "book-ch09-multimodal-embeddings"
       ],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "Invented vectors illustrate cross-modal comparison but no actual multimodal encoder is run.",
+      "retainedStrength": "Detailed specific explanation, worked calculation, actual model traces, interactive experiment and unique exercises.",
+      "finding": "E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "7b4a3c867417b8c3bfd2a827cb8025f4fa734790a95579725dcb81df576a37ef",
-      "codeFirstLine": "from math import sqrt",
-      "sharedExampleWith": ["clip", "openclip"],
-      "genericExercise": true,
+      "exampleKind": "recorded-model-evidence-calculation",
+      "codeSha256": "2ac82ab4792d5e9cbcbf4a9c0cd2744ee218ec437613d8c1da18f5991482a814",
+      "codeFirstLine": "import json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Compare word, sentence, document, and image representations without treating their spaces as interchangeable.",
-        "Create matching image/text embeddings rather than compare invented vectors only."
+        "Independent technical/editorial review and beginner pilot. Hosted comparison and optional judge execution remain unverified; fresh data required for broader quality claims."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E6"
+      "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
+      "nextPhase": "E6",
+      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
     },
     {
       "conceptId": "named-entity-recognition",
@@ -1493,26 +1576,29 @@
       "conceptId": "openclip",
       "chapter": 9,
       "path": "src/content/docs/concepts/openclip.mdx",
-      "sourceSha256": "10ba3bc202fc6ccc1429f723b566746b0a71bdd6f7382248ab604e1410f6b3a7",
+      "sourceSha256": "24ba087851d8148d1e4b69958bcb29011725b4e8f00d8b2ccb63c412cab4c7c4",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch09-openclip"],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The example never loads OpenCLIP or matching image preprocessing and text artifacts.",
-      "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "7b4a3c867417b8c3bfd2a827cb8025f4fa734790a95579725dcb81df576a37ef",
-      "codeFirstLine": "from math import sqrt",
-      "sharedExampleWith": ["clip", "multimodal-embeddings"],
-      "genericExercise": true,
-      "requiredWork": [
-        "Run a matched model, tokenizer, image processor, and real image/text similarity matrix."
+      "sourceSectionIds": [
+        "book-ch09-openclip"
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E6"
+      "retainedStrength": "Detailed specific explanation, worked calculation, actual model traces, interactive experiment and unique exercises.",
+      "finding": "E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "recorded-model-evidence-calculation",
+      "codeSha256": "4c6f0e75b3adeb8c2c15f2ef6a5c303e29d72d93181f0e5a1c943cb33c8d30ba",
+      "codeFirstLine": "import json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner pilot. Hosted comparison and optional judge execution remain unverified; fresh data required for broader quality claims."
+      ],
+      "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
+      "nextPhase": "E6",
+      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
     },
     {
       "conceptId": "output-verification",
@@ -1553,14 +1639,19 @@
       "auditStatus": "assessed",
       "priority": "P1",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch12-peft", "book-ch12-adapters"],
+      "sourceSectionIds": [
+        "book-ch12-peft",
+        "book-ch12-adapters"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "A matrix update illustrates LoRA only; distinguish adapter families and actual frozen/trainable parameter groups.",
       "evidenceAnchor": "implement-it",
       "exampleKind": "illustrative-python",
       "codeSha256": "c006509147e71d86bae6a67e9e384ecb3725e26ed541b6c4445d4f66cf18a832",
       "codeFirstLine": "base = [[1.0, 0.0], [0.0, 1.0]]",
-      "sharedExampleWith": ["qlora"],
+      "sharedExampleWith": [
+        "qlora"
+      ],
       "genericExercise": true,
       "requiredWork": [
         "Distinguish added adapters, low-rank updates, and quantized base storage.",
@@ -1579,7 +1670,9 @@
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch03-rope"],
+      "sourceSectionIds": [
+        "book-ch03-rope"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -1605,7 +1698,9 @@
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch01-training-paradigm"],
+      "sourceSectionIds": [
+        "book-ch01-training-paradigm"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -1642,7 +1737,9 @@
       "exampleKind": "illustrative-python",
       "codeSha256": "ad52b94d6779d81e4a1b52f22f023710c4d0002fdeb8dc45a04dff92046ccabb",
       "codeFirstLine": "weight = 0.2",
-      "sharedExampleWith": ["bert-fine-tuning"],
+      "sharedExampleWith": [
+        "bert-fine-tuning"
+      ],
       "genericExercise": true,
       "requiredWork": [
         "Trace pretraining, task adaptation, and preference tuning with distinct data and objectives.",
@@ -1697,7 +1794,9 @@
       "auditStatus": "assessed",
       "priority": "P1",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch07-prompt-template"],
+      "sourceSectionIds": [
+        "book-ch07-prompt-template"
+      ],
       "retainedStrength": "Specific definition and mechanism connected to runnable local evidence.",
       "finding": "E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -1736,7 +1835,9 @@
       "exampleKind": "illustrative-python",
       "codeSha256": "c006509147e71d86bae6a67e9e384ecb3725e26ed541b6c4445d4f66cf18a832",
       "codeFirstLine": "base = [[1.0, 0.0], [0.0, 1.0]]",
-      "sharedExampleWith": ["peft"],
+      "sharedExampleWith": [
+        "peft"
+      ],
       "genericExercise": true,
       "requiredWork": [
         "Distinguish added adapters, low-rank updates, and quantized base storage.",
@@ -1787,7 +1888,10 @@
       "auditStatus": "assessed",
       "priority": "P1",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch07-quantized-langchain", "book-ch07-gguf"],
+      "sourceSectionIds": [
+        "book-ch07-quantized-langchain",
+        "book-ch07-gguf"
+      ],
       "retainedStrength": "Specific definition and mechanism connected to runnable local evidence.",
       "finding": "E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -1836,57 +1940,61 @@
       "conceptId": "rag",
       "chapter": 8,
       "path": "src/content/docs/concepts/rag.mdx",
-      "sourceSha256": "725118425c1c23fb390453ab7998b1f132b81b71bcbf8fd4d03e06cf789c5a63",
+      "sourceSha256": "20e422e3dec5f72af07df36fd8663fccdd4d810e4288d2191d011ba9bcb2ac9b",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch08-overview",
         "book-ch08-rag",
-        "book-ch08-search-to-rag"
+        "book-ch08-search-to-rag",
+        "book-ch08-advanced-rag"
       ],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The fixed selected passage illustrates support, but is not a retriever/generator; retain the separate real-model use-case sketch.",
+      "retainedStrength": "Detailed specific explanation, worked calculation, actual model traces, interactive experiment and unique exercises.",
+      "finding": "E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "569f132d14b42f4168e35ce26d74c41e1c304f861d70473cbfd3d0ddcaa8a915",
-      "codeFirstLine": "question = 'When does the library close on Saturday?'",
+      "exampleKind": "recorded-model-evidence-calculation",
+      "codeSha256": "6ba3f52a93b1373ea272082452c4b8a06ce8fe21579ecd79a58b64ce7e6732a2",
+      "codeFirstLine": "import json",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
-        "Distinguish ranked search results from answers generated using retrieved evidence.",
-        "Trace ingestion, retrieval, context assembly, generation, and support verification.",
-        "Turn actual retrieved passages into attributable generated answers."
+        "Independent technical/editorial review and beginner pilot. Hosted comparison and optional judge execution remain unverified; fresh data required for broader quality claims."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E6"
+      "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
+      "nextPhase": "E6",
+      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
     },
     {
       "conceptId": "rag-evaluation",
       "chapter": 8,
       "path": "src/content/docs/concepts/rag-evaluation.mdx",
-      "sourceSha256": "9f33324544568241445c1c3444aece05bb1bb3eb2dfd73989a514471b5943593",
+      "sourceSha256": "d1e59634a66a115d7a1798690fe3c6de58ba970e20f94be5d52a3353fd49932a",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch08-rag-evaluation"],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "Retrieval recall alone does not evaluate answer support, citations, relevance, or faithfulness.",
-      "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "ef8c9cbade5661effcc5c81ab3970e0530a077dc56b619db58e85b4dfa29cf58",
-      "codeFirstLine": "relevant = {\"A\", \"C\"}",
-      "sharedExampleWith": ["embedding-evaluation", "retrieval-metrics"],
-      "genericExercise": true,
-      "requiredWork": [
-        "Evaluate answer support, citation precision/recall, usefulness, and faithfulness separately from retrieval recall."
+      "sourceSectionIds": [
+        "book-ch08-rag-evaluation",
+        "book-ch08-citations"
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E6"
+      "retainedStrength": "Detailed specific explanation, worked calculation, actual model traces, interactive experiment and unique exercises.",
+      "finding": "E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "recorded-model-evidence-calculation",
+      "codeSha256": "948564fa57d4d2207c95f61a5bdf6f681efb8554dab66d4f16ad85a000295468",
+      "codeFirstLine": "import sys",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner pilot. Hosted comparison and optional judge execution remain unverified; fresh data required for broader quality claims."
+      ],
+      "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
+      "nextPhase": "E6",
+      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
     },
     {
       "conceptId": "react",
@@ -1957,7 +2065,9 @@
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch01-encoder-models"],
+      "sourceSectionIds": [
+        "book-ch01-encoder-models"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -1977,30 +2087,30 @@
       "conceptId": "reranking",
       "chapter": 8,
       "path": "src/content/docs/concepts/reranking.mdx",
-      "sourceSha256": "8c1ce4974100a03a75b0e696f02c78978d4c0af5275c0bd457c1d3c19fcc577c",
+      "sourceSha256": "afcc246deb93f52f3dcbb3511ec501cf1f9d6e936a7802d10bb7457c0ab41a6b",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P0",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch08-reranking",
         "book-ch10-encoder-comparison"
       ],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The code performs keyword overlap once and does not rerank first-stage candidates with a joint scorer.",
+      "retainedStrength": "Detailed specific explanation, worked calculation, actual model traces, interactive experiment and unique exercises.",
+      "finding": "E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "84a666d04370604276d0fd8b0fc63fe7345a4878b6c8966688014bc8f1e1fada",
-      "codeFirstLine": "query = {\"saturday\", \"hours\"}",
-      "sharedExampleWith": ["dense-retrieval", "grounded-generation"],
-      "genericExercise": true,
+      "exampleKind": "recorded-model-evidence-calculation",
+      "codeSha256": "a80bec366c4d31d0cd6265c72ddcd9608268b24a2f1a186013c6f18c9f00d3c7",
+      "codeFirstLine": "import json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Score query-document pairs jointly and compare rankings before and after reranking.",
-        "Compare joint pair processing with separately cached vectors and explain the training architecture."
+        "Independent technical/editorial review and beginner pilot. Hosted comparison and optional judge execution remain unverified; fresh data required for broader quality claims."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E6"
+      "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
+      "nextPhase": "E6",
+      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
     },
     {
       "conceptId": "responsible-use",
@@ -2012,7 +2122,9 @@
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch01-responsible-use"],
+      "sourceSectionIds": [
+        "book-ch01-responsible-use"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -2032,27 +2144,32 @@
       "conceptId": "retrieval-metrics",
       "chapter": 8,
       "path": "src/content/docs/concepts/retrieval-metrics.mdx",
-      "sourceSha256": "4959ea7f39b1bbff38e20c0b23f2693ed6563929f13257ce981b06bb4689a037",
+      "sourceSha256": "48d4cc892c2297c97101e90d7cc939e7224f960489bf5b58e45e4b09683ea386",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch08-retrieval-metrics", "book-ch08-ndcg"],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The snippet covers recall only; the book devotes a worked sequence to AP and MAP.",
-      "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "ef8c9cbade5661effcc5c81ab3970e0530a077dc56b619db58e85b4dfa29cf58",
-      "codeFirstLine": "relevant = {\"A\", \"C\"}",
-      "sharedExampleWith": ["embedding-evaluation", "rag-evaluation"],
-      "genericExercise": true,
-      "requiredWork": [
-        "Add the book's average precision and mean average precision worked calculations and relevance judgments.",
-        "Explain graded relevance and discounted ranking as the book's brief comparison to MAP."
+      "sourceSectionIds": [
+        "book-ch08-retrieval-metrics",
+        "book-ch08-average-precision",
+        "book-ch08-mean-average-precision",
+        "book-ch08-ndcg"
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E6"
+      "retainedStrength": "Detailed specific explanation, worked calculation, actual model traces, interactive experiment and unique exercises.",
+      "finding": "E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "recorded-model-evidence-calculation",
+      "codeSha256": "44b4ba8d0a9e5b3965052a56747054c98d083dee2284770161711c12ef96257e",
+      "codeFirstLine": "import sys",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner pilot. Hosted comparison and optional judge execution remain unverified; fresh data required for broader quality claims."
+      ],
+      "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
+      "nextPhase": "E6",
+      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
     },
     {
       "conceptId": "reward-models",
@@ -2077,7 +2194,10 @@
       "exampleKind": "illustrative-python",
       "codeSha256": "8c0e50c9cc6557009d869e520a3c0d373d82a1137eb4eca17b865b36d356cfd5",
       "codeFirstLine": "from math import log, exp",
-      "sharedExampleWith": ["dpo", "rlhf"],
+      "sharedExampleWith": [
+        "dpo",
+        "rlhf"
+      ],
       "genericExercise": true,
       "requiredWork": [
         "Explain replacing the language-model head with a scalar scoring head.",
@@ -2099,14 +2219,20 @@
       "auditStatus": "assessed",
       "priority": "P0",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch12-training-stages", "book-ch12-alignment"],
+      "sourceSectionIds": [
+        "book-ch12-training-stages",
+        "book-ch12-alignment"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "A DPO scalar loss does not show the reward-model and policy-optimization stages described in the lesson.",
       "evidenceAnchor": "implement-it",
       "exampleKind": "illustrative-python",
       "codeSha256": "8c0e50c9cc6557009d869e520a3c0d373d82a1137eb4eca17b865b36d356cfd5",
       "codeFirstLine": "from math import log, exp",
-      "sharedExampleWith": ["dpo", "reward-models"],
+      "sharedExampleWith": [
+        "dpo",
+        "reward-models"
+      ],
       "genericExercise": true,
       "requiredWork": [
         "Compare the data, objective, and expected behavior of the three stages.",
@@ -2185,7 +2311,9 @@
       "auditStatus": "assessed",
       "priority": "P0",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch06-self-consistency"],
+      "sourceSectionIds": [
+        "book-ch06-self-consistency"
+      ],
       "retainedStrength": "Specific definition and mechanism connected to runnable local evidence.",
       "finding": "E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -2205,27 +2333,30 @@
       "conceptId": "semantic-search",
       "chapter": 8,
       "path": "src/content/docs/concepts/semantic-search.mdx",
-      "sourceSha256": "4182b1d78df26f1fd90e5789a11391a32f484beb7f7c5a04b3c199f101140359",
+      "sourceSha256": "c76652b95ae215d8159b4cd6a297e8559209c9424df4a723cd7b0d81375d7c86",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch08-overview", "book-ch08-semantic-search"],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "Invented-vector cosine ranking is relevant; add real encoding, source IDs, indexing, and query evaluation.",
+      "sourceSectionIds": [
+        "book-ch08-overview",
+        "book-ch08-semantic-search"
+      ],
+      "retainedStrength": "Detailed specific explanation, worked calculation, actual model traces, interactive experiment and unique exercises.",
+      "finding": "E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "33a0f65ed7d627e4b05168fb2d126a0eba85e2a169af9b19d450a519943a0b56",
-      "codeFirstLine": "from math import sqrt",
+      "exampleKind": "recorded-model-evidence-calculation",
+      "codeSha256": "14f847bd19cb1688c5cc455aac69842e1258ce81794c03d3ade921a988f0a9eb",
+      "codeFirstLine": "import json",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
-        "Distinguish ranked search results from answers generated using retrieved evidence.",
-        "Build query/document representations, rank candidates, and evaluate relevance."
+        "Independent technical/editorial review and beginner pilot. Hosted comparison and optional judge execution remain unverified; fresh data required for broader quality claims."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E6"
+      "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
+      "nextPhase": "E6",
+      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
     },
     {
       "conceptId": "sentiment-analysis",
@@ -2237,7 +2368,9 @@
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch04-sentiment-task"],
+      "sourceSectionIds": [
+        "book-ch04-sentiment-task"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -2263,7 +2396,9 @@
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch03-packing"],
+      "sourceSectionIds": [
+        "book-ch03-packing"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -2318,7 +2453,10 @@
       "auditStatus": "assessed",
       "priority": "P0",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch11-setfit", "book-ch11-few-shot-training"],
+      "sourceSectionIds": [
+        "book-ch11-setfit",
+        "book-ch11-few-shot-training"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "The snippet has no labeled-pair generation, sentence-model adaptation, or classifier fitting.",
       "evidenceAnchor": "implement-it",
@@ -2350,7 +2488,9 @@
       "auditStatus": "assessed",
       "priority": "P0",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch07-summary"],
+      "sourceSectionIds": [
+        "book-ch07-summary"
+      ],
       "retainedStrength": "Specific definition and mechanism connected to runnable local evidence.",
       "finding": "E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -2466,7 +2606,9 @@
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch02-tokenization"],
+      "sourceSectionIds": [
+        "book-ch02-tokenization"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -2558,7 +2700,9 @@
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch05-topic-modeling"],
+      "sourceSectionIds": [
+        "book-ch05-topic-modeling"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -2688,7 +2832,9 @@
       "exampleKind": "illustrative-python",
       "codeSha256": "66f6727ed6514c8b37f62fc21bb2ba266319f9d52be2b2d2efe332bb0b38e91f",
       "codeFirstLine": "tokens = [\"the\", \"model\", \"reads\"]",
-      "sharedExampleWith": ["masked-language-modeling"],
+      "sharedExampleWith": [
+        "masked-language-modeling"
+      ],
       "genericExercise": true,
       "requiredWork": [
         "Explain reconstruction-based representation learning without similarity labels.",
@@ -2702,30 +2848,30 @@
       "conceptId": "vision-transformers",
       "chapter": 9,
       "path": "src/content/docs/concepts/vision-transformers.mdx",
-      "sourceSha256": "1f1f1875ca9d968c2d70348a38d552908b6d89f31380be97001eaeba7472ccd4",
+      "sourceSha256": "31c614ebe06312ad221365a2ad239a74d76ede0c8137257ad60fadfed0083e22",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P0",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch09-vision-transformers",
         "book-ch09-image-patches"
       ],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The code never reads pixels, extracts patches, or creates projected image tokens.",
+      "retainedStrength": "Detailed specific explanation, worked calculation, actual model traces, interactive experiment and unique exercises.",
+      "finding": "E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "6f9979031f8857a24349f427ea5c23c3d3a97a3ff8ce27baadc6b7d0ef28e02a",
-      "codeFirstLine": "from math import exp",
+      "exampleKind": "recorded-model-evidence-calculation",
+      "codeSha256": "31d3787ca9db62a8840e961cf0f778ec9e8e81b14a6e540e33e39792feed7d22",
+      "codeFirstLine": "import json",
       "sharedExampleWith": [],
-      "genericExercise": true,
+      "genericExercise": false,
       "requiredWork": [
-        "Patch real image pixels and trace projected patches, positions, and model inputs.",
-        "Show actual pixels becoming patches and projected sequence elements."
+        "Independent technical/editorial review and beginner pilot. Hosted comparison and optional judge execution remain unverified; fresh data required for broader quality claims."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E6"
+      "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
+      "nextPhase": "E6",
+      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
     },
     {
       "conceptId": "vocabulary",
@@ -2768,7 +2914,9 @@
       "auditStatus": "assessed",
       "priority": "P1",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch07-window"],
+      "sourceSectionIds": [
+        "book-ch07-window"
+      ],
       "retainedStrength": "Specific definition and mechanism connected to runnable local evidence.",
       "finding": "E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -2794,7 +2942,9 @@
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch02-token-units"],
+      "sourceSectionIds": [
+        "book-ch02-token-units"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "E3 author implementation: topic-specific definition/theory, worked example, mechanism, connected CPU workflow, error boundaries, and exercises. Independent editorial/learner review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -2852,7 +3002,9 @@
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch04-zero-shot"],
+      "sourceSectionIds": [
+        "book-ch04-zero-shot"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -2878,7 +3030,9 @@
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch05-mmr"],
+      "sourceSectionIds": [
+        "book-ch05-mmr"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -2904,7 +3058,9 @@
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "sourceSectionIds": ["book-ch05-ctfidf"],
+      "sourceSectionIds": [
+        "book-ch05-ctfidf"
+      ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
       "finding": "E4 author implementation: specific theory, worked mechanism, evaluated workflow, interactive evidence, operational boundaries, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -2960,7 +3116,9 @@
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSha256": "7fab822acf3bac822826979be146c419dccc015272a8b814773dd696ae9020c2",
-      "sourceSectionIds": ["book-ch06-tree-of-thought"],
+      "sourceSectionIds": [
+        "book-ch06-tree-of-thought"
+      ],
       "retainedStrength": "Specific definition and mechanism connected to runnable local evidence.",
       "finding": "E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending.",
       "evidenceAnchor": "implement-it",
@@ -2975,6 +3133,232 @@
       "executionStatus": "local-generation-search-memory-tools-verified",
       "nextPhase": "E5",
       "enhancementReview": "e5-workflows-author-review-2026-11-21"
+    },
+    {
+      "conceptId": "document-chunking",
+      "chapter": 8,
+      "path": "src/content/docs/concepts/document-chunking.mdx",
+      "legacyStatus": "full",
+      "reviewStatus": "changes-required",
+      "auditStatus": "assessed",
+      "priority": "P2",
+      "reviewRecord": "e0-static-audit-2026-11-19",
+      "sourceSha256": "0a5d27936daa708a19a1965de7633b08757b90900bcb5b2fdc06350b2a2ab1fe",
+      "sourceSectionIds": [
+        "book-ch08-chunking"
+      ],
+      "retainedStrength": "Detailed specific explanation, worked calculation, actual model traces, interactive experiment and unique exercises.",
+      "finding": "E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "recorded-model-evidence-calculation",
+      "codeSha256": "24e9ac36674682b066cf2bd881b57fa09568c254fe5ac38aeb45aab50d566e25",
+      "codeFirstLine": "import sys",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner pilot. Hosted comparison and optional judge execution remain unverified; fresh data required for broader quality claims."
+      ],
+      "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
+      "nextPhase": "E6",
+      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
+    },
+    {
+      "conceptId": "query-rewriting",
+      "chapter": 8,
+      "path": "src/content/docs/concepts/query-rewriting.mdx",
+      "legacyStatus": "full",
+      "reviewStatus": "changes-required",
+      "auditStatus": "assessed",
+      "priority": "P2",
+      "reviewRecord": "e0-static-audit-2026-11-19",
+      "sourceSha256": "797606e5de84fdd44e0129d5842b3c1e4bbbdddf35fb4ac038f80b65a439701b",
+      "sourceSectionIds": [
+        "book-ch08-query-rewriting"
+      ],
+      "retainedStrength": "Detailed specific explanation, worked calculation, actual model traces, interactive experiment and unique exercises.",
+      "finding": "E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "recorded-model-evidence-calculation",
+      "codeSha256": "a48a237b1397acc7781cea27d404acd8dd49531c9a0967614bb8ff8f09be6571",
+      "codeFirstLine": "import json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner pilot. Hosted comparison and optional judge execution remain unverified; fresh data required for broader quality claims."
+      ],
+      "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
+      "nextPhase": "E6",
+      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
+    },
+    {
+      "conceptId": "multi-query-rag",
+      "chapter": 8,
+      "path": "src/content/docs/concepts/multi-query-rag.mdx",
+      "legacyStatus": "full",
+      "reviewStatus": "changes-required",
+      "auditStatus": "assessed",
+      "priority": "P2",
+      "reviewRecord": "e0-static-audit-2026-11-19",
+      "sourceSha256": "432013d39aa82fa5bd70ed65b55a6ad1a5671b94bfa706d484d7ef4d0afd5771",
+      "sourceSectionIds": [
+        "book-ch08-multi-query"
+      ],
+      "retainedStrength": "Detailed specific explanation, worked calculation, actual model traces, interactive experiment and unique exercises.",
+      "finding": "E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "recorded-model-evidence-calculation",
+      "codeSha256": "ef27e63b6d9d54248037009499a344c5e3f0bf2c99ebf5130d918630d6a907b6",
+      "codeFirstLine": "import json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner pilot. Hosted comparison and optional judge execution remain unverified; fresh data required for broader quality claims."
+      ],
+      "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
+      "nextPhase": "E6",
+      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
+    },
+    {
+      "conceptId": "multi-hop-rag",
+      "chapter": 8,
+      "path": "src/content/docs/concepts/multi-hop-rag.mdx",
+      "legacyStatus": "full",
+      "reviewStatus": "changes-required",
+      "auditStatus": "assessed",
+      "priority": "P2",
+      "reviewRecord": "e0-static-audit-2026-11-19",
+      "sourceSha256": "e16fe4dc64f1df3a888e455591f4c56430ebe4f4122a3fc8e9d86efb2f7b0406",
+      "sourceSectionIds": [
+        "book-ch08-multi-hop"
+      ],
+      "retainedStrength": "Detailed specific explanation, worked calculation, actual model traces, interactive experiment and unique exercises.",
+      "finding": "E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "recorded-model-evidence-calculation",
+      "codeSha256": "6deccc89fc614e9f55b1f62e685ffb94e4d6f09d9080ddd94224b23697d5c70e",
+      "codeFirstLine": "import json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner pilot. Hosted comparison and optional judge execution remain unverified; fresh data required for broader quality claims."
+      ],
+      "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
+      "nextPhase": "E6",
+      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
+    },
+    {
+      "conceptId": "query-routing",
+      "chapter": 8,
+      "path": "src/content/docs/concepts/query-routing.mdx",
+      "legacyStatus": "full",
+      "reviewStatus": "changes-required",
+      "auditStatus": "assessed",
+      "priority": "P2",
+      "reviewRecord": "e0-static-audit-2026-11-19",
+      "sourceSha256": "076aca102d0b68ef84358d8e7bf4253cc9526b8d13d5f41824593cf547b8078f",
+      "sourceSectionIds": [
+        "book-ch08-routing"
+      ],
+      "retainedStrength": "Detailed specific explanation, worked calculation, actual model traces, interactive experiment and unique exercises.",
+      "finding": "E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "recorded-model-evidence-calculation",
+      "codeSha256": "3b1434ec7eb0bd971131993f3454cabe0c585fa3531c9fe996afa4feacdfbe81",
+      "codeFirstLine": "import json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner pilot. Hosted comparison and optional judge execution remain unverified; fresh data required for broader quality claims."
+      ],
+      "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
+      "nextPhase": "E6",
+      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
+    },
+    {
+      "conceptId": "agentic-rag",
+      "chapter": 8,
+      "path": "src/content/docs/concepts/agentic-rag.mdx",
+      "legacyStatus": "full",
+      "reviewStatus": "changes-required",
+      "auditStatus": "assessed",
+      "priority": "P2",
+      "reviewRecord": "e0-static-audit-2026-11-19",
+      "sourceSha256": "bf2cdeaf5adc2c44767a95e4a8df74aa82635274ac6aedc99995959337e2c3ed",
+      "sourceSectionIds": [
+        "book-ch08-agentic-rag"
+      ],
+      "retainedStrength": "Detailed specific explanation, worked calculation, actual model traces, interactive experiment and unique exercises.",
+      "finding": "E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "recorded-model-evidence-calculation",
+      "codeSha256": "73dcac2918f62a6a04cfe486773c799e867c7e966fe151576f5eedca822f5178",
+      "codeFirstLine": "import json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner pilot. Hosted comparison and optional judge execution remain unverified; fresh data required for broader quality claims."
+      ],
+      "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
+      "nextPhase": "E6",
+      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
+    },
+    {
+      "conceptId": "multimodal-preprocessing",
+      "chapter": 9,
+      "path": "src/content/docs/concepts/multimodal-preprocessing.mdx",
+      "legacyStatus": "full",
+      "reviewStatus": "changes-required",
+      "auditStatus": "assessed",
+      "priority": "P2",
+      "reviewRecord": "e0-static-audit-2026-11-19",
+      "sourceSha256": "b97435c0e063725a15102090578452bde6ae70868da5ff06b9d31dc9f74ef050",
+      "sourceSectionIds": [
+        "book-ch09-preprocessing",
+        "book-ch09-image-preprocessing",
+        "book-ch09-text-preprocessing"
+      ],
+      "retainedStrength": "Detailed specific explanation, worked calculation, actual model traces, interactive experiment and unique exercises.",
+      "finding": "E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "recorded-model-evidence-calculation",
+      "codeSha256": "e6d70083f0acf238887456b2ad83526d5ef7be39de9e979fad3065c10b8f882f",
+      "codeFirstLine": "import json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner pilot. Hosted comparison and optional judge execution remain unverified; fresh data required for broader quality claims."
+      ],
+      "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
+      "nextPhase": "E6",
+      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
+    },
+    {
+      "conceptId": "q-former",
+      "chapter": 9,
+      "path": "src/content/docs/concepts/q-former.mdx",
+      "legacyStatus": "full",
+      "reviewStatus": "changes-required",
+      "auditStatus": "assessed",
+      "priority": "P2",
+      "reviewRecord": "e0-static-audit-2026-11-19",
+      "sourceSha256": "c6865c2c6e30f2e111f323ce3676c76c2f84bf99010b1db3f5898902afe0997b",
+      "sourceSectionIds": [
+        "book-ch09-q-former"
+      ],
+      "retainedStrength": "Detailed specific explanation, worked calculation, actual model traces, interactive experiment and unique exercises.",
+      "finding": "E6 author implementation: retrieval, grounded generation or multimodal mechanism connected to pinned actual workflows. Independent teaching acceptance pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "recorded-model-evidence-calculation",
+      "codeSha256": "3c47d69bb3c3cad11fa7023d3f8264d99f594cdc7f3f82baa07209d62d395ad2",
+      "codeFirstLine": "import json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner pilot. Hosted comparison and optional judge execution remain unverified; fresh data required for broader quality claims."
+      ],
+      "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
+      "nextPhase": "E6",
+      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
     }
   ],
   "useCases": [
@@ -2989,12 +3373,12 @@
     },
     {
       "path": "src/content/docs/use-cases/rag-question-answering.mdx",
-      "anchor": "run-a-small-local-pipeline",
+      "anchor": "1-establish-a-baseline",
       "chapter": 8,
-      "implementation": "local-rag-sketch",
-      "gap": "Unpinned dependencies; one selected passage and generated draft; no recorded run, absence tests, reranking, or executable citation evaluation.",
-      "sourceSha256": "23a79f07657120f1035733fd72d76dbb1486a0f34f11b27fea05ca92a7152842",
-      "executionStatus": "not-verified"
+      "implementation": "actual-retrieval-grounded-generation-and-proposition-review",
+      "gap": "Independent review and a new realistic collection remain pending; hosted comparison is documented/imported only.",
+      "sourceSha256": "ae59f62c7a810a1a3b1d079caa89df72ad482ece9a877d47ac87ed31e7ce1cb6",
+      "executionStatus": "local-cpu-model-workflow-verified"
     },
     {
       "path": "src/content/docs/use-cases/research-collection-explorer.mdx",
@@ -3004,7 +3388,16 @@
       "gap": "Independent reader review and a realistic licensed external research collection remain pending.",
       "sourceSha256": "875be6aabbd4d56780dc0c75fac09c053e37795bf559fefc7d37d07b39155b07",
       "executionStatus": "cpu-topic-workflow-verified"
+    },
+    {
+      "path": "src/content/docs/use-cases/image-text-collection-search.mdx",
+      "anchor": "1-declare-the-collection-and-representation",
+      "chapter": 9,
+      "implementation": "actual-openclip-retrieval-preprocessing-and-patch-projection",
+      "gap": "Independent review and fresh licensed evaluation images remain pending.",
+      "sourceSha256": "e86bcf684e0aa9b721ec2835315ef65e46c48b990a841b87876b8d50501ca60f",
+      "executionStatus": "local-cpu-model-workflow-verified"
     }
   ],
-  "lastUpdated": "2026-11-20"
+  "lastUpdated": "2026-11-24"
 }

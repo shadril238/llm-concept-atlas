@@ -1,88 +1,123 @@
 ---
-title: Semantic Search
-description: Retrieving information by meaning rather than exact words alone.
-kind: concept
+title: "Semantic Search"
+description: "Semantic search ranks a collection using learned representations of meaning rather than relying only on shared words. Its output is a ranked set of candidate sources; it does not itself establish that a generated answer is true."
+kind: "concept"
 conceptId: semantic-search
 chapter: 8
-part: applications
-summary: Semantic search compares representations of a query and documents to find meaningfully relevant results.
-parent: chapter-08
-prerequisites: [text-embedding]
-related: [rag, representation-model]
-level: beginner
-tags: [retrieval, applications]
+part: "applications"
+summary: "Semantic search ranks a collection using learned representations of meaning rather than relying only on shared words. Its output is a ranked set of candidate sources; it does not itself establish that a generated answer is true."
+parent: "chapter-08"
+prerequisites: ["text-embedding"]
+related: []
+level: "beginner"
+tags: ["applications", "chapter-08"]
 lessonStatus: full
-lastReviewed: 2026-11-12
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e6-retrieval-author-review-2026-11-24
+learningObjectives: ["Distinguish ranked search from grounded answering.", "Compare actual lexical and learned rankings.", "Recognize an absent-answer retrieval failure."]
+bookSections: ["book-ch08-overview", "book-ch08-semantic-search"]
+labHref: "/labs/retrieval-and-multimodal/"
+aliases: ["semantic retrieval", "meaning-based search"]
+exampleIds: ["e6-semantic-search", "retrieval-benchmark"]
+relationshipReasons: {"text-embedding": "Learned text-vector compatibility makes meaning-based ranking possible."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { EmbeddingLab } from '../../../components/simulations/LearningLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import RetrievalEvidence from '../../../components/RetrievalEvidence.astro';
+import { RetrievalExplorer } from '../../../components/simulations/RetrievalLabs';
 
 <ConceptPrimer id="semantic-search" />
 
 ## Definition and intuition
 
-**Semantic search** ranks documents by a representation of meaning, not just exact word overlap. A query and candidate passages are embedded into vectors, then compared. This can retrieve a relevant passage even when it uses a paraphrase of the question.
+Semantic search ranks a collection using learned representations of meaning rather than relying only on shared words. Its output is a ranked set of candidate sources; it does not itself establish that a generated answer is true.
 
-It is a retrieval method, not a guarantee that the top result answers the question. A practical system must prepare documents, evaluate ranking quality, and often combine dense and keyword search.
+Read this lesson as a sequence: identify the input, follow the transformation, inspect the result, and explain a failure. The worked example and recorded lab below make those boundaries visible.
 
-## Before you start
-
-Read [text embedding](/llm-concept-atlas/concepts/text-embedding/) first; return here when the key terms feel familiar.
+<ReferenceBrief objectives={["Distinguish ranked search from grounded answering.", "Compare actual lexical and learned rankings.", "Recognize an absent-answer retrieval failure."]} prerequisites="text-embedding" scope="A specific teaching calculation or recorded-run replay, connected to actual pinned model execution. Independent teaching review remains pending." />
 
 ## How it works
 
-First divide source material into passages with usable titles and provenance. Encode each passage using an embedding model and store its vector. At query time, encode the question in a compatible way, compare it with indexed vectors, and return the top candidates. A reranker may then compare each query–passage pair more deeply before presenting results.
+### From information need to ranked evidence
 
-Cosine similarity or dot product can rank dense vectors; approximate nearest-neighbor indexes accelerate large collections. Keyword methods can outperform dense retrieval for exact IDs, names, or quoted phrases, so hybrid retrieval is often useful. Evaluate with labeled queries using recall at k or ranking metrics, not only a few satisfying examples.
+Start with the question the reader needs answered. A retrieval model encodes the query and candidate passages in a compatible representation space. Similarity then orders candidates. A query about wheelchair access can match a passage about a ramp even without repeating the same words. Compatibility matters: equal vector widths from unrelated encoders do not create a shared semantic space.
+
+### A lexical baseline remains useful
+
+BM25 rewards query-term occurrences with inverse-document-frequency and length normalization. It is often helpful for exact identifiers, names, or rare terms. L12 compares this transparent baseline with actual masked-mean MiniLM embeddings and a pairwise reranker on the same original corpus. It does not assume learned search wins every query or that a single example proves general superiority.
+
+### Define relevance before measuring success
+
+The fixed corpus has 24 fictional documents and stable source IDs. Author judgments use grade two for directly useful evidence, grade one for related or partial evidence, and zero otherwise. L12 reports 16 evaluation queries, including two with no answer evidence, separately from six design queries. The stricter support-ID set for QA is different from topical relevance. A related result can improve a retrieval metric while remaining insufficient for a complete answer.
 
 ## Worked example
 
-Query: “How can I reduce my electric bill?” Passage A: “Ways to use less power at home.” Passage B: “How electricity prices are set.” Both are related, but A better satisfies the implied request for actions. A semantic retriever might surface both; a reranker can improve their order.
+For “Which entrance should a wheelchair visitor use?”, the access document supplies an east-entrance ramp. A wireless-network page may also mention an entrance or lobby without answering access needs. Inspect the actual BM25 and dense lists before deciding which representation helped. Then choose an absent swimming-pool question: the index still returns neighbors even though the collection contains no pool rule.
 
-<LessonFlow steps={['Chunk and label documents', 'Embed and index passages', 'Embed query', 'Rank candidates', 'Inspect or rerank']} caption="A simplified flow for semantic search. Follow each labeled step from left to right." />
+## Try the experiment
 
-## Try the vector lab
+Predict the outcome before changing a control. Controls either select actual recorded runs or recalculate a clearly labeled mathematical exercise. They do not download model weights or call a hosted provider in your browser.
 
-<EmbeddingLab client:visible />
+<RetrievalExplorer client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key needed. Save this as `example.py` and run `python3 example.py`. This is a small teaching model, not a pretrained neural network.
+From the repository root, run `python3 scripts/run-examples.py --id e6-semantic-search --offline` after installing the foundation environment. This standard-library example calculates the stated mechanism or replays hash-linked actual model evidence from the published snapshot. It does not perform a fresh neural-model inference. The complete local/CI implementation and execution contract are linked immediately below.
+
+{/* example:e6-semantic-search:start */}
 
 ```python
-from math import sqrt
-query = (0.9,0.3)
-docs = {'power-saving tips':(0.8,0.4), 'billing policy':(0.4,0.8)}
-def cos(a,b):
-    return sum(x*y for x,y in zip(a,b))/(sqrt(sum(x*x for x in a))*sqrt(sum(y*y for y in b)))
-print(sorted(docs, key=lambda name: cos(query,docs[name]), reverse=True))
+import json
+from pathlib import Path
+data = json.loads(Path('src/data/retrieval-results.json').read_text())
+query = next(q for q in data['retrieval']['queries'] if q['id']=='eval-access')
+print(query['text'])
+for method in ['lexical','dense']:
+    row = next(r for r in data['retrieval']['rows'] if r['id']==query['id'] and r['method']==method)
+    print(method, row['document_ranking'][:3])
 ```
 
-**Expected behavior:** `power-saving tips` ranks first for these invented vectors.
+{/* example:e6-semantic-search:end */}
 
-The vectors are illustrative, so the code tests ranking mechanics only. The [official chapter 8 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter08) uses embedding models. For a real system, encode both documents and queries with a compatible model and retain source IDs.
+Recorded mechanism output:
+
+```text
+Which entrance should a wheelchair visitor use?
+lexical ['security', 'access', 'quiet']
+dense ['access', 'pets', 'training']
+```
+
+<RetrievalEvidence id="retrieval-benchmark" />
 
 ## When to use it
 
-- Search knowledge bases with varied phrasing; retrieve candidate context for RAG.
-- Add keyword retrieval when exact identifiers or rare names are critical.
+Use semantic retrieval to find evidence expressed with varied wording, such as a help-center article, policy clause, or research passage. Preserve source identity and compare a lexical baseline using representative queries and explicit judgments.
 
 ## Limits and common mistakes
 
-- Similarity can rank a related but unhelpful passage above the answer.
-- A corpus cannot return information it never contained; document quality and chunking matter.
+Similarity is not a calibrated probability of relevance. The closest available vector can still be irrelevant. A small fictional corpus is a teaching experiment, not a benchmark for all document domains. Domain adaptation belongs to a separate training/evaluation workflow.
 
 ## Check your understanding
 
-<details><summary>What is stored before a user searches?</summary><p>Passage embeddings plus source metadata.</p></details>
+<details>
+<summary>Why can an absent-answer query still return a top result?</summary>
 
-<details><summary>Why might keyword search still be valuable?</summary><p>Exact names, IDs, and quoted terms can be matched reliably.</p></details>
+Nearest-neighbor ranking orders the available collection; it does not prove that any item answers the query. A separate withholding or answerability policy needs evidence.
+
+</details>
+
+<details>
+<summary>Why keep BM25 in the comparison?</summary>
+
+Exact terms and identifiers can matter. A baseline reveals whether the learned encoder adds useful retrieval behavior on the same judged questions.
+
+</details>
 
 ## Connections and sources
 
-This lesson follows the topic sequence in chapter 8 of *Hands-On Large Language Models*. The explanation, example, and diagram here are original. Continue with the linked concepts below. For a deeper implementation, use the [official book notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter08) and [this primary technical reference](https://www.sbert.net/examples/sentence_transformer/applications/semantic-search/README.html).
+This original lesson follows Chapter 8 of *Hands-On Large Language Models*. The [complete L12–L14 lab](/llm-concept-atlas/labs/retrieval-and-multimodal/) links exact source, pinned environments, data/model provenance, raw failure traces, and author-review limitations. Compare the [authors’ pinned chapter 8 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter08) for the original workflow. The source PDF and book artwork are not redistributed.
 
 <ConceptConnections id="semantic-search" />

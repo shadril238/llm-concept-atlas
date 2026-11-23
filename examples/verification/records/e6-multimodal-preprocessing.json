@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e6-multimodal-preprocessing",
+  "status": "passed",
+  "date": "2026-11-23T18:31:56.774276+00:00",
+  "gitCommit": "cd37282ba4cf353101a2d8a96bdf4ff094188aba",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e6/multimodal_preprocessing.py"
+  ],
+  "sourceSha256": "03e10c6c14c1395a555d4c5c5791cb845e077bdbe1a34508c1135d9177d12384",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "82359c5ccecfd7b983eed346b63307890fd6b98e00882b374d46cd496612b1d9",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.02,
+  "peakMemoryMiB": 28.0,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "source size: [600, 400] retained area: 0.6667\nfloat tensor: [3, 224, 224] torch.float32\nAstronaut patch mean restored to [0,1]: [0.3755, 0.3423, 0.4033]\n",
+  "stderr": "",
+  "error": null,
+  "supportHashes": {
+    "src/data/retrieval-results.json": "32c1fb66c612b89422b2f0e82b4044d5cf3673f195b85d9f26e11498ace47f1d"
+  }
+}

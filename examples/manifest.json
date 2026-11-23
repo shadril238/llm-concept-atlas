@@ -243,10 +243,7 @@
       "entrypoint": "examples/legacy/legacy-blip-2.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/blip-2.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -360,10 +357,7 @@
       "entrypoint": "examples/legacy/legacy-clip.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/clip.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -822,10 +816,7 @@
       "entrypoint": "examples/legacy/legacy-dense-retrieval.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/dense-retrieval.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -1459,10 +1450,7 @@
       "entrypoint": "examples/legacy/legacy-grounded-generation.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/grounded-generation.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -1499,10 +1487,7 @@
       "entrypoint": "examples/legacy/legacy-image-captioning.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/image-captioning.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -1723,10 +1708,7 @@
       "entrypoint": "examples/legacy/legacy-local-model-rag.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/local-model-rag.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -1884,10 +1866,7 @@
       "entrypoint": "examples/legacy/legacy-multimodal-chat.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/multimodal-chat.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -1925,10 +1904,7 @@
       "entrypoint": "examples/legacy/legacy-multimodal-embeddings.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/multimodal-embeddings.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -2006,10 +1982,7 @@
       "entrypoint": "examples/legacy/legacy-openclip.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/openclip.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -2477,10 +2450,7 @@
       "entrypoint": "examples/legacy/legacy-rag-evaluation.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/rag-evaluation.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -2519,10 +2489,7 @@
       "entrypoint": "examples/legacy/legacy-rag.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/rag.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -2669,10 +2636,7 @@
       "entrypoint": "examples/legacy/legacy-reranking.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/reranking.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -2747,10 +2711,7 @@
       "entrypoint": "examples/legacy/legacy-retrieval-metrics.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/retrieval-metrics.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -2989,10 +2950,7 @@
       "entrypoint": "examples/legacy/legacy-semantic-search.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/semantic-search.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3569,10 +3527,7 @@
       "entrypoint": "examples/legacy/legacy-vision-transformers.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/vision-transformers.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3798,10 +3753,7 @@
       "entrypoint": "examples/legacy/legacy-rag-question-answering.py",
       "environment": "legacy-unverified",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/use-cases/rag-question-answering.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -7813,7 +7765,10 @@
       "kind": "evaluated-workflow",
       "environment": "retrieval",
       "workingDirectory": ".",
-      "lesson": null,
+      "lesson": {
+        "path": "src/content/docs/labs/retrieval-and-multimodal.mdx",
+        "block": 3
+      },
       "region": null,
       "models": [
         {
@@ -7833,7 +7788,7 @@
       "auth": false,
       "inputSchema": "Versioned original task fixture; declared design/evaluation split and finite schemas.",
       "outputSchema": "JSON invariant report plus inspectable results.json and traces.",
-      "verificationRecord": null,
+      "verificationRecord": "examples/verification/records/blip2-captioning.json",
       "troubleshooting": "See examples/applications/retrieval/README.md; model-weight budget differs from total RSS and disk transfer is substantial.",
       "id": "blip2-captioning",
       "title": "Genuine BLIP-2 captioning and VQA on Linux CPU",
@@ -7872,6 +7827,1310 @@
       "resultArtifact": "examples/artifacts/e6-caption/results.json",
       "resultFile": "src/data/retrieval-results.json",
       "resultKey": "caption"
+    },
+    {
+      "level": "B",
+      "kind": "evaluated-workflow",
+      "environment": "retrieval",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/retrieval-and-multimodal.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [
+        {
+          "id": "sentence-transformers/all-MiniLM-L6-v2",
+          "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
+        },
+        {
+          "id": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+          "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a"
+        }
+      ],
+      "dataset": "examples/data/manifests/retrieval-corpus.json",
+      "seed": 42,
+      "reproducibility": "Pinned actual CPU model calls with seed 42 and one thread; exact quality and timings depend on the host. Separate declared design/evaluation split or labeled mechanism probes.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 900,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Versioned original task fixture; declared design/evaluation split and finite schemas.",
+      "outputSchema": "JSON invariant report plus inspectable results.json and traces.",
+      "verificationRecord": "examples/verification/records/retrieval-benchmark.json",
+      "troubleshooting": "See examples/applications/retrieval/README.md; model-weight budget differs from total RSS and disk transfer is substantial.",
+      "id": "retrieval-benchmark",
+      "title": "L12 \u00b7 how do ranking and candidate coverage affect quality?",
+      "concepts": [
+        "semantic-search",
+        "dense-retrieval",
+        "document-chunking",
+        "reranking",
+        "retrieval-metrics"
+      ],
+      "sourceSections": [
+        "book-ch08-average-precision",
+        "book-ch08-chunking",
+        "book-ch08-dense-retrieval",
+        "book-ch08-mean-average-precision",
+        "book-ch08-ndcg",
+        "book-ch08-overview",
+        "book-ch08-reranking",
+        "book-ch08-retrieval-adaptation",
+        "book-ch08-retrieval-metrics",
+        "book-ch08-semantic-search",
+        "book-ch08-vector-index"
+      ],
+      "entrypoint": "examples/applications/retrieval/src/atlas_retrieval/benchmark.py",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "reload_verified": true,
+          "index_contract_verified": true,
+          "split_verified": true
+        }
+      },
+      "supportFiles": [
+        "examples/applications/retrieval/src/atlas_retrieval/common.py",
+        "examples/applications/retrieval/download_models.py",
+        "examples/applications/retrieval/models.json",
+        "examples/foundations/src/atlas_foundations/e6/retrieval.py",
+        "examples/data/fixtures/retrieval-corpus.json"
+      ],
+      "resultArtifact": "examples/artifacts/e6-retrieval/results.json",
+      "resultFile": "src/data/retrieval-results.json",
+      "resultKey": "retrieval"
+    },
+    {
+      "level": "B",
+      "kind": "evaluated-workflow",
+      "environment": "retrieval",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/retrieval-and-multimodal.mdx",
+        "block": 1
+      },
+      "region": null,
+      "models": [
+        {
+          "id": "sentence-transformers/all-MiniLM-L6-v2",
+          "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
+        },
+        {
+          "id": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+          "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a"
+        },
+        {
+          "id": "google/flan-t5-small",
+          "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab"
+        }
+      ],
+      "dataset": "examples/data/manifests/retrieval-corpus.json",
+      "seed": 42,
+      "reproducibility": "Pinned actual CPU model calls with seed 42 and one thread; exact quality and timings depend on the host. Separate declared design/evaluation split or labeled mechanism probes.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 900,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Versioned original task fixture; declared design/evaluation split and finite schemas.",
+      "outputSchema": "JSON invariant report plus inspectable results.json and traces.",
+      "verificationRecord": "examples/verification/records/grounded-retrieval.json",
+      "troubleshooting": "See examples/applications/retrieval/README.md; model-weight budget differs from total RSS and disk transfer is substantial.",
+      "id": "grounded-retrieval",
+      "title": "L13 \u00b7 which stage caused an unsupported answer?",
+      "concepts": [
+        "rag",
+        "grounded-generation",
+        "local-model-rag",
+        "rag-evaluation",
+        "query-rewriting",
+        "multi-query-rag",
+        "multi-hop-rag",
+        "query-routing",
+        "agentic-rag"
+      ],
+      "sourceSections": [
+        "book-ch08-advanced-rag",
+        "book-ch08-agentic-rag",
+        "book-ch08-api-rag",
+        "book-ch08-citations",
+        "book-ch08-local-rag",
+        "book-ch08-multi-hop",
+        "book-ch08-multi-query",
+        "book-ch08-query-rewriting",
+        "book-ch08-rag",
+        "book-ch08-rag-evaluation",
+        "book-ch08-routing",
+        "book-ch08-search-to-rag"
+      ],
+      "entrypoint": "examples/applications/retrieval/src/atlas_retrieval/grounded.py",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "context_budget_verified": true,
+          "bounded_search_verified": true,
+          "citation_resolution_checked": true
+        }
+      },
+      "supportFiles": [
+        "examples/applications/retrieval/src/atlas_retrieval/common.py",
+        "examples/applications/retrieval/download_models.py",
+        "examples/applications/retrieval/models.json",
+        "examples/foundations/src/atlas_foundations/e6/retrieval.py",
+        "examples/data/fixtures/retrieval-corpus.json",
+        "examples/applications/retrieval/src/atlas_retrieval/benchmark.py",
+        "examples/data/fixtures/rag-author-review.json"
+      ],
+      "resultArtifact": "examples/artifacts/e6-grounded/results.json",
+      "resultFile": "src/data/retrieval-results.json",
+      "resultKey": "grounded"
+    },
+    {
+      "level": "B",
+      "kind": "evaluated-workflow",
+      "environment": "retrieval",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/retrieval-and-multimodal.mdx",
+        "block": 2
+      },
+      "region": null,
+      "models": [
+        {
+          "id": "timm/vit_base_patch32_clip_224.openai",
+          "revision": "a6f597a30f7b82c51704746581f9a4e41421e878"
+        }
+      ],
+      "dataset": "examples/data/manifests/vision-images.json",
+      "seed": 42,
+      "reproducibility": "Pinned actual CPU model calls with seed 42 and one thread; exact quality and timings depend on the host. Separate declared design/evaluation split or labeled mechanism probes.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 900,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Versioned original task fixture; declared design/evaluation split and finite schemas.",
+      "outputSchema": "JSON invariant report plus inspectable results.json and traces.",
+      "verificationRecord": "examples/verification/records/openclip-retrieval.json",
+      "troubleshooting": "See examples/applications/retrieval/README.md; model-weight budget differs from total RSS and disk transfer is substantial.",
+      "id": "openclip-retrieval",
+      "title": "L14a \u00b7 what pixels and vectors does OpenCLIP compare?",
+      "concepts": [
+        "vision-transformers",
+        "multimodal-embeddings",
+        "clip",
+        "openclip",
+        "multimodal-preprocessing"
+      ],
+      "sourceSections": [
+        "book-ch09-clip",
+        "book-ch09-clip-training",
+        "book-ch09-image-patches",
+        "book-ch09-image-preprocessing",
+        "book-ch09-multimodal-embeddings",
+        "book-ch09-openclip",
+        "book-ch09-preprocessing",
+        "book-ch09-text-preprocessing",
+        "book-ch09-vision-transformers"
+      ],
+      "entrypoint": "examples/applications/retrieval/src/atlas_retrieval/vision.py",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "preprocessing_verified": true,
+          "patch_projection_verified": true,
+          "embedding_reload_verified": true,
+          "contrastive_library_verified": true
+        }
+      },
+      "supportFiles": [
+        "examples/applications/retrieval/src/atlas_retrieval/common.py",
+        "examples/applications/retrieval/download_models.py",
+        "examples/applications/retrieval/models.json",
+        "examples/foundations/src/atlas_foundations/e6/retrieval.py",
+        "examples/foundations/src/atlas_foundations/e6/vision.py",
+        "examples/data/fixtures/vision-images.json",
+        "public/images/e6/astronaut.png",
+        "public/images/e6/coffee.png",
+        "public/images/e6/chelsea.png"
+      ],
+      "resultArtifact": "examples/artifacts/e6-vision/results.json",
+      "resultFile": "src/data/retrieval-results.json",
+      "resultKey": "vision"
+    },
+    {
+      "level": "B",
+      "kind": "evaluated-workflow",
+      "environment": "retrieval",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/retrieval-and-multimodal.mdx",
+        "block": 4
+      },
+      "region": null,
+      "models": [
+        {
+          "id": "HuggingFaceTB/SmolVLM-256M-Instruct",
+          "revision": "d039ab0d4b9311b617e8ffec1d06c8464364aeb3"
+        }
+      ],
+      "dataset": "examples/data/manifests/vision-images.json",
+      "seed": 42,
+      "reproducibility": "Pinned actual CPU model calls with seed 42 and one thread; exact quality and timings depend on the host. Separate declared design/evaluation split or labeled mechanism probes.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 900,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Versioned original task fixture; declared design/evaluation split and finite schemas.",
+      "outputSchema": "JSON invariant report plus inspectable results.json and traces.",
+      "verificationRecord": "examples/verification/records/multimodal-chat.json",
+      "troubleshooting": "See examples/applications/retrieval/README.md; model-weight budget differs from total RSS and disk transfer is substantial.",
+      "id": "multimodal-chat",
+      "title": "L14c \u00b7 can a visual chatbot infer a price that is not shown?",
+      "concepts": [
+        "multimodal-chat"
+      ],
+      "sourceSections": [
+        "book-ch09-multimodal-chat"
+      ],
+      "entrypoint": "examples/applications/retrieval/src/atlas_retrieval/chat.py",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "actual_multimodal_verified": true,
+          "history_carries_generated_answer": true,
+          "continuation_only_verified": true
+        }
+      },
+      "supportFiles": [
+        "examples/applications/retrieval/src/atlas_retrieval/common.py",
+        "examples/applications/retrieval/download_models.py",
+        "examples/applications/retrieval/models.json",
+        "examples/foundations/src/atlas_foundations/e6/retrieval.py",
+        "examples/data/fixtures/vision-images.json",
+        "public/images/e6/astronaut.png",
+        "public/images/e6/coffee.png",
+        "public/images/e6/chelsea.png"
+      ],
+      "resultArtifact": "examples/artifacts/e6-chat/results.json",
+      "resultFile": "src/data/retrieval-results.json",
+      "resultKey": "chat"
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/semantic-search.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e6-semantic-search.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e6-semantic-search",
+      "title": "Semantic Search evidence calculation",
+      "concepts": [
+        "semantic-search"
+      ],
+      "sourceSections": [
+        "book-ch08-overview",
+        "book-ch08-semantic-search"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e6/semantic_search.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "Which entrance should a wheelchair visitor use?\nlexical ['security', 'access', 'quiet']\ndense ['access', 'pets', 'training']",
+        "origin": "author-checked-recorded-evidence-calculation"
+      },
+      "supportFiles": [
+        "src/data/retrieval-results.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/dense-retrieval.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e6-dense-retrieval.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e6-dense-retrieval",
+      "title": "Dense Retrieval evidence calculation",
+      "concepts": [
+        "dense-retrieval"
+      ],
+      "sourceSections": [
+        "book-ch08-dense-retrieval",
+        "book-ch08-vector-index",
+        "book-ch08-retrieval-adaptation"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e6/dense_retrieval.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "actual query width: 384\naccess-c0 0.4284\nquiet-c0 0.2042\nloans-c0 0.1512\nhours-c0 0.0818\nscope: A declared four-passage subset of actual normalized encoder vectors; not the complete index ranking.",
+        "origin": "author-checked-recorded-evidence-calculation"
+      },
+      "supportFiles": [
+        "src/data/retrieval-results.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/document-chunking.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e6-document-chunking.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e6-document-chunking",
+      "title": "Document Chunking evidence calculation",
+      "concepts": [
+        "document-chunking"
+      ],
+      "sourceSections": [
+        "book-ch08-chunking"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e6/document_chunking.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0 54 Laptop loans last three days. Return them to the desk.\n30 87 Return them to the desk. Book loans last twenty-one days.",
+        "origin": "author-checked-recorded-evidence-calculation"
+      },
+      "supportFiles": [
+        "src/data/retrieval-results.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/reranking.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e6-reranking.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e6-reranking",
+      "title": "Reranking evidence calculation",
+      "concepts": [
+        "reranking"
+      ],
+      "sourceSections": [
+        "book-ch08-reranking"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e6/reranking.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "dense [('wren-c1', 0.463), ('aspen-c0', 0.375), ('birch-c0', 0.362)]\nreranked [('wren-c1', 1.234), ('birch-c0', -0.813), ('aspen-c0', -1.945)]\nPair scores are raw logits; only six dense candidate chunks are reranked.",
+        "origin": "author-checked-recorded-evidence-calculation"
+      },
+      "supportFiles": [
+        "src/data/retrieval-results.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/retrieval-metrics.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e6-retrieval-metrics.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e6-retrieval-metrics",
+      "title": "Retrieval Metrics evidence calculation",
+      "concepts": [
+        "retrieval-metrics"
+      ],
+      "sourceSections": [
+        "book-ch08-retrieval-metrics",
+        "book-ch08-average-precision",
+        "book-ch08-mean-average-precision",
+        "book-ch08-ndcg"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e6/retrieval_metrics.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "AP terms: [1.0, 0.6666666666666666] all relevant: 3\nP@3: 0.6667 AP@3: 0.5556 nDCG@3: 0.649\nAbsent-query AP: None",
+        "origin": "author-checked-recorded-evidence-calculation"
+      },
+      "supportFiles": [
+        "src/data/retrieval-results.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/rag.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e6-rag.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e6-rag",
+      "title": "Rag evidence calculation",
+      "concepts": [
+        "rag"
+      ],
+      "sourceSections": [
+        "book-ch08-rag",
+        "book-ch08-search-to-rag",
+        "book-ch08-advanced-rag"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e6/rag.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "actual context IDs: ['hours-c0', 'menu-c1', 'event-c1', 'account-c1']\nraw draft: 17:30\nmodel citations: []\napplication display: 17:30",
+        "origin": "author-checked-recorded-evidence-calculation"
+      },
+      "supportFiles": [
+        "src/data/retrieval-results.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/grounded-generation.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e6-grounded-generation.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e6-grounded-generation",
+      "title": "Grounded Generation evidence calculation",
+      "concepts": [
+        "grounded-generation"
+      ],
+      "sourceSections": [
+        "book-ch08-search-to-rag",
+        "book-ch08-api-rag"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e6/grounded_generation.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "raw answer: 57\nwren-c1 Wren has a projector and a whiteboard. The Birch team maintains Wren.\naspen-c0 The Aspen maintenance team can be reached at extension 57. Aspen handles seating repairs for its assigned rooms.\nbirch-c0 The Birch maintenance team can be reached at extension 42. Birch handles projector repairs for its assigned rooms.\nReference answer is evaluation-only: 42",
+        "origin": "author-checked-recorded-evidence-calculation"
+      },
+      "supportFiles": [
+        "src/data/retrieval-results.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/local-model-rag.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e6-local-model-rag.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e6-local-model-rag",
+      "title": "Local Model Rag evidence calculation",
+      "concepts": [
+        "local-model-rag"
+      ],
+      "sourceSections": [
+        "book-ch08-local-rag"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e6/local_model_rag.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "Models and pinned revisions:\nsentence-transformers/all-MiniLM-L6-v2 1110a243fdf4706b3f48f1d95db1a4f5529b4d41\ngoogle/flan-t5-small 0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab\nNative input cap: 512\nWhole-passage budget: 384\nIndex reload checked: True",
+        "origin": "author-checked-recorded-evidence-calculation"
+      },
+      "supportFiles": [
+        "src/data/retrieval-results.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/rag-evaluation.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e6-rag-evaluation.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e6-rag-evaluation",
+      "title": "Rag Evaluation evidence calculation",
+      "concepts": [
+        "rag-evaluation"
+      ],
+      "sourceSections": [
+        "book-ch08-rag-evaluation",
+        "book-ch08-citations"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e6/rag_evaluation.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "Author answer judgment: True\nCitation metrics: {'citation_precision': None, 'citation_recall': 0.0, 'claims': 1, 'citations': 0}\nIndependent review: False",
+        "origin": "author-checked-recorded-evidence-calculation"
+      },
+      "supportFiles": [
+        "src/data/retrieval-results.json",
+        "examples/data/fixtures/rag-author-review.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/query-rewriting.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e6-query-rewriting.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e6-query-rewriting",
+      "title": "Query Rewriting evidence calculation",
+      "concepts": [
+        "query-rewriting"
+      ],
+      "sourceSections": [
+        "book-ch08-query-rewriting"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e6/query_rewriting.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "original: I was thinking about bringing my cat, or maybe my trained assistance dog. I will bring the dog. Can it come inside?\nactual rewrite: I was thinking about bringing my cat, or maybe my trained assistance dog.\nactual search: I was thinking about bringing my cat, or maybe my trained assistance dog.\nraw answer: The community center is a place where people can get help.",
+        "origin": "author-checked-recorded-evidence-calculation"
+      },
+      "supportFiles": [
+        "src/data/retrieval-results.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/multi-query-rag.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e6-multi-query-rag.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e6-multi-query-rag",
+      "title": "Multi Query Rag evidence calculation",
+      "concepts": [
+        "multi-query-rag"
+      ],
+      "sourceSections": [
+        "book-ch08-multi-query"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e6/multi_query_rag.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "actual query: Wren and Lark are the seating capacities of Wren and Lark.\nfused first IDs: ['lark-c0', 'wren-c0', 'lark-c1', 'project-c0']",
+        "origin": "author-checked-recorded-evidence-calculation"
+      },
+      "supportFiles": [
+        "src/data/retrieval-results.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/multi-hop-rag.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e6-multi-hop-rag.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e6-multi-hop-rag",
+      "title": "Multi Hop Rag evidence calculation",
+      "concepts": [
+        "multi-hop-rag"
+      ],
+      "sourceSections": [
+        "book-ch08-multi-hop"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e6/multi_hop_rag.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "evidence: ['wren-c1', 'aspen-c0'] next query: The Aspen maintenance team can be reached at extension 57.\nevidence: ['aspen-c0', 'birch-c0'] next query: The Aspen maintenance team can be reached at extension 57.\nactual searches: 2\nstop: repeated-query",
+        "origin": "author-checked-recorded-evidence-calculation"
+      },
+      "supportFiles": [
+        "src/data/retrieval-results.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/query-routing.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e6-query-routing.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e6-query-routing",
+      "title": "Query Routing evidence calculation",
+      "concepts": [
+        "query-routing"
+      ],
+      "sourceSections": [
+        "book-ch08-routing"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e6/query_routing.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "actual decision: saturday valid: False\nexecuted collection: all\nA successful fallback is not evidence of a correct route.",
+        "origin": "author-checked-recorded-evidence-calculation"
+      },
+      "supportFiles": [
+        "src/data/retrieval-results.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/agentic-rag.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e6-agentic-rag.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e6-agentic-rag",
+      "title": "Agentic Rag evidence calculation",
+      "concepts": [
+        "agentic-rag"
+      ],
+      "sourceSections": [
+        "book-ch08-agentic-rag"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e6/agentic_rag.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "actual finite decision: library\nsearches: 1 stop: repeated-source\nscored tokens: 14 generated tokens: 3",
+        "origin": "author-checked-recorded-evidence-calculation"
+      },
+      "supportFiles": [
+        "src/data/retrieval-results.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/vision-transformers.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e6-vision-transformers.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e6-vision-transformers",
+      "title": "Vision Transformers evidence calculation",
+      "concepts": [
+        "vision-transformers"
+      ],
+      "sourceSections": [
+        "book-ch09-vision-transformers",
+        "book-ch09-image-patches"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e6/vision_transformers.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "actual unfolded patches: [1, 49, 3072]\nactual projection: [1, 49, 768]\nwith class-token positions: [50, 768]\nNative convolution equality: True",
+        "origin": "author-checked-recorded-evidence-calculation"
+      },
+      "supportFiles": [
+        "src/data/retrieval-results.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/multimodal-embeddings.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e6-multimodal-embeddings.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e6-multimodal-embeddings",
+      "title": "Multimodal Embeddings evidence calculation",
+      "concepts": [
+        "multimodal-embeddings"
+      ],
+      "sourceSections": [
+        "book-ch09-multimodal-embeddings"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e6/multimodal_embeddings.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "astronaut -> a photograph of an astronaut in a space suit 0.2942\nchelsea -> a photograph of a tabby cat 0.3085\ncoffee -> a photograph of a cup of coffee on a saucer 0.3212\nshape: {'image': [3, 512], 'text': [5, 512]}\nThese are actual model similarities, not manually assigned semantic vectors.",
+        "origin": "author-checked-recorded-evidence-calculation"
+      },
+      "supportFiles": [
+        "src/data/retrieval-results.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/clip.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e6-clip.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e6-clip",
+      "title": "Clip evidence calculation",
+      "concepts": [
+        "clip"
+      ],
+      "sourceSections": [
+        "book-ch09-clip",
+        "book-ch09-clip-training"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e6/clip.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "{'image_to_text': 1.4e-05, 'text_to_image': 2e-05, 'loss': 1.7e-05}\nNo weights were updated.",
+        "origin": "author-checked-recorded-evidence-calculation"
+      },
+      "supportFiles": [
+        "src/data/retrieval-results.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/openclip.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e6-openclip.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e6-openclip",
+      "title": "Openclip evidence calculation",
+      "concepts": [
+        "openclip"
+      ],
+      "sourceSections": [
+        "book-ch09-openclip"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e6/openclip.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "Actual open_clip_torch 3.3.0 ViT-B-32 with QuickGELU and pinned OpenAI weights, not a manually assigned feature table. The book uses Transformers CLIPModel under an OpenCLIP heading; this adaptation exercises the OpenCLIP library itself.\nManual/native preprocessing equal: True\nSaved vectors reload checked: True\nastronaut [512, 512] -> [3, 224, 224]\nchelsea [451, 300] -> [3, 224, 224]\ncoffee [600, 400] -> [3, 224, 224]",
+        "origin": "author-checked-recorded-evidence-calculation"
+      },
+      "supportFiles": [
+        "src/data/retrieval-results.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/multimodal-preprocessing.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e6-multimodal-preprocessing.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e6-multimodal-preprocessing",
+      "title": "Multimodal Preprocessing evidence calculation",
+      "concepts": [
+        "multimodal-preprocessing"
+      ],
+      "sourceSections": [
+        "book-ch09-preprocessing",
+        "book-ch09-image-preprocessing",
+        "book-ch09-text-preprocessing"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e6/multimodal_preprocessing.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "source size: [600, 400] retained area: 0.6667\nfloat tensor: [3, 224, 224] torch.float32\nAstronaut patch mean restored to [0,1]: [0.3755, 0.3423, 0.4033]",
+        "origin": "author-checked-recorded-evidence-calculation"
+      },
+      "supportFiles": [
+        "src/data/retrieval-results.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/blip-2.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e6-blip-2.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e6-blip-2",
+      "title": "Blip 2 evidence calculation",
+      "concepts": [
+        "blip-2"
+      ],
+      "sourceSections": [
+        "book-ch09-multimodal-generation",
+        "book-ch09-blip2"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e6/blip_2.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "genuine checkpoint: Salesforce/blip2-opt-2.7b\nastronaut {'vision_tokens': [1, 257, 1408], 'query_tokens': [1, 32, 768], 'projected_queries': [1, 32, 2560]}\ncoffee {'vision_tokens': [1, 257, 1408], 'query_tokens': [1, 32, 768], 'projected_queries': [1, 32, 2560]}\nActual CPU profile checked: True\nNo BLIP-2 training was performed.",
+        "origin": "author-checked-recorded-evidence-calculation"
+      },
+      "supportFiles": [
+        "src/data/retrieval-results.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/q-former.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e6-q-former.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e6-q-former",
+      "title": "Q Former evidence calculation",
+      "concepts": [
+        "q-former"
+      ],
+      "sourceSections": [
+        "book-ch09-q-former"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e6/q_former.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "learned query values: 24576\nbiased projection parameters: 1968640\nactual query output: [1, 32, 768]\nactual projected output: [1, 32, 2560]",
+        "origin": "author-checked-recorded-evidence-calculation"
+      },
+      "supportFiles": [
+        "src/data/retrieval-results.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/image-captioning.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e6-image-captioning.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e6-image-captioning",
+      "title": "Image Captioning evidence calculation",
+      "concepts": [
+        "image-captioning"
+      ],
+      "sourceSections": [
+        "book-ch09-captioning"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e6/image_captioning.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "image: astronaut prompt: ''\nraw generation: a woman in an orange space suit with a space shuttle\n\noutput cap: 12\nimage: coffee prompt: 'Question: What is in the cup? Answer:'\nraw generation: Question: What is in the cup? Answer: Espresso\n\noutput cap: 12\nInspect the actual image before accepting any descriptive detail.",
+        "origin": "author-checked-recorded-evidence-calculation"
+      },
+      "supportFiles": [
+        "src/data/retrieval-results.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/multimodal-chat.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e6-multimodal-chat.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e6-multimodal-chat",
+      "title": "Multimodal Chat evidence calculation",
+      "concepts": [
+        "multimodal-chat"
+      ],
+      "sourceSections": [
+        "book-ch09-multimodal-chat"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e6/multimodal_chat.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "single-image pixel shape: [1, 1, 3, 512, 512]\nprice answer: The exact price of this drink is not mentioned in the image.\nsplit-images pixel shape: [1, 13, 3, 512, 512]\nprice answer: The drink is priced at 100.\nThe second-turn history also changes with the first generated answer.",
+        "origin": "author-checked-recorded-evidence-calculation"
+      },
+      "supportFiles": [
+        "src/data/retrieval-results.json"
+      ]
     }
   ]
 }

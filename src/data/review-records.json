@@ -7,7 +7,11 @@
       "status": "author-reviewed",
       "independentReview": false,
       "reviewer": "Implementing assistant (author technical pass)",
-      "concepts": ["tokenization", "lora", "named-entity-recognition"],
+      "concepts": [
+        "tokenization",
+        "lora",
+        "named-entity-recognition"
+      ],
       "evidence": "docs/reviews/e2-reference-lessons.md",
       "pending": [
         "Independent technical/editorial review",
@@ -120,6 +124,44 @@
         "windowed-memory"
       ],
       "evidence": "docs/reviews/e5-workflows.md",
+      "pending": [
+        "Independent technical/editorial review",
+        "Beginner pilot feedback"
+      ],
+      "accepted": false
+    },
+    {
+      "id": "e6-retrieval-author-review-2026-11-24",
+      "date": "2026-11-24",
+      "status": "author-reviewed",
+      "independentReview": false,
+      "reviewer": "Implementing assistant (author technical pass)",
+      "concepts": [
+        "agentic-rag",
+        "blip-2",
+        "clip",
+        "dense-retrieval",
+        "document-chunking",
+        "grounded-generation",
+        "image-captioning",
+        "local-model-rag",
+        "multi-hop-rag",
+        "multi-query-rag",
+        "multimodal-chat",
+        "multimodal-embeddings",
+        "multimodal-preprocessing",
+        "openclip",
+        "q-former",
+        "query-rewriting",
+        "query-routing",
+        "rag",
+        "rag-evaluation",
+        "reranking",
+        "retrieval-metrics",
+        "semantic-search",
+        "vision-transformers"
+      ],
+      "evidence": "docs/reviews/e6-retrieval-and-multimodal.md",
       "pending": [
         "Independent technical/editorial review",
         "Beginner pilot feedback"

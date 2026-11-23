@@ -1,98 +1,129 @@
 ---
-title: Image captioning
-description: Image captioning generates a short textual description from visual input.
-kind: concept
+title: "Image captioning"
+description: "Image captioning generates a text description conditioned on actual image pixels. It differs from choosing a matching caption embedding, and its descriptive details require visual support even when the sentence is fluent."
+kind: "concept"
 conceptId: image-captioning
 chapter: 9
-part: applications
-summary: Image captioning generates a short textual description from visual input.
-parent: chapter-09
-prerequisites: [blip-2]
-related: [blip-2, multimodal-chat]
-level: intermediate
-tags: [applications, chapter-09]
+part: "applications"
+summary: "Image captioning generates a text description conditioned on actual image pixels. It differs from choosing a matching caption embedding, and its descriptive details require visual support even when the sentence is fluent."
+parent: "blip-2"
+prerequisites: ["blip-2", "multimodal-preprocessing"]
+related: []
+level: "intermediate"
+tags: ["applications", "chapter-09"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e6-retrieval-author-review-2026-11-24
+learningObjectives: ["Distinguish generated descriptions from embedding matches.", "Inspect unedited genuine model captions and VQA.", "Identify unsupported details and output-cap effects."]
+bookSections: ["book-ch09-captioning"]
+labHref: "/labs/retrieval-and-multimodal/"
+aliases: ["image-to-text", "visual caption generation"]
+exampleIds: ["e6-image-captioning", "blip2-captioning"]
+relationshipReasons: {"blip-2": "BLIP-2 provides the actual vision-to-language generation architecture in this lab.", "multimodal-preprocessing": "Multimodal preprocessing fixes the image evidence available before any caption token is generated."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { MultimodalLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import RetrievalEvidence from '../../../components/RetrievalEvidence.astro';
+import { VisualGeneration } from '../../../components/simulations/RetrievalLabs';
 
 <ConceptPrimer id="image-captioning" />
 
 ## Definition and intuition
 
-Image captioning generates a short textual description from visual input.
+Image captioning generates a text description conditioned on actual image pixels. It differs from choosing a matching caption embedding, and its descriptive details require visual support even when the sentence is fluent.
 
-Chapter 9 connects images and language. A shared vector space supports matching, while a generation model needs an additional path from visual features to text tokens.
+Read this lesson as a sequence: identify the input, follow the transformation, inspect the result, and explain a failure. The worked example and recorded lab below make those boundaries visible.
 
-## Before you start
+<ReferenceBrief objectives={["Distinguish generated descriptions from embedding matches.", "Inspect unedited genuine model captions and VQA.", "Identify unsupported details and output-cap effects."]} prerequisites="blip-2, multimodal-preprocessing" scope="A specific teaching calculation or recorded-run replay, connected to actual pinned model execution. Independent teaching review remains pending." />
 
-Read [BLIP-2](/llm-concept-atlas/concepts/blip-2/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **image captioning** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Generation has its own evidence boundary
 
-1. **Prepare:** Preprocess the image and extract visual features
-2. **Transform:** Condition a text decoder on those features
-3. **Inspect:** Evaluate whether the caption is accurate, useful, and appropriately specific.
+A captioning model receives processed pixel tensors, uses its vision-language interface, and predicts text tokens. The source photograph, actual processor view, output cap, and unedited continuation are all part of the record. A caption that names a plausible object may reflect prior associations rather than something visible in this particular input.
 
-### The important distinction
+### The genuine BLIP-2 path
 
-The decoder conditions on visual features and previously generated words, so each next token can carry uncertainty or inherited error. A caption should describe visible evidence at the desired level of detail. Human review is especially important when captions are used as accessibility text rather than only search metadata.
+L14 uses the actual Salesforce checkpoint for captioning/VQA in the supported heavy Linux CPU profile. Its vision, Q-Former, and language-projection outputs are recorded. Empty caption text is passed through the chosen processor contract explicitly, while text IDs remain integers and pixel values retain their declared floating type. A separate small chat backend is labeled as a different architecture.
+
+### Inspect more than one notion of quality
+
+Ask whether the description covers salient visible objects, invents properties, omits important details, or stops mid-sentence. A short output cap can truncate a useful description without proving a model has no further knowledge. Familiar sample photos do not make an independent benchmark, and the lab does not turn a favorable caption into a general quality claim.
 
 ## Worked example
 
-A photo of a brown dog on grass should produce a caption about the dog and grass, not an invented owner or location. One caption cannot capture every visible detail. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+The astronaut photograph can support a description of visible clothing and objects. It cannot establish every biographical fact, unseen event, or exact price merely from pixels. Compare the original and actual processed view before judging an omission. The recorded caption and VQA output remain unedited, including uncertain or unsupported details.
 
-<LessonFlow steps={["Preprocess the image and extract visual features", "Condition a text decoder on those features", "Evaluate whether the caption is accurate, useful, and appropriately specific."]} caption="A teaching diagram for Image captioning. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
 
-## Try the interactive lab
+Predict the outcome before changing a control. Controls either select actual recorded runs or recalculate a clearly labeled mathematical exercise. They do not download model weights or call a hosted provider in your browser.
 
-<MultimodalLab client:visible />
-
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+<VisualGeneration client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+From the repository root, run `python3 scripts/run-examples.py --id e6-image-captioning --offline` after installing the foundation environment. This standard-library example calculates the stated mechanism or replays hash-linked actual model evidence from the published snapshot. It does not perform a fresh neural-model inference. The complete local/CI implementation and execution contract are linked immediately below.
+
+{/* example:e6-image-captioning:start */}
 
 ```python
-features = {"animal": 0.9, "road": 0.1}
-if features["animal"] > features["road"]:
-    print("An animal is in the picture.")
-else:
-    print("A road is in the picture.")
+import json
+from pathlib import Path
+data = json.loads(Path('src/data/retrieval-results.json').read_text())
+for row in data['caption']['rows']:
+    print('image:',row['image_id'],'prompt:',repr(row['prompt']))
+    print('raw generation:',row['raw'])
+    print('output cap:',row['max_new_tokens'])
+print('Inspect the actual image before accepting any descriptive detail.')
 ```
 
-**Expected output:**
+{/* example:e6-image-captioning:end */}
+
+Recorded mechanism output:
 
 ```text
-An animal is in the picture.
+image: astronaut prompt: ''
+raw generation: a woman in an orange space suit with a space shuttle
+
+output cap: 12
+image: coffee prompt: 'Question: What is in the cup? Answer:'
+raw generation: Question: What is in the cup? Answer: Espresso
+
+output cap: 12
+Inspect the actual image before accepting any descriptive detail.
 ```
 
-**What the code shows:** The two hand-written feature scores choose a fixed sentence. This makes the feature-to-text decision visible, but a real captioner learns visual features and token generation. The [official chapter 9 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter09) develops the corresponding model-based implementation.
+<RetrievalEvidence id="blip2-captioning" />
 
 ## When to use it
 
-Use captions for accessibility drafts, image indexing, and media search with human review where needed. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use captioning to draft searchable descriptions or accessibility text with appropriate review. Tie any description to its actual input and task requirements, and retain a way to inspect the image that produced it.
 
 ## Limits and common mistakes
 
-- Captioners can omit small details or invent plausible context; reference metrics miss some errors.
-- **Failure to look for:** The caption says “a dog in a park” although only an indoor rug is visible.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+A caption is not a complete image interpretation, object detector, or factual database. Cropping and resizing can remove evidence. Human assessment of coverage and unsupported details remains necessary; no broad captioning accuracy or production accessibility certification is claimed.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First preprocess the image and extract visual features Then condition a text decoder on those features Finally evaluate whether the caption is accurate, useful, and appropriately specific.</p></details>
+<details>
+<summary>How does caption generation differ from CLIP matching?</summary>
 
-<details><summary>What would make the result misleading?</summary><p>The caption says “a dog in a park” although only an indoor rug is visible.</p></details>
+CLIP ranks compatibility between encoded inputs; captioning predicts a new text continuation conditioned on image features.
+
+</details>
+
+<details>
+<summary>Why preserve an output-cap flag or setting?</summary>
+
+It distinguishes possible truncation from a complete description and prevents treating a cut-off sentence as the model’s full intended answer.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 9 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 9 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter09). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 9 of *Hands-On Large Language Models*. The [complete L12–L14 lab](/llm-concept-atlas/labs/retrieval-and-multimodal/) links exact source, pinned environments, data/model provenance, raw failure traces, and author-review limitations. Compare the [authors’ pinned chapter 9 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter09) for the original workflow. The source PDF and book artwork are not redistributed.
 
 <ConceptConnections id="image-captioning" />

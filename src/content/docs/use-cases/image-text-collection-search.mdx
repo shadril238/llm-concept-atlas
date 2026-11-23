@@ -1,0 +1,36 @@
+---
+title: Image/text collection search
+description: Build an inspectable photo search prototype with real vectors and visible preprocessing.
+kind: use-case
+lastReviewed: 2026-11-24
+---
+
+import { VisionExplorer, PatchExplorer } from '../../../components/simulations/RetrievalLabs';
+
+Search a small licensed photo collection with natural language. Start with actual OpenCLIP embeddings rather than handwritten similarity scores. A reader should see **which photograph ranked, what pixels the model received, and why a ranking score is limited**.
+
+## 1. Declare the collection and representation
+
+The fixture contains three unchanged source PNGs: NASA's public-domain astronaut portrait, Stefan van der Walt's CC0 cat, and Rachel Michetti's CC0 coffee image. Per-file credits, source URLs, dimensions and hashes live in the image manifest. Familiar photographs may overlap model pretraining, so this is a mechanism exercise. Add new licensed images and fresh queries for an independent evaluation.
+
+Run `openclip-retrieval` through [L14 setup](/llm-concept-atlas/labs/retrieval-and-multimodal/#set-up-and-choose-a-profile). Save image IDs, actual 512-dimensional unit embeddings, processor configuration, model revision and query text. The script reloads stored vectors and checks its similarity matrix.
+
+## 2. Inspect before trusting the ranking
+
+<VisionExplorer client:visible />
+
+Compare the original rectangular coffee picture with the actual square model input. Center cropping discards visual information. Inverse-normalization makes the selected input viewable; it does not undo a crop. Compare bare object labels against descriptive captions and inspect text token IDs. Change the candidate set: cosine stays fixed while softmax renormalizes. Neither establishes calibrated object-presence probability.
+
+## 3. Explain a patch and the objective
+
+<PatchExplorer client:visible />
+
+Trace one actual 32×32×3 patch through its learned projection. The encoder also uses a class token and positional information. The paired contrastive objective rewards matched image/text pairs against the batch alternatives, in both directions. Here it is computed on frozen model embeddings and independently checked; no training or improvement is claimed.
+
+## 4. Add generation as a separately evaluated feature
+
+Offer captions only if the interface can distinguish observation from inference. The [genuine BLIP-2 lab](/llm-concept-atlas/labs/retrieval-and-multimodal/#l14-genuine-blip-2) requires a heavy Linux profile; the [small visual chatbot](/llm-concept-atlas/labs/retrieval-and-multimodal/#l14-multimodal-chat) is a separate model. The coffee photograph cannot establish an exact price even when a chatbot confidently produces one.
+
+**Deliverable:** an inspectable gallery with search text, rankings, source credits, original/processed comparison, and explicit empty/no-result state. For an external dataset, freeze relevance judgments before comparing queries/crops. Report retrieval quality separately from generated-caption support. Explain one crop loss and one unsupported generated detail using actual traces.
+
+Continue through the [multimodal learning path](/llm-concept-atlas/paths/from-pixels-to-multimodal-answers/).

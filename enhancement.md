@@ -2,7 +2,7 @@
 
 **Prepared:** 2026-11-18  
 **Last updated:** 2026-11-19  
-**Status:** E0 source inventory and initial lesson audit, and E1 infrastructure implemented; E2–E5 implementation delivered, independent review pending; E6–E10 pending. See the [gap report](./docs/audits/book-gap-report.md) and [audit guide](./docs/audits/README.md).
+**Status:** E0 source inventory and initial lesson audit, and E1 infrastructure implemented; E2–E6 implementation delivered, independent review pending; E7–E10 pending. See the [gap report](./docs/audits/book-gap-report.md) and [audit guide](./docs/audits/README.md).
 **Baseline:** Repository commit `a6b3ec4`, following the original Phases 1–5 in [plan.md](./plan.md).  
 **Source edition:** _Hands-On Large Language Models_, Jay Alammar and Maarten Grootendorst, first edition, September 2024.  
 **Primary goal:** A learner can explain, trace, implement, evaluate, and apply the book's ideas without depending on unexplained terminology or disconnected code snippets.
@@ -881,11 +881,11 @@ Use enhancement phase IDs **E0–E10** to distinguish this work from the origina
 
 **Depends on:** E4–E5; foundation embeddings from E3.
 
-- [ ] Complete Chapter 8–9 work, including advanced retrieval techniques and actual multimodal preprocessing.
-- [ ] Complete L12–L14 and the grounded-document and image/text projects.
-- [ ] Add a held-out retrieval set, absent-answer cases, citation checks, and stage-specific evaluation.
-- [ ] Add authentic image input/output records with provenance and separate hardware profiles.
-- [ ] Upgrade the RAG path and create the multimodal learning route.
+- [x] Complete Chapter 8–9 work, including advanced retrieval techniques and actual multimodal preprocessing.
+- [x] Complete L12–L14 and the grounded-document and image/text projects.
+- [x] Add a held-out retrieval set, absent-answer cases, citation checks, and stage-specific evaluation.
+- [x] Add authentic image input/output records with provenance and separate hardware profiles.
+- [x] Upgrade the RAG path and create the multimodal learning route.
 
 **Gate:** Real model workflows run in their supported profiles; sources/citations and processed model inputs are inspectable; recorded-output browsing is clearly labeled.
 
@@ -1060,10 +1060,10 @@ These references support the implementation direction, not a claim that all prop
 | E3: foundations | Implemented; review pending | 32 rewritten/new lessons plus E2 tokenization, L01–L06 CPU evidence, graph/glossary/path updates; independent acceptance open. |
 | E4: classification and topics         | Implemented; review pending | 15 expanded/new lessons, L07–L08 CPU evidence, explorer projects; hosted importer documented, independent acceptance open.                                                    |
 | E5: prompting and workflows           | Implemented; review pending | 18 expanded/new lessons; five L09–L11 local-model sources/notebooks, interactive traces, and bounded contracts.                                                    |
-| E6: RAG and multimodal                | Not started | Chapter 8–9 objectives and L12–L14 accepted.                                                    |
+| E6: RAG and multimodal                | Implemented; review pending | 23 detailed lessons, five actual-model sources/notebooks, L12–L14 interactives, grounded/image-text projects and routes.                                                    |
 | E7: embedding/representation training | Not started | Chapter 10–11 objectives and L15–L20 accepted.                                                  |
 | E8: generation adaptation             | Not started | Chapter 12 objectives and L21–L23 accepted.                                                     |
 | E9: integrated learner experience     | Not started | Discovery, navigation, practice, and accessibility/performance checks.                          |
 | E10: review and release               | Not started | Reconciled coverage, execution evidence, learner feedback, and release report.                  |
 
-**Next:** Collect independent review of E2–E5 and proceed to E6 retrieval, RAG, and multimodal workflows when authorized. Full enhancement acceptance remains tied to the documented review gates.
+**Next:** Collect independent review of E2–E6 and proceed to E7 embedding and representation training when authorized. Full enhancement acceptance remains tied to the documented review gates.

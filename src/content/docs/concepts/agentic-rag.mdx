@@ -1,0 +1,125 @@
+---
+title: "Agentic RAG"
+description: "Agentic retrieval uses a controller to choose evidence-gathering actions, execute permitted searches, observe their results, and decide whether to continue. Its actual action domain and stopping policy define its level of autonomy."
+kind: "concept"
+conceptId: agentic-rag
+chapter: 8
+part: "applications"
+summary: "Agentic retrieval uses a controller to choose evidence-gathering actions, execute permitted searches, observe their results, and decide whether to continue. Its actual action domain and stopping policy define its level of autonomy."
+parent: "rag"
+prerequisites: ["multi-hop-rag", "agents"]
+related: []
+level: "intermediate"
+tags: ["applications", "chapter-08"]
+lessonStatus: full
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e6-retrieval-author-review-2026-11-24
+learningObjectives: ["Inspect real finite-label likelihood decisions.", "Follow executed searches and their observations.", "Explain stopping rules and scored-token work."]
+bookSections: ["book-ch08-agentic-rag"]
+labHref: "/labs/retrieval-and-multimodal/"
+aliases: ["agentic retrieval", "bounded source controller"]
+exampleIds: ["e6-agentic-rag", "grounded-retrieval"]
+relationshipReasons: {"multi-hop-rag": "Multi-hop RAG establishes the dependence between successive evidence searches.", "agents": "Agent controllers add source actions, observations and explicit stop rules to that loop."}
+---
+
+import ConceptPrimer from '../../../components/ConceptPrimer.astro';
+import ConceptConnections from '../../../components/ConceptConnections.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import RetrievalEvidence from '../../../components/RetrievalEvidence.astro';
+import { GroundedExplorer } from '../../../components/simulations/RetrievalLabs';
+
+<ConceptPrimer id="agentic-rag" />
+
+## Definition and intuition
+
+Agentic retrieval uses a controller to choose evidence-gathering actions, execute permitted searches, observe their results, and decide whether to continue. Its actual action domain and stopping policy define its level of autonomy.
+
+Read this lesson as a sequence: identify the input, follow the transformation, inspect the result, and explain a failure. The worked example and recorded lab below make those boundaries visible.
+
+<ReferenceBrief objectives={["Inspect real finite-label likelihood decisions.", "Follow executed searches and their observations.", "Explain stopping rules and scored-token work."]} prerequisites="multi-hop-rag, agents" scope="A specific teaching calculation or recorded-run replay, connected to actual pinned model execution. Independent teaching review remains pending." />
+
+## How it works
+
+### A finite, actual model decision
+
+The local controller uses the real FLAN-T5 model to score a shared set of collection labels by mean target-token log likelihood. It chooses among library, rooms, and operations; finish is available only after evidence. This is finite-label scoring, not free-form constrained generation or a hidden reasoning trace. The candidate scores and scored-token work are recorded.
+
+### Action and observation
+
+The chosen source is searched using the original question. Actual returned passages become observations for the next decision. At most three searches are allowed; a repeated source or invalid decision stops the loop. A final draft receives only the selected evidence under the same budget. This restricted controller does not generate arbitrary tools, operands, shell commands, or write side effects.
+
+### Bounded termination is not competence
+
+The real model can repeat a source, stop without all support, or generate a wrong final answer. The trace preserves those outcomes. Earlier free-form planner-format failures remain part of the author’s implementation notes rather than being reported as successful tool use. L13 is a purpose-built inspected mechanism study; it does not claim untouched benchmark performance or unrestricted agent reliability.
+
+## Worked example
+
+A source decision can retrieve the Saturday-hours rule and still repeat the same collection on its next step. The controller stops at repeated-source and records the actual observation. Another question may require rooms followed by operations, but the model need not choose that path. Compare search count, stop reason, source coverage, and raw answer separately.
+
+## Try the experiment
+
+Predict the outcome before changing a control. Controls either select actual recorded runs or recalculate a clearly labeled mathematical exercise. They do not download model weights or call a hosted provider in your browser.
+
+<GroundedExplorer client:visible />
+
+## Implement it
+
+From the repository root, run `python3 scripts/run-examples.py --id e6-agentic-rag --offline` after installing the foundation environment. This standard-library example calculates the stated mechanism or replays hash-linked actual model evidence from the published snapshot. It does not perform a fresh neural-model inference. The complete local/CI implementation and execution contract are linked immediately below.
+
+{/* example:e6-agentic-rag:start */}
+
+```python
+import json
+from pathlib import Path
+data = json.loads(Path('src/data/retrieval-results.json').read_text())
+row = next(r for r in data['grounded']['rows'] if r['id']=='eval-hours' and r['variant']=='agentic')
+first = row['plan']['calls'][0]
+assert 'finish' not in first['choices']
+assert first['raw']==first['choices'][max(range(len(first['choices'])),key=lambda i:first['mean_log_probabilities'][i])]
+print('actual finite decision:',first['raw'])
+print('searches:',row['search_calls'],'stop:',row['plan']['stop_reason'])
+print('scored tokens:',row['scored_tokens'],'generated tokens:',row['output_tokens'])
+```
+
+{/* example:e6-agentic-rag:end */}
+
+Recorded mechanism output:
+
+```text
+actual finite decision: library
+searches: 1 stop: repeated-source
+scored tokens: 14 generated tokens: 3
+```
+
+<RetrievalEvidence id="grounded-retrieval" />
+
+## When to use it
+
+Use a bounded evidence controller when the required source is uncertain and subsequent actions can benefit from observations. Begin with a small allowlist and measured stopping behavior before expanding the tool space.
+
+## Limits and common mistakes
+
+The model chooses a collection, while the application supplies the original query and enforces the domain. This is substantially narrower than a general autonomous retrieval agent. A valid finite label, a completed loop, or a repeated high score does not establish answer truth.
+
+## Check your understanding
+
+<details>
+<summary>What does the model actually control here?</summary>
+
+It scores and selects a permitted collection label or finish after evidence. The application controls the original search query, tool execution, and limits.
+
+</details>
+
+<details>
+<summary>Why count scored tokens separately from generated tokens?</summary>
+
+Candidate likelihood evaluation performs decoder work without generating a free-form answer. Treating it as zero work would understate the controller’s computation.
+
+</details>
+
+## Connections and sources
+
+This original lesson follows Chapter 8 of *Hands-On Large Language Models*. The [complete L12–L14 lab](/llm-concept-atlas/labs/retrieval-and-multimodal/) links exact source, pinned environments, data/model provenance, raw failure traces, and author-review limitations. Compare the [authors’ pinned chapter 8 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter08) for the original workflow. The source PDF and book artwork are not redistributed.
+
+<ConceptConnections id="agentic-rag" />

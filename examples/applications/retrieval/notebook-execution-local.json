@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-23T18:28:35.324753+00:00",
+  "platform": "macOS-27.2.1-arm64-arm-64bit",
+  "lockSha256": "602d0fb1fd106bb2732671f3e26a21c432d677748eb583d64038f09987324248",
+  "verifierSha256": "fa99eea436c34a3d8a718981ee8ed034d8af9e5d2efa4ff34d0cea14371baf86",
+  "python": "3.11.18",
+  "records": [
+    {
+      "path": "examples/applications/retrieval/notebooks/grounded-retrieval.ipynb",
+      "sha256": "480dadb30a424e86fa2fe3bc89b5230d8dc382982ae1b8f97b48dea928acb084",
+      "method": "Fresh actual Jupyter kernel; all cells executed in order via nbclient",
+      "codeCells": 4,
+      "status": "passed"
+    },
+    {
+      "path": "examples/applications/retrieval/notebooks/multimodal-chat.ipynb",
+      "sha256": "76a8e6f26a3640c27d8068c5f7b29efe894fba95cede3b9c8c1116ab83a73cce",
+      "method": "Fresh actual Jupyter kernel; all cells executed in order via nbclient",
+      "codeCells": 4,
+      "status": "passed"
+    },
+    {
+      "path": "examples/applications/retrieval/notebooks/openclip-retrieval.ipynb",
+      "sha256": "e7f45418268b97f5750e11f8db4dced95d42f12ef24cecaaab2f2ac5691d9dfd",
+      "method": "Fresh actual Jupyter kernel; all cells executed in order via nbclient",
+      "codeCells": 4,
+      "status": "passed"
+    },
+    {
+      "path": "examples/applications/retrieval/notebooks/retrieval-benchmark.ipynb",
+      "sha256": "970e4c0566e4b82e4f95b7159f7a77aa8e901e497813f40894bf0f228a75c376",
+      "method": "Fresh actual Jupyter kernel; all cells executed in order via nbclient",
+      "codeCells": 4,
+      "status": "passed"
+    }
+  ]
+}

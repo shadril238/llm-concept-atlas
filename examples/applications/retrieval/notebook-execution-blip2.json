@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-23T18:24:59.594350+00:00",
+  "platform": "Linux-7.0.0-1020-azure-x86_64-with-glibc2.43",
+  "lockSha256": "602d0fb1fd106bb2732671f3e26a21c432d677748eb583d64038f09987324248",
+  "verifierSha256": "fa99eea436c34a3d8a718981ee8ed034d8af9e5d2efa4ff34d0cea14371baf86",
+  "python": "3.11.18",
+  "records": [
+    {
+      "path": "examples/applications/retrieval/notebooks/blip2-captioning.ipynb",
+      "sha256": "ec3e29882dc19348ec7396bd5cc2e1f668ea58ef885b5290e5de0789051c0778",
+      "method": "Fresh actual Jupyter kernel; all cells executed in order via nbclient",
+      "codeCells": 4,
+      "status": "passed"
+    }
+  ]
+}

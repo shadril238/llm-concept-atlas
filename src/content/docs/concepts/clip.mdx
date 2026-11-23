@@ -1,98 +1,126 @@
 ---
-title: CLIP
-description: CLIP learns aligned image and text embeddings from paired examples using a contrastive objective.
-kind: concept
+title: "CLIP"
+description: "CLIP learns image and text representations from paired examples by making matching pairs more compatible than other pairs in a batch. Its two encoders support cross-modal retrieval; CLIP itself is not a text-answer generator."
+kind: "concept"
 conceptId: clip
 chapter: 9
-part: applications
-summary: CLIP learns aligned image and text embeddings from paired examples using a contrastive objective.
-parent: chapter-09
-prerequisites: [multimodal-embeddings]
-related: [multimodal-embeddings, openclip]
-level: intermediate
-tags: [applications, chapter-09]
+part: "applications"
+summary: "CLIP learns image and text representations from paired examples by making matching pairs more compatible than other pairs in a batch. Its two encoders support cross-modal retrieval; CLIP itself is not a text-answer generator."
+parent: "multimodal-embeddings"
+prerequisites: ["multimodal-embeddings"]
+related: []
+level: "intermediate"
+tags: ["applications", "chapter-09"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e6-retrieval-author-review-2026-11-24
+learningObjectives: ["Calculate both directional paired cross entropies.", "Explain in-batch negative assumptions.", "Separate frozen inference from encoder training."]
+bookSections: ["book-ch09-clip", "book-ch09-clip-training"]
+labHref: "/labs/retrieval-and-multimodal/"
+aliases: ["Contrastive Language-Image Pre-training", "symmetric contrastive loss", "image-text matching"]
+exampleIds: ["e6-clip", "openclip-retrieval"]
+relationshipReasons: {"multimodal-embeddings": "The paired contrastive objective learns the shared image/text representation used for retrieval."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { MultimodalLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import RetrievalEvidence from '../../../components/RetrievalEvidence.astro';
+import { PatchExplorer } from '../../../components/simulations/RetrievalLabs';
 
 <ConceptPrimer id="clip" />
 
 ## Definition and intuition
 
-CLIP learns aligned image and text embeddings from paired examples using a contrastive objective.
+CLIP learns image and text representations from paired examples by making matching pairs more compatible than other pairs in a batch. Its two encoders support cross-modal retrieval; CLIP itself is not a text-answer generator.
 
-Chapter 9 connects images and language. A shared vector space supports matching, while a generation model needs an additional path from visual features to text tokens.
+Read this lesson as a sequence: identify the input, follow the transformation, inspect the result, and explain a failure. The worked example and recorded lab below make those boundaries visible.
 
-## Before you start
+<ReferenceBrief objectives={["Calculate both directional paired cross entropies.", "Explain in-batch negative assumptions.", "Separate frozen inference from encoder training."]} prerequisites="multimodal-embeddings" scope="A specific teaching calculation or recorded-run replay, connected to actual pinned model execution. Independent teaching review remains pending." />
 
-Read [Multimodal embeddings](/llm-concept-atlas/concepts/multimodal-embeddings/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **CLIP** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### A batch is a matching problem
 
-1. **Prepare:** Encode a batch of images and captions into two sets of vectors
-2. **Transform:** Increase similarity for matched pairs relative to mismatched pairs
-3. **Inspect:** Use the trained encoders for zero-shot matching or retrieval.
+For N paired images and captions, normalized image and text vectors produce an N×N cosine matrix. A learned positive logit scale multiplies those similarities. The diagonal entries correspond to the known pairings. Image-to-text cross entropy asks which caption matches each image; text-to-image cross entropy asks which image matches each caption. The symmetric objective averages both directions.
 
-### The important distinction
+### What the negatives assume
 
-CLIP uses separate image and text encoders, so candidate captions can be encoded and compared efficiently. Its contrastive loss makes matched pairs score higher within a batch. Zero-shot classification works by comparing an image with text descriptions of candidate classes, which makes prompt wording consequential.
+Other items in the batch serve as negatives, even though some may be semantically related or near duplicates. That assumption affects training and explains why a valid description of more than one image can complicate the loss. L14 computes this objective from frozen real embeddings and checks it against PyTorch. Moving a loss slider recalculates arithmetic; it does not update the pretrained encoders.
+
+### Inference and score interpretation
+
+The actual OpenCLIP checkpoint uses an image class-token representation and a text end-of-text representation, projected into a shared space. Larger cosine indicates greater compatibility for that input pair, not a calibrated probability. Softmax produces relative scores among selected descriptions, and its result can change simply because another candidate was added or removed.
 
 ## Worked example
 
-Given an image of a bicycle and candidate captions “a bicycle” and “a dog,” the matched caption should score higher. The model is comparing candidates, not composing a detailed explanation. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+The three paired photos and descriptions form a real 3×3 matrix. Read one image row, then one caption column; their normalization denominators differ. Scale the logits and observe both directional losses. A low paired loss for these familiar samples is not evidence that the atlas trained CLIP or that the model will recognize every unfamiliar object.
 
-<LessonFlow steps={["Encode a batch of images and captions into two sets of vectors", "Increase similarity for matched pairs relative to mismatched pairs", "Use the trained encoders for zero-shot matching or retrieval."]} caption="A teaching diagram for CLIP. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
 
-## Try the interactive lab
+Predict the outcome before changing a control. Controls either select actual recorded runs or recalculate a clearly labeled mathematical exercise. They do not download model weights or call a hosted provider in your browser.
 
-<MultimodalLab client:visible />
-
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+<PatchExplorer client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+From the repository root, run `python3 scripts/run-examples.py --id e6-clip --offline` after installing the foundation environment. This standard-library example calculates the stated mechanism or replays hash-linked actual model evidence from the published snapshot. It does not perform a fresh neural-model inference. The complete local/CI implementation and execution contract are linked immediately below.
+
+{/* example:e6-clip:start */}
 
 ```python
-from math import sqrt
-image = (0.8, 0.6)
-captions = {"a dog": (0.7, 0.7), "a car": (-0.6, 0.8)}
-score = lambda a,b: sum(x*y for x,y in zip(a,b)) / (sqrt(sum(x*x for x in a))*sqrt(sum(y*y for y in b)))
-print(max(captions, key=lambda text: score(image, captions[text])))
+import json
+from pathlib import Path
+data = json.loads(Path('src/data/retrieval-results.json').read_text())
+import sys
+sys.path.insert(0, 'examples/foundations/src')
+from atlas_foundations.e6.vision import contrastive_loss
+v = data['vision']
+logits = [[cosine*v['logit_scale'] for cosine in row[:3]] for row in v['cosines']]
+loss = contrastive_loss(logits)
+assert abs(loss['loss']-v['contrastive']['loss'])<1e-10
+print({key:round(loss[key],6) for key in ['image_to_text','text_to_image','loss']})
+print('No weights were updated.')
 ```
 
-**Expected output:**
+{/* example:e6-clip:end */}
+
+Recorded mechanism output:
 
 ```text
-a dog
+{'image_to_text': 1.4e-05, 'text_to_image': 2e-05, 'loss': 1.7e-05}
+No weights were updated.
 ```
 
-**What the code shows:** The toy image vector is compared with caption vectors using cosine similarity. The highest score wins among the offered candidates; no image pixels are processed. The [official chapter 9 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter09) develops the corresponding model-based implementation.
+<RetrievalEvidence id="openclip-retrieval" />
 
 ## When to use it
 
-Use CLIP-style models for cross-modal search or label scoring without task-specific classifier training. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use CLIP-style encoders for cross-modal search and candidate-description matching when text labels are available but a task-specific classification head is unnecessary. Evaluate prompt wording, domain coverage, and ambiguous descriptions.
 
 ## Limits and common mistakes
 
-- Performance depends on training data and candidate wording; ranking is not grounded scene understanding.
-- **Failure to look for:** A spurious background cue makes an incorrect caption score above the true object.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+CLIP does not directly produce long grounded answers or guarantee fine-grained counting. A candidate-set probability is not object certainty. The corpus is tiny, familiar, and potentially present in pretraining, so no independent vision benchmark or training-improvement claim is made.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First encode a batch of images and captions into two sets of vectors Then increase similarity for matched pairs relative to mismatched pairs Finally use the trained encoders for zero-shot matching or retrieval.</p></details>
+<details>
+<summary>Why use both row and column cross entropy?</summary>
 
-<details><summary>What would make the result misleading?</summary><p>A spurious background cue makes an incorrect caption score above the true object.</p></details>
+Each direction tests matching from a different modality and has its own normalization. The symmetric average trains paired compatibility in both directions.
+
+</details>
+
+<details>
+<summary>Does changing the displayed logit scale retrain the encoder?</summary>
+
+No. The browser recomputes loss from fixed recorded similarities. Training would require gradients, optimizer updates, and a new evaluation.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 9 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 9 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter09). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 9 of *Hands-On Large Language Models*. The [complete L12–L14 lab](/llm-concept-atlas/labs/retrieval-and-multimodal/) links exact source, pinned environments, data/model provenance, raw failure traces, and author-review limitations. Compare the [authors’ pinned chapter 9 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter09) for the original workflow. The source PDF and book artwork are not redistributed.
 
 <ConceptConnections id="clip" />
