@@ -189,3 +189,4 @@ Generated from the registry and execution records. Execution checks do not const
 | local-model-chain | B | json-invariants | [Passed 2026-11-21T17:57:23.288975+00:00](records/local-model-chain.json) |
 | memory-policies | B | json-invariants | [Passed 2026-11-21T17:57:26.447439+00:00](records/memory-policies.json) |
 | bounded-tool-workflow | B | json-invariants | [Passed 2026-11-21T17:57:30.190478+00:00](records/bounded-tool-workflow.json) |
+| blip2-captioning | B | json-invariants | Unverified |

@@ -25,7 +25,7 @@ def main():
         path,
         local_files_only=True,
         use_safetensors=True,
-        torch_dtype=torch.float32,
+        dtype=torch.float32,
         device_map="auto",
         max_memory={"cpu": "1GiB"},
         offload_folder=str(offload),
@@ -61,7 +61,7 @@ def main():
         ("coffee", "Question: What is in the cup? Answer:", 12),
     ]:
         image = Image.open(ROOT / f"public/images/e6/{id}.png").convert("RGB")
-        inputs = processor(images=image, text=prompt or None, return_tensors="pt")
+        inputs = processor(images=image, text=prompt, return_tensors="pt")
         assert (
             inputs["input_ids"].dtype == torch.int64
             and inputs["pixel_values"].dtype == torch.float32

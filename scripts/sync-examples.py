@@ -344,6 +344,41 @@ if not args.check:
             )
             + "\n"
         )
+# E6 staged notebooks import the same shared model entrypoints.
+import sys
+
+sys.path.insert(0, str(ROOT / "examples/applications/retrieval"))
+from notebook_views import SPECS as retrieval_specs, notebook as retrieval_notebook
+
+for eid in retrieval_specs:
+    outputs[f"examples/applications/retrieval/notebooks/{eid}.ipynb"] = (
+        json.dumps(retrieval_notebook(eid), indent=2) + "\n"
+    )
+if not args.check:
+    retrieval_paths = {
+        key: ROOT / "examples/artifacts" / folder / "results.json"
+        for key, folder in {
+            "retrieval": "e6-retrieval",
+            "grounded": "e6-grounded",
+            "vision": "e6-vision",
+            "caption": "e6-caption",
+            "chat": "e6-chat",
+        }.items()
+    }
+    if all(path.exists() for path in retrieval_paths.values()):
+        outputs["src/data/retrieval-results.json"] = (
+            json.dumps(
+                {
+                    key: json.loads(path.read_text())
+                    for key, path in retrieval_paths.items()
+                },
+                indent=2,
+                ensure_ascii=False,
+                allow_nan=False,
+            )
+            + "\n"
+        )
+
 # Replace only explicit source regions; surrounding explanations stay authored.
 if not args.check:
     discovery = {

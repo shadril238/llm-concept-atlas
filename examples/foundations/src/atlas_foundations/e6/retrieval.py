@@ -93,6 +93,8 @@ def chunks(text, size=2, overlap=1, mode="sentence"):
 
 
 def bm25(query, documents, k1=1.2, b=0.75):
+    if not 0 <= b <= 1 or k1 <= 0:
+        raise ValueError("Require k1>0 and 0<=b<=1")
     if not documents:
         raise ValueError("Nonempty document collection required")
     tokenize = lambda text: re.findall(r"[a-z0-9]+", text.casefold())
@@ -107,6 +109,8 @@ def bm25(query, documents, k1=1.2, b=0.75):
         score = 0.0
         for term in set(tokenize(query)):
             frequency = counts[term]
+            if not frequency:
+                continue
             idf = math.log(1 + (len(tokens) - df[term] + 0.5) / (df[term] + 0.5))
             score += (
                 idf
@@ -119,14 +123,23 @@ def bm25(query, documents, k1=1.2, b=0.75):
 
 
 def citation_metrics(claims):
-    """Human judgments are inputs, not inferred from citation existence."""
+    """Human per-link usefulness and joint citation-set support are separate inputs."""
+    for claim in claims:
+        if type(claim.get("fully_supported_by_citations")) is not bool:
+            raise ValueError(
+                "A human joint-support judgment is required for each claim"
+            )
+        if claim["fully_supported_by_citations"] and not claim["citations"]:
+            raise ValueError("An uncited claim cannot have complete citation support")
+        if any(type(link.get("supports")) is not bool for link in claim["citations"]):
+            raise ValueError("Every citation needs a human per-link support judgment")
     links = [link for claim in claims for link in claim["citations"]]
     return {
         "citation_precision": sum(link["supports"] for link in links) / len(links)
         if links
         else None,
         "citation_recall": sum(
-            any(link["supports"] for link in claim["citations"]) for claim in claims
+            claim["fully_supported_by_citations"] for claim in claims
         )
         / len(claims)
         if claims

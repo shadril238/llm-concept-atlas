@@ -5,7 +5,7 @@ import sys, json, time, hashlib
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from atlas_retrieval.common import ROOT, snapshot, save, provenance, torch
-from transformers import AutoProcessor, AutoModelForVision2Seq
+from transformers import AutoProcessor, AutoModelForImageTextToText
 from PIL import Image
 
 NAME = "HuggingFaceTB/SmolVLM-256M-Instruct"
@@ -16,12 +16,13 @@ def main():
     processor = AutoProcessor.from_pretrained(
         path, local_files_only=True, trust_remote_code=False
     )
-    model = AutoModelForVision2Seq.from_pretrained(
+    processor.image_processor.do_image_splitting = False
+    model = AutoModelForImageTextToText.from_pretrained(
         path,
         local_files_only=True,
         use_safetensors=True,
         trust_remote_code=False,
-        torch_dtype=torch.float32,
+        dtype=torch.float32,
         attn_implementation="eager",
     ).eval()
     image = Image.open(ROOT / "public/images/e6/coffee.png").convert("RGB")
@@ -43,9 +44,7 @@ def main():
         rendered = processor.apply_chat_template(
             conversation, add_generation_prompt=True
         )
-        inputs = processor(
-            text=rendered, images=[image], return_tensors="pt", do_image_splitting=False
-        )
+        inputs = processor(text=rendered, images=[image], return_tensors="pt")
         assert (
             inputs["input_ids"].dtype == torch.int64
             and inputs["pixel_values"].dtype == torch.float32

@@ -28,7 +28,12 @@ def download(name):
     )
     for item in spec["files"]:
         file = path / item["name"]
-        if file.exists() and item["sha256"]:
+        if not file.exists():
+            raise FileNotFoundError(
+                "Pinned snapshot is incomplete; finish the public download before offline execution: "
+                + item["name"]
+            )
+        if item["sha256"]:
             h = hashlib.sha256()
             with file.open("rb") as stream:
                 for block in iter(lambda: stream.read(8 * 1024 * 1024), b""):
