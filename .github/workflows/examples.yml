@@ -23,6 +23,10 @@ on:
         description: Run E5 local GGUF prompting, search, memory, and tools
         type: boolean
         default: false
+      e6_blip2:
+        description: Run genuine E6 BLIP-2 CPU/disk-offload verification (large public model download)
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
@@ -142,3 +146,23 @@ jobs:
             examples/verification/records/memory-policies*.json
             examples/verification/records/bounded-tool-workflow*.json
             examples/artifacts/e5-*/results.json
+
+  e6-blip2:
+    if: github.event_name == 'workflow_dispatch' && inputs.e6_blip2
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+        with:
+          version: "0.13.9"
+      - run: uv sync --locked --project examples/applications/retrieval
+      - run: HF_HUB_DISABLE_XET=0 python3 scripts/run-examples.py --id blip2-captioning --allow-network --record
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: e6-blip2-verification
+          path: |
+            examples/verification/records/blip2-captioning*.json
+            examples/artifacts/e6-caption/results.json
+            public/images/e6/*-blip-input.png

@@ -1,0 +1,11 @@
+{
+  "id": "atlas-community-retrieval-v1",
+  "revision": 1,
+  "path": "examples/data/fixtures/retrieval-corpus.json",
+  "sha256": "4a78594dad029ada4c2ec28e56f8f1d7d4e95766a98544635c8106c9e2c93e8a",
+  "source": "Original fictional community documents and queries authored for L12/L13. No source PDF or private data.",
+  "license": "MIT (repository LICENSE)",
+  "split": "6 design (4 answerable/2 absent), 16 evaluation (14 answerable/2 absent). Documents are the fixed searchable collection; no learned parameters are fitted on evaluation queries.",
+  "training": false,
+  "leakagePolicy": "Design-only answerability-threshold selection. Evaluation references/support IDs never enter model prompts, routing decisions, rewrite prompts, or gold-only tool domains. Small original probes do not establish broad domain quality."
+}

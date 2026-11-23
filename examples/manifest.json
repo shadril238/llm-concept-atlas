@@ -30,6 +30,11 @@
       "project": "examples/applications/workflows",
       "python": "3.11",
       "lock": "examples/applications/workflows/uv.lock"
+    },
+    "retrieval": {
+      "project": "examples/applications/retrieval",
+      "python": "3.11",
+      "lock": "examples/applications/retrieval/uv.lock"
     }
   },
   "examples": [
@@ -7802,6 +7807,71 @@
       "resultArtifact": "examples/artifacts/e5-agents/results.json",
       "resultFile": "src/data/workflow-results.json",
       "resultKey": "agents"
+    },
+    {
+      "level": "B",
+      "kind": "evaluated-workflow",
+      "environment": "retrieval",
+      "workingDirectory": ".",
+      "lesson": null,
+      "region": null,
+      "models": [
+        {
+          "id": "Salesforce/blip2-opt-2.7b",
+          "revision": "59a1ef6c1e5117b3f65523d1c6066825bcf315e3"
+        }
+      ],
+      "dataset": "examples/data/manifests/vision-images.json",
+      "seed": 42,
+      "reproducibility": "Pinned real BLIP-2, CPU float32, 1 GiB resident model-weight budget plus disk offload. Output and timing can vary by device; no CUDA execution claim.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 3600,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Versioned original task fixture; declared design/evaluation split and finite schemas.",
+      "outputSchema": "JSON invariant report plus inspectable results.json and traces.",
+      "verificationRecord": null,
+      "troubleshooting": "See examples/applications/retrieval/README.md; model-weight budget differs from total RSS and disk transfer is substantial.",
+      "id": "blip2-captioning",
+      "title": "Genuine BLIP-2 captioning and VQA with CPU/disk offload",
+      "concepts": [
+        "blip-2",
+        "image-captioning",
+        "vision-transformers"
+      ],
+      "sourceSections": [
+        "book-ch09-blip2",
+        "book-ch09-captioning",
+        "book-ch09-preprocessing",
+        "book-ch09-q-former"
+      ],
+      "entrypoint": "examples/applications/retrieval/src/atlas_retrieval/caption.py",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "actual_blip2_verified": true,
+          "offload_verified": true,
+          "processor_dtypes_verified": true
+        }
+      },
+      "supportFiles": [
+        "examples/applications/retrieval/src/atlas_retrieval/common.py",
+        "examples/applications/retrieval/src/atlas_retrieval/vision.py",
+        "examples/applications/retrieval/download_models.py",
+        "examples/applications/retrieval/models.json",
+        "examples/foundations/src/atlas_foundations/e6/retrieval.py",
+        "examples/foundations/src/atlas_foundations/e6/vision.py",
+        "examples/data/fixtures/vision-images.json",
+        "public/images/e6/astronaut.png",
+        "public/images/e6/coffee.png",
+        "public/images/e6/chelsea.png"
+      ],
+      "resultArtifact": "examples/artifacts/e6-caption/results.json",
+      "resultFile": "src/data/retrieval-results.json",
+      "resultKey": "caption"
     }
   ]
 }

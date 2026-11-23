@@ -1,0 +1,322 @@
+{
+  "sentence-transformers/all-MiniLM-L6-v2": {
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "files": [
+      {
+        "name": "1_Pooling/config.json",
+        "bytes": 190,
+        "sha256": null
+      },
+      {
+        "name": "config.json",
+        "bytes": 612,
+        "sha256": null
+      },
+      {
+        "name": "config_sentence_transformers.json",
+        "bytes": 116,
+        "sha256": null
+      },
+      {
+        "name": "data_config.json",
+        "bytes": 39265,
+        "sha256": null
+      },
+      {
+        "name": "model.safetensors",
+        "bytes": 90868376,
+        "sha256": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db"
+      },
+      {
+        "name": "modules.json",
+        "bytes": 349,
+        "sha256": null
+      },
+      {
+        "name": "sentence_bert_config.json",
+        "bytes": 53,
+        "sha256": null
+      },
+      {
+        "name": "special_tokens_map.json",
+        "bytes": 112,
+        "sha256": null
+      },
+      {
+        "name": "tokenizer.json",
+        "bytes": 466247,
+        "sha256": null
+      },
+      {
+        "name": "tokenizer_config.json",
+        "bytes": 350,
+        "sha256": null
+      },
+      {
+        "name": "vocab.txt",
+        "bytes": 231508,
+        "sha256": null
+      }
+    ]
+  },
+  "cross-encoder/ms-marco-MiniLM-L-6-v2": {
+    "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+    "files": [
+      {
+        "name": "config.json",
+        "bytes": 794,
+        "sha256": null
+      },
+      {
+        "name": "model.safetensors",
+        "bytes": 90870598,
+        "sha256": "821d1aa69520101d6e0737f78a042ae25b19e5cb9160701909d10434f4aeb0ae"
+      },
+      {
+        "name": "special_tokens_map.json",
+        "bytes": 132,
+        "sha256": null
+      },
+      {
+        "name": "tokenizer.json",
+        "bytes": 711396,
+        "sha256": null
+      },
+      {
+        "name": "tokenizer_config.json",
+        "bytes": 1330,
+        "sha256": null
+      },
+      {
+        "name": "vocab.txt",
+        "bytes": 231508,
+        "sha256": null
+      }
+    ]
+  },
+  "google/flan-t5-small": {
+    "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+    "files": [
+      {
+        "name": "config.json",
+        "bytes": 1401,
+        "sha256": null
+      },
+      {
+        "name": "generation_config.json",
+        "bytes": 147,
+        "sha256": null
+      },
+      {
+        "name": "model.safetensors",
+        "bytes": 307867048,
+        "sha256": "495fa51e204676f1a857a9fc13c4c89f3f5ba9f480b898cebca02add25e6d749"
+      },
+      {
+        "name": "special_tokens_map.json",
+        "bytes": 2201,
+        "sha256": null
+      },
+      {
+        "name": "spiece.model",
+        "bytes": 791656,
+        "sha256": "d60acb128cf7b7f2536e8f38a5b18a05535c9e14c7a355904270e15b0945ea86"
+      },
+      {
+        "name": "tokenizer.json",
+        "bytes": 2424064,
+        "sha256": null
+      },
+      {
+        "name": "tokenizer_config.json",
+        "bytes": 2539,
+        "sha256": null
+      }
+    ]
+  },
+  "timm/vit_base_patch32_clip_224.openai": {
+    "revision": "a6f597a30f7b82c51704746581f9a4e41421e878",
+    "files": [
+      {
+        "name": "config.json",
+        "bytes": 617,
+        "sha256": null
+      },
+      {
+        "name": "merges.txt",
+        "bytes": 524619,
+        "sha256": null
+      },
+      {
+        "name": "open_clip_config.json",
+        "bytes": 556,
+        "sha256": null
+      },
+      {
+        "name": "open_clip_model.safetensors",
+        "bytes": 605143284,
+        "sha256": "e6d1bd7789aa45192b3bf90570a789b478bae1b74ebcce7eddd908e83a2b7c31"
+      },
+      {
+        "name": "special_tokens_map.json",
+        "bytes": 588,
+        "sha256": null
+      },
+      {
+        "name": "tokenizer.json",
+        "bytes": 3642035,
+        "sha256": null
+      },
+      {
+        "name": "tokenizer_config.json",
+        "bytes": 706,
+        "sha256": null
+      },
+      {
+        "name": "vocab.json",
+        "bytes": 862328,
+        "sha256": null
+      }
+    ]
+  },
+  "Salesforce/blip2-opt-2.7b": {
+    "revision": "59a1ef6c1e5117b3f65523d1c6066825bcf315e3",
+    "files": [
+      {
+        "name": "added_tokens.json",
+        "bytes": 23,
+        "sha256": null
+      },
+      {
+        "name": "config.json",
+        "bytes": 1029,
+        "sha256": null
+      },
+      {
+        "name": "generation_config.json",
+        "bytes": 141,
+        "sha256": null
+      },
+      {
+        "name": "merges.txt",
+        "bytes": 456318,
+        "sha256": null
+      },
+      {
+        "name": "model-00001-of-00002.safetensors",
+        "bytes": 9996328120,
+        "sha256": "b81228c9ac1b3dee1731ee71d51fe3b2c34f915019c44c25a793b51300ae24fc"
+      },
+      {
+        "name": "model-00002-of-00002.safetensors",
+        "bytes": 4982879016,
+        "sha256": "536bd73b8f1de7d94f503b23fea2eaa4f7f3ea5f74f8f874fcb21d6df1555a19"
+      },
+      {
+        "name": "model.safetensors.index.json",
+        "bytes": 121654,
+        "sha256": null
+      },
+      {
+        "name": "preprocessor_config.json",
+        "bytes": 432,
+        "sha256": null
+      },
+      {
+        "name": "processor_config.json",
+        "bytes": 68,
+        "sha256": null
+      },
+      {
+        "name": "pytorch_model.bin.index.json",
+        "bytes": 121727,
+        "sha256": null
+      },
+      {
+        "name": "special_tokens_map.json",
+        "bytes": 548,
+        "sha256": null
+      },
+      {
+        "name": "tokenizer.json",
+        "bytes": 3558841,
+        "sha256": null
+      },
+      {
+        "name": "tokenizer_config.json",
+        "bytes": 882,
+        "sha256": null
+      },
+      {
+        "name": "vocab.json",
+        "bytes": 798293,
+        "sha256": null
+      }
+    ]
+  },
+  "HuggingFaceTB/SmolVLM-256M-Instruct": {
+    "revision": "d039ab0d4b9311b617e8ffec1d06c8464364aeb3",
+    "files": [
+      {
+        "name": "added_tokens.json",
+        "bytes": 4739,
+        "sha256": null
+      },
+      {
+        "name": "chat_template.json",
+        "bytes": 516,
+        "sha256": null
+      },
+      {
+        "name": "config.json",
+        "bytes": 7353,
+        "sha256": null
+      },
+      {
+        "name": "generation_config.json",
+        "bytes": 136,
+        "sha256": null
+      },
+      {
+        "name": "merges.txt",
+        "bytes": 466391,
+        "sha256": null
+      },
+      {
+        "name": "model.safetensors",
+        "bytes": 513028808,
+        "sha256": "74dea5904032e5ae99a2e0eef5179e6ac0f1dedc3ab0c7c2a5d4d387c843203e"
+      },
+      {
+        "name": "preprocessor_config.json",
+        "bytes": 486,
+        "sha256": null
+      },
+      {
+        "name": "processor_config.json",
+        "bytes": 68,
+        "sha256": null
+      },
+      {
+        "name": "special_tokens_map.json",
+        "bytes": 1069,
+        "sha256": null
+      },
+      {
+        "name": "tokenizer.json",
+        "bytes": 3548256,
+        "sha256": null
+      },
+      {
+        "name": "tokenizer_config.json",
+        "bytes": 28336,
+        "sha256": null
+      },
+      {
+        "name": "vocab.json",
+        "bytes": 800662,
+        "sha256": null
+      }
+    ]
+  }
+}

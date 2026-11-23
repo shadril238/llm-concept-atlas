@@ -1,0 +1,49 @@
+{
+  "id": "atlas-vision-images-v1",
+  "images": [
+    {
+      "id": "astronaut",
+      "path": "public/images/e6/astronaut.png",
+      "source": "https://raw.githubusercontent.com/scikit-image/scikit-image/v0.25.2/skimage/data/astronaut.png",
+      "credit": "NASA / Eileen Collins photograph",
+      "license": "Public domain",
+      "sha256": "88431cd9653ccd539741b555fb0a46b61558b301d4110412b5bc28b5e3ea6cb5",
+      "original_size": [
+        512,
+        512
+      ],
+      "alt": "Portrait of astronaut Eileen Collins wearing an orange flight suit",
+      "license_evidence": "https://scikit-image.org/docs/0.25.x/api/skimage.data.html#skimage.data.astronaut"
+    },
+    {
+      "id": "chelsea",
+      "path": "public/images/e6/chelsea.png",
+      "source": "https://raw.githubusercontent.com/scikit-image/scikit-image/v0.25.2/skimage/data/chelsea.png",
+      "credit": "Stefan van der Walt",
+      "license": "CC0",
+      "sha256": "596aa1e7cb875eb79f437e310381d26b338a81c2da23439704a73c4651e8c4bb",
+      "original_size": [
+        451,
+        300
+      ],
+      "alt": "Close photograph of a tabby cat",
+      "license_evidence": "https://scikit-image.org/docs/0.25.x/api/skimage.data.html#skimage.data.chelsea"
+    },
+    {
+      "id": "coffee",
+      "path": "public/images/e6/coffee.png",
+      "source": "https://raw.githubusercontent.com/scikit-image/scikit-image/v0.25.2/skimage/data/coffee.png",
+      "credit": "Rachel Michetti / Pikolo Espresso Bar",
+      "license": "CC0",
+      "sha256": "cc02f8ca188b167c775a7101b5d767d1e71792cf762c33d6fa15a4599b5a8de7",
+      "original_size": [
+        600,
+        400
+      ],
+      "alt": "A cup of coffee on a saucer on a wooden table",
+      "license_evidence": "https://scikit-image.org/docs/0.25.x/api/skimage.data.html#skimage.data.coffee"
+    }
+  ],
+  "purpose": "Three familiar licensed photographs for inspectable preprocessing and image-text mechanisms, not an independent vision benchmark. Pretraining overlap is unknown.",
+  "changes": "Original PNG bytes preserved. Actual model processors create separate inverse-normalized input previews with explicit metadata."
+}

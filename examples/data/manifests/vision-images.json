@@ -1,0 +1,11 @@
+{
+  "id": "atlas-vision-images-v1",
+  "revision": 1,
+  "path": "examples/data/fixtures/vision-images.json",
+  "sha256": "40d725f2b5624cbe19c7fe67b034a807be9ac2089d640afe2f7155303cdc9118",
+  "source": "Official scikit-image v0.25.2 data files; per-image author/license/source/hash preserved in the fixture.",
+  "license": "Mixed public domain / CC0, distinct from repository MIT code",
+  "split": "Explicit small mechanism probes only; not a held-out benchmark.",
+  "training": false,
+  "leakagePolicy": "No model training. Images and human descriptions are shown for inspection; pretrained overlap is unknown."
+}
