@@ -13,6 +13,17 @@ NAME = "Salesforce/blip2-opt-2.7b"
 
 
 def main():
+    import psutil
+
+    if sys.platform != "linux":
+        raise RuntimeError(
+            "This heavy BLIP-2 profile is verified on Linux CPU. Use the recorded result or the opt-in CI job; the small chat/OpenCLIP profiles run on the author Mac."
+        )
+    available = psutil.virtual_memory().available
+    if available < 10 * 1024**3:
+        raise RuntimeError(
+            "This full-model CPU profile requires at least 10 GiB available before loading; use recorded output when the profile does not fit."
+        )
     path = snapshot(NAME)
     processor = AutoProcessor.from_pretrained(
         path, local_files_only=True, use_fast=False

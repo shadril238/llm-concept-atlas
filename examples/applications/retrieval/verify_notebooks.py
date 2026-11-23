@@ -56,7 +56,9 @@ def main():
         os.environ["HF_HUB_OFFLINE"] = "0" if args.allow_network else "1"
         try:
             for path in sorted((PROJECT / "notebooks").glob("*.ipynb")):
-                if args.id and path.stem not in args.id:
+                if (args.id and path.stem not in args.id) or (
+                    not args.id and path.stem == "blip2-captioning"
+                ):
                     continue
                 notebook = nbformat.read(path, as_version=4)
                 # Each client creates and shuts down a new kernel. No preexisting state.
