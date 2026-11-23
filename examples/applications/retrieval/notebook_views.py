@@ -31,7 +31,7 @@ SPECS = {
         "L14b · how do actual BLIP-2 queries bridge vision and language?",
         "caption",
         "e6-caption",
-        "Genuine Salesforce BLIP-2, CPU float32 with a 1 GiB resident-model-weight budget plus disk offload. This budget is not total RSS. The public checkpoint is about 14.98 GB; loading, disk access, runtime buffers, and active layers are additional. The verified Linux CI profile is separate from the smaller local labs. No CUDA or 4-bit run is claimed. Inspect vision tokens, learned query count, projected query width, integer text IDs, and actual generated caption/VQA text.",
+        "Genuine Salesforce BLIP-2, Linux CPU bfloat16 inference with float32 Q-Former components and explicit CPU autocast. Full model weights and runtime buffers are resident; see measured memory in the execution record. The public checkpoint is about 14.98 GB; loading, disk access, runtime buffers, and active layers are additional. The verified heavy Linux CI profile is separate from the smaller local labs. No CUDA or 4-bit run is claimed. Inspect vision tokens, learned query count, projected query width, integer text IDs, and actual generated caption/VQA text.",
         'print(json.dumps({k:result[k] for k in ["profile","bridge_config","rows"]},indent=2))',
         "Does matching the LLM embedding width prove semantic alignment? Explain the role of learned queries and the trainable projection in the historical training process. Inspect the actual caption and identify any detail the photograph cannot establish.",
     ),
@@ -87,7 +87,7 @@ print("Image attribution:",[(r["id"],r["credit"],r["license"]) for r in images["
         ),
         md(
             "contract",
-            "## Execution contract\n\nInstall `uv sync --locked --project examples/applications/retrieval` and select that Python 3.11 kernel. Start in the project or notebooks subdirectory. No hosted provider or key is used. Public safetensors/tokenizer files are pinned and checksummed. First downloads need network; cached runs can set HF_HUB_OFFLINE=1. Read README for download sizes, measured host resources, CPU/disk placement, and optional unverified hardware configurations. Restart the kernel and Run All.\n",
+            "## Execution contract\n\nInstall `uv sync --locked --project examples/applications/retrieval` and select that Python 3.11 kernel. Start in the project or notebooks subdirectory. No hosted provider or key is used. Public safetensors/tokenizer files are pinned and checksummed. First downloads need network; cached runs can set HF_HUB_OFFLINE=1. Read README for download sizes, measured host resources, CPU placement and heavy-model memory, and optional unverified hardware configurations. Restart the kernel and Run All.\n",
         ),
         md(
             "inspect",

@@ -7823,7 +7823,7 @@
       ],
       "dataset": "examples/data/manifests/vision-images.json",
       "seed": 42,
-      "reproducibility": "Pinned real BLIP-2, CPU float32, 1 GiB resident model-weight budget plus disk offload. Output and timing can vary by device; no CUDA execution claim.",
+      "reproducibility": "Pinned genuine BLIP-2, Linux CPU bfloat16 inference with float32 Q-Former components and explicit CPU autocast. Hardware-specific output/timing can vary; no CUDA or disk-offload success claim.",
       "runtime": {
         "device": "cpu",
         "timeoutSeconds": 3600,
@@ -7836,7 +7836,7 @@
       "verificationRecord": null,
       "troubleshooting": "See examples/applications/retrieval/README.md; model-weight budget differs from total RSS and disk transfer is substantial.",
       "id": "blip2-captioning",
-      "title": "Genuine BLIP-2 captioning and VQA with CPU/disk offload",
+      "title": "Genuine BLIP-2 captioning and VQA on Linux CPU",
       "concepts": [
         "blip-2",
         "image-captioning",
@@ -7853,7 +7853,7 @@
         "method": "json-invariants",
         "equals": {
           "actual_blip2_verified": true,
-          "offload_verified": true,
+          "cpu_profile_verified": true,
           "processor_dtypes_verified": true
         }
       },

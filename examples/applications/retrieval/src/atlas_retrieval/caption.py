@@ -1,4 +1,4 @@
-"""L14b: genuine BLIP-2 with a bounded CPU weight budget and disk offload."""
+"""L14b: genuine BLIP-2 in a measured Linux CPU bfloat16 inference profile."""
 
 from pathlib import Path
 import sys, json, time, hashlib
@@ -17,26 +17,24 @@ def main():
     processor = AutoProcessor.from_pretrained(
         path, local_files_only=True, use_fast=False
     )
-    offload = ROOT / ".cache/e6/blip2-offload"
-    offload.mkdir(parents=True, exist_ok=True)
     started = time.perf_counter()
-    # This caps resident model WEIGHTS, not total process RSS; one layer and runtime buffers are additional.
+    # The heavy verified profile runs on Linux CI, not the memory-constrained author Mac.
     model = Blip2ForConditionalGeneration.from_pretrained(
         path,
         local_files_only=True,
         use_safetensors=True,
-        dtype=torch.float32,
-        device_map="auto",
-        max_memory={"cpu": "1GiB"},
-        offload_folder=str(offload),
-        offload_state_dict=True,
+        dtype=torch.bfloat16,
+        device_map={"": "cpu"},
         low_cpu_mem_usage=True,
         attn_implementation="eager",
     ).eval()
     load_seconds = time.perf_counter() - started
-    assert "disk" in model.hf_device_map.values(), (
-        "The recorded low-memory profile must actually exercise disk offload"
+    assert all(
+        module.weight.ndim == 2
+        for module in model.modules()
+        if isinstance(module, torch.nn.Linear)
     )
+    assert all(parameter.device.type == "cpu" for parameter in model.parameters())
     trace = {}
 
     def hook(name):
@@ -73,7 +71,10 @@ def main():
             processor.image_processor.image_std,
         ).save(display)
         started = time.perf_counter()
-        with torch.inference_mode():
+        with (
+            torch.inference_mode(),
+            torch.autocast("cpu", dtype=torch.bfloat16, cache_enabled=False),
+        ):
             output = model.generate(
                 **inputs, do_sample=False, max_new_tokens=cap, num_beams=1
             )
@@ -108,11 +109,10 @@ def main():
     result = {
         "models": provenance([NAME]),
         "profile": {
-            "compute": "CPU float32",
-            "weight_budget": "1 GiB",
-            "offload": "remaining model weights dispatched from local safetensors/disk as needed",
+            "compute": "Linux CPU bfloat16 autocast; checkpoint weights bfloat16 with Q-Former/query parameters retained in float32 by Transformers",
+            "weight_budget": "Full resident 16-bit model weights plus float32 Q-Former and runtime buffers; measured process memory is in the execution record",
             "device_map": model.hf_device_map,
-            "runtime_memory_caution": "The weight-placement budget is not a total-RSS cap. Active layers, buffers, tokenizer, and page cache are additional.",
+            "runtime_memory_caution": "This heavy profile requires substantially more memory than the small local labs. It is verified on Linux CI; CUDA and the failed disk-offload profile are not claimed verified.",
             "load_seconds": load_seconds,
         },
         "rows": rows,
@@ -124,11 +124,11 @@ def main():
             "vision_patch_size": model.config.vision_config.patch_size,
         },
         "actual_blip2_verified": True,
-        "offload_verified": True,
+        "cpu_profile_verified": True,
         "processor_dtypes_verified": True,
         "limitations": [
             "Genuine pretrained BLIP-2 inference, not a smaller substitute or a randomly initialized bridge.",
-            "Slow CPU/disk profile for a memory-limited author host. No CUDA/4-bit backend execution is claimed.",
+            "Heavy Linux CPU bfloat16 profile. No CUDA, 4-bit, or successful disk-offload execution is claimed.",
             "Caption/VQA strings are retained unedited and can hallucinate or stop at the output cap.",
             "No BLIP-2 training performed; the original two-stage training is explained separately.",
         ],
@@ -138,7 +138,7 @@ def main():
         json.dumps(
             {
                 "actual_blip2_verified": True,
-                "offload_verified": True,
+                "cpu_profile_verified": True,
                 "processor_dtypes_verified": True,
                 "cases": len(rows),
                 "outputs": [r["raw"] for r in rows],

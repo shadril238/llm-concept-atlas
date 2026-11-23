@@ -24,7 +24,7 @@ on:
         type: boolean
         default: false
       e6_blip2:
-        description: Run genuine E6 BLIP-2 CPU/disk-offload verification (large public model download)
+        description: Run genuine E6 BLIP-2 Linux CPU verification (large public model download)
         type: boolean
         default: false
 permissions:
