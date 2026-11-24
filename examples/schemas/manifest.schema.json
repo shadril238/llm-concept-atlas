@@ -87,7 +87,8 @@
               "legacy-unverified",
               "reference",
               "workflows",
-              "retrieval"
+              "retrieval",
+              "representation"
             ]
           },
           "workingDirectory": {

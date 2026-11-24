@@ -1,0 +1,65 @@
+{
+  "date": "2026-11-24T08:26:51.321309+00:00",
+  "platform": "macOS-27.2.1-arm64-arm-64bit",
+  "lockSha256": "3b2bc413e61efa720eea2cec86ff22cbc1f7eed38f2f1296eec59b2fc1283e68",
+  "verifierSha256": "2dd9cee4895cc9dfe1ef73c48b14fde580bea138e85b3c7d21dd4f2a8c6b5ade",
+  "python": "3.11.18",
+  "sourceHashes": {
+    "examples/foundations/src/atlas_foundations/e7/contracts.py": "29ef85a7f9f8e5226038e69aaa3c2e939ed76baaee0eea62f9bf438dc22ca5cd",
+    "examples/foundations/src/atlas_foundations/ner_contract.py": "1c522d9347af9b28d65a724052c40811d674627ba9f481309ee3b73abd623a2d",
+    "examples/training/reference/src/atlas_reference/ner_model.py": "9fa4a1d1fa51d5f7dbeaf0ff8695e7c1d00201a8dc3f4f42f5e1e6ac00fe9af8",
+    "examples/training/representation/download_models.py": "c281cd588b81767a522bcb77b135f921afc4235128fe502470d3d8a75738691c",
+    "examples/training/representation/models.json": "060b789b756f86dddd24d93cfdec6e81e8b7b869efd92acff11bdf6ab8ee8db6",
+    "examples/training/representation/src/atlas_representation/augmentation.py": "28f27a1f78d4685309a44169757512fe2e326295af1b7899987c650962894fa5",
+    "examples/training/representation/src/atlas_representation/classification.py": "04d91bebef2d8e9e463b3891f9f2f8fe1b4bf4b4b056b23636db5cb0ed1f5177",
+    "examples/training/representation/src/atlas_representation/common.py": "1ce605a9495e6f93e19ae7252021c673d20e641a1ca9241329589878b1022981",
+    "examples/training/representation/src/atlas_representation/denoising.py": "acc960147ea05c204f80220f7cb2b13ae586fcc3643eb10689bb1d2d0ef9c7ae",
+    "examples/training/representation/src/atlas_representation/embedding.py": "a9aacd5f300729cbb8b91be77e9114955dc23d454006050ee5b3d9ec09c2bebc",
+    "examples/training/representation/src/atlas_representation/mlm.py": "5fae79d961ad8096754ed4f2fe7ddadcc01d396d012698df1848916af4574cf7",
+    "examples/training/representation/src/atlas_representation/ner.py": "81dcdd3487514d97dff05515fe54c05bf96ae382f73b503dfa4e7540c8c1a939"
+  },
+  "records": [
+    {
+      "path": "examples/training/representation/notebooks/augmented-sbert-training.ipynb",
+      "sha256": "1dcc27005ae374ecdc1dd93b3dd51d18e40e027eb4d5c21d0b1ce4d2375d7165",
+      "method": "Fresh actual Jupyter kernel; all cells executed in order via nbclient",
+      "codeCells": 4,
+      "status": "passed"
+    },
+    {
+      "path": "examples/training/representation/notebooks/continued-pretraining.ipynb",
+      "sha256": "0879b7b1f96e30243d255d168d8f3c1c0d5568dac76909c2e5eb473d4d6ddca7",
+      "method": "Fresh actual Jupyter kernel; all cells executed in order via nbclient",
+      "codeCells": 4,
+      "status": "passed"
+    },
+    {
+      "path": "examples/training/representation/notebooks/embedding-training.ipynb",
+      "sha256": "44e9f5ac5629462bffb4f157f0c59752d6af31df1871e9d25a63cb11e214bec4",
+      "method": "Fresh actual Jupyter kernel; all cells executed in order via nbclient",
+      "codeCells": 4,
+      "status": "passed"
+    },
+    {
+      "path": "examples/training/representation/notebooks/ner-complete.ipynb",
+      "sha256": "93a9a6ea9293cb47fb4396a06af22c1c228317f1ee8ef7fd637db03278e63a27",
+      "method": "Fresh actual Jupyter kernel; all cells executed in order via nbclient",
+      "codeCells": 4,
+      "status": "passed"
+    },
+    {
+      "path": "examples/training/representation/notebooks/representation-classification.ipynb",
+      "sha256": "887243e00c3703a4f8d8c253efc14c577b7e46f2202d112aa76b091f19988a39",
+      "method": "Fresh actual Jupyter kernel; all cells executed in order via nbclient",
+      "codeCells": 4,
+      "status": "passed"
+    },
+    {
+      "path": "examples/training/representation/notebooks/tsdae-adaptation.ipynb",
+      "sha256": "8cd70a13d2413eb6eb321c8c9df4ef999d1f8ed3614710adc9cb77e1c923382b",
+      "method": "Fresh actual Jupyter kernel; all cells executed in order via nbclient",
+      "codeCells": 4,
+      "status": "passed"
+    }
+  ]
+}

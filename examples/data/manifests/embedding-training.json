@@ -1,0 +1,11 @@
+{
+  "id": "atlas-embedding-training-v1",
+  "revision": 1,
+  "path": "examples/data/fixtures/embedding-training.json",
+  "sha256": "a593a458508a21c918ab8f6570ff17408f65d92f297bd845b3c7cbdf1724fa1c",
+  "source": "Original author-created community-service intent examples; no book sentences or external dataset copied.",
+  "license": "MIT",
+  "split": "24 train / 12 validation / 18 test / 24 unlabeled training-pool sentences; disjoint exact text and IDs.",
+  "training": true,
+  "leakagePolicy": "No exact sentence or pair ID shared between train, validation, test or unlabeled silver pool; intent categories recur by design. Silver candidates exclude validation/test sentences."
+}

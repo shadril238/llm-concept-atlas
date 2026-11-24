@@ -167,6 +167,36 @@
         "Beginner pilot feedback"
       ],
       "accepted": false
+    },
+    {
+      "id": "e7-representation-author-review-2026-11-24",
+      "date": "2026-11-24",
+      "status": "author-reviewed",
+      "independentReview": false,
+      "reviewer": "Implementing assistant (author technical pass)",
+      "concepts": [
+        "augmented-sbert",
+        "bert-fine-tuning",
+        "contrastive-examples",
+        "contrastive-learning",
+        "domain-adaptation",
+        "embedding-evaluation",
+        "few-shot-classification",
+        "fine-tuning-embeddings",
+        "frozen-layers",
+        "loss-functions",
+        "masked-language-modeling",
+        "named-entity-recognition",
+        "sbert",
+        "setfit",
+        "tsdae"
+      ],
+      "evidence": "docs/reviews/e7-representation-training.md",
+      "pending": [
+        "Independent technical/editorial review",
+        "Beginner pilot feedback"
+      ],
+      "accepted": false
     }
   ]
 }

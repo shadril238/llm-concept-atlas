@@ -35,6 +35,11 @@
       "project": "examples/applications/retrieval",
       "python": "3.11",
       "lock": "examples/applications/retrieval/uv.lock"
+    },
+    "representation": {
+      "project": "examples/training/representation",
+      "python": "3.11",
+      "lock": "examples/training/representation/uv.lock"
     }
   },
   "examples": [
@@ -165,10 +170,7 @@
       "entrypoint": "examples/legacy/legacy-bert-fine-tuning.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/bert-fine-tuning.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -583,10 +585,7 @@
       "entrypoint": "examples/legacy/legacy-contrastive-examples.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/contrastive-examples.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -625,10 +624,7 @@
       "entrypoint": "examples/legacy/legacy-contrastive-learning.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/contrastive-learning.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -928,10 +924,7 @@
       "entrypoint": "examples/legacy/legacy-domain-adaptation.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/domain-adaptation.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -1053,10 +1046,7 @@
       "entrypoint": "examples/legacy/legacy-embedding-evaluation.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/embedding-evaluation.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -1169,10 +1159,7 @@
       "entrypoint": "examples/legacy/legacy-few-shot-classification.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/few-shot-classification.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -1251,10 +1238,7 @@
       "entrypoint": "examples/legacy/legacy-fine-tuning-embeddings.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/fine-tuning-embeddings.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -1291,10 +1275,7 @@
       "entrypoint": "examples/legacy/legacy-frozen-layers.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/frozen-layers.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -1785,10 +1766,7 @@
       "entrypoint": "examples/legacy/legacy-loss-functions.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/loss-functions.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -1826,10 +1804,7 @@
       "entrypoint": "examples/legacy/legacy-masked-language-modeling.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/masked-language-modeling.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -2835,10 +2810,7 @@
       "entrypoint": "examples/legacy/legacy-sbert.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/sbert.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3024,10 +2996,7 @@
       "entrypoint": "examples/legacy/legacy-setfit.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/setfit.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3486,10 +3455,7 @@
       "entrypoint": "examples/legacy/legacy-tsdae.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/tsdae.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -3964,10 +3930,7 @@
       "entrypoint": "examples/foundations/src/atlas_foundations/ner_contract.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/named-entity-recognition.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": null,
       "models": [],
       "dataset": null,
@@ -4161,10 +4124,7 @@
       "entrypoint": "examples/training/reference/src/atlas_reference/ner_model.py",
       "environment": "reference",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/named-entity-recognition.mdx",
-        "block": 1
-      },
+      "lesson": null,
       "region": "alignment",
       "models": [
         {
@@ -9130,6 +9090,1106 @@
       },
       "supportFiles": [
         "src/data/retrieval-results.json"
+      ]
+    },
+    {
+      "level": "B",
+      "kind": "evaluated-workflow",
+      "environment": "representation",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/embedding-and-representation-training.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [
+        {
+          "id": "prajjwal1/bert-tiny",
+          "revision": "6f75de8b60a9f8a2fdf7b69cbd86d9e64bcb3837"
+        }
+      ],
+      "dataset": "examples/data/manifests/embedding-training.json",
+      "seed": 42,
+      "reproducibility": "Pinned float32 one-thread CPU training; declared train/validation/test splits, actual gradients/updates, checkpoint selection and saved-model reload. Three fixed selection seeds for L18; no general benchmark claim.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 1200,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Versioned original task fixture; declared design/evaluation split and finite schemas.",
+      "outputSchema": "JSON invariant report plus inspectable results.json and traces.",
+      "verificationRecord": "examples/verification/records/embedding-training.json",
+      "troubleshooting": "See examples/training/representation/README.md; no GPU or hosted provider is required.",
+      "id": "embedding-training",
+      "title": "L15: embedding training and three losses",
+      "concepts": [
+        "contrastive-learning",
+        "sbert",
+        "contrastive-examples",
+        "loss-functions",
+        "embedding-evaluation",
+        "fine-tuning-embeddings"
+      ],
+      "sourceSections": [
+        "book-ch10-contrastive",
+        "book-ch10-contrastive-examples",
+        "book-ch10-cosine-loss",
+        "book-ch10-create-embeddings",
+        "book-ch10-embedding-models",
+        "book-ch10-encoder-comparison",
+        "book-ch10-evaluation",
+        "book-ch10-fine-tuning",
+        "book-ch10-hard-negatives",
+        "book-ch10-losses",
+        "book-ch10-mnr-loss",
+        "book-ch10-mteb",
+        "book-ch10-sbert",
+        "book-ch10-softmax-loss",
+        "book-ch10-sts-correlation",
+        "book-ch10-supervised",
+        "book-ch10-train-model"
+      ],
+      "entrypoint": "examples/training/representation/src/atlas_representation/embedding.py",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "training_updates_verified": true,
+          "loss_arithmetic_verified": true,
+          "reload_verified": true
+        }
+      },
+      "supportFiles": [
+        "examples/training/representation/src/atlas_representation/common.py",
+        "examples/training/representation/download_models.py",
+        "examples/training/representation/models.json",
+        "examples/foundations/src/atlas_foundations/e7/contracts.py",
+        "examples/data/fixtures/embedding-training.json"
+      ],
+      "resultArtifact": "examples/artifacts/e7-embedding/results.json",
+      "resultFile": "src/data/training-results.json",
+      "resultKey": "embedding"
+    },
+    {
+      "level": "B",
+      "kind": "evaluated-workflow",
+      "environment": "representation",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/embedding-and-representation-training.mdx",
+        "block": 1
+      },
+      "region": null,
+      "models": [
+        {
+          "id": "prajjwal1/bert-tiny",
+          "revision": "6f75de8b60a9f8a2fdf7b69cbd86d9e64bcb3837"
+        }
+      ],
+      "dataset": "examples/data/manifests/embedding-training.json",
+      "seed": 42,
+      "reproducibility": "Pinned float32 one-thread CPU training; declared train/validation/test splits, actual gradients/updates, checkpoint selection and saved-model reload. Three fixed selection seeds for L18; no general benchmark claim.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 1200,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Versioned original task fixture; declared design/evaluation split and finite schemas.",
+      "outputSchema": "JSON invariant report plus inspectable results.json and traces.",
+      "verificationRecord": "examples/verification/records/augmented-sbert-training.json",
+      "troubleshooting": "See examples/training/representation/README.md; no GPU or hosted provider is required.",
+      "id": "augmented-sbert-training",
+      "title": "L16: trained teacher and gold/silver students",
+      "concepts": [
+        "augmented-sbert"
+      ],
+      "sourceSections": [
+        "book-ch10-augmented-sbert"
+      ],
+      "entrypoint": "examples/training/representation/src/atlas_representation/augmentation.py",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "teacher_trained": true,
+          "silver_split_verified": true,
+          "students_updated": true,
+          "reload_verified": true
+        }
+      },
+      "supportFiles": [
+        "examples/training/representation/src/atlas_representation/common.py",
+        "examples/training/representation/download_models.py",
+        "examples/training/representation/models.json",
+        "examples/foundations/src/atlas_foundations/e7/contracts.py",
+        "examples/data/fixtures/embedding-training.json"
+      ],
+      "resultArtifact": "examples/artifacts/e7-augmentation/results.json",
+      "resultFile": "src/data/training-results.json",
+      "resultKey": "augmentation"
+    },
+    {
+      "level": "B",
+      "kind": "evaluated-workflow",
+      "environment": "representation",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/embedding-and-representation-training.mdx",
+        "block": 2
+      },
+      "region": null,
+      "models": [
+        {
+          "id": "prajjwal1/bert-tiny",
+          "revision": "6f75de8b60a9f8a2fdf7b69cbd86d9e64bcb3837"
+        }
+      ],
+      "dataset": "examples/data/manifests/embedding-training.json",
+      "seed": 42,
+      "reproducibility": "Pinned float32 one-thread CPU training; declared train/validation/test splits, actual gradients/updates, checkpoint selection and saved-model reload. Three fixed selection seeds for L18; no general benchmark claim.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 1200,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Versioned original task fixture; declared design/evaluation split and finite schemas.",
+      "outputSchema": "JSON invariant report plus inspectable results.json and traces.",
+      "verificationRecord": "examples/verification/records/tsdae-adaptation.json",
+      "troubleshooting": "See examples/training/representation/README.md; no GPU or hosted provider is required.",
+      "id": "tsdae-adaptation",
+      "title": "L17: actual TSDAE and domain adaptation",
+      "concepts": [
+        "tsdae",
+        "domain-adaptation"
+      ],
+      "sourceSections": [
+        "book-ch10-domain-adaptation",
+        "book-ch10-tsdae",
+        "book-ch10-unsupervised"
+      ],
+      "entrypoint": "examples/training/representation/src/atlas_representation/denoising.py",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "tsdae_trained": true,
+          "tied_parameters_verified": true,
+          "adaptation_compared": true,
+          "reload_verified": true
+        }
+      },
+      "supportFiles": [
+        "examples/training/representation/src/atlas_representation/common.py",
+        "examples/training/representation/download_models.py",
+        "examples/training/representation/models.json",
+        "examples/foundations/src/atlas_foundations/e7/contracts.py",
+        "examples/data/fixtures/embedding-training.json"
+      ],
+      "resultArtifact": "examples/artifacts/e7-denoising/results.json",
+      "resultFile": "src/data/training-results.json",
+      "resultKey": "denoising"
+    },
+    {
+      "level": "B",
+      "kind": "evaluated-workflow",
+      "environment": "representation",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/embedding-and-representation-training.mdx",
+        "block": 3
+      },
+      "region": null,
+      "models": [
+        {
+          "id": "prajjwal1/bert-tiny",
+          "revision": "6f75de8b60a9f8a2fdf7b69cbd86d9e64bcb3837"
+        },
+        {
+          "id": "sentence-transformers/paraphrase-MiniLM-L3-v2",
+          "revision": "4ca70771034acceecb2e72475f72050fcdde4ddc"
+        }
+      ],
+      "dataset": "examples/data/manifests/sentiment.json",
+      "seed": 42,
+      "reproducibility": "Pinned float32 one-thread CPU training; declared train/validation/test splits, actual gradients/updates, checkpoint selection and saved-model reload. Three fixed selection seeds for L18; no general benchmark claim.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 1200,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Versioned original task fixture; declared design/evaluation split and finite schemas.",
+      "outputSchema": "JSON invariant report plus inspectable results.json and traces.",
+      "verificationRecord": "examples/verification/records/representation-classification.json",
+      "troubleshooting": "See examples/training/representation/README.md; no GPU or hosted provider is required.",
+      "id": "representation-classification",
+      "title": "L18: freezing and repeated few-shot SetFit",
+      "concepts": [
+        "bert-fine-tuning",
+        "frozen-layers",
+        "few-shot-classification",
+        "setfit"
+      ],
+      "sourceSections": [
+        "book-ch11-bert-training",
+        "book-ch11-few-shot",
+        "book-ch11-few-shot-training",
+        "book-ch11-freezing",
+        "book-ch11-setfit",
+        "book-ch11-supervised"
+      ],
+      "entrypoint": "examples/training/representation/src/atlas_representation/classification.py",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "frozen_parameters_verified": true,
+          "setfit_trained": true,
+          "selection_repeated": true,
+          "reload_verified": true
+        }
+      },
+      "supportFiles": [
+        "examples/training/representation/src/atlas_representation/common.py",
+        "examples/training/representation/download_models.py",
+        "examples/training/representation/models.json",
+        "examples/foundations/src/atlas_foundations/e7/contracts.py",
+        "examples/data/fixtures/embedding-training.json",
+        "examples/data/fixtures/sentiment.json",
+        "src/data/discovery-results.json"
+      ],
+      "resultArtifact": "examples/artifacts/e7-classification/results.json",
+      "resultFile": "src/data/training-results.json",
+      "resultKey": "classification"
+    },
+    {
+      "level": "B",
+      "kind": "evaluated-workflow",
+      "environment": "representation",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/embedding-and-representation-training.mdx",
+        "block": 4
+      },
+      "region": null,
+      "models": [
+        {
+          "id": "prajjwal1/bert-tiny",
+          "revision": "6f75de8b60a9f8a2fdf7b69cbd86d9e64bcb3837"
+        }
+      ],
+      "dataset": "examples/data/manifests/sentiment.json",
+      "seed": 42,
+      "reproducibility": "Pinned float32 one-thread CPU training; declared train/validation/test splits, actual gradients/updates, checkpoint selection and saved-model reload. Three fixed selection seeds for L18; no general benchmark claim.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 1200,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Versioned original task fixture; declared design/evaluation split and finite schemas.",
+      "outputSchema": "JSON invariant report plus inspectable results.json and traces.",
+      "verificationRecord": "examples/verification/records/continued-pretraining.json",
+      "troubleshooting": "See examples/training/representation/README.md; no GPU or hosted provider is required.",
+      "id": "continued-pretraining",
+      "title": "L19: MLM adaptation and downstream comparison",
+      "concepts": [
+        "masked-language-modeling"
+      ],
+      "sourceSections": [
+        "book-ch11-masking-policy",
+        "book-ch11-mlm"
+      ],
+      "entrypoint": "examples/training/representation/src/atlas_representation/mlm.py",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "mlm_updated": true,
+          "test_excluded": true,
+          "downstream_compared": true,
+          "reload_verified": true
+        }
+      },
+      "supportFiles": [
+        "examples/training/representation/src/atlas_representation/common.py",
+        "examples/training/representation/download_models.py",
+        "examples/training/representation/models.json",
+        "examples/foundations/src/atlas_foundations/e7/contracts.py",
+        "examples/data/fixtures/embedding-training.json",
+        "examples/data/fixtures/sentiment.json"
+      ],
+      "resultArtifact": "examples/artifacts/e7-mlm/results.json",
+      "resultFile": "src/data/training-results.json",
+      "resultKey": "mlm"
+    },
+    {
+      "level": "B",
+      "kind": "evaluated-workflow",
+      "environment": "representation",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/labs/embedding-and-representation-training.mdx",
+        "block": 5
+      },
+      "region": null,
+      "models": [
+        {
+          "id": "prajjwal1/bert-tiny",
+          "revision": "6f75de8b60a9f8a2fdf7b69cbd86d9e64bcb3837"
+        },
+        {
+          "id": "google-bert/bert-base-uncased",
+          "revision": "86b5e0934494bd15c9632b12f734a8a67f723594"
+        }
+      ],
+      "dataset": "examples/data/manifests/ner-reference.json",
+      "seed": 42,
+      "reproducibility": "Pinned float32 one-thread CPU training; declared train/validation/test splits, actual gradients/updates, checkpoint selection and saved-model reload. Three fixed selection seeds for L18; no general benchmark claim.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 1200,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Versioned original task fixture; declared design/evaluation split and finite schemas.",
+      "outputSchema": "JSON invariant report plus inspectable results.json and traces.",
+      "verificationRecord": "examples/verification/records/ner-complete.json",
+      "troubleshooting": "See examples/training/representation/README.md; no GPU or hosted provider is required.",
+      "id": "ner-complete",
+      "title": "L20: complete alignment and real NER",
+      "concepts": [
+        "named-entity-recognition"
+      ],
+      "sourceSections": [
+        "book-ch11-bio-alignment",
+        "book-ch11-entity-metrics",
+        "book-ch11-ner",
+        "book-ch11-ner-data",
+        "book-ch11-ner-training"
+      ],
+      "entrypoint": "examples/training/representation/src/atlas_representation/ner.py",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "actual_ner_trained": true,
+          "alignment_verified": true,
+          "truncation_rejected": true,
+          "reload_verified": true
+        }
+      },
+      "supportFiles": [
+        "examples/training/representation/src/atlas_representation/common.py",
+        "examples/training/representation/download_models.py",
+        "examples/training/representation/models.json",
+        "examples/foundations/src/atlas_foundations/e7/contracts.py",
+        "examples/data/fixtures/embedding-training.json",
+        "examples/data/fixtures/ner-reference.json",
+        "examples/training/reference/src/atlas_reference/ner_model.py",
+        "examples/foundations/src/atlas_foundations/ner_contract.py"
+      ],
+      "resultArtifact": "examples/artifacts/e7-ner/results.json",
+      "resultFile": "src/data/training-results.json",
+      "resultKey": "ner"
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/contrastive-learning.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e7-contrastive-learning.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e7-contrastive-learning",
+      "title": "Contrastive learning mechanism and evidence",
+      "concepts": [
+        "contrastive-learning"
+      ],
+      "sourceSections": [
+        "book-ch10-contrastive",
+        "book-ch10-embedding-models"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e7/contrastive_learning.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "target probability: 0.8808\nrow loss: 0.1269\nlogit gradients: [-0.1192, 0.1192]",
+        "origin": "author-checked-mechanism-or-recorded-training-evidence"
+      },
+      "supportFiles": [
+        "examples/foundations/src/atlas_foundations/e7/contracts.py",
+        "src/data/training-results.json",
+        "examples/data/fixtures/embedding-training.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/sbert.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e7-sbert.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e7-sbert",
+      "title": "SBERT mechanism and evidence",
+      "concepts": [
+        "sbert"
+      ],
+      "sourceSections": [
+        "book-ch10-sbert",
+        "book-ch10-encoder-comparison",
+        "book-ch10-create-embeddings"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e7/sbert.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "classifier features: [1.0, 0.5, 0.2, 0.8, 0.8, 0.3]\nunordered pairs for 10,000 inputs: 49995000\nseparate encoder inputs: 10000\nscope: operation counts, not measured latency",
+        "origin": "author-checked-mechanism-or-recorded-training-evidence"
+      },
+      "supportFiles": [
+        "examples/foundations/src/atlas_foundations/e7/contracts.py",
+        "src/data/training-results.json",
+        "examples/data/fixtures/embedding-training.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/contrastive-examples.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e7-contrastive-examples.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e7-contrastive-examples",
+      "title": "Contrastive examples mechanism and evidence",
+      "concepts": [
+        "contrastive-examples"
+      ],
+      "sourceSections": [
+        "book-ch10-contrastive-examples",
+        "book-ch10-hard-negatives"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e7/contrastive_examples.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "valid MNR batch: True\nrejected: False negative or duplicate in MNR batch",
+        "origin": "author-checked-mechanism-or-recorded-training-evidence"
+      },
+      "supportFiles": [
+        "examples/foundations/src/atlas_foundations/e7/contracts.py",
+        "src/data/training-results.json",
+        "examples/data/fixtures/embedding-training.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/loss-functions.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e7-loss-functions.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e7-loss-functions",
+      "title": "Embedding loss functions mechanism and evidence",
+      "concepts": [
+        "loss-functions"
+      ],
+      "sourceSections": [
+        "book-ch10-losses",
+        "book-ch10-softmax-loss",
+        "book-ch10-cosine-loss",
+        "book-ch10-mnr-loss"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e7/loss_functions.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "regression toward one: 0.04\nregression toward zero: 0.64\npair classification CE: 0.3133\ndirectional MNR mean: 0.0878\nDifferent labels and denominators define different objectives.",
+        "origin": "author-checked-mechanism-or-recorded-training-evidence"
+      },
+      "supportFiles": [
+        "examples/foundations/src/atlas_foundations/e7/contracts.py",
+        "src/data/training-results.json",
+        "examples/data/fixtures/embedding-training.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/embedding-evaluation.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e7-embedding-evaluation.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e7-embedding-evaluation",
+      "title": "Embedding evaluation mechanism and evidence",
+      "concepts": [
+        "embedding-evaluation"
+      ],
+      "sourceSections": [
+        "book-ch10-evaluation",
+        "book-ch10-sts-correlation",
+        "book-ch10-mteb"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e7/embedding_evaluation.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "softmax test queries: 12 MRR: 0.8958\ncosine test queries: 12 MRR: 0.875\nmnr test queries: 12 MRR: 0.9167\nscope: actual recorded task; complete MTEB/STSB not executed",
+        "origin": "author-checked-mechanism-or-recorded-training-evidence"
+      },
+      "supportFiles": [
+        "examples/foundations/src/atlas_foundations/e7/contracts.py",
+        "src/data/training-results.json",
+        "examples/data/fixtures/embedding-training.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/fine-tuning-embeddings.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e7-fine-tuning-embeddings.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e7-fine-tuning-embeddings",
+      "title": "Fine-tuning embeddings mechanism and evidence",
+      "concepts": [
+        "fine-tuning-embeddings"
+      ],
+      "sourceSections": [
+        "book-ch10-fine-tuning",
+        "book-ch10-supervised",
+        "book-ch10-train-model"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e7/fine_tuning_embeddings.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "softmax selected step: 50 changed tensors: 37\nselection: minimum validation pair cross-entropy\ncosine selected step: 60 changed tensors: 37\nselection: minimum validation pair MSE\nmnr selected step: 20 changed tensors: 37\nselection: maximum validation retrieval MRR\nRerun embedding-training for new optimization; this replays recorded evidence.",
+        "origin": "author-checked-mechanism-or-recorded-training-evidence"
+      },
+      "supportFiles": [
+        "examples/foundations/src/atlas_foundations/e7/contracts.py",
+        "src/data/training-results.json",
+        "examples/data/fixtures/embedding-training.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/augmented-sbert.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e7-augmented-sbert.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e7-augmented-sbert",
+      "title": "Augmented SBERT mechanism and evidence",
+      "concepts": [
+        "augmented-sbert"
+      ],
+      "sourceSections": [
+        "book-ch10-augmented-sbert"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e7/augmented_sbert.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "silver candidates: 120\nteacher diagnostic disagreements: 14\ngold-only test MSE: 0.0586\ngold-plus-silver test MSE: 0.0929\nSilver scores are continuous model predictions, not gold targets.",
+        "origin": "author-checked-mechanism-or-recorded-training-evidence"
+      },
+      "supportFiles": [
+        "examples/foundations/src/atlas_foundations/e7/contracts.py",
+        "src/data/training-results.json",
+        "examples/data/fixtures/embedding-training.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/tsdae.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e7-tsdae.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e7-tsdae",
+      "title": "TSDAE mechanism and evidence",
+      "concepts": [
+        "tsdae"
+      ],
+      "sourceSections": [
+        "book-ch10-tsdae",
+        "book-ch10-unsupervised"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e7/tsdae.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "original: How do I book a workshop room?\ndamaged: How a workshop room?\nretained positions: [0, 4, 5, 6]\nThis corruption calculation does not reconstruct or train a neural model.",
+        "origin": "author-checked-mechanism-or-recorded-training-evidence"
+      },
+      "supportFiles": [
+        "examples/foundations/src/atlas_foundations/e7/contracts.py",
+        "src/data/training-results.json",
+        "examples/data/fixtures/embedding-training.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/domain-adaptation.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e7-domain-adaptation.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e7-domain-adaptation",
+      "title": "Domain adaptation mechanism and evidence",
+      "concepts": [
+        "domain-adaptation"
+      ],
+      "sourceSections": [
+        "book-ch10-domain-adaptation"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e7/domain_adaptation.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "baseline test MRR: 0.7319\nTSDAE-only test MRR: 0.6764\ngold-only test MRR: 0.9167\ntsdae-plus-gold test MRR: 0.9167\nreconstruction-loss / retrieval disagreement intervals: 5",
+        "origin": "author-checked-mechanism-or-recorded-training-evidence"
+      },
+      "supportFiles": [
+        "examples/foundations/src/atlas_foundations/e7/contracts.py",
+        "src/data/training-results.json",
+        "examples/data/fixtures/embedding-training.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/bert-fine-tuning.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e7-bert-fine-tuning.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e7-bert-fine-tuning",
+      "title": "BERT fine-tuning mechanism and evidence",
+      "concepts": [
+        "bert-fine-tuning"
+      ],
+      "sourceSections": [
+        "book-ch11-supervised",
+        "book-ch11-bert-training"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e7/bert_fine_tuning.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "seed: 11 train reviews: 16\nselected step: 20 test macro-F1: 0.4133\nseed: 23 train reviews: 16\nselected step: 30 test macro-F1: 0.5608\nseed: 37 train reviews: 16\nselected step: 30 test macro-F1: 0.5106\nEach reported model used validation-only checkpoint selection.",
+        "origin": "author-checked-mechanism-or-recorded-training-evidence"
+      },
+      "supportFiles": [
+        "examples/foundations/src/atlas_foundations/e7/contracts.py",
+        "src/data/training-results.json",
+        "examples/data/fixtures/embedding-training.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/frozen-layers.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e7-frozen-layers.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e7-frozen-layers",
+      "title": "Frozen layers mechanism and evidence",
+      "concepts": [
+        "frozen-layers"
+      ],
+      "sourceSections": [
+        "book-ch11-freezing"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e7/frozen_layers.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "embeddings trainable: 0 changed tensors: 0\nlayer_0 trainable: 0 changed tensors: 0\nlayer_1 trainable: 198272 changed tensors: 16\nhead_or_pooler trainable: 16770 changed tensors: 4\nexact frozen-weight check: True",
+        "origin": "author-checked-mechanism-or-recorded-training-evidence"
+      },
+      "supportFiles": [
+        "examples/foundations/src/atlas_foundations/e7/contracts.py",
+        "src/data/training-results.json",
+        "examples/data/fixtures/embedding-training.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/few-shot-classification.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e7-few-shot-classification.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e7-few-shot-classification",
+      "title": "Few-shot classification mechanism and evidence",
+      "concepts": [
+        "few-shot-classification"
+      ],
+      "sourceSections": [
+        "book-ch11-few-shot",
+        "book-ch11-few-shot-training"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e7/few_shot_classification.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "setfit selections: 3 mean: 0.7284 population SD: 0.0849\nfrozen-sentence-logistic selections: 3 mean: 0.7157 population SD: 0.0749\nThree fixed selections describe variability; they are not a confidence interval.",
+        "origin": "author-checked-mechanism-or-recorded-training-evidence"
+      },
+      "supportFiles": [
+        "examples/foundations/src/atlas_foundations/e7/contracts.py",
+        "src/data/training-results.json",
+        "examples/data/fixtures/embedding-training.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/setfit.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e7-setfit.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e7-setfit",
+      "title": "SetFit mechanism and evidence",
+      "concepts": [
+        "setfit"
+      ],
+      "sourceSections": [
+        "book-ch11-setfit",
+        "book-ch11-few-shot-training"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e7/setfit.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "seed: 11 unique labeled reviews: 16\nsaved body/head reload: True\nseed: 23 unique labeled reviews: 16\nsaved body/head reload: True\nseed: 37 unique labeled reviews: 16\nsaved body/head reload: True\nPair adaptation and classifier fitting are separate verified stages.",
+        "origin": "author-checked-mechanism-or-recorded-training-evidence"
+      },
+      "supportFiles": [
+        "examples/foundations/src/atlas_foundations/e7/contracts.py",
+        "src/data/training-results.json",
+        "examples/data/fixtures/embedding-training.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/masked-language-modeling.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e7-masked-language-modeling.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e7-masked-language-modeling",
+      "title": "Masked language modeling mechanism and evidence",
+      "concepts": [
+        "masked-language-modeling"
+      ],
+      "sourceSections": [
+        "book-ch11-mlm",
+        "book-ch11-masking-policy"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e7/masked_language_modeling.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "selected actual targets: 2\nsame initial downstream head/pooler: True\ntwo-step smoke / evaluated steps: 2 60",
+        "origin": "author-checked-mechanism-or-recorded-training-evidence"
+      },
+      "supportFiles": [
+        "examples/foundations/src/atlas_foundations/e7/contracts.py",
+        "src/data/training-results.json",
+        "examples/data/fixtures/embedding-training.json"
+      ]
+    },
+    {
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/named-entity-recognition.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library contract illustration; not a model call.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit literals in source.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e7-named-entity-recognition.json",
+      "troubleshooting": "See L12\u2013L14. This offline calculation replays recorded evidence; rerun the connected model source for fresh inference.",
+      "id": "e7-named-entity-recognition",
+      "title": "Named-entity recognition mechanism and evidence",
+      "concepts": [
+        "named-entity-recognition"
+      ],
+      "sourceSections": [
+        "book-ch11-ner",
+        "book-ch11-ner-data",
+        "book-ch11-ner-training",
+        "book-ch11-bio-alignment",
+        "book-ch11-entity-metrics"
+      ],
+      "entrypoint": "examples/foundations/src/atlas_foundations/e7/named_entity_recognition.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "token accuracy: 0.8333\nwhole typed entities: {'tp': 1, 'predicted': 2, 'gold': 2, 'precision': 0.5, 'recall': 0.5, 'f1': 0.5}",
+        "origin": "author-checked-mechanism-or-recorded-training-evidence"
+      },
+      "supportFiles": [
+        "examples/foundations/src/atlas_foundations/e7/contracts.py",
+        "src/data/training-results.json",
+        "examples/data/fixtures/embedding-training.json",
+        "examples/foundations/src/atlas_foundations/ner_contract.py"
       ]
     }
   ]

@@ -1,0 +1,1414 @@
+---
+title: "Embedding and representation training · L15–L20"
+description: "Train actual encoders and teachers, inspect loss/gradient/mask contracts, and evaluate reusable artifacts."
+---
+
+import VerifiedRun from '../../../components/VerifiedRun.astro';
+import { LossExplorer, EmbeddingTraining, SilverExplorer, DenoisingExplorer, FreezeExplorer, MaskExplorer, NERAlignment } from '../../../components/simulations/TrainingLabs';
+
+These Chapter 10–11 labs connect **data → objective → gradients → selected checkpoint → held-out task → saved artifact**. They perform real optimization with public pretrained models. The browser explores saved runs and explicit numerical/mask exercises; it makes no model or API calls. Begin with the [encoder training path](/llm-concept-atlas/paths/from-pretrained-encoder-to-domain-model/).
+
+## Set up the CPU profile
+
+Use Python 3.11 and [uv](https://docs.astral.sh/uv/getting-started/installation/). From the repository root:
+
+```sh
+uv sync --locked --project examples/training/representation
+python3 scripts/run-examples.py --id embedding-training --allow-network
+python3 scripts/run-examples.py --id augmented-sbert-training --offline
+python3 scripts/run-examples.py --id tsdae-adaptation --offline
+python3 scripts/run-examples.py --id representation-classification --allow-network
+python3 scripts/run-examples.py --id continued-pretraining --offline
+python3 scripts/run-examples.py --id ner-complete --allow-network
+```
+
+The tiny BERT weights are about 17.8 MB; SetFit additionally uses a small pretrained MiniLM sentence model (about 70 MB). Tokenizers/configuration, package installation and trained artifacts are additional. Downloaded weights are pinned/checksummed and stay in ignored `.cache/e7/`. All profiles use float32 CPU training with one PyTorch thread; no GPU or paid provider is required. An explicit CPU two-stage SetFit path avoids its convenience Trainer's implicit MPS selection. Read the [execution guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/representation/README.md) for exact versions, resources, source licenses and reproduction. GPU and large-corpus/book-scale configurations remain unverified.
+
+Run the six staged notebooks with the isolated environment's kernel. Each covers provenance, prediction, actual shared-source training, failure analysis, saved-result reload and transfer. `verify_notebooks.py` starts a fresh actual Jupyter kernel for each notebook; notebook/lock/verifier and shared-source hashes are recorded. Run notebooks **before** final CLI `--record` commands because both overwrite artifacts.
+
+## Data and evaluation contract
+
+The original MIT intent corpus has 24 training, 12 validation, 18 test and 24 separate unlabeled training-pool sentences across six services. Exact sentence text and IDs are disjoint across splits; the intent categories recur by design. Gold same-intent/different-intent labels define a binary service relation, not NLI classes or human-rated STS. The silver candidate pool never contains validation/test sentences; latent intent is diagnostic only after teacher prediction. These hand-authored domain phrases do not establish general semantic competence.
+
+Classification reuses E4's licensed UCI movie-review fixture: 200 training, 40 validation and 80 test reviews, plus unused challenge probes. Three fixed seeds select eight training reviews per class for every L18 method. The existing validation set has its own annotation cost. The E4 test data were previously published; here they remain excluded from fitting, continued pretraining, silver generation and checkpoint/hyperparameter selection. Fresh external data are needed for new independent generalization claims. Model pretraining overlap is unknown.
+
+NER reuses the original E2 annotation policy, disjoint name sets and 26/6/8 split. Its shared templates make it a controlled transfer example. First-subtoken supervision is the trained route; all-subtoken propagation is a separate actual-tokenizer alignment alternative.
+
+A loss decrease, plausible reconstruction, valid tensor or successful save is not sufficient task success. Author execution/review is separate from independent technical/editorial acceptance and beginner feedback, which remain pending.
+
+## L15 embedding training
+
+Compare the unmodified shared encoder against actual pair-softmax, cosine-regression and MNR training. All start from pretrained tiny BERT; this is a new sentence objective, not language-model training from random weights. The optimizer includes the pair classifier where applicable. MNR batches have one positive pair per distinct intent, preventing the fixture's same-intent alternatives becoming false negatives.
+
+<LossExplorer client:visible />
+<EmbeddingTraining client:visible />
+
+Loss-specific validation criteria select checkpoints: pair cross entropy, pair MSE or retrieval MRR. The full test query/candidate vectors produce actual rankings. A fixed PCA fitted on baseline training vectors visualizes before/after unit embeddings; its two coordinates do not preserve every high-dimensional relation. Independent arithmetic checks match actual library loss values. Gradient, changed-tensor and actual saved-encoder reload checks supplement quality metrics.
+
+**Exercise:** Explain why the same 0.8 cosine can imply squared error 0.04 or 0.64. Find a test query whose rank changes and verify its full-dimensional candidate scores. State whether the selected objective is symmetric or directional.
+
+<VerifiedRun id="embedding-training" />
+
+<details>
+<summary>Complete entrypoint source · embedding.py</summary>
+
+{/* example:embedding-training:start */}
+
+```python
+"""L15: real sentence-transformer losses, parameter updates and held-out embedding quality."""
+
+from pathlib import Path
+import json
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from atlas_representation.common import (
+    META,
+    MODEL,
+    ROOT,
+    artifact_files,
+    cls_eval,
+    encoder,
+    fixture,
+    losses,
+    pairs,
+    retrieval_eval,
+    save,
+    seed,
+    similarity_eval,
+    torch,
+    train_embedding,
+)
+from atlas_foundations.e7.contracts import cross_entropy, mnr_loss
+from sklearn.decomposition import PCA
+
+
+def main():
+    seed()
+    data = fixture()
+    gold = pairs(data, "train")
+    val = pairs(data, "validation")
+    test = pairs(data, "test")
+    baseline = encoder()
+    base = dict(
+        similarity=similarity_eval(baseline, test),
+        retrieval=retrieval_eval(baseline, data, "test"),
+    )
+    view_rows = [r for r in data["rows"] if r["split"] == "test"]
+    fit_texts = [r["text"] for r in data["rows"] if r["split"] == "train"]
+    pca = PCA(n_components=2).fit(baseline.encode(fit_texts, normalize_embeddings=True))
+    base_points = pca.transform(
+        baseline.encode([r["text"] for r in view_rows], normalize_embeddings=True)
+    )
+    results = []
+    checks = {}
+    for kind in ["softmax", "cosine", "mnr"]:
+        model = encoder()
+        objective = (
+            losses.SoftmaxLoss(model, 128, 2)
+            if kind == "softmax"
+            else losses.CosineSimilarityLoss(model)
+            if kind == "cosine"
+            else losses.MultipleNegativesRankingLoss(model, scale=20)
+        )
+        selected = gold if kind != "mnr" else [r for r in gold if r["label"] == 1]
+        probe = (
+            selected[:4]
+            if kind != "mnr"
+            else [
+                next(r for r in selected if r["left_id"].split("-")[1] == i)
+                for i in sorted({r["intent"] for r in data["rows"]})
+            ]
+        )
+        model.eval()
+        objective.eval()
+        features = [model.tokenize([r[k] for r in probe]) for k in ["left", "right"]]
+        with torch.no_grad():
+            if kind == "softmax":
+                reps, logits = objective(features, None)
+                target = int(probe[0]["label"])
+                checks[kind] = dict(
+                    concatenated_width=3 * 128,
+                    logits=logits[0].tolist(),
+                    target=target,
+                    manual=cross_entropy(logits[0].tolist(), target),
+                    library=float(
+                        torch.nn.functional.cross_entropy(
+                            logits[:1], torch.tensor([target])
+                        )
+                    ),
+                )
+            elif kind == "cosine":
+                u = model(features[0])["sentence_embedding"]
+                v = model(features[1])["sentence_embedding"]
+                cos = torch.nn.functional.cosine_similarity(u, v)
+                targets = torch.tensor([r["label"] for r in probe])
+                checks[kind] = dict(
+                    scores=cos.tolist(),
+                    targets=targets.tolist(),
+                    manual=float(((cos - targets) ** 2).mean()),
+                    library=float(
+                        objective(
+                            [
+                                model.tokenize([r[k] for r in probe])
+                                for k in ["left", "right"]
+                            ],
+                            targets,
+                        )
+                    ),
+                )
+            else:
+                u = torch.nn.functional.normalize(
+                    model(features[0])["sentence_embedding"], dim=-1
+                )
+                v = torch.nn.functional.normalize(
+                    model(features[1])["sentence_embedding"], dim=-1
+                )
+                scores = (u @ v.T).tolist()
+                checks[kind] = dict(
+                    scores=scores,
+                    scale=20,
+                    manual=mnr_loss(scores)["loss"],
+                    library=float(
+                        torch.nn.functional.cross_entropy(
+                            torch.tensor(scores) * 20, torch.arange(len(scores))
+                        )
+                    ),
+                )
+        assert abs(checks[kind]["manual"] - checks[kind]["library"]) < 2e-5
+        directory = ROOT / f"examples/artifacts/e7-embedding/{kind}"
+        training = train_embedding(
+            model, objective, data, selected, directory=directory, kind=kind
+        )
+        result = dict(
+            kind=kind,
+            training=training,
+            similarity=similarity_eval(model, test),
+            retrieval=retrieval_eval(model, data, "test"),
+            artifact=artifact_files(directory),
+        )
+        if kind == "softmax":
+            objective.eval()
+            with torch.no_grad():
+                reps, logits = objective(
+                    [model.tokenize([r[k] for r in test]) for k in ["left", "right"]],
+                    None,
+                )
+            result["pair_classification"] = cls_eval(
+                [int(r["label"]) for r in test], logits.argmax(-1).tolist()
+            )
+        points = pca.transform(
+            model.encode([r["text"] for r in view_rows], normalize_embeddings=True)
+        )
+        result["projection"] = [
+            dict(
+                id=r["id"],
+                text=r["text"],
+                intent=r["intent"],
+                before=a.tolist(),
+                after=b.tolist(),
+            )
+            for r, a, b in zip(view_rows, base_points, points)
+        ]
+        results.append(result)
+    save(
+        "e7-embedding",
+        dict(
+            model=META[MODEL],
+            baseline=base,
+            conditions=results,
+            loss_checks=checks,
+            projection_policy="One PCA fitted to baseline training vectors, then frozen for test before/after projections. Two displayed dimensions omit information; full 128-D similarities drive evaluation.",
+            protocol=data["protocol"],
+            verified=True,
+        ),
+    )
+    print(
+        json.dumps(
+            dict(
+                training_updates_verified=True,
+                loss_arithmetic_verified=True,
+                reload_verified=True,
+                conditions=len(results),
+            )
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()
+```
+
+{/* example:embedding-training:end */}
+
+</details>
+
+## L16 Augmented SBERT
+
+Train the cross-encoder teacher on gold training pairs, select it on gold validation, generate 120 continuous silver probabilities from a separate training-only pool, and train gold-only/gold-plus-silver students from the same initialization. This includes genuine teacher training, not an inference-only shortcut. Candidate generation does not use the pool's latent intent labels.
+
+<SilverExplorer client:visible />
+
+The first author run contains fourteen thresholded teacher disagreements; the continuous values, not thresholded diagnostics, train the student. Adding silver worsens held-out pair MSE in this small run. Both students have sixty optimizer steps, but the mixture changes gold exposure and sampled examples. More data and a competent teacher are not sufficient to guarantee better geometry.
+
+**Exercise:** Trace an erroneous silver pair to its sentence IDs and trained teacher. Propose a fresh validation-only sampling/filtering experiment without choosing a rule on these displayed test errors.
+
+<VerifiedRun id="augmented-sbert-training" />
+
+<details>
+<summary>Complete entrypoint source · augmentation.py</summary>
+
+{/* example:augmented-sbert-training:start */}
+
+```python
+"""L16: train a cross-encoder teacher, label training-only pairs, compare two students."""
+
+from pathlib import Path
+import json
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from atlas_representation.common import (
+    AutoModelForSequenceClassification,
+    AutoTokenizer,
+    MODEL,
+    ROOT,
+    artifact_files,
+    cls_eval,
+    copy,
+    download,
+    encoder,
+    fixture,
+    losses,
+    pairs,
+    random,
+    retrieval_eval,
+    save,
+    seed,
+    similarity_eval,
+    state_hash,
+    torch,
+    train_embedding,
+)
+
+
+def main():
+    seed()
+    data = fixture()
+    gold = pairs(data, "train")
+    valid = pairs(data, "validation")
+    test = pairs(data, "test")
+    by = {r["id"]: r for r in data["rows"]}
+    tokenizer = AutoTokenizer.from_pretrained(download(MODEL), local_files_only=True)
+    teacher = AutoModelForSequenceClassification.from_pretrained(
+        download(MODEL), num_labels=2, local_files_only=True
+    ).cpu()
+    initial = state_hash(teacher)
+    optimizer = torch.optim.AdamW(teacher.parameters(), lr=3e-4, weight_decay=0.01)
+    history = []
+    best = None
+    score = None
+    gradient = None
+    rng = random.Random(42)
+
+    def predict(rows):
+        teacher.eval()
+        with torch.no_grad():
+            return teacher(
+                **tokenizer(
+                    [r["left"] for r in rows],
+                    [r["right"] for r in rows],
+                    padding=True,
+                    truncation=True,
+                    max_length=64,
+                    return_tensors="pt",
+                )
+            ).logits.softmax(-1)[:, 1]
+
+    for step in range(60):
+        batch = rng.sample(gold, 8)
+        teacher.train()
+        optimizer.zero_grad()
+        inputs = tokenizer(
+            [r["left"] for r in batch],
+            [r["right"] for r in batch],
+            padding=True,
+            truncation=True,
+            max_length=64,
+            return_tensors="pt",
+        )
+        labels = torch.tensor([int(r["label"]) for r in batch])
+        loss = teacher(**inputs, labels=labels).loss
+        loss.backward()
+        if step == 0:
+            gradient = float(
+                teacher.bert.encoder.layer[0].attention.self.query.weight.grad.norm()
+            )
+        torch.nn.utils.clip_grad_norm_(teacher.parameters(), 1)
+        optimizer.step()
+        if (step + 1) % 10 == 0:
+            probs = predict(valid)
+            labels = torch.tensor([r["label"] for r in valid])
+            value = float(torch.nn.functional.binary_cross_entropy(probs, labels))
+            history.append(
+                dict(
+                    step=step + 1, loss=float(loss.detach()), validation_binary_ce=value
+                )
+            )
+            if score is None or value < score:
+                score = value
+                best = copy.deepcopy(teacher.state_dict())
+                best_step = step + 1
+    teacher.load_state_dict(best)
+    assert state_hash(teacher) != initial and gradient > 0
+    folder = ROOT / "examples/artifacts/e7-augmentation/teacher"
+    teacher.save_pretrained(folder)
+    tokenizer.save_pretrained(folder)
+    before = predict(valid)
+    reloaded = AutoModelForSequenceClassification.from_pretrained(folder).eval()
+    with torch.no_grad():
+        after = reloaded(
+            **tokenizer(
+                [r["left"] for r in valid],
+                [r["right"] for r in valid],
+                padding=True,
+                truncation=True,
+                max_length=64,
+                return_tensors="pt",
+            )
+        ).logits.softmax(-1)[:, 1]
+    assert torch.allclose(before, after, atol=1e-6)
+    candidates = [
+        dict(p, left=by[p["left_id"]]["text"], right=by[p["right_id"]]["text"])
+        for p in data["silver_candidates"]
+    ]
+    scores = predict(candidates).tolist()
+    silver = [
+        dict(p, label=float(value), origin="trained teacher probability, not gold")
+        for p, value in zip(candidates, scores)
+    ]
+    # Hidden fixture intents are used after prediction for diagnostics only, never teacher targets.
+    diagnostics = [
+        dict(
+            id=p["id"],
+            teacher_score=p["label"],
+            latent_same_intent=by[p["left_id"]]["intent"]
+            == by[p["right_id"]]["intent"],
+            disagreement=(p["label"] >= 0.5)
+            != (by[p["left_id"]]["intent"] == by[p["right_id"]]["intent"]),
+        )
+        for p in silver
+    ]
+    students = []
+    base = encoder()
+    baseline = similarity_eval(base, test)
+    for kind, rows in [("gold-only", gold), ("gold-plus-silver", gold + silver)]:
+        model = encoder()
+        objective = losses.CosineSimilarityLoss(model)
+        path = ROOT / f"examples/artifacts/e7-augmentation/{kind}"
+        training = train_embedding(
+            model, objective, data, rows, steps=60, directory=path
+        )
+        students.append(
+            dict(
+                condition=kind,
+                training=training,
+                similarity=similarity_eval(model, test),
+                retrieval=retrieval_eval(model, data, "test"),
+                train_pairs=len(rows),
+                artifact=artifact_files(path),
+            )
+        )
+    result = dict(
+        teacher=dict(
+            history=history,
+            selected_step=best_step,
+            initial_sha256=initial,
+            selected_sha256=state_hash(teacher),
+            first_query_gradient_norm=gradient,
+            validation_scores=before.tolist(),
+            test=cls_eval(
+                [int(r["label"]) for r in test], [int(x >= 0.5) for x in predict(test)]
+            ),
+            artifact=artifact_files(folder),
+        ),
+        baseline=baseline,
+        students=students,
+        silver=silver,
+        diagnostics=diagnostics,
+        protocol=data["protocol"],
+        comparison_limit="Equal 60-step student budgets and initialization; adding silver changes pair distribution and exposure, not only label quality. Teacher errors remain visible; no independent benchmark claim.",
+        verified=True,
+    )
+    save("e7-augmentation", result)
+    print(
+        json.dumps(
+            dict(
+                teacher_trained=True,
+                silver_split_verified=True,
+                students_updated=True,
+                reload_verified=True,
+                silver_pairs=len(silver),
+            )
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()
+```
+
+{/* example:augmented-sbert-training:end */}
+
+</details>
+
+## L17 TSDAE and adaptation
+
+Actual Sentence Transformers denoising loss encodes damaged training text into one CLS vector and conditions a causal decoder on it. Compatible encoder/decoder parameters are tied; newly initialized cross-attention value/output paths learn. With a single context key, the attention softmax is always one, so query/key selection gradients may be zero. The checks verify the actual value gradient and updated bridge instead of requiring impossible nonzero gradients everywhere.
+
+<DenoisingExplorer client:visible />
+
+The source compares baseline CLS embeddings, selected TSDAE-only embeddings, gold-only regression and TSDAE-plus-gold adaptation. It preserves actual repetitive greedy reconstruction and training-loss intervals without retrieval improvement. Gold previous tokens make teacher-forced outputs a different test from free reconstruction. Right padding is excluded from the pinned reconstruction loss; CLS pooling is a declared experiment choice, not a claim that contextual mean pooling removes all position information.
+
+**Exercise:** Find a loss/MRR disagreement interval and explain which task the surrogate rewards. Check that the reconstruction shown belongs to its explicitly labeled fixed probe, rather than whichever corruption row you selected.
+
+<VerifiedRun id="tsdae-adaptation" />
+
+<details>
+<summary>Complete entrypoint source · denoising.py</summary>
+
+{/* example:tsdae-adaptation:start */}
+
+```python
+"""L17: actual tied TSDAE reconstruction, retrieval checks and supervised adaptation."""
+
+from pathlib import Path
+import json
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from atlas_representation.common import (
+    ROOT,
+    SentenceTransformer,
+    artifact_files,
+    copy,
+    encoder,
+    fixture,
+    losses,
+    np,
+    pairs,
+    random,
+    retrieval_eval,
+    save,
+    seed,
+    similarity_eval,
+    state_hash,
+    torch,
+    train_embedding,
+)
+from atlas_foundations.e7.contracts import delete_words
+
+
+def main():
+    seed()
+    data = fixture()
+    texts = [r for r in data["rows"] if r["split"] == "train"]
+    by_id = {r["id"]: r for r in texts}
+    damaged = [
+        dict(id=r["id"], **delete_words(r["text"], 42 + i)) for i, r in enumerate(texts)
+    ]
+    model = encoder("cls")
+    baseline = dict(
+        similarity=similarity_eval(model, pairs(data, "test")),
+        retrieval=retrieval_eval(model, data, "test"),
+    )
+    initial = state_hash(model)
+    objective = losses.DenoisingAutoEncoderLoss(model, tie_encoder_decoder=True).cpu()
+    tokenizer = objective.tokenizer_decoder
+    assert (
+        model[0].auto_model.embeddings.word_embeddings.weight.data_ptr()
+        == objective.decoder.bert.embeddings.word_embeddings.weight.data_ptr()
+    )
+    optimizer = torch.optim.AdamW(objective.parameters(), lr=1e-4, weight_decay=0.01)
+    rng = random.Random(42)
+    history = []
+    gradients = {}
+    best = None
+    best_score = None
+
+    def reconstruction_loss():
+        objective.eval()
+        values = []
+        with torch.no_grad():
+            for start in range(0, len(damaged), 4):
+                batch = damaged[start : start + 4]
+                features = [
+                    model.tokenize([r[k] for r in batch])
+                    for k in ["damaged", "original"]
+                ]
+                values.append(float(objective(features, None)))
+        return sum(values) / len(values)
+
+    decoder_initial = state_hash(objective.decoder, lambda n, p: "crossattention" in n)
+    original_loss = reconstruction_loss()
+    initial_retrieval = retrieval_eval(model, data, "validation")
+    history.append(
+        dict(
+            step=0,
+            reconstruction_training_probe_loss=original_loss,
+            validation_mrr=initial_retrieval["mrr"],
+        )
+    )
+    for step in range(60):
+        batch = rng.sample(damaged, 4)
+        objective.train()
+        optimizer.zero_grad()
+        features = [
+            model.tokenize([r[k] for r in batch]) for k in ["damaged", "original"]
+        ]
+        loss = objective(features, None)
+        assert torch.isfinite(loss)
+        loss.backward()
+        if step == 0:
+            decoder_first_gradient = float(
+                objective.decoder.bert.encoder.layer[
+                    0
+                ].crossattention.self.value.weight.grad.norm()
+            )
+            decoder_query_gradient = float(
+                objective.decoder.bert.encoder.layer[
+                    0
+                ].crossattention.self.query.weight.grad.norm()
+            )
+            gradients = {
+                n: float(p.grad.norm())
+                for n, p in model.named_parameters()
+                if p.grad is not None
+            }
+        torch.nn.utils.clip_grad_norm_(objective.parameters(), 1)
+        optimizer.step()
+        if (step + 1) % 10 == 0:
+            value = reconstruction_loss()
+            quality = retrieval_eval(model, data, "validation")
+            history.append(
+                dict(
+                    step=step + 1,
+                    reconstruction_training_probe_loss=value,
+                    validation_mrr=quality["mrr"],
+                )
+            )
+            # Match the deployed encoder's task, not the reconstruction surrogate alone.
+            criterion = quality["mrr"]
+            if best_score is None or criterion > best_score:
+                best_score = criterion
+                best = copy.deepcopy(objective.state_dict())
+                best_step = step + 1
+    objective.load_state_dict(best)
+    assert decoder_first_gradient > 0 and decoder_initial != state_hash(
+        objective.decoder, lambda n, p: "crossattention" in n
+    )
+    model.eval()
+    assert state_hash(model) != initial and any(g > 0 for g in gradients.values())
+    after_tsdae = dict(
+        similarity=similarity_eval(model, pairs(data, "test")),
+        retrieval=retrieval_eval(model, data, "test"),
+    )
+    directory = ROOT / "examples/artifacts/e7-denoising/tsdae"
+    model.save_pretrained(directory)
+    objective.decoder.save_pretrained(directory / "decoder")
+    tokenizer.save_pretrained(directory / "decoder")
+    reloaded = SentenceTransformer(str(directory), device="cpu")
+    assert np.allclose(
+        model.encode([r["text"] for r in texts]),
+        reloaded.encode([r["text"] for r in texts]),
+        atol=1e-6,
+    )
+    sample = damaged[0]
+    objective.eval()
+    with torch.no_grad():
+        reps = model(model.tokenize([sample["damaged"]]))["sentence_embedding"]
+        generated = objective.decoder.generate(
+            input_ids=torch.tensor([[tokenizer.cls_token_id]]),
+            encoder_hidden_states=reps[:, None],
+            encoder_attention_mask=torch.ones((1, 1), dtype=torch.long),
+            max_new_tokens=24,
+            do_sample=False,
+            eos_token_id=tokenizer.sep_token_id,
+            pad_token_id=tokenizer.pad_token_id,
+        )
+        raw = tokenizer.decode(generated[0], skip_special_tokens=True)
+    teacher_forced = model.tokenize([sample["original"]])
+    with torch.no_grad():
+        ids = teacher_forced["input_ids"]
+        out = objective.decoder(
+            input_ids=ids[:, :-1],
+            encoder_hidden_states=reps[:, None],
+            encoder_attention_mask=torch.ones((1, 1), dtype=torch.long),
+        )
+        pred = out.logits.argmax(-1)[0].tolist()
+    conditions = []
+    for name, student in [("gold-only", encoder("cls")), ("tsdae-plus-gold", model)]:
+        obj = losses.CosineSimilarityLoss(student)
+        path = ROOT / f"examples/artifacts/e7-denoising/{name}"
+        training = train_embedding(
+            student, obj, data, pairs(data, "train"), steps=60, directory=path
+        )
+        conditions.append(
+            dict(
+                condition=name,
+                training=training,
+                similarity=similarity_eval(student, pairs(data, "test")),
+                retrieval=retrieval_eval(student, data, "test"),
+                artifact=artifact_files(path),
+            )
+        )
+    counterexamples = [
+        dict(before=a, after=b)
+        for a, b in zip(history, history[1:])
+        if b["reconstruction_training_probe_loss"]
+        < a["reconstruction_training_probe_loss"]
+        and b["validation_mrr"] <= a["validation_mrr"]
+    ]
+    save(
+        "e7-denoising",
+        dict(
+            baseline=baseline,
+            tsdae=after_tsdae,
+            history=history,
+            selected_step=best_step,
+            selection="first maximum validation retrieval MRR, not minimum reconstruction loss",
+            corruption=damaged,
+            reconstruction=dict(
+                source=sample,
+                greedy=raw,
+                greedy_ids=generated[0].tolist(),
+                teacher_forced_next_tokens=tokenizer.convert_ids_to_tokens(pred),
+                encoder_condition_shape=list(reps[:, None].shape),
+                warning="Teacher-forced tokens see gold previous tokens; greedy reconstruction does not. Neither is evidence of retrieval improvement.",
+            ),
+            counterexamples=counterexamples,
+            adaptation=conditions,
+            initial_sha256=initial,
+            first_gradient_norms=gradients,
+            decoder_first_cross_attention_value_gradient=decoder_first_gradient,
+            decoder_first_cross_attention_query_gradient=decoder_query_gradient,
+            single_context_key_note="One encoder vector gives a one-element attention softmax: query/key selection gradients are zero; value/output paths still learn.",
+            decoder_cross_attention_updated=True,
+            tied_embeddings_verified=True,
+            reload_verified=True,
+            artifact=artifact_files(directory),
+            protocol="Training-only original community-service sentences, 60% seeded whitespace-word deletion with at least one retained word, CLS pooling, one-vector decoder cross-attention and actual tied Sentence Transformers DenoisingAutoEncoderLoss. Fixed corruption is an inspectable small training probe; no general language reconstruction or benchmark claim.",
+            verified=True,
+        ),
+    )
+    print(
+        json.dumps(
+            dict(
+                tsdae_trained=True,
+                tied_parameters_verified=True,
+                adaptation_compared=True,
+                reload_verified=True,
+                loss_retrieval_disagreements=len(counterexamples),
+            )
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()
+```
+
+{/* example:tsdae-adaptation:end */}
+
+</details>
+
+## L18 classification and SetFit
+
+Compare full, partial and head-only tiny BERT against TF-IDF/logistic regression, frozen MiniLM sentence vectors/logistic regression, and genuine SetFit. Every method receives the same sixteen selected reviews within each of three seeds. BERT validation checkpoints are selected without test data. SetFit's body trains for a fixed twenty-four steps using the actual library pair sampler/loss, then SetFitModel fits its classifier on the original labeled reviews.
+
+<FreezeExplorer client:visible />
+
+Partial freezing uses module names rather than an architecture-dependent numeric parameter index. Exact frozen hashes, first-step gradients and changed tensors demonstrate the intended update. SetFit and its frozen control share the same pretrained sentence encoder; comparisons with tiny BERT additionally change architecture and prior training. All-seed means, ranges and descriptive standard deviations remain visible, including worse adapted-encoder runs.
+
+**Exercise:** Compare one seed across partial/head-only/full policies. Explain the distinction between frozen weights and eval-mode dropout. Count unique labeled reviews separately from repeated generated pair rows.
+
+<VerifiedRun id="representation-classification" />
+
+<details>
+<summary>Complete entrypoint source · classification.py</summary>
+
+{/* example:representation-classification:start */}
+
+```python
+"""L18: matched few-shot selection, explicit freezing and genuine SetFit training."""
+
+from pathlib import Path
+import json
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from atlas_representation.common import (
+    ROOT,
+    SentenceTransformer,
+    accuracy_score,
+    artifact_files,
+    classifier_run,
+    cls_eval,
+    download,
+    np,
+    random,
+    save,
+    seed,
+    sentiment,
+    state_hash,
+)
+from sklearn.linear_model import LogisticRegression
+from sklearn.feature_extraction.text import TfidfVectorizer
+from setfit import SetFitModel
+from setfit.sampler import ContrastiveDataset
+from sentence_transformers import losses
+import torch
+
+SENTENCE = "sentence-transformers/paraphrase-MiniLM-L3-v2"
+
+
+def main():
+    source = sentiment()["rows"]
+    train = [r for r in source if r["split"] == "train"]
+    valid = [r for r in source if r["split"] == "validation"]
+    test = [r for r in source if r["split"] == "test"]
+    runs = []
+    labels = [r["label"] for r in test]
+    for run_seed in [11, 23, 37]:
+        rng = random.Random(run_seed)
+        sample = []
+        for label in [0, 1]:
+            sample += rng.sample([r for r in train if r["label"] == label], 8)
+        for policy in ["full", "partial", "head-only"]:
+            directory = (
+                ROOT / f"examples/artifacts/e7-classification/seed-{run_seed}-{policy}"
+            )
+            r = classifier_run(
+                sample, valid, test, directory, freeze=policy, run_seed=run_seed
+            )
+            r["method"] = "bert-" + policy
+            runs.append(r)
+        vectorizer = TfidfVectorizer(ngram_range=(1, 2))
+        x = vectorizer.fit_transform([r["text"] for r in sample])
+        clf = LogisticRegression(random_state=run_seed, max_iter=1000).fit(
+            x, [r["label"] for r in sample]
+        )
+        pred = clf.predict(vectorizer.transform([r["text"] for r in test])).tolist()
+        runs.append(
+            dict(
+                method="tfidf-few-shot",
+                seed=run_seed,
+                train_ids=[r["id"] for r in sample],
+                test=cls_eval(labels, pred),
+                predictions=[
+                    dict(id=r["id"], gold=r["label"], prediction=p)
+                    for r, p in zip(test, pred)
+                ],
+            )
+        )
+        seed(run_seed)
+        body = SentenceTransformer(download(SENTENCE), device="cpu")
+        body.max_seq_length = 96
+        initial = state_hash(body)
+        probe = body.encode(
+            [r["text"] for r in sample],
+            show_progress_bar=False,
+            normalize_embeddings=True,
+        )
+        head = LogisticRegression(random_state=run_seed, max_iter=1000).fit(
+            probe, [r["label"] for r in sample]
+        )
+        pred = head.predict(
+            body.encode(
+                [r["text"] for r in test],
+                normalize_embeddings=True,
+                show_progress_bar=False,
+            )
+        ).tolist()
+        runs.append(
+            dict(
+                method="frozen-sentence-logistic",
+                seed=run_seed,
+                train_ids=[r["id"] for r in sample],
+                test=cls_eval(labels, pred),
+                predictions=[
+                    dict(id=r["id"], gold=r["label"], prediction=p)
+                    for r, p in zip(test, pred)
+                ],
+            )
+        )
+        model = SetFitModel(
+            model_body=body,
+            model_head=LogisticRegression(random_state=run_seed, max_iter=1000),
+            normalize_embeddings=True,
+        )
+        gradient = []
+        handle = (
+            body[0]
+            .auto_model.encoder.layer[0]
+            .attention.self.query.weight.register_hook(
+                lambda g: gradient.append(float(g.norm())) if not gradient else None
+            )
+        )
+        # Use the real SetFit sampler/model with an explicit CPU optimizer loop.
+        # SetFit 1.1.3's convenience Trainer implicitly selects MPS on this host;
+        # the transparent two-stage path avoids claiming that as a CPU run.
+        sampled_pairs = list(
+            ContrastiveDataset(
+                [r["text"] for r in sample],
+                [r["label"] for r in sample],
+                multilabel=False,
+                num_iterations=4,
+            )
+        )
+        objective = losses.CosineSimilarityLoss(body)
+        optimizer = torch.optim.AdamW(body.parameters(), lr=2e-4, weight_decay=0.01)
+        history = []
+        pair_rng = random.Random(run_seed)
+        for step in range(24):
+            batch = pair_rng.sample(sampled_pairs, 8)
+            body.train()
+            optimizer.zero_grad()
+            features = [
+                body.tokenize([r[k] for r in batch])
+                for k in ["sentence_1", "sentence_2"]
+            ]
+            loss = objective(features, torch.tensor([r["label"] for r in batch]))
+            assert torch.isfinite(loss)
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(body.parameters(), 1)
+            optimizer.step()
+            if (step + 1) % 4 == 0 or step == 0:
+                history.append(dict(step=step + 1, embedding_loss=float(loss.detach())))
+        model.fit(
+            [r["text"] for r in sample],
+            [r["label"] for r in sample],
+            num_epochs=1,
+            batch_size=8,
+            show_progress_bar=False,
+        )
+        handle.remove()
+        updated = state_hash(body)
+        assert updated != initial and gradient[0] > 0
+        assert all(p.device.type == "cpu" for p in body.parameters())
+        pred = np.asarray(model.predict([r["text"] for r in test])).tolist()
+        path = ROOT / f"examples/artifacts/e7-classification/setfit-{run_seed}"
+        model.save_pretrained(str(path))
+        reloaded = SetFitModel.from_pretrained(
+            str(path), local_files_only=True, device="cpu"
+        )
+        assert pred == np.asarray(reloaded.predict([r["text"] for r in test])).tolist()
+        runs.append(
+            dict(
+                method="setfit",
+                seed=run_seed,
+                train_ids=[r["id"] for r in sample],
+                test=cls_eval(labels, pred),
+                predictions=[
+                    dict(id=r["id"], text=r["text"], gold=r["label"], prediction=p)
+                    for r, p in zip(test, pred)
+                ],
+                initial_sha256=initial,
+                updated_sha256=updated,
+                first_query_gradient_norm=gradient[0],
+                history=history,
+                settings=dict(
+                    actual_training_device=str(next(body.parameters()).device),
+                    generated_pair_rows=len(sampled_pairs),
+                    distinct_pair_rows=len(
+                        {(r["sentence_1"], r["sentence_2"]) for r in sampled_pairs}
+                    ),
+                    max_steps=24,
+                    batch_size=8,
+                    num_iterations=4,
+                    body_learning_rate=2e-4,
+                    head="sklearn LogisticRegression",
+                    normalize_embeddings=True,
+                ),
+                reload_verified=True,
+                artifact=artifact_files(path),
+            )
+        )
+    summary = []
+    for method in sorted({r["method"] for r in runs}):
+        scores = [r["test"]["macro_f1"] for r in runs if r["method"] == method]
+        summary.append(
+            dict(
+                method=method,
+                mean_macro_f1=float(np.mean(scores)),
+                std_macro_f1=float(np.std(scores)),
+                minimum=min(scores),
+                maximum=max(scores),
+                seeds=[11, 23, 37],
+            )
+        )
+    previous = json.loads((ROOT / "src/data/discovery-results.json").read_text())[
+        "classification"
+    ]["methods"]["tfidf-logistic"]["test"]
+    save(
+        "e7-classification",
+        dict(
+            runs=runs,
+            summary=summary,
+            earlier_full_data_tfidf=dict(
+                metrics=previous,
+                source="E4 recorded tfidf-logistic, same test IDs, 200 training examples instead of 16; descriptive reference, not matched-label comparison",
+            ),
+            protocol="Three fixed seeds; eight training rows per class, identical selected IDs across methods within each seed. Validation selects BERT checkpoints only; SetFit fixed 24 steps, never test-selected. SetFit/frozen sentence route use pretrained MiniLM sentence embeddings, whereas BERT routes use tiny BERT: architecture and prior training differ. Standard deviation over three selections is descriptive, not a confidence interval.",
+            verified=True,
+        ),
+    )
+    print(
+        json.dumps(
+            dict(
+                frozen_parameters_verified=True,
+                setfit_trained=True,
+                selection_repeated=True,
+                reload_verified=True,
+                seeds=3,
+            )
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()
+```
+
+{/* example:representation-classification:end */}
+
+</details>
+
+## L19 continued pretraining
+
+Perform actual dynamic MLM on training review text only, using the pinned collator's 15% selection and nominal 80/10/10 replacement policy. Special/padding/nonselected targets are ignored. Fixed validation masks make token-weighted selection stable. A two-step smoke run and sixty-step evaluated run are separate artifacts.
+
+<MaskExplorer client:visible />
+
+The downstream comparison preserves equal initial pooler/head weights, because an MLM checkpoint omits the sequence-classification pooler. Only shared adapted embeddings/encoder weights are transferred. Training RNG is reset after construction so extra model loading does not change the comparison's dropout draws. Identical downstream data, optimizer budgets and validation rules compare pretrained versus adapted encoders. Actual task metrics, not fill-mask fluency alone, establish the observed effect.
+
+**Exercise:** Remove every illustrated target and explain why the mean loss is undefined. Find an original selected-but-unchanged token if present. Explain why an unchanged input ID does not uniquely reveal the sampling branch that produced it.
+
+<VerifiedRun id="continued-pretraining" />
+
+<details>
+<summary>Complete entrypoint source · mlm.py</summary>
+
+{/* example:continued-pretraining:start */}
+
+```python
+"""L19: genuine dynamic MLM adaptation, fixed masked validation and downstream comparison."""
+
+from pathlib import Path
+import json
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from atlas_representation.common import (
+    AutoTokenizer,
+    MODEL,
+    ROOT,
+    artifact_files,
+    classifier_run,
+    copy,
+    download,
+    random,
+    save,
+    seed,
+    sentiment,
+    state_hash,
+    torch,
+)
+from transformers import AutoModelForMaskedLM, DataCollatorForLanguageModeling
+
+
+def main():
+    source = sentiment()["rows"]
+    train = [r for r in source if r["split"] == "train"]
+    valid = [r for r in source if r["split"] == "validation"]
+    test = [r for r in source if r["split"] == "test"]
+    tokenizer = AutoTokenizer.from_pretrained(download(MODEL), local_files_only=True)
+    encode = lambda rows: [
+        tokenizer(
+            r["text"], truncation=True, max_length=96, return_special_tokens_mask=True
+        )
+        for r in rows
+    ]
+    training = encode(train)
+    validation = encode(valid)
+    collator = DataCollatorForLanguageModeling(
+        tokenizer=tokenizer, mlm=True, mlm_probability=0.15, seed=999
+    )
+    fixed = [collator(validation[i : i + 8]) for i in range(0, len(validation), 8)]
+    assert all((b["labels"] != -100).any() for b in fixed)
+
+    def evaluate(model):
+        model.eval()
+        total = 0.0
+        tokens = 0
+        with torch.no_grad():
+            for b in fixed:
+                count = int((b["labels"] != -100).sum())
+                total += float(model(**b).loss) * count
+                tokens += count
+        return total / tokens
+
+    def adapt(steps, name, keep=False):
+        seed()
+        model = AutoModelForMaskedLM.from_pretrained(
+            download(MODEL), local_files_only=True
+        ).cpu()
+        initial = state_hash(model)
+        baseline = evaluate(model)
+        optimizer = torch.optim.AdamW(model.parameters(), lr=1e-4, weight_decay=0.01)
+        dynamic = DataCollatorForLanguageModeling(
+            tokenizer=tokenizer, mlm=True, mlm_probability=0.15, seed=42
+        )
+        rng = random.Random(42)
+        history = []
+        best = None
+        score = None
+        grad = None
+        for step in range(steps):
+            batch = dynamic(rng.sample(training, 8))
+            assert (batch["labels"] != -100).any()
+            model.train()
+            optimizer.zero_grad()
+            loss = model(**batch).loss
+            assert torch.isfinite(loss)
+            loss.backward()
+            if step == 0:
+                grad = float(
+                    model.bert.encoder.layer[0].attention.self.query.weight.grad.norm()
+                )
+            torch.nn.utils.clip_grad_norm_(model.parameters(), 1)
+            optimizer.step()
+            if (step + 1) % 10 == 0 or step == steps - 1:
+                value = evaluate(model)
+                history.append(
+                    dict(
+                        step=step + 1,
+                        training_loss=float(loss.detach()),
+                        validation_masked_loss=value,
+                    )
+                )
+                if score is None or value < score:
+                    score = value
+                    best = copy.deepcopy(model.state_dict())
+                    best_step = step + 1
+        model.load_state_dict(best)
+        assert state_hash(model) != initial and grad > 0
+        directory = ROOT / f"examples/artifacts/e7-mlm/{name}"
+        model.save_pretrained(directory)
+        tokenizer.save_pretrained(directory)
+        reloaded = AutoModelForMaskedLM.from_pretrained(directory).eval()
+        assert abs(evaluate(model) - evaluate(reloaded)) < 1e-6
+        sentence = "The acting was [MASK]."
+        probe = tokenizer(sentence, return_tensors="pt")
+        position = int((probe["input_ids"][0] == tokenizer.mask_token_id).nonzero()[0])
+        with torch.no_grad():
+            probs = reloaded(**probe).logits[0, position].softmax(-1)
+            values, ids = probs.topk(5)
+        return dict(
+            profile=name,
+            steps=steps,
+            baseline_masked_validation_loss=baseline,
+            selected_validation_loss=score,
+            selected_step=best_step,
+            history=history,
+            initial_sha256=initial,
+            updated_sha256=state_hash(model),
+            first_query_gradient_norm=grad,
+            reload_verified=True,
+            fill_mask=dict(
+                input=sentence,
+                top=[
+                    dict(
+                        token=tokenizer.convert_ids_to_tokens(int(i)),
+                        probability=float(v),
+                    )
+                    for i, v in zip(ids, values)
+                ],
+            ),
+            artifact=artifact_files(directory),
+        ), directory
+
+    smoke, _ = adapt(2, "smoke-2-steps")
+    evaluated, path = adapt(60, "evaluated-60-steps")
+    # Equal downstream data, step budget and random head seed; the adapted encoder is the intended intervention.
+    downstream = []
+    for name, backbone in [("pretrained", None), ("mlm-adapted", str(path))]:
+        directory = ROOT / f"examples/artifacts/e7-mlm/downstream-{name}"
+        row = classifier_run(
+            train, valid, test, directory, backbone=backbone, run_seed=42, steps=60
+        )
+        row["condition"] = name
+        downstream.append(row)
+    assert (
+        downstream[0]["head_pooler_initial_sha256"]
+        == downstream[1]["head_pooler_initial_sha256"]
+    )
+    original = tokenizer.pad(validation[:8], padding=True, return_tensors="pt")
+    b = fixed[0]
+    tokens = []
+    for i, (orig, changed, label, mask) in enumerate(
+        zip(
+            original["input_ids"][0],
+            b["input_ids"][0],
+            b["labels"][0],
+            original["special_tokens_mask"][0],
+        )
+    ):
+        if int(label) != -100:
+            assert not int(mask) and int(label) == int(orig)
+        tokens.append(
+            dict(
+                position=i,
+                original_id=int(orig),
+                input_id=int(changed),
+                label=int(label),
+                original_token=tokenizer.convert_ids_to_tokens(int(orig)),
+                input_token=tokenizer.convert_ids_to_tokens(int(changed)),
+                special_or_padding=bool(mask) or int(orig) == tokenizer.pad_token_id,
+                loss_included=int(label) != -100,
+            )
+        )
+    save(
+        "e7-mlm",
+        dict(
+            smoke=smoke,
+            evaluated=evaluated,
+            downstream=downstream,
+            mask_trace=tokens,
+            training_ids=[r["id"] for r in train],
+            validation_ids=[r["id"] for r in valid],
+            test_ids=[r["id"] for r in test],
+            protocol="Only 200 training review texts enter continued pretraining, never labels/test/challenge texts. Fixed dynamically-created validation masks select minimum validation masked-token loss; 60-step evaluated run is separate from a two-step smoke run. Downstream runs have identical data/seed/budget and validation-only classification selection. Pretraining overlap of the original downloaded checkpoint is unknown.",
+            masking="Actual Transformers collator: 15% eligible token selection, nominal 80% mask / 10% random vocabulary / 10% unchanged among selected tokens. Observed unchanged IDs do not identify which random branch produced them. Special/padding labels remain -100.",
+            verified=True,
+        ),
+    )
+    print(
+        json.dumps(
+            dict(
+                mlm_updated=True,
+                test_excluded=True,
+                downstream_compared=True,
+                reload_verified=True,
+            )
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()
+```
+
+{/* example:continued-pretraining:end */}
+
+</details>
+
+## L20 complete NER
+
+Reuse the E2 token-classifier trainer, optimizer, validation selection, decoder and strict span scoring through explicit model/artifact paths. L20 adds actual split-name/no-entity/padding/truncation probes, side-by-side first-only and B-to-I propagated supervision, and boundary/type/invalid-BIO error examples. There is one training implementation rather than a duplicated E7 copy.
+
+<NERAlignment client:visible />
+
+Whole typed spans include sentence identity and exclusive end offsets. Splitting each token into its own metric sentence destroys multiword entities and is incorrect. First-only training reconstructs one label per complete original word. Truncated records are rejected for training, even when an inspection mask is displayed. An invalid predicted I tag starts a repaired span under an explicit policy and is separately flagged; that policy is not permission for malformed gold annotation.
+
+**Exercise:** Explain why predicting “Cedar” alone misses the gold ORG “Cedar Labs.” Compare token accuracy with exact entity F1 and identify which subpieces receive loss under each supervision policy. The saved model's predictions are actual held-out outputs, while boundary/type examples are explicitly constructed teaching cases.
+
+<VerifiedRun id="ner-complete" />
+
+<details>
+<summary>Complete entrypoint source · ner.py</summary>
+
+{/* example:ner-complete:start */}
+
+```python
+"""L20: reuse the E2 trainer; extend annotation, alignment and strict entity-error evidence."""
+
+from pathlib import Path
+from collections import Counter
+from contextlib import redirect_stdout
+import io
+import json
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from atlas_representation.common import (
+    AutoTokenizer,
+    MODEL,
+    ROOT,
+    TOKENIZER,
+    artifact_files,
+    download,
+    save,
+)
+
+sys.path.insert(0, str(ROOT / "examples/training/reference/src"))
+from atlas_reference.ner_model import main as train_reference
+from atlas_foundations.ner_contract import LABELS, align_first, spans, entity_scores
+from atlas_foundations.e7.contracts import align_all
+
+
+def main():
+    path = ROOT / "examples/artifacts/e7-ner/reused-training"
+    # One implementation of training/selection/decoding, reused rather than copied.
+    with redirect_stdout(io.StringIO()):
+        result = train_reference(
+            output_path=path,
+            model_path=download(MODEL),
+            tokenizer_path=download(TOKENIZER),
+        )
+    tokenizer = AutoTokenizer.from_pretrained(
+        download(TOKENIZER), use_fast=True, local_files_only=True
+    )
+    probes = [
+        dict(
+            id="split-and-multiword",
+            tokens=[
+                "Mireille",
+                "Quill",
+                "visited",
+                "Cedar",
+                "Research",
+                "in",
+                "New",
+                "York",
+                ".",
+            ],
+            tags=["B-PER", "I-PER", "O", "B-ORG", "I-ORG", "O", "B-LOC", "I-LOC", "O"],
+        ),
+        dict(
+            id="no-entities",
+            tokens=["The", "doors", "are", "open", "."],
+            tags=["O"] * 5,
+        ),
+    ]
+    alignments = []
+    for row in probes:
+        full = tokenizer(row["tokens"], is_split_into_words=True)
+        counts = Counter(i for i in full.word_ids() if i is not None)
+        for cap in [32, 6]:
+            encoded = tokenizer(
+                row["tokens"],
+                is_split_into_words=True,
+                truncation=True,
+                padding="max_length",
+                max_length=cap,
+            )
+            ids = encoded.word_ids()
+            truncated = Counter(i for i in ids if i is not None) != counts
+            first = align_first(ids, row["tags"], counts, reject_truncated=False)
+            rejected = False
+            try:
+                propagated = align_all(ids, row["tags"], counts)
+            except ValueError:
+                rejected = True
+                propagated = None
+            assert rejected == truncated
+            for i, label in zip(ids, first):
+                if i is None:
+                    assert label == -100
+            alignments.append(
+                dict(
+                    id=row["id"],
+                    tokens=row["tokens"],
+                    tags=row["tags"],
+                    max_length=cap,
+                    truncated=truncated,
+                    training_rejected=rejected,
+                    rows=[
+                        dict(
+                            position=j,
+                            word_id=w,
+                            word=row["tokens"][w] if w is not None else None,
+                            word_tag=row["tags"][w] if w is not None else None,
+                            piece=piece,
+                            token_id=token,
+                            label_first=a,
+                            label_all=None if propagated is None else propagated[j],
+                            loss_first=a != -100,
+                            loss_all=None
+                            if propagated is None
+                            else propagated[j] != -100,
+                        )
+                        for j, (w, piece, token, a) in enumerate(
+                            zip(
+                                ids,
+                                tokenizer.convert_ids_to_tokens(encoded.input_ids),
+                                encoded.input_ids,
+                                first,
+                            )
+                        )
+                    ],
+                )
+            )
+    assert any(
+        sum(r["word_id"] == i for r in alignments[0]["rows"]) > 1
+        for i in range(len(probes[0]["tokens"]))
+    )
+    gold = [["B-PER", "I-PER", "O", "B-ORG", "I-ORG", "O"]]
+    errors = []
+    for name, pred in [
+        ("correct", gold[0]),
+        ("boundary", ["B-PER", "O", "O", "B-ORG", "I-ORG", "O"]),
+        ("type", ["B-LOC", "I-LOC", "O", "B-ORG", "I-ORG", "O"]),
+        ("invalid-I", ["I-PER", "I-PER", "O", "B-ORG", "I-ORG", "O"]),
+    ]:
+        errors.append(
+            dict(
+                name=name,
+                gold=gold[0],
+                prediction=pred,
+                metrics=entity_scores(gold, [pred]),
+                token_accuracy=sum(a == b for a, b in zip(gold[0], pred)) / len(pred),
+                raw_invalid_bio=name == "invalid-I",
+                policy="Invalid I begins a new span under the shared explicit repair rule; report the raw violation separately.",
+            )
+        )
+    output = dict(
+        training=result,
+        alignment=alignments,
+        span_examples=errors,
+        annotation_policy=json.loads(
+            (ROOT / "examples/data/fixtures/ner-reference.json").read_text()
+        )["policy"],
+        scope="Flat nonoverlapping PER/ORG/LOC tags with disjoint name sets and shared templates; no nested entities, CoNLL performance or natural-domain generalization claim. Training uses first complete subtoken supervision. All-subtoken propagation is a separately verified alignment alternative, not a second trained model.",
+        reuse="atlas_reference.ner_model.main: the original 90-step E2 trainer, validation-selected checkpoint, frozen embeddings, whole-sentence predictions and strict entity metrics. E7 changes only artifact/model paths, not a duplicated training loop.",
+        reload_verified=result["reload"],
+        artifact=artifact_files(path),
+        verified=True,
+    )
+    save("e7-ner", output)
+    print(
+        json.dumps(
+            dict(
+                actual_ner_trained=True,
+                alignment_verified=True,
+                truncation_rejected=True,
+                reload_verified=True,
+            )
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()
+```
+
+{/* example:ner-complete:end */}
+
+</details>
+
+## Reproduce and extend
+
+The [shared CPU trainer and evaluators](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/representation/src/atlas_representation/common.py), [data/loss/alignment contracts](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/foundations/src/atlas_foundations/e7/contracts.py), and [reused NER implementation](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/src/atlas_reference/ner_model.py) complete the entrypoints shown above. Exact model files, fixture manifests, optimizer settings, selection rules, artifact hashes and notebook execution evidence live in the execution guide/registry.
+
+Complete the [service-search adaptation project](/llm-concept-atlas/use-cases/service-search-adaptation/) with a fresh licensed collection and new queries before making a broader quality claim. The original book-scale MNLI/STSB/MTEB and CoNLL runs are not reproduced by these deliberately small profiles. The [pinned official notebooks](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada) provide their historical workflows. No source PDF pages/artwork are redistributed. GPU verification, broad benchmark execution, independent lesson review and beginner feedback remain separate work.

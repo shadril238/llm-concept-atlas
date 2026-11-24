@@ -1,92 +1,128 @@
 ---
-title: Frozen layers
-description: Frozen layers keep selected pretrained weights fixed while other parameters learn a new task.
-kind: concept
+title: "Frozen layers"
+description: "Freezing layers prevents selected parameters from receiving optimizer updates while other parameters train. It changes the optimization problem and resource use, but it does not automatically disable dropout or make all intermediate computation unnecessary."
+kind: "concept"
 conceptId: frozen-layers
 chapter: 11
-part: training
-summary: Frozen layers keep selected pretrained weights fixed while other parameters learn a new task.
-parent: chapter-11
-prerequisites: [bert-fine-tuning]
-related: [bert-fine-tuning, few-shot-classification]
-level: advanced
-tags: [training, chapter-11]
+part: "training"
+summary: "Freezing layers prevents selected parameters from receiving optimizer updates while other parameters train. It changes the optimization problem and resource use, but it does not automatically disable dropout or make all intermediate computation unnecessary."
+parent: "bert-fine-tuning"
+prerequisites: ["bert-fine-tuning"]
+related: []
+level: "advanced"
+tags: ["training", "chapter-11"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e7-representation-author-review-2026-11-24
+learningObjectives: ["Verify a frozen group with two independent signals.", "Distinguish freezing from evaluation mode."]
+aliases: ["layer freezing", "requires_grad", "trainable parameters"]
+bookSections: ["book-ch11-freezing"]
+exampleIds: ["e7-frozen-layers", "representation-classification"]
+relationshipReasons: {"bert-fine-tuning": "BERT fine-tuning identifies the modules whose weights can be frozen or updated."}
+labHref: "/labs/embedding-and-representation-training/"
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import TrainingEvidence from '../../../components/TrainingEvidence.astro';
+import { FreezeExplorer } from '../../../components/simulations/TrainingLabs';
 
 <ConceptPrimer id="frozen-layers" />
 
 ## Definition and intuition
 
-Frozen layers keep selected pretrained weights fixed while other parameters learn a new task.
+Freezing layers prevents selected parameters from receiving optimizer updates while other parameters train. It changes the optimization problem and resource use, but it does not automatically disable dropout or make all intermediate computation unnecessary.
 
-Chapter 11 adapts an encoder to labeled tasks. Data splits, frozen versus trainable weights, and task-specific heads change both cost and generalization.
+Follow the input, objective, update, and evaluation as separate steps. The worked example and experiment below connect the explanation to an inspectable implementation.
 
-## Before you start
+<ReferenceBrief objectives={["Verify a frozen group with two independent signals.", "Distinguish freezing from evaluation mode."]} prerequisites="bert-fine-tuning" scope="Original numerical reasoning and actual recorded CPU training with pinned public models. Independent technical/editorial review and beginner feedback remain pending." />
 
-Read [BERT fine-tuning](/llm-concept-atlas/concepts/bert-fine-tuning/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **frozen layers** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Freeze by meaningful module names
 
-1. **Prepare:** Choose which backbone layers to freeze
-2. **Transform:** Compute features through those layers without updating their weights
-3. **Inspect:** Train a task head or remaining layers and compare cost and accuracy.
+The lab freezes BERT embeddings and encoder layer 0 for partial adaptation, or every BERT parameter for the head-only route. It does not rely on a magic enumeration index that changes with architecture. The optimizer includes only trainable parameters and the result records per-group parameter counts.
 
-### The important distinction
+### Verify gradients and exact weights
 
-When a layer is frozen, its parameters still participate in the forward pass, but the optimizer does not update them. The trainable head can only separate what the fixed features already encode. Gradually unfreezing upper layers is one way to trade compute for adaptation when a head-only baseline is inadequate.
+Before training, frozen tensors are hashed. After selected-state loading, their hash must match exactly. First-step gradient norms and changed tensor counts show where learning occurred. A frozen early module can still participate in a forward path needed by later trainable modules; freezing is not the same as deleting it.
+
+### Separate parameter state and module mode
+
+requires_grad=False controls gradient accumulation for a parameter. model.eval() controls behaviors such as dropout. The head-only route explicitly keeps the encoder in evaluation mode during head training, whereas partially frozen training retains the declared model train-mode behavior. Report those choices rather than treating identical weight hashes as identical stochastic outputs.
 
 ## Worked example
 
-A ticket classifier freezes the encoder and trains only a small head. Training is cheaper, but if ticket jargon is poorly represented the head cannot repair the missing features. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+In the partial route, the embedding table and first encoder layer have zero trainable parameters and zero changed tensors. The upper layer and head should show nonzero gradients and changed weights. Select the same review/seed under full and head-only conditions and inspect their distinct errors; less training work need not imply better or worse quality in every small sample.
 
-<LessonFlow steps={["Choose which backbone layers to freeze", "Compute features through those layers without updating their weights", "Train a task head or remaining layers and compare cost and accuracy."]} caption="A teaching diagram for Frozen layers. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
+
+Predict an outcome before changing a control. Selectors replay actual saved training/evaluation runs; loss and mask calculators recalculate a declared teaching mechanism. They make no model or API requests in your browser.
+
+<FreezeExplorer client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+From the repository root, install the foundation environment and run `python3 scripts/run-examples.py --id e7-frozen-layers --offline`. The standard-library example below calculates a mechanism or checks the published actual evidence. Recorded-evidence replay is distinct from new optimization: the connected model lab supplies the complete source and fresh-training command.
+
+{/* example:e7-frozen-layers:start */}
 
 ```python
-weights = {"encoder": 0.5, "head": 0.2}
-gradients = {"encoder": 0.4, "head": -0.3}
-trainable = {"head"}
-for name in trainable:
-    weights[name] -= 0.1 * gradients[name]
-print(weights)
+import json
+from pathlib import Path
+data = json.loads(Path('src/data/training-results.json').read_text())['classification']
+row = next(r for r in data['runs'] if r['seed'] == 11 and r['method'] == 'bert-partial')
+for name, group in row['parameters'].items():
+    if group['trainable'] == 0:
+        assert group['changed_tensors'] == 0
+    print(name, 'trainable:', group['trainable'], 'changed tensors:', group['changed_tensors'])
+print('exact frozen-weight check:', row['frozen_verified'])
 ```
 
-**Expected output:**
+{/* example:e7-frozen-layers:end */}
+
+Recorded calculation output:
 
 ```text
-{'encoder': 0.5, 'head': 0.23}
+embeddings trainable: 0 changed tensors: 0
+layer_0 trainable: 0 changed tensors: 0
+layer_1 trainable: 198272 changed tensors: 16
+head_or_pooler trainable: 16770 changed tensors: 4
+exact frozen-weight check: True
 ```
 
-**What the code shows:** Only names in `trainable` receive a gradient update. The frozen encoder value remains fixed, while the task head changes. The [official chapter 11 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter11) develops the corresponding model-based implementation.
+<TrainingEvidence id="representation-classification" />
 
 ## When to use it
 
-Use freezing when compute or data is limited and pretrained features are already suitable. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use freezing to reduce update/optimizer-state work or preserve a representation when labels are scarce. Validate the policy for the actual architecture and task.
 
 ## Limits and common mistakes
 
-- Too much freezing limits adaptation; too little can overfit or cost more.
-- **Failure to look for:** The head cannot distinguish two classes because the fixed encoder maps them to nearly identical vectors.
+A frozen but randomly initialized classifier cannot solve the task by wishful thinking. Freezing all parameters leaves no meaningful update. Trainable counts alone do not measure peak memory, since activations and other runtime buffers also matter.
 
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Author execution checks tensor/mask contracts, actual parameter updates, split provenance and artifact reload. It does not constitute independent lesson acceptance. Keep training quality, task quality, runtime and generalization claims separate.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First choose which backbone layers to freeze Then compute features through those layers without updating their weights Finally train a task head or remaining layers and compare cost and accuracy.</p></details>
+<details>
+<summary>Verify a frozen group with two independent signals.</summary>
 
-<details><summary>What would make the result misleading?</summary><p>The head cannot distinguish two classes because the fixed encoder maps them to nearly identical vectors.</p></details>
+Check that its parameters are excluded from updates and that their exact initial/selected hashes agree; inspect gradients and changed-tensor counts as separate diagnostics.
+
+</details>
+
+<details>
+<summary>Distinguish freezing from evaluation mode.</summary>
+
+Freezing concerns weight updates; evaluation mode concerns module behavior such as dropout. One does not imply the other.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 11 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 11 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter11). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 11 of *Hands-On Large Language Models*. The [complete L15–L20 lab](/llm-concept-atlas/labs/embedding-and-representation-training/#l18-classification-and-setfit) links actual training source, pinned environments, data provenance, real failures, and the artifact lifecycle. Compare the [authors’ pinned chapter 11 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter11) for the book-scale workflow. The atlas uses explicitly smaller CPU configurations and does not redistribute book pages or artwork.
 
 <ConceptConnections id="frozen-layers" />

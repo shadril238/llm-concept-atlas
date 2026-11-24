@@ -1,0 +1,40 @@
+---
+title: Adapt a service-search encoder
+description: Build a reusable domain encoder and judge its retrieval behavior with source-aware evaluation.
+kind: use-case
+lastReviewed: 2026-11-24
+---
+
+import { EmbeddingTraining, SilverExplorer, DenoisingExplorer } from '../../../components/simulations/TrainingLabs';
+
+A community help center needs to distinguish creating a room booking from cancelling one, and laptop loans from book renewals. The product should retrieve the requested service rather than the most similar shared words. This original project connects Chapters 8 and 10: **evaluate the search interface before and after actual encoder adaptation**.
+
+## 1. Define the data contract
+
+Start with the versioned original intent fixture in L15. Same-intent means the same requested service, not universal semantic equivalence. Keep train/validation/test sentences separate before constructing pairs. For an external collection, split by source/customer/document groups where appropriate, preserve permissions, and create fresh queries with independently reviewed relevance judgments.
+
+## 2. Train a controlled baseline comparison
+
+Run [L15 setup](/llm-concept-atlas/labs/embedding-and-representation-training/#set-up-the-cpu-profile), then compare the unmodified encoder with the three actual objective paths. Keep tokenizer/pooling and candidate definitions visible. Validate checkpoint selection and save/reload before inspecting the test result.
+
+<EmbeddingTraining client:visible />
+
+The fixed PCA display is explanatory; use full-dimensional rankings for the decision. Review wrong-service near misses and not only the average MRR. Tiny original data can show a mechanism without predicting a production retrieval gain.
+
+## 3. Investigate label scarcity honestly
+
+Use [Augmented SBERT](/llm-concept-atlas/concepts/augmented-sbert/) to train a teacher and label a separate training-only pool. Keep every silver score and source pair ID, including wrong confident examples. Compare gold-only and augmented students under the declared budget; extra pairs need not help.
+
+<SilverExplorer client:visible />
+
+## 4. Investigate unsupervised adaptation
+
+If labeled pairs are scarce, inspect [TSDAE/domain adaptation](/llm-concept-atlas/labs/embedding-and-representation-training/#l17-tsdae-and-adaptation). Compare adaptation-only, gold-only and combined paths. Lower reconstruction loss can coexist with worse retrieval; retain that failure in the project report.
+
+<DenoisingExplorer client:visible />
+
+## 5. Deliver an inspectable artifact
+
+Export the selected encoder with tokenizer and pooling configuration, a query/candidate evaluation report, provenance and split IDs, actual training curves, parameter-update checks and reload equivalence. If changing an E6 search encoder, rebuild its index with the same selected encoder and re-evaluate candidate/reranking/context stages; old vectors are not compatible merely because dimensions match.
+
+**Acceptance exercise:** explain one correct rank change, one persistent near miss, one silver-label error and one reconstruction/task disagreement. A deployment recommendation requires fresh realistic data and suitable operational evaluation; this educational project does not silently overwrite the existing E6 index or model.

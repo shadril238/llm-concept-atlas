@@ -1,99 +1,129 @@
 ---
-title: Contrastive learning
-description: Contrastive learning trains representations by rewarding closeness for positives and separation from negatives.
-kind: concept
+title: "Contrastive learning"
+description: "Contrastive learning shapes a representation using relationships between examples: which inputs should be compatible, and which alternatives should be distinguished. The relationship must match the intended task; same topic, same intent and same sentiment are different definitions of similarity."
+kind: "concept"
 conceptId: contrastive-learning
 chapter: 10
-part: training
-summary: Contrastive learning trains representations by rewarding closeness for positives and separation from negatives.
-parent: chapter-10
-prerequisites: [text-embedding]
-related: [sbert]
-level: advanced
-tags: [training, chapter-10]
+part: "training"
+summary: "Contrastive learning shapes a representation using relationships between examples: which inputs should be compatible, and which alternatives should be distinguished. The relationship must match the intended task; same topic, same intent and same sentiment are different definitions of similarity."
+parent: "chapter-10"
+prerequisites: ["text-embedding"]
+related: ["clip"]
+level: "advanced"
+tags: ["training", "chapter-10"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e7-representation-author-review-2026-11-24
+learningObjectives: ["Explain the probability-minus-target gradient.", "Find a false negative in a service-request batch."]
+aliases: ["contrastive learning", "positive-negative learning"]
+bookSections: ["book-ch10-contrastive", "book-ch10-embedding-models"]
+exampleIds: ["e7-contrastive-learning", "embedding-training"]
+relationshipReasons: {"text-embedding": "Text embeddings supply the representation whose task-specific relationships training changes.", "clip": "CLIP also learns from paired contrasts, but its symmetric objective differs from this directional MNR configuration."}
+labHref: "/labs/embedding-and-representation-training/"
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { ContrastiveLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import TrainingEvidence from '../../../components/TrainingEvidence.astro';
+import { LossExplorer } from '../../../components/simulations/TrainingLabs';
 
 <ConceptPrimer id="contrastive-learning" />
 
 ## Definition and intuition
 
-Contrastive learning trains representations by rewarding closeness for positives and separation from negatives.
+Contrastive learning shapes a representation using relationships between examples: which inputs should be compatible, and which alternatives should be distinguished. The relationship must match the intended task; same topic, same intent and same sentiment are different definitions of similarity.
 
-Chapter 10 trains representations by choosing which examples should be close or far apart. The construction of positive and negative pairs is part of the learning objective.
+Follow the input, objective, update, and evaluation as separate steps. The worked example and experiment below connect the explanation to an inspectable implementation.
 
-## Before you start
+<ReferenceBrief objectives={["Explain the probability-minus-target gradient.", "Find a false negative in a service-request batch."]} prerequisites="text-embedding" scope="Original numerical reasoning and actual recorded CPU training with pinned public models. Independent technical/editorial review and beginner feedback remain pending." />
 
-Read [Text Embedding](/llm-concept-atlas/concepts/text-embedding/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **contrastive learning** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### The supervision lives in the relationship
 
-1. **Prepare:** Define what counts as a positive pair for the application
-2. **Transform:** Encode a batch and compare similarities across pairs
-3. **Inspect:** Optimize a loss that ranks positives above negatives and evaluate retrieval.
+A sentence encoder does not discover your product’s definition of relevance from a vector shape. In L15, two requests are positive when they ask for the same community service. “Reserve a room” and “cancel a room” are lexically close but have different intents. A sentiment dataset would create different pairs. State this policy before generating examples, and keep validation/test sentences outside pair construction.
 
-### The important distinction
+### A competition creates a gradient
 
-For an anchor, the loss often compares one positive score with several negative scores through a temperature-scaled softmax. The resulting gradient reshapes the encoder so similar examples occupy nearby regions. Hard negatives sharpen the task boundary, but mislabeled hard negatives can do disproportionate damage.
+For one MNR anchor, candidate similarities s_j become logits s_j/T. Cross entropy is −log(exp(s_positive/T)/sum_j exp(s_j/T)). Its logit derivative is predicted probability minus the one-hot target. Increasing the positive logit lowers loss; increasing an unrelated alternative raises it. If an alternative is another valid positive, the same gradient teaches a false distinction. Lower temperature concentrates that competition.
+
+### Verify the learned geometry
+
+The actual library losses update a tiny pretrained BERT encoder rather than moving invented dots. Validation selects checkpoints, and held-out retrieval measures whether the learned relation transfers to unseen phrases. Two-dimensional projections illustrate changes but omit most of the 128-dimensional representation. Full-dimensional cosine scores drive the reported task metrics.
 
 ## Worked example
 
-A question and its answering passage are a positive pair. A passage on the same broad topic but without the answer is a hard negative that teaches a finer distinction. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+With positive similarity 0.8, alternative 0.4, and scale 5, logits are [4,2]. The target probability is about 0.881 and loss about 0.127. If the alternative expresses the same intent, this apparently clean target is wrong: optimization still pushes it away. Inspect the actual six-intent batch and the independent library arithmetic check before judging a falling curve.
 
-<LessonFlow steps={["Define what counts as a positive pair for the application", "Encode a batch and compare similarities across pairs", "Optimize a loss that ranks positives above negatives and evaluate retrieval."]} caption="A teaching diagram for Contrastive learning. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
 
-## Try the interactive lab
+Predict an outcome before changing a control. Selectors replay actual saved training/evaluation runs; loss and mask calculators recalculate a declared teaching mechanism. They make no model or API requests in your browser.
 
-<ContrastiveLab client:visible />
-
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+<LossExplorer client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+From the repository root, install the foundation environment and run `python3 scripts/run-examples.py --id e7-contrastive-learning --offline`. The standard-library example below calculates a mechanism or checks the published actual evidence. Recorded-evidence replay is distinct from new optimization: the connected model lab supplies the complete source and fresh-training command.
+
+{/* example:e7-contrastive-learning:start */}
 
 ```python
-from math import exp, log
-positive_similarity = 0.8
-negative_similarities = [0.2, 0.4]
-all_scores = [positive_similarity, *negative_similarities]
-loss = -log(exp(all_scores[0]) / sum(exp(x) for x in all_scores))
-print(round(loss, 3))
+import sys
+sys.path.insert(0, 'examples/foundations/src')
+from atlas_foundations.e7.contracts import cross_entropy
+scores = [0.8, 0.4]
+scale = 5
+logits = [scale * score for score in scores]
+loss = cross_entropy(logits, 0)
+from math import exp
+probability = exp(-loss)
+print('target probability:', round(probability, 4))
+print('row loss:', round(loss, 4))
+print('logit gradients:', [round(probability - 1, 4), round(1 - probability, 4)])
 ```
 
-**Expected output:**
+{/* example:e7-contrastive-learning:end */}
+
+Recorded calculation output:
 
 ```text
-0.797
+target probability: 0.8808
+row loss: 0.1269
+logit gradients: [-0.1192, 0.1192]
 ```
 
-**What the code shows:** The positive score competes with two negative scores inside a softmax. The negative logarithm is smaller when the positive takes more of the probability mass. The [official chapter 10 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter10) develops the corresponding model-based implementation.
+<TrainingEvidence id="embedding-training" />
 
 ## When to use it
 
-Use it to train embeddings for retrieval, matching, or similarity tasks. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use it for retrieval, sentence similarity, class-conditioned embeddings and recommendation when you can define trustworthy relationships. Evaluate on the downstream relation rather than assuming semantic similarity is universal.
 
 ## Limits and common mistakes
 
-- Pair quality and batch composition strongly affect learned geometry.
-- **Failure to look for:** An unlabeled true match is treated as a negative and pushed away during training.
+Pair leakage, false negatives and repeated templates can make the task deceptively easy. A larger batch adds useful alternatives only when they are valid negatives. Our original small corpus is a controlled teaching experiment, with recurring intent categories and unknown pretrained overlap, not a broad benchmark.
 
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Author execution checks tensor/mask contracts, actual parameter updates, split provenance and artifact reload. It does not constitute independent lesson acceptance. Keep training quality, task quality, runtime and generalization claims separate.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First define what counts as a positive pair for the application Then encode a batch and compare similarities across pairs Finally optimize a loss that ranks positives above negatives and evaluate retrieval.</p></details>
+<details>
+<summary>Explain the probability-minus-target gradient.</summary>
 
-<details><summary>What would make the result misleading?</summary><p>An unlabeled true match is treated as a negative and pushed away during training.</p></details>
+The correct candidate gets p−1; each competing candidate gets p. This optimizes the supplied target, even if the target is semantically wrong.
+
+</details>
+
+<details>
+<summary>Find a false negative in a service-request batch.</summary>
+
+Two distinct phrasings of the same requested service are a false-negative pair if the diagonal-only objective makes them compete.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 10 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 10 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter10). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 10 of *Hands-On Large Language Models*. The [complete L15–L20 lab](/llm-concept-atlas/labs/embedding-and-representation-training/#l15-embedding-training) links actual training source, pinned environments, data provenance, real failures, and the artifact lifecycle. Compare the [authors’ pinned chapter 10 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter10) for the book-scale workflow. The atlas uses explicitly smaller CPU configurations and does not redistribute book pages or artwork.
 
 <ConceptConnections id="contrastive-learning" />

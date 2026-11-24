@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e7-named-entity-recognition",
+  "status": "passed",
+  "date": "2026-11-24T08:28:58.983033+00:00",
+  "gitCommit": "2a274a0eaf31e33861ce3e0b036faed935fa906a",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e7/named_entity_recognition.py"
+  ],
+  "sourceSha256": "2e5cbb4e318153d29bc0ad8c05bf21f519fbc263e0eac2ce885dd856cee454b9",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "4b02c56e35c3f6468c47fddbc312d50a6a0b617ef2056d44df1ac4b3642d2499",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.5,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "token accuracy: 0.8333\nwhole typed entities: {'tp': 1, 'predicted': 2, 'gold': 2, 'precision': 0.5, 'recall': 0.5, 'f1': 0.5}\n",
+  "stderr": "",
+  "error": null,
+  "supportHashes": {
+    "examples/foundations/src/atlas_foundations/e7/contracts.py": "29ef85a7f9f8e5226038e69aaa3c2e939ed76baaee0eea62f9bf438dc22ca5cd",
+    "src/data/training-results.json": "919648238de7ecc34e48e0c25a2e8cce55e2e0e5368c7942d6423e273381d4f0",
+    "examples/data/fixtures/embedding-training.json": "a593a458508a21c918ab8f6570ff17408f65d92f297bd845b3c7cbdf1724fa1c",
+    "examples/foundations/src/atlas_foundations/ner_contract.py": "1c522d9347af9b28d65a724052c40811d674627ba9f481309ee3b73abd623a2d"
+  }
+}

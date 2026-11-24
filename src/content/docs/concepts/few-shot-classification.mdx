@@ -1,91 +1,125 @@
 ---
-title: Few-shot classification
-description: Few-shot classification learns or applies a label rule from only a handful of labeled examples per class.
-kind: concept
+title: "Few-shot classification"
+description: "Few-shot classification trains a predictor with a small labeled sample per class. It is distinct from giving demonstrations to a prompt: these experiments actually update model parameters or fit a classifier."
+kind: "concept"
 conceptId: few-shot-classification
 chapter: 11
-part: training
-summary: Few-shot classification learns or applies a label rule from only a handful of labeled examples per class.
-parent: chapter-11
-prerequisites: [supervised-classification]
-related: [frozen-layers, setfit]
-level: advanced
-tags: [training, chapter-11]
+part: "training"
+summary: "Few-shot classification trains a predictor with a small labeled sample per class. It is distinct from giving demonstrations to a prompt: these experiments actually update model parameters or fit a classifier."
+parent: "chapter-11"
+prerequisites: ["supervised-classification", "bert-fine-tuning"]
+related: []
+level: "advanced"
+tags: ["training", "chapter-11"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e7-representation-author-review-2026-11-24
+learningObjectives: ["Explain why pair count is not label count.", "Interpret mean and standard deviation over three seeds."]
+aliases: ["few-label learning", "few-shot supervised classification"]
+bookSections: ["book-ch11-few-shot", "book-ch11-few-shot-training"]
+exampleIds: ["e7-few-shot-classification", "representation-classification"]
+relationshipReasons: {"supervised-classification": "Supervised classification defines the labels and evaluation task despite the small training sample.", "bert-fine-tuning": "BERT fine-tuning provides full/partial/head-only controls under the same selected review IDs."}
+labHref: "/labs/embedding-and-representation-training/"
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import TrainingEvidence from '../../../components/TrainingEvidence.astro';
+import { FreezeExplorer } from '../../../components/simulations/TrainingLabs';
 
 <ConceptPrimer id="few-shot-classification" />
 
 ## Definition and intuition
 
-Few-shot classification learns or applies a label rule from only a handful of labeled examples per class.
+Few-shot classification trains a predictor with a small labeled sample per class. It is distinct from giving demonstrations to a prompt: these experiments actually update model parameters or fit a classifier.
 
-Chapter 11 adapts an encoder to labeled tasks. Data splits, frozen versus trainable weights, and task-specific heads change both cost and generalization.
+Follow the input, objective, update, and evaluation as separate steps. The worked example and experiment below connect the explanation to an inspectable implementation.
 
-## Before you start
+<ReferenceBrief objectives={["Explain why pair count is not label count.", "Interpret mean and standard deviation over three seeds."]} prerequisites="supervised-classification, bert-fine-tuning" scope="Original numerical reasoning and actual recorded CPU training with pinned public models. Independent technical/editorial review and beginner feedback remain pending." />
 
-Read [Supervised classification](/llm-concept-atlas/concepts/supervised-classification/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **few-shot classification** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Declare the sampling unit
 
-1. **Prepare:** Select representative examples and define the label set
-2. **Transform:** Use a suitable embedding, prompt, or efficient tuning method
-3. **Inspect:** Evaluate carefully across multiple small sample choices.
+L18 samples eight reviews per class from the fixed training split under seeds 11, 23 and 37. Within a seed all methods receive identical selected IDs. Validation and test remain fixed. Class balance is controlled here, but rare classes and source-group dependence need explicit treatment in a real dataset.
 
-### The important distinction
+### Use informative controls
 
-Few-shot results are unusually sensitive to which examples were selected. Evaluate across multiple sampled support sets, not only one favorable draw. Prototype methods, prompts, and adapter methods use the examples differently, so compare them under the same held-out cases and label definitions.
+Compare lexical TF-IDF/logistic regression, frozen sentence vectors plus logistic regression, full/partial/head-only BERT and two-stage SetFit. The frozen sentence route is the direct encoder-adaptation control for SetFit. Tiny BERT and pretrained MiniLM sentence encoders have different architectures and prior training, so their comparison does not isolate just the objective.
+
+### Report variability and independent labels
+
+Pair generation can create many optimization examples from sixteen labeled reviews without creating sixteen new independent labels per pair. Report results for every seed and descriptive mean, standard deviation and range. Three samples are too few for a strong population confidence statement; a single favorable seed is even weaker.
 
 ## Worked example
 
-With five examples each of billing and shipping tickets, a simple embedding prototype may work. Results can swing if the five examples omit common edge cases. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+The same eight-positive/eight-negative budget can include different vocabulary and difficult examples under another seed. Find the largest SetFit/frozen-encoder gap and inspect its test errors. A reported average can conceal a seed where the adapted encoder underperforms its frozen counterpart.
 
-<LessonFlow steps={["Select representative examples and define the label set", "Use a suitable embedding, prompt, or efficient tuning method", "Evaluate carefully across multiple small sample choices."]} caption="A teaching diagram for Few-shot classification. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
+
+Predict an outcome before changing a control. Selectors replay actual saved training/evaluation runs; loss and mask calculators recalculate a declared teaching mechanism. They make no model or API requests in your browser.
+
+<FreezeExplorer client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+From the repository root, install the foundation environment and run `python3 scripts/run-examples.py --id e7-few-shot-classification --offline`. The standard-library example below calculates a mechanism or checks the published actual evidence. Recorded-evidence replay is distinct from new optimization: the connected model lab supplies the complete source and fresh-training command.
+
+{/* example:e7-few-shot-classification:start */}
 
 ```python
-examples = ["a wonderful film", "a dull film"]
-labels = ["positive", "negative"]
-def classify(text):
-    return "positive" if "wonderful" in text else "negative"
-print([(text, classify(text)) for text in examples])
+import json
+from pathlib import Path
+from statistics import mean, pstdev
+data = json.loads(Path('src/data/training-results.json').read_text())['classification']
+for method in ['setfit', 'frozen-sentence-logistic']:
+    scores = [r['test']['macro_f1'] for r in data['runs'] if r['method'] == method]
+    print(method, 'selections:', len(scores), 'mean:', round(mean(scores), 4), 'population SD:', round(pstdev(scores), 4))
+print('Three fixed selections describe variability; they are not a confidence interval.')
 ```
 
-**Expected output:**
+{/* example:e7-few-shot-classification:end */}
+
+Recorded calculation output:
 
 ```text
-[('a wonderful film', 'positive'), ('a dull film', 'negative')]
+setfit selections: 3 mean: 0.7284 population SD: 0.0849
+frozen-sentence-logistic selections: 3 mean: 0.7157 population SD: 0.0749
+Three fixed selections describe variability; they are not a confidence interval.
 ```
 
-**What the code shows:** The function uses one word as a simple classification baseline. Change the rule or input text and compare the predicted label with the intended label. The [official chapter 11 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter11) develops the corresponding model-based implementation.
+<TrainingEvidence id="representation-classification" />
 
 ## When to use it
 
-Use it when annotation is expensive and a modest classifier is needed quickly. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use it when annotation is expensive and a pretrained representation provides a useful starting point. Spend some label budget on validation and error review rather than reporting only a training fit.
 
 ## Limits and common mistakes
 
-- Few examples make variance and label bias large; report more than one random split.
-- **Failure to look for:** A model appears accurate because the evaluation set shares wording with the tiny training set.
+Validation sets can overwhelm a tiny training budget if their annotation cost is ignored. This experiment reuses an existing forty-review validation set, so “sixteen training labels” is not a claim that the entire project consumed only sixteen human labels.
 
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Author execution checks tensor/mask contracts, actual parameter updates, split provenance and artifact reload. It does not constitute independent lesson acceptance. Keep training quality, task quality, runtime and generalization claims separate.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First select representative examples and define the label set Then use a suitable embedding, prompt, or efficient tuning method Finally evaluate carefully across multiple small sample choices.</p></details>
+<details>
+<summary>Explain why pair count is not label count.</summary>
 
-<details><summary>What would make the result misleading?</summary><p>A model appears accurate because the evaluation set shares wording with the tiny training set.</p></details>
+Many pairs reuse the same labeled reviews and share information. Report unique labeled source examples separately from optimization rows.
+
+</details>
+
+<details>
+<summary>Interpret mean and standard deviation over three seeds.</summary>
+
+They describe these selected runs, not a calibrated confidence interval or proof of general superiority.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 11 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 11 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter11). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 11 of *Hands-On Large Language Models*. The [complete L15–L20 lab](/llm-concept-atlas/labs/embedding-and-representation-training/#l18-classification-and-setfit) links actual training source, pinned environments, data provenance, real failures, and the artifact lifecycle. Compare the [authors’ pinned chapter 11 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter11) for the book-scale workflow. The atlas uses explicitly smaller CPU configurations and does not redistribute book pages or artwork.
 
 <ConceptConnections id="few-shot-classification" />

@@ -4,7 +4,7 @@ description: A guided route through classification, clustering, prompting, multi
 kind: path
 ---
 
-This route connects the book's later chapters. Follow it after [the sentence path](/llm-concept-atlas/paths/how-an-llm-processes-a-sentence/) and [the search-to-RAG path](/llm-concept-atlas/paths/from-semantic-search-to-rag/), or start at the chapter that matches your question. Plan on several sessions: the linked lessons contain introductory explanations, diagrams, illustrative code, and self-checks. Deeper model workflows are planned. The [concept directory](/llm-concept-atlas/concept-directory/) lists all 96 lessons.
+This route connects the book's later chapters. Follow it after [the sentence path](/llm-concept-atlas/paths/how-an-llm-processes-a-sentence/) and [the search-to-RAG path](/llm-concept-atlas/paths/from-semantic-search-to-rag/), or start at the chapter that matches your question. Plan on several sessions: the linked lessons contain introductory explanations, diagrams, illustrative code, and self-checks. L07–L20 now link to actual application and encoder-training workflows; Chapter 12 generation adaptation remains a separate E8 milestone. The [concept directory](/llm-concept-atlas/concept-directory/) lists the published lessons, aliases and prerequisites.
 
 ## 1. Turn text into decisions — chapter 4
 
@@ -37,6 +37,8 @@ Begin with [prompt structure](/llm-concept-atlas/concepts/prompt-structure/) and
 **Checkpoint:** Does the top CLIP caption prove every detail in that sentence is visible? No. Similarity ranks candidates and must be checked against the image.
 
 ## 6. Train useful embeddings — chapter 10
+
+Follow the detailed [encoder training path](/llm-concept-atlas/paths/from-pretrained-encoder-to-domain-model/) and [L15–L20](/llm-concept-atlas/labs/embedding-and-representation-training/) for actual optimization, loss checks, teacher/silver provenance, frozen-parameter checks and reusable artifacts.
 
 [Contrastive learning](/llm-concept-atlas/concepts/contrastive-learning/) defines positives and negatives, then moves vector relationships. Adjust pair scores in the contrastive lab and watch the loss change. [SBERT](/llm-concept-atlas/concepts/sbert/) creates reusable sentence vectors, while [embedding evaluation](/llm-concept-atlas/concepts/embedding-evaluation/) asks whether those vectors help the target task. [Domain adaptation](/llm-concept-atlas/concepts/domain-adaptation/) should be judged on new domain examples, not just a lower training loss.
 

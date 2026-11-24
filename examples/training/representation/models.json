@@ -1,0 +1,107 @@
+{
+  "prajjwal1/bert-tiny": {
+    "revision": "6f75de8b60a9f8a2fdf7b69cbd86d9e64bcb3837",
+    "files": [
+      {
+        "name": "config.json",
+        "size": 285,
+        "sha256": null
+      },
+      {
+        "name": "pytorch_model.bin",
+        "size": 17756393,
+        "sha256": "dab2c2bddcfb48ea430ef63fd76d46d67d704487844d967256a50dd7d7fd0a66"
+      },
+      {
+        "name": "vocab.txt",
+        "size": 231508,
+        "sha256": null
+      }
+    ],
+    "license": [
+      "mit"
+    ]
+  },
+  "google-bert/bert-base-uncased": {
+    "revision": "86b5e0934494bd15c9632b12f734a8a67f723594",
+    "files": [
+      {
+        "name": "config.json",
+        "size": 570,
+        "sha256": null
+      },
+      {
+        "name": "tokenizer.json",
+        "size": 466062,
+        "sha256": null
+      },
+      {
+        "name": "tokenizer_config.json",
+        "size": 48,
+        "sha256": null
+      },
+      {
+        "name": "vocab.txt",
+        "size": 231508,
+        "sha256": null
+      }
+    ],
+    "license": "apache-2.0"
+  },
+  "sentence-transformers/paraphrase-MiniLM-L3-v2": {
+    "revision": "4ca70771034acceecb2e72475f72050fcdde4ddc",
+    "files": [
+      {
+        "name": "1_Pooling/config.json",
+        "size": 190,
+        "sha256": null
+      },
+      {
+        "name": "config.json",
+        "size": 629,
+        "sha256": null
+      },
+      {
+        "name": "config_sentence_transformers.json",
+        "size": 122,
+        "sha256": null
+      },
+      {
+        "name": "model.safetensors",
+        "size": 69569488,
+        "sha256": "cf1e4e2d420c664973037c3c73125d7a8fc69952495093ef8f50596f8943a433"
+      },
+      {
+        "name": "modules.json",
+        "size": 229,
+        "sha256": null
+      },
+      {
+        "name": "sentence_bert_config.json",
+        "size": 53,
+        "sha256": null
+      },
+      {
+        "name": "special_tokens_map.json",
+        "size": 112,
+        "sha256": null
+      },
+      {
+        "name": "tokenizer.json",
+        "size": 466248,
+        "sha256": null
+      },
+      {
+        "name": "tokenizer_config.json",
+        "size": 314,
+        "sha256": null
+      },
+      {
+        "name": "vocab.txt",
+        "size": 231508,
+        "sha256": null
+      }
+    ],
+    "license": "apache-2.0"
+  }
+}

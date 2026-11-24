@@ -379,6 +379,19 @@ if not args.check:
             + "\n"
         )
 
+# E7 notebook views use a distinct module name; E6 has its own notebook_views module.
+import importlib.util
+representation_path = ROOT / "examples/training/representation/notebook_views.py"
+representation_spec = importlib.util.spec_from_file_location("representation_notebook_views", representation_path)
+representation_views = importlib.util.module_from_spec(representation_spec)
+representation_spec.loader.exec_module(representation_views)
+for eid in representation_views.SPECS:
+    outputs[f"examples/training/representation/notebooks/{eid}.ipynb"] = json.dumps(representation_views.notebook(eid), indent=2) + "\n"
+if not args.check:
+    representation_paths = {key: ROOT / f"examples/artifacts/e7-{key}/results.json" for key in ["embedding", "augmentation", "denoising", "classification", "mlm", "ner"]}
+    if all(path.exists() for path in representation_paths.values()):
+        outputs["src/data/training-results.json"] = json.dumps({key: json.loads(path.read_text()) for key,path in representation_paths.items()}, indent=2, ensure_ascii=False, allow_nan=False) + "\n"
+
 # Replace only explicit source regions; surrounding explanations stay authored.
 if not args.check:
     discovery = {

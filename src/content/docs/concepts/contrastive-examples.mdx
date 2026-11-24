@@ -1,99 +1,131 @@
 ---
-title: Contrastive examples
-description: Contrastive examples specify which pairs should match and which should be separated during embedding training.
-kind: concept
+title: "Contrastive examples"
+description: "Contrastive examples specify a relationship between an anchor and other inputs. Positive pairs express the intended match; negatives express a meaningful nonmatch. Their construction determines what the representation is rewarded for learning."
+kind: "concept"
 conceptId: contrastive-examples
 chapter: 10
-part: training
-summary: Contrastive examples specify which pairs should match and which should be separated during embedding training.
-parent: chapter-10
-prerequisites: [contrastive-learning]
-related: [sbert, embedding-evaluation]
-level: advanced
-tags: [training, chapter-10]
+part: "training"
+summary: "Contrastive examples specify a relationship between an anchor and other inputs. Positive pairs express the intended match; negatives express a meaningful nonmatch. Their construction determines what the representation is rewarded for learning."
+parent: "contrastive-learning"
+prerequisites: ["contrastive-learning"]
+related: []
+level: "advanced"
+tags: ["training", "chapter-10"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e7-representation-author-review-2026-11-24
+learningObjectives: ["Differentiate hard and false negatives.", "Detect sentence-level leakage hidden by different pair IDs."]
+aliases: ["positive pairs", "hard negatives", "false negatives", "in-batch negatives"]
+bookSections: ["book-ch10-contrastive-examples", "book-ch10-hard-negatives"]
+exampleIds: ["e7-contrastive-examples", "embedding-training"]
+relationshipReasons: {"contrastive-learning": "Contrastive learning turns the supplied positive/negative relations into an optimization signal."}
+labHref: "/labs/embedding-and-representation-training/"
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { ContrastiveLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import TrainingEvidence from '../../../components/TrainingEvidence.astro';
+import { LossExplorer } from '../../../components/simulations/TrainingLabs';
 
 <ConceptPrimer id="contrastive-examples" />
 
 ## Definition and intuition
 
-Contrastive examples specify which pairs should match and which should be separated during embedding training.
+Contrastive examples specify a relationship between an anchor and other inputs. Positive pairs express the intended match; negatives express a meaningful nonmatch. Their construction determines what the representation is rewarded for learning.
 
-Chapter 10 trains representations by choosing which examples should be close or far apart. The construction of positive and negative pairs is part of the learning objective.
+Follow the input, objective, update, and evaluation as separate steps. The worked example and experiment below connect the explanation to an inspectable implementation.
 
-## Before you start
+<ReferenceBrief objectives={["Differentiate hard and false negatives.", "Detect sentence-level leakage hidden by different pair IDs."]} prerequisites="contrastive-learning" scope="Original numerical reasoning and actual recorded CPU training with pinned public models. Independent technical/editorial review and beginner feedback remain pending." />
 
-Read [Contrastive learning](/llm-concept-atlas/concepts/contrastive-learning/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **contrastive examples** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Explicit and in-batch negatives
 
-1. **Prepare:** Collect or generate positive pairs with a clear task definition
-2. **Transform:** Choose informative negatives and remove accidental positives
-3. **Inspect:** Audit pair quality before training and measure on unseen queries.
+An explicit negative is included as a known nonmatch. An in-batch negative comes from another example’s candidate. A hard negative is plausible under the current representation but wrong for the task, such as a room cancellation retrieved for a new room booking. Hardness is model-dependent; it is not the same as incorrect labeling.
 
-### The important distinction
+### False negatives are supervision errors
 
-Positive examples may come from duplicate questions, paraphrases, or query-answer pairs; each source defines a different notion of similarity. Random negatives are easy but can be uninformative, while near-miss negatives teach finer distinctions. Audit for false negatives before interpreting a lower training loss as progress.
+Two requests can both be valid matches even if their sentence IDs differ. Exact duplicate removal is useful but cannot establish semantic uniqueness. L15 forms a positive batch with one pair per distinct intent, checks unique texts and uses the author relation labels to avoid latent positives becoming in-batch negatives. A production collection may need multiple-positive objectives or more careful sampling.
+
+### Construct after splitting
+
+Split source groups before creating pairs. Otherwise one sentence may appear in many train pairs and again in a test pair. The fixture has disjoint exact sentences and IDs across train, validation, test and silver pool. Intent categories recur by design, so this is transfer to new phrasings within the same services, not transfer to entirely unseen classes.
 
 ## Worked example
 
-For a returns FAQ, the question “Can I return this?” and its policy paragraph are positive. A different paragraph about shipping may be an easy negative; a near-miss refund policy is harder. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+A batch has “reserve a room”→“book a meeting space” and “cancel a room”→“remove my booking.” These provide a useful near miss. Replacing the second candidate with another reservation paraphrase makes the first anchor compete with a second valid answer. The numerical loss can still decrease while the semantic target is damaged.
 
-<LessonFlow steps={["Collect or generate positive pairs with a clear task definition", "Choose informative negatives and remove accidental positives", "Audit pair quality before training and measure on unseen queries."]} caption="A teaching diagram for Contrastive examples. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
 
-## Try the interactive lab
+Predict an outcome before changing a control. Selectors replay actual saved training/evaluation runs; loss and mask calculators recalculate a declared teaching mechanism. They make no model or API requests in your browser.
 
-<ContrastiveLab client:visible />
-
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+<LossExplorer client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+From the repository root, install the foundation environment and run `python3 scripts/run-examples.py --id e7-contrastive-examples --offline`. The standard-library example below calculates a mechanism or checks the published actual evidence. Recorded-evidence replay is distinct from new optimization: the connected model lab supplies the complete source and fresh-training command.
+
+{/* example:e7-contrastive-examples:start */}
 
 ```python
-from math import exp, log
-positive_similarity = 0.8
-negative_similarities = [0.2, 0.4]
-all_scores = [positive_similarity, *negative_similarities]
-loss = -log(exp(all_scores[0]) / sum(exp(x) for x in all_scores))
-print(round(loss, 3))
+import sys, json
+from pathlib import Path
+sys.path.insert(0, 'examples/foundations/src')
+from atlas_foundations.e7.contracts import check_splits, check_mnr_batch
+data = json.loads(Path('examples/data/fixtures/embedding-training.json').read_text())
+check_splits(data)
+by_id = {r['id']: r for r in data['rows']}
+positives = [p for p in data['gold_pairs'] if p['split'] == 'train' and p['label'] == 1]
+batch = [next(p for p in positives if by_id[p['left_id']]['intent'] == intent)
+         for intent in sorted({r['intent'] for r in data['rows']})]
+print('valid MNR batch:', check_mnr_batch(batch, by_id))
+try:
+    check_mnr_batch([batch[0], batch[0]], by_id)
+except ValueError as error:
+    print('rejected:', error)
 ```
 
-**Expected output:**
+{/* example:e7-contrastive-examples:end */}
+
+Recorded calculation output:
 
 ```text
-0.797
+valid MNR batch: True
+rejected: False negative or duplicate in MNR batch
 ```
 
-**What the code shows:** The positive score competes with two negative scores inside a softmax. The negative logarithm is smaller when the positive takes more of the probability mass. The [official chapter 10 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter10) develops the corresponding model-based implementation.
+<TrainingEvidence id="embedding-training" />
 
 ## When to use it
 
-Use them when training or adapting an embedding model to a particular domain. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use relationship examples to train retrieval and similarity systems. Review difficult negatives with the same annotation policy used for your search product.
 
 ## Limits and common mistakes
 
-- Synthetic pairs can encode the generator's mistakes and duplicate leakage.
-- **Failure to look for:** A “negative” passage also answers the question, so training penalizes the behavior the application needs.
+Pair counts overstate independent information when many pairs reuse the same labels/sentences. Do not mine negatives using test queries, or let a teacher label held-out evaluation text and then call that pool training-only.
 
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Author execution checks tensor/mask contracts, actual parameter updates, split provenance and artifact reload. It does not constitute independent lesson acceptance. Keep training quality, task quality, runtime and generalization claims separate.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First collect or generate positive pairs with a clear task definition Then choose informative negatives and remove accidental positives Finally audit pair quality before training and measure on unseen queries.</p></details>
+<details>
+<summary>Differentiate hard and false negatives.</summary>
 
-<details><summary>What would make the result misleading?</summary><p>A “negative” passage also answers the question, so training penalizes the behavior the application needs.</p></details>
+A hard negative is a valid nonmatch that resembles a match; a false negative is actually a valid match mislabeled as a nonmatch.
+
+</details>
+
+<details>
+<summary>Detect sentence-level leakage hidden by different pair IDs.</summary>
+
+Compare underlying sentence/source IDs and canonical text across splits, not only pair IDs.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 10 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 10 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter10). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 10 of *Hands-On Large Language Models*. The [complete L15–L20 lab](/llm-concept-atlas/labs/embedding-and-representation-training/#l15-embedding-training) links actual training source, pinned environments, data provenance, real failures, and the artifact lifecycle. Compare the [authors’ pinned chapter 10 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter10) for the book-scale workflow. The atlas uses explicitly smaller CPU configurations and does not redistribute book pages or artwork.
 
 <ConceptConnections id="contrastive-examples" />

@@ -1,98 +1,131 @@
 ---
-title: Embedding evaluation
-description: Embedding evaluation tests whether vector distances support the intended task on unseen examples.
-kind: concept
+title: "Embedding evaluation"
+description: "Embedding evaluation measures whether vector behavior is useful for a declared task on data excluded from fitting and model selection. Correlation, retrieval ranking, classification quality and resource use answer different questions."
+kind: "concept"
 conceptId: embedding-evaluation
 chapter: 10
-part: training
-summary: Embedding evaluation tests whether vector distances support the intended task on unseen examples.
-parent: chapter-10
-prerequisites: [text-embedding]
-related: [contrastive-examples, loss-functions]
-level: advanced
-tags: [training, chapter-10]
+part: "training"
+summary: "Embedding evaluation measures whether vector behavior is useful for a declared task on data excluded from fitting and model selection. Correlation, retrieval ranking, classification quality and resource use answer different questions."
+parent: "chapter-10"
+prerequisites: ["sbert", "retrieval-metrics"]
+related: ["rag-evaluation"]
+level: "advanced"
+tags: ["training", "chapter-10"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e7-representation-author-review-2026-11-24
+learningObjectives: ["Distinguish Pearson, Spearman and calibration.", "Identify a valid model-selection split."]
+aliases: ["STS", "MTEB", "Pearson correlation", "Spearman correlation"]
+bookSections: ["book-ch10-evaluation", "book-ch10-sts-correlation", "book-ch10-mteb"]
+exampleIds: ["e7-embedding-evaluation", "embedding-training"]
+relationshipReasons: {"sbert": "SBERT defines the independently encoded representation being evaluated.", "retrieval-metrics": "Retrieval metrics grade the query/candidate ordering produced by those vectors.", "rag-evaluation": "RAG evaluation depends on source ranking but also needs separate generated-claim support checks."}
+labHref: "/labs/embedding-and-representation-training/"
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { ContrastiveLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import TrainingEvidence from '../../../components/TrainingEvidence.astro';
+import { EmbeddingTraining } from '../../../components/simulations/TrainingLabs';
 
 <ConceptPrimer id="embedding-evaluation" />
 
 ## Definition and intuition
 
-Embedding evaluation tests whether vector distances support the intended task on unseen examples.
+Embedding evaluation measures whether vector behavior is useful for a declared task on data excluded from fitting and model selection. Correlation, retrieval ranking, classification quality and resource use answer different questions.
 
-Chapter 10 trains representations by choosing which examples should be close or far apart. The construction of positive and negative pairs is part of the learning objective.
+Follow the input, objective, update, and evaluation as separate steps. The worked example and experiment below connect the explanation to an inspectable implementation.
 
-## Before you start
+<ReferenceBrief objectives={["Distinguish Pearson, Spearman and calibration.", "Identify a valid model-selection split."]} prerequisites="sbert, retrieval-metrics" scope="Original numerical reasoning and actual recorded CPU training with pinned public models. Independent technical/editorial review and beginner feedback remain pending." />
 
-Read [Text Embedding](/llm-concept-atlas/concepts/text-embedding/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **embedding evaluation** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Similarity and correlation
 
-1. **Prepare:** Define a benchmark of queries, pairs, or triplets with judgments
-2. **Transform:** Compute task-relevant ranking or similarity metrics
-3. **Inspect:** Inspect errors by domain and compare with a simple baseline.
+Pair MSE measures numeric error against the declared target scale. Pearson correlation measures linear association; Spearman correlation measures rank association with tied values handled explicitly. A monotonic score transformation can preserve ranking without preserving calibration. Correlation is undefined for a constant score or constant target vector, rather than automatically zero or perfect.
 
-### The important distinction
+### Retrieval and matched evaluators
 
-A benchmark should match the intended operation: sentence similarity, pair classification, or ranked retrieval. For search, retain query-to-document relevance judgments and report top-k performance. Check performance by topic and document length because an average can hide failures on the cases users care about.
+The retrieval task holds one candidate per service intent and queries it with other unseen test phrasings. MRR averages reciprocal rank, while Recall@1 counts the correct first result. L15 selects regression checkpoints by validation MSE, pair-classifier checkpoints by validation cross entropy, and ranking checkpoints by validation MRR. The final test does not choose among checkpoints or prompts.
+
+### Broader benchmark coverage
+
+MTEB organizes many embedding tasks and datasets; a score depends on benchmark version, task subset, language, data revisions and aggregation. The book’s historical task/language counts are not timeless properties. These labs execute original similarity/retrieval tasks and licensed review classification, not the complete MTEB or STSB benchmark. Runtime and stored artifact size supplement quality but do not measure the same thing.
+
+### STS correlation and MTEB
+
+A report must name its target scale, split, benchmark/task version and selected metric. The executed original binary-relation task is not the human-rated STSB dataset. Complete MTEB/STSB reproduction is not claimed by the E7 execution records. Constant-input correlation remains undefined, and task aggregates should preserve their denominators.
 
 ## Worked example
 
-An embedding model may score well on general sentence similarity but rank policy passages poorly. A small labeled retrieval set reveals the mismatch. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+A teacher may rank held-out binary pairs well while giving poorly calibrated probability values for student regression. Conversely, the softmax-trained encoder can obtain a useful pair-classification score but a different cosine retrieval order. Inspect the same held-out query IDs under baseline and adapted encoders instead of choosing the metric that makes one condition look best.
 
-<LessonFlow steps={["Define a benchmark of queries, pairs, or triplets with judgments", "Compute task-relevant ranking or similarity metrics", "Inspect errors by domain and compare with a simple baseline."]} caption="A teaching diagram for Embedding evaluation. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
 
-## Try the interactive lab
+Predict an outcome before changing a control. Selectors replay actual saved training/evaluation runs; loss and mask calculators recalculate a declared teaching mechanism. They make no model or API requests in your browser.
 
-<ContrastiveLab client:visible />
-
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+<EmbeddingTraining client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+From the repository root, install the foundation environment and run `python3 scripts/run-examples.py --id e7-embedding-evaluation --offline`. The standard-library example below calculates a mechanism or checks the published actual evidence. Recorded-evidence replay is distinct from new optimization: the connected model lab supplies the complete source and fresh-training command.
+
+{/* example:e7-embedding-evaluation:start */}
 
 ```python
-relevant = {"A", "C"}
-ranking = ["B", "A", "C"]
-k = 2
-recall_at_k = len(relevant & set(ranking[:k])) / len(relevant)
-print(recall_at_k)
+import json
+from pathlib import Path
+data = json.loads(Path('src/data/training-results.json').read_text())['embedding']
+for row in data['conditions']:
+    predictions = row['retrieval']['rows']
+    mrr = sum(1 / p['rank'] for p in predictions) / len(predictions)
+    assert abs(mrr - row['retrieval']['mrr']) < 1e-12
+    print(row['kind'], 'test queries:', len(predictions), 'MRR:', round(mrr, 4))
+print('scope: actual recorded task; complete MTEB/STSB not executed')
 ```
 
-**Expected output:**
+{/* example:e7-embedding-evaluation:end */}
+
+Recorded calculation output:
 
 ```text
-0.5
+softmax test queries: 12 MRR: 0.8958
+cosine test queries: 12 MRR: 0.875
+mnr test queries: 12 MRR: 0.9167
+scope: actual recorded task; complete MTEB/STSB not executed
 ```
 
-**What the code shows:** The numerator counts relevant IDs in the first `k` results; the denominator counts all judged relevant IDs. Changing `k` changes what the metric asks. The [official chapter 10 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter10) develops the corresponding model-based implementation.
+<TrainingEvidence id="embedding-training" />
 
 ## When to use it
 
-Use it before choosing an encoder and after changing pairs, pooling, or domain data. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use task-matched evaluation for choosing retrieval, clustering or classifier representations. Report per-query/per-class failures and resource limits alongside an aggregate.
 
 ## Limits and common mistakes
 
-- A single benchmark may not reflect the application's documents or answer requirements.
-- **Failure to look for:** Reported similarity improves while top-k retrieval of answer-bearing passages worsens.
+Small repeated templates and only three few-shot selections do not support population-level confidence claims. Our test metrics are a one-time report for fixed protocols; new hyperparameter choices after inspection require fresh evaluation data.
 
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Author execution checks tensor/mask contracts, actual parameter updates, split provenance and artifact reload. It does not constitute independent lesson acceptance. Keep training quality, task quality, runtime and generalization claims separate.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First define a benchmark of queries, pairs, or triplets with judgments Then compute task-relevant ranking or similarity metrics Finally inspect errors by domain and compare with a simple baseline.</p></details>
+<details>
+<summary>Distinguish Pearson, Spearman and calibration.</summary>
 
-<details><summary>What would make the result misleading?</summary><p>Reported similarity improves while top-k retrieval of answer-bearing passages worsens.</p></details>
+Pearson concerns linear association, Spearman order, and calibration whether numeric scores match the target interpretation. None substitutes for task-specific ranking.
+
+</details>
+
+<details>
+<summary>Identify a valid model-selection split.</summary>
+
+Use training for updates, validation for checkpoint selection, and test only after the protocol is fixed. Do not choose the displayed winner on test.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 10 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 10 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter10). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 10 of *Hands-On Large Language Models*. The [complete L15–L20 lab](/llm-concept-atlas/labs/embedding-and-representation-training/#l15-embedding-training) links actual training source, pinned environments, data provenance, real failures, and the artifact lifecycle. Compare the [authors’ pinned chapter 10 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter10) for the book-scale workflow. The atlas uses explicitly smaller CPU configurations and does not redistribute book pages or artwork.
 
 <ConceptConnections id="embedding-evaluation" />

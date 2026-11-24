@@ -1,8 +1,8 @@
 # Existing lesson depth audit
 
-Initial review 2026-11-19; latest lesson update 2026-11-24. Covers **112 concepts**. Source hashes detect stale findings. Independent pedagogical acceptance remains pending; execution claims below refer only to linked workflow evidence.
+Initial review 2026-11-19; latest lesson update 2026-11-24. Covers **113 concepts**. Source hashes detect stale findings. Independent pedagogical acceptance remains pending; execution claims below refer only to linked workflow evidence.
 
-The 112 concept snippets contain **102 distinct Python implementations**. Shared code is not automatically wrong; the finding records whether it demonstrates this lesson's mechanism.
+The 113 concept snippets contain **110 distinct Python implementations**. Shared code is not automatically wrong; the finding records whether it demonstrates this lesson's mechanism.
 
 ## Useful existing work
 
@@ -148,25 +148,26 @@ The site has explanations, labeled illustrative examples, relationship navigatio
 
 | Lesson | Current implementation finding | Priority / next phase |
 | --- | --- | --- |
-| [contrastive-examples](../../src/content/docs/concepts/contrastive-examples.mdx#implement-it) | The example computes loss from supplied scores rather than constructing valid positive/negative text pairs. | P1 / E7 |
-| [contrastive-learning](../../src/content/docs/concepts/contrastive-learning.mdx#implement-it) | The scalar contrastive loss is useful; add temperature, batch structure, gradients, and a trainable encoder. | P1 / E7 |
-| [domain-adaptation](../../src/content/docs/concepts/domain-adaptation.mdx#implement-it) | The reused contrastive-loss calculation has no source/target corpus, adaptation, or transfer evaluation. | P1 / E7 |
-| [embedding-evaluation](../../src/content/docs/concepts/embedding-evaluation.mdx#implement-it) | One recall-at-k fixture omits similarity correlations, MTEB, and actual model comparison. | P1 / E7 |
-| [fine-tuning-embeddings](../../src/content/docs/concepts/fine-tuning-embeddings.mdx#implement-it) | The fixed-score loss never updates an embedding model or compares held-out results. | P1 / E7 |
-| [loss-functions](../../src/content/docs/concepts/loss-functions.mdx#implement-it) | One contrastive loss does not teach softmax classification, cosine regression, and MNR separately. | P1 / E7 |
-| [sbert](../../src/content/docs/concepts/sbert.mdx#implement-it) | The example calculates cosine similarity but never runs an encoder or pooling operation. | P1 / E7 |
-| [tsdae](../../src/content/docs/concepts/tsdae.mdx#implement-it) | A single MLM-style mask omits deletion noise, sentence reconstruction, decoder training, and embedding evaluation. | P0 / E7 |
+| [contrastive-examples](../../src/content/docs/concepts/contrastive-examples.mdx#implement-it) | E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending. | P2 / E7 |
+| [contrastive-learning](../../src/content/docs/concepts/contrastive-learning.mdx#implement-it) | E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending. | P2 / E7 |
+| [domain-adaptation](../../src/content/docs/concepts/domain-adaptation.mdx#implement-it) | E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending. | P2 / E7 |
+| [embedding-evaluation](../../src/content/docs/concepts/embedding-evaluation.mdx#implement-it) | E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending. | P2 / E7 |
+| [fine-tuning-embeddings](../../src/content/docs/concepts/fine-tuning-embeddings.mdx#implement-it) | E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending. | P2 / E7 |
+| [loss-functions](../../src/content/docs/concepts/loss-functions.mdx#implement-it) | E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending. | P2 / E7 |
+| [sbert](../../src/content/docs/concepts/sbert.mdx#implement-it) | E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending. | P2 / E7 |
+| [tsdae](../../src/content/docs/concepts/tsdae.mdx#implement-it) | E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending. | P2 / E7 |
+| [augmented-sbert](../../src/content/docs/concepts/augmented-sbert.mdx#implement-it) | E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending. | P2 / E7 |
 
 ### Chapter 11
 
 | Lesson | Current implementation finding | Priority / next phase |
 | --- | --- | --- |
-| [bert-fine-tuning](../../src/content/docs/concepts/bert-fine-tuning.mdx#implement-it) | A single scalar squared-error update does not train a BERT encoder or task head. | P1 / E7 |
-| [few-shot-classification](../../src/content/docs/concepts/few-shot-classification.mdx#implement-it) | A keyword if-statement uses no labeled support-set learning or sampling comparison. | P1 / E7 |
-| [frozen-layers](../../src/content/docs/concepts/frozen-layers.mdx#implement-it) | The selective dictionary update is relevant; verify actual parameter freezing and compare held-out model results. | P1 / E7 |
-| [masked-language-modeling](../../src/content/docs/concepts/masked-language-modeling.mdx#implement-it) | Replacing one token is a preprocessing illustration; add corruption policy, ignored labels, and actual MLM training. | P1 / E7 |
-| [named-entity-recognition](../../src/content/docs/concepts/named-entity-recognition.mdx#implement-it) | E2 replaces supplied labels as the main implementation with actual tokenizer alignment and trained predictions, explicit masking/truncation, sentence-preserving spans, baseline/test metrics, validation errors, and reload checks. Real-domain extension and independent review remain pending. | P2 / E2 |
-| [setfit](../../src/content/docs/concepts/setfit.mdx#implement-it) | The snippet has no labeled-pair generation, sentence-model adaptation, or classifier fitting. | P0 / E7 |
+| [bert-fine-tuning](../../src/content/docs/concepts/bert-fine-tuning.mdx#implement-it) | E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending. | P2 / E7 |
+| [few-shot-classification](../../src/content/docs/concepts/few-shot-classification.mdx#implement-it) | E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending. | P2 / E7 |
+| [frozen-layers](../../src/content/docs/concepts/frozen-layers.mdx#implement-it) | E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending. | P2 / E7 |
+| [masked-language-modeling](../../src/content/docs/concepts/masked-language-modeling.mdx#implement-it) | E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending. | P2 / E7 |
+| [named-entity-recognition](../../src/content/docs/concepts/named-entity-recognition.mdx#implement-it) | E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending. | P2 / E7 |
+| [setfit](../../src/content/docs/concepts/setfit.mdx#implement-it) | E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending. | P2 / E7 |
 
 ### Chapter 12
 
@@ -188,6 +189,7 @@ The site has explanations, labeled illustrative examples, relationship navigatio
 - [actual-retrieval-grounded-generation-and-proposition-review](../../src/content/docs/use-cases/rag-question-answering.mdx#1-establish-a-baseline): Independent review and a new realistic collection remain pending; hosted comparison is documented/imported only.
 - [fitted-topic-pipeline-with-controlled-representation-and-density-comparisons](../../src/content/docs/use-cases/research-collection-explorer.mdx#2-run-the-actual-topic-model): Independent reader review and a realistic licensed external research collection remain pending.
 - [actual-openclip-retrieval-preprocessing-and-patch-projection](../../src/content/docs/use-cases/image-text-collection-search.mdx#1-declare-the-collection-and-representation): Independent review and fresh licensed evaluation images remain pending.
+- [actual-encoder-teacher-denoising-comparisons-and-reusable-artifacts](../../src/content/docs/use-cases/service-search-adaptation.mdx#2-train-a-controlled-baseline-comparison): Independent review and fresh realistic external collection remain pending.
 
 ## How to act on a finding
 

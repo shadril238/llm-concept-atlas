@@ -514,9 +514,17 @@
         "AugSBERT",
         "gold and silver pairs"
       ],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E7",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "E7 detailed original explanation, actual training/evaluation evidence and connected interactive lab. Independent acceptance pending.",
+      "destination": {
+        "path": "src/content/docs/concepts/augmented-sbert.mdx",
+        "anchor": "definition-and-intuition"
+      },
+      "reviewRecord": "e7-representation-author-review-2026-11-24",
+      "exampleIds": [
+        "e7-augmented-sbert"
+      ]
     },
     {
       "id": "full-fine-tuning",
@@ -1075,9 +1083,17 @@
         "cosine similarity loss",
         "MNR loss"
       ],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E7",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "E7 detailed original explanation, actual training/evaluation evidence and connected interactive lab. Independent acceptance pending.",
+      "destination": {
+        "path": "src/content/docs/concepts/loss-functions.mdx",
+        "anchor": "how-it-works"
+      },
+      "reviewRecord": "e7-representation-author-review-2026-11-24",
+      "exampleIds": [
+        "e7-loss-functions"
+      ]
     },
     {
       "id": "embedding-evaluation-metrics",
@@ -1095,9 +1111,17 @@
         "Pearson",
         "Spearman"
       ],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E7",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "E7 detailed original explanation, actual training/evaluation evidence and connected interactive lab. Independent acceptance pending.",
+      "destination": {
+        "path": "src/content/docs/concepts/embedding-evaluation.mdx",
+        "anchor": "sts-correlation-and-mteb"
+      },
+      "reviewRecord": "e7-representation-author-review-2026-11-24",
+      "exampleIds": [
+        "e7-embedding-evaluation"
+      ]
     },
     {
       "id": "qlora-memory",

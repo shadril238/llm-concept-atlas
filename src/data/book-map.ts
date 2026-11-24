@@ -225,6 +225,7 @@ export const chapters: Chapter[] = [
       "Fine-tuning embeddings",
       "TSDAE",
       "Domain adaptation",
+      "Augmented SBERT",
     ],
   },
   {

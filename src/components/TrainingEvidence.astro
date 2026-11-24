@@ -1,0 +1,7 @@
+---
+import VerifiedRun from './VerifiedRun.astro';
+const {id}=Astro.props as {id:string};
+const anchors:Record<string,string>={'embedding-training':'l15-embedding-training','augmented-sbert-training':'l16-augmented-sbert','tsdae-adaptation':'l17-tsdae-and-adaptation','representation-classification':'l18-classification-and-setfit','continued-pretraining':'l19-continued-pretraining','ner-complete':'l20-complete-ner'};
+---
+<aside class="reference-brief"><strong>Train the connected real model</strong><p><a href={`/llm-concept-atlas/labs/embedding-and-representation-training/#${anchors[id]}`}>Open setup, full source, recorded training and failure analysis</a></p><p>After installing the isolated representation environment, run <code>python3 scripts/run-examples.py --id {id} --allow-network</code> for its first public-model download; use <code>--offline</code> for later cached runs. Training uses actual parameters and saved/reloaded models; browser controls explore recorded evidence or labeled calculations.</p></aside>
+<VerifiedRun id={id}/>

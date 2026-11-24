@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e7-domain-adaptation",
+  "status": "passed",
+  "date": "2026-11-24T08:28:58.480238+00:00",
+  "gitCommit": "2a274a0eaf31e33861ce3e0b036faed935fa906a",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e7/domain_adaptation.py"
+  ],
+  "sourceSha256": "e7c81bc74d73885f5dc485a3a04686af4f2d21819b50515f97aa893fe63fdf63",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "7b4e2c62194806f4196e7ee763d02766d39bc98dca3c029614eb474628a23155",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.016,
+  "peakMemoryMiB": 21.2,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "baseline test MRR: 0.7319\nTSDAE-only test MRR: 0.6764\ngold-only test MRR: 0.9167\ntsdae-plus-gold test MRR: 0.9167\nreconstruction-loss / retrieval disagreement intervals: 5\n",
+  "stderr": "",
+  "error": null,
+  "supportHashes": {
+    "examples/foundations/src/atlas_foundations/e7/contracts.py": "29ef85a7f9f8e5226038e69aaa3c2e939ed76baaee0eea62f9bf438dc22ca5cd",
+    "src/data/training-results.json": "919648238de7ecc34e48e0c25a2e8cce55e2e0e5368c7942d6423e273381d4f0",
+    "examples/data/fixtures/embedding-training.json": "a593a458508a21c918ab8f6570ff17408f65d92f297bd845b3c7cbdf1724fa1c"
+  }
+}

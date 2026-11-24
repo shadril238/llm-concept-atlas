@@ -1,99 +1,129 @@
 ---
-title: Loss functions
-description: A loss function turns prediction or ranking errors into a scalar signal used to update model parameters.
-kind: concept
+title: "Embedding loss functions"
+description: "A loss function turns model outputs and a supervision contract into a scalar objective for optimization. For sentence embeddings, pair classification, cosine regression and multiple-negatives ranking use different labels and expose different inference behavior."
+kind: "concept"
 conceptId: loss-functions
 chapter: 10
-part: training
-summary: A loss function turns prediction or ranking errors into a scalar signal used to update model parameters.
-parent: chapter-10
-prerequisites: [contrastive-learning]
-related: [embedding-evaluation, fine-tuning-embeddings]
-level: advanced
-tags: [training, chapter-10]
+part: "training"
+summary: "A loss function turns model outputs and a supervision contract into a scalar objective for optimization. For sentence embeddings, pair classification, cosine regression and multiple-negatives ranking use different labels and expose different inference behavior."
+parent: "chapter-10"
+prerequisites: ["contrastive-learning"]
+related: []
+level: "advanced"
+tags: ["training", "chapter-10"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e7-representation-author-review-2026-11-24
+learningObjectives: ["Calculate regression error for targets zero and one.", "Explain why MNR and symmetric CLIP loss need not match."]
+aliases: ["softmax loss", "cosine similarity loss", "multiple negatives ranking loss", "MNR loss", "InfoNCE"]
+bookSections: ["book-ch10-losses", "book-ch10-softmax-loss", "book-ch10-cosine-loss", "book-ch10-mnr-loss"]
+exampleIds: ["e7-loss-functions", "embedding-training"]
+relationshipReasons: {"contrastive-learning": "Contrastive objectives require explicit relationships and candidate-denominator assumptions."}
+labHref: "/labs/embedding-and-representation-training/"
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { ContrastiveLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import TrainingEvidence from '../../../components/TrainingEvidence.astro';
+import { LossExplorer } from '../../../components/simulations/TrainingLabs';
 
 <ConceptPrimer id="loss-functions" />
 
 ## Definition and intuition
 
-**Loss functions**: A loss function turns prediction or ranking errors into a scalar signal used to update model parameters.
+A loss function turns model outputs and a supervision contract into a scalar objective for optimization. For sentence embeddings, pair classification, cosine regression and multiple-negatives ranking use different labels and expose different inference behavior.
 
-Chapter 10 trains representations by choosing which examples should be close or far apart. The construction of positive and negative pairs is part of the learning objective.
+Follow the input, objective, update, and evaluation as separate steps. The worked example and experiment below connect the explanation to an inspectable implementation.
 
-## Before you start
+<ReferenceBrief objectives={["Calculate regression error for targets zero and one.", "Explain why MNR and symmetric CLIP loss need not match."]} prerequisites="contrastive-learning" scope="Original numerical reasoning and actual recorded CPU training with pinned public models. Independent technical/editorial review and beginner feedback remain pending." />
 
-Read [Contrastive learning](/llm-concept-atlas/concepts/contrastive-learning/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **loss functions** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Softmax pair classification
 
-1. **Prepare:** Choose a loss whose target matches the intended behavior
-2. **Transform:** Compute loss from model outputs and labeled examples
-3. **Inspect:** Differentiate it to update trainable weights and monitor held-out quality.
+The SBERT-style classifier consumes [u,v,|u−v|], learns class logits, and minimizes cross entropy against a discrete relation label. The book uses three NLI classes. L15 explicitly adapts this to two author-defined service relations, same-intent versus different-intent; it is not a relabeled NLI benchmark. The classifier has its own trainable weights, and the optimizer includes them as well as the shared encoder.
 
-### The important distinction
+### Cosine similarity regression
 
-A classification loss compares predicted class probabilities with labels; a contrastive loss compares relative similarities among examples. The gradient tells the optimizer how to change weights, but the chosen objective determines what improvement means. A smaller number is only valuable if the objective matches the application.
+The pinned CosineSimilarityLoss computes mean squared error between cosine similarity and a numerical target: mean_i(cos(u_i,v_i)−y_i)^2. It is not simply 1−cos for every pair. A target of zero asks for orthogonality under this score, not maximum negative cosine. Our binary targets reflect the defined service relation; continuous human STS ratings require their own annotation scale.
+
+### Multiple negatives ranking
+
+MNR uses a matrix of anchor/candidate similarities, multiplies by a declared scale, and applies row-wise cross entropy with diagonal targets. In the pinned 5.1.2 configuration, scale is 20 and the loss is directional anchor→candidate; it is not automatically the symmetric CLIP objective. Batch composition determines the denominator and the negative assumptions. Validation retrieval MRR selects its saved checkpoint.
 
 ## Worked example
 
-A contrastive loss decreases when a positive sentence pair outranks negatives. A classification loss instead rewards the right class label, so the two objectives can shape different representations. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+If cosine is 0.8 and target 1, regression squared error is 0.04. If target is 0, the same score yields 0.64. With alternative similarity 0.4 and scale 5, one-row ranking loss is about 0.127. The same positive score therefore produces different losses because the contracts differ. L15 checks the actual library outputs against independent arithmetic and verifies parameter changes.
 
-<LessonFlow steps={["Choose a loss whose target matches the intended behavior", "Compute loss from model outputs and labeled examples", "Differentiate it to update trainable weights and monitor held-out quality."]} caption="A teaching diagram for Loss functions. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
 
-## Try the interactive lab
+Predict an outcome before changing a control. Selectors replay actual saved training/evaluation runs; loss and mask calculators recalculate a declared teaching mechanism. They make no model or API requests in your browser.
 
-<ContrastiveLab client:visible />
-
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+<LossExplorer client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+From the repository root, install the foundation environment and run `python3 scripts/run-examples.py --id e7-loss-functions --offline`. The standard-library example below calculates a mechanism or checks the published actual evidence. Recorded-evidence replay is distinct from new optimization: the connected model lab supplies the complete source and fresh-training command.
+
+{/* example:e7-loss-functions:start */}
 
 ```python
-from math import exp, log
-positive_similarity = 0.8
-negative_similarities = [0.2, 0.4]
-all_scores = [positive_similarity, *negative_similarities]
-loss = -log(exp(all_scores[0]) / sum(exp(x) for x in all_scores))
-print(round(loss, 3))
+import sys
+sys.path.insert(0, 'examples/foundations/src')
+from atlas_foundations.e7.contracts import cross_entropy, mnr_loss
+score = 0.8
+print('regression toward one:', round((score - 1) ** 2, 4))
+print('regression toward zero:', round(score ** 2, 4))
+print('pair classification CE:', round(cross_entropy([2.0, 1.0], 0), 4))
+matrix = [[0.8, 0.4], [0.3, 0.9]]
+print('directional MNR mean:', round(mnr_loss(matrix, scale=5)['loss'], 4))
+print('Different labels and denominators define different objectives.')
 ```
 
-**Expected output:**
+{/* example:e7-loss-functions:end */}
+
+Recorded calculation output:
 
 ```text
-0.797
+regression toward one: 0.04
+regression toward zero: 0.64
+pair classification CE: 0.3133
+directional MNR mean: 0.0878
+Different labels and denominators define different objectives.
 ```
 
-**What the code shows:** The positive score competes with two negative scores inside a softmax. The negative logarithm is smaller when the positive takes more of the probability mass. The [official chapter 10 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter10) develops the corresponding model-based implementation.
+<TrainingEvidence id="embedding-training" />
 
 ## When to use it
 
-Use the objective that matches the evaluation task and available labels. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Choose a loss after specifying your data format and deployed scorer. Use regression for graded similarity targets, ranking for trustworthy positive retrieval pairs, and a pair classifier when relation classes are the task.
 
 ## Limits and common mistakes
 
-- Low training loss can coexist with overfitting or a mismatch to the real goal.
-- **Failure to look for:** The model optimizes easy pair separation but fails on hard near-miss search results.
+Loss magnitudes across objectives are not a leaderboard. A lower number does not establish better retrieval, and false negatives make a ranking target wrong even when its tensor shape is valid.
 
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Author execution checks tensor/mask contracts, actual parameter updates, split provenance and artifact reload. It does not constitute independent lesson acceptance. Keep training quality, task quality, runtime and generalization claims separate.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First choose a loss whose target matches the intended behavior Then compute loss from model outputs and labeled examples Finally differentiate it to update trainable weights and monitor held-out quality.</p></details>
+<details>
+<summary>Calculate regression error for targets zero and one.</summary>
 
-<details><summary>What would make the result misleading?</summary><p>The model optimizes easy pair separation but fails on hard near-miss search results.</p></details>
+For score 0.8 the squared errors are 0.64 and 0.04 respectively; the desired relation changes the gradient.
+
+</details>
+
+<details>
+<summary>Explain why MNR and symmetric CLIP loss need not match.</summary>
+
+The selected MNR implementation normalizes anchor-to-candidate rows; symmetric CLIP also includes the opposite direction. State the exact configuration.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 10 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 10 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter10). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 10 of *Hands-On Large Language Models*. The [complete L15–L20 lab](/llm-concept-atlas/labs/embedding-and-representation-training/#l15-embedding-training) links actual training source, pinned environments, data provenance, real failures, and the artifact lifecycle. Compare the [authors’ pinned chapter 10 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter10) for the book-scale workflow. The atlas uses explicitly smaller CPU configurations and does not redistribute book pages or artwork.
 
 <ConceptConnections id="loss-functions" />

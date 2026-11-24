@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e7-augmented-sbert",
+  "status": "passed",
+  "date": "2026-11-24T08:28:58.288925+00:00",
+  "gitCommit": "2a274a0eaf31e33861ce3e0b036faed935fa906a",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e7/augmented_sbert.py"
+  ],
+  "sourceSha256": "233ff66793f023cb5bdbfc932e1222409df18cb9371ca5f52d6670c0e04ce547",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "130c485ac86288a85cbe78cbb82762ad43113155ca03e38b62ea721b4a558d08",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.017,
+  "peakMemoryMiB": 21.2,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "silver candidates: 120\nteacher diagnostic disagreements: 14\ngold-only test MSE: 0.0586\ngold-plus-silver test MSE: 0.0929\nSilver scores are continuous model predictions, not gold targets.\n",
+  "stderr": "",
+  "error": null,
+  "supportHashes": {
+    "examples/foundations/src/atlas_foundations/e7/contracts.py": "29ef85a7f9f8e5226038e69aaa3c2e939ed76baaee0eea62f9bf438dc22ca5cd",
+    "src/data/training-results.json": "919648238de7ecc34e48e0c25a2e8cce55e2e0e5368c7942d6423e273381d4f0",
+    "examples/data/fixtures/embedding-training.json": "a593a458508a21c918ab8f6570ff17408f65d92f297bd845b3c7cbdf1724fa1c"
+  }
+}

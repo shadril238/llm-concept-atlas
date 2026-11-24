@@ -1,0 +1,42 @@
+---
+title: From a pretrained encoder to a domain model
+description: Learn objectives, data provenance, actual updates, frozen layers, and downstream evaluation through six real training labs.
+kind: path
+lastReviewed: 2026-11-24
+---
+
+Allow several sessions for Chapters 10–11. Browser reading does not need a GPU or model downloads; the linked labs have a separate pinned CPU setup. Each concept includes definition, theory, worked example, implementation, use cases, limits and self-checks.
+
+## 1. Define the relation before choosing a loss
+
+Read [contrastive learning](/llm-concept-atlas/concepts/contrastive-learning/), [contrastive examples](/llm-concept-atlas/concepts/contrastive-examples/) and [SBERT](/llm-concept-atlas/concepts/sbert/). Explain why a room cancellation can be a hard negative for a room reservation. Distinguish two cached sentence vectors from a jointly encoded pair.
+
+## 2. Train and evaluate an encoder
+
+Read [loss functions](/llm-concept-atlas/concepts/loss-functions/), [embedding evaluation](/llm-concept-atlas/concepts/embedding-evaluation/) and [fine-tuning embeddings](/llm-concept-atlas/concepts/fine-tuning-embeddings/). Work through [L15](/llm-concept-atlas/labs/embedding-and-representation-training/#l15-embedding-training). Compare pair cross entropy, regression and directional MNR. Inspect actual gradients, selected checkpoint, unseen-query ranks and saved-model reload.
+
+**Checkpoint:** Is a lower pair-classification loss sufficient evidence for better cosine retrieval? Explain the deployed scorer and matching evaluator.
+
+## 3. Inspect teacher-generated supervision
+
+Read [Augmented SBERT](/llm-concept-atlas/concepts/augmented-sbert/) and run L16. Trace gold teacher training → training-pool candidates → continuous silver labels → two student models. Find a teacher error and explain why extra silver can worsen a student. Keep evaluation sentences out of augmentation.
+
+## 4. Separate reconstruction from task usefulness
+
+Read [TSDAE](/llm-concept-atlas/concepts/tsdae/) and [domain adaptation](/llm-concept-atlas/concepts/domain-adaptation/), then inspect L17. Compare actual greedy reconstruction with teacher forcing. Explain the single-vector bottleneck, tied weights, and why one-key attention can have zero query-selection gradient while value projections learn.
+
+**Checkpoint:** Locate a decreasing reconstruction-loss interval with flat or worse validation retrieval. Which metric selects the deployed encoder?
+
+## 5. Compare limited-label classifiers
+
+Read [BERT fine-tuning](/llm-concept-atlas/concepts/bert-fine-tuning/), [frozen layers](/llm-concept-atlas/concepts/frozen-layers/), [few-shot classification](/llm-concept-atlas/concepts/few-shot-classification/) and [SetFit](/llm-concept-atlas/concepts/setfit/). Use L18 to inspect three fixed seeds and six methods. Verify frozen hashes, changed tensors, unique labeled rows, generated pair counts and per-class failures.
+
+## 6. Continue pretraining, then test the task
+
+Read [masked language modeling](/llm-concept-atlas/concepts/masked-language-modeling/) and run L19. Separate selected targets from replaced tokens. Compare the smoke run with the evaluated run and explain the identical downstream pooler/head initialization. The test corpus remains outside adaptation even without labels.
+
+## 7. Align and score complete entities
+
+Read [NER](/llm-concept-atlas/concepts/named-entity-recognition/) and inspect L20. Compare actual word IDs, split pieces, first-only and propagated labels, special/padding masks and safe truncation rejection. Fix a boundary error under strict sentence-preserving entity scoring.
+
+Complete the [service-search project](/llm-concept-atlas/use-cases/service-search-adaptation/) and revisit the [topic graph](/llm-concept-atlas/atlas/) to connect training objectives with dense retrieval and grounded answering. Generation adaptation remains the next E8 milestone; E7 does not claim to complete the Chapter 12 training workflows.

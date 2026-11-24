@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e7-contrastive-learning",
+  "status": "passed",
+  "date": "2026-11-24T08:28:57.791064+00:00",
+  "gitCommit": "2a274a0eaf31e33861ce3e0b036faed935fa906a",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e7/contrastive_learning.py"
+  ],
+  "sourceSha256": "7c0204c40e4659f643a2dee2e783e3b3f864b4f8b454d000f3f76be9298f31d7",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "7ccbc39e8004409d4d2d0d966432c0f802c35618c0bd7eeab28240ee07443237",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 21.2,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "target probability: 0.8808\nrow loss: 0.1269\nlogit gradients: [-0.1192, 0.1192]\n",
+  "stderr": "",
+  "error": null,
+  "supportHashes": {
+    "examples/foundations/src/atlas_foundations/e7/contracts.py": "29ef85a7f9f8e5226038e69aaa3c2e939ed76baaee0eea62f9bf438dc22ca5cd",
+    "src/data/training-results.json": "919648238de7ecc34e48e0c25a2e8cce55e2e0e5368c7942d6423e273381d4f0",
+    "examples/data/fixtures/embedding-training.json": "a593a458508a21c918ab8f6570ff17408f65d92f297bd845b3c7cbdf1724fa1c"
+  }
+}

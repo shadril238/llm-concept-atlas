@@ -1,0 +1,2285 @@
+{
+  "id": "atlas-embedding-training-v1",
+  "policy": "Original English community-service intent paraphrases, MIT. Similarity means same requested service, not entailment or general semantic equivalence. Lexically close reserve/cancel are distinct intents. Shared domain and hand-authored style limit generalization.",
+  "rows": [
+    {
+      "id": "train-hours-0",
+      "text": "When does the library shut on Saturday?",
+      "intent": "hours",
+      "split": "train"
+    },
+    {
+      "id": "train-hours-1",
+      "text": "Tell me the weekend closing time.",
+      "intent": "hours",
+      "split": "train"
+    },
+    {
+      "id": "train-hours-2",
+      "text": "What are the Saturday opening hours?",
+      "intent": "hours",
+      "split": "train"
+    },
+    {
+      "id": "train-hours-3",
+      "text": "I need the library schedule for Saturday.",
+      "intent": "hours",
+      "split": "train"
+    },
+    {
+      "id": "validation-hours-4",
+      "text": "At what hour are the doors closed this weekend?",
+      "intent": "hours",
+      "split": "validation"
+    },
+    {
+      "id": "validation-hours-5",
+      "text": "How late is the library open on Saturday?",
+      "intent": "hours",
+      "split": "validation"
+    },
+    {
+      "id": "test-hours-6",
+      "text": "Will the library still be open on Saturday evening?",
+      "intent": "hours",
+      "split": "test"
+    },
+    {
+      "id": "test-hours-7",
+      "text": "Please find the Saturday shutdown time.",
+      "intent": "hours",
+      "split": "test"
+    },
+    {
+      "id": "test-hours-8",
+      "text": "What time should Saturday visitors leave?",
+      "intent": "hours",
+      "split": "test"
+    },
+    {
+      "id": "silver-pool-hours-9",
+      "text": "Can I visit the library late on the weekend?",
+      "intent": "hours",
+      "split": "silver-pool"
+    },
+    {
+      "id": "silver-pool-hours-10",
+      "text": "I am looking for weekend hours.",
+      "intent": "hours",
+      "split": "silver-pool"
+    },
+    {
+      "id": "silver-pool-hours-11",
+      "text": "Show the schedule for Saturday visitors.",
+      "intent": "hours",
+      "split": "silver-pool"
+    },
+    {
+      "id": "silver-pool-hours-12",
+      "text": "When do Saturday services finish?",
+      "intent": "hours",
+      "split": "silver-pool"
+    },
+    {
+      "id": "train-laptop-0",
+      "text": "How long may I borrow a laptop?",
+      "intent": "laptop",
+      "split": "train"
+    },
+    {
+      "id": "train-laptop-1",
+      "text": "Tell me the notebook computer loan period.",
+      "intent": "laptop",
+      "split": "train"
+    },
+    {
+      "id": "train-laptop-2",
+      "text": "When must borrowed laptops be returned?",
+      "intent": "laptop",
+      "split": "train"
+    },
+    {
+      "id": "train-laptop-3",
+      "text": "I need the computer borrowing deadline.",
+      "intent": "laptop",
+      "split": "train"
+    },
+    {
+      "id": "validation-laptop-4",
+      "text": "What is the return limit for a loan laptop?",
+      "intent": "laptop",
+      "split": "validation"
+    },
+    {
+      "id": "validation-laptop-5",
+      "text": "For how many days can I keep a notebook?",
+      "intent": "laptop",
+      "split": "validation"
+    },
+    {
+      "id": "test-laptop-6",
+      "text": "How long is a portable computer checked out?",
+      "intent": "laptop",
+      "split": "test"
+    },
+    {
+      "id": "test-laptop-7",
+      "text": "When is a borrowed computer due?",
+      "intent": "laptop",
+      "split": "test"
+    },
+    {
+      "id": "test-laptop-8",
+      "text": "Explain the device lending duration.",
+      "intent": "laptop",
+      "split": "test"
+    },
+    {
+      "id": "silver-pool-laptop-9",
+      "text": "I borrowed a laptop; when should it come back?",
+      "intent": "laptop",
+      "split": "silver-pool"
+    },
+    {
+      "id": "silver-pool-laptop-10",
+      "text": "What is the allowed laptop loan length?",
+      "intent": "laptop",
+      "split": "silver-pool"
+    },
+    {
+      "id": "silver-pool-laptop-11",
+      "text": "Find the notebook return policy.",
+      "intent": "laptop",
+      "split": "silver-pool"
+    },
+    {
+      "id": "silver-pool-laptop-12",
+      "text": "How much time do computer borrowers get?",
+      "intent": "laptop",
+      "split": "silver-pool"
+    },
+    {
+      "id": "train-renew-0",
+      "text": "How can I renew my library book?",
+      "intent": "renew",
+      "split": "train"
+    },
+    {
+      "id": "train-renew-1",
+      "text": "Tell me whether a book loan can be extended.",
+      "intent": "renew",
+      "split": "train"
+    },
+    {
+      "id": "train-renew-2",
+      "text": "I want to keep a borrowed book longer.",
+      "intent": "renew",
+      "split": "train"
+    },
+    {
+      "id": "train-renew-3",
+      "text": "Explain the book renewal rules.",
+      "intent": "renew",
+      "split": "train"
+    },
+    {
+      "id": "validation-renew-4",
+      "text": "Can the due date of a book be moved?",
+      "intent": "renew",
+      "split": "validation"
+    },
+    {
+      "id": "validation-renew-5",
+      "text": "What is needed to extend a book checkout?",
+      "intent": "renew",
+      "split": "validation"
+    },
+    {
+      "id": "test-renew-6",
+      "text": "How do I get more time for reading a loan book?",
+      "intent": "renew",
+      "split": "test"
+    },
+    {
+      "id": "test-renew-7",
+      "text": "Is another borrowing period available for this book?",
+      "intent": "renew",
+      "split": "test"
+    },
+    {
+      "id": "test-renew-8",
+      "text": "What stops a book from being renewed?",
+      "intent": "renew",
+      "split": "test"
+    },
+    {
+      "id": "silver-pool-renew-9",
+      "text": "Find the procedure for extending book loans.",
+      "intent": "renew",
+      "split": "silver-pool"
+    },
+    {
+      "id": "silver-pool-renew-10",
+      "text": "Can I renew a reserved title?",
+      "intent": "renew",
+      "split": "silver-pool"
+    },
+    {
+      "id": "silver-pool-renew-11",
+      "text": "Show how readers prolong a book loan.",
+      "intent": "renew",
+      "split": "silver-pool"
+    },
+    {
+      "id": "silver-pool-renew-12",
+      "text": "I need to postpone returning my book.",
+      "intent": "renew",
+      "split": "silver-pool"
+    },
+    {
+      "id": "train-reserve-0",
+      "text": "How do I book a workshop room?",
+      "intent": "reserve",
+      "split": "train"
+    },
+    {
+      "id": "train-reserve-1",
+      "text": "I want to reserve a meeting space.",
+      "intent": "reserve",
+      "split": "train"
+    },
+    {
+      "id": "train-reserve-2",
+      "text": "Explain the procedure for making a room reservation.",
+      "intent": "reserve",
+      "split": "train"
+    },
+    {
+      "id": "train-reserve-3",
+      "text": "Can I arrange a room booking?",
+      "intent": "reserve",
+      "split": "train"
+    },
+    {
+      "id": "validation-reserve-4",
+      "text": "Where can I schedule a workshop space?",
+      "intent": "reserve",
+      "split": "validation"
+    },
+    {
+      "id": "validation-reserve-5",
+      "text": "What must I do to secure a meeting room?",
+      "intent": "reserve",
+      "split": "validation"
+    },
+    {
+      "id": "test-reserve-6",
+      "text": "Help me place a reservation for a room.",
+      "intent": "reserve",
+      "split": "test"
+    },
+    {
+      "id": "test-reserve-7",
+      "text": "I need to create a workshop booking.",
+      "intent": "reserve",
+      "split": "test"
+    },
+    {
+      "id": "test-reserve-8",
+      "text": "How is a new room appointment made?",
+      "intent": "reserve",
+      "split": "test"
+    },
+    {
+      "id": "silver-pool-reserve-9",
+      "text": "Find instructions for reserving a space.",
+      "intent": "reserve",
+      "split": "silver-pool"
+    },
+    {
+      "id": "silver-pool-reserve-10",
+      "text": "What is the process to request a meeting area?",
+      "intent": "reserve",
+      "split": "silver-pool"
+    },
+    {
+      "id": "silver-pool-reserve-11",
+      "text": "I would like to schedule a room.",
+      "intent": "reserve",
+      "split": "silver-pool"
+    },
+    {
+      "id": "silver-pool-reserve-12",
+      "text": "Can visitors make new room reservations?",
+      "intent": "reserve",
+      "split": "silver-pool"
+    },
+    {
+      "id": "train-cancel-0",
+      "text": "How can I cancel a room reservation?",
+      "intent": "cancel",
+      "split": "train"
+    },
+    {
+      "id": "train-cancel-1",
+      "text": "Remove my workshop room booking.",
+      "intent": "cancel",
+      "split": "train"
+    },
+    {
+      "id": "train-cancel-2",
+      "text": "I no longer need the reserved meeting space.",
+      "intent": "cancel",
+      "split": "train"
+    },
+    {
+      "id": "train-cancel-3",
+      "text": "Tell me the room cancellation procedure.",
+      "intent": "cancel",
+      "split": "train"
+    },
+    {
+      "id": "validation-cancel-4",
+      "text": "Where do I withdraw a meeting room request?",
+      "intent": "cancel",
+      "split": "validation"
+    },
+    {
+      "id": "validation-cancel-5",
+      "text": "How do I give back a booked workshop slot?",
+      "intent": "cancel",
+      "split": "validation"
+    },
+    {
+      "id": "test-cancel-6",
+      "text": "Help me cancel an existing room booking.",
+      "intent": "cancel",
+      "split": "test"
+    },
+    {
+      "id": "test-cancel-7",
+      "text": "I want to revoke my meeting-space reservation.",
+      "intent": "cancel",
+      "split": "test"
+    },
+    {
+      "id": "test-cancel-8",
+      "text": "What is needed to release a reserved room?",
+      "intent": "cancel",
+      "split": "test"
+    },
+    {
+      "id": "silver-pool-cancel-9",
+      "text": "Find instructions to undo a room reservation.",
+      "intent": "cancel",
+      "split": "silver-pool"
+    },
+    {
+      "id": "silver-pool-cancel-10",
+      "text": "Delete a workshop booking that I made.",
+      "intent": "cancel",
+      "split": "silver-pool"
+    },
+    {
+      "id": "silver-pool-cancel-11",
+      "text": "How is an existing room reservation removed?",
+      "intent": "cancel",
+      "split": "silver-pool"
+    },
+    {
+      "id": "silver-pool-cancel-12",
+      "text": "I need to withdraw my scheduled meeting space.",
+      "intent": "cancel",
+      "split": "silver-pool"
+    },
+    {
+      "id": "train-battery-0",
+      "text": "Where should I dispose of used batteries?",
+      "intent": "battery",
+      "split": "train"
+    },
+    {
+      "id": "train-battery-1",
+      "text": "Tell me the battery recycling location.",
+      "intent": "battery",
+      "split": "train"
+    },
+    {
+      "id": "train-battery-2",
+      "text": "I need to throw away an old battery safely.",
+      "intent": "battery",
+      "split": "train"
+    },
+    {
+      "id": "train-battery-3",
+      "text": "Explain the procedure for battery disposal.",
+      "intent": "battery",
+      "split": "train"
+    },
+    {
+      "id": "validation-battery-4",
+      "text": "Which container accepts spent batteries?",
+      "intent": "battery",
+      "split": "validation"
+    },
+    {
+      "id": "validation-battery-5",
+      "text": "Where can visitors recycle battery cells?",
+      "intent": "battery",
+      "split": "validation"
+    },
+    {
+      "id": "test-battery-6",
+      "text": "How do I get rid of a depleted battery?",
+      "intent": "battery",
+      "split": "test"
+    },
+    {
+      "id": "test-battery-7",
+      "text": "Show the collection point for used batteries.",
+      "intent": "battery",
+      "split": "test"
+    },
+    {
+      "id": "test-battery-8",
+      "text": "Do dead batteries belong in general trash?",
+      "intent": "battery",
+      "split": "test"
+    },
+    {
+      "id": "silver-pool-battery-9",
+      "text": "Find where exhausted batteries are collected.",
+      "intent": "battery",
+      "split": "silver-pool"
+    },
+    {
+      "id": "silver-pool-battery-10",
+      "text": "What is the safe way to discard battery cells?",
+      "intent": "battery",
+      "split": "silver-pool"
+    },
+    {
+      "id": "silver-pool-battery-11",
+      "text": "I have an empty battery to recycle.",
+      "intent": "battery",
+      "split": "silver-pool"
+    },
+    {
+      "id": "silver-pool-battery-12",
+      "text": "Where do we take worn out batteries?",
+      "intent": "battery",
+      "split": "silver-pool"
+    }
+  ],
+  "gold_pairs": [
+    {
+      "id": "gold-train-0",
+      "left_id": "train-hours-0",
+      "right_id": "train-hours-1",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-1",
+      "left_id": "train-hours-0",
+      "right_id": "train-hours-2",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-2",
+      "left_id": "train-hours-0",
+      "right_id": "train-hours-3",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-3",
+      "left_id": "train-hours-1",
+      "right_id": "train-hours-2",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-4",
+      "left_id": "train-hours-1",
+      "right_id": "train-hours-3",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-5",
+      "left_id": "train-hours-2",
+      "right_id": "train-hours-3",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-6",
+      "left_id": "train-laptop-0",
+      "right_id": "train-laptop-1",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-7",
+      "left_id": "train-laptop-0",
+      "right_id": "train-laptop-2",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-8",
+      "left_id": "train-laptop-0",
+      "right_id": "train-laptop-3",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-9",
+      "left_id": "train-laptop-1",
+      "right_id": "train-laptop-2",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-10",
+      "left_id": "train-laptop-1",
+      "right_id": "train-laptop-3",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-11",
+      "left_id": "train-laptop-2",
+      "right_id": "train-laptop-3",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-12",
+      "left_id": "train-renew-0",
+      "right_id": "train-renew-1",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-13",
+      "left_id": "train-renew-0",
+      "right_id": "train-renew-2",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-14",
+      "left_id": "train-renew-0",
+      "right_id": "train-renew-3",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-15",
+      "left_id": "train-renew-1",
+      "right_id": "train-renew-2",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-16",
+      "left_id": "train-renew-1",
+      "right_id": "train-renew-3",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-17",
+      "left_id": "train-renew-2",
+      "right_id": "train-renew-3",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-18",
+      "left_id": "train-reserve-0",
+      "right_id": "train-reserve-1",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-19",
+      "left_id": "train-reserve-0",
+      "right_id": "train-reserve-2",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-20",
+      "left_id": "train-reserve-0",
+      "right_id": "train-reserve-3",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-21",
+      "left_id": "train-reserve-1",
+      "right_id": "train-reserve-2",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-22",
+      "left_id": "train-reserve-1",
+      "right_id": "train-reserve-3",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-23",
+      "left_id": "train-reserve-2",
+      "right_id": "train-reserve-3",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-24",
+      "left_id": "train-cancel-0",
+      "right_id": "train-cancel-1",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-25",
+      "left_id": "train-cancel-0",
+      "right_id": "train-cancel-2",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-26",
+      "left_id": "train-cancel-0",
+      "right_id": "train-cancel-3",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-27",
+      "left_id": "train-cancel-1",
+      "right_id": "train-cancel-2",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-28",
+      "left_id": "train-cancel-1",
+      "right_id": "train-cancel-3",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-29",
+      "left_id": "train-cancel-2",
+      "right_id": "train-cancel-3",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-30",
+      "left_id": "train-battery-0",
+      "right_id": "train-battery-1",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-31",
+      "left_id": "train-battery-0",
+      "right_id": "train-battery-2",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-32",
+      "left_id": "train-battery-0",
+      "right_id": "train-battery-3",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-33",
+      "left_id": "train-battery-1",
+      "right_id": "train-battery-2",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-34",
+      "left_id": "train-battery-1",
+      "right_id": "train-battery-3",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-35",
+      "left_id": "train-battery-2",
+      "right_id": "train-battery-3",
+      "label": 1.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-36",
+      "left_id": "train-hours-2",
+      "right_id": "train-renew-1",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-37",
+      "left_id": "train-laptop-2",
+      "right_id": "train-renew-1",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-38",
+      "left_id": "train-hours-0",
+      "right_id": "train-reserve-1",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-39",
+      "left_id": "train-laptop-0",
+      "right_id": "train-reserve-1",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-40",
+      "left_id": "train-laptop-1",
+      "right_id": "train-cancel-1",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-41",
+      "left_id": "train-reserve-0",
+      "right_id": "train-battery-1",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-42",
+      "left_id": "train-reserve-2",
+      "right_id": "train-cancel-1",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-43",
+      "left_id": "train-laptop-3",
+      "right_id": "train-reserve-0",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-44",
+      "left_id": "train-cancel-1",
+      "right_id": "train-battery-3",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-45",
+      "left_id": "train-hours-2",
+      "right_id": "train-renew-0",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-46",
+      "left_id": "train-laptop-2",
+      "right_id": "train-battery-2",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-47",
+      "left_id": "train-reserve-0",
+      "right_id": "train-cancel-1",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-48",
+      "left_id": "train-hours-1",
+      "right_id": "train-reserve-1",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-49",
+      "left_id": "train-hours-3",
+      "right_id": "train-battery-2",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-50",
+      "left_id": "train-laptop-2",
+      "right_id": "train-renew-3",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-51",
+      "left_id": "train-laptop-3",
+      "right_id": "train-battery-0",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-52",
+      "left_id": "train-hours-1",
+      "right_id": "train-laptop-1",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-53",
+      "left_id": "train-laptop-2",
+      "right_id": "train-cancel-3",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-54",
+      "left_id": "train-renew-3",
+      "right_id": "train-battery-2",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-55",
+      "left_id": "train-reserve-1",
+      "right_id": "train-battery-2",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-56",
+      "left_id": "train-renew-0",
+      "right_id": "train-battery-3",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-57",
+      "left_id": "train-renew-2",
+      "right_id": "train-battery-0",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-58",
+      "left_id": "train-hours-3",
+      "right_id": "train-renew-2",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-59",
+      "left_id": "train-laptop-2",
+      "right_id": "train-cancel-2",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-60",
+      "left_id": "train-renew-0",
+      "right_id": "train-cancel-1",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-61",
+      "left_id": "train-reserve-3",
+      "right_id": "train-battery-2",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-62",
+      "left_id": "train-laptop-0",
+      "right_id": "train-reserve-0",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-63",
+      "left_id": "train-cancel-1",
+      "right_id": "train-battery-0",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-64",
+      "left_id": "train-reserve-1",
+      "right_id": "train-cancel-2",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-65",
+      "left_id": "train-laptop-2",
+      "right_id": "train-reserve-3",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-66",
+      "left_id": "train-renew-1",
+      "right_id": "train-cancel-2",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-67",
+      "left_id": "train-hours-3",
+      "right_id": "train-laptop-1",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-68",
+      "left_id": "train-hours-3",
+      "right_id": "train-cancel-1",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-69",
+      "left_id": "train-cancel-2",
+      "right_id": "train-battery-1",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-70",
+      "left_id": "train-hours-0",
+      "right_id": "train-cancel-0",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-train-71",
+      "left_id": "train-cancel-3",
+      "right_id": "train-battery-3",
+      "label": 0.0,
+      "split": "train",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-validation-0",
+      "left_id": "validation-hours-4",
+      "right_id": "validation-hours-5",
+      "label": 1.0,
+      "split": "validation",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-validation-1",
+      "left_id": "validation-laptop-4",
+      "right_id": "validation-laptop-5",
+      "label": 1.0,
+      "split": "validation",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-validation-2",
+      "left_id": "validation-renew-4",
+      "right_id": "validation-renew-5",
+      "label": 1.0,
+      "split": "validation",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-validation-3",
+      "left_id": "validation-reserve-4",
+      "right_id": "validation-reserve-5",
+      "label": 1.0,
+      "split": "validation",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-validation-4",
+      "left_id": "validation-cancel-4",
+      "right_id": "validation-cancel-5",
+      "label": 1.0,
+      "split": "validation",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-validation-5",
+      "left_id": "validation-battery-4",
+      "right_id": "validation-battery-5",
+      "label": 1.0,
+      "split": "validation",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-validation-6",
+      "left_id": "validation-renew-4",
+      "right_id": "validation-cancel-4",
+      "label": 0.0,
+      "split": "validation",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-validation-7",
+      "left_id": "validation-laptop-4",
+      "right_id": "validation-reserve-5",
+      "label": 0.0,
+      "split": "validation",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-validation-8",
+      "left_id": "validation-reserve-5",
+      "right_id": "validation-battery-4",
+      "label": 0.0,
+      "split": "validation",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-validation-9",
+      "left_id": "validation-hours-5",
+      "right_id": "validation-laptop-5",
+      "label": 0.0,
+      "split": "validation",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-validation-10",
+      "left_id": "validation-hours-5",
+      "right_id": "validation-cancel-4",
+      "label": 0.0,
+      "split": "validation",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-validation-11",
+      "left_id": "validation-laptop-4",
+      "right_id": "validation-renew-4",
+      "label": 0.0,
+      "split": "validation",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-0",
+      "left_id": "test-hours-6",
+      "right_id": "test-hours-7",
+      "label": 1.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-1",
+      "left_id": "test-hours-6",
+      "right_id": "test-hours-8",
+      "label": 1.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-2",
+      "left_id": "test-hours-7",
+      "right_id": "test-hours-8",
+      "label": 1.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-3",
+      "left_id": "test-laptop-6",
+      "right_id": "test-laptop-7",
+      "label": 1.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-4",
+      "left_id": "test-laptop-6",
+      "right_id": "test-laptop-8",
+      "label": 1.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-5",
+      "left_id": "test-laptop-7",
+      "right_id": "test-laptop-8",
+      "label": 1.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-6",
+      "left_id": "test-renew-6",
+      "right_id": "test-renew-7",
+      "label": 1.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-7",
+      "left_id": "test-renew-6",
+      "right_id": "test-renew-8",
+      "label": 1.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-8",
+      "left_id": "test-renew-7",
+      "right_id": "test-renew-8",
+      "label": 1.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-9",
+      "left_id": "test-reserve-6",
+      "right_id": "test-reserve-7",
+      "label": 1.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-10",
+      "left_id": "test-reserve-6",
+      "right_id": "test-reserve-8",
+      "label": 1.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-11",
+      "left_id": "test-reserve-7",
+      "right_id": "test-reserve-8",
+      "label": 1.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-12",
+      "left_id": "test-cancel-6",
+      "right_id": "test-cancel-7",
+      "label": 1.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-13",
+      "left_id": "test-cancel-6",
+      "right_id": "test-cancel-8",
+      "label": 1.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-14",
+      "left_id": "test-cancel-7",
+      "right_id": "test-cancel-8",
+      "label": 1.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-15",
+      "left_id": "test-battery-6",
+      "right_id": "test-battery-7",
+      "label": 1.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-16",
+      "left_id": "test-battery-6",
+      "right_id": "test-battery-8",
+      "label": 1.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-17",
+      "left_id": "test-battery-7",
+      "right_id": "test-battery-8",
+      "label": 1.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-18",
+      "left_id": "test-hours-7",
+      "right_id": "test-reserve-8",
+      "label": 0.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-19",
+      "left_id": "test-laptop-7",
+      "right_id": "test-cancel-6",
+      "label": 0.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-20",
+      "left_id": "test-cancel-8",
+      "right_id": "test-battery-7",
+      "label": 0.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-21",
+      "left_id": "test-hours-6",
+      "right_id": "test-cancel-6",
+      "label": 0.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-22",
+      "left_id": "test-cancel-6",
+      "right_id": "test-battery-8",
+      "label": 0.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-23",
+      "left_id": "test-hours-7",
+      "right_id": "test-laptop-7",
+      "label": 0.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-24",
+      "left_id": "test-laptop-8",
+      "right_id": "test-reserve-8",
+      "label": 0.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-25",
+      "left_id": "test-renew-7",
+      "right_id": "test-battery-6",
+      "label": 0.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-26",
+      "left_id": "test-renew-6",
+      "right_id": "test-cancel-6",
+      "label": 0.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-27",
+      "left_id": "test-renew-8",
+      "right_id": "test-cancel-8",
+      "label": 0.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-28",
+      "left_id": "test-hours-6",
+      "right_id": "test-laptop-7",
+      "label": 0.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-29",
+      "left_id": "test-cancel-7",
+      "right_id": "test-battery-8",
+      "label": 0.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-30",
+      "left_id": "test-renew-8",
+      "right_id": "test-battery-6",
+      "label": 0.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-31",
+      "left_id": "test-renew-8",
+      "right_id": "test-reserve-7",
+      "label": 0.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-32",
+      "left_id": "test-laptop-7",
+      "right_id": "test-battery-6",
+      "label": 0.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-33",
+      "left_id": "test-renew-7",
+      "right_id": "test-cancel-6",
+      "label": 0.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-34",
+      "left_id": "test-reserve-6",
+      "right_id": "test-cancel-7",
+      "label": 0.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    },
+    {
+      "id": "gold-test-35",
+      "left_id": "test-hours-8",
+      "right_id": "test-laptop-7",
+      "label": 0.0,
+      "split": "test",
+      "origin": "author-defined same-intent binary relation; not NLI or human STS"
+    }
+  ],
+  "silver_candidates": [
+    {
+      "id": "silver-candidate-0",
+      "left_id": "silver-pool-reserve-9",
+      "right_id": "silver-pool-battery-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-1",
+      "left_id": "silver-pool-reserve-10",
+      "right_id": "silver-pool-battery-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-2",
+      "left_id": "silver-pool-cancel-11",
+      "right_id": "silver-pool-cancel-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-3",
+      "left_id": "silver-pool-cancel-9",
+      "right_id": "silver-pool-battery-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-4",
+      "left_id": "silver-pool-cancel-12",
+      "right_id": "silver-pool-battery-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-5",
+      "left_id": "silver-pool-cancel-9",
+      "right_id": "silver-pool-battery-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-6",
+      "left_id": "silver-pool-cancel-11",
+      "right_id": "silver-pool-battery-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-7",
+      "left_id": "silver-pool-hours-12",
+      "right_id": "silver-pool-reserve-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-8",
+      "left_id": "silver-pool-hours-9",
+      "right_id": "silver-pool-hours-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-9",
+      "left_id": "silver-pool-laptop-11",
+      "right_id": "silver-pool-cancel-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-10",
+      "left_id": "silver-pool-renew-9",
+      "right_id": "silver-pool-cancel-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-11",
+      "left_id": "silver-pool-laptop-10",
+      "right_id": "silver-pool-battery-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-12",
+      "left_id": "silver-pool-reserve-11",
+      "right_id": "silver-pool-reserve-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-13",
+      "left_id": "silver-pool-reserve-9",
+      "right_id": "silver-pool-reserve-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-14",
+      "left_id": "silver-pool-reserve-10",
+      "right_id": "silver-pool-cancel-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-15",
+      "left_id": "silver-pool-laptop-12",
+      "right_id": "silver-pool-renew-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-16",
+      "left_id": "silver-pool-hours-11",
+      "right_id": "silver-pool-renew-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-17",
+      "left_id": "silver-pool-hours-11",
+      "right_id": "silver-pool-cancel-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-18",
+      "left_id": "silver-pool-laptop-9",
+      "right_id": "silver-pool-reserve-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-19",
+      "left_id": "silver-pool-cancel-10",
+      "right_id": "silver-pool-battery-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-20",
+      "left_id": "silver-pool-reserve-10",
+      "right_id": "silver-pool-cancel-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-21",
+      "left_id": "silver-pool-hours-10",
+      "right_id": "silver-pool-cancel-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-22",
+      "left_id": "silver-pool-laptop-12",
+      "right_id": "silver-pool-reserve-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-23",
+      "left_id": "silver-pool-renew-9",
+      "right_id": "silver-pool-renew-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-24",
+      "left_id": "silver-pool-renew-11",
+      "right_id": "silver-pool-reserve-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-25",
+      "left_id": "silver-pool-renew-9",
+      "right_id": "silver-pool-reserve-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-26",
+      "left_id": "silver-pool-laptop-10",
+      "right_id": "silver-pool-battery-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-27",
+      "left_id": "silver-pool-laptop-10",
+      "right_id": "silver-pool-renew-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-28",
+      "left_id": "silver-pool-renew-11",
+      "right_id": "silver-pool-cancel-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-29",
+      "left_id": "silver-pool-reserve-10",
+      "right_id": "silver-pool-cancel-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-30",
+      "left_id": "silver-pool-cancel-10",
+      "right_id": "silver-pool-battery-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-31",
+      "left_id": "silver-pool-cancel-12",
+      "right_id": "silver-pool-battery-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-32",
+      "left_id": "silver-pool-hours-9",
+      "right_id": "silver-pool-laptop-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-33",
+      "left_id": "silver-pool-hours-12",
+      "right_id": "silver-pool-battery-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-34",
+      "left_id": "silver-pool-reserve-12",
+      "right_id": "silver-pool-battery-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-35",
+      "left_id": "silver-pool-laptop-9",
+      "right_id": "silver-pool-battery-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-36",
+      "left_id": "silver-pool-reserve-9",
+      "right_id": "silver-pool-battery-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-37",
+      "left_id": "silver-pool-reserve-12",
+      "right_id": "silver-pool-battery-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-38",
+      "left_id": "silver-pool-renew-10",
+      "right_id": "silver-pool-cancel-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-39",
+      "left_id": "silver-pool-laptop-11",
+      "right_id": "silver-pool-reserve-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-40",
+      "left_id": "silver-pool-renew-9",
+      "right_id": "silver-pool-reserve-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-41",
+      "left_id": "silver-pool-cancel-11",
+      "right_id": "silver-pool-battery-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-42",
+      "left_id": "silver-pool-renew-10",
+      "right_id": "silver-pool-battery-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-43",
+      "left_id": "silver-pool-reserve-11",
+      "right_id": "silver-pool-cancel-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-44",
+      "left_id": "silver-pool-hours-10",
+      "right_id": "silver-pool-reserve-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-45",
+      "left_id": "silver-pool-laptop-11",
+      "right_id": "silver-pool-renew-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-46",
+      "left_id": "silver-pool-laptop-9",
+      "right_id": "silver-pool-cancel-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-47",
+      "left_id": "silver-pool-cancel-9",
+      "right_id": "silver-pool-battery-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-48",
+      "left_id": "silver-pool-laptop-10",
+      "right_id": "silver-pool-battery-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-49",
+      "left_id": "silver-pool-laptop-10",
+      "right_id": "silver-pool-renew-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-50",
+      "left_id": "silver-pool-renew-12",
+      "right_id": "silver-pool-reserve-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-51",
+      "left_id": "silver-pool-renew-12",
+      "right_id": "silver-pool-cancel-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-52",
+      "left_id": "silver-pool-hours-10",
+      "right_id": "silver-pool-reserve-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-53",
+      "left_id": "silver-pool-renew-11",
+      "right_id": "silver-pool-cancel-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-54",
+      "left_id": "silver-pool-hours-11",
+      "right_id": "silver-pool-battery-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-55",
+      "left_id": "silver-pool-hours-12",
+      "right_id": "silver-pool-cancel-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-56",
+      "left_id": "silver-pool-hours-12",
+      "right_id": "silver-pool-renew-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-57",
+      "left_id": "silver-pool-renew-9",
+      "right_id": "silver-pool-renew-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-58",
+      "left_id": "silver-pool-reserve-12",
+      "right_id": "silver-pool-cancel-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-59",
+      "left_id": "silver-pool-laptop-12",
+      "right_id": "silver-pool-renew-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-60",
+      "left_id": "silver-pool-hours-12",
+      "right_id": "silver-pool-battery-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-61",
+      "left_id": "silver-pool-renew-12",
+      "right_id": "silver-pool-cancel-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-62",
+      "left_id": "silver-pool-renew-12",
+      "right_id": "silver-pool-battery-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-63",
+      "left_id": "silver-pool-hours-10",
+      "right_id": "silver-pool-battery-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-64",
+      "left_id": "silver-pool-hours-12",
+      "right_id": "silver-pool-laptop-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-65",
+      "left_id": "silver-pool-renew-10",
+      "right_id": "silver-pool-reserve-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-66",
+      "left_id": "silver-pool-laptop-10",
+      "right_id": "silver-pool-reserve-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-67",
+      "left_id": "silver-pool-hours-11",
+      "right_id": "silver-pool-cancel-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-68",
+      "left_id": "silver-pool-hours-10",
+      "right_id": "silver-pool-reserve-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-69",
+      "left_id": "silver-pool-hours-9",
+      "right_id": "silver-pool-reserve-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-70",
+      "left_id": "silver-pool-hours-9",
+      "right_id": "silver-pool-laptop-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-71",
+      "left_id": "silver-pool-renew-9",
+      "right_id": "silver-pool-renew-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-72",
+      "left_id": "silver-pool-laptop-9",
+      "right_id": "silver-pool-reserve-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-73",
+      "left_id": "silver-pool-laptop-12",
+      "right_id": "silver-pool-battery-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-74",
+      "left_id": "silver-pool-cancel-9",
+      "right_id": "silver-pool-cancel-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-75",
+      "left_id": "silver-pool-battery-10",
+      "right_id": "silver-pool-battery-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-76",
+      "left_id": "silver-pool-laptop-12",
+      "right_id": "silver-pool-battery-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-77",
+      "left_id": "silver-pool-hours-9",
+      "right_id": "silver-pool-cancel-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-78",
+      "left_id": "silver-pool-renew-12",
+      "right_id": "silver-pool-cancel-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-79",
+      "left_id": "silver-pool-renew-11",
+      "right_id": "silver-pool-reserve-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-80",
+      "left_id": "silver-pool-hours-10",
+      "right_id": "silver-pool-cancel-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-81",
+      "left_id": "silver-pool-renew-12",
+      "right_id": "silver-pool-battery-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-82",
+      "left_id": "silver-pool-reserve-10",
+      "right_id": "silver-pool-cancel-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-83",
+      "left_id": "silver-pool-laptop-11",
+      "right_id": "silver-pool-reserve-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-84",
+      "left_id": "silver-pool-reserve-11",
+      "right_id": "silver-pool-battery-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-85",
+      "left_id": "silver-pool-hours-9",
+      "right_id": "silver-pool-hours-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-86",
+      "left_id": "silver-pool-reserve-12",
+      "right_id": "silver-pool-cancel-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-87",
+      "left_id": "silver-pool-cancel-10",
+      "right_id": "silver-pool-battery-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-88",
+      "left_id": "silver-pool-reserve-12",
+      "right_id": "silver-pool-battery-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-89",
+      "left_id": "silver-pool-hours-10",
+      "right_id": "silver-pool-laptop-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-90",
+      "left_id": "silver-pool-hours-11",
+      "right_id": "silver-pool-renew-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-91",
+      "left_id": "silver-pool-hours-12",
+      "right_id": "silver-pool-cancel-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-92",
+      "left_id": "silver-pool-hours-12",
+      "right_id": "silver-pool-renew-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-93",
+      "left_id": "silver-pool-reserve-9",
+      "right_id": "silver-pool-battery-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-94",
+      "left_id": "silver-pool-laptop-12",
+      "right_id": "silver-pool-renew-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-95",
+      "left_id": "silver-pool-laptop-9",
+      "right_id": "silver-pool-renew-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-96",
+      "left_id": "silver-pool-laptop-11",
+      "right_id": "silver-pool-cancel-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-97",
+      "left_id": "silver-pool-renew-9",
+      "right_id": "silver-pool-cancel-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-98",
+      "left_id": "silver-pool-renew-9",
+      "right_id": "silver-pool-reserve-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-99",
+      "left_id": "silver-pool-reserve-10",
+      "right_id": "silver-pool-battery-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-100",
+      "left_id": "silver-pool-hours-11",
+      "right_id": "silver-pool-renew-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-101",
+      "left_id": "silver-pool-laptop-9",
+      "right_id": "silver-pool-cancel-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-102",
+      "left_id": "silver-pool-hours-11",
+      "right_id": "silver-pool-reserve-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-103",
+      "left_id": "silver-pool-reserve-12",
+      "right_id": "silver-pool-cancel-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-104",
+      "left_id": "silver-pool-laptop-11",
+      "right_id": "silver-pool-renew-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-105",
+      "left_id": "silver-pool-hours-10",
+      "right_id": "silver-pool-reserve-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-106",
+      "left_id": "silver-pool-hours-10",
+      "right_id": "silver-pool-battery-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-107",
+      "left_id": "silver-pool-hours-12",
+      "right_id": "silver-pool-reserve-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-108",
+      "left_id": "silver-pool-hours-9",
+      "right_id": "silver-pool-reserve-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-109",
+      "left_id": "silver-pool-renew-10",
+      "right_id": "silver-pool-battery-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-110",
+      "left_id": "silver-pool-laptop-10",
+      "right_id": "silver-pool-cancel-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-111",
+      "left_id": "silver-pool-renew-10",
+      "right_id": "silver-pool-battery-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-112",
+      "left_id": "silver-pool-hours-11",
+      "right_id": "silver-pool-battery-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-113",
+      "left_id": "silver-pool-renew-9",
+      "right_id": "silver-pool-battery-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-114",
+      "left_id": "silver-pool-renew-10",
+      "right_id": "silver-pool-renew-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-115",
+      "left_id": "silver-pool-laptop-10",
+      "right_id": "silver-pool-renew-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-116",
+      "left_id": "silver-pool-reserve-12",
+      "right_id": "silver-pool-battery-10",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-117",
+      "left_id": "silver-pool-laptop-10",
+      "right_id": "silver-pool-cancel-12",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-118",
+      "left_id": "silver-pool-hours-9",
+      "right_id": "silver-pool-laptop-9",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    },
+    {
+      "id": "silver-candidate-119",
+      "left_id": "silver-pool-reserve-9",
+      "right_id": "silver-pool-cancel-11",
+      "split": "training-pool-only",
+      "selection": "uniform pair sampling without intent labels"
+    }
+  ],
+  "protocol": {
+    "seed": 42,
+    "mnr_batch": "one positive pair per distinct intent; no duplicate text or latent positive as an in-batch negative",
+    "splits": "No exact sentence or pair ID shared between train, validation, test or unlabeled silver pool; intent categories recur by design.",
+    "selection": "Models selected using validation only. Test is evaluated after selection; no test-driven hyperparameter changes.",
+    "silver": "Teacher trained on gold train only, selected on gold validation. Candidate silver pairs use separate training-only pool; no evaluation sentences. Latent intent is available only for explicit diagnostic review, never teacher target labels."
+  }
+}

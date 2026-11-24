@@ -30,6 +30,8 @@ export default defineConfig({
             { label: "Prompting + workflows · L09–L11", slug: "labs/prompting-and-workflows" },
             { label: "Retrieval + multimodal · L12–L14", slug: "labs/retrieval-and-multimodal" },
             { label: "From pixels to multimodal answers", slug: "paths/from-pixels-to-multimodal-answers" },
+            { label: "Encoder training · L15–L20", slug: "labs/embedding-and-representation-training" },
+            { label: "Pretrained encoder to domain model", slug: "paths/from-pretrained-encoder-to-domain-model" },
             { label: "Concept glossary", slug: "glossary" },
             { label: "About and sources", slug: "about-and-sources" },
           ],
@@ -41,6 +43,7 @@ export default defineConfig({
             { label: "Research collection explorer", slug: "use-cases/research-collection-explorer" },
             { label: "Grounded document assistant", slug: "use-cases/rag-question-answering" },
             { label: "Image/text collection search", slug: "use-cases/image-text-collection-search" },
+            { label: "Adapt a service-search encoder", slug: "use-cases/service-search-adaptation" },
           ],
         },
         {

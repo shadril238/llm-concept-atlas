@@ -1,91 +1,129 @@
 ---
-title: BERT fine-tuning
-description: BERT fine-tuning updates an encoder and task head on labeled examples for a downstream prediction task.
-kind: concept
+title: "BERT fine-tuning"
+description: "BERT fine-tuning adapts a pretrained bidirectional encoder and a task head using labeled data. For sequence classification, one prediction is made for each review; this differs from masked-token prediction and token-level NER."
+kind: "concept"
 conceptId: bert-fine-tuning
 chapter: 11
-part: training
-summary: BERT fine-tuning updates an encoder and task head on labeled examples for a downstream prediction task.
-parent: chapter-11
-prerequisites: [encoder-only]
-related: [frozen-layers]
-level: advanced
-tags: [training, chapter-11]
+part: "training"
+summary: "BERT fine-tuning adapts a pretrained bidirectional encoder and a task head using labeled data. For sequence classification, one prediction is made for each review; this differs from masked-token prediction and token-level NER."
+parent: "chapter-11"
+prerequisites: ["encoder-only", "supervised-classification"]
+related: []
+level: "advanced"
+tags: ["training", "chapter-11"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e7-representation-author-review-2026-11-24
+learningObjectives: ["Identify sequence-classification inputs, labels and output shape.", "Explain validation selection without test leakage."]
+aliases: ["BERT classification training", "encoder fine-tuning"]
+bookSections: ["book-ch11-supervised", "book-ch11-bert-training"]
+exampleIds: ["e7-bert-fine-tuning", "representation-classification"]
+relationshipReasons: {"encoder-only": "BERT provides pretrained contextual states before a new task head is adapted.", "supervised-classification": "Supervised classification defines per-review labels, splits and task metrics."}
+labHref: "/labs/embedding-and-representation-training/"
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import TrainingEvidence from '../../../components/TrainingEvidence.astro';
+import { FreezeExplorer } from '../../../components/simulations/TrainingLabs';
 
 <ConceptPrimer id="bert-fine-tuning" />
 
 ## Definition and intuition
 
-BERT fine-tuning updates an encoder and task head on labeled examples for a downstream prediction task.
+BERT fine-tuning adapts a pretrained bidirectional encoder and a task head using labeled data. For sequence classification, one prediction is made for each review; this differs from masked-token prediction and token-level NER.
 
-Chapter 11 adapts an encoder to labeled tasks. Data splits, frozen versus trainable weights, and task-specific heads change both cost and generalization.
+Follow the input, objective, update, and evaluation as separate steps. The worked example and experiment below connect the explanation to an inspectable implementation.
 
-## Before you start
+<ReferenceBrief objectives={["Identify sequence-classification inputs, labels and output shape.", "Explain validation selection without test leakage."]} prerequisites="encoder-only, supervised-classification" scope="Original numerical reasoning and actual recorded CPU training with pinned public models. Independent technical/editorial review and beginner feedback remain pending." />
 
-Read [Encoder-Only Model](/llm-concept-atlas/concepts/encoder-only/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **bert fine-tuning** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Follow text into the supervised batch
 
-1. **Prepare:** Start with a pretrained encoder and attach a classification or token head
-2. **Transform:** Train on labeled examples with validation monitoring
-3. **Inspect:** Evaluate on a held-out split and inspect class or entity errors.
+The tokenizer creates integer IDs, attention masks and padding under a declared cap. A BERT encoder produces contextual states; a pooler/classification head maps the sequence to class logits. Cross entropy compares logits with the review label. L18 uses the same licensed UCI review splits as E4 and an explicitly smaller pretrained tiny BERT backbone.
 
-### The important distinction
+### Train the intended parameters
 
-A classification head can read a pooled sequence representation, while token classification uses a prediction at each token position. Full fine-tuning updates the encoder as well as the head; freezing some layers changes the training budget. Use a validation set for early stopping and report a separate test score only once model choices are fixed.
+The loop uses AdamW, finite loss checks, gradient clipping and validation checkpoint selection. Full adaptation, embeddings-plus-first-layer freezing, and head-only training expose different trainable counts. A frozen weight must remain bitwise equal; absence from an optimizer is not the only evidence. The head-only route also fixes encoder dropout behavior explicitly.
+
+### Evaluate after selection
+
+Three fixed seeds each choose eight training examples per class, with identical selected IDs across methods within a seed. The first maximum validation macro-F1 checkpoint is saved, reloaded and evaluated on the same eighty test reviews. Per-class metrics, confusion matrices and individual wrong predictions are retained. A pretrained sentence-encoder classifier is a separate architectural comparison.
 
 ## Worked example
 
-A pretrained BERT encoder is adapted to label support tickets as billing or shipping. The classification head learns the labels while encoder weights may shift toward ticket language. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+Compare a misclassified review under full and partial freezing for the same selection seed. The partially frozen model may save trainable parameters without reliably increasing test quality. The displayed loss and validation curves explain which checkpoint was selected; the final optimizer step is not automatically deployed.
 
-<LessonFlow steps={["Start with a pretrained encoder and attach a classification or token head", "Train on labeled examples with validation monitoring", "Evaluate on a held-out split and inspect class or entity errors."]} caption="A teaching diagram for BERT fine-tuning. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
+
+Predict an outcome before changing a control. Selectors replay actual saved training/evaluation runs; loss and mask calculators recalculate a declared teaching mechanism. They make no model or API requests in your browser.
+
+<FreezeExplorer client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+From the repository root, install the foundation environment and run `python3 scripts/run-examples.py --id e7-bert-fine-tuning --offline`. The standard-library example below calculates a mechanism or checks the published actual evidence. Recorded-evidence replay is distinct from new optimization: the connected model lab supplies the complete source and fresh-training command.
+
+{/* example:e7-bert-fine-tuning:start */}
 
 ```python
-weight = 0.2
-for target in [1.0, 1.0, 0.0]:
-    prediction = weight
-    weight -= 0.1 * 2 * (prediction - target)
-print(round(weight, 3))
+import json
+from pathlib import Path
+data = json.loads(Path('src/data/training-results.json').read_text())['classification']
+for row in data['runs']:
+    if row['method'] == 'bert-full':
+        print('seed:', row['seed'], 'train reviews:', len(row['train_ids']))
+        print('selected step:', row['selected_step'], 'test macro-F1:', round(row['test']['macro_f1'], 4))
+print('Each reported model used validation-only checkpoint selection.')
 ```
 
-**Expected output:**
+{/* example:e7-bert-fine-tuning:end */}
+
+Recorded calculation output:
 
 ```text
-0.39
+seed: 11 train reviews: 16
+selected step: 20 test macro-F1: 0.4133
+seed: 23 train reviews: 16
+selected step: 30 test macro-F1: 0.5608
+seed: 37 train reviews: 16
+selected step: 30 test macro-F1: 0.5106
+Each reported model used validation-only checkpoint selection.
 ```
 
-**What the code shows:** The toy loop measures a squared-error gradient for one scalar weight and applies a small update. Actual pretraining uses many parameters, batches, and a token-level objective. The [official chapter 11 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter11) develops the corresponding model-based implementation.
+<TrainingEvidence id="representation-classification" />
 
 ## When to use it
 
-Use it when a stable task and representative labeled data justify the training cost. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use it for labeled text classification when a pretrained encoder can adapt to the task and a compact supervised predictor is suitable. Keep lexical and frozen-embedding baselines.
 
 ## Limits and common mistakes
 
-- Small datasets can overfit, and full tuning can forget useful general behavior.
-- **Failure to look for:** Validation accuracy rises on duplicated templates but drops on real unseen tickets.
+Small labeled samples cause high selection variability. Macro-F1, accuracy and per-class recall can disagree. Our three fixed selections are descriptive evidence and do not establish a universal best freezing policy.
 
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Author execution checks tensor/mask contracts, actual parameter updates, split provenance and artifact reload. It does not constitute independent lesson acceptance. Keep training quality, task quality, runtime and generalization claims separate.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First start with a pretrained encoder and attach a classification or token head Then train on labeled examples with validation monitoring Finally evaluate on a held-out split and inspect class or entity errors.</p></details>
+<details>
+<summary>Identify sequence-classification inputs, labels and output shape.</summary>
 
-<details><summary>What would make the result misleading?</summary><p>Validation accuracy rises on duplicated templates but drops on real unseen tickets.</p></details>
+A batch of token sequences has one class label per review and one logit vector per review; its label contract differs from one label per token.
+
+</details>
+
+<details>
+<summary>Explain validation selection without test leakage.</summary>
+
+Choose a checkpoint using validation metrics at the declared steps, then evaluate test once under the fixed protocol.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 11 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 11 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter11). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 11 of *Hands-On Large Language Models*. The [complete L15–L20 lab](/llm-concept-atlas/labs/embedding-and-representation-training/#l18-classification-and-setfit) links actual training source, pinned environments, data provenance, real failures, and the artifact lifecycle. Compare the [authors’ pinned chapter 11 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter11) for the book-scale workflow. The atlas uses explicitly smaller CPU configurations and does not redistribute book pages or artwork.
 
 <ConceptConnections id="bert-fine-tuning" />

@@ -9097,7 +9097,7 @@
         {
           "conceptId": "contrastive-learning",
           "path": "src/content/docs/concepts/contrastive-learning.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
@@ -9644,12 +9644,18 @@
         {
           "conceptId": "sbert",
           "path": "src/content/docs/concepts/sbert.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
+        },
+        {
+          "conceptId": "contrastive-learning",
+          "path": "src/content/docs/concepts/contrastive-learning.mdx",
+          "anchor": "how-it-works",
+          "role": "author-implemented-pending-review"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -9680,27 +9686,23 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Define task-dependent similarity and representation objectives.",
-        "Invented-vector similarity is relevant; add actual sentence encoding and pooling/normalization inspection."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
-          "path": "src/content/docs/concepts/text-embedding.mdx",
-          "anchor": "implement-it",
-          "finding": "Invented-vector similarity is relevant; add actual sentence encoding and pooling/normalization inspection."
-        },
-        {
-          "path": "src/content/docs/concepts/sbert.mdx",
-          "anchor": "implement-it",
-          "finding": "The example calculates cosine similarity but never runs an encoder or pooling operation."
+          "path": "src/content/docs/concepts/contrastive-learning.mdx",
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 311
-      }
+      },
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/embedding-training.json"
     },
     {
       "id": "book-ch10-contrastive",
@@ -9724,12 +9726,12 @@
         {
           "conceptId": "contrastive-learning",
           "path": "src/content/docs/concepts/contrastive-learning.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -9760,22 +9762,23 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Connect positive/negative pairs to the loss and resulting parameter update.",
-        "The scalar contrastive loss is useful; add temperature, batch structure, gradients, and a trainable encoder."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/contrastive-learning.mdx",
-          "anchor": "implement-it",
-          "finding": "The scalar contrastive loss is useful; add temperature, batch structure, gradients, and a trainable encoder."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 313
-      }
+      },
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/embedding-training.json"
     },
     {
       "id": "book-ch10-sbert",
@@ -9799,12 +9802,12 @@
         {
           "conceptId": "sbert",
           "path": "src/content/docs/concepts/sbert.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -9839,22 +9842,23 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Compare cross- and bi-encoder computation, pooling, and the training setup.",
-        "The example calculates cosine similarity but never runs an encoder or pooling operation."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/sbert.mdx",
-          "anchor": "implement-it",
-          "finding": "The example calculates cosine similarity but never runs an encoder or pooling operation."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 315
-      }
+      },
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/embedding-training.json"
     },
     {
       "id": "book-ch10-create-embeddings",
@@ -9878,12 +9882,18 @@
         {
           "conceptId": "fine-tuning-embeddings",
           "path": "src/content/docs/concepts/fine-tuning-embeddings.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
+        },
+        {
+          "conceptId": "sbert",
+          "path": "src/content/docs/concepts/sbert.mdx",
+          "anchor": "how-it-works",
+          "role": "author-implemented-pending-review"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -9918,22 +9928,23 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Build the data, loss, trainer, evaluator, and saved-model lifecycle.",
-        "The fixed-score loss never updates an embedding model or compares held-out results."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
-          "path": "src/content/docs/concepts/fine-tuning-embeddings.mdx",
-          "anchor": "implement-it",
-          "finding": "The fixed-score loss never updates an embedding model or compares held-out results."
+          "path": "src/content/docs/concepts/sbert.mdx",
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 318
-      }
+      },
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/embedding-training.json"
     },
     {
       "id": "book-ch10-contrastive-examples",
@@ -9957,12 +9968,12 @@
         {
           "conceptId": "contrastive-examples",
           "path": "src/content/docs/concepts/contrastive-examples.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -9993,22 +10004,23 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Create labeled sentence pairs from NLI data and explain label semantics.",
-        "The example computes loss from supplied scores rather than constructing valid positive/negative text pairs."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/contrastive-examples.mdx",
-          "anchor": "implement-it",
-          "finding": "The example computes loss from supplied scores rather than constructing valid positive/negative text pairs."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 318
-      }
+      },
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/embedding-training.json"
     },
     {
       "id": "book-ch10-train-model",
@@ -10032,12 +10044,12 @@
         {
           "conceptId": "fine-tuning-embeddings",
           "path": "src/content/docs/concepts/fine-tuning-embeddings.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -10072,22 +10084,23 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Train a real sentence model and report a held-out similarity evaluator.",
-        "The fixed-score loss never updates an embedding model or compares held-out results."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/fine-tuning-embeddings.mdx",
-          "anchor": "implement-it",
-          "finding": "The fixed-score loss never updates an embedding model or compares held-out results."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 319
-      }
+      },
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/embedding-training.json"
     },
     {
       "id": "book-ch10-evaluation",
@@ -10111,12 +10124,12 @@
         {
           "conceptId": "embedding-evaluation",
           "path": "src/content/docs/concepts/embedding-evaluation.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -10151,22 +10164,23 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Explain STS correlations and run an appropriate MTEB task with versioned results.",
-        "One recall-at-k fixture omits similarity correlations, MTEB, and actual model comparison."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/embedding-evaluation.mdx",
-          "anchor": "implement-it",
-          "finding": "One recall-at-k fixture omits similarity correlations, MTEB, and actual model comparison."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 322
-      }
+      },
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/embedding-training.json"
     },
     {
       "id": "book-ch10-losses",
@@ -10190,12 +10204,12 @@
         {
           "conceptId": "loss-functions",
           "path": "src/content/docs/concepts/loss-functions.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -10230,22 +10244,23 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Separate softmax classification, cosine regression, and multiple-negatives ranking objectives.",
-        "One contrastive loss does not teach softmax classification, cosine regression, and MNR separately."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/loss-functions.mdx",
-          "anchor": "implement-it",
-          "finding": "One contrastive loss does not teach softmax classification, cosine regression, and MNR separately."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 323
-      }
+      },
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/embedding-training.json"
     },
     {
       "id": "book-ch10-fine-tuning",
@@ -10269,12 +10284,12 @@
         {
           "conceptId": "fine-tuning-embeddings",
           "path": "src/content/docs/concepts/fine-tuning-embeddings.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -10309,22 +10324,23 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Compare pretrained and adapted embeddings with the same evaluation protocol.",
-        "The fixed-score loss never updates an embedding model or compares held-out results."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/fine-tuning-embeddings.mdx",
-          "anchor": "implement-it",
-          "finding": "The fixed-score loss never updates an embedding model or compares held-out results."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 331
-      }
+      },
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/embedding-training.json"
     },
     {
       "id": "book-ch10-supervised",
@@ -10348,12 +10364,12 @@
         {
           "conceptId": "fine-tuning-embeddings",
           "path": "src/content/docs/concepts/fine-tuning-embeddings.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -10376,27 +10392,28 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Use correctly structured positive/negative pairs and a disjoint evaluation set.",
-        "The fixed-score loss never updates an embedding model or compares held-out results."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/fine-tuning-embeddings.mdx",
-          "anchor": "implement-it",
-          "finding": "The fixed-score loss never updates an embedding model or compares held-out results."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 331
-      }
+      },
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/embedding-training.json"
     },
     {
       "id": "book-ch10-augmented-sbert",
@@ -10416,11 +10433,36 @@
       "scope": "core",
       "kind": "workflow",
       "coverageUnit": true,
-      "mappings": [],
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/augmented-sbert.mdx",
+          "anchor": "how-it-works",
+          "conceptId": "augmented-sbert",
+          "role": "author-implemented-pending-review"
+        },
+        {
+          "path": "src/content/docs/concepts/augmented-sbert.mdx",
+          "anchor": "how-it-works",
+          "conceptId": "augmented-sbert",
+          "role": "author-implemented-pending-review"
+        },
+        {
+          "path": "src/content/docs/concepts/augmented-sbert.mdx",
+          "anchor": "how-it-works",
+          "conceptId": "augmented-sbert",
+          "role": "author-implemented-pending-review"
+        },
+        {
+          "path": "src/content/docs/concepts/augmented-sbert.mdx",
+          "anchor": "definition-and-intuition",
+          "conceptId": "augmented-sbert",
+          "role": "author-implemented-pending-review"
+        }
+      ],
       "plannedDestinations": [
         "augmented-sbert"
       ],
-      "mappingStatus": "unmapped",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -10440,24 +10482,31 @@
       },
       "notApplicableReasons": {},
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
-        "implementation": "missing",
-        "evaluation": "missing",
-        "exercises": "missing"
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
+        "implementation": "partial",
+        "evaluation": "partial",
+        "exercises": "partial"
       },
       "gaps": [
-        "Train a teacher, label silver pairs, train a student, and compare gold-only versus augmented data.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/augmented-sbert.mdx",
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 333
-      }
+      },
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/augmented-sbert-training.json"
     },
     {
       "id": "book-ch10-unsupervised",
@@ -10481,12 +10530,12 @@
         {
           "conceptId": "tsdae",
           "path": "src/content/docs/concepts/tsdae.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P0",
@@ -10521,22 +10570,23 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Explain reconstruction-based representation learning without similarity labels.",
-        "A single MLM-style mask omits deletion noise, sentence reconstruction, decoder training, and embedding evaluation."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/tsdae.mdx",
-          "anchor": "implement-it",
-          "finding": "A single MLM-style mask omits deletion noise, sentence reconstruction, decoder training, and embedding evaluation."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 338
-      }
+      },
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/tsdae-adaptation.json"
     },
     {
       "id": "book-ch10-tsdae",
@@ -10560,12 +10610,12 @@
         {
           "conceptId": "tsdae",
           "path": "src/content/docs/concepts/tsdae.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P0",
@@ -10588,27 +10638,28 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Corrupt sentences and train an encoder-decoder reconstruction objective, then evaluate embeddings.",
-        "A single MLM-style mask omits deletion noise, sentence reconstruction, decoder training, and embedding evaluation."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/tsdae.mdx",
-          "anchor": "implement-it",
-          "finding": "A single MLM-style mask omits deletion noise, sentence reconstruction, decoder training, and embedding evaluation."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 338
-      }
+      },
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/tsdae-adaptation.json"
     },
     {
       "id": "book-ch10-domain-adaptation",
@@ -10632,18 +10683,18 @@
         {
           "conceptId": "domain-adaptation",
           "path": "src/content/docs/concepts/domain-adaptation.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         },
         {
           "conceptId": "tsdae",
           "path": "src/content/docs/concepts/tsdae.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P0",
@@ -10666,32 +10717,28 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Separate adaptive pretraining from downstream tuning and measure domain transfer.",
-        "The reused contrastive-loss calculation has no source/target corpus, adaptation, or transfer evaluation."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/domain-adaptation.mdx",
-          "anchor": "implement-it",
-          "finding": "The reused contrastive-loss calculation has no source/target corpus, adaptation, or transfer evaluation."
-        },
-        {
-          "path": "src/content/docs/concepts/tsdae.mdx",
-          "anchor": "implement-it",
-          "finding": "A single MLM-style mask omits deletion noise, sentence reconstruction, decoder training, and embedding evaluation."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 342
-      }
+      },
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/tsdae-adaptation.json"
     },
     {
       "id": "book-ch11-supervised",
@@ -10715,12 +10762,12 @@
         {
           "conceptId": "bert-fine-tuning",
           "path": "src/content/docs/concepts/bert-fine-tuning.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -10755,22 +10802,23 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Compare frozen feature extraction with adaptation of the encoder and task head.",
-        "A single scalar squared-error update does not train a BERT encoder or task head."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/bert-fine-tuning.mdx",
-          "anchor": "implement-it",
-          "finding": "A single scalar squared-error update does not train a BERT encoder or task head."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 345
-      }
+      },
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/representation-classification.json"
     },
     {
       "id": "book-ch11-bert-training",
@@ -10794,12 +10842,12 @@
         {
           "conceptId": "bert-fine-tuning",
           "path": "src/content/docs/concepts/bert-fine-tuning.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -10822,27 +10870,28 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Tokenize real data, train a sequence classifier, validate, and save/reload artifacts.",
-        "A single scalar squared-error update does not train a BERT encoder or task head."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/bert-fine-tuning.mdx",
-          "anchor": "implement-it",
-          "finding": "A single scalar squared-error update does not train a BERT encoder or task head."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 347
-      }
+      },
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/representation-classification.json"
     },
     {
       "id": "book-ch11-freezing",
@@ -10866,12 +10915,12 @@
         {
           "conceptId": "frozen-layers",
           "path": "src/content/docs/concepts/frozen-layers.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -10894,27 +10943,28 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Select actual parameter groups, verify frozen weights, and compare task performance.",
-        "The selective dictionary update is relevant; verify actual parameter freezing and compare held-out model results."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/frozen-layers.mdx",
-          "anchor": "implement-it",
-          "finding": "The selective dictionary update is relevant; verify actual parameter freezing and compare held-out model results."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 350
-      }
+      },
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/representation-classification.json"
     },
     {
       "id": "book-ch11-few-shot",
@@ -10938,12 +10988,12 @@
         {
           "conceptId": "few-shot-classification",
           "path": "src/content/docs/concepts/few-shot-classification.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -10978,22 +11028,23 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Define the label budget and evaluate sensitivity to support-set sampling.",
-        "A keyword if-statement uses no labeled support-set learning or sampling comparison."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/few-shot-classification.mdx",
-          "anchor": "implement-it",
-          "finding": "A keyword if-statement uses no labeled support-set learning or sampling comparison."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 355
-      }
+      },
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/representation-classification.json"
     },
     {
       "id": "book-ch11-setfit",
@@ -11017,12 +11068,12 @@
         {
           "conceptId": "setfit",
           "path": "src/content/docs/concepts/setfit.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P0",
@@ -11053,22 +11104,23 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Trace labeled-pair generation, encoder adaptation, and classifier fitting.",
-        "The snippet has no labeled-pair generation, sentence-model adaptation, or classifier fitting."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/setfit.mdx",
-          "anchor": "implement-it",
-          "finding": "The snippet has no labeled-pair generation, sentence-model adaptation, or classifier fitting."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 355
-      }
+      },
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/representation-classification.json"
     },
     {
       "id": "book-ch11-few-shot-training",
@@ -11092,18 +11144,18 @@
         {
           "conceptId": "setfit",
           "path": "src/content/docs/concepts/setfit.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         },
         {
           "conceptId": "few-shot-classification",
           "path": "src/content/docs/concepts/few-shot-classification.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P0",
@@ -11126,32 +11178,28 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Run real SetFit training and evaluate on untouched documents.",
-        "The snippet has no labeled-pair generation, sentence-model adaptation, or classifier fitting."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
-          "path": "src/content/docs/concepts/setfit.mdx",
-          "anchor": "implement-it",
-          "finding": "The snippet has no labeled-pair generation, sentence-model adaptation, or classifier fitting."
-        },
-        {
           "path": "src/content/docs/concepts/few-shot-classification.mdx",
-          "anchor": "implement-it",
-          "finding": "A keyword if-statement uses no labeled support-set learning or sampling comparison."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 359
-      }
+      },
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/representation-classification.json"
     },
     {
       "id": "book-ch11-mlm",
@@ -11175,12 +11223,12 @@
         {
           "conceptId": "masked-language-modeling",
           "path": "src/content/docs/concepts/masked-language-modeling.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -11215,22 +11263,23 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Implement masking/collation and actual domain adaptation with downstream comparison.",
-        "Replacing one token is a preprocessing illustration; add corruption policy, ignored labels, and actual MLM training."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/masked-language-modeling.mdx",
-          "anchor": "implement-it",
-          "finding": "Replacing one token is a preprocessing illustration; add corruption policy, ignored labels, and actual MLM training."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 362
-      }
+      },
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/continued-pretraining.json"
     },
     {
       "id": "book-ch11-ner",
@@ -11254,12 +11303,12 @@
         {
           "conceptId": "named-entity-recognition",
           "path": "src/content/docs/concepts/named-entity-recognition.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -11294,22 +11343,23 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/named-entity-recognition.mdx",
-          "anchor": "implement-it",
-          "finding": "E2 replaces supplied labels as the main implementation with actual tokenizer alignment and trained predictions, explicit masking/truncation, sentence-preserving spans, baseline/test metrics, validation errors, and reload checks. Real-domain extension and independent review remain pending."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 367
       },
-      "enhancementReview": "e2-reference-author-review-2026-11-20"
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/ner-complete.json"
     },
     {
       "id": "book-ch11-ner-data",
@@ -11333,12 +11383,12 @@
         {
           "conceptId": "named-entity-recognition",
           "path": "src/content/docs/concepts/named-entity-recognition.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -11373,22 +11423,23 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/named-entity-recognition.mdx",
-          "anchor": "implement-it",
-          "finding": "E2 replaces supplied labels as the main implementation with actual tokenizer alignment and trained predictions, explicit masking/truncation, sentence-preserving spans, baseline/test metrics, validation errors, and reload checks. Real-domain extension and independent review remain pending."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 369
       },
-      "enhancementReview": "e2-reference-author-review-2026-11-20"
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/ner-complete.json"
     },
     {
       "id": "book-ch11-ner-training",
@@ -11412,12 +11463,12 @@
         {
           "conceptId": "named-entity-recognition",
           "path": "src/content/docs/concepts/named-entity-recognition.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -11445,22 +11496,23 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/named-entity-recognition.mdx",
-          "anchor": "implement-it",
-          "finding": "E2 replaces supplied labels as the main implementation with actual tokenizer alignment and trained predictions, explicit masking/truncation, sentence-preserving spans, baseline/test metrics, validation errors, and reload checks. Real-domain extension and independent review remain pending."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "verified-reference-slice",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 374
       },
-      "enhancementReview": "e2-reference-author-review-2026-11-20"
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/ner-complete.json"
     },
     {
       "id": "book-ch12-training-stages",
@@ -15441,7 +15493,7 @@
         {
           "conceptId": "fine-tuning-embeddings",
           "path": "src/content/docs/concepts/fine-tuning-embeddings.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         },
         {
@@ -15482,19 +15534,19 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Independent technical/editorial review and beginner pilot remain pending.",
-        "Actual retrieval encoder adaptation/training is deferred to Chapter 10/E7; E6 explains the connection and executes inference/evaluation only."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
-          "path": "src/content/docs/concepts/dense-retrieval.mdx",
+          "path": "src/content/docs/concepts/fine-tuning-embeddings.mdx",
           "anchor": "how-it-works",
-          "finding": "E6 definition, theory, worked example, interactive actual evidence and original implementation; review pending."
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
-      "enhancementReview": "e6-retrieval-author-review-2026-11-24"
+      "realModelExecution": "verified",
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/embedding-training.json"
     },
     {
       "id": "book-ch08-average-precision",
@@ -16657,7 +16709,7 @@
         {
           "conceptId": "sbert",
           "path": "src/content/docs/concepts/sbert.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         },
         {
@@ -16668,7 +16720,7 @@
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P0",
@@ -16699,23 +16751,19 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Compare joint pair processing with separately cached vectors and explain the training architecture.",
-        "The example calculates cosine similarity but never runs an encoder or pooling operation."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/sbert.mdx",
-          "anchor": "implement-it",
-          "finding": "The example calculates cosine similarity but never runs an encoder or pooling operation."
-        },
-        {
-          "path": "src/content/docs/concepts/reranking.mdx",
           "anchor": "how-it-works",
-          "finding": "The code performs keyword overlap once and does not rerank first-stage candidates with a joint scorer."
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "verified",
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/embedding-training.json"
     },
     {
       "id": "book-ch10-softmax-loss",
@@ -16735,11 +16783,18 @@
       "scope": "core",
       "kind": "concept",
       "coverageUnit": true,
-      "mappings": [],
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/loss-functions.mdx",
+          "anchor": "how-it-works",
+          "conceptId": "loss-functions",
+          "role": "author-implemented-pending-review"
+        }
+      ],
       "plannedDestinations": [
         "embedding-losses"
       ],
-      "mappingStatus": "unmapped",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -16762,20 +16817,27 @@
         "evaluation": "A numerical or reasoning self-check suffices for this mechanism; full task evaluation belongs to its workflow."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Connect NLI pair labels, representation combination, logits, and classification loss.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/loss-functions.mdx",
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "verified",
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/embedding-training.json"
     },
     {
       "id": "book-ch10-sts-correlation",
@@ -16795,11 +16857,36 @@
       "scope": "core",
       "kind": "concept",
       "coverageUnit": true,
-      "mappings": [],
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/embedding-evaluation.mdx",
+          "anchor": "how-it-works",
+          "conceptId": "embedding-evaluation",
+          "role": "author-implemented-pending-review"
+        },
+        {
+          "path": "src/content/docs/concepts/embedding-evaluation.mdx",
+          "anchor": "how-it-works",
+          "conceptId": "embedding-evaluation",
+          "role": "author-implemented-pending-review"
+        },
+        {
+          "path": "src/content/docs/concepts/embedding-evaluation.mdx",
+          "anchor": "how-it-works",
+          "conceptId": "embedding-evaluation",
+          "role": "author-implemented-pending-review"
+        },
+        {
+          "path": "src/content/docs/concepts/embedding-evaluation.mdx",
+          "anchor": "sts-correlation-and-mteb",
+          "conceptId": "embedding-evaluation",
+          "role": "author-implemented-pending-review"
+        }
+      ],
       "plannedDestinations": [
         "embedding-evaluation-metrics"
       ],
-      "mappingStatus": "unmapped",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -16822,20 +16909,27 @@
         "evaluation": "A numerical or reasoning self-check suffices for this mechanism; full task evaluation belongs to its workflow."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Distinguish similarity scores from Pearson/Spearman correlation across a dataset.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/embedding-evaluation.mdx",
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "verified",
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/embedding-training.json"
     },
     {
       "id": "book-ch10-mteb",
@@ -16855,11 +16949,36 @@
       "scope": "core",
       "kind": "concept",
       "coverageUnit": true,
-      "mappings": [],
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/embedding-evaluation.mdx",
+          "anchor": "how-it-works",
+          "conceptId": "embedding-evaluation",
+          "role": "author-implemented-pending-review"
+        },
+        {
+          "path": "src/content/docs/concepts/embedding-evaluation.mdx",
+          "anchor": "how-it-works",
+          "conceptId": "embedding-evaluation",
+          "role": "author-implemented-pending-review"
+        },
+        {
+          "path": "src/content/docs/concepts/embedding-evaluation.mdx",
+          "anchor": "how-it-works",
+          "conceptId": "embedding-evaluation",
+          "role": "author-implemented-pending-review"
+        },
+        {
+          "path": "src/content/docs/concepts/embedding-evaluation.mdx",
+          "anchor": "sts-correlation-and-mteb",
+          "conceptId": "embedding-evaluation",
+          "role": "author-implemented-pending-review"
+        }
+      ],
       "plannedDestinations": [
         "embedding-evaluation-metrics"
       ],
-      "mappingStatus": "unmapped",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -16882,20 +17001,27 @@
         "evaluation": "A numerical or reasoning self-check suffices for this mechanism; full task evaluation belongs to its workflow."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Run a relevant benchmark task and interpret dataset-specific scores and timing.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence.",
+        "Complete MTEB execution is not claimed; the lab executes original held-out similarity/retrieval and licensed review classification tasks."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/embedding-evaluation.mdx",
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "not-verified",
+      "enhancementReview": "e7-representation-author-review-2026-11-24"
     },
     {
       "id": "book-ch10-cosine-loss",
@@ -16915,11 +17041,18 @@
       "scope": "core",
       "kind": "concept",
       "coverageUnit": true,
-      "mappings": [],
+      "mappings": [
+        {
+          "path": "src/content/docs/concepts/loss-functions.mdx",
+          "anchor": "how-it-works",
+          "conceptId": "loss-functions",
+          "role": "author-implemented-pending-review"
+        }
+      ],
       "plannedDestinations": [
         "embedding-losses"
       ],
-      "mappingStatus": "unmapped",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -16942,20 +17075,27 @@
         "evaluation": "A numerical or reasoning self-check suffices for this mechanism; full task evaluation belongs to its workflow."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Compare predicted cosine similarity to graded labels and compute its regression loss.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/loss-functions.mdx",
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "verified",
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/embedding-training.json"
     },
     {
       "id": "book-ch10-mnr-loss",
@@ -16979,18 +17119,18 @@
         {
           "conceptId": "loss-functions",
           "path": "src/content/docs/concepts/loss-functions.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         },
         {
           "conceptId": "contrastive-learning",
           "path": "src/content/docs/concepts/contrastive-learning.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -17021,23 +17161,19 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Build a batch similarity matrix and show how positive pairs supply in-batch negatives.",
-        "One contrastive loss does not teach softmax classification, cosine regression, and MNR separately."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/loss-functions.mdx",
-          "anchor": "implement-it",
-          "finding": "One contrastive loss does not teach softmax classification, cosine regression, and MNR separately."
-        },
-        {
-          "path": "src/content/docs/concepts/contrastive-learning.mdx",
-          "anchor": "implement-it",
-          "finding": "The scalar contrastive loss is useful; add temperature, batch structure, gradients, and a trainable encoder."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "verified",
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/embedding-training.json"
     },
     {
       "id": "book-ch10-hard-negatives",
@@ -17061,12 +17197,12 @@
         {
           "conceptId": "contrastive-examples",
           "path": "src/content/docs/concepts/contrastive-examples.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -17097,18 +17233,19 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Construct near misses and identify invalid negatives before interpreting loss reduction.",
-        "The example computes loss from supplied scores rather than constructing valid positive/negative text pairs."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/contrastive-examples.mdx",
-          "anchor": "implement-it",
-          "finding": "The example computes loss from supplied scores rather than constructing valid positive/negative text pairs."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "verified",
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/embedding-training.json"
     },
     {
       "id": "book-ch11-masking-policy",
@@ -17132,12 +17269,12 @@
         {
           "conceptId": "masked-language-modeling",
           "path": "src/content/docs/concepts/masked-language-modeling.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -17168,18 +17305,19 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Implement mask, random replacement, unchanged selected tokens, and ignored loss positions.",
-        "Replacing one token is a preprocessing illustration; add corruption policy, ignored labels, and actual MLM training."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/masked-language-modeling.mdx",
-          "anchor": "implement-it",
-          "finding": "Replacing one token is a preprocessing illustration; add corruption policy, ignored labels, and actual MLM training."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified"
+      "realModelExecution": "verified",
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/continued-pretraining.json"
     },
     {
       "id": "book-ch11-bio-alignment",
@@ -17203,12 +17341,12 @@
         {
           "conceptId": "named-entity-recognition",
           "path": "src/content/docs/concepts/named-entity-recognition.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -17239,18 +17377,19 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/named-entity-recognition.mdx",
-          "anchor": "implement-it",
-          "finding": "E2 replaces supplied labels as the main implementation with actual tokenizer alignment and trained predictions, explicit masking/truncation, sentence-preserving spans, baseline/test metrics, validation errors, and reload checks. Real-domain extension and independent review remain pending."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
-      "enhancementReview": "e2-reference-author-review-2026-11-20"
+      "realModelExecution": "verified",
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/ner-complete.json"
     },
     {
       "id": "book-ch11-entity-metrics",
@@ -17274,12 +17413,12 @@
         {
           "conceptId": "named-entity-recognition",
           "path": "src/content/docs/concepts/named-entity-recognition.mdx",
-          "anchor": "the-important-distinction",
+          "anchor": "how-it-works",
           "role": "partial-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -17310,18 +17449,19 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
+        "Independent technical/editorial review and beginner pilot remain pending. Book-scale/GPU and broad benchmark quality claims require additional execution evidence."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/named-entity-recognition.mdx",
-          "anchor": "implement-it",
-          "finding": "E2 replaces supplied labels as the main implementation with actual tokenizer alignment and trained predictions, explicit masking/truncation, sentence-preserving spans, baseline/test metrics, validation errors, and reload checks. Real-domain extension and independent review remain pending."
+          "anchor": "how-it-works",
+          "finding": "E7 detailed definition, theory, specific worked example, actual CPU optimization, recorded predictions and artifact reload; independent acceptance pending."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
-      "enhancementReview": "e2-reference-author-review-2026-11-20"
+      "realModelExecution": "verified",
+      "enhancementReview": "e7-representation-author-review-2026-11-24",
+      "executionRecord": "examples/verification/records/ner-complete.json"
     },
     {
       "id": "book-ch12-adapters",

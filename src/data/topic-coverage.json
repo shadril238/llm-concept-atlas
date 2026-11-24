@@ -105,7 +105,8 @@
     "Loss functions": "loss-functions",
     "Fine-tuning embeddings": "fine-tuning-embeddings",
     "TSDAE": "tsdae",
-    "Domain adaptation": "domain-adaptation"
+    "Domain adaptation": "domain-adaptation",
+    "Augmented SBERT": "augmented-sbert"
   },
   "11": {
     "BERT fine-tuning": "bert-fine-tuning",

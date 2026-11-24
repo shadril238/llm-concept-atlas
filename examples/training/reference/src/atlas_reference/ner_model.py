@@ -21,15 +21,17 @@ TOKENIZER = "google-bert/bert-base-uncased"
 TOKENIZER_REVISION = "86b5e0934494bd15c9632b12f734a8a67f723594"
 
 
-def main():
+def main(output_path=None, model_path=None, tokenizer_path=None):
     torch.manual_seed(7)
     torch.set_num_threads(1)
     tokenizer = AutoTokenizer.from_pretrained(
-        TOKENIZER, revision=TOKENIZER_REVISION, use_fast=True
+        tokenizer_path or TOKENIZER,
+        revision=None if tokenizer_path else TOKENIZER_REVISION,
+        use_fast=True,
     )
     model = AutoModelForTokenClassification.from_pretrained(
-        MODEL,
-        revision=REVISION,
+        model_path or MODEL,
+        revision=None if model_path else REVISION,
         num_labels=len(LABELS),
         id2label=dict(enumerate(LABELS)),
         label2id={tag: i for i, tag in enumerate(LABELS)},
@@ -90,7 +92,7 @@ def main():
     optimizer = torch.optim.AdamW(
         [p for p in model.parameters() if p.requires_grad], lr=0.001
     )
-    path = ROOT / "examples/artifacts/ner-model"
+    path = Path(output_path) if output_path else ROOT / "examples/artifacts/ner-model"
     path.mkdir(parents=True, exist_ok=True)
     best = -1.0
     history = []
@@ -203,6 +205,7 @@ def main():
             }
         )
     )
+    return result
 
 
 if __name__ == "__main__":

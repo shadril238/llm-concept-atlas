@@ -95,32 +95,30 @@
       "conceptId": "bert-fine-tuning",
       "chapter": 11,
       "path": "src/content/docs/concepts/bert-fine-tuning.mdx",
-      "sourceSha256": "faee5c11b630d6cff31635425d737a0be0adb23dae7cc02710699f8e608216c4",
+      "sourceSha256": "599729449b822291b37ae0ddc38a0ad0f421d8d9c97083abcb553a882a90b706",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch11-supervised",
         "book-ch11-bert-training"
       ],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "A single scalar squared-error update does not train a BERT encoder or task head.",
+      "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
+      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "ad52b94d6779d81e4a1b52f22f023710c4d0002fdeb8dc45a04dff92046ccabb",
-      "codeFirstLine": "weight = 0.2",
-      "sharedExampleWith": [
-        "pretraining-and-sft"
-      ],
-      "genericExercise": true,
+      "exampleKind": "training-contract-or-recorded-evidence-calculation",
+      "codeSha256": "75b8dc49cbf615fab8704d6c5c883d7b4ae46afea5e22326d8da3e3110086a43",
+      "codeFirstLine": "import json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Compare frozen feature extraction with adaptation of the encoder and task head.",
-        "Tokenize real data, train a sequence classifier, validate, and save/reload artifacts."
+        "Independent technical/editorial review and beginner pilot. Broad benchmark, larger data and GPU configurations are not verified by the small CPU profiles."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E7"
+      "executionStatus": "actual-cpu-training-and-artifact-reload-verified",
+      "nextPhase": "E7",
+      "enhancementReview": "e7-representation-author-review-2026-11-24"
     },
     {
       "conceptId": "bertopic",
@@ -414,73 +412,61 @@
       "conceptId": "contrastive-examples",
       "chapter": 10,
       "path": "src/content/docs/concepts/contrastive-examples.mdx",
-      "sourceSha256": "7ee7e4494bd08b0510c8d7a6a58a4271b05a082422e15d48a4a46c3f65b2bd5c",
+      "sourceSha256": "3b98522e1c786f49bcb02fe3a7e0c9755f7b0170a773fe896dd75c8cf6f9d5ea",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch10-contrastive-examples",
         "book-ch10-hard-negatives"
       ],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The example computes loss from supplied scores rather than constructing valid positive/negative text pairs.",
+      "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
+      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "a43674310c5ab749c015b65c7938820679a79a20d569eeb73873c187797ca945",
-      "codeFirstLine": "from math import exp, log",
-      "sharedExampleWith": [
-        "contrastive-learning",
-        "domain-adaptation",
-        "fine-tuning-embeddings",
-        "loss-functions",
-        "setfit"
-      ],
-      "genericExercise": true,
+      "exampleKind": "training-contract-or-recorded-evidence-calculation",
+      "codeSha256": "7faa3ac895ccc597d5149a457654181a46035ee3ff9b14404ee9c569fb037136",
+      "codeFirstLine": "import sys, json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Create labeled sentence pairs from NLI data and explain label semantics.",
-        "Construct near misses and identify invalid negatives before interpreting loss reduction."
+        "Independent technical/editorial review and beginner pilot. Broad benchmark, larger data and GPU configurations are not verified by the small CPU profiles."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E7"
+      "executionStatus": "actual-cpu-training-and-artifact-reload-verified",
+      "nextPhase": "E7",
+      "enhancementReview": "e7-representation-author-review-2026-11-24"
     },
     {
       "conceptId": "contrastive-learning",
       "chapter": 10,
       "path": "src/content/docs/concepts/contrastive-learning.mdx",
-      "sourceSha256": "2eefa425ddb71e2c73ac37fda91535cfd67c28d124fe060a1dce6394fb6078e4",
+      "sourceSha256": "dfc45c42110c8d00c59ee2790565835d0cb035995bbb26ca1c62ce5217bc2261",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch09-clip-training",
+        "book-ch10-embedding-models",
         "book-ch10-contrastive",
         "book-ch10-mnr-loss"
       ],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The scalar contrastive loss is useful; add temperature, batch structure, gradients, and a trainable encoder.",
+      "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
+      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "a43674310c5ab749c015b65c7938820679a79a20d569eeb73873c187797ca945",
-      "codeFirstLine": "from math import exp, log",
-      "sharedExampleWith": [
-        "contrastive-examples",
-        "domain-adaptation",
-        "fine-tuning-embeddings",
-        "loss-functions",
-        "setfit"
-      ],
-      "genericExercise": true,
+      "exampleKind": "training-contract-or-recorded-evidence-calculation",
+      "codeSha256": "626fcdc0dfbeae1c0038e3345245fb77484fdbeaeb3c8b23552eb186f837ad34",
+      "codeFirstLine": "import sys",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Work through the batch similarity matrix and the paired training objective in both directions.",
-        "Connect positive/negative pairs to the loss and resulting parameter update.",
-        "Build a batch similarity matrix and show how positive pairs supply in-batch negatives."
+        "Independent technical/editorial review and beginner pilot. Broad benchmark, larger data and GPU configurations are not verified by the small CPU profiles."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E7"
+      "executionStatus": "actual-cpu-training-and-artifact-reload-verified",
+      "nextPhase": "E7",
+      "enhancementReview": "e7-representation-author-review-2026-11-24"
     },
     {
       "conceptId": "contrastive-training",
@@ -717,34 +703,29 @@
       "conceptId": "domain-adaptation",
       "chapter": 10,
       "path": "src/content/docs/concepts/domain-adaptation.mdx",
-      "sourceSha256": "e9254b4d1be1468bc5b43cb929d7a2e4d38f95021ef0d9f3c9f528d030bf154f",
+      "sourceSha256": "19e886cd4b8a398cc3213253b5edb0808e523b822807ab7831503ee234397e18",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch10-domain-adaptation"
       ],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The reused contrastive-loss calculation has no source/target corpus, adaptation, or transfer evaluation.",
+      "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
+      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "a43674310c5ab749c015b65c7938820679a79a20d569eeb73873c187797ca945",
-      "codeFirstLine": "from math import exp, log",
-      "sharedExampleWith": [
-        "contrastive-examples",
-        "contrastive-learning",
-        "fine-tuning-embeddings",
-        "loss-functions",
-        "setfit"
-      ],
-      "genericExercise": true,
+      "exampleKind": "training-contract-or-recorded-evidence-calculation",
+      "codeSha256": "c94e0ddaca7accc0dfd2b03a1c996720adb203790d098aaeb364a144cd3aa2e1",
+      "codeFirstLine": "import json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Separate adaptive pretraining from downstream tuning and measure domain transfer."
+        "Independent technical/editorial review and beginner pilot. Broad benchmark, larger data and GPU configurations are not verified by the small CPU profiles."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E7"
+      "executionStatus": "actual-cpu-training-and-artifact-reload-verified",
+      "nextPhase": "E7",
+      "enhancementReview": "e7-representation-author-review-2026-11-24"
     },
     {
       "conceptId": "dpo",
@@ -822,28 +803,31 @@
       "conceptId": "embedding-evaluation",
       "chapter": 10,
       "path": "src/content/docs/concepts/embedding-evaluation.mdx",
-      "sourceSha256": "19309bbd164713a781eb00eaa49dd5091c8816bb3c46433d0a6332b513211bdc",
+      "sourceSha256": "4ae74a89cb983975669df812759184840c5c9223f27f8f44166cd75d83ec8fcb",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
-        "book-ch10-evaluation"
+        "book-ch10-evaluation",
+        "book-ch10-sts-correlation",
+        "book-ch10-mteb"
       ],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "One recall-at-k fixture omits similarity correlations, MTEB, and actual model comparison.",
+      "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
+      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "ef8c9cbade5661effcc5c81ab3970e0530a077dc56b619db58e85b4dfa29cf58",
-      "codeFirstLine": "relevant = {\"A\", \"C\"}",
+      "exampleKind": "training-contract-or-recorded-evidence-calculation",
+      "codeSha256": "48537ae6c4b5c91e01a0d1cd428fe59f1b4d273a1301ce3e292eaa4e22953fd9",
+      "codeFirstLine": "import json",
       "sharedExampleWith": [],
-      "genericExercise": true,
+      "genericExercise": false,
       "requiredWork": [
-        "Explain STS correlations and run an appropriate MTEB task with versioned results."
+        "Independent technical/editorial review and beginner pilot. Broad benchmark, larger data and GPU configurations are not verified by the small CPU profiles."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E7"
+      "executionStatus": "actual-cpu-training-and-artifact-reload-verified",
+      "nextPhase": "E7",
+      "enhancementReview": "e7-representation-author-review-2026-11-24"
     },
     {
       "conceptId": "embeddings-for-classification",
@@ -906,30 +890,30 @@
       "conceptId": "few-shot-classification",
       "chapter": 11,
       "path": "src/content/docs/concepts/few-shot-classification.mdx",
-      "sourceSha256": "441af8a985565cc78476ad5d4f70459c7bf639b0669e352285287dcc7762d96a",
+      "sourceSha256": "9436f08553475393c93957b5b86f76268858e52e837a71bfcdc31f9eedff367e",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch11-few-shot",
         "book-ch11-few-shot-training"
       ],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "A keyword if-statement uses no labeled support-set learning or sampling comparison.",
+      "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
+      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "68017589f5fdb83619c1f966daabea3667772a6e0d91d06784181b962a9c34b0",
-      "codeFirstLine": "examples = [\"a wonderful film\", \"a dull film\"]",
+      "exampleKind": "training-contract-or-recorded-evidence-calculation",
+      "codeSha256": "a456dfcc9ffe7130e7f4ab2d427d9256fef147c7b7dc42e1fe948e671998f6d0",
+      "codeFirstLine": "import json",
       "sharedExampleWith": [],
-      "genericExercise": true,
+      "genericExercise": false,
       "requiredWork": [
-        "Define the label budget and evaluate sensitivity to support-set sampling.",
-        "Run real SetFit training and evaluate on untouched documents."
+        "Independent technical/editorial review and beginner pilot. Broad benchmark, larger data and GPU configurations are not verified by the small CPU profiles."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E7"
+      "executionStatus": "actual-cpu-training-and-artifact-reload-verified",
+      "nextPhase": "E7",
+      "enhancementReview": "e7-representation-author-review-2026-11-24"
     },
     {
       "conceptId": "few-shot-examples",
@@ -965,11 +949,11 @@
       "conceptId": "fine-tuning-embeddings",
       "chapter": 10,
       "path": "src/content/docs/concepts/fine-tuning-embeddings.mdx",
-      "sourceSha256": "9258260261851e6c1782e412529ed2f017b8dc12d38212895c8dfcb53ea7b6f0",
+      "sourceSha256": "d7c642f742d6267b5b06accda3c46106e99e1fd760e2bd056b18507af1c58499",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch10-create-embeddings",
@@ -978,56 +962,48 @@
         "book-ch10-supervised",
         "book-ch08-retrieval-adaptation"
       ],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The fixed-score loss never updates an embedding model or compares held-out results.",
+      "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
+      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "a43674310c5ab749c015b65c7938820679a79a20d569eeb73873c187797ca945",
-      "codeFirstLine": "from math import exp, log",
-      "sharedExampleWith": [
-        "contrastive-examples",
-        "contrastive-learning",
-        "domain-adaptation",
-        "loss-functions",
-        "setfit"
-      ],
-      "genericExercise": true,
+      "exampleKind": "training-contract-or-recorded-evidence-calculation",
+      "codeSha256": "9a7c06154c7006de2e2b32195c841a179a96319e74f6810e1dbc107dc4644375",
+      "codeFirstLine": "import json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Build the data, loss, trainer, evaluator, and saved-model lifecycle.",
-        "Train a real sentence model and report a held-out similarity evaluator.",
-        "Compare pretrained and adapted embeddings with the same evaluation protocol.",
-        "Use correctly structured positive/negative pairs and a disjoint evaluation set.",
-        "Connect relevant query/passage pairs to a retrieval-specific adaptation objective."
+        "Independent technical/editorial review and beginner pilot. Broad benchmark, larger data and GPU configurations are not verified by the small CPU profiles."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E7"
+      "executionStatus": "actual-cpu-training-and-artifact-reload-verified",
+      "nextPhase": "E7",
+      "enhancementReview": "e7-representation-author-review-2026-11-24"
     },
     {
       "conceptId": "frozen-layers",
       "chapter": 11,
       "path": "src/content/docs/concepts/frozen-layers.mdx",
-      "sourceSha256": "4db4ae930d639414ec013b26a9c7e1421bb96fe402ab542e3a46728900506473",
+      "sourceSha256": "18eb09eaa496fae15ebb7711429243ebf99cd6b9e4c49f8079ce3417d2965659",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch11-freezing"
       ],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The selective dictionary update is relevant; verify actual parameter freezing and compare held-out model results.",
+      "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
+      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "8b9929f4cddb30122cee582ab3eb657d9cd79ad39ed27e22374987d7e20d9df0",
-      "codeFirstLine": "weights = {\"encoder\": 0.5, \"head\": 0.2}",
+      "exampleKind": "training-contract-or-recorded-evidence-calculation",
+      "codeSha256": "99cbcede59440384d95a8e6c3f19396ceed06d17df78eaf94488b6be131e721a",
+      "codeFirstLine": "import json",
       "sharedExampleWith": [],
-      "genericExercise": true,
+      "genericExercise": false,
       "requiredWork": [
-        "Select actual parameter groups, verify frozen weights, and compare task performance."
+        "Independent technical/editorial review and beginner pilot. Broad benchmark, larger data and GPU configurations are not verified by the small CPU profiles."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E7"
+      "executionStatus": "actual-cpu-training-and-artifact-reload-verified",
+      "nextPhase": "E7",
+      "enhancementReview": "e7-representation-author-review-2026-11-24"
     },
     {
       "conceptId": "generative-classification",
@@ -1389,67 +1365,61 @@
       "conceptId": "loss-functions",
       "chapter": 10,
       "path": "src/content/docs/concepts/loss-functions.mdx",
-      "sourceSha256": "56ab586d636c2597735a6ddcca00a8936bb3b4c60290e853f275fccc6cf4b3f9",
+      "sourceSha256": "5b719668c0fcd45d0763504525b3de994e3967084b3ba41aeb80b0e1d88543f2",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch10-losses",
+        "book-ch10-softmax-loss",
+        "book-ch10-cosine-loss",
         "book-ch10-mnr-loss"
       ],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "One contrastive loss does not teach softmax classification, cosine regression, and MNR separately.",
+      "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
+      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "a43674310c5ab749c015b65c7938820679a79a20d569eeb73873c187797ca945",
-      "codeFirstLine": "from math import exp, log",
-      "sharedExampleWith": [
-        "contrastive-examples",
-        "contrastive-learning",
-        "domain-adaptation",
-        "fine-tuning-embeddings",
-        "setfit"
-      ],
-      "genericExercise": true,
+      "exampleKind": "training-contract-or-recorded-evidence-calculation",
+      "codeSha256": "7567d3b25fd9cd3a7a4c7a8a45fabbe6855f798ad517d5276ea438b42a659a1c",
+      "codeFirstLine": "import sys",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Separate softmax classification, cosine regression, and multiple-negatives ranking objectives.",
-        "Build a batch similarity matrix and show how positive pairs supply in-batch negatives."
+        "Independent technical/editorial review and beginner pilot. Broad benchmark, larger data and GPU configurations are not verified by the small CPU profiles."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E7"
+      "executionStatus": "actual-cpu-training-and-artifact-reload-verified",
+      "nextPhase": "E7",
+      "enhancementReview": "e7-representation-author-review-2026-11-24"
     },
     {
       "conceptId": "masked-language-modeling",
       "chapter": 11,
       "path": "src/content/docs/concepts/masked-language-modeling.mdx",
-      "sourceSha256": "9b2cf98b3a4350cfd8696f5cea3a6dafd8a74b72a2c4863443e30dda383e2824",
+      "sourceSha256": "1817c54e0935a676169e06da64bf960cc17642c165a716e97a4289ef7d1a2e57",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch11-mlm",
         "book-ch11-masking-policy"
       ],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "Replacing one token is a preprocessing illustration; add corruption policy, ignored labels, and actual MLM training.",
+      "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
+      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "66f6727ed6514c8b37f62fc21bb2ba266319f9d52be2b2d2efe332bb0b38e91f",
-      "codeFirstLine": "tokens = [\"the\", \"model\", \"reads\"]",
-      "sharedExampleWith": [
-        "tsdae"
-      ],
-      "genericExercise": true,
+      "exampleKind": "training-contract-or-recorded-evidence-calculation",
+      "codeSha256": "722d8fe1326dd97bb66550f4f40b6272064213406f4e8846ef5670d4c3b03a8e",
+      "codeFirstLine": "import json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Implement masking/collation and actual domain adaptation with downstream comparison.",
-        "Implement mask, random replacement, unchanged selected tokens, and ignored loss positions."
+        "Independent technical/editorial review and beginner pilot. Broad benchmark, larger data and GPU configurations are not verified by the small CPU profiles."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E7"
+      "executionStatus": "actual-cpu-training-and-artifact-reload-verified",
+      "nextPhase": "E7",
+      "enhancementReview": "e7-representation-author-review-2026-11-24"
     },
     {
       "conceptId": "model-access",
@@ -1544,7 +1514,7 @@
       "conceptId": "named-entity-recognition",
       "chapter": 11,
       "path": "src/content/docs/concepts/named-entity-recognition.mdx",
-      "sourceSha256": "d9e672690aaa8ba08e364e179e526cc9ab813ebc3acef27125fa1f2c6712b797",
+      "sourceSha256": "267b29f808b26abc916005b167b2246aa1f440f1ebf791a435669b8528983322",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
@@ -1557,20 +1527,20 @@
         "book-ch11-bio-alignment",
         "book-ch11-entity-metrics"
       ],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "E2 replaces supplied labels as the main implementation with actual tokenizer alignment and trained predictions, explicit masking/truncation, sentence-preserving spans, baseline/test metrics, validation errors, and reload checks. Real-domain extension and independent review remain pending.",
+      "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
+      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "verified-reference-workflow",
-      "codeSha256": "ef5ab63ce78af0ddefd89bab70d39267f86afd5af7ab905d12d646026aab2514",
-      "codeFirstLine": "\"\"\"Word-level BIO alignment and strict, sentence-preserving entity scoring.\"\"\"",
+      "exampleKind": "training-contract-or-recorded-evidence-calculation",
+      "codeSha256": "cb0fa67aa3525c73ed19eb4d1ee37508ac9d343ed392c78a322e51c9b1619fa5",
+      "codeFirstLine": "import sys",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
-        "Independent technical/editorial review and beginner pilot; broader chapter workflow remains tracked separately."
+        "Independent technical/editorial review and beginner pilot. Broad benchmark, larger data and GPU configurations are not verified by the small CPU profiles."
       ],
-      "executionStatus": "cpu-reference-verified",
-      "nextPhase": "E2",
-      "enhancementReview": "e2-reference-author-review-2026-11-20"
+      "executionStatus": "actual-cpu-training-and-artifact-reload-verified",
+      "nextPhase": "E7",
+      "enhancementReview": "e7-representation-author-review-2026-11-24"
     },
     {
       "conceptId": "openclip",
@@ -1737,9 +1707,7 @@
       "exampleKind": "illustrative-python",
       "codeSha256": "ad52b94d6779d81e4a1b52f22f023710c4d0002fdeb8dc45a04dff92046ccabb",
       "codeFirstLine": "weight = 0.2",
-      "sharedExampleWith": [
-        "bert-fine-tuning"
-      ],
+      "sharedExampleWith": [],
       "genericExercise": true,
       "requiredWork": [
         "Trace pretraining, task adaptation, and preference tuning with distinct data and objectives.",
@@ -2245,32 +2213,32 @@
       "conceptId": "sbert",
       "chapter": 10,
       "path": "src/content/docs/concepts/sbert.mdx",
-      "sourceSha256": "0c4507855625c18d65cad23e2228a450a1e0d429bd8eb6d1462ae5744989faad",
+      "sourceSha256": "735d4185a81a05288b70403614f1f0b5ff45da0e9adc544a1fa61f250d3d7ab0",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P1",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch10-embedding-models",
         "book-ch10-sbert",
+        "book-ch10-create-embeddings",
         "book-ch10-encoder-comparison"
       ],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The example calculates cosine similarity but never runs an encoder or pooling operation.",
+      "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
+      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "1d303f69fda272102a43cb998219dab761a5d61eb43e7306c32de785f165f684",
-      "codeFirstLine": "from math import sqrt",
+      "exampleKind": "training-contract-or-recorded-evidence-calculation",
+      "codeSha256": "078eb60bc1afb9ca5742a1a5dc972fcc7510a8f2af2b13f97e0c89c3f272a059",
+      "codeFirstLine": "u = [1.0, 0.5]",
       "sharedExampleWith": [],
-      "genericExercise": true,
+      "genericExercise": false,
       "requiredWork": [
-        "Define task-dependent similarity and representation objectives.",
-        "Compare cross- and bi-encoder computation, pooling, and the training setup.",
-        "Compare joint pair processing with separately cached vectors and explain the training architecture."
+        "Independent technical/editorial review and beginner pilot. Broad benchmark, larger data and GPU configurations are not verified by the small CPU profiles."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E7"
+      "executionStatus": "actual-cpu-training-and-artifact-reload-verified",
+      "nextPhase": "E7",
+      "enhancementReview": "e7-representation-author-review-2026-11-24"
     },
     {
       "conceptId": "self-attention",
@@ -2447,36 +2415,30 @@
       "conceptId": "setfit",
       "chapter": 11,
       "path": "src/content/docs/concepts/setfit.mdx",
-      "sourceSha256": "87bcbce87109a504423c9dce2232563a454e7110ced7eb060ab80d58c0c256de",
+      "sourceSha256": "2f14747a55d5e802d328e157fe3d056d90c72ffd7a29479de30b4a58ac618a43",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P0",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch11-setfit",
         "book-ch11-few-shot-training"
       ],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The snippet has no labeled-pair generation, sentence-model adaptation, or classifier fitting.",
+      "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
+      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "a43674310c5ab749c015b65c7938820679a79a20d569eeb73873c187797ca945",
-      "codeFirstLine": "from math import exp, log",
-      "sharedExampleWith": [
-        "contrastive-examples",
-        "contrastive-learning",
-        "domain-adaptation",
-        "fine-tuning-embeddings",
-        "loss-functions"
-      ],
-      "genericExercise": true,
+      "exampleKind": "training-contract-or-recorded-evidence-calculation",
+      "codeSha256": "38a2bd253a197733b0e0877802d753665447f87e24adfda41c21d1c7f698a6fc",
+      "codeFirstLine": "import json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Trace labeled-pair generation, encoder adaptation, and classifier fitting.",
-        "Run real SetFit training and evaluate on untouched documents."
+        "Independent technical/editorial review and beginner pilot. Broad benchmark, larger data and GPU configurations are not verified by the small CPU profiles."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E7"
+      "executionStatus": "actual-cpu-training-and-artifact-reload-verified",
+      "nextPhase": "E7",
+      "enhancementReview": "e7-representation-author-review-2026-11-24"
     },
     {
       "conceptId": "summarized-memory",
@@ -2815,34 +2777,31 @@
       "conceptId": "tsdae",
       "chapter": 10,
       "path": "src/content/docs/concepts/tsdae.mdx",
-      "sourceSha256": "f52211f42d1dd1095732bf863e4e41881d3134131f789547097ed1d4a1cc0ad8",
+      "sourceSha256": "8daa04fbda36351cfd3de06490995b5eaef57160baddccf741124c27a89510ce",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
-      "priority": "P0",
+      "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
         "book-ch10-unsupervised",
         "book-ch10-tsdae",
         "book-ch10-domain-adaptation"
       ],
-      "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "A single MLM-style mask omits deletion noise, sentence reconstruction, decoder training, and embedding evaluation.",
+      "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
+      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "66f6727ed6514c8b37f62fc21bb2ba266319f9d52be2b2d2efe332bb0b38e91f",
-      "codeFirstLine": "tokens = [\"the\", \"model\", \"reads\"]",
-      "sharedExampleWith": [
-        "masked-language-modeling"
-      ],
-      "genericExercise": true,
+      "exampleKind": "training-contract-or-recorded-evidence-calculation",
+      "codeSha256": "bd95859b9f43874860f28b17d0c4898b5851cbd4b10bd90659c1b242b41fcf9c",
+      "codeFirstLine": "import sys",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Explain reconstruction-based representation learning without similarity labels.",
-        "Corrupt sentences and train an encoder-decoder reconstruction objective, then evaluate embeddings.",
-        "Separate adaptive pretraining from downstream tuning and measure domain transfer."
+        "Independent technical/editorial review and beginner pilot. Broad benchmark, larger data and GPU configurations are not verified by the small CPU profiles."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E7"
+      "executionStatus": "actual-cpu-training-and-artifact-reload-verified",
+      "nextPhase": "E7",
+      "enhancementReview": "e7-representation-author-review-2026-11-24"
     },
     {
       "conceptId": "vision-transformers",
@@ -3359,6 +3318,34 @@
       "executionStatus": "actual-retrieval-grounding-or-vision-evidence-verified",
       "nextPhase": "E6",
       "enhancementReview": "e6-retrieval-author-review-2026-11-24"
+    },
+    {
+      "conceptId": "augmented-sbert",
+      "chapter": 10,
+      "path": "src/content/docs/concepts/augmented-sbert.mdx",
+      "legacyStatus": "full",
+      "reviewStatus": "changes-required",
+      "auditStatus": "assessed",
+      "priority": "P2",
+      "reviewRecord": "e0-static-audit-2026-11-19",
+      "sourceSha256": "79559086dbb96ff25d041dec1e534e038540ffa33c96c2c399a86fe3462046b4",
+      "sourceSectionIds": [
+        "book-ch10-augmented-sbert"
+      ],
+      "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
+      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
+      "evidenceAnchor": "implement-it",
+      "exampleKind": "training-contract-or-recorded-evidence-calculation",
+      "codeSha256": "d36f6e279b4a8d8af36c06e4a2013d9fa22435e3811894a61d55020ae48ff9d9",
+      "codeFirstLine": "import json",
+      "sharedExampleWith": [],
+      "genericExercise": false,
+      "requiredWork": [
+        "Independent technical/editorial review and beginner pilot. Broad benchmark, larger data and GPU configurations are not verified by the small CPU profiles."
+      ],
+      "executionStatus": "actual-cpu-training-and-artifact-reload-verified",
+      "nextPhase": "E7",
+      "enhancementReview": "e7-representation-author-review-2026-11-24"
     }
   ],
   "useCases": [
@@ -3397,6 +3384,15 @@
       "gap": "Independent review and fresh licensed evaluation images remain pending.",
       "sourceSha256": "e86bcf684e0aa9b721ec2835315ef65e46c48b990a841b87876b8d50501ca60f",
       "executionStatus": "local-cpu-model-workflow-verified"
+    },
+    {
+      "path": "src/content/docs/use-cases/service-search-adaptation.mdx",
+      "anchor": "2-train-a-controlled-baseline-comparison",
+      "chapter": 10,
+      "implementation": "actual-encoder-teacher-denoising-comparisons-and-reusable-artifacts",
+      "gap": "Independent review and fresh realistic external collection remain pending.",
+      "sourceSha256": "fb20b1595de2f73a5372290b4c1b0ef9818ce7bf0a21b931b1b377912ab0b53f",
+      "executionStatus": "actual-cpu-training-verified"
     }
   ],
   "lastUpdated": "2026-11-24"

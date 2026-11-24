@@ -1,92 +1,131 @@
 ---
-title: SetFit
-description: SetFit fine-tunes sentence embeddings using small labeled datasets, then trains a lightweight classifier.
-kind: concept
+title: "SetFit"
+description: "SetFit is a two-stage few-label classification approach: adapt a sentence encoder with class-derived positive/negative pairs, then fit a classifier on the resulting sentence representations. The classifier stage still uses the original labeled sentences."
+kind: "concept"
 conceptId: setfit
 chapter: 11
-part: training
-summary: SetFit fine-tunes sentence embeddings using small labeled datasets, then trains a lightweight classifier.
-parent: few-shot-classification
-prerequisites: [few-shot-classification]
-related: [few-shot-classification, masked-language-modeling]
-level: advanced
-tags: [training, chapter-11]
+part: "training"
+summary: "SetFit is a two-stage few-label classification approach: adapt a sentence encoder with class-derived positive/negative pairs, then fit a classifier on the resulting sentence representations. The classifier stage still uses the original labeled sentences."
+parent: "few-shot-classification"
+prerequisites: ["few-shot-classification", "contrastive-learning"]
+related: []
+level: "advanced"
+tags: ["training", "chapter-11"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e7-representation-author-review-2026-11-24
+learningObjectives: ["Name the two fitted stages and their targets.", "Detect a fake SetFit implementation."]
+aliases: ["SetFit training", "two-stage few-shot classification"]
+bookSections: ["book-ch11-setfit", "book-ch11-few-shot-training"]
+exampleIds: ["e7-setfit", "representation-classification"]
+relationshipReasons: {"few-shot-classification": "Few-shot classification supplies a constrained labeled budget and repeated sampling protocol.", "contrastive-learning": "Contrastive learning updates sentence embeddings using class-derived pair relationships."}
+labHref: "/labs/embedding-and-representation-training/"
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import TrainingEvidence from '../../../components/TrainingEvidence.astro';
+import { FreezeExplorer } from '../../../components/simulations/TrainingLabs';
 
 <ConceptPrimer id="setfit" />
 
 ## Definition and intuition
 
-SetFit fine-tunes sentence embeddings using small labeled datasets, then trains a lightweight classifier.
+SetFit is a two-stage few-label classification approach: adapt a sentence encoder with class-derived positive/negative pairs, then fit a classifier on the resulting sentence representations. The classifier stage still uses the original labeled sentences.
 
-Chapter 11 adapts an encoder to labeled tasks. Data splits, frozen versus trainable weights, and task-specific heads change both cost and generalization.
+Follow the input, objective, update, and evaluation as separate steps. The worked example and experiment below connect the explanation to an inspectable implementation.
 
-## Before you start
+<ReferenceBrief objectives={["Name the two fitted stages and their targets.", "Detect a fake SetFit implementation."]} prerequisites="few-shot-classification, contrastive-learning" scope="Original numerical reasoning and actual recorded CPU training with pinned public models. Independent technical/editorial review and beginner feedback remain pending." />
 
-Read [Few-shot classification](/llm-concept-atlas/concepts/few-shot-classification/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **SetFit** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Generate relationships from class labels
 
-1. **Prepare:** Create contrastive sentence pairs from a few labeled examples
-2. **Transform:** Adapt the sentence encoder so same-class items are closer
-3. **Inspect:** Train a classification head and evaluate on held-out items.
+The actual pinned SetFit ContrastiveDataset sampler constructs same-class and different-class pairs from the selected sixteen reviews. Its sampling can repeat pairs and include self-positive pairs. A declared iteration count controls sampled rows, not a count of independent newly annotated examples. The result records sampled and distinct pair counts.
 
-### The important distinction
+### Train the real sentence encoder
 
-SetFit expands a small labeled set into sentence pairs, fine-tunes a sentence encoder contrastively, then fits a lightweight classification head. This can be data-efficient, but duplicated or mislabeled examples affect many pairs. Evaluate on untouched documents from the real target distribution.
+The lab uses the actual SetFitModel, a pinned pretrained MiniLM sentence encoder, the library sampler, and Sentence Transformers cosine-regression loss. A transparent twenty-four-step AdamW loop keeps training explicitly on CPU and checks the first attention-query gradient and changed weight hash. This avoids the convenience Trainer’s implicit accelerator choice on the author Mac; it is the real two-stage algorithm, not a frozen encoder mislabeled as SetFit.
+
+### Fit and reload the classifier
+
+SetFitModel.fit trains its sklearn logistic head on the adapted normalized embeddings of the original sixteen labeled reviews. The frozen-encoder control uses the same pretrained encoder and labels without the embedding-update stage. Saved SetFit artifacts include the body and local fitted head; reload predictions must match. Only load such serialized heads from trusted artifacts you created.
 
 ## Worked example
 
-Five complaint and five compliment messages can generate multiple pairs. The tuned encoder can separate their meanings before a simple head assigns labels. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+Changing an embedding model to emphasize sentiment can help a small classifier, but it can also overfit the sampled reviews. Compare all three fixed seeds against the frozen sentence-logistic control. The implementation retains unfavorable runs and exposes per-review errors rather than selecting the best seed for display.
 
-<LessonFlow steps={["Create contrastive sentence pairs from a few labeled examples", "Adapt the sentence encoder so same-class items are closer", "Train a classification head and evaluate on held-out items."]} caption="A teaching diagram for SetFit. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
+
+Predict an outcome before changing a control. Selectors replay actual saved training/evaluation runs; loss and mask calculators recalculate a declared teaching mechanism. They make no model or API requests in your browser.
+
+<FreezeExplorer client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+From the repository root, install the foundation environment and run `python3 scripts/run-examples.py --id e7-setfit --offline`. The standard-library example below calculates a mechanism or checks the published actual evidence. Recorded-evidence replay is distinct from new optimization: the connected model lab supplies the complete source and fresh-training command.
+
+{/* example:e7-setfit:start */}
 
 ```python
-from math import exp, log
-positive_similarity = 0.8
-negative_similarities = [0.2, 0.4]
-all_scores = [positive_similarity, *negative_similarities]
-loss = -log(exp(all_scores[0]) / sum(exp(x) for x in all_scores))
-print(round(loss, 3))
+import json
+from pathlib import Path
+data = json.loads(Path('src/data/training-results.json').read_text())['classification']
+for row in data['runs']:
+    if row['method'] == 'setfit':
+        assert row['initial_sha256'] != row['updated_sha256']
+        assert row['first_query_gradient_norm'] > 0
+        print('seed:', row['seed'], 'unique labeled reviews:', len(row['train_ids']))
+        print('saved body/head reload:', row['reload_verified'])
+print('Pair adaptation and classifier fitting are separate verified stages.')
 ```
 
-**Expected output:**
+{/* example:e7-setfit:end */}
+
+Recorded calculation output:
 
 ```text
-0.797
+seed: 11 unique labeled reviews: 16
+saved body/head reload: True
+seed: 23 unique labeled reviews: 16
+saved body/head reload: True
+seed: 37 unique labeled reviews: 16
+saved body/head reload: True
+Pair adaptation and classifier fitting are separate verified stages.
 ```
 
-**What the code shows:** The positive score competes with two negative scores inside a softmax. The negative logarithm is smaller when the positive takes more of the probability mass. The [official chapter 11 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter11) develops the corresponding model-based implementation.
+<TrainingEvidence id="representation-classification" />
 
 ## When to use it
 
-Use it for few-shot text classification when full task fine-tuning is expensive. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use it for low-label text classification when a pretrained sentence encoder is suitable and class-derived similarity is meaningful. Evaluate whether pair adaptation improves over a frozen-vector classifier first.
 
 ## Limits and common mistakes
 
-- Pair generation can amplify label mistakes and does not remove the need for representative examples.
-- **Failure to look for:** A mislabeled support message creates many wrong pairs and distorts the embedding space.
+Same-class text can differ semantically while still being a valid sentiment positive under this task. That relation may harm a general semantic-search use. Small seed counts, validation annotation costs and architecture differences limit comparisons with BERT.
 
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Author execution checks tensor/mask contracts, actual parameter updates, split provenance and artifact reload. It does not constitute independent lesson acceptance. Keep training quality, task quality, runtime and generalization claims separate.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First create contrastive sentence pairs from a few labeled examples Then adapt the sentence encoder so same-class items are closer Finally train a classification head and evaluate on held-out items.</p></details>
+<details>
+<summary>Name the two fitted stages and their targets.</summary>
 
-<details><summary>What would make the result misleading?</summary><p>A mislabeled support message creates many wrong pairs and distorts the embedding space.</p></details>
+Stage one updates sentence embeddings using class-derived pair similarity; stage two fits a classifier using the original review labels and adapted embeddings.
+
+</details>
+
+<details>
+<summary>Detect a fake SetFit implementation.</summary>
+
+A frozen encoder with a trained logistic head is a useful baseline but lacks SetFit’s embedding-adaptation stage. Check actual gradients and weight changes.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 11 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 11 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter11). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 11 of *Hands-On Large Language Models*. The [complete L15–L20 lab](/llm-concept-atlas/labs/embedding-and-representation-training/#l18-classification-and-setfit) links actual training source, pinned environments, data provenance, real failures, and the artifact lifecycle. Compare the [authors’ pinned chapter 11 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter11) for the book-scale workflow. The atlas uses explicitly smaller CPU configurations and does not redistribute book pages or artwork.
 
 <ConceptConnections id="setfit" />

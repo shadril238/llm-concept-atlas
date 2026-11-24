@@ -1,97 +1,126 @@
 ---
-title: TSDAE
-description: Transformer-based Sequential Denoising Auto-Encoder training reconstructs original text from a corrupted version to adapt sentence representations without labels.
-kind: concept
+title: "TSDAE"
+description: "A Transformer-based Sequential Denoising Auto-Encoder (TSDAE) learns sentence representations by encoding a damaged sentence and reconstructing the original with a decoder. The deployed artifact is the encoder; reconstruction is a training surrogate for a useful sentence representation."
+kind: "concept"
 conceptId: tsdae
 chapter: 10
-part: training
-summary: Transformer-based Sequential Denoising Auto-Encoder training reconstructs original text from a corrupted version to adapt sentence representations without labels.
-parent: chapter-10
-prerequisites: [sbert]
-related: [fine-tuning-embeddings, domain-adaptation]
-level: advanced
-tags: [training, chapter-10]
+part: "training"
+summary: "A Transformer-based Sequential Denoising Auto-Encoder (TSDAE) learns sentence representations by encoding a damaged sentence and reconstructing the original with a decoder. The deployed artifact is the encoder; reconstruction is a training surrogate for a useful sentence representation."
+parent: "chapter-10"
+prerequisites: ["sbert", "loss-functions"]
+related: []
+level: "advanced"
+tags: ["training", "chapter-10"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e7-representation-author-review-2026-11-24
+learningObjectives: ["Distinguish teacher-forced and greedy reconstruction.", "Explain a loss-versus-retrieval disagreement."]
+aliases: ["denoising autoencoder", "TSDAE reconstruction"]
+bookSections: ["book-ch10-tsdae", "book-ch10-unsupervised"]
+exampleIds: ["e7-tsdae", "tsdae-adaptation"]
+relationshipReasons: {"sbert": "SBERT supplies the sentence-encoder interface used as the reconstruction bottleneck.", "loss-functions": "Loss functions distinguish token reconstruction from pair regression and ranking."}
+labHref: "/labs/embedding-and-representation-training/"
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { ContrastiveLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import TrainingEvidence from '../../../components/TrainingEvidence.astro';
+import { DenoisingExplorer } from '../../../components/simulations/TrainingLabs';
 
 <ConceptPrimer id="tsdae" />
 
 ## Definition and intuition
 
-**TSDAE**: Transformer-based Sequential Denoising Auto-Encoder training reconstructs original text from a corrupted version to adapt sentence representations without labels.
+A Transformer-based Sequential Denoising Auto-Encoder (TSDAE) learns sentence representations by encoding a damaged sentence and reconstructing the original with a decoder. The deployed artifact is the encoder; reconstruction is a training surrogate for a useful sentence representation.
 
-Chapter 10 trains representations by choosing which examples should be close or far apart. The construction of positive and negative pairs is part of the learning objective.
+Follow the input, objective, update, and evaluation as separate steps. The worked example and experiment below connect the explanation to an inspectable implementation.
 
-## Before you start
+<ReferenceBrief objectives={["Distinguish teacher-forced and greedy reconstruction.", "Explain a loss-versus-retrieval disagreement."]} prerequisites="sbert, loss-functions" scope="Original numerical reasoning and actual recorded CPU training with pinned public models. Independent technical/editorial review and beginner feedback remain pending." />
 
-Read [SBERT](/llm-concept-atlas/concepts/sbert/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **TSDAE** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Corrupt only the permitted corpus
 
-1. **Prepare:** Corrupt a sentence by deleting or masking tokens
-2. **Transform:** Encode the damaged text and decode toward the original
-3. **Inspect:** Update the encoder and evaluate downstream similarity or retrieval.
+The lab uses training-only service requests and seeded 60% whitespace-word deletion, retaining at least one word. The original sentence is the target, not a class label. Fixed corruptions make this small experiment inspectable; they do not reproduce the full stochastic scale of the paper. Validation/test sentences are excluded from updates.
 
-### The important distinction
+### A sentence bottleneck conditions reconstruction
 
-TSDAE corrupts a sentence and trains a sequential decoder to reconstruct it from an encoded representation. This creates a self-supervised adaptation signal without explicit similarity labels. The learned embedding still needs downstream evaluation because reconstruction can reward details irrelevant to retrieval.
+The actual DenoisingAutoEncoderLoss uses CLS pooling and sends a [batch,1,128] vector to decoder cross-attention. The decoder sees gold previous tokens during teacher-forced training and predicts the next original token. Padding targets are ignored with the decoder pad ID in this pinned loss. Encoder/decoder compatible parameters are tied; new decoder cross-attention is initialized separately. With only one context key, its attention softmax is always one: query/key selection gradients can be zero while value/output projections still learn. The run checks this distinction rather than asserting every cross-attention tensor must receive a nonzero gradient.
+
+### Inspect task quality beyond reconstruction
+
+CLS is a pooling choice used by the book/paper experiment, not proof that contextual mean pooling has no positional information. A lower reconstruction loss can reflect better token prediction without better retrieval geometry. L17 records both curves, selects among trained checkpoints using validation retrieval MRR, and checks actual encoder and decoder gradients, tied parameters and reload equivalence.
 
 ## Worked example
 
-“The payment arrived yesterday” might become “payment arrived”. The model learns a representation useful for reconstructing the full sentence, even though no positive pair label was provided. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+A request such as “How do I book a workshop room?” may lose most words under deletion. Compare its saved damaged input with the actual greedy reconstruction. The small decoder produces repetition in the author run. Several curve intervals lower reconstruction loss without improving validation MRR; test retrieval also fell from the CLS baseline. Those outputs remain visible.
 
-<LessonFlow steps={["Corrupt a sentence by deleting or masking tokens", "Encode the damaged text and decode toward the original", "Update the encoder and evaluate downstream similarity or retrieval."]} caption="A teaching diagram for TSDAE. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
 
-## Try the interactive lab
+Predict an outcome before changing a control. Selectors replay actual saved training/evaluation runs; loss and mask calculators recalculate a declared teaching mechanism. They make no model or API requests in your browser.
 
-<ContrastiveLab client:visible />
-
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+<DenoisingExplorer client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+From the repository root, install the foundation environment and run `python3 scripts/run-examples.py --id e7-tsdae --offline`. The standard-library example below calculates a mechanism or checks the published actual evidence. Recorded-evidence replay is distinct from new optimization: the connected model lab supplies the complete source and fresh-training command.
+
+{/* example:e7-tsdae:start */}
 
 ```python
-tokens = ["the", "model", "reads"]
-target = tokens[1]
-masked = tokens.copy(); masked[1] = "[MASK]"
-print(masked, "target:", target)
+import sys
+sys.path.insert(0, 'examples/foundations/src')
+from atlas_foundations.e7.contracts import delete_words
+result = delete_words('How do I book a workshop room?', seed=42, probability=0.6)
+print('original:', result['original'])
+print('damaged:', result['damaged'])
+print('retained positions:', result['retained_word_indices'])
+print('This corruption calculation does not reconstruct or train a neural model.')
 ```
 
-**Expected output:**
+{/* example:e7-tsdae:end */}
+
+Recorded calculation output:
 
 ```text
-['the', '[MASK]', 'reads'] target: model
+original: How do I book a workshop room?
+damaged: How a workshop room?
+retained positions: [0, 4, 5, 6]
+This corruption calculation does not reconstruct or train a neural model.
 ```
 
-**What the code shows:** One token is replaced by `[MASK]` and the original token is kept as the training target. The example isolates data preparation, not the neural prediction. The [official chapter 10 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter10) develops the corresponding model-based implementation.
+<TrainingEvidence id="tsdae-adaptation" />
 
 ## When to use it
 
-Use it for unsupervised domain adaptation when raw text is plentiful but labels are scarce. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use unsupervised reconstruction as a candidate adaptation stage when domain text is available but relationship labels are scarce. Test the resulting encoder on the actual downstream task.
 
 ## Limits and common mistakes
 
-- Reconstruction quality does not automatically imply better retrieval for the target task.
-- **Failure to look for:** The model gets good at filling common words but still confuses two policy passages with different answers.
+Teacher-forced token predictions are easier than free reconstruction because they see correct earlier tokens. A decoder that models common wording well may still discard distinctions important for search. Reconstruction performance is not a general sentence-embedding benchmark.
 
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Author execution checks tensor/mask contracts, actual parameter updates, split provenance and artifact reload. It does not constitute independent lesson acceptance. Keep training quality, task quality, runtime and generalization claims separate.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First corrupt a sentence by deleting or masking tokens Then encode the damaged text and decode toward the original Finally update the encoder and evaluate downstream similarity or retrieval.</p></details>
+<details>
+<summary>Distinguish teacher-forced and greedy reconstruction.</summary>
 
-<details><summary>What would make the result misleading?</summary><p>The model gets good at filling common words but still confuses two policy passages with different answers.</p></details>
+Teacher forcing supplies gold previous tokens at each position; greedy decoding must use its own earlier generated tokens and can accumulate errors.
+
+</details>
+
+<details>
+<summary>Explain a loss-versus-retrieval disagreement.</summary>
+
+The surrogate predicts text through a bottleneck; task ranking depends on the geometry of unseen query/document vectors, which need not improve together.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 10 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 10 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter10). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 10 of *Hands-On Large Language Models*. The [complete L15–L20 lab](/llm-concept-atlas/labs/embedding-and-representation-training/#l17-tsdae-and-adaptation) links actual training source, pinned environments, data provenance, real failures, and the artifact lifecycle. Compare the [authors’ pinned chapter 10 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter10) for the book-scale workflow. The atlas uses explicitly smaller CPU configurations and does not redistribute book pages or artwork.
 
 <ConceptConnections id="tsdae" />

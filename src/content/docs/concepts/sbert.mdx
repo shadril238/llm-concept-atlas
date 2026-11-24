@@ -1,98 +1,125 @@
 ---
-title: SBERT
-description: SBERT adapts transformer encoders to produce sentence embeddings that can be compared efficiently.
-kind: concept
+title: "SBERT"
+description: "Sentence-BERT (SBERT) is a shared-weight sentence-encoding approach that makes independently computed sentence vectors useful for comparison. Sentence Transformers is the broader library that implements many architectures and objectives; its models are not all literally BERT."
+kind: "concept"
 conceptId: sbert
 chapter: 10
-part: training
-summary: SBERT adapts transformer encoders to produce sentence embeddings that can be compared efficiently.
-parent: chapter-10
-prerequisites: [contrastive-learning]
-related: [contrastive-learning, contrastive-examples]
-level: advanced
-tags: [training, chapter-10]
+part: "training"
+summary: "Sentence-BERT (SBERT) is a shared-weight sentence-encoding approach that makes independently computed sentence vectors useful for comparison. Sentence Transformers is the broader library that implements many architectures and objectives; its models are not all literally BERT."
+parent: "chapter-10"
+prerequisites: ["text-embedding", "encoder-only"]
+related: ["dense-retrieval"]
+level: "advanced"
+tags: ["training", "chapter-10"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-24"
+reviewStatus: "author-reviewed"
+reviewRecord: e7-representation-author-review-2026-11-24
+learningObjectives: ["Distinguish cached bi-encoder and joint cross-encoder work.", "Explain why a pair classifier can improve without optimal cosine retrieval."]
+aliases: ["sentence bert", "sentence transformers", "bi-encoder", "siamese sentence encoder"]
+bookSections: ["book-ch10-sbert", "book-ch10-encoder-comparison", "book-ch10-create-embeddings"]
+exampleIds: ["e7-sbert", "embedding-training"]
+relationshipReasons: {"text-embedding": "Sentence-level vectors are the reusable output of the bi-encoder.", "encoder-only": "BERT supplies the pretrained contextual token encoder for the original SBERT architecture.", "dense-retrieval": "Independent sentence vectors support the cached document index used by dense retrieval."}
+labHref: "/labs/embedding-and-representation-training/"
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { ContrastiveLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import TrainingEvidence from '../../../components/TrainingEvidence.astro';
+import { EmbeddingTraining } from '../../../components/simulations/TrainingLabs';
 
 <ConceptPrimer id="sbert" />
 
 ## Definition and intuition
 
-SBERT adapts transformer encoders to produce sentence embeddings that can be compared efficiently.
+Sentence-BERT (SBERT) is a shared-weight sentence-encoding approach that makes independently computed sentence vectors useful for comparison. Sentence Transformers is the broader library that implements many architectures and objectives; its models are not all literally BERT.
 
-Chapter 10 trains representations by choosing which examples should be close or far apart. The construction of positive and negative pairs is part of the learning objective.
+Follow the input, objective, update, and evaluation as separate steps. The worked example and experiment below connect the explanation to an inspectable implementation.
 
-## Before you start
+<ReferenceBrief objectives={["Distinguish cached bi-encoder and joint cross-encoder work.", "Explain why a pair classifier can improve without optimal cosine retrieval."]} prerequisites="text-embedding, encoder-only" scope="Original numerical reasoning and actual recorded CPU training with pinned public models. Independent technical/editorial review and beginner feedback remain pending." />
 
-Read [Contrastive learning](/llm-concept-atlas/concepts/contrastive-learning/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **SBERT** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+## How it works
 
-## Theory: how it works
+### Shared weights, separate inference
 
-1. **Prepare:** Encode each sentence independently through a shared encoder
-2. **Transform:** Pool token states into one vector per sentence
-3. **Inspect:** Train with similarity or contrastive supervision and compare vectors.
+A bi-encoder applies the same encoder/pooling parameters to each sentence. After training, each document vector can be cached and compared with a query vector. Sharing weights does not mean running two separate copies forever, and a fixed output width alone does not create semantic compatibility.
 
-### The important distinction
+### Contrast with a cross-encoder
 
-SBERT-style models use a bi-encoder: each sentence gets one reusable vector. A common pooling choice averages token embeddings under an attention mask, though model-specific pooling varies. This architecture makes large-scale retrieval practical because documents can be embedded before a query arrives.
+A cross-encoder processes the paired token sequence jointly, allowing token interactions across the pair before scoring. For all unordered pairs of 10,000 inputs, 49,995,000 pair evaluations are possible; independent encoding needs 10,000 encoder inputs plus vector comparisons. These counts are not hardware timings. Cross-encoder quality and bi-encoder efficiency depend on the actual task and model.
+
+### Pooling and training are both part of the model
+
+Masked mean pooling averages contextual states over retained tokens; CLS pooling uses a designated contextual token. Padding must not enter a mean. L15 starts from pretrained tiny BERT and trains a new sentence-level objective, not random language-model weights. Its 128-wide vectors, tokenizer, pooling config and trained encoder are saved together and reloaded.
 
 ## Worked example
 
-A thousand candidate sentences can be embedded once, then compared with a new query vector. A joint cross-encoder would need a separate forward pass for each pair. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+The original pair classifier combines [u,v,|u−v|]. With u=[1,0.5] and v=[0.2,0.8], the six features are [1,0.5,0.2,0.8,0.8,0.3]. L15 uses actual 128-wide vectors, hence 384 classifier features. That training classifier is distinct from the deployed cosine-search interface; test both the objective and the intended vector use.
 
-<LessonFlow steps={["Encode each sentence independently through a shared encoder", "Pool token states into one vector per sentence", "Train with similarity or contrastive supervision and compare vectors."]} caption="A teaching diagram for SBERT. Read the three labeled stages from left to right; each stage is described in the text above." />
+## Try the experiment
 
-## Try the interactive lab
+Predict an outcome before changing a control. Selectors replay actual saved training/evaluation runs; loss and mask calculators recalculate a declared teaching mechanism. They make no model or API requests in your browser.
 
-<ContrastiveLab client:visible />
-
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+<EmbeddingTraining client:visible />
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+From the repository root, install the foundation environment and run `python3 scripts/run-examples.py --id e7-sbert --offline`. The standard-library example below calculates a mechanism or checks the published actual evidence. Recorded-evidence replay is distinct from new optimization: the connected model lab supplies the complete source and fresh-training command.
+
+{/* example:e7-sbert:start */}
 
 ```python
-from math import sqrt
-a, b = (0.8, 0.6), (0.7, 0.7)
-dot = sum(x*y for x, y in zip(a, b))
-cosine = dot / (sqrt(sum(x*x for x in a)) * sqrt(sum(y*y for y in b)))
-print(round(cosine, 3))
+u = [1.0, 0.5]
+v = [0.2, 0.8]
+features = u + v + [abs(a - b) for a, b in zip(u, v)]
+print('classifier features:', [round(x, 2) for x in features])
+print('unordered pairs for 10,000 inputs:', 10_000 * 9_999 // 2)
+print('separate encoder inputs:', 10_000)
+print('scope: operation counts, not measured latency')
 ```
 
-**Expected output:**
+{/* example:e7-sbert:end */}
+
+Recorded calculation output:
 
 ```text
-0.99
+classifier features: [1.0, 0.5, 0.2, 0.8, 0.8, 0.3]
+unordered pairs for 10,000 inputs: 49995000
+separate encoder inputs: 10000
+scope: operation counts, not measured latency
 ```
 
-**What the code shows:** The code takes a dot product, divides by both vector lengths, and prints a cosine score. Change a coordinate to see how the direction changes the comparison. The [official chapter 10 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter10) develops the corresponding model-based implementation.
+<TrainingEvidence id="embedding-training" />
 
 ## When to use it
 
-Use it for scalable semantic search, clustering, or sentence similarity. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use a bi-encoder for large searchable collections or reusable sentence features. Add a cross-encoder for a small candidate pool when joint comparison is worth its extra work.
 
 ## Limits and common mistakes
 
-- Bi-encoder efficiency trades away some pairwise interaction available to a reranker.
-- **Failure to look for:** A semantically related sentence outranks one that actually answers the precise query.
+An arbitrary mean of pretrained BERT states is not automatically a trained sentence embedding. Similarity depends on pooling, normalization, truncation and the learned task. Our shared-weight CPU example does not reproduce the book’s full NLI/STSB training scale.
 
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+Author execution checks tensor/mask contracts, actual parameter updates, split provenance and artifact reload. It does not constitute independent lesson acceptance. Keep training quality, task quality, runtime and generalization claims separate.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First encode each sentence independently through a shared encoder Then pool token states into one vector per sentence Finally train with similarity or contrastive supervision and compare vectors.</p></details>
+<details>
+<summary>Distinguish cached bi-encoder and joint cross-encoder work.</summary>
 
-<details><summary>What would make the result misleading?</summary><p>A semantically related sentence outranks one that actually answers the precise query.</p></details>
+Documents are encoded once for a bi-encoder; the cross-encoder normally recomputes a joint representation for each query/document pair.
+
+</details>
+
+<details>
+<summary>Explain why a pair classifier can improve without optimal cosine retrieval.</summary>
+
+Its learned classifier can use features that the deployed cosine scorer does not expose. Evaluate the actual inference interface.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 10 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 10 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter10). Continue through the linked prerequisites and nearby concepts below.
+This original lesson follows Chapter 10 of *Hands-On Large Language Models*. The [complete L15–L20 lab](/llm-concept-atlas/labs/embedding-and-representation-training/#l15-embedding-training) links actual training source, pinned environments, data provenance, real failures, and the artifact lifecycle. Compare the [authors’ pinned chapter 10 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter10) for the book-scale workflow. The atlas uses explicitly smaller CPU configurations and does not redistribute book pages or artwork.
 
 <ConceptConnections id="sbert" />

@@ -2,7 +2,7 @@
 
 **Prepared:** 2026-11-18  
 **Last updated:** 2026-11-19  
-**Status:** E0 source inventory and initial lesson audit, and E1 infrastructure implemented; E2–E6 implementation delivered, independent review pending; E7–E10 pending. See the [gap report](./docs/audits/book-gap-report.md) and [audit guide](./docs/audits/README.md).
+**Status:** E0 source inventory and initial lesson audit, and E1 infrastructure implemented; E2–E7 implementation delivered, independent review pending; E8–E10 pending. See the [gap report](./docs/audits/book-gap-report.md) and [audit guide](./docs/audits/README.md).
 **Baseline:** Repository commit `a6b3ec4`, following the original Phases 1–5 in [plan.md](./plan.md).  
 **Source edition:** _Hands-On Large Language Models_, Jay Alammar and Maarten Grootendorst, first edition, September 2024.  
 **Primary goal:** A learner can explain, trace, implement, evaluate, and apply the book's ideas without depending on unexplained terminology or disconnected code snippets.
@@ -893,11 +893,11 @@ Use enhancement phase IDs **E0–E10** to distinguish this work from the origina
 
 **Depends on:** E4/E6 evaluation foundations and the training environment; reuse E2 NER work.
 
-- [ ] Complete Chapter 10–11 work, including Augmented SBERT, all required loss explanations, TSDAE, SetFit, continued pretraining, and full NER preparation.
-- [ ] Complete L15–L20 with baseline comparisons, appropriate data splits, saving/reloading, and held-out evaluation.
-- [ ] Add training curves, gradient/frozen-parameter checks, alignment visuals, and gold/silver-data provenance.
-- [ ] Extend the NER reference workflow to the chapter's full teaching scope without duplicating its source implementation.
-- [ ] Publish measured runtime profiles and recorded results; retain unverified status for any configuration not actually executed.
+- [x] Complete Chapter 10–11 work, including Augmented SBERT, all required loss explanations, TSDAE, SetFit, continued pretraining, and full NER preparation.
+- [x] Complete L15–L20 with baseline comparisons, appropriate data splits, saving/reloading, and held-out evaluation.
+- [x] Add training curves, gradient/frozen-parameter checks, alignment visuals, and gold/silver-data provenance.
+- [x] Extend the NER reference workflow to the chapter's full teaching scope without duplicating its source implementation.
+- [x] Publish measured runtime profiles and recorded results; retain unverified status for any configuration not actually executed.
 
 **Gate:** Each training workflow demonstrably updates the intended parameters, evaluates on untouched data, and produces a reusable artifact. Loss reduction alone is not the completion criterion.
 
@@ -1061,9 +1061,9 @@ These references support the implementation direction, not a claim that all prop
 | E4: classification and topics         | Implemented; review pending | 15 expanded/new lessons, L07–L08 CPU evidence, explorer projects; hosted importer documented, independent acceptance open.                                                    |
 | E5: prompting and workflows           | Implemented; review pending | 18 expanded/new lessons; five L09–L11 local-model sources/notebooks, interactive traces, and bounded contracts.                                                    |
 | E6: RAG and multimodal                | Implemented; review pending | 23 detailed lessons, five actual-model sources/notebooks, L12–L14 interactives, grounded/image-text projects and routes.                                                    |
-| E7: embedding/representation training | Not started | Chapter 10–11 objectives and L15–L20 accepted.                                                  |
+| E7: embedding/representation training | Implemented; review pending | 15 detailed lessons; six actual CPU training workflows/notebooks, gradient/freeze/mask checks, held-out task results and reusable artifacts.                                                  |
 | E8: generation adaptation             | Not started | Chapter 12 objectives and L21–L23 accepted.                                                     |
 | E9: integrated learner experience     | Not started | Discovery, navigation, practice, and accessibility/performance checks.                          |
 | E10: review and release               | Not started | Reconciled coverage, execution evidence, learner feedback, and release report.                  |
 
-**Next:** Collect independent review of E2–E6 and proceed to E7 embedding and representation training when authorized. Full enhancement acceptance remains tied to the documented review gates.
+**Next:** Collect independent review of E2–E7 and proceed to E8 generation adaptation and evaluation when authorized. Full enhancement acceptance remains tied to the documented review gates.

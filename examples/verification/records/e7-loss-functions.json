@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e7-loss-functions",
+  "status": "passed",
+  "date": "2026-11-24T08:28:58.029014+00:00",
+  "gitCommit": "2a274a0eaf31e33861ce3e0b036faed935fa906a",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e7/loss_functions.py"
+  ],
+  "sourceSha256": "cfd183e3f0634058e21c16378369380400c92bf891bb6793cbdbd25ce3fff4c6",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "5285eefc8beb6216d906201b1ac6761d06e48f33936530d4df36ff7c98c25979",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.01,
+  "peakMemoryMiB": 21.2,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "regression toward one: 0.04\nregression toward zero: 0.64\npair classification CE: 0.3133\ndirectional MNR mean: 0.0878\nDifferent labels and denominators define different objectives.\n",
+  "stderr": "",
+  "error": null,
+  "supportHashes": {
+    "examples/foundations/src/atlas_foundations/e7/contracts.py": "29ef85a7f9f8e5226038e69aaa3c2e939ed76baaee0eea62f9bf438dc22ca5cd",
+    "src/data/training-results.json": "919648238de7ecc34e48e0c25a2e8cce55e2e0e5368c7942d6423e273381d4f0",
+    "examples/data/fixtures/embedding-training.json": "a593a458508a21c918ab8f6570ff17408f65d92f297bd845b3c7cbdf1724fa1c"
+  }
+}
