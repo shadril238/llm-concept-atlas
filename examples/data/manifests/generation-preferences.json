@@ -1,0 +1,12 @@
+{
+  "id": "atlas-generation-preferences-v1",
+  "revision": 1,
+  "path": "examples/data/fixtures/generation-preferences.json",
+  "sha256": "e5c3d0b773cfe1f51f1f2cc8343f4b7420185ca137d8eda989b9121a0e7b118f",
+  "source": "Derived from attributed instruction-dolly.json with four rule-authored rejected-completion types.",
+  "license": "CC-BY-SA-3.0",
+  "split": "32 train / 8 validation / 8 test; exact source row and context disjoint.",
+  "training": true,
+  "leakagePolicy": "Same prompts as SFT within the same split only; test never optimized or used to select checkpoints.",
+  "attribution": "Databricks Dolly subset, with Atlas preference transformations, CC BY-SA 3.0. Not independent human preference annotations."
+}

@@ -392,6 +392,21 @@ if not args.check:
     if all(path.exists() for path in representation_paths.values()):
         outputs["src/data/training-results.json"] = json.dumps({key: json.loads(path.read_text()) for key,path in representation_paths.items()}, indent=2, ensure_ascii=False, allow_nan=False) + "\n"
 
+# E8 staged notebooks and exact-byte published evidence.
+generation_path = ROOT / "examples/training/generation/notebook_views.py"
+generation_spec = importlib.util.spec_from_file_location("generation_notebook_views", generation_path)
+generation_views = importlib.util.module_from_spec(generation_spec)
+generation_spec.loader.exec_module(generation_views)
+for eid in generation_views.SPECS:
+    outputs[f"examples/training/generation/notebooks/{eid}.ipynb"] = json.dumps(generation_views.notebook(eid), indent=2) + "\n"
+if not args.check:
+    generation_paths = {key: ROOT / f"examples/artifacts/e8-{key}/results.json" for key in ["sft", "preferences", "evaluation"]}
+    if all(path.exists() for path in generation_paths.values()):
+        outputs["src/data/generation-results.json"] = json.dumps({key: json.loads(path.read_text()) for key,path in generation_paths.items()}, indent=2, ensure_ascii=False, allow_nan=False) + "\n"
+    quant_path = ROOT / "examples/artifacts/e8-qlora/results.json"
+    if quant_path.exists():
+        outputs["src/data/quantized-results.json"] = json.dumps({"qlora":json.loads(quant_path.read_text())}, indent=2, ensure_ascii=False, allow_nan=False) + "\n"
+
 # Replace only explicit source regions; surrounding explanations stay authored.
 if not args.check:
     discovery = {

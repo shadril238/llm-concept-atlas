@@ -1,0 +1,437 @@
+{
+  "revision": "bdd27f4d94b9c1f951818a7da7fd7aeea5dbff1a",
+  "rows": [
+    {
+      "id": "dolly-28",
+      "split": "train",
+      "instruction": "What is the average lifespan of a Golden Retriever?",
+      "context": "Golden Retrievers are a generally healthy breed; they have an average lifespan of 12 to 13 years. Irresponsible breeding to meet high demand has led to the prevalence of inherited health problems in some breed lines, including allergic skin conditions, eye problems and sometimes snappiness. These problems are rarely encountered in dogs bred from responsible breeders.",
+      "response": "The average lifespan of a Golden Retriever is 12 to 13 years.",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 28
+    },
+    {
+      "id": "dolly-321",
+      "split": "train",
+      "instruction": "When was the 8088 processor released?",
+      "context": "The 8086 (also called iAPX 86) is a 16-bit microprocessor chip designed by Intel between early 1976 and June 8, 1978, when it was released. The Intel 8088, released July 1, 1979, is a slightly modified chip with an external 8-bit data bus (allowing the use of cheaper and fewer supporting ICs),[note 1] and is notable as the processor used in the original IBM PC design.",
+      "response": "The Intel 8088 processor was released July 1, 1979.",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 321
+    },
+    {
+      "id": "dolly-332",
+      "split": "train",
+      "instruction": "Which team was relegated from the league at the conclusion of the 1991 Season?",
+      "context": "Waterside Karori were relegated at the end of the 1990 season, to be replaced by the winner of a play-off series between teams from the northern, central, and southern leagues (Mount Albert-Ponsonby, Nelson United, and Burndale United respectively). Nelson United won the series to gain promotion, but there is some controversy about their participation in the play-offs as they had only finished second in the central regional league, which was won by Petone.\n\nGisborne City were relegated at the end of the 1991 season",
+      "response": "Gisborne City",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 332
+    },
+    {
+      "id": "dolly-420",
+      "split": "train",
+      "instruction": "Extract the names of the cities and rank them in alphabetical order?",
+      "context": "The United Kingdom is a constitutional monarchy and parliamentary democracy. Its capital and largest city is London, the capital of England, a global city and financial centre with a population of over 14 million people. Edinburgh, Cardiff and Belfast are the national capitals of Scotland, Wales and Northern Ireland respectively.",
+      "response": "The cities listed in alphabetical order are Belfast, Cardiff, Edinburgh and London.",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 420
+    },
+    {
+      "id": "dolly-424",
+      "split": "train",
+      "instruction": "From the passage provided, extract the date when the 34th Wisconsin Infantry Regiment was organized.",
+      "context": "The 34th Wisconsin Infantry Regiment was a conscripted infantry regiment that served in the Union Army during the American Civil War. The 34th Wisconsin Infantry was composed of men drafted by state authorities under General Order No. 94. The regiment was organized at Madison, Wisconsin, and mustered into Federal service December 31, 1862.",
+      "response": "The 34th Wisconsin Infantry Regiment was organized on December 31, 1862.",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 424
+    },
+    {
+      "id": "dolly-563",
+      "split": "train",
+      "instruction": "From the passage provided, extract the programming languages supported by Flink. Separate them with a comma.",
+      "context": "Flink provides a high-throughput, low-latency streaming engine as well as support for event-time processing and state management. Flink applications are fault-tolerant in the event of machine failure and support exactly-once semantics. Programs can be written in Java, Scala, Python, and SQL and are automatically compiled and optimized into dataflow programs that are executed in a cluster or cloud environment.",
+      "response": "Java, Scala, Python, SQL",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 563
+    },
+    {
+      "id": "dolly-1059",
+      "split": "train",
+      "instruction": "Who started Belu?",
+      "context": "Belu was founded in 2004 by film maker Reed Paget as a bottled water business with an aim to be an environmentally friendly alternative to other beverages on the market. Before launching Belu, Paget was a keen environmentalist in business communities, encouraging others in the drinks industry to consider the environmental impact of sourcing, manufacturing and packaging. Early stage investors in Belu included Body Shop co-founder Gordon Roddick, environmentalist Ben Goldsmith and hedge fund manager, Chris Cooper-Hohn",
+      "response": "Reed Paget founded Belu in 2004.",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 1059
+    },
+    {
+      "id": "dolly-1131",
+      "split": "train",
+      "instruction": "Why is it called the Hawaiian pizza?",
+      "context": "The addition of pineapple to the traditional mix of tomato sauce and cheese, along with either ham or bacon, later became popular locally and eventually became a staple offering of pizzerias on a global scale. The name of this creation is, in fact, actually not directly inspired by the U.S. state of Hawaii at all; Panopoulos chose the name Hawaiian after the brand of canned pineapple they were using at the time.",
+      "response": "The name comes from the canned pineapple brand",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 1131
+    },
+    {
+      "id": "dolly-1371",
+      "split": "train",
+      "instruction": "List the two oldest University of California campuses separated by a semicolon.",
+      "context": "The University of California, Los Angeles (UCLA) is a public land-grant research university in Los Angeles, California. UCLA's academic roots were established in 1881 as a normal school then known as the southern branch of the California State Normal School (now San José State University). This school was absorbed with the official founding of UCLA as the Southern Branch of the University of California in 1919, making it the second-oldest of the 10-campus University of California system (after UC Berkeley).",
+      "response": "UC Berkeley; UCLA",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 1371
+    },
+    {
+      "id": "dolly-1381",
+      "split": "train",
+      "instruction": "How far is the village from Warsaw?",
+      "context": "Żabia Wola [ˈʐabja ˈvɔla] is a village in Grodzisk Mazowiecki County, Masovian Voivodeship, in east-central Poland. It is the seat of the gmina (administrative district) called Gmina Żabia Wola. It lies approximately 10 kilometres (6 mi) south-east of Grodzisk Mazowiecki and 30 km (19 mi) south-west of Warsaw.\nThe village has a population of 530.",
+      "response": "The village lies approximately 30 km (19 mi) south-west of Warsaw.",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 1381
+    },
+    {
+      "id": "dolly-1603",
+      "split": "train",
+      "instruction": "Where is Cabomba sometimes used for decoration but also utility?",
+      "context": "Cabomba is an aquatic plant genus, one of two belonging to the family Cabombaceae. It has divided submerged leaves in the shape of a fan (hence the vernacular name fanwort) and is much favoured by aquarists as an ornamental and oxygenating plant for fish tanks. Use in the aquarium trade has led to some species being introduced to other parts of the world, such as Australia, where they have become weeds.",
+      "response": "fish tanks",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 1603
+    },
+    {
+      "id": "dolly-1658",
+      "split": "train",
+      "instruction": "Which notable person in this list with surname Liebers was born last?",
+      "context": "Liebers is a German language surname. Notable people with the name include:\n\nMario Liebers (born 1960), German former competitive figure skater\nMartin Liebers (born 1985), German former competitive figure skater\nMatthias Liebers (born 1958), former German footballer\nPeter Liebers (born 1988), German former figure skater.",
+      "response": "Peter Liebers",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 1658
+    },
+    {
+      "id": "dolly-1968",
+      "split": "train",
+      "instruction": "Is the harmonic distribution a discrete distribution?",
+      "context": "In probability theory and statistics, the harmonic distribution is a continuous probability distribution. It was discovered by Étienne Halphen, who had become interested in the statistical modeling of natural events. His practical experience in data analysis motivated him to pioneer a new system of distributions that provided sufficient flexibility to fit a large variety of data sets. Halphen restricted his search to distributions whose parameters could be estimated using simple statistical approaches.",
+      "response": "No, it is a continuous distribution.",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 1968
+    },
+    {
+      "id": "dolly-2099",
+      "split": "train",
+      "instruction": "Extract the names of Jesse LaFollette's grandchildren from the provided passage",
+      "context": "Jesse LaFollette (1781 NJ-1843 Ind) was the grandfather of Robert Marion La Follette, Sr., William La Follette, and Harvey Marion LaFollette. His family lived next to the Knob Creek Farm, Kentucky owned by Thomas Lincoln during Abraham Lincoln's boyhood years. LaFollette is shown in one of the limestone panels at the Lincoln Boyhood National Memorial in Lincoln City, Indiana.",
+      "response": "Robert Marion La Follette, Sr., William La Follette, and Harvey Marion LaFollette",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 2099
+    },
+    {
+      "id": "dolly-2125",
+      "split": "train",
+      "instruction": "What is the Family of the orchid Bulbophyllum concatenatum?",
+      "context": "Bulbophyllum concatenatum is a species of orchid in the genus Bulbophyllum. \n\nKingdom: \tPlantae\nClade: \tTracheophytes\nClade: \tAngiosperms\nClade: \tMonocots\nOrder: \tAsparagales\nFamily: \tOrchidaceae\nSubfamily: \tEpidendroideae\nTribe: \tDendrobieae\nGenus: \tBulbophyllum\nSpecies: \tB. concatenatum",
+      "response": "Orchidaceae",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 2125
+    },
+    {
+      "id": "dolly-2166",
+      "split": "train",
+      "instruction": "Which is the capital of Union Territory of Ladakh ?",
+      "context": "The Leh–Manali Highway is a 428 km (266 mi) long highway in northernmost India connecting Leh, the capital of the Union Territory of Ladakh, to Manali in the state of Himachal Pradesh.",
+      "response": "Leh is the capital of the Union Territory of Ladakh.",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 2166
+    },
+    {
+      "id": "dolly-2170",
+      "split": "train",
+      "instruction": "From the passage provided, extract the date of birth of Gandhi",
+      "context": "Mohandas Karamchand Gandhi was born on 2 October 1869 into a Gujarati Hindu Modh Bania family in Porbandar (also known as Sudamapuri), a coastal town on the Kathiawar Peninsula and then part of the small princely state of Porbandar in the Kathiawar Agency of the British Raj. His father, Karamchand Uttamchand Gandhi (1822–1885), served as the dewan (chief minister) of Porbandar state. His family originated from the then village of Kutiana in what was then Junagadh State.",
+      "response": "Gandhi was born on 2 October 1869",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 2170
+    },
+    {
+      "id": "dolly-2327",
+      "split": "train",
+      "instruction": "Extract the years that Ayrton Senna da Silva won the Formula One World Championship, and put them separated by comma.",
+      "context": "Ayrton Senna da Silva (21 March 1960 – 1 May 1994) was a Brazilian racing driver who won the Formula One World Drivers' Championship in 1988, 1990, and 1991. Senna is one of three Formula One drivers from Brazil to win the World Championship and won 41 Grands Prix and 65 pole positions, with the latter being the record until 2006.",
+      "response": "1988, 1990, 1991",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 2327
+    },
+    {
+      "id": "dolly-2408",
+      "split": "train",
+      "instruction": "Extract the number of men and women living in the municipality of Paradela and list them using bullets in the format {men} - {number} and {woman} - {number) in a comma separated format.",
+      "context": "Paradela is a municipality in Lugo province in Galicia in north-west Spain. It is situated in the region of Sarria. There were 2,193 people living in Paradela as of 2008 (1,101 men and 1,092 women). It is known for the connection it has with the Way of St. James. The French route of such a way, ending in Santiago de Compostela, passes through five parishes of Paradela: Ferreiros, Francos, Laxe, Cortes and Loio.",
+      "response": "{men} - {1,101}, {woman} - {1,092}",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 2408
+    },
+    {
+      "id": "dolly-2504",
+      "split": "train",
+      "instruction": "What year was Craigslist founded?",
+      "context": "Craigslist (stylized as craigslist) is a privately-held American company operating a classified advertisements website with sections devoted to jobs, housing, for sale, items wanted, services, community service, gigs, résumés, and discussion forums.\n\nCraig Newmark began the service in 1995 as an email distribution list to friends, featuring local events in the San Francisco Bay Area. It became a web-based service in 1996 and expanded into other classified categories. It started expanding to other U.S. and Canadian cities in 2000, and now covers 70 countries.",
+      "response": "Craigslist was founded in the year 1995 by Craig Newmark.",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 2504
+    },
+    {
+      "id": "dolly-2552",
+      "split": "train",
+      "instruction": "List all the years mentioned in the following passage",
+      "context": "During the Middle Ages, the Gran Tavola (Italian for \"Great Table\") was the largest Sienese bank; it was one of the most powerful banks in Europe from 1255 to 1298. The Gran Tavola has been called \"the greatest bank of the thirteenth century\" as well as \"one of the largest commercial and banking enterprises in Europe\".\n\nThe main branches of the Gran Tavola during the mid-thirteenth century were in Pisa, Bologna, Genoa, Marseille, and Paris.",
+      "response": "1255, 1298",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 2552
+    },
+    {
+      "id": "dolly-2590",
+      "split": "train",
+      "instruction": "What is the color of silicon.",
+      "context": "Silicon is a chemical element with the symbol Si and atomic number 14. It is a hard, brittle crystalline solid with a blue-grey metallic luster, and is a tetravalent metalloid and semiconductor. It is a member of group 14 in the periodic table: carbon is above it; and germanium, tin, lead, and flerovium are below it. It is relatively unreactive.",
+      "response": "blue-grey",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 2590
+    },
+    {
+      "id": "dolly-2886",
+      "split": "train",
+      "instruction": "Extract from the text the list of actors and the characters they play.  List answer as bullet list in in format:  {actor name}:  {character name}",
+      "context": "The Mandalorian is an American space Western television series created by Jon Favreau for the streaming service Disney+. It is the first live-action series in the Star Wars franchise, beginning five years after the events of Return of the Jedi (1983), and stars Pedro Pascal as the title character, a lone bounty hunter who goes on the run to protect the Force-sensitive child Grogu. Starting in the third season, Katee Sackhoff also stars as Mandalorian Bo-Katan Kryze, following her appearance in the second season.",
+      "response": "- Pedro Pascal: Mandelorian\n- Katee Sackhoff: Bo-Katan Kryze",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 2886
+    },
+    {
+      "id": "dolly-2937",
+      "split": "train",
+      "instruction": "Using this passage, extract all the years associated with the area.",
+      "context": "In 1872 the Boundary Commission travelled through this area while surveying the border between Canada and the United States. During the 1874 March West trek of the North-West Mounted Police, the force established its first camp (called Short Creek Camp) at this location. The community began being served by the Soo Line in 1893, permitting the coal mines in the region to become operational. Roche Percée incorporated as a village on January 12, 1909.",
+      "response": "1872, 1874, 1893, 1909",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 2937
+    },
+    {
+      "id": "dolly-3075",
+      "split": "train",
+      "instruction": "Extract all of the names of people mentioned in this paragraph and list them using bullets in the format {Name}",
+      "context": "The Wildfoods festival was started in 1990 by Hokitika local Claire Bryant, a producer of gorse-flower and rose-petal wine, who wanted to celebrate the flavours and produce of the West Coast. The first festival in March 1990 coincided with Hokitika's 125th anniversary and was run by Heritage Hokitika. It took place in a newly-developed heritage area on Gibson Quay in downtown Hokitika. The first Wildfoods had 30 stalls, and attracted 1800 people. Alison Holst was the celebrity judge.",
+      "response": "• Claire Bryant\n• Alison Holst",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 3075
+    },
+    {
+      "id": "dolly-3114",
+      "split": "train",
+      "instruction": "What does W stand for in the name W. Rex Black?",
+      "context": "Wilford Rex Black (January 31, 1920 – December 12, 2012) was an American politician.\n\nWilford Rex Black represented the 2nd Utah Senate District from 1973 to 1997. W. Rex Black, as he was often referred to, was a member of the Democratic party and represented the party as the Minority leader in the Utah Senate for many years.",
+      "response": "Wilford",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 3114
+    },
+    {
+      "id": "dolly-3557",
+      "split": "train",
+      "instruction": "Extract the most recent owner of the Seattle Storm from this Wikipedia article.",
+      "context": "Owners\nFurther information: Category:Seattle Storm owners\nBarry and Ginger Ackerley, owners of the Seattle SuperSonics (2000–2001)\nHoward Schultz, owner of the Seattle SuperSonics (2001–2006) \nClay Bennett, owner of the Seattle SuperSonics (2007) \nForce 10 Hoops LLC, composed of Dawn Trudeau, Lisa Brummel, Ginny Gilder (2008–present)",
+      "response": "The current owner of the Seattle Storm is Force",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 3557
+    },
+    {
+      "id": "dolly-3576",
+      "split": "train",
+      "instruction": "Was Michael Flavin wealthy at the time he wrote Benjamin Disraeli?",
+      "context": "Michael Flavin's Benjamin Disraeli: The Novel as a Political Discourse suggests that Venetia was largely a commercial endeavour for Disraeli, who was deep in debt at the time that he wrote it.",
+      "response": "No, he was deep in debt at the time.",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 3576
+    },
+    {
+      "id": "dolly-3603",
+      "split": "train",
+      "instruction": "Based on the passage provided, what does Brene Brown's research focus on?",
+      "context": "Casandra Brené Brown (born November 18, 1965) is an American professor, lecturer, author, and podcast host. Brown is known in particular for her research on shame, vulnerability, and leadership, and for her widely viewed TEDx talk in 2010. Since then she has written six number-one New York Times bestselling books, hosts two podcasts, and has filmed a lecture for Netflix as well as a series about her latest book, Atlas of the Heart on HBO Max.",
+      "response": "Brene Brown's research focuses on shame, vulnerability, and leadership.",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 3603
+    },
+    {
+      "id": "dolly-3864",
+      "split": "train",
+      "instruction": "From the passage provided, extract the official language of Tamil Nadu.",
+      "context": "Tamil Nadu (/ˌtæmɪl ˈnɑːduː/; Tamil: [ˈtamiɻ ˈnaːɽɯ] (listen), abbr. TN) is the southern-most state of India. The tenth largest Indian state by area and the sixth largest by population, Tamil Nadu is the home of the Tamil people, whose Tamil language—one of the longest surviving classical languages in the world—is widely spoken in the state and serves as its official language. The capital and largest city is Chennai.",
+      "response": "Tamil is the official language of Tamil Nadu.",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 3864
+    },
+    {
+      "id": "dolly-3865",
+      "split": "train",
+      "instruction": "From the passage provided find the names of the creators of Kafka. Separate them with a comma.",
+      "context": "Kafka was originally developed at LinkedIn, and was subsequently open sourced in early 2011. Jay Kreps, Neha Narkhede and Jun Rao helped co-create Kafka. Graduation from the Apache Incubator occurred on 23 October 2012. Jay Kreps chose to name the software after the author Franz Kafka because it is \"a system optimized for writing\", and he liked Kafka's work.",
+      "response": "Jay Kreps, Neha Narkhede, Jun Rao",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 3865
+    },
+    {
+      "id": "dolly-3960",
+      "split": "train",
+      "instruction": "From the passage provided, extract the founders of Bloomberg L.P. Separate them with a comma.",
+      "context": "Bloomberg L.P. is a privately held financial, software, data, and media company headquartered in Midtown Manhattan, New York City. It was co-founded by Michael Bloomberg in 1981, with Thomas Secunda, Duncan MacMillan, Charles Zegar, and a 12% ownership investment by Bank of America through their brokerage subsidiary Merrill Lynch.",
+      "response": "Michael Bloomberg, Thomas Secunda, Duncan MacMillan, Charles Zega",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 3960
+    },
+    {
+      "id": "dolly-3979",
+      "split": "validation",
+      "instruction": "Extract the members of the band Radiohead in a comma separated list.",
+      "context": "Radiohead are an English rock band formed in Abingdon, Oxfordshire, in 1985. The band consists of Thom Yorke (vocals, guitar, piano, keyboards); brothers Jonny Greenwood (lead guitar, keyboards, other instruments) and Colin Greenwood (bass); Ed O'Brien (guitar, backing vocals); and Philip Selway (drums, percussion). They have worked with the producer Nigel Godrich and the cover artist Stanley Donwood since 1994. Radiohead's experimental approach is credited with advancing the sound of alternative rock.",
+      "response": "Thom Yorke, Jonny Greenwood, Colin Greenwood, Ed O'Brien, Philip Selway",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 3979
+    },
+    {
+      "id": "dolly-4061",
+      "split": "validation",
+      "instruction": "Was Samuel Wesley the founder of the Methodist Church?",
+      "context": "Samuel Wesley (24 February 1766 – 11 October 1837) was an English organist and composer in the late Georgian period. Wesley was a contemporary of Mozart (1756–1791) and was called by some \"the English Mozart\".\n\nBorn in Bristol, he was the son of noted Methodist and hymnodist Charles Wesley, the grandson of Samuel Wesley (a poet of the late Stuart period) and the nephew of John Wesley, the founder of the Methodist Church.",
+      "response": "No, John Wesley, his uncle, was the founder of the Methodist Church.",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 4061
+    },
+    {
+      "id": "dolly-4136",
+      "split": "validation",
+      "instruction": "What are the primary grapes in a red Bordeaux?",
+      "context": "Red Bordeaux is generally made from a blend of grapes. Permitted grapes are Cabernet Sauvignon, Cabernet Franc, Merlot, Petit Verdot, Malbec and Carménère. Today Carménère is rarely used, with Château Clerc Milon, a fifth growth Bordeaux, being one of the few to still retain Carménère vines. As of July 2019, Bordeaux wineries authorized the use of four new red grapes to combat effects of climate change on viticulture in Bordeaux. These newly approved grapes are Marselan, Touriga Nacional, Castets, and Arinarnoa.",
+      "response": "Cabernet Sauvignon, Cabernet Franc, Merlot, Petit Verdot, Malbec",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 4136
+    },
+    {
+      "id": "dolly-4489",
+      "split": "validation",
+      "instruction": "Extract the club that Corinthians defeated in the 2012 FIFA Club World Cup.",
+      "context": "On 4 July, after reaching the final of the 2012 Copa Libertadores undefeated, Corinthians won its first title after a two-match final against 6-time champions Boca Juniors by drawing 1–1 in Argentina and winning 2-0 at the Estádio do Pacaembu in São Paulo, becoming the ninth Brazilian side to win the Copa Libertadores. The club won the 2012 FIFA Club World Cup after defeating English club Chelsea 1–0 on 16 December 2012.",
+      "response": "Chelsea",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 4489
+    },
+    {
+      "id": "dolly-4570",
+      "split": "validation",
+      "instruction": "When did the Great Chicago Fire occur?",
+      "context": "He assumed the presidency of the Commercial Insurance Company, then was named president of the Chicago Board of Underwriters in 1869. Following the Great Chicago Fire of 1871, he was named the president of the State Savings Institution, resigning in 1873. Dore also presided over the Newsboys' and Bootblacks' Home and donated a building to them in 1884.",
+      "response": "1871",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 4570
+    },
+    {
+      "id": "dolly-4663",
+      "split": "validation",
+      "instruction": "Extract the names of the editors of Transportation Research Part D. Separate them with a comma.",
+      "context": "Transportation Research Part D: Transport and Environment is a peer-reviewed, international scientific journal which publishes work relating to land, sea, and air transportation systems and their impact on environmental systems. It was established in 1996 and is published by Elsevier. The editors-in-chief are Robert Noland (Rutgers University) and Jason Cao (University of Minnesota, Twin Cities).",
+      "response": "Robert Noland, Jason Cao",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 4663
+    },
+    {
+      "id": "dolly-4854",
+      "split": "validation",
+      "instruction": "How many times did Barton switch parties?",
+      "context": "Barton switched parties three times in his political life. He was first elected as a Democratic-Republican; he then switched to an Adams Democrat for his re-election in 1825. When he ran for the Senate again in 1830 he switched to being an Anti-Jacksonian candidate. In the Senate, he served as chairman of the committee on public lands. He was a member of the Missouri State Senate in 1834–1835.",
+      "response": "Three times",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 4854
+    },
+    {
+      "id": "dolly-5330",
+      "split": "validation",
+      "instruction": "What sport did Tim Horton play?",
+      "context": "The company was founded in 1964 in Hamilton, Ontario, by Canadian hockey player Tim Horton (1930–1974) and Jim Charade (1934–2009), after an initial venture in hamburger restaurants. In 1967, Horton partnered with investor Ron Joyce, who assumed control over operations after Horton died in 1974. Joyce expanded the chain into a multi-billion dollar franchise. Charade left the organization in 1966 and briefly returned in 1970 and 1993 through 1996.",
+      "response": "Tim Horton was a hockey player",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 5330
+    },
+    {
+      "id": "dolly-5412",
+      "split": "test",
+      "instruction": "Extract the names of the teams Michael Schumacher was a part of from the text. Separate them with a comma.",
+      "context": "Michael Schumacher ; born 3 January 1969) is a German former racing driver who competed in Formula One for Jordan, Benetton, Ferrari, and Mercedes. Schumacher has a joint-record seven World Drivers' Championship titles (tied with Lewis Hamilton) and, at the time of his retirement from the sport in 2012, he held the records for the most wins (91), pole positions (68), and podium finishes (155)—which have since been broken by Hamilton—while he maintains the record for the number of total fastest laps (77), among others.",
+      "response": "Jordan, Benetton, Ferrari, Mercedes",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 5412
+    },
+    {
+      "id": "dolly-5504",
+      "split": "test",
+      "instruction": "Extract from the text who invented the Optophone.",
+      "context": "The optophone is a device, used by the blind, that scans text and generates time-varying chords of tones to identify letters. It is one of the earliest known applications of sonification. Dr. Edmund Fournier d'Albe of Birmingham University invented the optophone in 1913, which used selenium photosensors to detect black print and convert it into an audible output which could be interpreted by a blind person. The Glasgow company, Barr and Stroud, participated in improving the resolution and usability of the instrument.",
+      "response": "Dr. Edmund Fournier d'Albe",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 5504
+    },
+    {
+      "id": "dolly-5684",
+      "split": "test",
+      "instruction": "Extract the names of the groups of islands located on the Azores plateau from the text. Separate them with a comma.",
+      "context": "These islands can be divided into three recognizable groups located on the Azores Plateau:\nThe Eastern Group (Grupo Oriental) of São Miguel, Santa Maria and Formigas Islets\nThe Central Group (Grupo Central) of Terceira, Graciosa, São Jorge, Pico and Faial\nThe Western Group (Grupo Ocidental) of Flores and Corvo.",
+      "response": "Eastern Group, Central Group, Western Group",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 5684
+    },
+    {
+      "id": "dolly-5730",
+      "split": "test",
+      "instruction": "How many people initially formed the band Raeth?",
+      "context": "Raeth was initially formed in 2006 by four students from Karachi, Pakistan — Wajhi Farooki (vocals), Mustafa Asad (bass), and Hasan Farabi (lead guitar). The band was launched in 2006 by Fire Records at a local beach club in DHA.",
+      "response": "four",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 5730
+    },
+    {
+      "id": "dolly-5890",
+      "split": "test",
+      "instruction": "Extract the population of Teodorów from the following text.",
+      "context": "Teodorów [tɛɔˈdɔruf] is a village in the administrative district of Gmina Koniecpol, within Częstochowa County, Silesian Voivodeship, in southern Poland. It lies approximately 7 kilometres (4 mi) east of Koniecpol, 46 km (29 mi) east of Częstochowa, and 82 km (51 mi) north-east of the regional capital Katowice. The village has a population of 107.",
+      "response": "The village of Teodorów has a population of 107.",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 5890
+    },
+    {
+      "id": "dolly-6036",
+      "split": "test",
+      "instruction": "From the passage provided, extract the name of the person that made some fountains in the garden, and how many. Your answer shall be of the format \"{name} built {number of fountains} fountains.\"",
+      "context": "The chateau has four wings and is surrounded by arcades lining the courtyard. The yard is accessible from the entrance gate and leads to the Italian symmetrical garden. There are also four fountains in the garden by stonemason Jakub Mitthofer.",
+      "response": "Jakub Mitthofer built four fountains.",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 6036
+    },
+    {
+      "id": "dolly-6168",
+      "split": "test",
+      "instruction": "List the types of cured pork that can be used to make carbonara. Separate them with a comma.",
+      "context": "Carbonara (Italian: [karboˈnaːra]) is a Roman pasta dish made with eggs, hard cheese, cured pork and black pepper. The dish took its modern form and name in the middle of the 20th century.\n\nThe cheese is usually Pecorino Romano, Parmigiano-Reggiano, or a combination of the two. Spaghetti is the most common pasta, but fettuccine, rigatoni, linguine, or bucatini are also used. Normally guanciale or pancetta are used for the meat component, but lardons of smoked bacon are a common substitute outside Italy.",
+      "response": "Guanciale, pancetta, lardons, smoked bacon",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 6168
+    },
+    {
+      "id": "dolly-6303",
+      "split": "test",
+      "instruction": "When was the Berlin wall torn down?",
+      "context": "After World War II and its subsequent occupation by the victorious countries, the devastated city was divided; West Berlin became a de facto exclave of West Germany, surrounded by the Berlin Wall (from August 1961 to November 1989) and East German territory. East Berlin was declared capital of East Germany, while Bonn became the West German capital. Following German reunification in 1990, Berlin once again became the capital of all of Germany.",
+      "response": "The Berlin wall was torn down in 1989.",
+      "origin": "Dolly-15k information_extraction",
+      "source_row": 6303
+    }
+  ]
+}

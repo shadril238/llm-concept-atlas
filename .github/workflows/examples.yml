@@ -27,6 +27,10 @@ on:
         description: Run genuine E6 BLIP-2 Linux CPU verification (large public model download)
         type: boolean
         default: false
+      e8_nf4:
+        description: Verify genuine Linux CPU NF4 double-quant adapter training (not a GPU certification)
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
@@ -168,3 +172,22 @@ jobs:
             examples/artifacts/e6-caption/results.json
             examples/applications/retrieval/notebook-execution-blip2.json
             public/images/e6/*-blip-input.png
+
+  e8_nf4:
+    if: github.event_name == 'workflow_dispatch' && inputs.e8_nf4
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+        with:
+          version: "0.13.9"
+      - run: uv sync --locked --project examples/training/quantized
+      - run: python3 scripts/run-examples.py --id nf4-adaptation --allow-network --record
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: e8-nf4-verification
+          path: |
+            examples/verification/records/nf4-adaptation*.json
+            examples/artifacts/e8-qlora/results.json

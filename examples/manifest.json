@@ -40,6 +40,16 @@
       "project": "examples/training/representation",
       "python": "3.11",
       "lock": "examples/training/representation/uv.lock"
+    },
+    "generation": {
+      "project": "examples/training/generation",
+      "python": "3.11",
+      "lock": "examples/training/generation/uv.lock"
+    },
+    "quantized": {
+      "project": "examples/training/quantized",
+      "python": "3.11",
+      "lock": "examples/training/quantized/uv.lock"
     }
   },
   "examples": [
@@ -10191,6 +10201,437 @@
         "examples/data/fixtures/embedding-training.json",
         "examples/foundations/src/atlas_foundations/ner_contract.py"
       ]
+    },
+    {
+      "id": "instruction-adaptation",
+      "title": "L21: full/LoRA instruction adaptation",
+      "concepts": [
+        "pretraining-and-sft",
+        "peft",
+        "lora",
+        "qlora",
+        "quantization",
+        "generative-evaluation",
+        "reward-models",
+        "rlhf",
+        "dpo"
+      ],
+      "sourceSections": [
+        "book-ch12-training-stages",
+        "book-ch12-sft",
+        "book-ch12-full-fine-tuning",
+        "book-ch12-peft",
+        "book-ch12-instruction-qlora",
+        "book-ch12-instruction-template",
+        "book-ch12-sft-quantization",
+        "book-ch12-lora-config",
+        "book-ch12-sft-config",
+        "book-ch12-sft-training",
+        "book-ch12-merge",
+        "book-ch12-evaluation",
+        "book-ch12-word-metrics",
+        "book-ch12-benchmarks",
+        "book-ch12-leaderboards",
+        "book-ch12-automated-evaluation",
+        "book-ch12-human-evaluation",
+        "book-ch12-alignment",
+        "book-ch12-reward-models",
+        "book-ch12-reward-io",
+        "book-ch12-reward-training",
+        "book-ch12-no-reward-model",
+        "book-ch12-dpo-workflow",
+        "book-ch12-alignment-template",
+        "book-ch12-dpo-quantization",
+        "book-ch12-dpo-config",
+        "book-ch12-dpo-training",
+        "book-ch12-adapters",
+        "book-ch12-low-rank",
+        "book-ch12-blockwise-quantization",
+        "book-ch12-double-quantization",
+        "book-ch12-perplexity",
+        "book-ch12-overlap-metrics",
+        "book-ch12-preference-pairs",
+        "book-ch12-reward-loss",
+        "book-ch12-ppo",
+        "book-ch12-dpo-logprobs"
+      ],
+      "level": "B",
+      "kind": "evaluated-workflow",
+      "environment": "generation",
+      "workingDirectory": ".",
+      "lesson": null,
+      "region": null,
+      "models": [
+        {
+          "id": "EleutherAI/pythia-14m",
+          "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac"
+        },
+        {
+          "id": "prajjwal1/bert-tiny",
+          "revision": "6f75de8b60a9f8a2fdf7b69cbd86d9e64bcb3837"
+        }
+      ],
+      "dataset": "examples/data/manifests/instruction-dolly.json",
+      "seed": 42,
+      "reproducibility": "Pinned CPU profile, fixed source-row/context-disjoint train/validation/test data, completion masks, validation-selected trained checkpoints, real updates and saved artifact reload. GPU profile remains unverified.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 1200,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Fixed attributed extraction subset and rule-authored preference pairs; explicit EOS and loss masks.",
+      "outputSchema": "JSON checks and inspectable result artifact; raw generations retained.",
+      "verificationRecord": null,
+      "troubleshooting": "Read examples/training/generation/README.md; run SFT, preferences, then evaluation. NF4 requires the separate Linux environment.",
+      "entrypoint": "examples/training/generation/src/atlas_generation/sft.py",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "training_updates_verified": true,
+          "reload_verified": true,
+          "merge_verified": true,
+          "masks_verified": true
+        }
+      },
+      "supportFiles": [
+        "examples/training/generation/src/atlas_generation/common.py",
+        "examples/training/generation/download_models.py",
+        "examples/training/generation/models.json",
+        "examples/foundations/src/atlas_foundations/e8/contracts.py",
+        "examples/data/fixtures/instruction-dolly.json",
+        "examples/data/fixtures/instruction-contract.json",
+        "examples/data/fixtures/generation-preferences.json",
+        "examples/data/manifests/generation-preferences.json"
+      ],
+      "resultArtifact": "examples/artifacts/e8-sft/results.json",
+      "resultFile": "src/data/generation-results.json",
+      "resultKey": "sft"
+    },
+    {
+      "id": "preference-adaptation",
+      "title": "L23: scalar reward modeling and DPO",
+      "concepts": [
+        "pretraining-and-sft",
+        "peft",
+        "lora",
+        "qlora",
+        "quantization",
+        "generative-evaluation",
+        "reward-models",
+        "rlhf",
+        "dpo"
+      ],
+      "sourceSections": [
+        "book-ch12-training-stages",
+        "book-ch12-sft",
+        "book-ch12-full-fine-tuning",
+        "book-ch12-peft",
+        "book-ch12-instruction-qlora",
+        "book-ch12-instruction-template",
+        "book-ch12-sft-quantization",
+        "book-ch12-lora-config",
+        "book-ch12-sft-config",
+        "book-ch12-sft-training",
+        "book-ch12-merge",
+        "book-ch12-evaluation",
+        "book-ch12-word-metrics",
+        "book-ch12-benchmarks",
+        "book-ch12-leaderboards",
+        "book-ch12-automated-evaluation",
+        "book-ch12-human-evaluation",
+        "book-ch12-alignment",
+        "book-ch12-reward-models",
+        "book-ch12-reward-io",
+        "book-ch12-reward-training",
+        "book-ch12-no-reward-model",
+        "book-ch12-dpo-workflow",
+        "book-ch12-alignment-template",
+        "book-ch12-dpo-quantization",
+        "book-ch12-dpo-config",
+        "book-ch12-dpo-training",
+        "book-ch12-adapters",
+        "book-ch12-low-rank",
+        "book-ch12-blockwise-quantization",
+        "book-ch12-double-quantization",
+        "book-ch12-perplexity",
+        "book-ch12-overlap-metrics",
+        "book-ch12-preference-pairs",
+        "book-ch12-reward-loss",
+        "book-ch12-ppo",
+        "book-ch12-dpo-logprobs"
+      ],
+      "level": "B",
+      "kind": "evaluated-workflow",
+      "environment": "generation",
+      "workingDirectory": ".",
+      "lesson": null,
+      "region": null,
+      "models": [
+        {
+          "id": "EleutherAI/pythia-14m",
+          "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac"
+        },
+        {
+          "id": "prajjwal1/bert-tiny",
+          "revision": "6f75de8b60a9f8a2fdf7b69cbd86d9e64bcb3837"
+        }
+      ],
+      "dataset": "examples/data/manifests/instruction-dolly.json",
+      "seed": 42,
+      "reproducibility": "Pinned CPU profile, fixed source-row/context-disjoint train/validation/test data, completion masks, validation-selected trained checkpoints, real updates and saved artifact reload. GPU profile remains unverified.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 1200,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Fixed attributed extraction subset and rule-authored preference pairs; explicit EOS and loss masks.",
+      "outputSchema": "JSON checks and inspectable result artifact; raw generations retained.",
+      "verificationRecord": null,
+      "troubleshooting": "Read examples/training/generation/README.md; run SFT, preferences, then evaluation. NF4 requires the separate Linux environment.",
+      "entrypoint": "examples/training/generation/src/atlas_generation/preferences.py",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "reward_trained": true,
+          "dpo_trained": true,
+          "reference_unchanged": true,
+          "reload_verified": true,
+          "initial_reference_verified": true
+        }
+      },
+      "supportFiles": [
+        "examples/training/generation/src/atlas_generation/common.py",
+        "examples/training/generation/download_models.py",
+        "examples/training/generation/models.json",
+        "examples/foundations/src/atlas_foundations/e8/contracts.py",
+        "examples/data/fixtures/instruction-dolly.json",
+        "examples/data/fixtures/instruction-contract.json",
+        "examples/data/fixtures/generation-preferences.json",
+        "examples/data/manifests/generation-preferences.json"
+      ],
+      "resultArtifact": "examples/artifacts/e8-preferences/results.json",
+      "resultFile": "src/data/generation-results.json",
+      "resultKey": "preferences"
+    },
+    {
+      "id": "generation-evaluation",
+      "title": "L22: fixed generation evaluation",
+      "concepts": [
+        "pretraining-and-sft",
+        "peft",
+        "lora",
+        "qlora",
+        "quantization",
+        "generative-evaluation",
+        "reward-models",
+        "rlhf",
+        "dpo"
+      ],
+      "sourceSections": [
+        "book-ch12-training-stages",
+        "book-ch12-sft",
+        "book-ch12-full-fine-tuning",
+        "book-ch12-peft",
+        "book-ch12-instruction-qlora",
+        "book-ch12-instruction-template",
+        "book-ch12-sft-quantization",
+        "book-ch12-lora-config",
+        "book-ch12-sft-config",
+        "book-ch12-sft-training",
+        "book-ch12-merge",
+        "book-ch12-evaluation",
+        "book-ch12-word-metrics",
+        "book-ch12-benchmarks",
+        "book-ch12-leaderboards",
+        "book-ch12-automated-evaluation",
+        "book-ch12-human-evaluation",
+        "book-ch12-alignment",
+        "book-ch12-reward-models",
+        "book-ch12-reward-io",
+        "book-ch12-reward-training",
+        "book-ch12-no-reward-model",
+        "book-ch12-dpo-workflow",
+        "book-ch12-alignment-template",
+        "book-ch12-dpo-quantization",
+        "book-ch12-dpo-config",
+        "book-ch12-dpo-training",
+        "book-ch12-adapters",
+        "book-ch12-low-rank",
+        "book-ch12-blockwise-quantization",
+        "book-ch12-double-quantization",
+        "book-ch12-perplexity",
+        "book-ch12-overlap-metrics",
+        "book-ch12-preference-pairs",
+        "book-ch12-reward-loss",
+        "book-ch12-ppo",
+        "book-ch12-dpo-logprobs"
+      ],
+      "level": "B",
+      "kind": "evaluated-workflow",
+      "environment": "generation",
+      "workingDirectory": ".",
+      "lesson": null,
+      "region": null,
+      "models": [
+        {
+          "id": "EleutherAI/pythia-14m",
+          "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac"
+        },
+        {
+          "id": "prajjwal1/bert-tiny",
+          "revision": "6f75de8b60a9f8a2fdf7b69cbd86d9e64bcb3837"
+        }
+      ],
+      "dataset": "examples/data/manifests/instruction-dolly.json",
+      "seed": 42,
+      "reproducibility": "Pinned CPU profile, fixed source-row/context-disjoint train/validation/test data, completion masks, validation-selected trained checkpoints, real updates and saved artifact reload. GPU profile remains unverified.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 1200,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Fixed attributed extraction subset and rule-authored preference pairs; explicit EOS and loss masks.",
+      "outputSchema": "JSON checks and inspectable result artifact; raw generations retained.",
+      "verificationRecord": null,
+      "troubleshooting": "Read examples/training/generation/README.md; run SFT, preferences, then evaluation. NF4 requires the separate Linux environment.",
+      "entrypoint": "examples/training/generation/src/atlas_generation/evaluate.py",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "fixed_suite_verified": true,
+          "semantic_metric_executed": true,
+          "judge_import_verified": true
+        }
+      },
+      "supportFiles": [
+        "examples/training/generation/src/atlas_generation/common.py",
+        "examples/training/generation/download_models.py",
+        "examples/training/generation/models.json",
+        "examples/foundations/src/atlas_foundations/e8/contracts.py",
+        "examples/data/fixtures/instruction-dolly.json",
+        "examples/data/fixtures/instruction-contract.json",
+        "examples/data/fixtures/generation-preferences.json",
+        "examples/data/manifests/generation-preferences.json",
+        "examples/training/generation/src/atlas_generation/sft.py",
+        "examples/training/generation/src/atlas_generation/preferences.py"
+      ],
+      "resultArtifact": "examples/artifacts/e8-evaluation/results.json",
+      "resultFile": "src/data/generation-results.json",
+      "resultKey": "evaluation"
+    },
+    {
+      "id": "nf4-adaptation",
+      "title": "L21: genuine Linux CPU NF4 adaptation",
+      "concepts": [
+        "pretraining-and-sft",
+        "peft",
+        "lora",
+        "qlora",
+        "quantization",
+        "generative-evaluation",
+        "reward-models",
+        "rlhf",
+        "dpo"
+      ],
+      "sourceSections": [
+        "book-ch12-training-stages",
+        "book-ch12-sft",
+        "book-ch12-full-fine-tuning",
+        "book-ch12-peft",
+        "book-ch12-instruction-qlora",
+        "book-ch12-instruction-template",
+        "book-ch12-sft-quantization",
+        "book-ch12-lora-config",
+        "book-ch12-sft-config",
+        "book-ch12-sft-training",
+        "book-ch12-merge",
+        "book-ch12-evaluation",
+        "book-ch12-word-metrics",
+        "book-ch12-benchmarks",
+        "book-ch12-leaderboards",
+        "book-ch12-automated-evaluation",
+        "book-ch12-human-evaluation",
+        "book-ch12-alignment",
+        "book-ch12-reward-models",
+        "book-ch12-reward-io",
+        "book-ch12-reward-training",
+        "book-ch12-no-reward-model",
+        "book-ch12-dpo-workflow",
+        "book-ch12-alignment-template",
+        "book-ch12-dpo-quantization",
+        "book-ch12-dpo-config",
+        "book-ch12-dpo-training",
+        "book-ch12-adapters",
+        "book-ch12-low-rank",
+        "book-ch12-blockwise-quantization",
+        "book-ch12-double-quantization",
+        "book-ch12-perplexity",
+        "book-ch12-overlap-metrics",
+        "book-ch12-preference-pairs",
+        "book-ch12-reward-loss",
+        "book-ch12-ppo",
+        "book-ch12-dpo-logprobs"
+      ],
+      "level": "B",
+      "kind": "evaluated-workflow",
+      "environment": "quantized",
+      "workingDirectory": ".",
+      "lesson": null,
+      "region": null,
+      "models": [
+        {
+          "id": "EleutherAI/pythia-14m",
+          "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac"
+        },
+        {
+          "id": "prajjwal1/bert-tiny",
+          "revision": "6f75de8b60a9f8a2fdf7b69cbd86d9e64bcb3837"
+        }
+      ],
+      "dataset": "examples/data/manifests/instruction-dolly.json",
+      "seed": 42,
+      "reproducibility": "Pinned CPU profile, fixed source-row/context-disjoint train/validation/test data, completion masks, validation-selected trained checkpoints, real updates and saved artifact reload. GPU profile remains unverified.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 1200,
+        "measured": null
+      },
+      "network": "first-download",
+      "auth": false,
+      "inputSchema": "Fixed attributed extraction subset and rule-authored preference pairs; explicit EOS and loss masks.",
+      "outputSchema": "JSON checks and inspectable result artifact; raw generations retained.",
+      "verificationRecord": null,
+      "troubleshooting": "Read examples/training/generation/README.md; run SFT, preferences, then evaluation. NF4 requires the separate Linux environment.",
+      "entrypoint": "examples/training/generation/src/atlas_generation/qlora.py",
+      "validation": {
+        "method": "json-invariants",
+        "equals": {
+          "nf4_verified": true,
+          "double_quant_verified": true,
+          "adapters_trained": true,
+          "reload_verified": true,
+          "merge_verified": true
+        }
+      },
+      "supportFiles": [
+        "examples/training/generation/src/atlas_generation/common.py",
+        "examples/training/generation/download_models.py",
+        "examples/training/generation/models.json",
+        "examples/foundations/src/atlas_foundations/e8/contracts.py",
+        "examples/data/fixtures/instruction-dolly.json",
+        "examples/data/fixtures/instruction-contract.json",
+        "examples/data/fixtures/generation-preferences.json",
+        "examples/data/manifests/generation-preferences.json"
+      ],
+      "resultArtifact": "examples/artifacts/e8-qlora/results.json",
+      "resultFile": "src/data/quantized-results.json",
+      "resultKey": "qlora"
     }
   ]
 }

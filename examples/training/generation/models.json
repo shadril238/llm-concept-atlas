@@ -1,0 +1,54 @@
+{
+  "EleutherAI/pythia-14m": {
+    "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac",
+    "files": [
+      {
+        "name": "config.json",
+        "size": 698,
+        "sha256": "f97f966a66c444890ed461fff2a51eefb15d74303df05b948124719f199b0b17"
+      },
+      {
+        "name": "model.safetensors",
+        "size": 28143920,
+        "sha256": "116a02532db461f91386a5b20f942ff2c8d4de7341e21b55caafc3d7b25f49a1"
+      },
+      {
+        "name": "tokenizer.json",
+        "size": 2114042,
+        "sha256": "870f4e2baa6b683221fa52004d5d6f40ab8c9d31961617304b78c910c2c3caf2"
+      },
+      {
+        "name": "tokenizer_config.json",
+        "size": 4834,
+        "sha256": "eee017c5bd133137f45907bd0a6e781e2ccd1a533734b7ed2a2f2f4446659809"
+      },
+      {
+        "name": "special_tokens_map.json",
+        "size": 441,
+        "sha256": "10b8c8852c1e1f70b54d9aff61728408c28971c0e97a6c5a7b2debbd1d3e9c0c"
+      }
+    ],
+    "license": "Apache-2.0"
+  },
+  "prajjwal1/bert-tiny": {
+    "revision": "6f75de8b60a9f8a2fdf7b69cbd86d9e64bcb3837",
+    "files": [
+      {
+        "name": "config.json",
+        "size": 285,
+        "sha256": "cf3179684f7c360dd6185962d480e7d426ceb8fe49f5db7b64bdc15dba0b8798"
+      },
+      {
+        "name": "pytorch_model.bin",
+        "size": 17756393,
+        "sha256": "dab2c2bddcfb48ea430ef63fd76d46d67d704487844d967256a50dd7d7fd0a66"
+      },
+      {
+        "name": "vocab.txt",
+        "size": 231508,
+        "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+      }
+    ],
+    "license": "MIT"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "atlas-instruction-dolly-v1",
+  "revision": 1,
+  "path": "examples/data/fixtures/instruction-dolly.json",
+  "sha256": "278ce07ad4599bbba4640671b99b6de24dbbd3d55f6044664060d2afd602599c",
+  "source": "https://huggingface.co/datasets/databricks/databricks-dolly-15k/tree/bdd27f4d94b9c1f951818a7da7fd7aeea5dbff1a",
+  "license": "CC-BY-SA-3.0",
+  "split": "First 48 unique-context information_extraction rows with 31\u201385 context words and 1\u201312 response words; first32 train, next8 validation, last8 test.",
+  "training": true,
+  "leakagePolicy": "Disjoint source row, exact prompt and context; categories recur. Filters fixed before training. No benchmark representativeness claim.",
+  "upstreamSha256": "2df9083338b4abd6bceb5635764dab5d833b393b55759dffb0959b6fcbf794ec",
+  "changes": "Filtered subset; added stable row IDs and fixed splits. Original instruction/context/response retained verbatim.",
+  "attribution": "Databricks employees, databricks-dolly-15k (2023). Dataset subset remains CC BY-SA 3.0; not covered by repository MIT license."
+}
