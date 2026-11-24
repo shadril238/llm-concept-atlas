@@ -6,7 +6,7 @@ import { join, resolve } from 'node:path';
 const docs = resolve('src/content/docs');
 const concepts = join(docs, 'concepts');
 const files = readdirSync(concepts).filter((name) => name.endsWith('.mdx'));
-const coverage = JSON.parse(readFileSync(resolve('src/data/topic-coverage.json'), 'utf8'));
+const inventory = JSON.parse(readFileSync(resolve('src/data/book-sections.json'), 'utf8'));
 
 test('published concepts retain the existing lesson structure (not a depth certification)', () => {
   assert.ok(files.length > 0);
@@ -22,21 +22,13 @@ test('published concepts retain the existing lesson structure (not a depth certi
   }
 });
 
-test('every curated chapter topic has a published lesson (not exhaustive book coverage)', () => {
-  const mapSource = readFileSync(resolve('src/data/book-map.ts'), 'utf8');
-  const chapterMatches = [...mapSource.matchAll(/number: (\d+),[\s\S]*?topics: \[([\s\S]*?)\]/g)];
-  assert.equal(chapterMatches.length, 12);
-  for (const [, chapter, body] of chapterMatches) {
-    const listedTopics = [...body.matchAll(/"([^"]+)"/g)].map((match) => match[1]);
-    assert.deepEqual(Object.keys(coverage[chapter]), listedTopics, `chapter ${chapter} coverage drifted from the book map`);
+test('chapter navigation uses audited source objectives, not the retired topic map', () => {
+  for(let chapter=1;chapter<=12;chapter++){
+    const leaves=inventory.sections.filter(s=>s.chapter===chapter&&s.coverageUnit);
+    assert.ok(leaves.length>0);
+    for(const leaf of leaves)for(const mapping of leaf.mappings)assert.ok(existsSync(resolve(mapping.path)),mapping.path);
   }
-  const mapped = Object.values(coverage).flatMap((chapter) => Object.values(chapter));
-  assert.ok(mapped.length > 0);
-  for (const conceptId of mapped) {
-    const file = join(concepts, `${conceptId}.mdx`);
-    assert.ok(existsSync(file), `${conceptId} has no lesson`);
-    assert.match(readFileSync(file, 'utf8'), /lessonStatus: full/, `${conceptId} is not a full lesson`);
-  }
+  assert.ok(!readFileSync(resolve('src/components/ChapterOverview.astro'),'utf8').includes('topic-coverage'));
 });
 
 test('internal lesson and path links resolve to source pages', () => {

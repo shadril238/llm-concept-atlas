@@ -1,0 +1,8 @@
+---
+import {getAtlasGraph} from '../lib/atlas';
+import {learningRoutes} from '../lib/learning-catalog';
+const graph=await getAtlasGraph(),base=import.meta.env.BASE_URL.replace(/\/?$/,'/');
+---
+<div data-pagefind-ignore class="learning-resume"><p data-progress-summary role="status">Reading and practice progress is stored only in this browser.</p><a href={base} data-resume hidden>Resume your last lesson</a><p data-storage-note></p></div>
+<nav class="learning-actions" aria-label="Choose a learning goal">{learningRoutes.map(r=><a href={"#"+r.id}>{r.title}</a>)}</nav>
+<div class="learning-route-grid">{learningRoutes.map(route=><section class="learning-route-card" id={route.id}><span class="eyebrow">{route.chapters.length===1?'Chapter':'Chapters'} {route.chapters.join(', ')}</span><h2>{route.title}</h2><ol>{route.steps.map(id=>{const n=graph.nodes.find(n=>n.id===id);if(!n)throw new Error('Unknown route step '+id);return <li><a href={base+n.href.replace(/^\//,'')}>{n.title}</a></li>})}</ol><p data-route-progress data-concepts={JSON.stringify(route.steps)}></p><nav class="learning-actions" aria-label={route.title+' routes'}><a href={base+route.pathHref}>Guided path</a><a href={base+route.labHref}>Lab</a><a href={base+route.projectHref}>Project</a></nav><fieldset data-pagefind-ignore><legend>My practice</legend><label><input type="checkbox" data-practice-step="lab" data-route-id={route.id}/> I worked through the lab</label><label><input type="checkbox" data-practice-step="project" data-route-id={route.id}/> I attempted the project</label></fieldset></section>)}</div>

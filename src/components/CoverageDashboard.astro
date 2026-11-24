@@ -1,0 +1,9 @@
+---
+import inventory from '../data/book-sections.json';
+import {summarizeCoverage} from '../lib/coverage-summary.js';
+import {chapters} from '../data/book-map';
+const totals=summarizeCoverage(inventory.sections),base=import.meta.env.BASE_URL.replace(/\/?$/,'/');
+---
+<div class="coverage-stats"><div><strong>{totals.mapped} / {totals.total}</strong><span>Leaf objectives mapped to lessons</span></div><div><strong>{totals.accepted} / {totals.total}</strong><span>Independently accepted teaching objectives</span></div><div><strong>{totals.executed} / {totals.practical}</strong><span>Required practical objectives with recorded execution</span></div></div>
+<p>Execution applies to each recorded configuration. It does not certify GPU variants, book-scale benchmarks or teaching quality. E8's supported GPU QLoRA and independent review requirements remain open.</p>
+<div class="coverage-table"><table><thead><tr><th>Chapter</th><th>Mapped</th><th>Accepted</th><th>Practical execution</th><th>Details</th></tr></thead><tbody>{chapters.map(c=>{const n=summarizeCoverage(inventory.sections,c.number);return <tr><th>{c.number} · {c.title}</th><td>{n.mapped}/{n.total}</td><td>{n.accepted}/{n.total}</td><td>{n.executed}/{n.practical}</td><td><a href={`${base}chapters/${c.part}/${String(c.number).padStart(2,'0')}/#source-objectives`}>Inspect objectives</a></td></tr>})}</tbody></table></div>

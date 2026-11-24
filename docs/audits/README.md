@@ -21,7 +21,7 @@ All concept mechanisms and Python snippets were inspected for their relationship
 | [proposed-concepts.json](../../src/data/proposed-concepts.json) | Proposed standalone pages, subsections, or shared labs; aliases, intended existing parent, and source evidence. These are not implemented destinations. |
 | [book-notebooks.json](../../src/data/book-notebooks.json)       | Pinned official notebook provenance, reviewed cells, and differences that must be considered during implementation.                                     |
 
-Existing `book-map.ts` and `topic-coverage.json` continue to power navigation. They represent a curated outline, not the exhaustive audit. No concept IDs, lesson URLs, or local reader progress are migrated in E0.
+E9 migrated chapter coverage displays to `book-sections.json` leaf objectives. `book-map.ts` now holds only part/chapter structure; the former topic mapping is archived in `legacy-topic-coverage.json` and is not used at runtime. Canonical concept IDs and lesson URLs remain stable. The separate E9 progress migration preserves existing reading checkmarks and retains the original browser key as a backup.
 
 ## Counting and status rules
 

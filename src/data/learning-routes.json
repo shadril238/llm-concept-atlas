@@ -1,0 +1,152 @@
+[
+  {
+    "id": "route-01",
+    "chapters": [
+      1,
+      2,
+      3
+    ],
+    "title": "Understand a language model",
+    "pathHref": "paths/how-an-llm-processes-a-sentence/",
+    "labHref": "labs/foundations/",
+    "projectHref": "use-cases/research-collection-explorer/",
+    "steps": [
+      "tokenization",
+      "token-embedding",
+      "contextualized-embeddings",
+      "attention",
+      "transformer",
+      "decoding"
+    ]
+  },
+  {
+    "id": "route-04",
+    "chapters": [
+      4
+    ],
+    "title": "Choose a text classifier",
+    "pathHref": "paths/from-applications-to-fine-tuning/",
+    "labHref": "labs/classification-and-topics/",
+    "projectHref": "use-cases/text-classification/",
+    "steps": [
+      "sentiment-analysis",
+      "supervised-classification",
+      "zero-shot-classification",
+      "generative-classification"
+    ]
+  },
+  {
+    "id": "route-05",
+    "chapters": [
+      5
+    ],
+    "title": "Explore a document collection",
+    "pathHref": "paths/from-applications-to-fine-tuning/",
+    "labHref": "labs/classification-and-topics/",
+    "projectHref": "use-cases/research-collection-explorer/",
+    "steps": [
+      "document-embeddings",
+      "dimensionality-reduction",
+      "clustering",
+      "bertopic",
+      "topic-representations"
+    ]
+  },
+  {
+    "id": "route-06",
+    "chapters": [
+      6,
+      7
+    ],
+    "title": "Build and check a generation workflow",
+    "pathHref": "paths/from-applications-to-fine-tuning/",
+    "labHref": "labs/prompting-and-workflows/",
+    "projectHref": "use-cases/rag-question-answering/",
+    "steps": [
+      "prompt-structure",
+      "instruction-prompting",
+      "few-shot-examples",
+      "output-verification",
+      "chains",
+      "conversation-memory",
+      "agents"
+    ]
+  },
+  {
+    "id": "route-08",
+    "chapters": [
+      8
+    ],
+    "title": "Build a grounded document assistant",
+    "pathHref": "paths/from-semantic-search-to-rag/",
+    "labHref": "labs/retrieval-and-multimodal/",
+    "projectHref": "use-cases/rag-question-answering/",
+    "steps": [
+      "text-embedding",
+      "semantic-search",
+      "document-chunking",
+      "dense-retrieval",
+      "reranking",
+      "rag",
+      "rag-evaluation"
+    ]
+  },
+  {
+    "id": "route-09",
+    "chapters": [
+      9
+    ],
+    "title": "Connect images and language",
+    "pathHref": "paths/from-pixels-to-multimodal-answers/",
+    "labHref": "labs/retrieval-and-multimodal/",
+    "projectHref": "use-cases/image-text-collection-search/",
+    "steps": [
+      "vision-transformers",
+      "multimodal-preprocessing",
+      "clip",
+      "multimodal-embeddings",
+      "blip-2",
+      "multimodal-chat"
+    ]
+  },
+  {
+    "id": "route-10",
+    "chapters": [
+      10,
+      11
+    ],
+    "title": "Adapt an encoder for a domain",
+    "pathHref": "paths/from-pretrained-encoder-to-domain-model/",
+    "labHref": "labs/embedding-and-representation-training/",
+    "projectHref": "use-cases/service-search-adaptation/",
+    "steps": [
+      "contrastive-learning",
+      "loss-functions",
+      "fine-tuning-embeddings",
+      "embedding-evaluation",
+      "frozen-layers",
+      "setfit",
+      "named-entity-recognition"
+    ]
+  },
+  {
+    "id": "route-12",
+    "chapters": [
+      12
+    ],
+    "title": "Adapt instructions and preferences",
+    "pathHref": "paths/from-instructions-to-preferences/",
+    "labHref": "labs/generation-adaptation/",
+    "projectHref": "use-cases/instruction-preference-adaptation/",
+    "steps": [
+      "pretraining-and-sft",
+      "peft",
+      "lora",
+      "qlora",
+      "generative-evaluation",
+      "reward-models",
+      "rlhf",
+      "dpo"
+    ]
+  }
+]

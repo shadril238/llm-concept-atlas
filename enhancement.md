@@ -1,8 +1,8 @@
 # LLM Concept Atlas: teaching depth and book coverage enhancement plan
 
 **Prepared:** 2026-11-18  
-**Last updated:** 2026-11-19  
-**Status:** E0 source inventory and initial lesson audit, and E1 infrastructure implemented; E2–E7 implementation delivered, independent review pending; E8 CPU implementation delivered with GPU/review gates open; E9–E10 pending. See the [gap report](./docs/audits/book-gap-report.md) and [audit guide](./docs/audits/README.md).
+**Last updated:** 2026-11-25\
+**Status:** E0 source inventory and initial lesson audit, and E1 infrastructure implemented; E2–E7 implementation delivered, independent review pending; E8 CPU implementation delivered with GPU/review gates open; E9 implementation delivered; independent acceptance remains for E10. See the [gap report](./docs/audits/book-gap-report.md) and [audit guide](./docs/audits/README.md).
 **Baseline:** Repository commit `a6b3ec4`, following the original Phases 1–5 in [plan.md](./plan.md).  
 **Source edition:** _Hands-On Large Language Models_, Jay Alammar and Maarten Grootendorst, first edition, September 2024.  
 **Primary goal:** A learner can explain, trace, implement, evaluate, and apply the book's ideas without depending on unexplained terminology or disconnected code snippets.
@@ -919,12 +919,14 @@ Use enhancement phase IDs **E0–E10** to distinguish this work from the origina
 
 **Depends on:** E3–E8 content; implement small enabling pieces earlier when required.
 
-- [ ] Complete the glossary, alias-aware search, query regression set, and chapter/content filters where helpful.
-- [ ] Add graph relationship reasons, prerequisite routes, lab links, and cross-chapter discovery.
-- [ ] Migrate chapter coverage displays to the audited inventory and retire redundant mappings safely.
-- [ ] Finish project/path navigation and local progress migration if richer practice tracking was implemented.
-- [ ] Review the entire UI across keyboard, touch, small screens, themes, reduced motion, and text alternatives.
-- [ ] Measure the production site with the enlarged content/graph and resolve meaningful regressions.
+- [x] Complete the glossary, alias-aware search, query regression set, and chapter/content filters where helpful.
+- [x] Add graph relationship reasons, prerequisite routes, lab links, and cross-chapter discovery.
+- [x] Migrate chapter coverage displays to the audited inventory and retire redundant mappings safely.
+- [x] Finish project/path navigation and local progress migration if richer practice tracking was implemented.
+- [x] Review the entire UI across keyboard, touch, small screens, themes, reduced motion, and text alternatives.
+- [x] Measure the production site with the enlarged content/graph and resolve meaningful regressions.
+
+**Implementation:** Shared alias/task/full-text search; 20 query regressions; all 113 concept practice routes; relationship reasons and ordered prerequisites; audited chapter/part/coverage displays; eight study routes and safe browser-progress migration; responsive/keyboard checks and measured payload budgets. See [author review](./docs/reviews/e9-learning-experience.md) and [performance evidence](./docs/performance/e9-production.json). Independent learner/assistive-technology acceptance remains an E10 task; E8 GPU verification and other unverified configurations remain open.
 
 **Gate:** A reader can find a term by acronym, full name, or task, understand its prerequisites, complete its lab route, and return to a related concept without broken navigation.
 
@@ -1065,7 +1067,7 @@ These references support the implementation direction, not a claim that all prop
 | E6: RAG and multimodal                | Implemented; review pending | 23 detailed lessons, five actual-model sources/notebooks, L12–L14 interactives, grounded/image-text projects and routes.                                                    |
 | E7: embedding/representation training | Implemented; review pending | 15 detailed lessons; six actual CPU training workflows/notebooks, gradient/freeze/mask checks, held-out task results and reusable artifacts.                                                  |
 | E8: generation adaptation | CPU implementation delivered; GPU/review gates open | Nine detailed lessons, L21–L23 actual CPU workflows/notebooks and Linux NF4 evidence; supported GPU QLoRA and independent acceptance remain pending. |
-| E9: integrated learner experience     | Not started | Discovery, navigation, practice, and accessibility/performance checks.                          |
+| E9: integrated learner experience | Implemented; independent review pending | Shared search and query regressions, complete practice routes/reasons, audited coverage, local progress migration and responsive/performance checks. |
 | E10: review and release               | Not started | Reconciled coverage, execution evidence, learner feedback, and release report.                  |
 
-**Next:** Collect independent review of E2–E8 and verify supported GPU QLoRA; E9 discovery/navigation integration is the next implementation milestone when authorized. Full enhancement acceptance remains tied to the documented review gates.
+**Next:** E10 independent technical/editorial review, learner pilots and evidence-backed release. Reconcile the remaining unverified practical objectives and supported GPU QLoRA requirement; implementation and mapping do not replace acceptance. Full enhancement acceptance remains tied to the documented review gates.

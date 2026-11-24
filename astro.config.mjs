@@ -13,12 +13,16 @@ export default defineConfig({
       title: "LLM Concept Atlas",
       description:
         "A visual field guide to language models, from first token to fine-tuning.",
-      customCss: ["./src/styles/custom.css"],
+      components: { Search: "./src/components/AtlasSearch.astro", MarkdownContent: "./src/components/DiscoveryContent.astro", Footer: "./src/components/LearningFooter.astro" },
+      customCss: ["./src/styles/custom.css", "./src/styles/discovery.css"],
       sidebar: [
         {
           label: "Start here",
           items: [
             { label: "Overview", slug: "index" },
+            { label: "Find concepts and labs", slug: "search" },
+            { label: "Learning hub", slug: "learning-hub" },
+            { label: "Coverage and evidence", slug: "coverage" },
             { label: "Explore the atlas", slug: "atlas" },
             { label: "Concept directory", slug: "concept-directory" },
             { label: "How an LLM processes a sentence", slug: "paths/how-an-llm-processes-a-sentence" },

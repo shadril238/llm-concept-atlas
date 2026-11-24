@@ -1,9 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
-const entries=(await getCollection('docs')).filter(entry=>entry.data.kind==='concept').sort((a,b)=>a.data.title.localeCompare(b.data.title));
+import DiscoveryPanel from './DiscoveryPanel.astro';
+import {getCollection} from 'astro:content';
+import {enrichConcept} from '../lib/learning-catalog';
+const entries=(await getCollection('docs')).filter(e=>e.data.kind==='concept').map(e=>enrichConcept(e.data)).sort((a,b)=>a.title.localeCompare(b.title,'en'));
 const base=import.meta.env.BASE_URL.replace(/\/?$/,'/');
 ---
-<div class="concept-glossary">
-  <p>Aliases point to a canonical lesson. Definitions and source locations live on that lesson; alternate spellings do not create competing pages.</p>
-  <dl>{entries.map(entry=><div><dt><a href={`${base}concepts/${entry.data.conceptId}/`}>{entry.data.title}</a></dt><dd>{entry.data.summary}{entry.data.aliases.length>0&&<p><small>Also search: {entry.data.aliases.join(' · ')}</small></p>}</dd></div>)}</dl>
-</div>
+<p>Every definition points to one canonical lesson. Search by abbreviation, alternate spelling or task, then open its connected lab or learning path.</p>
+<DiscoveryPanel id="glossary" mode="concept" />
+<noscript><dl>{entries.map(e=><div><dt><a href={`${base}concepts/${e.conceptId}/`}>{e.title}</a></dt><dd>{e.summary}<p>Also known as: {e.aliases.join(' · ')}</p></dd></div>)}</dl></noscript>

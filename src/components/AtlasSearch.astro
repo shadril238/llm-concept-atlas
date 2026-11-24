@@ -1,0 +1,27 @@
+---
+import DiscoveryPanel from './DiscoveryPanel.astro';
+const base=import.meta.env.BASE_URL.replace(/\/?$/,'/');
+---
+<div class="atlas-global-search" data-global-search data-pagefind-ignore>
+ <a href={`${base}search/`} data-search-open aria-label="Search concepts and lessons" aria-keyshortcuts="Control+K Meta+K"><span aria-hidden="true">⌕</span><span>Search</span><kbd>⌘ K</kbd></a>
+ <dialog aria-label="Search concepts and lessons"><div class="atlas-search-frame"><header><strong>Find your next idea</strong><button type="button" data-search-close>Close search</button></header><DiscoveryPanel id="global" mode="global"/><p><a href={`${base}search/`}>Open the dedicated search page</a></p></div></dialog>
+</div>
+<script>
+ document.querySelectorAll<HTMLElement>('[data-global-search]').forEach(root=>{
+  const open=root.querySelector<HTMLAnchorElement>('[data-search-open]')!,close=root.querySelector<HTMLButtonElement>('[data-search-close]')!,dialog=root.querySelector('dialog')!,panel=dialog.querySelector<HTMLElement>('[data-discovery]')!;
+  const show=()=>{if(!dialog.open){dialog.showModal();panel.dispatchEvent(new Event('discovery-open'));}};
+  open.addEventListener('click',e=>{e.preventDefault();show();});close.addEventListener('click',()=>dialog.close());
+  dialog.addEventListener('close',()=>open.focus());
+  dialog.addEventListener('click',e=>{if(e.target===dialog){const b=dialog.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)dialog.close();}});
+  dialog.addEventListener('keydown', e=>{
+    if(e.key==='Escape'){e.preventDefault();dialog.close();return;}
+    if(e.key==='Tab'){
+      const controls=[...dialog.querySelectorAll<HTMLElement>('a[href],button,input,select')].filter(el=>!el.hasAttribute('disabled')&&el.getClientRects().length>0);
+      const first=controls[0],last=controls.at(-1);
+      if(e.shiftKey&&document.activeElement===first){e.preventDefault();last?.focus();}
+      else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus();}
+    }
+  });
+  document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();show();}});
+ });
+</script>

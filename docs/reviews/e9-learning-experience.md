@@ -1,0 +1,36 @@
+# E9 · connected discovery and learner practice
+
+Author implementation/technical review: 2026-11-25 (Asia/Seoul). Independent teaching acceptance and E10 learner pilots are pending. E8 GPU QLoRA and other unsupported configurations retain their existing unverified status.
+
+## Delivered behavior
+
+One lexical ranking module now drives the header search, dedicated search page, concept directory, glossary and graph lookup. Twenty frozen queries check acronym/full-name pairs, punctuation, task phrases and a few-shot prompting/classification confusion. Exact aliases rank before body keywords; short acronyms do not match arbitrary fragments inside words. Curated task phrases and nearby-spelling suggestions are labeled as such; no semantic search or universal typo correction is claimed.
+
+Pagefind remains the separate full-text engine. The custom accessible dialog supports Ctrl/Cmd+K, native modal focus containment, explicit Escape/close and focus restoration. Search is debounced and stale asynchronous results are rejected. Loading/error/retry, empty results, active filters and pagination have visible states. Full-text failure does not disable catalog lookup. Chapter/type/difficulty filters use the same vocabulary in both engines; multi-chapter labs receive all their chapter filters. Difficulty is declared only for concept lessons. Dedicated search URLs retain valid query/filter state. Alias text uses documented Pagefind weights; repeated navigation/progress controls are excluded from indexing.
+
+Every one of the 113 canonical concepts has a valid lab/path/project route. Eight goal-based routes connect the existing six guided path pages and projects; broader chapter labs are identified as broader workflows, not one-to-one model proofs. The graph preserves contains/prerequisite/related semantics and focused neighborhoods, explains every prerequisite/related edge using existing or specifically authored notes, and exposes topologically ordered prerequisites. Conceptual parent and source chapter are explicitly separate. Shared selection URLs and keyboard-accessible hierarchy/relationship controls remain. A selected concept survives lookup-filter changes with a visible explanation.
+
+The learning hub and concept reading controls use versioned browser-local progress. Existing v1 reading checkmarks migrate with de-duplication and canonical-ID validation; the old key remains a backup. Practice is separately self-reported. Unknown IDs do not inflate counts. Corrupt/blocked storage is handled, in-page controls remain usable, and a future schema version is preserved without being overwritten. No progress is uploaded. Reading/practice checkmarks are not teaching acceptance, certification or model execution evidence.
+
+## Coverage migration
+
+Chapter and part displays now use audited leaf objectives from `book-sections.json`. Containers cannot inflate denominators. The old topic map is archived at `docs/audits/legacy-topic-coverage.json`; no runtime component consumes it, and `book-map.ts` retains only part/chapter structure. Canonical lesson URLs and concept IDs are unchanged.
+
+The coverage dashboard reports 160/160 mapped leaf objectives, 0 independently accepted objectives and 41/51 required practical objectives with recorded execution. These are distinct states. Chapter details expose printed-page ranges, destinations, outstanding gaps and existing execution records. Supported GPU/book-scale variants are not certified by a CPU record. The coverage/audit gates remain open for independent review and remaining execution requirements.
+
+## Verification
+
+The release gate adds nine behavioral tests for ranking/filter intersections, acronym fragments, suggestions, prerequisite ordering/cycles, inbound relationship reasons, legacy/future/blocked progress and leaf accounting. The built catalog regression checks all twenty expected searches and every concept's lab/path/project destination and relationship explanation. Existing Python/model evidence is preserved; no model run is relabeled as a navigation test.
+
+Actual browser checks cover full-text-only body queries, acronym/task lookup, filtered multi-chapter labs, no-result suggestions, Ctrl+K/Escape/focus restoration, reading and practice persistence/reversal, prerequisite routes and selection retained outside filters. Responsive/theme checks cover representative search, glossary, hub, chapter/coverage, graph and concept views. The graph retains a complete text hierarchy for keyboard/screen-reader navigation. Reduced-motion behavior is checked in CSS and graph motion branches; no unsupported OS/browser emulation or formal assistive-technology certification is claimed. Independent users should still test zoom, screen readers and mobile ergonomics during E10.
+
+## Performance evidence and limits
+
+`docs/performance/e9-baseline.json` comes from a clean archived b0a0658 production build using the same local Node/OS and cloned locked dependencies. `e9-production.json` records the resulting production files. The comparison counts HTML-linked and recursively reachable JavaScript, including lazy imports/islands; gzip figures are file estimates, not network/CPU/Lighthouse scores. Runtime-computed Pagefind module/index/fragment requests are not in that static closure; catalog size is recorded separately.
+
+The LoRA lesson drops from 123,236 to about 77,800 gzip bytes of reachable JavaScript (about 37%) by separating the rank/memory calculator from recorded generation data and replacing the larger generic search UI. Ordinary lessons do not include Cytoscape or the graph implementation. The graph's reachable JavaScript is about 146 KB gzip versus 170 KB previously; its library is loaded only on the graph page after data loads. The discovery catalog is about 18.4 KB gzip. The new modal/fallback navigation increases HTML; this is reported rather than omitted.
+
+Budgets allow 180 KB gzip reachable ordinary-lesson JS, 250 KB for the graph and 45 KB for the catalog, leaving deliberate headroom for maintenance while guarding significant growth. Exact output filenames/counts may vary with an otherwise compatible platform; source maps/model weights are not part of this browser payload. These tests do not predict real low-end phone performance. Source references: [Pagefind API](https://pagefind.app/docs/api/), [filters](https://pagefind.app/docs/filtering/), [weights](https://pagefind.app/docs/weighting/) and the installed Starlight override/route contracts.
+
+
+Final acceptance evidence: 118 behavioral tests (64 Python and 54 Node), 20 built query cases, 113 concept practice destinations and eight goal routes pass. Astro reports zero errors/warnings/hints and builds 156 pages; link/asset validation checks 17,274 targets. Browser verification confirms retained query text when clearing filters, positive persisted practice checkbox state after reload followed by reversal, no document overflow at 390×844 on search/hub/coverage/chapter/glossary/graph samples, light/dark theme views, and an error/warning-free console. The final public deployment and search interaction are checked after the main push. Payload data are generated separately by the production checker and keep their method/limits alongside the values.

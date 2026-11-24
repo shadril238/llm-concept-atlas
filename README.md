@@ -2,9 +2,11 @@
 
 **See it. Try it. Understand it.** An independent visual companion to *Hands-On Large Language Models* by Jay Alammar and Maarten Grootendorst.
 
+**Current implementation:** E9 connects 113 concept lessons through shared search, eight study routes, prerequisite explanations and honest coverage displays. Start with the [learning hub](https://shadril238.github.io/llm-concept-atlas/learning-hub/) or [find a term](https://shadril238.github.io/llm-concept-atlas/search/). Independent teaching acceptance and supported GPU QLoRA verification remain open.
+
 The original Phases 1–5 produced a **curated companion across all 12 chapters**: 96 concept lessons, an interactive relationship graph, 11 teaching simulations, three guided paths, and two use cases. The explanations and examples vary in depth; this is not yet exhaustive book coverage or a complete set of evaluated model workflows.
 
-**Enhancements E0 and E1 are complete:** the [book gap report](./docs/audits/book-gap-report.md) inventories 231 source entries and distinguishes partial explanations, missing topics, and practical implementation gaps. The [lesson depth audit](./docs/audits/lesson-depth-report.md) records findings for every existing concept. The [example guide](./examples/README.md) provides locked environments, a 234-example registry, synchronized lesson/notebook source, and recorded CPU verification. Follow [enhancement.md](./enhancement.md) for the remaining enhancement phases; independent teaching acceptance and verification of the remaining model workflows are pending.
+**Enhancements E0 and E1 are complete:** the [book gap report](./docs/audits/book-gap-report.md) inventories 231 source entries and distinguishes partial explanations, missing topics, and practical implementation gaps. The [lesson depth audit](./docs/audits/lesson-depth-report.md) records findings for every existing concept. The [example guide](./examples/README.md) provides locked environments, a 239-example registry, synchronized lesson/notebook source, and recorded CPU verification. Follow [enhancement.md](./enhancement.md) for the remaining enhancement phases; independent teaching acceptance and verification of the remaining model workflows are pending.
 
 **E2 implementation delivered:** [tokenization](https://shadril238.github.io/llm-concept-atlas/concepts/tokenization/), [LoRA](https://shadril238.github.io/llm-concept-atlas/concepts/lora/), and [NER](https://shadril238.github.io/llm-concept-atlas/concepts/named-entity-recognition/) now have detailed reference lessons, interactive traces, real CPU workflows, and topic-specific practice. [Author review and execution evidence](./docs/reviews/e2-reference-lessons.md) are available; independent editorial review and beginner feedback remain pending.
 
@@ -34,8 +36,8 @@ npm run release:build
 
 ## Content model
 
-- `src/data/book-map.ts` records the book's three parts, 12 chapters, and a curated topic outline.
-- `src/data/topic-coverage.json` maps that outline's 95 entries to published lessons. Closely related entries can share a page; these entries are not the book's complete contents.
+- `src/data/book-map.ts` records the three parts and twelve chapters; chapter objective displays come from the audited source inventory.
+- The former topic map is archived at `docs/audits/legacy-topic-coverage.json` for historical reference and is no longer a runtime coverage source.
 - `src/data/book-sections.json` records the audited source sections, embedded concepts, exact source locations, remaining work, and separate coverage dimensions. Containers are excluded from leaf-objective counts.
 - `src/data/lesson-audit.json`, `proposed-concepts.json`, and `book-notebooks.json` record per-lesson findings, planned destinations/aliases, and pinned official notebook references. See the [audit guide](./docs/audits/README.md).
 - `src/content/docs/concepts/*.mdx` contains concept pages. Its frontmatter supplies the concept ID, chapter, parent, prerequisites, and related links.
@@ -74,3 +76,10 @@ The atlas now contains **113 concept lessons**. Fifteen Chapter 10–11 lessons 
 [Explore L21–L23](https://shadril238.github.io/llm-concept-atlas/labs/generation-adaptation/): nine detailed Chapter12 lessons, instruction-mask/rank/memory/preference/evaluation interactives, actual full/LoRA SFT, scalar reward training and separate DPO, three fresh-kernel notebooks, genuine Linux CPU NF4 adapter training, fixed metrics and an offline human/judge importer. Follow the [generation path](https://shadril238.github.io/llm-concept-atlas/paths/from-instructions-to-preferences/) and [project](https://shadril238.github.io/llm-concept-atlas/use-cases/instruction-preference-adaptation/). Setup/provenance/limits: `examples/training/generation/README.md`; author evidence: `docs/reviews/e8-generation-adaptation.md`.
 
 The tiny experiment visibly fails all eight generated exact-match tasks despite some improved likelihood/preference metrics. It is an instructional training study, not a production assistant or a general benchmark. Human/editorial review and supported GPU QLoRA/paged optimizer verification remain open; the full E8 completion gate is not marked passed. The attributed Dolly subset and derived preference data retain CC BY-SA3.0 separately from repository MIT code. Hosted judging remains documented/offline-import only.
+
+
+### E9 · a connected learning experience
+
+Use [search](https://shadril238.github.io/llm-concept-atlas/search/) for aliases, full names, curated tasks and Pagefind full-text results; filter by chapter, content type and concept difficulty. The glossary and graph use the same lexical ranking. [Eight learning routes](https://shadril238.github.io/llm-concept-atlas/learning-hub/) connect all 113 concepts to prerequisite sequences, labs and projects. Reading and practice checkmarks are browser-local, self-reported and migrated from the original progress key with its backup retained.
+
+[Coverage](https://shadril238.github.io/llm-concept-atlas/coverage/) distinguishes mapped leaf objectives, independently accepted teaching and recorded practical execution. The audit remains the source of truth; E8 GPU QLoRA and independent review remain open. E9 adds 20 query regressions, relationship explanations and payload budgets; see `docs/reviews/e9-learning-experience.md` and `docs/performance/`. E10 independent teaching/learner acceptance is still pending.

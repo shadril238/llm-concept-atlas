@@ -1,0 +1,22 @@
+[
+ {"query":"NER","expected":["named-entity-recognition"]},
+ {"query":"named entity recognition","expected":["named-entity-recognition"]},
+ {"query":"SFT","expected":["pretraining-and-sft"]},
+ {"query":"instruction tuning","expected":["pretraining-and-sft"]},
+ {"query":"c-TF-IDF","expected":["class-based-tf-idf"]},
+ {"query":"class based tf idf","expected":["class-based-tf-idf"]},
+ {"query":"LoRA","expected":["lora"]},
+ {"query":"low rank adaptation","expected":["lora"]},
+ {"query":"CoT","expected":["chain-of-thought"]},
+ {"query":"tree of thought","expected":["tree-of-thought"]},
+ {"query":"train with a few labels","expected":["few-shot-classification","setfit"]},
+ {"query":"few shot prompting","expected":["few-shot-examples"],"excludeFirst":["few-shot-classification"]},
+ {"query":"answer questions from documents","expected":["rag"]},
+ {"query":"search images using text","expected":["clip"]},
+ {"query":"generate valid JSON","expected":["constrained-sampling"]},
+ {"query":"KV cache","expected":["kv-cache"]},
+ {"query":"RoPE","expected":["positional-embeddings-and-rope"]},
+ {"query":"NF4","expected":["qlora"]},
+ {"query":"train from chosen and rejected answers","expected":["dpo"]},
+ {"query":"search documents by meaning","expected":["dense-retrieval","semantic-search"]}
+]

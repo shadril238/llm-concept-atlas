@@ -90,6 +90,9 @@ export function buildAtlasGraph(parts, chapters, entries) {
       aliases: data.aliases ?? [],
       relationshipReasons: data.relationshipReasons ?? {},
       labHref: data.labHref,
+      pathHref: data.pathHref,
+      projectHref: data.projectHref,
+      tasks: data.tasks ?? [],
     });
   }
 

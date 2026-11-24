@@ -56,3 +56,12 @@ The [E3 packet](./docs/reviews/e3-foundations.md) adds shared foundation mechani
 E4 data and model changes must retain [UCI attribution and data licenses](./examples/data/manifests/sentiment.json), preserve split/label/invalid-output contracts, and rerun the [discovery workflows](./examples/applications/discovery/README.md). Representation-only topic comparisons must assert unchanged assignments; a topic-label change is not clustering improvement.
 
 E5 changes should preserve the distinction between recorded model evidence and deterministic exercises. Read the [workflow execution guide](./examples/applications/workflows/README.md), run `npm run test:workflows`, and rerun affected local model examples after source/lock/support changes. Keep invalids, ties, failed chains, missing memory facts, and bounded-agent failures visible; fake-model tests do not establish real model competence.
+
+
+## Discovery and learning routes
+
+Keep canonical concept IDs/URLs stable. Add true alternate names or explicit task phrases in `src/data/discovery-terms.json`; do not advertise semantic or general typo search. Add regression queries to `src/data/search-queries.json` with intended top-three destinations and distinguish common confusions. `src/lib/discovery.js` supplies the same ranking to lookup, glossary and graph. Pagefind handles the separate full-text section; aliases are indexed with documented weight attributes, and repeated navigation is excluded.
+
+Map chapter objectives in `src/data/book-sections.json`, not the archived topic map. Mapped pages, independent teaching acceptance and recorded execution are different states. Every new concept must receive an acyclic prerequisite route and a chapter learning route with valid lab/path/project links. Existing relationship reasons are retained; missing pairs need a specific explanation in `relationship-notes.json`, not a generic “these concepts are related” sentence.
+
+Run `npm run release:build`. The gate includes query/route checks, safe local progress migration tests, source audit checks and production payload budgets. Update performance measurements with `node scripts/check-performance.mjs dist --write` after a reviewed build; measurements include recursively reachable lazy JavaScript and state their limits. Preserve the original v1 browser progress key when changing schemas, reject unknown IDs from counts, and never treat a reading checkbox as proof of understanding.

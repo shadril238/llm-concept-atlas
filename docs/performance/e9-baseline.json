@@ -1,0 +1,34 @@
+{
+  "commit": "b0a0658",
+  "method": "Clean production build of archived main with cloned locked node_modules; same local Node/OS.",
+  "lora": {
+    "htmlBytes": 79116,
+    "reachableJsBytes": 460256,
+    "reachableJsGzipBytes": 123236,
+    "modules": [
+      "_astro/GenerationLabs.BHUdMuXQ.js",
+      "_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.C3fM4Kra.js",
+      "_astro/Search.astro_astro_type_script_index_0_lang.CQC2DPxh.js",
+      "_astro/TableOfContents.astro_astro_type_script_index_0_lang.BpJaGz7G.js",
+      "_astro/client.CzWaolnw.js",
+      "_astro/ec.0vx5m.js",
+      "_astro/jsx-runtime.CVFlYIZn.js",
+      "_astro/page.cNngjUgL.js",
+      "_astro/react.C1eXT9gT.js",
+      "_astro/rolldown-runtime.DN1TCW_I.js",
+      "_astro/starlight-toc.D4UDIxQL.js",
+      "_astro/ui-core.YmRu_8dX.js"
+    ]
+  },
+  "graph": {
+    "htmlBytes": 65919,
+    "reachableJsBytes": 551188,
+    "reachableJsGzipBytes": 170440,
+    "modules": [
+      "_astro/AtlasExplorer.astro_astro_type_script_index_0_lang.BHQ9g9kn.js",
+      "_astro/Search.astro_astro_type_script_index_0_lang.CQC2DPxh.js",
+      "_astro/page.cNngjUgL.js",
+      "_astro/ui-core.YmRu_8dX.js"
+    ]
+  }
+}

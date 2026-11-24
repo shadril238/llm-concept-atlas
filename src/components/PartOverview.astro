@@ -1,4 +1,6 @@
 ---
+import inventory from '../data/book-sections.json';
+import {summarizeCoverage} from '../lib/coverage-summary.js';
 import { parts, chapters, chapterSlug } from '../data/book-map';
 const { id } = Astro.props;
 const part = parts.find((item) => item.id === id);
@@ -16,7 +18,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 <div class="chapter-card-grid">
   {matching.map((chapter) => <a class="chapter-card" href={`${base}${chapterSlug(chapter)}/`}>
     <span class="chapter-number">{String(chapter.number).padStart(2, '0')}</span>
-    <div><h2>{chapter.title}</h2><p>{chapter.summary}</p><small>{chapter.topics.length} mapped topic areas</small></div>
+    <div><h2>{chapter.title}</h2><p>{chapter.summary}</p><small>{summarizeCoverage(inventory.sections,chapter.number).mapped} mapped source objectives · {summarizeCoverage(inventory.sections,chapter.number).accepted} independently accepted</small></div>
     <span class="arrow" aria-hidden="true">↗</span>
   </a>)}
 </div>

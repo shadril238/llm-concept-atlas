@@ -1,0 +1,24 @@
+---
+import DefaultFooter from '@astrojs/starlight/components/Footer.astro';
+import { getAtlasGraph } from '../lib/atlas';
+import { prerequisiteRoute } from '../lib/discovery.js';
+import { learningRoutes } from '../lib/learning-catalog';
+const entry=Astro.locals.starlightRoute.entry;
+const graph=await getAtlasGraph();
+const node=graph.nodes.find(n=>n.id===entry.data.conceptId);
+const before=node?prerequisiteRoute(graph.nodes,node.id).slice(0,-1):[];
+const base=import.meta.env.BASE_URL.replace(/\/?$/,'/');
+const associated=learningRoutes.filter(r=>[r.pathHref.split('#')[0],r.labHref.split('#')[0],r.projectHref.split('#')[0]].includes(entry.id+'/'));
+const config={ids:graph.nodes.filter(n=>n.kind==='concept').map(n=>n.id),routes:learningRoutes.map(r=>r.id),current:node?.id??null,base};
+---
+{node&&<section class="learning-next" data-pagefind-ignore aria-label="Continue learning">
+ <span class="eyebrow">Turn understanding into practice</span><h2>Choose your next step</h2>
+ <p>Follow the dependencies, try the connected lab, then test the idea in a project. Book location does not automatically imply a learning prerequisite.</p>
+ {before.length>0?<details><summary>Learn prerequisites in order · {before.length} concepts</summary><ol>{before.map(n=><li><a href={base+n.href.replace(/^\//,'')}>{n.title}</a></li>)}</ol></details>:<p>No additional prerequisites are specified for this lesson.</p>}
+ <nav class="learning-actions" aria-label="Lesson practice routes"><a href={base+node.labHref}>Try the connected lab</a><a href={base+node.pathHref}>Follow the learning path</a><a href={base+node.projectHref}>Apply it in a project</a><a href={`${base}atlas/?focus=${node.id}`}>See relationships on the map</a></nav>
+ <p class="quiet-note">A lab may be a broader chapter workflow. Reading a concept is preparation for the experiment, not proof that its model configuration has been verified.</p>
+</section>}
+{associated.length>0&&<aside class="learning-next" data-pagefind-ignore aria-label="Related learning routes"><h2>Keep your place in the learning route</h2><ul>{associated.map(r=><li><strong>{r.title}</strong> · <a href={base+r.pathHref}>Guided path</a> · <a href={base+r.labHref}>Lab</a> · <a href={base+r.projectHref}>Project</a></li>)}</ul><a href={base+'learning-hub/'}>Return to the learning hub</a></aside>}
+<script type="application/json" data-progress-config set:html={JSON.stringify(config).replace(/</g,'\\u003c')}/>
+<script>import '../scripts/learning-progress';</script>
+<DefaultFooter />

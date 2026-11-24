@@ -1,0 +1,39 @@
+{
+  "method": "HTML-linked and recursively reachable JavaScript, including lazy islands/imports; gzip file estimates, not measured network bytes or interaction timing.",
+  "lora": {
+    "htmlBytes": 90609,
+    "reachableJsBytes": 239484,
+    "reachableJsGzipBytes": 77800,
+    "modules": [
+      "_astro/DiscoveryPanel.astro_astro_type_script_index_0_lang.CRxsAJIi.js",
+      "_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.C3fM4Kra.js",
+      "_astro/RankMemory.CM8AwhIa.js",
+      "_astro/RankMemory.DWE2tQnL.js",
+      "_astro/TableOfContents.astro_astro_type_script_index_0_lang.BpJaGz7G.js",
+      "_astro/client.CzWaolnw.js",
+      "_astro/discovery.DWpsRkn0.js",
+      "_astro/ec.0vx5m.js",
+      "_astro/jsx-runtime.CVFlYIZn.js",
+      "_astro/page.cNngjUgL.js",
+      "_astro/react.C1eXT9gT.js",
+      "_astro/rolldown-runtime.DN1TCW_I.js",
+      "_astro/starlight-toc.D4UDIxQL.js"
+    ]
+  },
+  "graph": {
+    "htmlBytes": 75876,
+    "reachableJsBytes": 460472,
+    "reachableJsGzipBytes": 146438,
+    "modules": [
+      "_astro/AtlasExplorer.astro_astro_type_script_index_0_lang.DQjaeaOX.js",
+      "_astro/DiscoveryPanel.astro_astro_type_script_index_0_lang.CRxsAJIi.js",
+      "_astro/cytoscape.esm.DpfQbjy7.js",
+      "_astro/discovery.DWpsRkn0.js",
+      "_astro/page.cNngjUgL.js"
+    ]
+  },
+  "discovery": {
+    "bytes": 88830,
+    "gzipBytes": 18402
+  }
+}

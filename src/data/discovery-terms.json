@@ -1,0 +1,276 @@
+{
+  "named-entity-recognition": {
+    "aliases": [
+      "NER",
+      "named entity recognition",
+      "BIO tagging"
+    ],
+    "tasks": [
+      "extract names and organizations",
+      "label entity spans"
+    ]
+  },
+  "pretraining-and-sft": {
+    "aliases": [
+      "SFT",
+      "supervised fine tuning",
+      "instruction tuning"
+    ],
+    "tasks": [
+      "teach a model to follow instructions"
+    ]
+  },
+  "class-based-tf-idf": {
+    "aliases": [
+      "c-TF-IDF",
+      "ctfidf",
+      "class based tf idf"
+    ],
+    "tasks": [
+      "name the topics in document clusters"
+    ]
+  },
+  "lora": {
+    "aliases": [
+      "LoRA",
+      "low rank adaptation"
+    ],
+    "tasks": [
+      "fine tune with fewer trainable parameters"
+    ]
+  },
+  "qlora": {
+    "aliases": [
+      "QLoRA",
+      "quantized low rank adaptation",
+      "NF4",
+      "double quantization"
+    ],
+    "tasks": [
+      "train adapters on a four bit model"
+    ]
+  },
+  "chain-of-thought": {
+    "aliases": [
+      "CoT",
+      "chain of thought"
+    ],
+    "tasks": [
+      "prompt step by step reasoning"
+    ]
+  },
+  "self-consistency": {
+    "aliases": [
+      "majority vote",
+      "reasoning aggregation"
+    ],
+    "tasks": [
+      "combine several reasoning answers"
+    ]
+  },
+  "tree-of-thought": {
+    "aliases": [
+      "ToT",
+      "tree of thought",
+      "tree of thoughts"
+    ],
+    "tasks": [
+      "search over reasoning branches"
+    ]
+  },
+  "setfit": {
+    "aliases": [
+      "SetFit",
+      "sentence transformer fine tuning"
+    ],
+    "tasks": [
+      "train with a few labels",
+      "classify with limited labeled data"
+    ]
+  },
+  "few-shot-classification": {
+    "aliases": [
+      "few shot classification"
+    ],
+    "tasks": [
+      "train with a few labels",
+      "classify with limited labeled data"
+    ]
+  },
+  "few-shot-examples": {
+    "aliases": [
+      "few shot prompting",
+      "demonstrations"
+    ],
+    "tasks": [
+      "give examples in a prompt without training"
+    ]
+  },
+  "rag": {
+    "aliases": [
+      "RAG",
+      "retrieval augmented generation"
+    ],
+    "tasks": [
+      "answer questions from documents",
+      "build a grounded document assistant"
+    ]
+  },
+  "dense-retrieval": {
+    "aliases": [
+      "vector retrieval"
+    ],
+    "tasks": [
+      "search documents by meaning"
+    ]
+  },
+  "semantic-search": {
+    "aliases": [
+      "semantic retrieval"
+    ],
+    "tasks": [
+      "search documents by meaning"
+    ]
+  },
+  "reranking": {
+    "aliases": [
+      "cross encoder reranking"
+    ],
+    "tasks": [
+      "improve the order of search results"
+    ]
+  },
+  "bertopic": {
+    "aliases": [
+      "BERTopic"
+    ],
+    "tasks": [
+      "discover topics in documents",
+      "cluster a document collection"
+    ]
+  },
+  "clip": {
+    "aliases": [
+      "CLIP",
+      "contrastive language image pretraining"
+    ],
+    "tasks": [
+      "search images using text",
+      "compare images and captions"
+    ]
+  },
+  "blip-2": {
+    "aliases": [
+      "BLIP-2",
+      "BLIP2"
+    ],
+    "tasks": [
+      "generate captions for images"
+    ]
+  },
+  "conversation-memory": {
+    "aliases": [
+      "chat history",
+      "chatbot memory"
+    ],
+    "tasks": [
+      "remember facts across a conversation"
+    ]
+  },
+  "output-verification": {
+    "aliases": [
+      "answer validation"
+    ],
+    "tasks": [
+      "check whether a generated answer is correct"
+    ]
+  },
+  "constrained-sampling": {
+    "aliases": [
+      "structured output",
+      "JSON schema"
+    ],
+    "tasks": [
+      "generate valid JSON"
+    ]
+  },
+  "dpo": {
+    "aliases": [
+      "DPO",
+      "direct preference optimization"
+    ],
+    "tasks": [
+      "train from chosen and rejected answers"
+    ]
+  },
+  "reward-models": {
+    "aliases": [
+      "preference scorer",
+      "reward modeling"
+    ],
+    "tasks": [
+      "rank answers using preferences"
+    ]
+  },
+  "fine-tuning-embeddings": {
+    "aliases": [
+      "embedding fine tuning"
+    ],
+    "tasks": [
+      "improve search for my domain"
+    ]
+  },
+  "masked-language-modeling": {
+    "aliases": [
+      "MLM",
+      "masked language modeling"
+    ],
+    "tasks": [
+      "continue pretraining a BERT model"
+    ]
+  },
+  "kv-cache": {
+    "aliases": [
+      "KV cache",
+      "key value cache"
+    ],
+    "tasks": [
+      "speed up token generation"
+    ]
+  },
+  "maximal-marginal-relevance": {
+    "aliases": [
+      "MMR",
+      "maximal marginal relevance"
+    ],
+    "tasks": [
+      "reduce duplicate retrieved passages"
+    ]
+  },
+  "positional-embeddings-and-rope": {
+    "aliases": [
+      "RoPE",
+      "rotary positional embeddings"
+    ],
+    "tasks": [
+      "represent token order"
+    ]
+  },
+  "quantized-models": {
+    "aliases": [
+      "GGUF",
+      "low bit inference"
+    ],
+    "tasks": [
+      "run a small local language model"
+    ]
+  },
+  "grounded-generation": {
+    "aliases": [
+      "grounded QA"
+    ],
+    "tasks": [
+      "cite evidence and abstain when sources are missing"
+    ]
+  }
+}

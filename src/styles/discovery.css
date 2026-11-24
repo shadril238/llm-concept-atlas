@@ -1,0 +1,35 @@
+/* Shared reading, search and practice surfaces. */
+.atlas-global-search > a { display:flex;align-items:center;gap:.7rem;border:1px solid var(--sl-color-gray-5);border-radius:.65rem;padding:.55rem .85rem;text-decoration:none;color:var(--sl-color-text);background:var(--sl-color-bg);min-height:44px; }
+.atlas-global-search kbd { margin-left:auto;color:var(--sl-color-gray-3);font-size:.8rem; }
+.atlas-global-search dialog { width:min(58rem,calc(100% - 2rem));max-height:calc(100dvh - 2rem);border:1px solid var(--sl-color-gray-5);border-radius:1rem;padding:0;background:var(--sl-color-bg);color:var(--sl-color-text);overscroll-behavior:contain; }
+.atlas-global-search dialog::backdrop { background:rgb(8 18 24/.7);backdrop-filter:blur(4px); }
+.atlas-search-frame { padding:clamp(1rem,3vw,2rem); }
+.atlas-search-frame > header { display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1.5rem; }
+.discovery-panel { --lookup-accent:var(--sl-color-text-accent);margin-block:1.5rem; }
+.discovery-panel label { display:grid;gap:.4rem;font-size:.9rem;font-weight:600; }
+.discovery-panel input,.discovery-panel select { width:100%;min-width:0;padding:.75rem;border:1px solid var(--sl-color-gray-4);border-radius:.65rem;background:var(--sl-color-bg);color:var(--sl-color-text);font:inherit;min-height:44px; }
+.discovery-panel select { appearance:none;padding-right:2rem;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='m4 6 4 4 4-4' fill='none' stroke='%23778b91' stroke-width='2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .6rem center; }
+.discovery-panel button,.atlas-search-frame button { cursor:pointer;font:inherit;font-size:.88rem;min-height:44px;background:var(--sl-color-bg);color:var(--sl-color-text);border:1px solid var(--sl-color-gray-4);padding:.65rem .85rem;border-radius:.65rem; }
+.lookup-query input { font-size:1rem; }
+.lookup-hint,.lookup-aliases { font-size:.85rem;color:var(--sl-color-gray-2);line-height:1.6; }
+.lookup-filters { display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,10rem),1fr));gap:1rem;align-items:end;margin-block:1.25rem; }
+.lookup-filters > * { margin:0;min-width:0; }
+.lookup-results { display:grid;gap:1rem;margin-bottom:1rem; }
+.lookup-card { padding:1.15rem;border:1px solid var(--sl-color-gray-5);border-radius:.85rem;background:linear-gradient(130deg,color-mix(in srgb,var(--sl-color-accent-low) 18%,var(--sl-color-bg)),var(--sl-color-bg));min-width:0;overflow-wrap:anywhere; }
+.lookup-card > * { margin:0; }.lookup-card > * + * { margin-top:.55rem; }
+.lookup-card h3,.lookup-card h4 { font-size:1.1rem; }.lookup-card p { line-height:1.65; }.lookup-card small { font-size:.8rem; }
+.lookup-links,.learning-actions { display:flex;gap:.65rem 1rem;flex-wrap:wrap;align-items:center; }
+.lookup-links a,.learning-actions a { display:inline-flex;align-items:center;min-height:44px;padding:.35rem .65rem;border:1px solid var(--sl-color-gray-5);border-radius:.55rem;text-decoration:none;font-size:.88rem; }
+.lookup-suggestions { display:flex;flex-wrap:wrap;gap:.5rem;margin-block:1rem; }
+.learning-next,.learning-resume { margin-block:2rem;padding:1.4rem;border:1px solid var(--sl-color-gray-5);border-radius:1rem;background:color-mix(in srgb,var(--sl-color-accent-low) 18%,var(--sl-color-bg)); }
+.learning-next h2 { font-size:1.5rem;margin-top:.5rem; }.learning-next details { margin-block:1rem; }.learning-next nav { margin-block:1rem; }
+.learning-route-grid { display:grid;gap:1.5rem; }.learning-route-card { border:1px solid var(--sl-color-gray-5);border-radius:1rem;padding:1.4rem;min-width:0; }.learning-route-card h2 { font-size:1.4rem;margin-block:.4rem 1rem; }
+.learning-route-card fieldset { margin-top:1rem;padding:.8rem;border:1px solid var(--sl-color-gray-5);border-radius:.65rem; }.learning-route-card label { display:flex;align-items:center;gap:.6rem;padding:.4rem;min-height:44px; }.learning-route-card input { width:1.1rem;height:1.1rem; }
+.coverage-stats { display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-block:1.5rem; }.coverage-stats > div { padding:1rem;border:1px solid var(--sl-color-gray-5);border-radius:.75rem;display:grid;gap:.5rem; }.coverage-stats strong { font-size:1.6rem; }.coverage-stats span { font-size:.85rem; }.coverage-table { overflow:auto; }.coverage-table table { min-width:600px; }
+.atlas-relation-reason { color:var(--sl-color-gray-2);font-size:.875rem;line-height:1.6;margin:.3rem 0 .8rem; }.atlas-relation-links > div { min-width:0; }.atlas-practice-link { display:block;margin-block:.7rem; }.atlas-inspector details { margin-block:1rem; }
+:where(.discovery-panel,.atlas-global-search,.learning-next,.learning-route-card) :focus-visible { outline:3px solid var(--sl-color-text-accent);outline-offset:3px; }
+@media(max-width:50rem) { .atlas-global-search > a kbd {display:none;} .lookup-filters {grid-template-columns:1fr;} .atlas-global-search dialog {width:calc(100% - 1rem);max-height:calc(100dvh - 1rem);} }
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after {scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important;animation-iteration-count:1!important;} }
+@media(min-width:80rem) { .learning-route-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+.learning-route-card { scroll-margin-top:7rem;overflow-wrap:anywhere; }
+.atlas-search-frame > header { position:sticky;top:0;z-index:5;padding-block:.65rem;background:var(--sl-color-bg); }

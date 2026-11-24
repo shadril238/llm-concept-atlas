@@ -1,0 +1,22 @@
+---
+import { chapters } from '../data/book-map';
+const { id='lookup', mode='search' }=Astro.props;
+const base=import.meta.env.BASE_URL.replace(/\/?$/,'/');
+---
+<section class="discovery-panel" data-discovery data-mode={mode} data-base={base} data-pagefind-ignore aria-label="Find learning material">
+  <div class="lookup-query"><label for={`${id}-query`}>{mode==='concept'?'Find a concept or alias':'What would you like to understand?'}</label><input id={`${id}-query`} data-query type="search" placeholder="Try NER, low rank adaptation, or train with a few labels" autocomplete="off" /><p class="lookup-hint">Search a term, abbreviation or task. Task matches use curated phrases.</p></div>
+  <div class="lookup-filters">
+    <label for={`${id}-chapter`}>Chapter<select id={`${id}-chapter`} data-chapter><option value="all">All chapters</option>{chapters.map(c=><option value={c.number}>Chapter {c.number} · {c.title}</option>)}</select></label>
+    {mode!=='concept'&&<label for={`${id}-kind`}>Content type<select id={`${id}-kind`} data-kind><option value="all">Everything</option><option value="concept">Concepts</option><option value="lab">Labs</option><option value="path">Learning paths</option><option value="project">Projects</option><option value="chapter">Chapters</option><option value="guide">Guides</option></select></label>}
+    <label for={`${id}-level`}>Difficulty<select id={`${id}-level`} data-level><option value="all">All levels</option><option value="beginner">Beginner</option><option value="intermediate">Intermediate</option><option value="advanced">Advanced</option></select></label>
+    <button type="button" data-reset>Clear filters</button>
+  </div>
+  <p class="lookup-hint">Difficulty applies to concept lessons. Labs and paths may span several chapters.</p>
+  <p data-status role="status">Ready to find concepts, labs and learning routes.</p>
+  <div data-suggestions class="lookup-suggestions"></div>
+  <div class="lookup-results" data-results></div>
+  <button type="button" data-more hidden>Show more matches</button>
+  <section data-fulltext-section hidden><h3>Inside the lessons</h3><p data-fulltext-status role="status"></p><div data-fulltext class="lookup-results"></div><button type="button" data-retry hidden>Retry full-text search</button></section>
+  <noscript><p>Interactive filters need JavaScript. Browse the <a href={`${base}atlas/#atlas-directory-title`}>complete topic hierarchy</a> or <a href={`${base}learning-hub/`}>learning routes</a>.</p></noscript>
+</section>
+<script>import '../scripts/discovery';</script>

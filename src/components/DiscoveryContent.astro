@@ -1,0 +1,17 @@
+---
+import DefaultContent from '@astrojs/starlight/components/MarkdownContent.astro';
+import { enrichConcept, learningRoutes } from '../lib/learning-catalog';
+const entry=Astro.locals.starlightRoute.entry;
+const d=enrichConcept({...entry.data,chapter:entry.data.chapter??(entry.id.startsWith("chapters/")?Number(entry.id.split("/").at(-1)):undefined)});
+const chapterNumbers=d.chapter?[d.chapter]:[...new Set(learningRoutes.filter(r=>[r.labHref.split("#")[0],r.pathHref.split("#")[0],r.projectHref.split("#")[0]].includes(entry.id+"/")).flatMap(r=>r.chapters))];
+const kind=entry.id.startsWith('labs/')?'lab':d.kind==='use-case'?'project':['part','atlas'].includes(d.kind)?'guide':d.kind??'guide';
+---
+<div data-pagefind-ignore={entry.id==='search'||entry.id==='learning-hub'?true:undefined}><DefaultContent>
+ <div data-pagefind-ignore aria-hidden="true">
+  <span data-pagefind-filter={`kind:${kind}`}></span>
+  {chapterNumbers.map(n=><span data-pagefind-filter={`chapter:${n}`}></span>)}
+  {d.level&&<span data-pagefind-filter={`level:${d.level}`}></span>}
+ </div>
+ {d.aliases.length>0&&<p class="sr-only" aria-hidden="true" data-pagefind-weight="4">{d.aliases.join(' · ')} · {d.tasks.join(' · ')}</p>}
+ <slot />
+</DefaultContent></div>

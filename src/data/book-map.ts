@@ -6,7 +6,6 @@ export interface Chapter {
   title: string;
   summary: string;
   part: PartId;
-  topics: string[];
 }
 
 export interface Part {
@@ -55,18 +54,6 @@ export const chapters: Chapter[] = [
     part: "foundations",
     summary:
       "The big picture: language AI, model families, and what language models can do.",
-    topics: [
-      "Language AI",
-      "Bag-of-words",
-      "Dense vector embeddings",
-      "Attention",
-      "Encoder-only models",
-      "Decoder-only models",
-      "Representation models",
-      "Generative models",
-      "Pretraining",
-      "Responsible use",
-    ],
   },
   {
     number: 2,
@@ -74,17 +61,6 @@ export const chapters: Chapter[] = [
     part: "foundations",
     summary:
       "How text becomes tokens and how models turn those tokens into useful vectors.",
-    topics: [
-      "Tokenization",
-      "Vocabulary",
-      "Word and subword tokens",
-      "Token embeddings",
-      "Contextualized embeddings",
-      "Text embeddings",
-      "Word2vec",
-      "Contrastive training",
-      "Recommendation embeddings",
-    ],
   },
   {
     number: 3,
@@ -92,17 +68,6 @@ export const chapters: Chapter[] = [
     part: "foundations",
     summary:
       "Follow information through a transformer, from input tokens to a sampled output.",
-    topics: [
-      "Transformer forward pass",
-      "Sampling and decoding",
-      "Context size",
-      "KV cache",
-      "Self-attention",
-      "Queries, keys, and values",
-      "Transformer block",
-      "Efficient attention",
-      "Positional embeddings and RoPE",
-    ],
   },
   {
     number: 4,
@@ -110,14 +75,6 @@ export const chapters: Chapter[] = [
     part: "applications",
     summary:
       "Assign useful labels to text with representations or generative models.",
-    topics: [
-      "Sentiment analysis",
-      "Task-specific models",
-      "Embeddings for classification",
-      "Supervised classification",
-      "Zero-shot classification",
-      "Generative classification",
-    ],
   },
   {
     number: 5,
@@ -125,15 +82,6 @@ export const chapters: Chapter[] = [
     part: "applications",
     summary:
       "Discover patterns in a collection of documents without predefined labels.",
-    topics: [
-      "Document embeddings",
-      "Dimensionality reduction",
-      "Clustering",
-      "Cluster inspection",
-      "Topic modeling",
-      "BERTopic",
-      "Topic representations",
-    ],
   },
   {
     number: 6,
@@ -141,16 +89,6 @@ export const chapters: Chapter[] = [
     part: "applications",
     summary:
       "Shape model behavior with instructions, examples, and output constraints.",
-    topics: [
-      "Prompt structure",
-      "Instruction prompting",
-      "In-context learning",
-      "Few-shot examples",
-      "Chain prompting",
-      "Self-consistency",
-      "Output verification",
-      "Constrained sampling",
-    ],
   },
   {
     number: 7,
@@ -158,16 +96,6 @@ export const chapters: Chapter[] = [
     part: "applications",
     summary:
       "Combine model calls with templates, memory, chains, and tool-using agents.",
-    topics: [
-      "Quantized models",
-      "Prompt templates",
-      "Chains",
-      "Conversation memory",
-      "Windowed memory",
-      "Summarized memory",
-      "Agents",
-      "ReAct",
-    ],
   },
   {
     number: 8,
@@ -175,22 +103,6 @@ export const chapters: Chapter[] = [
     part: "applications",
     summary:
       "Find relevant information by meaning and ground generation in retrieved sources.",
-    topics: [
-      "Semantic search",
-      "Dense retrieval",
-      "Document chunking",
-      "Reranking",
-      "Retrieval metrics",
-      "RAG",
-      "Grounded generation",
-      "Local-model RAG",
-      "RAG evaluation",
-      "Query rewriting",
-      "Multi-query RAG",
-      "Multi-hop RAG",
-      "Query routing",
-      "Agentic RAG",
-    ],
   },
   {
     number: 9,
@@ -198,17 +110,6 @@ export const chapters: Chapter[] = [
     part: "applications",
     summary:
       "Connect language with images through shared representations and multimodal models.",
-    topics: [
-      "Vision transformers",
-      "Multimodal preprocessing",
-      "Multimodal embeddings",
-      "CLIP",
-      "OpenCLIP",
-      "BLIP-2",
-      "Q-Former",
-      "Image captioning",
-      "Multimodal chat",
-    ],
   },
   {
     number: 10,
@@ -216,17 +117,6 @@ export const chapters: Chapter[] = [
     part: "training",
     summary:
       "Train sentence representations and understand contrastive objectives.",
-    topics: [
-      "Contrastive learning",
-      "SBERT",
-      "Contrastive examples",
-      "Embedding evaluation",
-      "Loss functions",
-      "Fine-tuning embeddings",
-      "TSDAE",
-      "Domain adaptation",
-      "Augmented SBERT",
-    ],
   },
   {
     number: 11,
@@ -234,14 +124,6 @@ export const chapters: Chapter[] = [
     part: "training",
     summary:
       "Adapt an encoder to classification and named-entity recognition tasks.",
-    topics: [
-      "BERT fine-tuning",
-      "Frozen layers",
-      "Few-shot classification",
-      "SetFit",
-      "Masked language modeling",
-      "Named-entity recognition",
-    ],
   },
   {
     number: 12,
@@ -249,17 +131,6 @@ export const chapters: Chapter[] = [
     part: "training",
     summary:
       "Understand supervised fine-tuning, efficient adapters, evaluation, and preferences.",
-    topics: [
-      "Pretraining and SFT",
-      "PEFT",
-      "LoRA",
-      "QLoRA",
-      "Quantization",
-      "Generative evaluation",
-      "Reward models",
-      "RLHF",
-      "DPO",
-    ],
   },
 ];
 

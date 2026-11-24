@@ -1,7 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import { chapters, parts } from '../data/book-map';
-import topicCoverage from '../data/topic-coverage.json';
+import {summarizeCoverage} from '../lib/coverage-summary.js';
+import {routeForChapter} from '../lib/learning-catalog';
 import sourceInventory from '../data/book-sections.json';
 const { number } = Astro.props;
 const chapter = chapters.find((item) => item.number === number);
@@ -11,8 +12,8 @@ const entries = await getCollection('docs');
 const concepts = entries.filter((entry) => entry.data.kind === 'concept' && entry.data.chapter === number).sort((a,b) => a.data.title.localeCompare(b.data.title));
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const sourceObjectives = sourceInventory.sections.filter(section => section.chapter === number && section.coverageUnit);
-const mappedObjectives = sourceObjectives.filter(section => section.mappings.length > 0).length;
-const chapterTopics = topicCoverage[String(number) as keyof typeof topicCoverage] as Record<string, string>;
+const summary=summarizeCoverage(sourceInventory.sections,number);
+const route=routeForChapter(number);
 ---
 
 <div class={`chapter-intro part-${chapter.part}`}>
@@ -30,15 +31,12 @@ const chapterTopics = topicCoverage[String(number) as keyof typeof topicCoverage
   </div> : <p class="quiet-note">Concept notes for this chapter are being developed. Use the topic map below as a reading guide.</p>}
 </section>
 
-<section class="chapter-section">
-  <div class="section-heading"><span class="eyebrow">Chapter map</span><h2>Selected topics in this chapter</h2></div>
-  <ol class="topic-list">{chapter.topics.map((topic) => <li><a href={`${base}concepts/${chapterTopics[topic]}/`}>{topic} ↗</a></li>)}</ol>
+<section class="chapter-section" id="source-objectives" aria-label="Source objective coverage">
+ <span class="eyebrow">Audited source inventory</span><h2>Source objectives and evidence</h2>
+ <p>{summary.mapped} of {summary.total} leaf objectives mapped · {summary.accepted} independently accepted · {summary.executed} of {summary.practical} required practical objectives have recorded execution.</p>
+ <p>Mapping is navigation, acceptance is independent teaching review, and execution applies only to a recorded configuration. <a href={base+'coverage/'}>Understand these counts</a>.</p>
+ <details><summary>Inspect the objectives, gaps and destinations</summary><ul>{sourceObjectives.map(section=><li><strong>{section.title}</strong> · printed pp. {section.printedPages.join('–')}<p>Review: {section.reviewStatus}. Practical execution: {section.requirements.implementation?section.realModelExecution:'not required for this objective'}.</p><ul>{section.mappings.map(m=><li><a href={`${base}${m.path.replace('src/content/docs/','').replace('.mdx','/')}#${m.anchor}`}>{m.conceptId??'Lesson section'}</a></li>)}</ul>{section.mappings.length===0&&<p>Destination still to implement.</p>}<details><summary>Remaining review work</summary><ul>{section.gaps.map(g=><li>{g}</li>)}</ul>{'executionRecord'in section&&<a href={'https://github.com/shadril238/llm-concept-atlas/blob/main/'+section.executionRecord}>Recorded execution</a>}</details></li>)}</ul></details>
 </section>
-
-<section class="chapter-section" aria-label="Source objective coverage">
-  <div class="chapter-section-heading"><span class="eyebrow">Source inventory</span><h2>What this chapter still needs</h2></div>
-  <p>{mappedObjectives} of {sourceObjectives.length} audited leaf objectives have a lesson destination. A destination is a coverage map, not independent teaching acceptance.</p>
-  <details><summary>Inspect the source objectives and current destinations</summary><ul>{sourceObjectives.map(section => <li><strong>{section.title}</strong> <small>· printed pp. {section.printedPages.join('–')}</small>{section.mappings.length > 0 ? <ul>{section.mappings.map(mapping => <li><a href={`${base}${mapping.path.replace('src/content/docs/','').replace('.mdx','/')}#${mapping.anchor}`}>{mapping.conceptId ?? 'Lesson section'}</a></li>)}</ul> : <p>Destination still to implement.</p>}</li>)}</ul></details>
-</section>
+{route&&<section class="learning-next"><h2>Use this chapter</h2><nav class="learning-actions"><a href={base+route.pathHref}>Guided path</a><a href={base+route.labHref}>Connected lab</a><a href={base+route.projectHref}>Project</a></nav></section>}
 
 <div class="source-note">This is an independent study guide. For the full treatment and runnable chapter notebook, see <em>Hands-On Large Language Models</em> and the <a href={`https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter${String(number).padStart(2, '0')}`}>authors' official code</a>.</div>
