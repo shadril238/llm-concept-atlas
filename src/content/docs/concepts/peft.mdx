@@ -54,7 +54,7 @@ Parameter efficiency and sample efficiency are different. Learning twelve thousa
 
 ## Worked example
 
-The actual fused QKV LoRA configuration has six layers, input width128, output width384, rank 4 and alpha 8. Each layer adds `4×128 + 384×4 = 2,048` parameters, totaling 12,288. The original model has14,067,712 parameters. The trainable fraction is about 0.087%; the entire base still participates in every forward pass.
+The actual fused QKV LoRA configuration has six layers, input width 128, output width 384, rank 4 and alpha 8. Each layer adds `4×128 + 384×4 = 2,048` parameters, totaling 12,288. The original model has 14,067,712 parameters. The trainable fraction is about 0.087%; the entire base still participates in every forward pass.
 
 At float32, one trainable parameter commonly adds four bytes of gradient plus eight bytes for Adam's two moments, besides its own storage. Base-weight storage remains tens of megabytes in this tiny example. A larger activation footprint can dominate the adapter state; sequence length, batch size and checkpointing matter independently.
 
@@ -90,7 +90,7 @@ PEFT is useful when serving several domain/style variants on a shared pretrained
 
 ## Limits and common mistakes
 
-The evaluated instruction subset has32 training,8 validation and8 test source contexts. Pretraining overlap is unknown. Repeated views of these test outputs are not a new independent benchmark. Preserve failed and length-limited answers, exact base/tokenizer identity and data provenance when transferring the workflow. The book's larger TinyLlama/CUDA settings require their own supported hardware execution; the small profiles do not certify them.
+The evaluated instruction subset has 32 training,8 validation and 8 test source contexts. Pretraining overlap is unknown. Repeated views of these test outputs are not a new independent benchmark. Preserve failed and length-limited answers, exact base/tokenizer identity and data provenance when transferring the workflow. The book's larger TinyLlama/CUDA settings require their own supported hardware execution; the small profiles do not certify them.
 
 ## Check your understanding
 

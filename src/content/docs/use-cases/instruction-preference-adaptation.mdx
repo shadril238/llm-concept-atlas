@@ -11,9 +11,9 @@ A source-based assistant must extract the requested facts concisely and avoid un
 
 ## Start with a frozen baseline
 
-Read the [generation path](/llm-concept-atlas/paths/from-instructions-to-preferences/) and execute [L21–L23](/llm-concept-atlas/labs/generation-adaptation/). Preserve the pretrained baseline, fixed prompts, tokenization/template, decoding budget and raw predictions. The example uses a licensed Dolly subset, with source/context-disjoint32/8/8 splits and separate original mask-inspection cases. Keep attribution and CC BY-SA3.0 on the subset and derived preferences.
+Read the [generation path](/llm-concept-atlas/paths/from-instructions-to-preferences/) and execute [L21–L23](/llm-concept-atlas/labs/generation-adaptation/). Preserve the pretrained baseline, fixed prompts, tokenization/template, decoding budget and raw predictions. The example uses a licensed Dolly subset, with source/context-disjoint32/8/8 splits and separate original mask-inspection cases. Keep attribution and CC BY-SA 3.0 on the subset and derived preferences.
 
-The tiny Pythia model makes the mechanics accessible, but produces visibly weak extraction answers. Its current fixed suite has0/8 normalized exact matches across the four compared policies. This is an instructional experiment with documented failures, not a ready-to-deploy assistant. New task data, model capacity and independent evaluation are required before a deployment claim.
+The tiny Pythia model makes the mechanics accessible, but produces visibly weak extraction answers. Its current fixed suite has 0/8 normalized exact matches across the four compared policies. This is an instructional experiment with documented failures, not a ready-to-deploy assistant. New task data, model capacity and independent evaluation are required before a deployment claim.
 
 ## Implement the adaptation chain
 

@@ -62,7 +62,7 @@ Read the mechanism and the actual workflow together. A small calculation checks 
 
 ## Worked example
 
-Suppose1,024 weights use four-bit codes: idealized payload is 512 bytes. If sixteen blocks each keep a float32 scale, scales add64 bytes before codebook/other overhead. Double quantization might compress these scales, but its own metadata must also be counted. The example below is storage arithmetic, not an NF4 implementation and not a measured device peak.
+Suppose 1,024 weights use four-bit codes: idealized payload is 512 bytes. If sixteen blocks each keep a float32 scale, scales add 64 bytes before codebook/other overhead. Double quantization might compress these scales, but its own metadata must also be counted. The example below is storage arithmetic, not an NF4 implementation and not a measured device peak.
 
 The browser lets you vary base precision independently of rank and activation estimates. Ask which bar changes. Adapter precision does not automatically become four-bit when the base dropdown changes. Real allocation and kernels must be measured in the supported runtime.
 
@@ -99,7 +99,7 @@ Use quantized adapter training when frozen-base storage is a bottleneck and the 
 
 ## Limits and common mistakes
 
-The evaluated instruction subset has32 training,8 validation and8 test source contexts. Pretraining overlap is unknown. Repeated views of these test outputs are not a new independent benchmark. Preserve failed and length-limited answers, exact base/tokenizer identity and data provenance when transferring the workflow. The book's larger TinyLlama/CUDA settings require their own supported hardware execution; the small profiles do not certify them.
+The evaluated instruction subset has 32 training,8 validation and 8 test source contexts. Pretraining overlap is unknown. Repeated views of these test outputs are not a new independent benchmark. Preserve failed and length-limited answers, exact base/tokenizer identity and data provenance when transferring the workflow. The book's larger TinyLlama/CUDA settings require their own supported hardware execution; the small profiles do not certify them.
 
 ## Check your understanding
 

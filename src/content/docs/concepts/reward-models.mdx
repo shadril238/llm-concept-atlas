@@ -58,7 +58,7 @@ Reward training uses scalar rewards produced by the reward model. It does not us
 
 ## Worked example
 
-With chosen reward1.2 and rejected reward0.4, the margin is 0.8, sigmoid probability about 0.69 and pair loss about 0.371. Raising both rewards by 100 gives the same probability and loss. Reversing their order gives a larger loss. The code below performs only that scalar calculation; L23 performs actual encoder/head optimization.
+With chosen reward 1.2 and rejected reward 0.4, the margin is 0.8, sigmoid probability about 0.69 and pair loss about 0.371. Raising both rewards by 100 gives the same probability and loss. Reversing their order gives a larger loss. The code below performs only that scalar calculation; L23 performs actual encoder/head optimization.
 
 Before and after training, inspect heldout accuracy, ties, individual margins and candidate lengths. If the trained model prefers every longer answer, high aggregate accuracy on a length-biased fixture is weak evidence. A separate slice with short correct and long incorrect candidates helps reveal that shortcut.
 
@@ -97,12 +97,12 @@ Reward models can support candidate reranking or provide a policy-training signa
 
 ## Limits and common mistakes
 
-The evaluated instruction subset has32 training,8 validation and8 test source contexts. Pretraining overlap is unknown. Repeated views of these test outputs are not a new independent benchmark. Preserve failed and length-limited answers, exact base/tokenizer identity and data provenance when transferring the workflow. The book's larger TinyLlama/CUDA settings require their own supported hardware execution; the small profiles do not certify them.
+The evaluated instruction subset has 32 training,8 validation and 8 test source contexts. Pretraining overlap is unknown. Repeated views of these test outputs are not a new independent benchmark. Preserve failed and length-limited answers, exact base/tokenizer identity and data provenance when transferring the workflow. The book's larger TinyLlama/CUDA settings require their own supported hardware execution; the small profiles do not certify them.
 
 ## Check your understanding
 
 <details>
-<summary>Why is reward3 not an absolute factuality guarantee?</summary>
+<summary>Why is reward 3 not an absolute factuality guarantee?</summary>
 
 The objective constrains relative margins under its training preferences. A common offset is unconstrained, and the labels/model may reward shortcuts unrelated to factuality.
 

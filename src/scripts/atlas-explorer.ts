@@ -85,7 +85,7 @@ async function startAtlas(root: HTMLElement) {
     ],
     layout: { name: 'preset', fit: false },
     style: [
-      { selector: 'node', style: { 'label': 'data(label)', 'shape': 'round-rectangle', 'background-color': '#243a42', 'border-color': '#648188', 'border-width': 1.5, 'color': '#effaf8', 'font-family': 'ui-sans-serif, system-ui, sans-serif', 'font-size': 13, 'font-weight': 650, 'text-wrap': 'wrap', 'text-max-width': '160px', 'text-valign': 'center', 'text-halign': 'center', 'width': 190, 'height': 52, 'text-overflow-wrap': 'anywhere', 'overlay-opacity': 0 } },
+      { selector: 'node', style: { 'label': 'data(label)', 'shape': 'round-rectangle', 'background-color': '#243a42', 'border-color': '#648188', 'border-width': 1.5, 'color': '#effaf8', 'font-family': 'ui-sans-serif, system-ui, sans-serif', 'font-size': 13, 'font-weight': 600, 'text-wrap': 'wrap', 'text-max-width': '160px', 'text-valign': 'center', 'text-halign': 'center', 'width': 190, 'height': 52, 'text-overflow-wrap': 'anywhere', 'overlay-opacity': 0 } },
       { selector: 'node[kind = "part"]', style: { 'width': 220, 'height': 62, 'font-size': 18, 'font-weight': 800, 'border-width': 2, 'background-color': '#1b353a' } },
       { selector: 'node[kind = "chapter"]', style: { 'width': 208, 'height': 68, 'font-size': 12, 'background-color': '#21313b', 'text-max-width': '180px' } },
       { selector: 'node[kind = "concept"]', style: { 'width': 190, 'height': 54, 'font-size': 13 } },
@@ -104,7 +104,6 @@ async function startAtlas(root: HTMLElement) {
     ],
     minZoom: 0.28,
     maxZoom: 2.4,
-    wheelSensitivity: 0.18,
     boxSelectionEnabled: false,
     autoungrabify: true,
   });

@@ -46,13 +46,13 @@ The product BA has rank at most r. A bottleneck can represent some useful task c
 
 In the selected PEFT initialization, A is random and B is zero. The initial update is zero, so the adapted policy initially matches the base in evaluation mode. B can receive a first-step gradient while A's first-step gradient may be zero because it is multiplied by B. After B changes, A can learn too. Zero A and zero B together would produce a dead bilinear initialization.
 
-Targets are named modules, not vague “attention weights.” Here `query_key_value` is one fused projection with three output groups. Six fused384×128 matrices produce12,288 trainable values at rank 4. This does not adapt the attention output projection, MLP, embeddings or vocabulary head. Dropout is explicitly zero for these controlled CPU runs; nonzero adapter dropout changes the training path and must be disabled for equivalence checks.
+Targets are named modules, not vague “attention weights.” Here `query_key_value` is one fused projection with three output groups. Six fused 384×128 matrices produce 12,288 trainable values at rank 4. This does not adapt the attention output projection, MLP, embeddings or vocabulary head. Dropout is explicitly zero for these controlled CPU runs; nonzero adapter dropout changes the training path and must be disabled for equivalence checks.
 
 ### Adapter merging
 
 For supported floating-point linear layers, merge computes `W_merged = W + (alpha/r)BA`. It removes the separate adapter branch, so deployment can use an ordinary model, but merging sacrifices convenient task switching unless originals are retained. Save the tokenizer and exact base identity with the artifact. Directly changing a quantized integer payload is not this floating-point algebra.
 
-Float32 summation order can differ between a separate adapter path and the merged projection. L21 records the actual maximum logit difference and uses an explicit scale-relative tolerance, then separately repeats the algebra in float64. The author run's float32 maximum was about 0.00788 on logits with global magnitude31.95; float64 differed by about 1.3e-11. This is bounded numerical agreement, not bitwise identity. A fresh reload of the saved merged model is checked too.
+Float32 summation order can differ between a separate adapter path and the merged projection. L21 records the actual maximum logit difference and uses an explicit scale-relative tolerance, then separately repeats the algebra in float64. The author run's float32 maximum was about 0.00788 on logits with global magnitude 31.95; float64 differed by about 1.3e-11. This is bounded numerical agreement, not bitwise identity. A fresh reload of the saved merged model is checked too.
 
 ### The important distinction
 
@@ -60,7 +60,7 @@ Read the mechanism and the actual workflow together. A small calculation checks 
 
 ## Worked example
 
-Let W be the2×2 identity, A=`[0.1,0.2]`, B=`[0.3,-0.1]` as a column and alpha/r=2. BA is `[[0.03,0.06],[-0.01,-0.02]]`, so the merged matrix is `[[1.06,0.12],[-0.02,0.96]]`. Multiply the same x through both paths and compare. Changing orientation would compute a different shape or the wrong update.
+Let W be the 2×2 identity, A=`[0.1,0.2]`, B=`[0.3,-0.1]` as a column and alpha/r=2. BA is `[[0.03,0.06],[-0.01,-0.02]]`, so the merged matrix is `[[1.06,0.12],[-0.02,0.96]]`. Multiply the same x through both paths and compare. Changing orientation would compute a different shape or the wrong update.
 
 The earlier [pretrained LoRA lab](/llm-concept-atlas/labs/first-verified-examples/) supplies another real adapter workflow. L21 adds the fixed realistic instruction subset, full-model comparator, raw heldout generations and more explicit data masks. The old E2 record remains available rather than being relabeled as new evidence.
 
@@ -111,7 +111,7 @@ Use LoRA for compact domain/style/task adaptation where low-rank targets offer a
 
 ## Limits and common mistakes
 
-The evaluated instruction subset has32 training,8 validation and8 test source contexts. Pretraining overlap is unknown. Repeated views of these test outputs are not a new independent benchmark. Preserve failed and length-limited answers, exact base/tokenizer identity and data provenance when transferring the workflow. The book's larger TinyLlama/CUDA settings require their own supported hardware execution; the small profiles do not certify them.
+The evaluated instruction subset has 32 training,8 validation and 8 test source contexts. Pretraining overlap is unknown. Repeated views of these test outputs are not a new independent benchmark. Preserve failed and length-limited answers, exact base/tokenizer identity and data provenance when transferring the workflow. The book's larger TinyLlama/CUDA settings require their own supported hardware execution; the small profiles do not certify them.
 
 ## Check your understanding
 

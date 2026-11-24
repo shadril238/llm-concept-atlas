@@ -28,7 +28,7 @@ import { PreferenceExplorer } from '../../../components/simulations/GenerationLa
 
 <ConceptPrimer id="dpo" />
 
-<ReferenceBrief objectives={["Aggregate shifted completion/EOS log probabilities under policy and reference.", "Compute the original sigmoid DPO loss and initial log2 invariant.", "Compare reference-relative margins with actual generated task quality."]} prerequisites="rlhf, pretraining-and-sft" scope="Original explanations and calculations plus actual small CPU training. Independent review and GPU QLoRA certification remain pending." />
+<ReferenceBrief objectives={["Aggregate shifted completion/EOS log probabilities under policy and reference.", "Compute the original sigmoid DPO loss and initial log(2) invariant.", "Compare reference-relative margins with actual generated task quality."]} prerequisites="rlhf, pretraining-and-sft" scope="Original explanations and calculations plus actual small CPU training. Independent review and GPU QLoRA certification remain pending." />
 
 ## Definition and intuition
 
@@ -46,23 +46,23 @@ For each candidate y and prompt x, sum log pi(y_t | x,y_before_t) over completio
 
 Let pc/pr be the policy chosen/rejected log probabilities and rc/rr the reference values. The relative margin is (pc−pr)−(rc−rr). Original sigmoid DPO loss is −log sigmoid(beta×margin). Stable log-sigmoid avoids underflow. Beta is a preference-strength/drift-related objective parameter, not the optimizer learning rate; changing either has a different effect.
 
-At identical initial policy and reference, the relative margin is zero and loss is log2. The loss still has a nonzero gradient through policy probabilities; freezing both models would prevent learning. L23 checks exact initial agreement in evaluation mode, fixes reference parameters and verifies its hash after training. The policy uses a fresh zero-update LoRA adapter on the selected merged SFT checkpoint. Adapter dropout is zero here, keeping initial comparison deterministic.
+At identical initial policy and reference, the relative margin is zero and loss is log(2). The loss still has a nonzero gradient through policy probabilities; freezing both models would prevent learning. L23 checks exact initial agreement in evaluation mode, fixes reference parameters and verifies its hash after training. The policy uses a fresh zero-update LoRA adapter on the selected merged SFT checkpoint. Adapter dropout is zero here, keeping initial comparison deterministic.
 
 ### Preference data templating
 
-Keep one prompt and two separate completions. Do not paste chosen and rejected into a single assistant response or let one candidate's continuation become the other's prompt. The same EOS policy applies to each. Our maximum256 tokens is enforced by rejection, and test contexts remain outside fitting/selection. Chosen/rejected labels are rule-authored transformations of the attributed Dolly subset; label preference is relative and independent review remains pending.
+Keep one prompt and two separate completions. Do not paste chosen and rejected into a single assistant response or let one candidate's continuation become the other's prompt. The same EOS policy applies to each. Our maximum 256 tokens is enforced by rejection, and test contexts remain outside fitting/selection. Chosen/rejected labels are rule-authored transformations of the attributed Dolly subset; label preference is relative and independent review remains pending.
 
 ### The important distinction
 
 A positive relative margin says the policy has shifted toward the chosen completion relative to the reference. It need not mean the chosen candidate has higher raw likelihood: both sequences can have very low probability, and summed log probabilities carry length effects. L23 reports raw preference accuracy, relative accuracy and ties separately, plus independent task metrics on actual base/SFT/DPO generations. A decrease in validation DPO loss is not proof of better grounded answers.
 
-The explicit torch loop follows the original sigmoid formulation documented by pinned TRL0.23.1; it does not claim to execute DPOTrainer or every trainer variant. There is no online generation, reward-model query, length normalization, label smoothing or reference refresh inside this training objective.
+The explicit torch loop follows the original sigmoid formulation documented by pinned TRL 0.23.1; it does not claim to execute DPOTrainer or every trainer variant. There is no online generation, reward-model query, length normalization, label smoothing or reference refresh inside this training objective.
 
 ## Worked example
 
-Suppose policy log probabilities are pc=−3 and pr=−5 while reference values are rc=−4 and rr=−5. Policy gap2 exceeds reference gap1 by 1. With beta 0.1, loss is about 0.6444, below log2. Adding a common constant to either pair changes neither gap. If pc and pr are per-token means instead of sequence sums, this would be a different objective.
+Suppose policy log probabilities are pc=−3 and pr=−5 while reference values are rc=−4 and rr=−5. Policy gap 2 exceeds reference gap 1 by 1. With beta 0.1, loss is about 0.6444, below log(2). Adding a common constant to either pair changes neither gap. If pc and pr are per-token means instead of sequence sums, this would be a different objective.
 
-The actual run begins from L21's saved float32 merged SFT model. Forty optimizer steps, batch 2, LR0.001 and beta 0.1 are explicit. Every ten steps, validation pair loss selects among trained checkpoints; heldout prompts are not used to tune hyperparameters. The adapter is saved and loaded against the same selected SFT identity before scores are checked again.
+The actual run begins from L21's saved float32 merged SFT model. Forty optimizer steps, batch 2, LR 0.001 and beta 0.1 are explicit. Every ten steps, validation pair loss selects among trained checkpoints; heldout prompts are not used to tune hyperparameters. The adapter is saved and loaded against the same selected SFT identity before scores are checked again.
 
 ## Try the interactive lab
 
@@ -98,12 +98,12 @@ Use DPO when you have trustworthy pairwise preferences and a suitable SFT starti
 
 ## Limits and common mistakes
 
-The evaluated instruction subset has32 training,8 validation and8 test source contexts. Pretraining overlap is unknown. Repeated views of these test outputs are not a new independent benchmark. Preserve failed and length-limited answers, exact base/tokenizer identity and data provenance when transferring the workflow. The book's larger TinyLlama/CUDA settings require their own supported hardware execution; the small profiles do not certify them.
+The evaluated instruction subset has 32 training,8 validation and 8 test source contexts. Pretraining overlap is unknown. Repeated views of these test outputs are not a new independent benchmark. Preserve failed and length-limited answers, exact base/tokenizer identity and data provenance when transferring the workflow. The book's larger TinyLlama/CUDA settings require their own supported hardware execution; the small profiles do not certify them.
 
 ## Check your understanding
 
 <details>
-<summary>At identical policy/reference, why is a log2 loss compatible with learning?</summary>
+<summary>At identical policy/reference, why is a log(2) loss compatible with learning?</summary>
 
 The current relative margin is zero, but its derivative through trainable policy log probabilities is nonzero. Reference probabilities remain constant.
 

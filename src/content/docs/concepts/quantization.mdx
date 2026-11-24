@@ -56,7 +56,7 @@ Quantization also affects deployment comparisons. Reloading identical quantized 
 
 ## Worked example
 
-For the values 0.12,0.47 and1.00, choose a symmetric signed four-bit demonstration grid with codes−7…7 and scale 1/7. Values round to codes1,3,7 and reconstruct to approximately0.143,0.429,1.000. The first two values change despite staying in range. With one global outlier7.0, the scale becomes1 and both0.12 and0.47 round to zero.
+For the values 0.12,0.47 and 1.00, choose a symmetric signed four-bit demonstration grid with codes−7…7 and scale 1/7. Values round to codes 1,3,7 and reconstruct to approximately 0.143,0.429,1.000. The first two values change despite staying in range. With one global outlier 7.0, the scale becomes 1 and both 0.12 and 0.47 round to zero.
 
 This counterexample explains why code precision alone is insufficient: the scale and grouping matter. It does not reproduce NF4's codebook, GPU kernels or the memory savings in the original QLoRA experiments. Use the actual Linux profile to inspect real quantizer state and raw heldout behavior.
 
@@ -97,7 +97,7 @@ Quantization is useful for reducing deployment storage or enabling an otherwise 
 
 ## Limits and common mistakes
 
-The evaluated instruction subset has32 training,8 validation and8 test source contexts. Pretraining overlap is unknown. Repeated views of these test outputs are not a new independent benchmark. Preserve failed and length-limited answers, exact base/tokenizer identity and data provenance when transferring the workflow. The book's larger TinyLlama/CUDA settings require their own supported hardware execution; the small profiles do not certify them.
+The evaluated instruction subset has 32 training,8 validation and 8 test source contexts. Pretraining overlap is unknown. Repeated views of these test outputs are not a new independent benchmark. Preserve failed and length-limited answers, exact base/tokenizer identity and data provenance when transferring the workflow. The book's larger TinyLlama/CUDA settings require their own supported hardware execution; the small profiles do not certify them.
 
 ## Check your understanding
 
