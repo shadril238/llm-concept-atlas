@@ -637,7 +637,7 @@ export function FreezeExplorer() {
             >
               <strong>{name.replaceAll("_", " ")}</strong>
               <span>
-                {v.trainable.toLocaleString()} / {v.parameters.toLocaleString()}{" "}
+                {v.trainable.toLocaleString("en-US")} / {v.parameters.toLocaleString("en-US")}{" "}
                 trainable parameters
               </span>
               <span>
