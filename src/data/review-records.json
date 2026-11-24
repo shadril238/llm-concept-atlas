@@ -197,6 +197,31 @@
         "Beginner pilot feedback"
       ],
       "accepted": false
+    },
+    {
+      "id": "e8-generation-author-review-2026-11-24",
+      "date": "2026-11-24",
+      "status": "author-reviewed",
+      "independentReview": false,
+      "reviewer": "Implementing assistant (author technical pass)",
+      "concepts": [
+        "dpo",
+        "generative-evaluation",
+        "lora",
+        "peft",
+        "pretraining-and-sft",
+        "qlora",
+        "quantization",
+        "reward-models",
+        "rlhf"
+      ],
+      "evidence": "docs/reviews/e8-generation-adaptation.md",
+      "pending": [
+        "Independent technical/editorial review",
+        "Beginner pilot feedback",
+        "Supported GPU QLoRA/paged optimizer verification"
+      ],
+      "accepted": false
     }
   ]
 }

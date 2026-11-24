@@ -958,51 +958,6 @@
       "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
     },
     {
-      "id": "legacy-dpo",
-      "title": "Existing dpo example",
-      "concepts": [
-        "dpo"
-      ],
-      "sourceSections": [
-        "book-ch12-no-reward-model",
-        "book-ch12-dpo-workflow",
-        "book-ch12-dpo-quantization",
-        "book-ch12-dpo-config",
-        "book-ch12-dpo-training",
-        "book-ch12-dpo-logprobs"
-      ],
-      "level": "A",
-      "kind": "illustrative-calculation",
-      "entrypoint": "examples/legacy/legacy-dpo.py",
-      "environment": "foundations",
-      "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/dpo.mdx",
-        "block": 0
-      },
-      "region": null,
-      "models": [],
-      "dataset": null,
-      "seed": null,
-      "reproducibility": "Legacy mechanism; E0 findings still apply.",
-      "runtime": {
-        "device": "cpu",
-        "timeoutSeconds": 5,
-        "measured": null
-      },
-      "network": "offline",
-      "auth": false,
-      "inputSchema": "Inputs are literals in the source.",
-      "outputSchema": "stdout text",
-      "validation": {
-        "method": "exact-stdout",
-        "expected": "0.576",
-        "origin": "existing-published-output"
-      },
-      "verificationRecord": "examples/verification/records/legacy-dpo.json",
-      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
-    },
-    {
       "id": "legacy-efficient-attention",
       "title": "Existing efficient-attention example",
       "concepts": [
@@ -1343,49 +1298,6 @@
         "origin": "existing-published-output"
       },
       "verificationRecord": "examples/verification/records/legacy-generative-classification.json",
-      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
-    },
-    {
-      "id": "legacy-generative-evaluation",
-      "title": "Existing generative-evaluation example",
-      "concepts": [
-        "generative-evaluation"
-      ],
-      "sourceSections": [
-        "book-ch12-evaluation",
-        "book-ch12-word-metrics",
-        "book-ch12-automated-evaluation",
-        "book-ch12-human-evaluation"
-      ],
-      "level": "A",
-      "kind": "illustrative-calculation",
-      "entrypoint": "examples/legacy/legacy-generative-evaluation.py",
-      "environment": "foundations",
-      "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/generative-evaluation.mdx",
-        "block": 0
-      },
-      "region": null,
-      "models": [],
-      "dataset": null,
-      "seed": null,
-      "reproducibility": "Legacy mechanism; E0 findings still apply.",
-      "runtime": {
-        "device": "cpu",
-        "timeoutSeconds": 5,
-        "measured": null
-      },
-      "network": "offline",
-      "auth": false,
-      "inputSchema": "Inputs are literals in the source.",
-      "outputSchema": "stdout text",
-      "validation": {
-        "method": "exact-stdout",
-        "expected": "0.667",
-        "origin": "existing-published-output"
-      },
-      "verificationRecord": "examples/verification/records/legacy-generative-evaluation.json",
       "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
     },
     {
@@ -2029,47 +1941,6 @@
       "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
     },
     {
-      "id": "legacy-peft",
-      "title": "Existing peft example",
-      "concepts": [
-        "peft"
-      ],
-      "sourceSections": [
-        "book-ch12-peft",
-        "book-ch12-adapters"
-      ],
-      "level": "A",
-      "kind": "illustrative-calculation",
-      "entrypoint": "examples/legacy/legacy-peft.py",
-      "environment": "foundations",
-      "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/peft.mdx",
-        "block": 0
-      },
-      "region": null,
-      "models": [],
-      "dataset": null,
-      "seed": null,
-      "reproducibility": "Legacy mechanism; E0 findings still apply.",
-      "runtime": {
-        "device": "cpu",
-        "timeoutSeconds": 5,
-        "measured": null
-      },
-      "network": "offline",
-      "auth": false,
-      "inputSchema": "Inputs are literals in the source.",
-      "outputSchema": "stdout text",
-      "validation": {
-        "method": "exact-stdout",
-        "expected": "[[1.03, -0.01], [0.06, 0.98]]",
-        "origin": "existing-published-output"
-      },
-      "verificationRecord": "examples/verification/records/legacy-peft.json",
-      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
-    },
-    {
       "id": "legacy-positional-embeddings-and-rope",
       "title": "Existing positional-embeddings-and-rope example",
       "concepts": [
@@ -2104,48 +1975,6 @@
         "origin": "existing-published-output"
       },
       "verificationRecord": "examples/verification/records/legacy-positional-embeddings-and-rope.json",
-      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
-    },
-    {
-      "id": "legacy-pretraining-and-sft",
-      "title": "Existing pretraining-and-sft example",
-      "concepts": [
-        "pretraining-and-sft"
-      ],
-      "sourceSections": [
-        "book-ch01-training-paradigm",
-        "book-ch12-training-stages",
-        "book-ch12-sft"
-      ],
-      "level": "A",
-      "kind": "illustrative-calculation",
-      "entrypoint": "examples/legacy/legacy-pretraining-and-sft.py",
-      "environment": "foundations",
-      "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/pretraining-and-sft.mdx",
-        "block": 0
-      },
-      "region": null,
-      "models": [],
-      "dataset": null,
-      "seed": null,
-      "reproducibility": "Legacy mechanism; E0 findings still apply.",
-      "runtime": {
-        "device": "cpu",
-        "timeoutSeconds": 5,
-        "measured": null
-      },
-      "network": "offline",
-      "auth": false,
-      "inputSchema": "Inputs are literals in the source.",
-      "outputSchema": "stdout text",
-      "validation": {
-        "method": "exact-stdout",
-        "expected": "0.39",
-        "origin": "existing-published-output"
-      },
-      "verificationRecord": "examples/verification/records/legacy-pretraining-and-sft.json",
       "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
     },
     {
@@ -2260,91 +2089,6 @@
         "origin": "existing-published-output"
       },
       "verificationRecord": "examples/verification/records/legacy-prompt-templates.json",
-      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
-    },
-    {
-      "id": "legacy-qlora",
-      "title": "Existing qlora example",
-      "concepts": [
-        "qlora"
-      ],
-      "sourceSections": [
-        "book-ch12-peft",
-        "book-ch12-instruction-qlora",
-        "book-ch12-sft-quantization",
-        "book-ch12-dpo-quantization",
-        "book-ch12-blockwise-quantization"
-      ],
-      "level": "A",
-      "kind": "illustrative-calculation",
-      "entrypoint": "examples/legacy/legacy-qlora.py",
-      "environment": "foundations",
-      "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/qlora.mdx",
-        "block": 0
-      },
-      "region": null,
-      "models": [],
-      "dataset": null,
-      "seed": null,
-      "reproducibility": "Legacy mechanism; E0 findings still apply.",
-      "runtime": {
-        "device": "cpu",
-        "timeoutSeconds": 5,
-        "measured": null
-      },
-      "network": "offline",
-      "auth": false,
-      "inputSchema": "Inputs are literals in the source.",
-      "outputSchema": "stdout text",
-      "validation": {
-        "method": "exact-stdout",
-        "expected": "[[1.03, -0.01], [0.06, 0.98]]",
-        "origin": "existing-published-output"
-      },
-      "verificationRecord": "examples/verification/records/legacy-qlora.json",
-      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
-    },
-    {
-      "id": "legacy-quantization",
-      "title": "Existing quantization example",
-      "concepts": [
-        "quantization"
-      ],
-      "sourceSections": [
-        "book-ch12-sft-quantization",
-        "book-ch12-blockwise-quantization"
-      ],
-      "level": "A",
-      "kind": "illustrative-calculation",
-      "entrypoint": "examples/legacy/legacy-quantization.py",
-      "environment": "foundations",
-      "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/quantization.mdx",
-        "block": 0
-      },
-      "region": null,
-      "models": [],
-      "dataset": null,
-      "seed": null,
-      "reproducibility": "Legacy mechanism; E0 findings still apply.",
-      "runtime": {
-        "device": "cpu",
-        "timeoutSeconds": 5,
-        "measured": null
-      },
-      "network": "offline",
-      "auth": false,
-      "inputSchema": "Inputs are literals in the source.",
-      "outputSchema": "stdout text",
-      "validation": {
-        "method": "exact-stdout",
-        "expected": "[1, 5, -3] [0.1, 0.5, -0.30000000000000004]",
-        "origin": "existing-published-output"
-      },
-      "verificationRecord": "examples/verification/records/legacy-quantization.json",
       "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
     },
     {
@@ -2717,91 +2461,6 @@
         "origin": "existing-published-output"
       },
       "verificationRecord": "examples/verification/records/legacy-retrieval-metrics.json",
-      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
-    },
-    {
-      "id": "legacy-reward-models",
-      "title": "Existing reward-models example",
-      "concepts": [
-        "reward-models"
-      ],
-      "sourceSections": [
-        "book-ch12-reward-models",
-        "book-ch12-reward-io",
-        "book-ch12-reward-training",
-        "book-ch12-preference-pairs",
-        "book-ch12-reward-loss"
-      ],
-      "level": "A",
-      "kind": "illustrative-calculation",
-      "entrypoint": "examples/legacy/legacy-reward-models.py",
-      "environment": "foundations",
-      "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/reward-models.mdx",
-        "block": 0
-      },
-      "region": null,
-      "models": [],
-      "dataset": null,
-      "seed": null,
-      "reproducibility": "Legacy mechanism; E0 findings still apply.",
-      "runtime": {
-        "device": "cpu",
-        "timeoutSeconds": 5,
-        "measured": null
-      },
-      "network": "offline",
-      "auth": false,
-      "inputSchema": "Inputs are literals in the source.",
-      "outputSchema": "stdout text",
-      "validation": {
-        "method": "exact-stdout",
-        "expected": "0.576",
-        "origin": "existing-published-output"
-      },
-      "verificationRecord": "examples/verification/records/legacy-reward-models.json",
-      "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
-    },
-    {
-      "id": "legacy-rlhf",
-      "title": "Existing rlhf example",
-      "concepts": [
-        "rlhf"
-      ],
-      "sourceSections": [
-        "book-ch12-training-stages",
-        "book-ch12-alignment"
-      ],
-      "level": "A",
-      "kind": "illustrative-calculation",
-      "entrypoint": "examples/legacy/legacy-rlhf.py",
-      "environment": "foundations",
-      "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/rlhf.mdx",
-        "block": 0
-      },
-      "region": null,
-      "models": [],
-      "dataset": null,
-      "seed": null,
-      "reproducibility": "Legacy mechanism; E0 findings still apply.",
-      "runtime": {
-        "device": "cpu",
-        "timeoutSeconds": 5,
-        "measured": null
-      },
-      "network": "offline",
-      "auth": false,
-      "inputSchema": "Inputs are literals in the source.",
-      "outputSchema": "stdout text",
-      "validation": {
-        "method": "exact-stdout",
-        "expected": "0.576",
-        "origin": "existing-published-output"
-      },
-      "verificationRecord": "examples/verification/records/legacy-rlhf.json",
       "troubleshooting": "See docs/audits/lesson-depth-report.md; passing execution does not resolve teaching gaps."
     },
     {
@@ -3896,10 +3555,7 @@
       "entrypoint": "examples/foundations/src/atlas_foundations/lora_trace.py",
       "environment": "foundations",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/lora.mdx",
-        "block": 0
-      },
+      "lesson": null,
       "region": "demonstration",
       "models": [],
       "dataset": null,
@@ -4080,10 +3736,7 @@
       "entrypoint": "examples/training/reference/src/atlas_reference/lora_model.py",
       "environment": "reference",
       "workingDirectory": ".",
-      "lesson": {
-        "path": "src/content/docs/concepts/lora.mdx",
-        "block": 1
-      },
+      "lesson": null,
       "region": "adapter",
       "models": [
         {
@@ -10283,7 +9936,7 @@
       "auth": false,
       "inputSchema": "Fixed attributed extraction subset and rule-authored preference pairs; explicit EOS and loss masks.",
       "outputSchema": "JSON checks and inspectable result artifact; raw generations retained.",
-      "verificationRecord": null,
+      "verificationRecord": "examples/verification/records/instruction-adaptation.json",
       "troubleshooting": "Read examples/training/generation/README.md; run SFT, preferences, then evaluation. NF4 requires the separate Linux environment.",
       "entrypoint": "examples/training/generation/src/atlas_generation/sft.py",
       "validation": {
@@ -10390,7 +10043,7 @@
       "auth": false,
       "inputSchema": "Fixed attributed extraction subset and rule-authored preference pairs; explicit EOS and loss masks.",
       "outputSchema": "JSON checks and inspectable result artifact; raw generations retained.",
-      "verificationRecord": null,
+      "verificationRecord": "examples/verification/records/preference-adaptation.json",
       "troubleshooting": "Read examples/training/generation/README.md; run SFT, preferences, then evaluation. NF4 requires the separate Linux environment.",
       "entrypoint": "examples/training/generation/src/atlas_generation/preferences.py",
       "validation": {
@@ -10498,7 +10151,7 @@
       "auth": false,
       "inputSchema": "Fixed attributed extraction subset and rule-authored preference pairs; explicit EOS and loss masks.",
       "outputSchema": "JSON checks and inspectable result artifact; raw generations retained.",
-      "verificationRecord": null,
+      "verificationRecord": "examples/verification/records/generation-evaluation.json",
       "troubleshooting": "Read examples/training/generation/README.md; run SFT, preferences, then evaluation. NF4 requires the separate Linux environment.",
       "entrypoint": "examples/training/generation/src/atlas_generation/evaluate.py",
       "validation": {
@@ -10606,7 +10259,7 @@
       "auth": false,
       "inputSchema": "Fixed attributed extraction subset and rule-authored preference pairs; explicit EOS and loss masks.",
       "outputSchema": "JSON checks and inspectable result artifact; raw generations retained.",
-      "verificationRecord": null,
+      "verificationRecord": "examples/verification/records/nf4-adaptation.json",
       "troubleshooting": "Read examples/training/generation/README.md; run SFT, preferences, then evaluation. NF4 requires the separate Linux environment.",
       "entrypoint": "examples/training/generation/src/atlas_generation/qlora.py",
       "validation": {
@@ -10632,6 +10285,396 @@
       "resultArtifact": "examples/artifacts/e8-qlora/results.json",
       "resultFile": "src/data/quantized-results.json",
       "resultKey": "qlora"
+    },
+    {
+      "id": "e8-pretraining-and-sft",
+      "title": "Pretraining and supervised fine-tuning mechanism",
+      "concepts": [
+        "pretraining-and-sft"
+      ],
+      "sourceSections": [
+        "book-ch12-training-stages",
+        "book-ch12-sft",
+        "book-ch12-full-fine-tuning",
+        "book-ch12-instruction-template"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/pretraining-and-sft.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library arithmetic, distinct from actual L21\u2013L23 training.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit original teaching literals.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e8-pretraining-and-sft.json",
+      "troubleshooting": "Read the definition, worked example and L21\u2013L23 before interpreting this calculation.",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e8/pretraining_and_sft.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "0 11 ignored\n1 12 ignored\n2 13 ignored\n3 21 target\n4 22 target\n5 0 target\n6 0 ignored\n7 0 ignored",
+        "origin": "author-checked-original-calculation"
+      }
+    },
+    {
+      "id": "e8-peft",
+      "title": "Parameter-efficient fine-tuning mechanism",
+      "concepts": [
+        "peft"
+      ],
+      "sourceSections": [
+        "book-ch12-peft",
+        "book-ch12-adapters"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/peft.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library arithmetic, distinct from actual L21\u2013L23 training.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit original teaching literals.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e8-peft.json",
+      "troubleshooting": "Read the definition, worked example and L21\u2013L23 before interpreting this calculation.",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e8/peft.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "trainable: 12288\nfraction: 0.000873\nadapter gradients + Adam bytes: 147456\nFrozen backbone and activations still occupy memory.",
+        "origin": "author-checked-original-calculation"
+      }
+    },
+    {
+      "id": "e8-lora",
+      "title": "Low-rank adaptation (LoRA) mechanism",
+      "concepts": [
+        "lora"
+      ],
+      "sourceSections": [
+        "book-ch12-low-rank",
+        "book-ch12-lora-config",
+        "book-ch12-merge"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/lora.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library arithmetic, distinct from actual L21\u2013L23 training.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit original teaching literals.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e8-lora.json",
+      "troubleshooting": "Read the definition, worked example and L21\u2013L23 before interpreting this calculation.",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e8/lora.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "merged: [[1.06, 0.12], [-0.020000000000000004, 0.96]]\nsame linear function: [2.0, -1.0]",
+        "origin": "author-checked-original-calculation"
+      }
+    },
+    {
+      "id": "e8-qlora",
+      "title": "QLoRA and quantized adapter training mechanism",
+      "concepts": [
+        "qlora"
+      ],
+      "sourceSections": [
+        "book-ch12-instruction-qlora",
+        "book-ch12-sft-quantization",
+        "book-ch12-dpo-quantization",
+        "book-ch12-blockwise-quantization",
+        "book-ch12-double-quantization"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/qlora.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library arithmetic, distinct from actual L21\u2013L23 training.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit original teaching literals.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e8-qlora.json",
+      "troubleshooting": "Read the definition, worked example and L21\u2013L23 before interpreting this calculation.",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e8/qlora.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "ideal four-bit weight bytes: 512\nuncompressed float32 block-scale bytes: 64\nsubtotal: 576\nThis arithmetic does not execute NF4, gradients, or a paged optimizer.",
+        "origin": "author-checked-original-calculation"
+      }
+    },
+    {
+      "id": "e8-quantization",
+      "title": "Quantization for generation models mechanism",
+      "concepts": [
+        "quantization"
+      ],
+      "sourceSections": [
+        "book-ch12-sft-quantization",
+        "book-ch12-blockwise-quantization"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/quantization.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library arithmetic, distinct from actual L21\u2013L23 training.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit original teaching literals.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e8-quantization.json",
+      "troubleshooting": "Read the definition, worked example and L21\u2013L23 before interpreting this calculation.",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e8/quantization.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "local range: ([1, 3, 7], [0.143, 0.429, 1.0])\noutlier-scaled range: ([0, 0, 1], [0.0, 0.0, 1.0])\nUniform signed grid demonstration; not the NF4 codebook.",
+        "origin": "author-checked-original-calculation"
+      }
+    },
+    {
+      "id": "e8-generative-evaluation",
+      "title": "Evaluating generative models mechanism",
+      "concepts": [
+        "generative-evaluation"
+      ],
+      "sourceSections": [
+        "book-ch12-sft-config",
+        "book-ch12-sft-training",
+        "book-ch12-evaluation",
+        "book-ch12-word-metrics",
+        "book-ch12-benchmarks",
+        "book-ch12-leaderboards",
+        "book-ch12-automated-evaluation",
+        "book-ch12-human-evaluation",
+        "book-ch12-perplexity",
+        "book-ch12-overlap-metrics"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/generative-evaluation.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library arithmetic, distinct from actual L21\u2013L23 training.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit original teaching literals.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e8-generative-evaluation.json",
+      "troubleshooting": "Read the definition, worked example and L21\u2013L23 before interpreting this calculation.",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e8/generative_evaluation.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "completion NLL: 3.0\ncompletion perplexity: 20.086\nshared word types: 4\nHigh lexical overlap does not verify the day.",
+        "origin": "author-checked-original-calculation"
+      }
+    },
+    {
+      "id": "e8-reward-models",
+      "title": "Reward models mechanism",
+      "concepts": [
+        "reward-models"
+      ],
+      "sourceSections": [
+        "book-ch12-reward-models",
+        "book-ch12-reward-io",
+        "book-ch12-reward-training",
+        "book-ch12-preference-pairs",
+        "book-ch12-reward-loss"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/reward-models.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library arithmetic, distinct from actual L21\u2013L23 training.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit original teaching literals.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e8-reward-models.json",
+      "troubleshooting": "Read the definition, worked example and L21\u2013L23 before interpreting this calculation.",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e8/reward_models.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "preference probability: 0.69\nreward ranking loss: 0.3711\nCommon score offsets do not change a pairwise preference.",
+        "origin": "author-checked-original-calculation"
+      }
+    },
+    {
+      "id": "e8-rlhf",
+      "title": "RLHF and preference alignment mechanism",
+      "concepts": [
+        "rlhf"
+      ],
+      "sourceSections": [
+        "book-ch12-alignment",
+        "book-ch12-ppo"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/rlhf.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library arithmetic, distinct from actual L21\u2013L23 training.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit original teaching literals.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e8-rlhf.json",
+      "troubleshooting": "Read the definition, worked example and L21\u2013L23 before interpreting this calculation.",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e8/rlhf.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "advantage 2.0 PPO surrogate 2.4\nadvantage -2.0 PPO surrogate -2.6\nOld rollout policy ratio differs from a fixed-reference KL penalty.",
+        "origin": "author-checked-original-calculation"
+      }
+    },
+    {
+      "id": "e8-dpo",
+      "title": "Direct Preference Optimization (DPO) mechanism",
+      "concepts": [
+        "dpo"
+      ],
+      "sourceSections": [
+        "book-ch12-no-reward-model",
+        "book-ch12-dpo-workflow",
+        "book-ch12-alignment-template",
+        "book-ch12-dpo-config",
+        "book-ch12-dpo-training",
+        "book-ch12-dpo-logprobs"
+      ],
+      "level": "A",
+      "kind": "illustrative-calculation",
+      "environment": "foundations",
+      "workingDirectory": ".",
+      "lesson": {
+        "path": "src/content/docs/concepts/dpo.mdx",
+        "block": 0
+      },
+      "region": null,
+      "models": [],
+      "dataset": null,
+      "seed": null,
+      "reproducibility": "Deterministic standard-library arithmetic, distinct from actual L21\u2013L23 training.",
+      "runtime": {
+        "device": "cpu",
+        "timeoutSeconds": 10,
+        "measured": null
+      },
+      "network": "offline",
+      "auth": false,
+      "inputSchema": "Explicit original teaching literals.",
+      "outputSchema": "stdout text",
+      "verificationRecord": "examples/verification/records/e8-dpo.json",
+      "troubleshooting": "Read the definition, worked example and L21\u2013L23 before interpreting this calculation.",
+      "entrypoint": "examples/foundations/src/atlas_foundations/e8/dpo.py",
+      "validation": {
+        "method": "exact-stdout",
+        "expected": "reference-relative margin: 1.0\nDPO loss: 0.6444\nNo separate scalar reward model appears in this calculation.",
+        "origin": "author-checked-original-calculation"
+      }
     }
   ]
 }

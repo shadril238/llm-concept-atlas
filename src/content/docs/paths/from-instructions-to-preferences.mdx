@@ -1,0 +1,38 @@
+---
+title: From instructions to preferences
+description: Learn generation adaptation through token masks, actual optimization, reusable artifacts and disagreement-aware evaluation.
+kind: path
+lastReviewed: 2026-11-24
+---
+
+Work through Chapter 12 in several sessions. Each lesson has a definition, theory, worked calculation, implementation, use cases, limits and self-checks. The browser needs no model downloads. The linked [L21–L23 lab](/llm-concept-atlas/labs/generation-adaptation/) supplies small pinned CPU runs and distinguishes the unverified GPU profile.
+
+## 1. Define the behavior and data
+
+Read [pretraining and SFT](/llm-concept-atlas/concepts/pretraining-and-sft/). Separate broad next-token learning, instruction demonstrations and relative preferences. Inspect instruction/context/answer boundaries, native chat controls versus plain delimiters, explicit EOS and padding. Use the actual token inspector to explain the first supervised target after causal shifting.
+
+**Checkpoint:** Show why an EOS target must survive when padding shares its ID. Explain how a duplicated chat special token changes training input.
+
+## 2. Choose which parameters change
+
+Read [PEFT](/llm-concept-atlas/concepts/peft/) and [LoRA](/llm-concept-atlas/concepts/lora/). Compute A/B dimensions, alpha/r scaling and12,288 trainable parameters for the recorded QKV configuration. Distinguish the frozen base, adapter weights, gradients, optimizer moments and activations in the memory explorer. Full fine-tuning changes many more parameters without guaranteeing higher task quality.
+
+## 3. Understand quantization before promising fit
+
+Read [quantization](/llm-concept-atlas/concepts/quantization/) and [QLoRA](/llm-concept-atlas/concepts/qlora/). Distinguish code precision, scale metadata, compute dtype and adapter precision. Explain NF4, nested quantization and paged optimizers separately. A Linux CPU NF4 run does not certify CUDA paged-memory behavior or book-scale TinyLlama training.
+
+## 4. Train, select and reload
+
+Run L21 with fixed source-context-disjoint splits. Explain microbatch versus effective batch, learning rate, sequence cap, validation interval and trained-checkpoint selection. Read actual before/after answers. Check floating adapter reload, supported merge tolerance, separate float64 algebra and merged-model reload. Preserve exact base, tokenizer and template identity.
+
+**Checkpoint:** If full fine-tuning worsens heldout loss, preserve the result and investigate with validation/fresh data. Do not tune repeatedly on the published test examples.
+
+## 5. Separate preference algorithms
+
+Read [reward models](/llm-concept-atlas/concepts/reward-models/), [RLHF](/llm-concept-atlas/concepts/rlhf/) and [DPO](/llm-concept-atlas/concepts/dpo/). Train the scalar reward model, inspect heldout margins and length shortcuts, then trace the separate DPO policy/reference computation. The reward model is not used by DPO. PPO is a conceptual alternative, not an executed policy-training claim here.
+
+## 6. Evaluate the actual task
+
+Run L22 after L23 and read [generative evaluation](/llm-concept-atlas/concepts/generative-evaluation/). Compare all four policies on the same task suite, then inspect authored metric disagreements. Complete a blinded human rubric and use the optional offline importer if ratings are available. Missing ratings remain missing; automatic similarity is not a substitute.
+
+Complete the [instruction/preference project](/llm-concept-atlas/use-cases/instruction-preference-adaptation/) and revisit the [topic graph](/llm-concept-atlas/atlas/). Draw a path from data serialization to objective to updated parameters to artifact to task judgment. Independent review and supported GPU QLoRA evidence remain open E8 acceptance requirements.

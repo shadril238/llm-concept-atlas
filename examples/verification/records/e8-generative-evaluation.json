@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e8-generative-evaluation",
+  "status": "passed",
+  "date": "2026-11-24T14:34:25.423381+00:00",
+  "gitCommit": "3192d0816993191203ec5bbd1d81f1deee8fb895",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e8/generative_evaluation.py"
+  ],
+  "sourceSha256": "3365adafc210c72d9d0232ba7381cd9c8020608f07c72e0e4acaac3dbc8a0f69",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "3b75f5251f1256c5fb71e149e62c0258632c3f2ffffc8496721303e1b083bf93",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.008,
+  "peakMemoryMiB": 21.3,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "completion NLL: 3.0\ncompletion perplexity: 20.086\nshared word types: 4\nHigh lexical overlap does not verify the day.\n",
+  "stderr": "",
+  "error": null
+}

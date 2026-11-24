@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e8-reward-models",
+  "status": "passed",
+  "date": "2026-11-24T14:34:25.503579+00:00",
+  "gitCommit": "3192d0816993191203ec5bbd1d81f1deee8fb895",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e8/reward_models.py"
+  ],
+  "sourceSha256": "44bac3520507103505370490b4445a05b9752ad41c0159a7014a79aef6954082",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "95664af2b01db3aa4dbb52f894bddd1ff0793e1ad388979394cd18e6d26d4766",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.008,
+  "peakMemoryMiB": 21.3,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "preference probability: 0.69\nreward ranking loss: 0.3711\nCommon score offsets do not change a pairwise preference.\n",
+  "stderr": "",
+  "error": null
+}

@@ -1,100 +1,123 @@
 ---
-title: DPO
-description: Direct Preference Optimization updates a policy from preferred and rejected responses relative to a reference policy without training a separate reward model.
-kind: concept
+title: "Direct Preference Optimization (DPO)"
+description: "DPO adapts a language-model policy using preferred and rejected completions for the same prompt. It compares their sequence log-probability gap under the policy with the same gap under a frozen reference, then applies a logistic preference loss. It does not require the separately trained scalar reward model."
+kind: "concept"
 conceptId: dpo
 chapter: 12
-part: training
-summary: Direct Preference Optimization updates a policy from preferred and rejected responses relative to a reference policy without training a separate reward model.
-parent: rlhf
-prerequisites: [rlhf]
-related: [rlhf]
-level: advanced
-tags: [training, chapter-12]
+part: "training"
+summary: "DPO adapts a language-model policy using preferred and rejected completions for the same prompt. It compares their sequence log-probability gap under the policy with the same gap under a frozen reference, then applies a logistic preference loss. It does not require the separately trained scalar reward model."
+parent: "rlhf"
+prerequisites: ["rlhf", "pretraining-and-sft"]
+related: ["reward-models", "lora", "generative-evaluation"]
+level: "advanced"
+tags: ["training", "chapter-12"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-24"
+reviewRecord: e8-generation-author-review-2026-11-24
+aliases: ["chosen rejected pairs"]
+learningObjectives: ["Aggregate shifted completion/EOS log probabilities under policy and reference.", "Compute the original sigmoid DPO loss and initial log2 invariant.", "Compare reference-relative margins with actual generated task quality."]
+bookSections: ["book-ch12-no-reward-model", "book-ch12-dpo-workflow", "book-ch12-alignment-template", "book-ch12-dpo-config", "book-ch12-dpo-training", "book-ch12-dpo-logprobs"]
+exampleIds: ["e8-dpo", "instruction-adaptation", "preference-adaptation", "generation-evaluation"]
+relationshipReasons: {"reward-models": "Scalar reward training and DPO optimize different quantities from the same paired data.", "lora": "The DPO policy trains fresh LoRA factors on the selected SFT starting checkpoint.", "generative-evaluation": "Positive reference-relative margins do not guarantee correct greedy generations."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { PreferenceLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import { PreferenceExplorer } from '../../../components/simulations/GenerationLabs';
 
 <ConceptPrimer id="dpo" />
 
+<ReferenceBrief objectives={["Aggregate shifted completion/EOS log probabilities under policy and reference.", "Compute the original sigmoid DPO loss and initial log2 invariant.", "Compare reference-relative margins with actual generated task quality."]} prerequisites="rlhf, pretraining-and-sft" scope="Original explanations and calculations plus actual small CPU training. Independent review and GPU QLoRA certification remain pending." />
+
 ## Definition and intuition
 
-**DPO**: Direct Preference Optimization updates a policy from preferred and rejected responses relative to a reference policy without training a separate reward model.
-
-Chapter 12 distinguishes pretraining, instruction tuning, and preference optimization. Efficient adapters change a subset of parameters; evaluation still decides whether behavior improved.
+DPO adapts a language-model policy using preferred and rejected completions for the same prompt. It compares their sequence log-probability gap under the policy with the same gap under a frozen reference, then applies a logistic preference loss. It does not require the separately trained scalar reward model.
 
 ## Before you start
 
-Read [RLHF](/llm-concept-atlas/concepts/rlhf/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **DPO** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+Read [rlhf](/llm-concept-atlas/concepts/rlhf/), [pretraining and sft](/llm-concept-atlas/concepts/pretraining-and-sft/). Open the [generation training path](/llm-concept-atlas/paths/from-instructions-to-preferences/) if these prerequisites are unfamiliar. Distinguish a token distribution, a trainable parameter, and a task score before tracing this mechanism.
 
 ## Theory: how it works
 
-1. **Prepare:** Collect prompt, chosen response, and rejected response triples
-2. **Transform:** Compare their policy log-probability gap with the reference gap
-3. **Inspect:** Optimize the preference loss and evaluate on unseen prompts.
+### Completion log probabilities
+
+For each candidate y and prompt x, sum log pi(y_t | x,y_before_t) over completion tokens. L23 includes real EOS, excludes prompt and padding, and shifts causal labels once. The policy and reference receive identical token IDs and masks. They must not score a different template or silently truncate different parts of the pair. Sum log probabilities differ from mean token probabilities and from a product computed directly in floating point.
+
+Let pc/pr be the policy chosen/rejected log probabilities and rc/rr the reference values. The relative margin is (pc−pr)−(rc−rr). Original sigmoid DPO loss is −log sigmoid(beta×margin). Stable log-sigmoid avoids underflow. Beta is a preference-strength/drift-related objective parameter, not the optimizer learning rate; changing either has a different effect.
+
+At identical initial policy and reference, the relative margin is zero and loss is log2. The loss still has a nonzero gradient through policy probabilities; freezing both models would prevent learning. L23 checks exact initial agreement in evaluation mode, fixes reference parameters and verifies its hash after training. The policy uses a fresh zero-update LoRA adapter on the selected merged SFT checkpoint. Adapter dropout is zero here, keeping initial comparison deterministic.
+
+### Preference data templating
+
+Keep one prompt and two separate completions. Do not paste chosen and rejected into a single assistant response or let one candidate's continuation become the other's prompt. The same EOS policy applies to each. Our maximum256 tokens is enforced by rejection, and test contexts remain outside fitting/selection. Chosen/rejected labels are rule-authored transformations of the attributed Dolly subset; label preference is relative and independent review remains pending.
 
 ### The important distinction
 
-DPO uses the difference between chosen and rejected log-probabilities under the policy, adjusted by the same difference under a reference model. A logistic loss pushes the policy toward the preferred response relative to that reference. No separate reward-model training loop is required, but preference labels and validation still determine quality.
+A positive relative margin says the policy has shifted toward the chosen completion relative to the reference. It need not mean the chosen candidate has higher raw likelihood: both sequences can have very low probability, and summed log probabilities carry length effects. L23 reports raw preference accuracy, relative accuracy and ties separately, plus independent task metrics on actual base/SFT/DPO generations. A decrease in validation DPO loss is not proof of better grounded answers.
+
+The explicit torch loop follows the original sigmoid formulation documented by pinned TRL0.23.1; it does not claim to execute DPOTrainer or every trainer variant. There is no online generation, reward-model query, length normalization, label smoothing or reference refresh inside this training objective.
 
 ## Worked example
 
-For one prompt, reviewers prefer a cited answer over an invented one. DPO increases the relative likelihood of the preferred answer, subject to the reference comparison. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+Suppose policy log probabilities are pc=−3 and pr=−5 while reference values are rc=−4 and rr=−5. Policy gap2 exceeds reference gap1 by 1. With beta 0.1, loss is about 0.6444, below log2. Adding a common constant to either pair changes neither gap. If pc and pr are per-token means instead of sequence sums, this would be a different objective.
 
-<LessonFlow steps={["Collect prompt, chosen response, and rejected response triples", "Compare their policy log-probability gap with the reference gap", "Optimize the preference loss and evaluate on unseen prompts."]} caption="A teaching diagram for DPO. Read the three labeled stages from left to right; each stage is described in the text above." />
+The actual run begins from L21's saved float32 merged SFT model. Forty optimizer steps, batch 2, LR0.001 and beta 0.1 are explicit. Every ten steps, validation pair loss selects among trained checkpoints; heldout prompts are not used to tune hyperparameters. The adapter is saved and loaded against the same selected SFT identity before scores are checked again.
 
 ## Try the interactive lab
 
-<PreferenceLab client:visible />
+<PreferenceExplorer client:visible />
 
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+Predict a change before touching a control. The browser calculates explicit arithmetic or displays recorded model results; it performs no training or model requests. Reset restores the initial view, and tables preserve the exact numbers.
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+This standalone Python 3 calculation uses only the standard library. It does not download or train a model. The [complete generation labs](/llm-concept-atlas/labs/generation-adaptation/) provide the pinned environments, actual training entrypoints, staged notebooks, raw results and artifact checks.
+
+{/* example:e8-dpo:start */}
 
 ```python
-from math import log, exp
-chosen_logprob, rejected_logprob = -0.4, -1.1
-reference_gap = 0.2
-beta = 0.5
-gap = beta * ((chosen_logprob - rejected_logprob) - reference_gap)
-loss = log(1 + exp(-gap))
-print(round(loss, 3))
+from math import exp, log1p
+
+pc, pr, rc, rr, beta = -3.0, -5.0, -4.0, -5.0, 0.1
+margin = (pc - pr) - (rc - rr)
+z = beta * margin
+loss = max(0, -z) + log1p(exp(-abs(z)))
+print("reference-relative margin:", margin)
+print("DPO loss:", round(loss, 4))
+print("No separate scalar reward model appears in this calculation.")
 ```
 
-**Expected output:**
+{/* example:e8-dpo:end */}
 
-```text
-0.576
-```
-
-**What the code shows:** The loss compares the policy preference gap with a reference gap, scales it by beta, and applies a logistic penalty. A lower toy loss does not validate the preference labels. The [official chapter 12 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter12) develops the corresponding model-based implementation.
+Read the shared source from the lab: completion IDs and causal loss are in `common.py`; actual updates and saving are in `sft.py`/`preferences.py`; evaluation and the offline judgment import are separate. A runnable arithmetic snippet is a mechanism check, not a substitute for those model runs.
 
 ## When to use it
 
-Use it when reliable preference pairs exist and a simpler alternative to reward-model reinforcement learning is suitable. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use DPO when you have trustworthy pairwise preferences and a suitable SFT starting model. It can teach concision, source-grounding or response style if pairs represent those qualities. Easy authored defects are a teaching fixture, not evidence of robust general alignment; inspect length shortcuts, domain shifts and quality regressions.
 
 ## Limits and common mistakes
 
-- Pair quality, reference choice, and overoptimization still matter.
-- **Failure to look for:** A model learns superficial wording from chosen responses while missing the preference for evidence.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+The evaluated instruction subset has32 training,8 validation and8 test source contexts. Pretraining overlap is unknown. Repeated views of these test outputs are not a new independent benchmark. Preserve failed and length-limited answers, exact base/tokenizer identity and data provenance when transferring the workflow. The book's larger TinyLlama/CUDA settings require their own supported hardware execution; the small profiles do not certify them.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First collect prompt, chosen response, and rejected response triples Then compare their policy log-probability gap with the reference gap Finally optimize the preference loss and evaluate on unseen prompts.</p></details>
+<details>
+<summary>At identical policy/reference, why is a log2 loss compatible with learning?</summary>
 
-<details><summary>What would make the result misleading?</summary><p>A model learns superficial wording from chosen responses while missing the preference for evidence.</p></details>
+The current relative margin is zero, but its derivative through trainable policy log probabilities is nonzero. Reference probabilities remain constant.
+
+</details>
+
+<details>
+<summary>Can positive reference-relative accuracy coexist with poor generated answers?</summary>
+
+Yes. The objective compares two fixed candidate likelihoods relative to a reference. Actual decoding may produce other completions; independent task/human evaluation is still necessary.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 12 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 12 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter12). Continue through the linked prerequisites and nearby concepts below.
-
 <ConceptConnections id="dpo" />
+
+This original lesson follows Chapter 12, printed 355–389, of *Hands-On Large Language Models*. Its small-model/data configurations are deliberate teaching adaptations. Consult [Transformers chat templates](https://huggingface.co/docs/transformers/v4.57.1/en/chat_templating), [PEFT LoRA](https://huggingface.co/docs/peft/v0.17.0/en/developer_guides/lora), [bitsandbytes installation](https://huggingface.co/docs/bitsandbytes/v0.48.2/en/installation), and [TRL sigmoid DPO](https://huggingface.co/docs/trl/v0.23.1/en/dpo_trainer) for the versioned source contracts used here. Complete the [instruction adaptation project](/llm-concept-atlas/use-cases/instruction-preference-adaptation/) to test the full reasoning chain.

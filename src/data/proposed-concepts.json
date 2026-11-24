@@ -538,9 +538,18 @@
       "aliases": [
         "full parameter fine-tuning"
       ],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E8",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "conceptId": "pretraining-and-sft",
+        "path": "src/content/docs/concepts/pretraining-and-sft.mdx",
+        "anchor": "full-fine-tuning"
+      },
+      "reviewRecord": "e8-generation-author-review-2026-11-24",
+      "exampleIds": [
+        "e8-pretraining-and-sft"
+      ]
     },
     {
       "id": "instruction-data-templating",
@@ -555,9 +564,18 @@
         "chat template",
         "loss mask"
       ],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E8",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "conceptId": "pretraining-and-sft",
+        "path": "src/content/docs/concepts/pretraining-and-sft.mdx",
+        "anchor": "instruction-data-templating"
+      },
+      "reviewRecord": "e8-generation-author-review-2026-11-24",
+      "exampleIds": [
+        "e8-pretraining-and-sft"
+      ]
     },
     {
       "id": "generation-training-configuration",
@@ -569,9 +587,18 @@
       "placement": "subsection",
       "parentConceptId": "generative-evaluation",
       "aliases": [],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E8",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "conceptId": "generative-evaluation",
+        "path": "src/content/docs/concepts/generative-evaluation.mdx",
+        "anchor": "training-configuration"
+      },
+      "reviewRecord": "e8-generation-author-review-2026-11-24",
+      "exampleIds": [
+        "e8-generative-evaluation"
+      ]
     },
     {
       "id": "instruction-training-workflow",
@@ -583,9 +610,18 @@
       "placement": "subsection",
       "parentConceptId": "generative-evaluation",
       "aliases": [],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E8",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "conceptId": "generative-evaluation",
+        "path": "src/content/docs/concepts/generative-evaluation.mdx",
+        "anchor": "instruction-training-workflow"
+      },
+      "reviewRecord": "e8-generation-author-review-2026-11-24",
+      "exampleIds": [
+        "e8-generative-evaluation"
+      ]
     },
     {
       "id": "adapter-merging",
@@ -600,9 +636,18 @@
         "merge weights",
         "merge_and_unload"
       ],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E8",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "conceptId": "lora",
+        "path": "src/content/docs/concepts/lora.mdx",
+        "anchor": "adapter-merging"
+      },
+      "reviewRecord": "e8-generation-author-review-2026-11-24",
+      "exampleIds": [
+        "e8-lora"
+      ]
     },
     {
       "id": "generation-benchmarks",
@@ -615,9 +660,18 @@
       "placement": "subsection",
       "parentConceptId": "generative-evaluation",
       "aliases": [],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E8",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "conceptId": "generative-evaluation",
+        "path": "src/content/docs/concepts/generative-evaluation.mdx",
+        "anchor": "generation-benchmarks"
+      },
+      "reviewRecord": "e8-generation-author-review-2026-11-24",
+      "exampleIds": [
+        "e8-generative-evaluation"
+      ]
     },
     {
       "id": "preference-data-templating",
@@ -631,9 +685,18 @@
       "aliases": [
         "chosen rejected pairs"
       ],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E8",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "conceptId": "dpo",
+        "path": "src/content/docs/concepts/dpo.mdx",
+        "anchor": "preference-data-templating"
+      },
+      "reviewRecord": "e8-generation-author-review-2026-11-24",
+      "exampleIds": [
+        "e8-dpo"
+      ]
     },
     {
       "id": "cross-attention",
@@ -1137,9 +1200,18 @@
         "double quantization",
         "paged optimizer"
       ],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E8",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "conceptId": "qlora",
+        "path": "src/content/docs/concepts/qlora.mdx",
+        "anchor": "qlora-memory"
+      },
+      "reviewRecord": "e8-generation-author-review-2026-11-24",
+      "exampleIds": [
+        "e8-qlora"
+      ]
     },
     {
       "id": "generation-evaluation-metrics",
@@ -1157,9 +1229,18 @@
         "ROUGE",
         "BERTScore"
       ],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E8",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "conceptId": "generative-evaluation",
+        "path": "src/content/docs/concepts/generative-evaluation.mdx",
+        "anchor": "generation-evaluation-metrics"
+      },
+      "reviewRecord": "e8-generation-author-review-2026-11-24",
+      "exampleIds": [
+        "e8-generative-evaluation"
+      ]
     },
     {
       "id": "ppo-for-rlhf",
@@ -1174,9 +1255,18 @@
         "PPO",
         "proximal policy optimization"
       ],
-      "status": "proposed",
+      "status": "implemented",
       "nextPhase": "E8",
-      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page."
+      "reason": "Separate page only for a distinct reusable concept; otherwise add an anchored subsection or shared lab and retain the existing canonical page.",
+      "destination": {
+        "conceptId": "rlhf",
+        "path": "src/content/docs/concepts/rlhf.mdx",
+        "anchor": "ppo-for-rlhf"
+      },
+      "reviewRecord": "e8-generation-author-review-2026-11-24",
+      "exampleIds": [
+        "e8-rlhf"
+      ]
     }
   ]
 }

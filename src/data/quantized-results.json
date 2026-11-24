@@ -1,0 +1,285 @@
+{
+  "qlora": {
+    "backend": "Linux-7.0.0-1020-azure-x86_64-with-glibc2.43",
+    "quantizer": "bitsandbytes0.48.2 NF4 + nested/double quantization",
+    "compute_dtype": "float32",
+    "adapter_dtype": "float32",
+    "optimizer": "torch AdamW; NOT paged optimizer",
+    "gpu_profile": "unverified; no CUDA run",
+    "linear4bit_layers": [
+      "gpt_neox.layers.0.attention.query_key_value",
+      "gpt_neox.layers.0.attention.dense",
+      "gpt_neox.layers.0.mlp.dense_h_to_4h",
+      "gpt_neox.layers.0.mlp.dense_4h_to_h",
+      "gpt_neox.layers.1.attention.query_key_value",
+      "gpt_neox.layers.1.attention.dense",
+      "gpt_neox.layers.1.mlp.dense_h_to_4h",
+      "gpt_neox.layers.1.mlp.dense_4h_to_h",
+      "gpt_neox.layers.2.attention.query_key_value",
+      "gpt_neox.layers.2.attention.dense",
+      "gpt_neox.layers.2.mlp.dense_h_to_4h",
+      "gpt_neox.layers.2.mlp.dense_4h_to_h",
+      "gpt_neox.layers.3.attention.query_key_value",
+      "gpt_neox.layers.3.attention.dense",
+      "gpt_neox.layers.3.mlp.dense_h_to_4h",
+      "gpt_neox.layers.3.mlp.dense_4h_to_h",
+      "gpt_neox.layers.4.attention.query_key_value",
+      "gpt_neox.layers.4.attention.dense",
+      "gpt_neox.layers.4.mlp.dense_h_to_4h",
+      "gpt_neox.layers.4.mlp.dense_4h_to_h",
+      "gpt_neox.layers.5.attention.query_key_value",
+      "gpt_neox.layers.5.attention.dense",
+      "gpt_neox.layers.5.mlp.dense_h_to_4h",
+      "gpt_neox.layers.5.mlp.dense_4h_to_h"
+    ],
+    "baseline": {
+      "nll": 3.689702045486634,
+      "generations": [
+        {
+          "id": "dolly-5412",
+          "prediction": "\nThe first two-time I was in the first-time I was in the second-time I was in the",
+          "reference": "Jordan, Benetton, Ferrari, Mercedes",
+          "context": "Michael Schumacher ; born 3 January 1969) is a German former racing driver who competed in Formula One for Jordan, Benetton, Ferrari, and Mercedes. Schumacher has a joint-record seven World Drivers' Championship titles (tied with Lewis Hamilton) and, at the time of his retirement from the sport in 2012, he held the records for the most wins (91), pole positions (68), and podium finishes (155)—which have since been broken by Hamilton—while he maintains the record for the number of total fastest laps (77), among others.",
+          "instruction": "Extract the names of the teams Michael Schumacher was a part of from the text. Separate them with a comma.",
+          "generated_tokens": 24,
+          "hit_limit": true
+        },
+        {
+          "id": "dolly-5504",
+          "prediction": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+          "reference": "Dr. Edmund Fournier d'Albe",
+          "context": "The optophone is a device, used by the blind, that scans text and generates time-varying chords of tones to identify letters. It is one of the earliest known applications of sonification. Dr. Edmund Fournier d'Albe of Birmingham University invented the optophone in 1913, which used selenium photosensors to detect black print and convert it into an audible output which could be interpreted by a blind person. The Glasgow company, Barr and Stroud, participated in improving the resolution and usability of the instrument.",
+          "instruction": "Extract from the text who invented the Optophone.",
+          "generated_tokens": 24,
+          "hit_limit": true
+        },
+        {
+          "id": "dolly-5684",
+          "prediction": "\nThe Central Group (Grupo Central) of Terceira, Gracia, São Miguel, Gracia, São",
+          "reference": "Eastern Group, Central Group, Western Group",
+          "context": "These islands can be divided into three recognizable groups located on the Azores Plateau:\nThe Eastern Group (Grupo Oriental) of São Miguel, Santa Maria and Formigas Islets\nThe Central Group (Grupo Central) of Terceira, Graciosa, São Jorge, Pico and Faial\nThe Western Group (Grupo Ocidental) of Flores and Corvo.",
+          "instruction": "Extract the names of the groups of islands located on the Azores plateau from the text. Separate them with a comma.",
+          "generated_tokens": 24,
+          "hit_limit": true
+        },
+        {
+          "id": "dolly-5730",
+          "prediction": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+          "reference": "four",
+          "context": "Raeth was initially formed in 2006 by four students from Karachi, Pakistan — Wajhi Farooki (vocals), Mustafa Asad (bass), and Hasan Farabi (lead guitar). The band was launched in 2006 by Fire Records at a local beach club in DHA.",
+          "instruction": "How many people initially formed the band Raeth?",
+          "generated_tokens": 24,
+          "hit_limit": true
+        },
+        {
+          "id": "dolly-5890",
+          "prediction": "\nThe main purpose of the system is to provide a system of a system of a system of a system of a system",
+          "reference": "The village of Teodorów has a population of 107.",
+          "context": "Teodorów [tɛɔˈdɔruf] is a village in the administrative district of Gmina Koniecpol, within Częstochowa County, Silesian Voivodeship, in southern Poland. It lies approximately 7 kilometres (4 mi) east of Koniecpol, 46 km (29 mi) east of Częstochowa, and 82 km (51 mi) north-east of the regional capital Katowice. The village has a population of 107.",
+          "instruction": "Extract the population of Teodorów from the following text.",
+          "generated_tokens": 24,
+          "hit_limit": true
+        },
+        {
+          "id": "dolly-6036",
+          "prediction": "\nThe main source of the garden is the main source of the garden.\n\nThe main source of the garden is",
+          "reference": "Jakub Mitthofer built four fountains.",
+          "context": "The chateau has four wings and is surrounded by arcades lining the courtyard. The yard is accessible from the entrance gate and leads to the Italian symmetrical garden. There are also four fountains in the garden by stonemason Jakub Mitthofer.",
+          "instruction": "From the passage provided, extract the name of the person that made some fountains in the garden, and how many. Your answer shall be of the format \"{name} built {number of fountains} fountains.\"",
+          "generated_tokens": 24,
+          "hit_limit": true
+        },
+        {
+          "id": "dolly-6168",
+          "prediction": "\nThe meat component is a bit of a bit of a bit of a bit of a bit of a bit of a",
+          "reference": "Guanciale, pancetta, lardons, smoked bacon",
+          "context": "Carbonara (Italian: [karboˈnaːra]) is a Roman pasta dish made with eggs, hard cheese, cured pork and black pepper. The dish took its modern form and name in the middle of the 20th century.\n\nThe cheese is usually Pecorino Romano, Parmigiano-Reggiano, or a combination of the two. Spaghetti is the most common pasta, but fettuccine, rigatoni, linguine, or bucatini are also used. Normally guanciale or pancetta are used for the meat component, but lardons of smoked bacon are a common substitute outside Italy.",
+          "instruction": "List the types of cured pork that can be used to make carbonara. Separate them with a comma.",
+          "generated_tokens": 24,
+          "hit_limit": true
+        },
+        {
+          "id": "dolly-6303",
+          "prediction": "\nThe German-led German-led German-led German-led German-led German-led German-led German",
+          "reference": "The Berlin wall was torn down in 1989.",
+          "context": "After World War II and its subsequent occupation by the victorious countries, the devastated city was divided; West Berlin became a de facto exclave of West Germany, surrounded by the Berlin Wall (from August 1961 to November 1989) and East German territory. East Berlin was declared capital of East Germany, while Bonn became the West German capital. Following German reunification in 1990, Berlin once again became the capital of all of Germany.",
+          "instruction": "When was the Berlin wall torn down?",
+          "generated_tokens": 24,
+          "hit_limit": true
+        }
+      ]
+    },
+    "training": {
+      "trace": [
+        {
+          "step": 10,
+          "validation_nll": 2.815978637108436
+        },
+        {
+          "step": 20,
+          "validation_nll": 2.6941480112599803
+        }
+      ],
+      "selected_step": 20,
+      "validation_nll": 2.6941480112599803,
+      "max_gradient_norm": 22.16568946838379,
+      "changed": true,
+      "frozen_unchanged": true,
+      "trainable": 12288,
+      "total": 14080000,
+      "stored_elements": 13490176,
+      "steps": 20,
+      "learning_rate": 0.003,
+      "microbatch": 2,
+      "accumulation": 2,
+      "max_length": 256,
+      "optimizer": "torch AdamW, constant LR, no warmup, weight_decay=0; clip norm1",
+      "selection": "minimum validation token-weighted completion NLL among trained checkpoints; baseline reported separately, test untouched"
+    },
+    "test_nll": 2.843059287013778,
+    "generations": [
+      {
+        "id": "dolly-5412",
+        "prediction": "Michael Schumacher, and Mercedes, is the team Michael Schumacher.",
+        "reference": "Jordan, Benetton, Ferrari, Mercedes",
+        "context": "Michael Schumacher ; born 3 January 1969) is a German former racing driver who competed in Formula One for Jordan, Benetton, Ferrari, and Mercedes. Schumacher has a joint-record seven World Drivers' Championship titles (tied with Lewis Hamilton) and, at the time of his retirement from the sport in 2012, he held the records for the most wins (91), pole positions (68), and podium finishes (155)—which have since been broken by Hamilton—while he maintains the record for the number of total fastest laps (77), among others.",
+        "instruction": "Extract the names of the teams Michael Schumacher was a part of from the text. Separate them with a comma.",
+        "generated_tokens": 17,
+        "hit_limit": false
+      },
+      {
+        "id": "dolly-5504",
+        "prediction": "The scanner is a device, used in the scanner is a device, used in the scanner isable.",
+        "reference": "Dr. Edmund Fournier d'Albe",
+        "context": "The optophone is a device, used by the blind, that scans text and generates time-varying chords of tones to identify letters. It is one of the earliest known applications of sonification. Dr. Edmund Fournier d'Albe of Birmingham University invented the optophone in 1913, which used selenium photosensors to detect black print and convert it into an audible output which could be interpreted by a blind person. The Glasgow company, Barr and Stroud, participated in improving the resolution and usability of the instrument.",
+        "instruction": "Extract from the text who invented the Optophone.",
+        "generated_tokens": 22,
+        "hit_limit": false
+      },
+      {
+        "id": "dolly-5684",
+        "prediction": "The Central Group, the Central Group, the Central Group, the Central Group, the Central Group, the Central Group,",
+        "reference": "Eastern Group, Central Group, Western Group",
+        "context": "These islands can be divided into three recognizable groups located on the Azores Plateau:\nThe Eastern Group (Grupo Oriental) of São Miguel, Santa Maria and Formigas Islets\nThe Central Group (Grupo Central) of Terceira, Graciosa, São Jorge, Pico and Faial\nThe Western Group (Grupo Ocidental) of Flores and Corvo.",
+        "instruction": "Extract the names of the groups of islands located on the Azores plateau from the text. Separate them with a comma.",
+        "generated_tokens": 24,
+        "hit_limit": true
+      },
+      {
+        "id": "dolly-5730",
+        "prediction": "The band is the band.",
+        "reference": "four",
+        "context": "Raeth was initially formed in 2006 by four students from Karachi, Pakistan — Wajhi Farooki (vocals), Mustafa Asad (bass), and Hasan Farabi (lead guitar). The band was launched in 2006 by Fire Records at a local beach club in DHA.",
+        "instruction": "How many people initially formed the band Raeth?",
+        "generated_tokens": 7,
+        "hit_limit": false
+      },
+      {
+        "id": "dolly-5890",
+        "prediction": "The village is located in the County of Gmina Koniecpol, was the first census.",
+        "reference": "The village of Teodorów has a population of 107.",
+        "context": "Teodorów [tɛɔˈdɔruf] is a village in the administrative district of Gmina Koniecpol, within Częstochowa County, Silesian Voivodeship, in southern Poland. It lies approximately 7 kilometres (4 mi) east of Koniecpol, 46 km (29 mi) east of Częstochowa, and 82 km (51 mi) north-east of the regional capital Katowice. The village has a population of 107.",
+        "instruction": "Extract the population of Teodorów from the following text.",
+        "generated_tokens": 21,
+        "hit_limit": false
+      },
+      {
+        "id": "dolly-6036",
+        "prediction": "The person that made a peel is the designated name of the person that made a peel is the designated name of",
+        "reference": "Jakub Mitthofer built four fountains.",
+        "context": "The chateau has four wings and is surrounded by arcades lining the courtyard. The yard is accessible from the entrance gate and leads to the Italian symmetrical garden. There are also four fountains in the garden by stonemason Jakub Mitthofer.",
+        "instruction": "From the passage provided, extract the name of the person that made some fountains in the garden, and how many. Your answer shall be of the format \"{name} built {number of fountains} fountains.\"",
+        "generated_tokens": 24,
+        "hit_limit": true
+      },
+      {
+        "id": "dolly-6168",
+        "prediction": "The cheese is usually Pecorino.",
+        "reference": "Guanciale, pancetta, lardons, smoked bacon",
+        "context": "Carbonara (Italian: [karboˈnaːra]) is a Roman pasta dish made with eggs, hard cheese, cured pork and black pepper. The dish took its modern form and name in the middle of the 20th century.\n\nThe cheese is usually Pecorino Romano, Parmigiano-Reggiano, or a combination of the two. Spaghetti is the most common pasta, but fettuccine, rigatoni, linguine, or bucatini are also used. Normally guanciale or pancetta are used for the meat component, but lardons of smoked bacon are a common substitute outside Italy.",
+        "instruction": "List the types of cured pork that can be used to make carbonara. Separate them with a comma.",
+        "generated_tokens": 10,
+        "hit_limit": false
+      },
+      {
+        "id": "dolly-6303",
+        "prediction": "The nation was the West German territory. The nation was the West German territory. The nation was the West German territory.",
+        "reference": "The Berlin wall was torn down in 1989.",
+        "context": "After World War II and its subsequent occupation by the victorious countries, the devastated city was divided; West Berlin became a de facto exclave of West Germany, surrounded by the Berlin Wall (from August 1961 to November 1989) and East German territory. East Berlin was declared capital of East Germany, while Bonn became the West German capital. Following German reunification in 1990, Berlin once again became the capital of all of Germany.",
+        "instruction": "When was the Berlin wall torn down?",
+        "generated_tokens": 24,
+        "hit_limit": true
+      }
+    ],
+    "reload_max_abs_error": 0.0,
+    "dequant_max_abs_error": 0.0,
+    "merge_max_abs_error": 0.004415750503540039,
+    "float32_global_logit_scale": 29.511234283447266,
+    "float32_relative_tolerance": 0.001,
+    "float64_merge_max_abs_error": 1.2887468869848817e-11,
+    "merged_reload_max_abs_error": 0.0,
+    "merge_scope": "Dequantized NF4 base + adapter; original high-precision base is a different model. No requantized merge claim.",
+    "artifacts": [
+      {
+        "path": "examples/artifacts/e8-qlora/adapter/README.md",
+        "bytes": 5408,
+        "sha256": "f7647c34f5585b64b1eca282a5411bf288bd22681bd06dd44648d9bb119dbfde"
+      },
+      {
+        "path": "examples/artifacts/e8-qlora/adapter/adapter_config.json",
+        "bytes": 954,
+        "sha256": "ba9f62ef17bdbb3f7bad0116462664934feb7f51abcda23e9d79566a3c38a501"
+      },
+      {
+        "path": "examples/artifacts/e8-qlora/adapter/adapter_model.safetensors",
+        "bytes": 50840,
+        "sha256": "8f43d61d3db93e23b28bc44a1fc6dbab8c50a3293cd5fa89090f7b51c1357adf"
+      },
+      {
+        "path": "examples/artifacts/e8-qlora/adapter/special_tokens_map.json",
+        "bytes": 473,
+        "sha256": "57491904f8680d4b52ed440f1f7ba48cad1c31ecf3eb453b03484e6ff4723ae8"
+      },
+      {
+        "path": "examples/artifacts/e8-qlora/adapter/tokenizer.json",
+        "bytes": 3564303,
+        "sha256": "d4c0d99d84af59e9126913fafe5210822963e9a3065ee43e6833b358b0c2f825"
+      },
+      {
+        "path": "examples/artifacts/e8-qlora/adapter/tokenizer_config.json",
+        "bytes": 4875,
+        "sha256": "4abd8b0368a3a4baae1e2fb084a1d07310ddd0ea433b63b293e039bae5a42bcd"
+      },
+      {
+        "path": "examples/artifacts/e8-qlora/merged-dequantized/config.json",
+        "bytes": 748,
+        "sha256": "95a0a31e10fa6c04b97ab6499927bbd5f9aced43ba201c42de070dc9f6a00076"
+      },
+      {
+        "path": "examples/artifacts/e8-qlora/merged-dequantized/generation_config.json",
+        "bytes": 111,
+        "sha256": "6e3ede8c97ef97dd195ee04aa45ff0efd82d0c99c4d737f3a6bcd1914b62e4fd"
+      },
+      {
+        "path": "examples/artifacts/e8-qlora/merged-dequantized/model.safetensors",
+        "bytes": 56279344,
+        "sha256": "9288f27dae0bcc5ea10460f832925570a8767f9db8a516583703b2dbd41ae7b4"
+      },
+      {
+        "path": "examples/artifacts/e8-qlora/merged-dequantized/special_tokens_map.json",
+        "bytes": 473,
+        "sha256": "57491904f8680d4b52ed440f1f7ba48cad1c31ecf3eb453b03484e6ff4723ae8"
+      },
+      {
+        "path": "examples/artifacts/e8-qlora/merged-dequantized/tokenizer.json",
+        "bytes": 3564303,
+        "sha256": "d4c0d99d84af59e9126913fafe5210822963e9a3065ee43e6833b358b0c2f825"
+      },
+      {
+        "path": "examples/artifacts/e8-qlora/merged-dequantized/tokenizer_config.json",
+        "bytes": 4875,
+        "sha256": "4abd8b0368a3a4baae1e2fb084a1d07310ddd0ea433b63b293e039bae5a42bcd"
+      }
+    ]
+  }
+}

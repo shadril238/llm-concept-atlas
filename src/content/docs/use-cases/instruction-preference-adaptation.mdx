@@ -1,0 +1,38 @@
+---
+title: A grounded extraction adaptation study
+description: Build a reproducible instruction/preference experiment with honest failure analysis and reusable artifacts.
+kind: use-case
+lastReviewed: 2026-11-24
+---
+
+## Problem and success criterion
+
+A source-based assistant must extract the requested facts concisely and avoid unsupported additions. Define exactly which formats, abstentions and alternate answers are acceptable before collecting examples. A fluent paragraph, a lower training loss or a high reward score does not meet that criterion by itself.
+
+## Start with a frozen baseline
+
+Read the [generation path](/llm-concept-atlas/paths/from-instructions-to-preferences/) and execute [L21–L23](/llm-concept-atlas/labs/generation-adaptation/). Preserve the pretrained baseline, fixed prompts, tokenization/template, decoding budget and raw predictions. The example uses a licensed Dolly subset, with source/context-disjoint32/8/8 splits and separate original mask-inspection cases. Keep attribution and CC BY-SA3.0 on the subset and derived preferences.
+
+The tiny Pythia model makes the mechanics accessible, but produces visibly weak extraction answers. Its current fixed suite has0/8 normalized exact matches across the four compared policies. This is an instructional experiment with documented failures, not a ready-to-deploy assistant. New task data, model capacity and independent evaluation are required before a deployment claim.
+
+## Implement the adaptation chain
+
+1. Audit each instruction/context/reference triple. Check source grounding, answer variants, data provenance and repeated contexts. Freeze splits before optimization; pretraining overlap remains unknown.
+2. Inspect exact token IDs, prompt/completion boundaries, real EOS, padding masks and causal shift. Reject truncation that invalidates the task. Use a native chat model's actual tokenizer grammar when changing the base.
+3. Compare full adaptation and LoRA with explicit parameter counts, LR/steps and validation selection. Keep the unmodified baseline even if it performs better. Distinguish tensor-accounting estimates from measured runtime peak.
+4. Save/reload the selected policy and tokenizer. For supported merging, compare same-input logits under stated tolerances and reload the merged artifact. Record exact base revision and template, not only a model name.
+5. Define preference labels with rationales and mixed error/length slices. The example's four rule-authored defects are not independent human labels. Train a scalar reward model and inspect heldout ranking, ties and a length baseline.
+6. Separately initialize DPO policy/reference from the same selected SFT checkpoint. Verify initial zero relative margin, frozen reference bytes and consistent completion masks. DPO must not query the scalar reward model.
+7. Compare actual base/SFT/DPO task outputs with reference metrics, objective checks and blinded human ratings. Keep missing ratings and failed generations in denominators.
+
+## Analyze disagreement
+
+The recorded LoRA route improves reference likelihood; full fine-tuning worsens it. DPO improves relative preference margins on easy authored defects while worsening completion perplexity. All still fail normalized exact match on the small fixed task suite. Diagnose what each metric optimized before changing the recipe. A better pairwise objective does not imply the model will generate either candidate under greedy decoding.
+
+Inspect the Monday/paraphrase/Tuesday probes and state which fact the source supports. Compare lexical overlap with actual BERTScore, preserving encoder settings. Do not call a reference mismatch a hallucination without reading the source and allowed answer policy.
+
+## Deliverables and extension
+
+Publish the data manifest, inspected mask trace, baseline/trained raw outputs, validation curves, parameter/memory report, saved artifact hashes/reload checks, fixed evaluation settings, error slices and review boundary. If adding hosted judges, use the documented offline workflow and preserve version/order/output fingerprints; no API key is needed for the supplied implementation.
+
+Add a fresh independently reviewed task set before tuning further. Expand preference data beyond easy authored defects and test out-of-domain prompts. Supported GPU QLoRA, paged optimizer behavior, realistic large-model scale, PPO policy training and general safety claims are not certified by the small CPU workflows. Keep the full E8 gate open for its required GPU evidence and independent review.

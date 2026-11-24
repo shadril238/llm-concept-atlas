@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e8-lora",
+  "status": "passed",
+  "date": "2026-11-24T14:34:25.186873+00:00",
+  "gitCommit": "3192d0816993191203ec5bbd1d81f1deee8fb895",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e8/lora.py"
+  ],
+  "sourceSha256": "4dd95d1174d935636d5ce6e0ffe797e665d71991e65f05b9099d1065361bed38",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "31a7b73fb4b46189a647cb1362f205f1642f022bb5cb5589d3d13a655e764f5c",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.2,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "merged: [[1.06, 0.12], [-0.020000000000000004, 0.96]]\nsame linear function: [2.0, -1.0]\n",
+  "stderr": "",
+  "error": null
+}

@@ -3,6 +3,7 @@
 import copy
 import gc
 import json
+import hashlib
 import math
 import sys
 from pathlib import Path
@@ -37,7 +38,7 @@ from atlas_generation.common import (
     tokenizer,
     torch,
 )
-from transformers import AutoModelForSequenceClassification
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 
 def reward_batch(tok, rows, key):
@@ -279,6 +280,10 @@ def main():
         trainable=sum(p.numel() for p in policy.parameters() if p.requires_grad),
     )
     result = dict(
+        input_sft_files=artifacts(sft),
+        input_sft_result_sha256=hashlib.sha256(
+            (sft.parent / "results.json").read_bytes()
+        ).hexdigest(),
         reward=reward,
         dpo=dpo,
         artifacts=artifacts(folder),

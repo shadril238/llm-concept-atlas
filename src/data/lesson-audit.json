@@ -106,7 +106,7 @@
         "book-ch11-bert-training"
       ],
       "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
-      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
+      "finding": "E7 author implementation connects detailed Chapter 10\u201311 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
       "exampleKind": "training-contract-or-recorded-evidence-calculation",
       "codeSha256": "75b8dc49cbf615fab8704d6c5c883d7b4ae46afea5e22326d8da3e3110086a43",
@@ -423,7 +423,7 @@
         "book-ch10-hard-negatives"
       ],
       "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
-      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
+      "finding": "E7 author implementation connects detailed Chapter 10\u201311 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
       "exampleKind": "training-contract-or-recorded-evidence-calculation",
       "codeSha256": "7faa3ac895ccc597d5149a457654181a46035ee3ff9b14404ee9c569fb037136",
@@ -454,7 +454,7 @@
         "book-ch10-mnr-loss"
       ],
       "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
-      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
+      "finding": "E7 author implementation connects detailed Chapter 10\u201311 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
       "exampleKind": "training-contract-or-recorded-evidence-calculation",
       "codeSha256": "626fcdc0dfbeae1c0038e3345245fb77484fdbeaeb3c8b23552eb186f837ad34",
@@ -713,7 +713,7 @@
         "book-ch10-domain-adaptation"
       ],
       "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
-      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
+      "finding": "E7 author implementation connects detailed Chapter 10\u201311 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
       "exampleKind": "training-contract-or-recorded-evidence-calculation",
       "codeSha256": "c94e0ddaca7accc0dfd2b03a1c996720adb203790d098aaeb364a144cd3aa2e1",
@@ -731,7 +731,7 @@
       "conceptId": "dpo",
       "chapter": 12,
       "path": "src/content/docs/concepts/dpo.mdx",
-      "sourceSha256": "1c7998457cc6f2f01515711c403954ff8edfe78386ce34613233237d905bb98e",
+      "sourceSha256": "02f9f487c6f84a848dcbd090eedf5628be5a2671b6af8a0e8bacb3a1f507b73a",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
@@ -740,32 +740,26 @@
       "sourceSectionIds": [
         "book-ch12-no-reward-model",
         "book-ch12-dpo-workflow",
-        "book-ch12-dpo-quantization",
+        "book-ch12-alignment-template",
         "book-ch12-dpo-config",
         "book-ch12-dpo-training",
         "book-ch12-dpo-logprobs"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The scalar reference-relative loss is relevant; add completion logprob aggregation, masks, data, and actual training.",
+      "finding": "E8 author implementation: detailed definitions/theory, exact masks/shapes/objectives, worked calculations, actual CPU training and fixed generation evaluation, interactives and exercises. Independent review and supported GPU QLoRA remain pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "8c0e50c9cc6557009d869e520a3c0d373d82a1137eb4eca17b865b36d356cfd5",
-      "codeFirstLine": "from math import log, exp",
-      "sharedExampleWith": [
-        "reward-models",
-        "rlhf"
-      ],
-      "genericExercise": true,
+      "exampleKind": "generation-training-and-evaluation",
+      "codeSha256": "0c5f2c4c11c5495f43ea177c9107f854403236e6b7263b108ee44884042ecd23",
+      "codeFirstLine": "from math import exp, log1p",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Explain direct preference optimization and the role of a frozen reference without a separately trained reward model.",
-        "Train and evaluate a real policy with preference data and reference-relative log probabilities.",
-        "Load the intended SFT starting point with supported quantization and adapter semantics.",
-        "Explain beta, reference behavior, batching, prompt lengths, and trainer configuration.",
-        "Run preference training, save/reload correctly, and compare base/SFT/DPO behavior.",
-        "Trace completion log probabilities under policy and reference with the prompt masked consistently."
+        "Independent technical/editorial review and beginner feedback.",
+        "Supported GPU/book-scale QLoRA evidence; full E8 completion gate remains open."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E8"
+      "executionStatus": "cpu-instruction-reward-dpo-verified",
+      "nextPhase": "E8",
+      "enhancementReview": "e8-generation-author-review-2026-11-24"
     },
     {
       "conceptId": "efficient-attention",
@@ -815,7 +809,7 @@
         "book-ch10-mteb"
       ],
       "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
-      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
+      "finding": "E7 author implementation connects detailed Chapter 10\u201311 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
       "exampleKind": "training-contract-or-recorded-evidence-calculation",
       "codeSha256": "48537ae6c4b5c91e01a0d1cd428fe59f1b4d273a1301ce3e292eaa4e22953fd9",
@@ -901,7 +895,7 @@
         "book-ch11-few-shot-training"
       ],
       "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
-      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
+      "finding": "E7 author implementation connects detailed Chapter 10\u201311 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
       "exampleKind": "training-contract-or-recorded-evidence-calculation",
       "codeSha256": "a456dfcc9ffe7130e7f4ab2d427d9256fef147c7b7dc42e1fe948e671998f6d0",
@@ -963,7 +957,7 @@
         "book-ch08-retrieval-adaptation"
       ],
       "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
-      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
+      "finding": "E7 author implementation connects detailed Chapter 10\u201311 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
       "exampleKind": "training-contract-or-recorded-evidence-calculation",
       "codeSha256": "9a7c06154c7006de2e2b32195c841a179a96319e74f6810e1dbc107dc4644375",
@@ -991,7 +985,7 @@
         "book-ch11-freezing"
       ],
       "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
-      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
+      "finding": "E7 author implementation connects detailed Chapter 10\u201311 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
       "exampleKind": "training-contract-or-recorded-evidence-calculation",
       "codeSha256": "99cbcede59440384d95a8e6c3f19396ceed06d17df78eaf94488b6be131e721a",
@@ -1039,34 +1033,39 @@
       "conceptId": "generative-evaluation",
       "chapter": 12,
       "path": "src/content/docs/concepts/generative-evaluation.mdx",
-      "sourceSha256": "f523efb688f3b3652a552f744c20215d53b5661b20839c631e1e6dddcb4dc094",
+      "sourceSha256": "95dd14ccb9b353cb14c8cfabc374d4eff37ff03782dfbba8b7a8c1f1062b4715",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
+        "book-ch12-sft-config",
+        "book-ch12-sft-training",
         "book-ch12-evaluation",
         "book-ch12-word-metrics",
+        "book-ch12-benchmarks",
+        "book-ch12-leaderboards",
         "book-ch12-automated-evaluation",
-        "book-ch12-human-evaluation"
+        "book-ch12-human-evaluation",
+        "book-ch12-perplexity",
+        "book-ch12-overlap-metrics"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "Exact-label accuracy does not demonstrate generation metrics, benchmarks, or rubric-based evaluation.",
+      "finding": "E8 author implementation: detailed definitions/theory, exact masks/shapes/objectives, worked calculations, actual CPU training and fixed generation evaluation, interactives and exercises. Independent review and supported GPU QLoRA remain pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "eece17d98999c9dd05ece2f2a8885639c5333864de2535b5662a10bc3c0fee2f",
-      "codeFirstLine": "references = [\"cat\", \"dog\", \"bird\"]",
+      "exampleKind": "generation-training-and-evaluation",
+      "codeSha256": "383d15dbc79b0ddc2cbe612cdab18355061504e524c96a713462358b8cb51d46",
+      "codeFirstLine": "from math import exp",
       "sharedExampleWith": [],
-      "genericExercise": true,
+      "genericExercise": false,
       "requiredWork": [
-        "Select complementary metrics and explain disagreements and blind spots.",
-        "Distinguish perplexity, lexical overlap, and embedding-based metrics with worked counterexamples.",
-        "Use a defined automated grading rubric with calibration and bias checks.",
-        "Apply a blinded rubric, record disagreements, and distinguish preference from factual correctness."
+        "Independent technical/editorial review and beginner feedback.",
+        "Supported GPU/book-scale QLoRA evidence; full E8 completion gate remains open."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E8"
+      "executionStatus": "cpu-instruction-reward-dpo-verified",
+      "nextPhase": "E8",
+      "enhancementReview": "e8-generation-author-review-2026-11-24"
     },
     {
       "conceptId": "generative-model",
@@ -1335,31 +1334,32 @@
       "conceptId": "lora",
       "chapter": 12,
       "path": "src/content/docs/concepts/lora.mdx",
-      "sourceSha256": "01083a26356cd8ca8e0ca190cc76f5683eafacde74b53b38a04e10d2bc7548b3",
+      "sourceSha256": "d819fe52c24c7d4d3962882653163351776e8f975c2d9a619581137f307f81cd",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
-        "book-ch12-peft",
         "book-ch12-lora-config",
+        "book-ch12-merge",
         "book-ch12-low-rank"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "E2 resolves the A/B orientation mismatch and adds standard scaling, parameter counts, initialization/gradient trace, controlled training, a real pretrained adapter, held-out losses, reload, and precision-aware merge checks. Broader E8 workflows and independent review remain pending.",
+      "finding": "E8 author implementation: detailed definitions/theory, exact masks/shapes/objectives, worked calculations, actual CPU training and fixed generation evaluation, interactives and exercises. Independent review and supported GPU QLoRA remain pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "verified-reference-workflow",
-      "codeSha256": "b70826ce671c5ef90027563ffc97f8c684e058c792670cc3591a1afd302d3379",
-      "codeFirstLine": "W = [[1.0, 0.0], [0.0, 1.0]]  # [d_out=2, d_in=2]",
+      "exampleKind": "generation-training-and-evaluation",
+      "codeSha256": "ef63df891dc53460b7c421b800ed3bb6203861fe235635287088d61a566b60d9",
+      "codeFirstLine": "w = [[1.0, 0.0], [0.0, 1.0]]",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
-        "Independent technical/editorial review and beginner pilot; broader chapter workflow remains tracked separately."
+        "Independent technical/editorial review and beginner feedback.",
+        "Supported GPU/book-scale QLoRA evidence; full E8 completion gate remains open."
       ],
-      "executionStatus": "cpu-reference-verified",
-      "nextPhase": "E2",
-      "enhancementReview": "e2-reference-author-review-2026-11-20"
+      "executionStatus": "cpu-instruction-reward-dpo-verified",
+      "nextPhase": "E8",
+      "enhancementReview": "e8-generation-author-review-2026-11-24"
     },
     {
       "conceptId": "loss-functions",
@@ -1378,7 +1378,7 @@
         "book-ch10-mnr-loss"
       ],
       "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
-      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
+      "finding": "E7 author implementation connects detailed Chapter 10\u201311 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
       "exampleKind": "training-contract-or-recorded-evidence-calculation",
       "codeSha256": "7567d3b25fd9cd3a7a4c7a8a45fabbe6855f798ad517d5276ea438b42a659a1c",
@@ -1407,7 +1407,7 @@
         "book-ch11-masking-policy"
       ],
       "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
-      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
+      "finding": "E7 author implementation connects detailed Chapter 10\u201311 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
       "exampleKind": "training-contract-or-recorded-evidence-calculation",
       "codeSha256": "722d8fe1326dd97bb66550f4f40b6272064213406f4e8846ef5670d4c3b03a8e",
@@ -1528,7 +1528,7 @@
         "book-ch11-entity-metrics"
       ],
       "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
-      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
+      "finding": "E7 author implementation connects detailed Chapter 10\u201311 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
       "exampleKind": "training-contract-or-recorded-evidence-calculation",
       "codeSha256": "cb0fa67aa3525c73ed19eb4d1ee37508ac9d343ed392c78a322e51c9b1619fa5",
@@ -1603,7 +1603,7 @@
       "conceptId": "peft",
       "chapter": 12,
       "path": "src/content/docs/concepts/peft.mdx",
-      "sourceSha256": "deb0b0fd2df0627e559ef95e864e0e7bb52feb97db21902c0138d4e05f8eebe6",
+      "sourceSha256": "e8cb090e4299ad2132d969a591fce6c36cc9be992733527c3989fac66d99fba1",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
@@ -1614,21 +1614,20 @@
         "book-ch12-adapters"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "A matrix update illustrates LoRA only; distinguish adapter families and actual frozen/trainable parameter groups.",
+      "finding": "E8 author implementation: detailed definitions/theory, exact masks/shapes/objectives, worked calculations, actual CPU training and fixed generation evaluation, interactives and exercises. Independent review and supported GPU QLoRA remain pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "c006509147e71d86bae6a67e9e384ecb3725e26ed541b6c4445d4f66cf18a832",
-      "codeFirstLine": "base = [[1.0, 0.0], [0.0, 1.0]]",
-      "sharedExampleWith": [
-        "qlora"
-      ],
-      "genericExercise": true,
+      "exampleKind": "generation-training-and-evaluation",
+      "codeSha256": "4da47548a2f97edc0363132deb3f0f7a2f1b77df2166beeb458cfd6b5300f78e",
+      "codeFirstLine": "layers, d_in, d_out, rank = 6, 128, 384, 4",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Distinguish added adapters, low-rank updates, and quantized base storage.",
-        "Trace added trainable modules and distinguish adapter methods from low-rank updates."
+        "Independent technical/editorial review and beginner feedback.",
+        "Supported GPU/book-scale QLoRA evidence; full E8 completion gate remains open."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E8"
+      "executionStatus": "cpu-instruction-reward-dpo-verified",
+      "nextPhase": "E8",
+      "enhancementReview": "e8-generation-author-review-2026-11-24"
     },
     {
       "conceptId": "positional-embeddings-and-rope",
@@ -1690,7 +1689,7 @@
       "conceptId": "pretraining-and-sft",
       "chapter": 12,
       "path": "src/content/docs/concepts/pretraining-and-sft.mdx",
-      "sourceSha256": "d1cc99bcf841ab5431da5519cfcdc8e1ea877770195e7d7e21d76208e2f32145",
+      "sourceSha256": "5c86adeba4d719cf5598e4c73b61a0b6c4c279a5d9c787e927681401d5cda5a8",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
@@ -1699,23 +1698,25 @@
       "sourceSectionIds": [
         "book-ch01-training-paradigm",
         "book-ch12-training-stages",
-        "book-ch12-sft"
+        "book-ch12-sft",
+        "book-ch12-full-fine-tuning",
+        "book-ch12-instruction-template"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The same scalar update does not distinguish causal pretraining from instruction-conditioned SFT.",
+      "finding": "E8 author implementation: detailed definitions/theory, exact masks/shapes/objectives, worked calculations, actual CPU training and fixed generation evaluation, interactives and exercises. Independent review and supported GPU QLoRA remain pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "ad52b94d6779d81e4a1b52f22f023710c4d0002fdeb8dc45a04dff92046ccabb",
-      "codeFirstLine": "weight = 0.2",
+      "exampleKind": "generation-training-and-evaluation",
+      "codeSha256": "e09afece69974d80cce29706ffb5e16a43f2c5fbea8f071eb4d83301158392df",
+      "codeFirstLine": "prompt_ids = [11, 12, 13]",
       "sharedExampleWith": [],
-      "genericExercise": true,
+      "genericExercise": false,
       "requiredWork": [
-        "Trace pretraining, task adaptation, and preference tuning with distinct data and objectives.",
-        "Compare the data, objective, and expected behavior of the three stages.",
-        "Explain instruction-conditioned language modeling and which positions contribute to loss."
+        "Independent technical/editorial review and beginner feedback.",
+        "Supported GPU/book-scale QLoRA evidence; full E8 completion gate remains open."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E8"
+      "executionStatus": "cpu-instruction-reward-dpo-verified",
+      "nextPhase": "E8",
+      "enhancementReview": "e8-generation-author-review-2026-11-24"
     },
     {
       "conceptId": "prompt-structure",
@@ -1784,44 +1785,40 @@
       "conceptId": "qlora",
       "chapter": 12,
       "path": "src/content/docs/concepts/qlora.mdx",
-      "sourceSha256": "69017480d4e2c3241c2feae6a04e8d72e95d72ff555768e413513a2ad1c9579a",
+      "sourceSha256": "36ac8f6bf8eec532f5c54bcdc8d1c4d740c4aba6be9dd9bcde72f960a0ce9bf5",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
-        "book-ch12-peft",
         "book-ch12-instruction-qlora",
         "book-ch12-sft-quantization",
         "book-ch12-dpo-quantization",
-        "book-ch12-blockwise-quantization"
+        "book-ch12-blockwise-quantization",
+        "book-ch12-double-quantization"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The reused low-rank update never quantizes base weights or demonstrates their precision/memory behavior.",
+      "finding": "E8 author implementation: detailed definitions/theory, exact masks/shapes/objectives, worked calculations, actual CPU training and fixed generation evaluation, interactives and exercises. Independent review and supported GPU QLoRA remain pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "c006509147e71d86bae6a67e9e384ecb3725e26ed541b6c4445d4f66cf18a832",
-      "codeFirstLine": "base = [[1.0, 0.0], [0.0, 1.0]]",
-      "sharedExampleWith": [
-        "peft"
-      ],
-      "genericExercise": true,
+      "exampleKind": "generation-training-and-evaluation",
+      "codeSha256": "9c02418a00687b651d369f9da72a63cd95411bc234572b82081810fcd0b6408e",
+      "codeFirstLine": "weights, block_size = 1024, 64",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Distinguish added adapters, low-rank updates, and quantized base storage.",
-        "Execute data preparation, quantization, adapters, training, saving, and inference as one supported workflow.",
-        "Inspect quantized loading and separate storage precision from compute and adapter precision.",
-        "Load the intended SFT starting point with supported quantization and adapter semantics.",
-        "Calculate approximation/scaling and explain distribution-aware codebooks and storage precision."
+        "Independent technical/editorial review and beginner feedback.",
+        "Supported GPU/book-scale QLoRA evidence; full E8 completion gate remains open."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E8"
+      "executionStatus": "cpu-instruction-reward-dpo-verified",
+      "nextPhase": "E8",
+      "enhancementReview": "e8-generation-author-review-2026-11-24"
     },
     {
       "conceptId": "quantization",
       "chapter": 12,
       "path": "src/content/docs/concepts/quantization.mdx",
-      "sourceSha256": "ad07236409384fb086cd0babd3db6b2163bf69e4820620c65f93591378de679c",
+      "sourceSha256": "a28e6b3085aa5f0755ccd306cf9c2e84c67e64e5cfc989f2b81ec04968003341",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
@@ -1832,19 +1829,20 @@
         "book-ch12-blockwise-quantization"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "A scalar round/dequantize example is relevant but omits blockwise scaling, codebooks, clipping, and actual model validation.",
+      "finding": "E8 author implementation: detailed definitions/theory, exact masks/shapes/objectives, worked calculations, actual CPU training and fixed generation evaluation, interactives and exercises. Independent review and supported GPU QLoRA remain pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "c2791395aa3d92a4b464dcd28045b9980163b4dabafd7094f14a502af5c47b02",
-      "codeFirstLine": "weights = [0.12, 0.48, -0.31]",
+      "exampleKind": "generation-training-and-evaluation",
+      "codeSha256": "4114cfaa9b9856c8b3b59a79dfa42772820a614b7c97e44f340725beebaf8539",
+      "codeFirstLine": "values = [0.12, 0.47, 1.0]",
       "sharedExampleWith": [],
-      "genericExercise": true,
+      "genericExercise": false,
       "requiredWork": [
-        "Inspect quantized loading and separate storage precision from compute and adapter precision.",
-        "Calculate approximation/scaling and explain distribution-aware codebooks and storage precision."
+        "Independent technical/editorial review and beginner feedback.",
+        "Supported GPU/book-scale QLoRA evidence; full E8 completion gate remains open."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E8"
+      "executionStatus": "cpu-instruction-reward-dpo-verified",
+      "nextPhase": "E8",
+      "enhancementReview": "e8-generation-author-review-2026-11-24"
     },
     {
       "conceptId": "quantized-models",
@@ -2098,7 +2096,7 @@
       "evidenceAnchor": "implement-it",
       "exampleKind": "foundation-reference-workflow",
       "codeSha256": "45d1bd93fd41acaf16a567fc21d5b922e5029c3271c5dee61fb2c1562dfcd8bf",
-      "codeFirstLine": "source = {\"Saturday\": \"10:00–16:00\"}",
+      "codeFirstLine": "source = {\"Saturday\": \"10:00\u201316:00\"}",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
@@ -2143,7 +2141,7 @@
       "conceptId": "reward-models",
       "chapter": 12,
       "path": "src/content/docs/concepts/reward-models.mdx",
-      "sourceSha256": "56bca377b16d5880ac95e8308bc77dcbb90653e52af7aeaae1ff1818d5ef373e",
+      "sourceSha256": "30aef9c8f135347948e0d66d560d30638763652e3460006da505b5d368834a8a",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
@@ -2157,57 +2155,50 @@
         "book-ch12-reward-loss"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "The code uses policy/reference log probabilities and beta: it is a DPO loss, not reward-model training.",
+      "finding": "E8 author implementation: detailed definitions/theory, exact masks/shapes/objectives, worked calculations, actual CPU training and fixed generation evaluation, interactives and exercises. Independent review and supported GPU QLoRA remain pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "8c0e50c9cc6557009d869e520a3c0d373d82a1137eb4eca17b865b36d356cfd5",
-      "codeFirstLine": "from math import log, exp",
-      "sharedExampleWith": [
-        "dpo",
-        "rlhf"
-      ],
-      "genericExercise": true,
+      "exampleKind": "generation-training-and-evaluation",
+      "codeSha256": "e88c57fec08f8fc543ba2f080223c6f1a463f28566ce5a41393a346c30b23121",
+      "codeFirstLine": "from math import exp, log1p",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Explain replacing the language-model head with a scalar scoring head.",
-        "Score prompt-response pairs and distinguish reward scores from policy log probabilities.",
-        "Construct preference pairs and optimize a reward-ranking objective, not a DPO policy loss.",
-        "Distinguish relative preference from absolute correctness and retain prompt/response boundaries.",
-        "Compute chosen/rejected scalar rewards and the reward-model learning signal."
+        "Independent technical/editorial review and beginner feedback.",
+        "Supported GPU/book-scale QLoRA evidence; full E8 completion gate remains open."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E8"
+      "executionStatus": "cpu-instruction-reward-dpo-verified",
+      "nextPhase": "E8",
+      "enhancementReview": "e8-generation-author-review-2026-11-24"
     },
     {
       "conceptId": "rlhf",
       "chapter": 12,
       "path": "src/content/docs/concepts/rlhf.mdx",
-      "sourceSha256": "f3ec7cf68829ef834735948bff80df48f463d2314e92cd2f97726f2e76b692e2",
+      "sourceSha256": "8503183a3cbecdd3a4c960eee796191421af2528ec8caf28d01b36cf7796f2a7",
       "legacyStatus": "full",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P0",
       "reviewRecord": "e0-static-audit-2026-11-19",
       "sourceSectionIds": [
-        "book-ch12-training-stages",
-        "book-ch12-alignment"
+        "book-ch12-alignment",
+        "book-ch12-ppo"
       ],
       "retainedStrength": "Definition and introductory mechanism are present; keep useful intuition while extending the specific trace and implementation.",
-      "finding": "A DPO scalar loss does not show the reward-model and policy-optimization stages described in the lesson.",
+      "finding": "E8 author implementation: detailed definitions/theory, exact masks/shapes/objectives, worked calculations, actual CPU training and fixed generation evaluation, interactives and exercises. Independent review and supported GPU QLoRA remain pending.",
       "evidenceAnchor": "implement-it",
-      "exampleKind": "illustrative-python",
-      "codeSha256": "8c0e50c9cc6557009d869e520a3c0d373d82a1137eb4eca17b865b36d356cfd5",
-      "codeFirstLine": "from math import log, exp",
-      "sharedExampleWith": [
-        "dpo",
-        "reward-models"
-      ],
-      "genericExercise": true,
+      "exampleKind": "generation-training-and-evaluation",
+      "codeSha256": "96dcd2923ecac45b8d4a0ccbbb9d0af858d3b478e9104d09ba61b230da739c1d",
+      "codeFirstLine": "epsilon, ratio = 0.2, 1.3",
+      "sharedExampleWith": [],
+      "genericExercise": false,
       "requiredWork": [
-        "Compare the data, objective, and expected behavior of the three stages.",
-        "Explain preference labels, policy optimization, and reference constraints."
+        "Independent technical/editorial review and beginner feedback.",
+        "Supported GPU/book-scale QLoRA evidence; full E8 completion gate remains open."
       ],
-      "executionStatus": "real-model-workflow-not-verified",
-      "nextPhase": "E8"
+      "executionStatus": "cpu-instruction-reward-dpo-verified",
+      "nextPhase": "E8",
+      "enhancementReview": "e8-generation-author-review-2026-11-24"
     },
     {
       "conceptId": "sbert",
@@ -2226,7 +2217,7 @@
         "book-ch10-encoder-comparison"
       ],
       "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
-      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
+      "finding": "E7 author implementation connects detailed Chapter 10\u201311 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
       "exampleKind": "training-contract-or-recorded-evidence-calculation",
       "codeSha256": "078eb60bc1afb9ca5742a1a5dc972fcc7510a8f2af2b13f97e0c89c3f272a059",
@@ -2426,7 +2417,7 @@
         "book-ch11-few-shot-training"
       ],
       "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
-      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
+      "finding": "E7 author implementation connects detailed Chapter 10\u201311 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
       "exampleKind": "training-contract-or-recorded-evidence-calculation",
       "codeSha256": "38a2bd253a197733b0e0877802d753665447f87e24adfda41c21d1c7f698a6fc",
@@ -2789,7 +2780,7 @@
         "book-ch10-domain-adaptation"
       ],
       "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
-      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
+      "finding": "E7 author implementation connects detailed Chapter 10\u201311 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
       "exampleKind": "training-contract-or-recorded-evidence-calculation",
       "codeSha256": "bd95859b9f43874860f28b17d0c4898b5851cbd4b10bd90659c1b242b41fcf9c",
@@ -2909,7 +2900,7 @@
       "evidenceAnchor": "implement-it",
       "exampleKind": "foundation-reference-workflow",
       "codeSha256": "664de99e680172346ee0fc0caffafec72568b63e49380b335475a3ec65cf539c",
-      "codeFirstLine": "text = \"cats 👋\"",
+      "codeFirstLine": "text = \"cats \ud83d\udc4b\"",
       "sharedExampleWith": [],
       "genericExercise": false,
       "requiredWork": [
@@ -3333,7 +3324,7 @@
         "book-ch10-augmented-sbert"
       ],
       "retainedStrength": "Specific definitions, objective/data contracts, original calculations, actual training updates, interactive traces, held-out errors and artifact reload.",
-      "finding": "E7 author implementation connects detailed Chapter 10–11 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
+      "finding": "E7 author implementation connects detailed Chapter 10\u201311 teaching with actual CPU encoder, teacher, SetFit, MLM or NER evidence. Independent review pending.",
       "evidenceAnchor": "implement-it",
       "exampleKind": "training-contract-or-recorded-evidence-calculation",
       "codeSha256": "d36f6e279b4a8d8af36c06e4a2013d9fa22435e3811894a61d55020ae48ff9d9",
@@ -3392,6 +3383,15 @@
       "implementation": "actual-encoder-teacher-denoising-comparisons-and-reusable-artifacts",
       "gap": "Independent review and fresh realistic external collection remain pending.",
       "sourceSha256": "fb20b1595de2f73a5372290b4c1b0ef9818ce7bf0a21b931b1b377912ab0b53f",
+      "executionStatus": "actual-cpu-training-verified"
+    },
+    {
+      "path": "src/content/docs/use-cases/instruction-preference-adaptation.mdx",
+      "anchor": "implement-the-adaptation-chain",
+      "chapter": 12,
+      "implementation": "actual-full-lora-reward-dpo-and-nf4-training-with-fixed-evaluation",
+      "gap": "Independent review, fresh realistic task data and supported GPU QLoRA/paged optimization remain pending.",
+      "sourceSha256": "3c307403dec77e12abf309978872c610170cf7e502b6e7ff3c0765447324d008",
       "executionStatus": "actual-cpu-training-verified"
     }
   ],

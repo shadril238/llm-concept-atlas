@@ -16,7 +16,7 @@
     "coverage:report": "node scripts/check-coverage.mjs --write",
     "check:examples": "node scripts/check-code-examples.mjs",
     "check:links": "node scripts/check-internal-links.mjs",
-    "release:build": "npm run test:graph && npm run test:content && npm run test:coverage && npm run check:coverage && npm run check:example-manifest && npm run test:examples && npm run test:reference && npm run test:foundations && npm run test:workflows && npm run test:discovery && npm run test:retrieval && npm run test:training && npm run check:examples && npm run check && npm run build && npm run check:links",
+    "release:build": "npm run test:graph && npm run test:content && npm run test:coverage && npm run check:coverage && npm run check:example-manifest && npm run test:examples && npm run test:reference && npm run test:foundations && npm run test:workflows && npm run test:discovery && npm run test:retrieval && npm run test:training && npm run test:generation && npm run check:examples && npm run check && npm run build && npm run check:links",
     "check:example-manifest": "node scripts/check-example-manifest.mjs",
     "examples:sync": "python3 scripts/sync-examples.py",
     "examples:list": "python3 scripts/run-examples.py --list",
@@ -26,7 +26,8 @@
     "test:discovery": "node --test tests/discovery-mechanics.test.mjs",
     "test:workflows": "node --test tests/workflow-mechanics.test.mjs",
     "test:retrieval": "node --test tests/retrieval-mechanics.test.mjs",
-    "test:training": "node --test tests/training-mechanics.test.mjs"
+    "test:training": "node --test tests/training-mechanics.test.mjs",
+    "test:generation": "node --test tests/generation-mechanics.test.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^7.1.8",

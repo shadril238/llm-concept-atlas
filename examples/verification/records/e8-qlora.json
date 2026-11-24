@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e8-qlora",
+  "status": "passed",
+  "date": "2026-11-24T14:34:25.265637+00:00",
+  "gitCommit": "3192d0816993191203ec5bbd1d81f1deee8fb895",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e8/qlora.py"
+  ],
+  "sourceSha256": "0fff795d7bdbf9bd7c97225330f68ab81c3cb889a6517d18573977b6bf67f8e6",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "3ad7bce95fff0ba367508f06b76eb69c775ee75bc3a5aac2c0ef6e2c0827dbfe",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.008,
+  "peakMemoryMiB": 21.3,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "ideal four-bit weight bytes: 512\nuncompressed float32 block-scale bytes: 64\nsubtotal: 576\nThis arithmetic does not execute NF4, gradients, or a paged optimizer.\n",
+  "stderr": "",
+  "error": null
+}

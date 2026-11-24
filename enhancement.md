@@ -2,7 +2,7 @@
 
 **Prepared:** 2026-11-18  
 **Last updated:** 2026-11-19  
-**Status:** E0 source inventory and initial lesson audit, and E1 infrastructure implemented; E2–E7 implementation delivered, independent review pending; E8–E10 pending. See the [gap report](./docs/audits/book-gap-report.md) and [audit guide](./docs/audits/README.md).
+**Status:** E0 source inventory and initial lesson audit, and E1 infrastructure implemented; E2–E7 implementation delivered, independent review pending; E8 CPU implementation delivered with GPU/review gates open; E9–E10 pending. See the [gap report](./docs/audits/book-gap-report.md) and [audit guide](./docs/audits/README.md).
 **Baseline:** Repository commit `a6b3ec4`, following the original Phases 1–5 in [plan.md](./plan.md).  
 **Source edition:** _Hands-On Large Language Models_, Jay Alammar and Maarten Grootendorst, first edition, September 2024.  
 **Primary goal:** A learner can explain, trace, implement, evaluate, and apply the book's ideas without depending on unexplained terminology or disconnected code snippets.
@@ -906,10 +906,12 @@ Use enhancement phase IDs **E0–E10** to distinguish this work from the origina
 **Depends on:** E7's training/evaluation practices; reuse E2 LoRA work and E5 generation setup.
 
 - [ ] Complete Chapter 12 work and L21–L23, including data templates, loss masks, full/PEFT comparison, QLoRA, merging, reward modeling, and DPO.
-- [ ] Verify supported precision/backend combinations and artifact reload/merge behavior.
-- [ ] Add the fixed evaluation suite, human rubric, and optional calibrated judge workflow.
-- [ ] Complete the instruction/preference adaptation project and the training learning path.
-- [ ] Publish versioned run records, model/data references, and honest limits of the trained examples.
+- [x] Verify the supported float32 CPU and Linux NF4 CPU profiles, with artifact reload/merge checks. GPU/paged optimization remains unverified.
+- [x] Add the fixed evaluation suite, human rubric, and optional offline judge-import/calibration workflow. Actual human/hosted ratings remain absent; no calibration result is claimed.
+- [x] Implement the instruction/preference adaptation project and generation training path; independent acceptance pending.
+- [x] Publish versioned actual CPU run records, model/data references, fresh-kernel notebooks, and honest limits of the trained examples.
+
+**Implementation:** Nine detailed Chapter12 lessons, three staged L21–L23 notebooks, full/LoRA/reward/DPO CPU training, a genuine Linux NF4 profile, five interactive views, fixed evaluation, an offline judgment importer and project/path are delivered. See [author review](./docs/reviews/e8-generation-adaptation.md). The first checklist item remains open for the required supported GPU QLoRA evidence and independent acceptance. All four tiny policies score0/8 generated exact match on the fixed suite; optimization/artifact checks do not establish task success.
 
 **Gate:** Instruction and preference workflows have actual execution evidence and before/after evaluation; unsupported hardware/configurations are not advertised as verified. Explain every step from raw record to loss to saved artifact.
 
@@ -1062,8 +1064,8 @@ These references support the implementation direction, not a claim that all prop
 | E5: prompting and workflows           | Implemented; review pending | 18 expanded/new lessons; five L09–L11 local-model sources/notebooks, interactive traces, and bounded contracts.                                                    |
 | E6: RAG and multimodal                | Implemented; review pending | 23 detailed lessons, five actual-model sources/notebooks, L12–L14 interactives, grounded/image-text projects and routes.                                                    |
 | E7: embedding/representation training | Implemented; review pending | 15 detailed lessons; six actual CPU training workflows/notebooks, gradient/freeze/mask checks, held-out task results and reusable artifacts.                                                  |
-| E8: generation adaptation             | Not started | Chapter 12 objectives and L21–L23 accepted.                                                     |
+| E8: generation adaptation | CPU implementation delivered; GPU/review gates open | Nine detailed lessons, L21–L23 actual CPU workflows/notebooks and Linux NF4 evidence; supported GPU QLoRA and independent acceptance remain pending. |
 | E9: integrated learner experience     | Not started | Discovery, navigation, practice, and accessibility/performance checks.                          |
 | E10: review and release               | Not started | Reconciled coverage, execution evidence, learner feedback, and release report.                  |
 
-**Next:** Collect independent review of E2–E7 and proceed to E8 generation adaptation and evaluation when authorized. Full enhancement acceptance remains tied to the documented review gates.
+**Next:** Collect independent review of E2–E8 and verify supported GPU QLoRA; E9 discovery/navigation integration is the next implementation milestone when authorized. Full enhancement acceptance remains tied to the documented review gates.

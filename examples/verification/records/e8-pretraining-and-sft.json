@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e8-pretraining-and-sft",
+  "status": "passed",
+  "date": "2026-11-24T14:34:25.015302+00:00",
+  "gitCommit": "3192d0816993191203ec5bbd1d81f1deee8fb895",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e8/pretraining_and_sft.py"
+  ],
+  "sourceSha256": "21a13337b0f96966c5669b5bac103c4d05ffe4e94eaea3e0033656906384bda1",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "0124ad0254b515eabdf8c5c93dafb3527fb05e058e504dee5ffdfb7c3a61962b",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.2,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "0 11 ignored\n1 12 ignored\n2 13 ignored\n3 21 target\n4 22 target\n5 0 target\n6 0 ignored\n7 0 ignored\n",
+  "stderr": "",
+  "error": null
+}

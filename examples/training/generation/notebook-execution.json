@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-24T14:35:31.376529+00:00",
+  "platform": "macOS-27.2.1-arm64-arm-64bit",
+  "lockSha256": "648c145d0cb978db6328f6e34aaf641a0cac5b40ba61d96e63f4886e8466c8cf",
+  "verifierSha256": "267362be237e4f2db90088fbcc1f8df724b91f76cad3db08bbd03d54476f3f35",
+  "python": "3.11.18",
+  "sourceHashes": {
+    "examples/data/fixtures/generation-preferences.json": "e5c3d0b773cfe1f51f1f2cc8343f4b7420185ca137d8eda989b9121a0e7b118f",
+    "examples/data/fixtures/instruction-contract.json": "cf0343097bc438429e14b01d7537e1f86e28092fb24a959a74e7253488887eb9",
+    "examples/data/fixtures/instruction-dolly.json": "278ce07ad4599bbba4640671b99b6de24dbbd3d55f6044664060d2afd602599c",
+    "examples/foundations/src/atlas_foundations/e8/contracts.py": "6b3a00cdeafe1268f09f5e3e76dd676a2dd218216890d4202171840d1fe8854c",
+    "examples/training/generation/download_models.py": "40753319667c3c53c20ba3660f9acc49f624f85e8c61f7d8393455adee947d63",
+    "examples/training/generation/models.json": "cfa30fc9e8fa9095ba1588792fd9e5c1b4bf46bf5ea80899cffd8c5e7f22eaf1",
+    "examples/training/generation/notebook_views.py": "4e082973bfe78d2b2da39c5d7ba5c3325f9b97da0adbaf879450967c240c0688",
+    "examples/training/generation/src/atlas_generation/common.py": "e48c94d8885899d9baa5d2edfc60bd903e47a9efe378337fc2bd5a2d5d647fa7",
+    "examples/training/generation/src/atlas_generation/evaluate.py": "b523f7e2e298acefef73b324b4b3fe139251a73eb21e56e83ed2ac0c7e618a06",
+    "examples/training/generation/src/atlas_generation/preferences.py": "180d7364a032ce9cbf3e619677a27b86e3a0b15a00124e5d8d23d53153ba5865",
+    "examples/training/generation/src/atlas_generation/sft.py": "9b2889804b4a2c2cd4a7d8c35ab114b7210995f2f68aa42debd4d7a813392d79"
+  },
+  "records": [
+    {
+      "path": "examples/training/generation/notebooks/instruction-adaptation.ipynb",
+      "sha256": "a5db3eb3e02d2ee9ac6cde7a00ec979f3587eb0943de9fadd2a3d1c3e3fc8542",
+      "method": "Fresh actual Jupyter kernel; all cells executed in order via nbclient",
+      "codeCells": 4,
+      "status": "passed"
+    },
+    {
+      "path": "examples/training/generation/notebooks/preference-adaptation.ipynb",
+      "sha256": "48eee1ddbecbb761945a20615c956091b13915fb63c4f8997677e2b8046b20e4",
+      "method": "Fresh actual Jupyter kernel; all cells executed in order via nbclient",
+      "codeCells": 4,
+      "status": "passed"
+    },
+    {
+      "path": "examples/training/generation/notebooks/generation-evaluation.ipynb",
+      "sha256": "89f0a71f221128ebf2ae369aea25bce858d3066454cf591a8b9dc1eb19ff38e5",
+      "method": "Fresh actual Jupyter kernel; all cells executed in order via nbclient",
+      "codeCells": 4,
+      "status": "passed"
+    }
+  ]
+}

@@ -1,189 +1,136 @@
 ---
-title: LoRA
-description: LoRA adapts a large weight matrix with a trainable low-rank update while keeping the base matrix fixed.
-kind: concept
+title: "Low-rank adaptation (LoRA)"
+description: "LoRA learns an additive low-rank update to a frozen weight matrix. For column input x, W has shape d_out×d_in, A has shape r×d_in, B has shape d_out×r, and the adapted projection is Wx + (alpha/r)BAx. The factorization restricts the update, not the rank of the original W."
+kind: "concept"
 conceptId: lora
 chapter: 12
-part: training
-summary: LoRA adapts a large weight matrix with a trainable low-rank update while keeping the base matrix fixed.
-parent: peft
-prerequisites: [peft]
-related: [peft, qlora]
-level: advanced
-tags: [training, chapter-12]
+part: "training"
+summary: "LoRA learns an additive low-rank update to a frozen weight matrix. For column input x, W has shape d_out×d_in, A has shape r×d_in, B has shape d_out×r, and the adapted projection is Wx + (alpha/r)BAx. The factorization restricts the update, not the rank of the original W."
+parent: "chapter-12"
+prerequisites: ["peft"]
+related: ["qlora", "pretraining-and-sft", "generative-evaluation"]
+level: "advanced"
+tags: ["training", "chapter-12"]
 lessonStatus: full
-lastReviewed: 2026-11-20
-reviewStatus: author-reviewed
-reviewRecord: e2-reference-author-review-2026-11-20
-exampleIds: ["lora-trace", "lora-tiny-training", "lora-pretrained"]
-bookSections: ["book-ch12-peft", "book-ch12-lora-config", "book-ch12-low-rank"]
-aliases: ["Low-Rank Adaptation", "LoRA adapter"]
-learningObjectives: ["Calculate a LoRA forward pass with explicit matrix shapes and scaling.", "Explain why zero-initializing both factors prevents learning.", "Compare a frozen base, full update, and low-rank update on a controlled task.", "Train, reload, merge, and evaluate a real pretrained-model adapter."]
+lastReviewed: "2026-11-24"
+reviewRecord: e8-generation-author-review-2026-11-24
+aliases: ["merge weights", "merge_and_unload"]
+learningObjectives: ["Derive A/B dimensions, alpha/r scaling and fused-QKV parameter counts.", "Explain zero-update initialization and first-step gradients.", "Verify supported merge algebra separately from float32 runtime rounding."]
+bookSections: ["book-ch12-low-rank", "book-ch12-lora-config", "book-ch12-merge"]
+exampleIds: ["e8-lora", "instruction-adaptation", "preference-adaptation", "generation-evaluation"]
+relationshipReasons: {"qlora": "QLoRA combines low-rank adapters with a frozen quantized base.", "pretraining-and-sft": "The instruction-tuning loop supplies LoRA training targets and masks.", "generative-evaluation": "Merge/reload agreement and task quality are separate evaluation obligations."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
 import ReferenceBrief from '../../../components/ReferenceBrief.astro';
-import VerifiedRun from '../../../components/VerifiedRun.astro';
-import ReferenceResults from '../../../components/ReferenceResults.astro';
-import { LoraExplorer } from '../../../components/simulations/ReferenceLabs';
+import { RankMemory } from '../../../components/simulations/GenerationLabs';
 
 <ConceptPrimer id="lora" />
 
+<ReferenceBrief objectives={["Derive A/B dimensions, alpha/r scaling and fused-QKV parameter counts.", "Explain zero-update initialization and first-step gradients.", "Verify supported merge algebra separately from float32 runtime rounding."]} prerequisites="peft" scope="Original explanations and calculations plus actual small CPU training. Independent review and GPU QLoRA certification remain pending." />
+
 ## Definition and intuition
 
-Suppose a pretrained language model almost performs your task, but updating and storing every weight for every task is too expensive. **Low-Rank Adaptation (LoRA)** freezes selected pretrained weight matrices and learns a small, factorized additive update. The original matrix remains in the forward pass. LoRA does not replace the base model with two tiny matrices.
-
-Imagine learning a small correction to a map instead of redrawing the entire map. The correction still depends on the original map. This analogy explains the storage relationship; it does not prove a low-rank correction can represent every change your task requires.
-
-<ReferenceBrief objectives={["Calculate a LoRA forward pass with explicit matrix shapes and scaling.", "Explain why zero-initializing both factors prevents learning.", "Compare a frozen base, full update, and low-rank update on a controlled task.", "Train, reload, merge, and evaluate a real pretrained-model adapter."]} prerequisites="Read PEFT first. Be able to multiply a matrix by a vector and distinguish a parameter from a learning-rate setting. If gradients are new, think of them as local loss sensitivities used by an optimizer." scope="An exact arithmetic trace, a tiny trainable regression, and a CPU adapter on a pretrained 14M-parameter decoder. These establish mechanics and execution, not production instruction-following quality." />
+LoRA learns an additive low-rank update to a frozen weight matrix. For column input x, W has shape d_out×d_in, A has shape r×d_in, B has shape d_out×r, and the adapted projection is Wx + (alpha/r)BAx. The factorization restricts the update, not the rank of the original W.
 
 ## Before you start
 
-A weight matrix is a learned linear transformation. **Rank** is the number of independent directions a matrix can express. A product of two matrices with an inner dimension r has rank at most r. **Fine-tuning** changes parameters using task data; **inference** computes outputs using the current parameters. A frozen parameter participates in the forward computation but is excluded from optimizer updates.
-
-The small adapter reduces trainable parameters and their optimizer state. Activations, the frozen base weights, and computation through the network still consume memory. LoRA alone does not make a large model fit every CPU or GPU. [QLoRA](/llm-concept-atlas/concepts/qlora/) additionally quantizes base weights; the full-precision CPU workflow here does not verify that different configuration.
+Read [peft](/llm-concept-atlas/concepts/peft/). Open the [generation training path](/llm-concept-atlas/paths/from-instructions-to-preferences/) if these prerequisites are unfamiliar. Distinguish a token distribution, a trainable parameter, and a task score before tracing this mechanism.
 
 ## Theory: how it works
 
-Fix the orientation first. Use column vectors in the explanation:
+### Low rank and initialization
 
-| Symbol | Shape | Role |
-| --- | --- | --- |
-| x | d_in × 1 | Input activation |
-| W | d_out × d_in | Frozen pretrained weight |
-| A | r × d_in | Trainable projection into r directions |
-| B | d_out × r | Trainable projection back to output width |
-| α | Scalar | Adapter scaling hyperparameter |
+The product BA has rank at most r. A bottleneck can represent some useful task changes with many fewer values than an unrestricted matrix, but the useful rank depends on the task and targeted modules. Ordinary LoRA scaling is alpha/r; other variants can choose a different rule. L21 uses ordinary rank 4/alpha 8, so scaling is 2. Increasing alpha does not increase capacity or parameter count in the same way as increasing rank.
 
-The standard LoRA update used here is `ΔW = (α/r) B A`. The output is `y = W x + (α/r) B(Ax)`. First A compresses the input, then B expands the result, then the scaled correction is added to the original output. The factorized update is constrained; the rank of **W + ΔW** can still be high because W is retained.
+In the selected PEFT initialization, A is random and B is zero. The initial update is zero, so the adapted policy initially matches the base in evaluation mode. B can receive a first-step gradient while A's first-step gradient may be zero because it is multiplied by B. After B changes, A can learn too. Zero A and zero B together would produce a dead bilinear initialization.
 
-PyTorch commonly batches row vectors. The same computation becomes `X @ W.T + (α/r) * (X @ A.T) @ B.T`. A transpose changes notation, not the underlying transformation. Some variants use different scaling, such as α divided by the square root of rank. Read the configuration before comparing experiments.
+Targets are named modules, not vague “attention weights.” Here `query_key_value` is one fused projection with three output groups. Six fused384×128 matrices produce12,288 trainable values at rank 4. This does not adapt the attention output projection, MLP, embeddings or vocabulary head. Dropout is explicitly zero for these controlled CPU runs; nonzero adapter dropout changes the training path and must be disabled for equivalence checks.
 
-The adapter has `r × (d_in + d_out)` parameters, compared with `d_in × d_out` base weights. For a 4096 × 4096 projection at r = 8, that is 65,536 trainable adapter values versus 16,777,216 frozen values: about 0.39%. This is a parameter count, not a prediction of total training-memory reduction.
+### Adapter merging
+
+For supported floating-point linear layers, merge computes `W_merged = W + (alpha/r)BA`. It removes the separate adapter branch, so deployment can use an ordinary model, but merging sacrifices convenient task switching unless originals are retained. Save the tokenizer and exact base identity with the artifact. Directly changing a quantized integer payload is not this floating-point algebra.
+
+Float32 summation order can differ between a separate adapter path and the merged projection. L21 records the actual maximum logit difference and uses an explicit scale-relative tolerance, then separately repeats the algebra in float64. The author run's float32 maximum was about 0.00788 on logits with global magnitude31.95; float64 differed by about 1.3e-11. This is bounded numerical agreement, not bitwise identity. A fresh reload of the saved merged model is checked too.
 
 ### The important distinction
 
-LoRA constrains the **update**, not an arbitrary reconstruction of the complete pretrained weight. Lower rank reduces capacity and storage, but neither a small nor a large rank guarantees useful adaptation. Target-module choice, data coverage, learning rate, and evaluation matter. Adapting fused Q/K/V projections in Pythia is not the same module selection as adapting separate query/value projections in another architecture.
+Read the mechanism and the actual workflow together. A small calculation checks arithmetic; the connected training record checks optimization and artifacts; heldout task results check a separate quality claim.
 
 ## Worked example
 
-Let W be the 2 × 2 identity matrix, A = `[0.3, −0.1]`, B = `[0.1, 0.2]` as a column, x = `[2, 1]` as a column, and α = r = 1.
+Let W be the2×2 identity, A=`[0.1,0.2]`, B=`[0.3,-0.1]` as a column and alpha/r=2. BA is `[[0.03,0.06],[-0.01,-0.02]]`, so the merged matrix is `[[1.06,0.12],[-0.02,0.96]]`. Multiply the same x through both paths and compare. Changing orientation would compute a different shape or the wrong update.
 
-1. `Ax = 0.3×2 − 0.1×1 = 0.5`.
-2. `B(Ax) = [0.05, 0.10]`.
-3. `Wx = [2, 1]`, so `y = [2.05, 1.10]`.
-
-The corresponding update matrix is `[[0.03, −0.01], [0.06, −0.02]]`. Multiplying this matrix by x gives exactly the same correction. There are four adapter parameters and four base parameters in this deliberately tiny example, so it demonstrates the calculation without offering parameter savings.
+The earlier [pretrained LoRA lab](/llm-concept-atlas/labs/first-verified-examples/) supplies another real adapter workflow. L21 adds the fixed realistic instruction subset, full-model comparator, raw heldout generations and more explicit data masks. The old E2 record remains available rather than being relabeled as new evidence.
 
 ## Try the interactive lab
 
-<LoraExplorer client:visible />
+<RankMemory client:visible />
 
-Prediction prompt: with the factors held fixed, what happens when α doubles? The correction doubles. Changing the declared rank in this specific experiment changes scaling and adds zero factors; it does not simulate a newly trained higher-rank model. The separate layer-width selector illustrates parameter counts while the numeric trace remains 2 × 2.
+Predict a change before touching a control. The browser calculates explicit arithmetic or displays recorded model results; it performs no training or model requests. Reset restores the initial view, and tables preserve the exact numbers.
 
 ## Implement it
 
 ### A complete arithmetic trace
 
-Run `python3 scripts/run-examples.py --id lora-trace`. This standard-library example follows exactly the orientation above:
+This standalone Python 3 calculation uses only the standard library. It does not download or train a model. The [complete generation labs](/llm-concept-atlas/labs/generation-adaptation/) provide the pinned environments, actual training entrypoints, staged notebooks, raw results and artifact checks.
 
-{/* example:lora-trace:start */}
+{/* example:e8-lora:start */}
 
 ```python
-W = [[1.0, 0.0], [0.0, 1.0]]  # [d_out=2, d_in=2]
-A = [[0.3, -0.1]]  # [r=1, d_in=2]
-B = [[0.1], [0.2]]  # [d_out=2, r=1]
-x = [2.0, 1.0]
-alpha, rank = 1.0, 1
-compressed = sum(a * value for a, value in zip(A[0], x))
-update = [(alpha / rank) * row[0] * compressed for row in B]
-output = [
-    sum(w * value for w, value in zip(row, x)) + delta for row, delta in zip(W, update)
+w = [[1.0, 0.0], [0.0, 1.0]]
+a, b, scale, x = [0.1, 0.2], [0.3, -0.1], 2.0, [2.0, -1.0]
+merged = [[w[i][j] + scale * b[i] * a[j] for j in range(2)] for i in range(2)]
+separate = [
+    sum(w[i][j] * x[j] for j in range(2))
+    + scale * b[i] * sum(a[j] * x[j] for j in range(2))
+    for i in range(2)
 ]
-assert all(abs(a - b) < 1e-12 for a, b in zip(output, [2.05, 1.10]))
-print("A @ x:", round(compressed, 2))
-print("update:", [round(value, 2) for value in update])
-print("output:", [round(value, 2) for value in output])
+combined = [sum(merged[i][j] * x[j] for j in range(2)) for i in range(2)]
+print("merged:", merged)
+assert all(abs(a - b) < 1e-12 for a, b in zip(separate, combined))
+print("same linear function:", combined)
 ```
 
-{/* example:lora-trace:end */}
+{/* example:e8-lora:end */}
+
+Read the shared source from the lab: completion IDs and causal loss are in `common.py`; actual updates and saving are in `sft.py`/`preferences.py`; evaluation and the offline judgment import are separate. A runnable arithmetic snippet is a mechanism check, not a substitute for those model runs.
 
 ### Make the update learn
 
-```bash
-uv sync --locked --project examples/training/reference
-python3 scripts/run-examples.py --id lora-tiny-training
-```
-
-The tiny task learns a known rank-one correction to an 8 × 8 identity transformation from 48 synthetic training vectors and evaluates on 16 separately drawn vectors. The frozen base, a full 64-parameter update, and a 16-parameter adapter see the same target function. This is a controlled regression experiment with an exactly representable rank-one solution; it is intentionally easier than language adaptation.
-
-With random A and zero B, the initial adapter output is zero. On the first backward pass, A's gradient is zero because its path is multiplied by B, while B can receive a nonzero gradient through A. After B moves, A can also learn. If **both** factors start at zero, neither receives a useful gradient through their product. The script checks first-step gradients, frozen W, test error, factorized/merged equivalence, and saved-adapter reload.
-
-<VerifiedRun id="lora-tiny-training" />
+The [earlier E2 source](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/src/atlas_reference/lora_tiny.py) performs actual optimization in a tiny controlled model. It complements the fixed matrix trace above; neither is relabeled as the larger L21 instruction experiment.
 
 ### Adapt a pretrained language model
 
-```bash
-python3 scripts/run-examples.py --id lora-pretrained --allow-network
-# Cached rerun:
-python3 scripts/run-examples.py --id lora-pretrained --offline
-```
-
-The supported model is `EleutherAI/pythia-14m`, pinned in the manifest. The authored task completes “animal” or “color” for a queried word. The split has 24 training prompts, four validation prompts, and four final test prompts with disjoint queried words. Shared phrasing makes this an instructional fixture, not a benchmark of real instruction following.
-
-Here is the adapter configuration from the executable workflow. `base`, `torch`, and the imports are defined in the linked complete source; this excerpt belongs inside its `main()` function.
-
-{/* example:lora-pretrained:start */}
-
-```python
-config = LoraConfig(
-    task_type="CAUSAL_LM",
-    r=4,
-    lora_alpha=8,
-    target_modules=["query_key_value"],
-    lora_dropout=0.0,
-    bias="none",
-)
-model = get_peft_model(base, config)
-# Only the fused Q/K/V projections get adapters in this architecture.
-optimizer = torch.optim.AdamW(
-    [p for p in model.parameters() if p.requires_grad], lr=0.003
-)
-```
-
-{/* example:lora-pretrained:end */}
-
-The run uses rank 4, α = 8, zero dropout, learning rate 0.003, batches of four, and 40 steps on CPU. It masks prompt positions and padding with −100, leaving answer tokens and EOS in the causal-language-model loss. The model performs its next-token shift internally; do not shift labels a second time. The script checks that separate prompt encoding remains a prefix of the combined encoding, because subword merges can otherwise move a completion boundary.
-
-Validation loss is checked at fixed intervals to select an adapter checkpoint. Final test loss compares the frozen pretrained model and the selected adapter on the same held-out prompts. The script hashes frozen parameters before and after training, reopens the saved adapter against the exact base revision, and compares reloaded and merged logits with floating-point tolerances. It also records a greedy completion so that readers can see behavior beyond a scalar loss.
-
-<VerifiedRun id="lora-pretrained" />
-
-<ReferenceResults kind="lora" />
-
-A lower held-out loss means the assigned answer tokens became more likely on this fixture. It does not guarantee an exactly correct greedy answer, broad task competence, or improved safety. A negative result remains an informative result. Inspect `examples/artifacts/lora-model/results.json` for the validation history and observed completion.
+Run [L21 instruction adaptation](/llm-concept-atlas/labs/generation-adaptation/#l21-instruction-adaptation) for the attributed data, full-model comparator, actual gradients, raw generations and selected model artifacts. The earlier [pretrained LoRA source](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/reference/src/atlas_reference/lora_model.py) remains separately registered with its original execution evidence.
 
 ## When to use it
 
-LoRA is useful when multiple tasks can share the same base model, when adapter storage matters, or when optimizer-state memory limits full fine-tuning. Start with a baseline and a data-split policy. Select target layers using the architecture's actual module names, then compare task quality, runtime, and artifact size. A full update can be preferable when broad weight changes are needed and resources permit it; prompting or retrieval can be preferable when weights need not change at all.
+Use LoRA for compact domain/style/task adaptation where low-rank targets offer a useful quality/resource tradeoff. It cannot guarantee factual correctness or preserve every original capability. An adapter that lowers completion loss may still generate repeated, irrelevant or truncated prose.
 
 ## Limits and common mistakes
 
-A low training loss can reflect memorization of templates. Rank is not a direct measure of “knowledge capacity.” Freezing weights does not remove their forward-pass cost. Adapter artifacts must be paired with the correct base revision; a shape-compatible different base is not interchangeable. Merge checks require evaluation mode and compatible precision. Quantized merging and GPU training need their own verified environments.
+The evaluated instruction subset has32 training,8 validation and8 test source contexts. Pretraining overlap is unknown. Repeated views of these test outputs are not a new independent benchmark. Preserve failed and length-limited answers, exact base/tokenizer identity and data provenance when transferring the workflow. The book's larger TinyLlama/CUDA settings require their own supported hardware execution; the small profiles do not certify them.
 
 ## Check your understanding
 
-<details><summary>Calculate: how many parameters does rank 4 add to a 512 × 256 matrix?</summary><p>Hint: count both factors. A has 4×256 = 1,024 values; B has 512×4 = 2,048. Total: 3,072 adapter parameters versus 131,072 base parameters, ignoring any separately trained bias or head.</p></details>
+<details>
+<summary>Why can B learn on the first step when A is random and B is zero?</summary>
 
-<details><summary>Debug: the adapter never changes when both matrices start at zero. Why?</summary><p>Each factor's gradient depends on the other factor. Both paths are zero initially. Initialize one factor randomly and the other to zero to preserve the initial base output while allowing the other factor's first gradient.</p></details>
+The derivative with respect to B contains A and input x. The derivative with respect to A contains the initially zero B. Both-zero initialization would block both gradients.
 
-<details><summary>Explain: does a rank-one update force the entire adapted matrix to rank one?</summary><p>No. Only ΔW has rank at most one. Adding it to the frozen W can preserve a high-rank transformation.</p></details>
+</details>
 
-<details><summary>Transfer: training loss improves, validation loss worsens. What should you inspect?</summary><p>Inspect split leakage, label masks, sample coverage, learning rate, steps, and target modules. Select checkpoints with validation data, then evaluate the final choice on untouched test cases. Do not keep tuning on the test score.</p></details>
+<details>
+<summary>What must be compared after merging besides file size?</summary>
+
+Use the same tokenizer, inputs and evaluation mode; compare logits under a stated precision/tolerance, task outputs, exact base identity and fresh saved-model reload.
+
+</details>
 
 ## Connections and sources
 
-This original reference lesson develops Chapter 12, printed pp. 361–364 and 370–371. Its CPU Pythia run and synthetic regression are atlas extensions; the book's [official notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/ea3390819997999a51983677b80b3aac4dc50ada/chapter12) uses a different, larger training configuration. See the [LoRA paper](https://arxiv.org/abs/2106.09685), [PEFT configuration reference](https://huggingface.co/docs/peft/v0.17.0/en/package_reference/lora), and [Pythia model card](https://huggingface.co/EleutherAI/pythia-14m). Continue to PEFT, QLoRA, and generation evaluation.
-
 <ConceptConnections id="lora" />
+
+This original lesson follows Chapter 12, printed 355–389, of *Hands-On Large Language Models*. Its small-model/data configurations are deliberate teaching adaptations. Consult [Transformers chat templates](https://huggingface.co/docs/transformers/v4.57.1/en/chat_templating), [PEFT LoRA](https://huggingface.co/docs/peft/v0.17.0/en/developer_guides/lora), [bitsandbytes installation](https://huggingface.co/docs/bitsandbytes/v0.48.2/en/installation), and [TRL sigmoid DPO](https://huggingface.co/docs/trl/v0.23.1/en/dpo_trainer) for the versioned source contracts used here. Complete the [instruction adaptation project](/llm-concept-atlas/use-cases/instruction-preference-adaptation/) to test the full reasoning chain.

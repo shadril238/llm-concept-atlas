@@ -28,7 +28,6 @@ Generated from the registry and execution records. Execution checks do not const
 | legacy-dimensionality-reduction | A | exact-stdout | [Passed 2026-11-19T17:56:49.128627+00:00](records/legacy-dimensionality-reduction.json) |
 | legacy-document-embeddings | A | exact-stdout | [Passed 2026-11-19T17:56:49.209334+00:00](records/legacy-document-embeddings.json) |
 | legacy-domain-adaptation | A | exact-stdout | [Passed 2026-11-19T17:56:49.287199+00:00](records/legacy-domain-adaptation.json) |
-| legacy-dpo | A | exact-stdout | [Passed 2026-11-19T17:56:49.364378+00:00](records/legacy-dpo.json) |
 | legacy-efficient-attention | A | exact-stdout | [Passed 2026-11-19T17:56:49.442574+00:00](records/legacy-efficient-attention.json) |
 | legacy-embedding-evaluation | A | exact-stdout | [Passed 2026-11-19T17:56:49.518291+00:00](records/legacy-embedding-evaluation.json) |
 | legacy-embeddings-for-classification | A | exact-stdout | [Passed 2026-11-19T17:56:49.594233+00:00](records/legacy-embeddings-for-classification.json) |
@@ -38,7 +37,6 @@ Generated from the registry and execution records. Execution checks do not const
 | legacy-fine-tuning-embeddings | A | exact-stdout | [Passed 2026-11-19T17:56:49.904013+00:00](records/legacy-fine-tuning-embeddings.json) |
 | legacy-frozen-layers | A | exact-stdout | [Passed 2026-11-19T17:56:49.980199+00:00](records/legacy-frozen-layers.json) |
 | legacy-generative-classification | A | exact-stdout | [Passed 2026-11-19T17:56:50.057623+00:00](records/legacy-generative-classification.json) |
-| legacy-generative-evaluation | A | exact-stdout | [Passed 2026-11-19T17:56:50.137315+00:00](records/legacy-generative-evaluation.json) |
 | legacy-generative-model | A | exit-success | [Passed 2026-11-19T17:56:50.214094+00:00](records/legacy-generative-model.json) |
 | legacy-grounded-generation | A | exact-stdout | [Passed 2026-11-19T17:56:50.290844+00:00](records/legacy-grounded-generation.json) |
 | legacy-image-captioning | A | exact-stdout | [Passed 2026-11-19T17:56:50.367679+00:00](records/legacy-image-captioning.json) |
@@ -56,14 +54,10 @@ Generated from the registry and execution records. Execution checks do not const
 | legacy-named-entity-recognition | A | exact-stdout | [Passed 2026-11-19T17:56:51.333781+00:00](records/legacy-named-entity-recognition.json) |
 | legacy-openclip | A | exact-stdout | [Passed 2026-11-19T17:56:51.412628+00:00](records/legacy-openclip.json) |
 | legacy-output-verification | A | exact-stdout | [Passed 2026-11-19T17:56:51.489181+00:00](records/legacy-output-verification.json) |
-| legacy-peft | A | exact-stdout | [Passed 2026-11-19T17:56:51.566784+00:00](records/legacy-peft.json) |
 | legacy-positional-embeddings-and-rope | A | exact-stdout | [Passed 2026-11-19T17:56:51.642886+00:00](records/legacy-positional-embeddings-and-rope.json) |
-| legacy-pretraining-and-sft | A | exact-stdout | [Passed 2026-11-19T17:56:51.720247+00:00](records/legacy-pretraining-and-sft.json) |
 | legacy-pretraining | A | exact-stdout | [Passed 2026-11-19T17:56:51.797447+00:00](records/legacy-pretraining.json) |
 | legacy-prompt-structure | A | exact-stdout | [Passed 2026-11-19T17:56:51.877663+00:00](records/legacy-prompt-structure.json) |
 | legacy-prompt-templates | A | exact-stdout | [Passed 2026-11-19T17:56:51.957118+00:00](records/legacy-prompt-templates.json) |
-| legacy-qlora | A | exact-stdout | [Passed 2026-11-19T17:56:52.035828+00:00](records/legacy-qlora.json) |
-| legacy-quantization | A | exact-stdout | [Passed 2026-11-19T17:56:52.119721+00:00](records/legacy-quantization.json) |
 | legacy-quantized-models | A | exact-stdout | [Passed 2026-11-19T17:56:52.197955+00:00](records/legacy-quantized-models.json) |
 | legacy-query-key-value | A | exit-success | [Passed 2026-11-19T17:56:52.274541+00:00](records/legacy-query-key-value.json) |
 | legacy-rag-evaluation | A | exact-stdout | [Passed 2026-11-19T17:56:52.352523+00:00](records/legacy-rag-evaluation.json) |
@@ -74,8 +68,6 @@ Generated from the registry and execution records. Execution checks do not const
 | legacy-reranking | A | exact-stdout | [Passed 2026-11-19T17:56:52.745572+00:00](records/legacy-reranking.json) |
 | legacy-responsible-use | A | exact-stdout | [Passed 2026-11-19T17:56:52.822819+00:00](records/legacy-responsible-use.json) |
 | legacy-retrieval-metrics | A | exact-stdout | [Passed 2026-11-19T17:56:52.900153+00:00](records/legacy-retrieval-metrics.json) |
-| legacy-reward-models | A | exact-stdout | [Passed 2026-11-19T17:56:52.976699+00:00](records/legacy-reward-models.json) |
-| legacy-rlhf | A | exact-stdout | [Passed 2026-11-19T17:56:53.052139+00:00](records/legacy-rlhf.json) |
 | legacy-sbert | A | exact-stdout | [Passed 2026-11-19T17:56:53.126416+00:00](records/legacy-sbert.json) |
 | legacy-self-attention | A | exit-success | [Passed 2026-11-19T17:56:53.204833+00:00](records/legacy-self-attention.json) |
 | legacy-self-consistency | A | exact-stdout | [Passed 2026-11-19T17:56:53.280564+00:00](records/legacy-self-consistency.json) |
@@ -238,3 +230,16 @@ Generated from the registry and execution records. Execution checks do not const
 | e7-setfit | A | exact-stdout | [Passed 2026-11-24T08:28:58.821794+00:00](records/e7-setfit.json) |
 | e7-masked-language-modeling | A | exact-stdout | [Passed 2026-11-24T08:28:58.905820+00:00](records/e7-masked-language-modeling.json) |
 | e7-named-entity-recognition | A | exact-stdout | [Passed 2026-11-24T08:28:58.983033+00:00](records/e7-named-entity-recognition.json) |
+| instruction-adaptation | B | json-invariants | [Passed 2026-11-24T14:32:56.485552+00:00](records/instruction-adaptation.json) |
+| preference-adaptation | B | json-invariants | [Passed 2026-11-24T14:33:08.653556+00:00](records/preference-adaptation.json) |
+| generation-evaluation | B | json-invariants | [Passed 2026-11-24T14:37:00.346322+00:00](records/generation-evaluation.json) |
+| nf4-adaptation | B | json-invariants | [Passed 2026-11-24T14:37:17.357061+00:00](records/nf4-adaptation.json) |
+| e8-pretraining-and-sft | A | exact-stdout | [Passed 2026-11-24T14:34:25.015302+00:00](records/e8-pretraining-and-sft.json) |
+| e8-peft | A | exact-stdout | [Passed 2026-11-24T14:34:25.107340+00:00](records/e8-peft.json) |
+| e8-lora | A | exact-stdout | [Passed 2026-11-24T14:34:25.186873+00:00](records/e8-lora.json) |
+| e8-qlora | A | exact-stdout | [Passed 2026-11-24T14:34:25.265637+00:00](records/e8-qlora.json) |
+| e8-quantization | A | exact-stdout | [Passed 2026-11-24T14:34:25.344764+00:00](records/e8-quantization.json) |
+| e8-generative-evaluation | A | exact-stdout | [Passed 2026-11-24T14:34:25.423381+00:00](records/e8-generative-evaluation.json) |
+| e8-reward-models | A | exact-stdout | [Passed 2026-11-24T14:34:25.503579+00:00](records/e8-reward-models.json) |
+| e8-rlhf | A | exact-stdout | [Passed 2026-11-24T14:34:25.582005+00:00](records/e8-rlhf.json) |
+| e8-dpo | A | exact-stdout | [Passed 2026-11-24T14:34:25.665962+00:00](records/e8-dpo.json) |

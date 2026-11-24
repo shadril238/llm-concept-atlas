@@ -1989,3 +1989,24 @@ body:has(.atlas-explorer) {
 .training-tokens small { font-size:.65rem; }
 .training-rejection { padding:.9rem; border-left:4px solid var(--sl-color-orange); background:var(--sl-color-orange-low); border-radius:.3rem; }
 @media(max-width:550px) { .training-pair { grid-template-columns:1fr; } }
+
+/* E8 training views retain table alternatives and usable narrow-screen controls. */
+.generation-target { background: color-mix(in srgb, var(--sl-color-accent) 12%, transparent); }
+.generation-bars { display: grid; gap: 1rem; margin-block: 1.25rem; }
+.generation-bars > div > span { display:block; font-size:.85rem; margin-bottom:.3rem; }
+.generation-bars > div > div { height:.75rem; border-radius:99px; background:var(--sl-color-accent-high); max-width:100%; }
+.workflow-lab .workflow-controls button { align-self:end; min-height:2.5rem; }
+.workflow-lab label { display:grid; gap:.35rem; }
+.workflow-lab input[type=range] { max-width:100%; min-width:0; }
+.generation-token-scroll { max-height: 26rem; overflow: auto; border: 1px solid var(--sl-color-gray-5); border-radius: .75rem; }
+.generation-token-scroll th { position:sticky; top:0; background:var(--sl-color-bg); z-index:1; }
+.generation-pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; margin-block:1rem; }
+.generation-pair > div { padding:1rem; border:1px solid var(--sl-color-gray-5); border-radius:.75rem; overflow-wrap:anywhere; }
+@media(max-width: 42rem) { .generation-pair { grid-template-columns:1fr; } }
+.generation-lab { min-width:0; margin-block:2rem; padding:clamp(1rem,2vw,1.5rem); border:1px solid var(--sl-color-gray-5); border-radius:1rem; background:linear-gradient(145deg,color-mix(in srgb,var(--sl-color-accent-low) 28%,var(--sl-color-bg)),var(--sl-color-bg) 70%); }
+.generation-lab .workflow-controls { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr)); gap:1rem; align-items:end; }
+.generation-lab .workflow-controls > * { margin:0; min-width:0; }
+.generation-lab .workflow-eyebrow { font-size:.72rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--sl-color-text-accent); }
+.generation-lab > h3 { margin-top:.5rem; }
+.generation-lab .workflow-scroll { max-width:100%; }
+.generation-lab .generation-token-scroll { margin-top:1rem; }

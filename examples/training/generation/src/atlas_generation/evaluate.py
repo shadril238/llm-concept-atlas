@@ -1,6 +1,7 @@
 """L22: fixed task evaluation, real lexical/BERTScore metrics, offline judgments."""
 
 import json
+import hashlib
 import math
 import re
 import statistics
@@ -121,6 +122,12 @@ def main():
         imported = json.loads(path.read_text())
     judgments = validate_judgments(blind, imported)
     result = dict(
+        input_result_hashes={
+            name: hashlib.sha256(
+                (ROOT / f"examples/artifacts/e8-{name}/results.json").read_bytes()
+            ).hexdigest()
+            for name in ["sft", "preferences"]
+        },
         runs=runs,
         metric_probes=probes,
         semantic_metric=dict(

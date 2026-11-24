@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e8-rlhf",
+  "status": "passed",
+  "date": "2026-11-24T14:34:25.582005+00:00",
+  "gitCommit": "3192d0816993191203ec5bbd1d81f1deee8fb895",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e8/rlhf.py"
+  ],
+  "sourceSha256": "a7af54cd0bda7cb390fa98e2a9c85b86189e9003dd6faf4db677b5008461b508",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "dcc02c2a8f1ec0303a624f8632f4669f37410f946659f61260586d6607a33e62",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.008,
+  "peakMemoryMiB": 21.3,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "advantage 2.0 PPO surrogate 2.4\nadvantage -2.0 PPO surrogate -2.6\nOld rollout policy ratio differs from a fixed-reference KL penalty.\n",
+  "stderr": "",
+  "error": null
+}

@@ -26,3 +26,6 @@ __pycache__/
 *.pyc
 examples/artifacts/
 .cache/
+
+# Optional private local human/judge ratings
+examples/data/local/

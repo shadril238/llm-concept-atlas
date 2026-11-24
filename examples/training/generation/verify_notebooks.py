@@ -1,14 +1,14 @@
 """Restart a fresh actual Jupyter kernel for each notebook, then execute every cell."""
 
-from pathlib import Path
 import argparse
 import datetime
-import platform
 import hashlib
 import json
 import os
+import platform
 import sys
 import tempfile
+from pathlib import Path
 
 import nbformat
 from nbclient import NotebookClient
@@ -55,7 +55,14 @@ def main():
         os.environ["IPYTHONDIR"] = str(directory / "ipython")
         os.environ["HF_HUB_OFFLINE"] = "0" if args.allow_network else "1"
         try:
-            for path in sorted((PROJECT / "notebooks").glob("*.ipynb"), key=lambda p: ["instruction-adaptation", "preference-adaptation", "generation-evaluation"].index(p.stem)):
+            for path in sorted(
+                (PROJECT / "notebooks").glob("*.ipynb"),
+                key=lambda p: [
+                    "instruction-adaptation",
+                    "preference-adaptation",
+                    "generation-evaluation",
+                ].index(p.stem),
+            ):
                 if args.id and path.stem not in args.id:
                     continue
                 notebook = nbformat.read(path, as_version=4)
@@ -89,7 +96,7 @@ def main():
     ).write_text(
         json.dumps(
             {
-                "date": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                "date": datetime.datetime.now(datetime.UTC).isoformat(),
                 "platform": platform.platform(),
                 "lockSha256": hashlib.sha256(
                     (PROJECT / "uv.lock").read_bytes()
@@ -101,10 +108,14 @@ def main():
                 "sourceHashes": {
                     str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
                     for p in sorted(
-                        list((PROJECT / "src").rglob("*.py"))
+                        [PROJECT / "src/atlas_generation" / name for name in ["common.py", "sft.py", "preferences.py", "evaluate.py"]]
                         + [
                             PROJECT / "download_models.py",
                             PROJECT / "models.json",
+                            ROOT / "examples/data/fixtures/instruction-dolly.json",
+                            ROOT / "examples/data/fixtures/instruction-contract.json",
+                            ROOT / "examples/data/fixtures/generation-preferences.json",
+                            PROJECT / "notebook_views.py",
                             ROOT
                             / "examples/foundations/src/atlas_foundations/e8/contracts.py",
                         ]

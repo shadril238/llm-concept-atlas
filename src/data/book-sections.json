@@ -11536,18 +11536,12 @@
         {
           "conceptId": "pretraining-and-sft",
           "path": "src/content/docs/concepts/pretraining-and-sft.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
-        },
-        {
-          "conceptId": "rlhf",
-          "path": "src/content/docs/concepts/rlhf.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "theory-how-it-works",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P0",
@@ -11578,19 +11572,14 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Compare the data, objective, and expected behavior of the three stages.",
-        "The same scalar update does not distinguish causal pretraining from instruction-conditioned SFT."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/pretraining-and-sft.mdx",
-          "anchor": "implement-it",
-          "finding": "The same scalar update does not distinguish causal pretraining from instruction-conditioned SFT."
-        },
-        {
-          "path": "src/content/docs/concepts/rlhf.mdx",
-          "anchor": "implement-it",
-          "finding": "A DPO scalar loss does not show the reward-model and policy-optimization stages described in the lesson."
+          "anchor": "theory-how-it-works",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -11622,12 +11611,12 @@
         {
           "conceptId": "pretraining-and-sft",
           "path": "src/content/docs/concepts/pretraining-and-sft.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "theory-how-it-works",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -11662,14 +11651,14 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Explain instruction-conditioned language modeling and which positions contribute to loss.",
-        "The same scalar update does not distinguish causal pretraining from instruction-conditioned SFT."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/pretraining-and-sft.mdx",
-          "anchor": "implement-it",
-          "finding": "The same scalar update does not distinguish causal pretraining from instruction-conditioned SFT."
+          "anchor": "theory-how-it-works",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -11697,11 +11686,16 @@
       "scope": "core",
       "kind": "concept",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": [
-        "full-fine-tuning"
+      "mappings": [
+        {
+          "conceptId": "pretraining-and-sft",
+          "path": "src/content/docs/concepts/pretraining-and-sft.mdx",
+          "anchor": "full-fine-tuning",
+          "role": "author-implemented-explanation"
+        }
       ],
-      "mappingStatus": "unmapped",
+      "plannedDestinations": [],
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -11724,18 +11718,24 @@
         "evaluation": "A numerical or reasoning self-check suffices for this mechanism; full task evaluation belongs to its workflow."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Show which model weights change and compare resource and evaluation implications.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/pretraining-and-sft.mdx",
+          "anchor": "full-fine-tuning",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
@@ -11765,24 +11765,12 @@
         {
           "conceptId": "peft",
           "path": "src/content/docs/concepts/peft.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
-        },
-        {
-          "conceptId": "lora",
-          "path": "src/content/docs/concepts/lora.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
-        },
-        {
-          "conceptId": "qlora",
-          "path": "src/content/docs/concepts/qlora.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "theory-how-it-works",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -11817,23 +11805,14 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/peft.mdx",
-          "anchor": "implement-it",
-          "finding": "A matrix update illustrates LoRA only; distinguish adapter families and actual frozen/trainable parameter groups."
-        },
-        {
-          "path": "src/content/docs/concepts/lora.mdx",
-          "anchor": "implement-it",
-          "finding": "E2 resolves the A/B orientation mismatch and adds standard scaling, parameter counts, initialization/gradient trace, controlled training, a real pretrained adapter, held-out losses, reload, and precision-aware merge checks. Broader E8 workflows and independent review remain pending."
-        },
-        {
-          "path": "src/content/docs/concepts/qlora.mdx",
-          "anchor": "implement-it",
-          "finding": "The reused low-rank update never quantizes base weights or demonstrates their precision/memory behavior."
+          "anchor": "theory-how-it-works",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -11866,12 +11845,12 @@
         {
           "conceptId": "qlora",
           "path": "src/content/docs/concepts/qlora.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "theory-how-it-works",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -11906,14 +11885,14 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Execute data preparation, quantization, adapters, training, saving, and inference as one supported workflow.",
-        "The reused low-rank update never quantizes base weights or demonstrates their precision/memory behavior."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/qlora.mdx",
-          "anchor": "implement-it",
-          "finding": "The reused low-rank update never quantizes base weights or demonstrates their precision/memory behavior."
+          "anchor": "theory-how-it-works",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -11941,83 +11920,16 @@
       "scope": "core",
       "kind": "workflow",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": [
-        "instruction-data-templating"
-      ],
-      "mappingStatus": "unmapped",
-      "reviewStatus": "changes-required",
-      "auditStatus": "assessed",
-      "priority": "P1",
-      "nextPhase": "E8",
-      "plannedLabs": [
-        "L21",
-        "L22",
-        "L23"
-      ],
-      "requirements": {
-        "explanation": true,
-        "workedExample": true,
-        "visual": true,
-        "implementation": true,
-        "evaluation": true,
-        "exercises": true
-      },
-      "notApplicableReasons": {},
-      "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
-        "implementation": "missing",
-        "evaluation": "missing",
-        "exercises": "missing"
-      },
-      "gaps": [
-        "Render chat records with correct roles, boundary tokens, labels, and training masks.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
-      ],
-      "evidence": [],
-      "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
-      "sourceLocationCheck": {
-        "method": "normalized-heading-match-in-source-page",
-        "pdfPage": 389
-      }
-    },
-    {
-      "id": "book-ch12-sft-quantization",
-      "chapter": 12,
-      "parentId": "book-ch12-instruction-qlora",
-      "title": "Model Quantization",
-      "origin": "contents",
-      "printedPages": [
-        369,
-        370
-      ],
-      "pdfPages": [
-        391,
-        392
-      ],
-      "objective": "Inspect quantized loading and separate storage precision from compute and adapter precision.",
-      "scope": "core",
-      "kind": "workflow",
-      "coverageUnit": true,
       "mappings": [
         {
-          "conceptId": "quantization",
-          "path": "src/content/docs/concepts/quantization.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
-        },
-        {
-          "conceptId": "qlora",
-          "path": "src/content/docs/concepts/qlora.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "conceptId": "pretraining-and-sft",
+          "path": "src/content/docs/concepts/pretraining-and-sft.mdx",
+          "anchor": "instruction-data-templating",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -12040,32 +11952,107 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Inspect quantized loading and separate storage precision from compute and adapter precision.",
-        "A scalar round/dequantize example is relevant but omits blockwise scaling, codebooks, clipping, and actual model validation."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
-          "path": "src/content/docs/concepts/quantization.mdx",
-          "anchor": "implement-it",
-          "finding": "A scalar round/dequantize example is relevant but omits blockwise scaling, codebooks, clipping, and actual model validation."
-        },
-        {
-          "path": "src/content/docs/concepts/qlora.mdx",
-          "anchor": "implement-it",
-          "finding": "The reused low-rank update never quantizes base weights or demonstrates their precision/memory behavior."
+          "path": "src/content/docs/concepts/pretraining-and-sft.mdx",
+          "anchor": "instruction-data-templating",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
+      "sourceLocationCheck": {
+        "method": "normalized-heading-match-in-source-page",
+        "pdfPage": 389
+      },
+      "executionRecord": "examples/verification/records/instruction-adaptation.json"
+    },
+    {
+      "id": "book-ch12-sft-quantization",
+      "chapter": 12,
+      "parentId": "book-ch12-instruction-qlora",
+      "title": "Model Quantization",
+      "origin": "contents",
+      "printedPages": [
+        369,
+        370
+      ],
+      "pdfPages": [
+        391,
+        392
+      ],
+      "objective": "Inspect quantized loading and separate storage precision from compute and adapter precision.",
+      "scope": "core",
+      "kind": "workflow",
+      "coverageUnit": true,
+      "mappings": [
+        {
+          "conceptId": "qlora",
+          "path": "src/content/docs/concepts/qlora.mdx",
+          "anchor": "theory-how-it-works",
+          "role": "author-implemented-explanation"
+        },
+        {
+          "conceptId": "quantization",
+          "path": "src/content/docs/concepts/quantization.mdx",
+          "anchor": "theory-how-it-works",
+          "role": "author-implemented-quantization-explanation"
+        }
+      ],
+      "plannedDestinations": [],
+      "mappingStatus": "mapped",
+      "reviewStatus": "changes-required",
+      "auditStatus": "assessed",
+      "priority": "P1",
+      "nextPhase": "E8",
+      "plannedLabs": [
+        "L21",
+        "L22",
+        "L23"
+      ],
+      "requirements": {
+        "explanation": true,
+        "workedExample": true,
+        "visual": true,
+        "implementation": true,
+        "evaluation": true,
+        "exercises": true
+      },
+      "notApplicableReasons": {},
+      "coverage": {
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
+        "implementation": "partial",
+        "evaluation": "partial",
+        "exercises": "partial"
+      },
+      "gaps": [
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
+      ],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/qlora.mdx",
+          "anchor": "theory-how-it-works",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
+        }
+      ],
+      "reviewRecord": "e0-static-audit-2026-11-19",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 391
-      }
+      },
+      "executionRecord": "examples/verification/records/instruction-adaptation.json"
     },
     {
       "id": "book-ch12-lora-config",
@@ -12089,12 +12076,12 @@
         {
           "conceptId": "lora",
           "path": "src/content/docs/concepts/lora.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "theory-how-it-works",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -12122,22 +12109,24 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/lora.mdx",
-          "anchor": "implement-it",
-          "finding": "E2 resolves the A/B orientation mismatch and adds standard scaling, parameter counts, initialization/gradient trace, controlled training, a real pretrained adapter, held-out losses, reload, and precision-aware merge checks. Broader E8 workflows and independent review remain pending."
+          "anchor": "theory-how-it-works",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "verified-reference-slice",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 392
       },
-      "enhancementReview": "e2-reference-author-review-2026-11-20"
+      "enhancementReview": "e2-reference-author-review-2026-11-20",
+      "executionRecord": "examples/verification/records/instruction-adaptation.json"
     },
     {
       "id": "book-ch12-sft-config",
@@ -12157,11 +12146,16 @@
       "scope": "core",
       "kind": "workflow",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": [
-        "generation-training-configuration"
+      "mappings": [
+        {
+          "conceptId": "generative-evaluation",
+          "path": "src/content/docs/concepts/generative-evaluation.mdx",
+          "anchor": "training-configuration",
+          "role": "author-implemented-explanation"
+        }
       ],
-      "mappingStatus": "unmapped",
+      "plannedDestinations": [],
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -12181,24 +12175,31 @@
       },
       "notApplicableReasons": {},
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
-        "implementation": "missing",
-        "evaluation": "missing",
-        "exercises": "missing"
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
+        "implementation": "partial",
+        "evaluation": "partial",
+        "exercises": "partial"
       },
       "gaps": [
-        "Explain batch/accumulation, scheduling, precision, checkpointing, and validation settings.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/generative-evaluation.mdx",
+          "anchor": "training-configuration",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 393
-      }
+      },
+      "executionRecord": "examples/verification/records/instruction-adaptation.json"
     },
     {
       "id": "book-ch12-sft-training",
@@ -12218,11 +12219,16 @@
       "scope": "core",
       "kind": "workflow",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": [
-        "instruction-training-workflow"
+      "mappings": [
+        {
+          "conceptId": "generative-evaluation",
+          "path": "src/content/docs/concepts/generative-evaluation.mdx",
+          "anchor": "instruction-training-workflow",
+          "role": "author-implemented-explanation"
+        }
       ],
-      "mappingStatus": "unmapped",
+      "plannedDestinations": [],
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -12242,24 +12248,31 @@
       },
       "notApplicableReasons": {},
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
-        "implementation": "missing",
-        "evaluation": "missing",
-        "exercises": "missing"
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
+        "implementation": "partial",
+        "evaluation": "partial",
+        "exercises": "partial"
       },
       "gaps": [
-        "Run SFT, inspect progress, save the adapter, and evaluate held-out behavior.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/generative-evaluation.mdx",
+          "anchor": "instruction-training-workflow",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 394
-      }
+      },
+      "executionRecord": "examples/verification/records/instruction-adaptation.json"
     },
     {
       "id": "book-ch12-merge",
@@ -12279,11 +12292,16 @@
       "scope": "core",
       "kind": "workflow",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": [
-        "adapter-merging"
+      "mappings": [
+        {
+          "conceptId": "lora",
+          "path": "src/content/docs/concepts/lora.mdx",
+          "anchor": "adapter-merging",
+          "role": "author-implemented-explanation"
+        }
       ],
-      "mappingStatus": "unmapped",
+      "plannedDestinations": [],
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -12303,24 +12321,31 @@
       },
       "notApplicableReasons": {},
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
-        "implementation": "missing",
-        "evaluation": "missing",
-        "exercises": "missing"
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
+        "implementation": "partial",
+        "evaluation": "partial",
+        "exercises": "partial"
       },
       "gaps": [
-        "Merge supported adapters into the correct base and verify reload and output equivalence.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/lora.mdx",
+          "anchor": "adapter-merging",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 395
-      }
+      },
+      "executionRecord": "examples/verification/records/instruction-adaptation.json"
     },
     {
       "id": "book-ch12-evaluation",
@@ -12344,12 +12369,12 @@
         {
           "conceptId": "generative-evaluation",
           "path": "src/content/docs/concepts/generative-evaluation.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "theory-how-it-works",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -12384,14 +12409,14 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Select complementary metrics and explain disagreements and blind spots.",
-        "Exact-label accuracy does not demonstrate generation metrics, benchmarks, or rubric-based evaluation."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/generative-evaluation.mdx",
-          "anchor": "implement-it",
-          "finding": "Exact-label accuracy does not demonstrate generation metrics, benchmarks, or rubric-based evaluation."
+          "anchor": "theory-how-it-works",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -12423,12 +12448,12 @@
         {
           "conceptId": "generative-evaluation",
           "path": "src/content/docs/concepts/generative-evaluation.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "theory-how-it-works",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -12463,14 +12488,14 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Distinguish perplexity, lexical overlap, and embedding-based metrics with worked counterexamples.",
-        "Exact-label accuracy does not demonstrate generation metrics, benchmarks, or rubric-based evaluation."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/generative-evaluation.mdx",
-          "anchor": "implement-it",
-          "finding": "Exact-label accuracy does not demonstrate generation metrics, benchmarks, or rubric-based evaluation."
+          "anchor": "theory-how-it-works",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -12498,11 +12523,16 @@
       "scope": "context",
       "kind": "context",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": [
-        "generation-benchmarks"
+      "mappings": [
+        {
+          "conceptId": "generative-evaluation",
+          "path": "src/content/docs/concepts/generative-evaluation.mdx",
+          "anchor": "generation-benchmarks",
+          "role": "author-implemented-explanation"
+        }
       ],
-      "mappingStatus": "unmapped",
+      "plannedDestinations": [],
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -12525,18 +12555,24 @@
         "evaluation": "Contextual decision/discussion objective; a model execution or benchmark is not required."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Explain benchmark task coverage, contamination, and what a score does not measure.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/generative-evaluation.mdx",
+          "anchor": "generation-benchmarks",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
@@ -12562,11 +12598,16 @@
       "scope": "context",
       "kind": "context",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": [
-        "generation-benchmarks"
+      "mappings": [
+        {
+          "conceptId": "generative-evaluation",
+          "path": "src/content/docs/concepts/generative-evaluation.mdx",
+          "anchor": "generation-benchmarks",
+          "role": "author-implemented-explanation"
+        }
       ],
-      "mappingStatus": "unmapped",
+      "plannedDestinations": [],
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -12589,18 +12630,24 @@
         "evaluation": "Contextual decision/discussion objective; a model execution or benchmark is not required."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Interpret dated leaderboard results, evaluation settings, and comparison limits.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/generative-evaluation.mdx",
+          "anchor": "generation-benchmarks",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified",
       "sourceLocationCheck": {
@@ -12630,12 +12677,12 @@
         {
           "conceptId": "generative-evaluation",
           "path": "src/content/docs/concepts/generative-evaluation.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "theory-how-it-works",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -12666,14 +12713,14 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Use a defined automated grading rubric with calibration and bias checks.",
-        "Exact-label accuracy does not demonstrate generation metrics, benchmarks, or rubric-based evaluation."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/generative-evaluation.mdx",
-          "anchor": "implement-it",
-          "finding": "Exact-label accuracy does not demonstrate generation metrics, benchmarks, or rubric-based evaluation."
+          "anchor": "theory-how-it-works",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -12705,12 +12752,12 @@
         {
           "conceptId": "generative-evaluation",
           "path": "src/content/docs/concepts/generative-evaluation.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "theory-how-it-works",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -12741,14 +12788,14 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Apply a blinded rubric, record disagreements, and distinguish preference from factual correctness.",
-        "Exact-label accuracy does not demonstrate generation metrics, benchmarks, or rubric-based evaluation."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/generative-evaluation.mdx",
-          "anchor": "implement-it",
-          "finding": "Exact-label accuracy does not demonstrate generation metrics, benchmarks, or rubric-based evaluation."
+          "anchor": "theory-how-it-works",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -12780,12 +12827,12 @@
         {
           "conceptId": "rlhf",
           "path": "src/content/docs/concepts/rlhf.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "theory-how-it-works",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P0",
@@ -12820,14 +12867,14 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Explain preference labels, policy optimization, and reference constraints.",
-        "A DPO scalar loss does not show the reward-model and policy-optimization stages described in the lesson."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/rlhf.mdx",
-          "anchor": "implement-it",
-          "finding": "A DPO scalar loss does not show the reward-model and policy-optimization stages described in the lesson."
+          "anchor": "theory-how-it-works",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -12859,12 +12906,12 @@
         {
           "conceptId": "reward-models",
           "path": "src/content/docs/concepts/reward-models.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "theory-how-it-works",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P0",
@@ -12899,14 +12946,14 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Explain replacing the language-model head with a scalar scoring head.",
-        "The code uses policy/reference log probabilities and beta: it is a DPO loss, not reward-model training."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/reward-models.mdx",
-          "anchor": "implement-it",
-          "finding": "The code uses policy/reference log probabilities and beta: it is a DPO loss, not reward-model training."
+          "anchor": "theory-how-it-works",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -12938,12 +12985,12 @@
         {
           "conceptId": "reward-models",
           "path": "src/content/docs/concepts/reward-models.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "inputs-and-scalar-outputs",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P0",
@@ -12974,14 +13021,14 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Score prompt-response pairs and distinguish reward scores from policy log probabilities.",
-        "The code uses policy/reference log probabilities and beta: it is a DPO loss, not reward-model training."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/reward-models.mdx",
-          "anchor": "implement-it",
-          "finding": "The code uses policy/reference log probabilities and beta: it is a DPO loss, not reward-model training."
+          "anchor": "inputs-and-scalar-outputs",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -13013,12 +13060,12 @@
         {
           "conceptId": "reward-models",
           "path": "src/content/docs/concepts/reward-models.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "preference-pair-construction",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P0",
@@ -13053,14 +13100,14 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Construct preference pairs and optimize a reward-ranking objective, not a DPO policy loss.",
-        "The code uses policy/reference log probabilities and beta: it is a DPO loss, not reward-model training."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/reward-models.mdx",
-          "anchor": "implement-it",
-          "finding": "The code uses policy/reference log probabilities and beta: it is a DPO loss, not reward-model training."
+          "anchor": "preference-pair-construction",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -13092,12 +13139,12 @@
         {
           "conceptId": "dpo",
           "path": "src/content/docs/concepts/dpo.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "theory-how-it-works",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -13132,14 +13179,14 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Explain direct preference optimization and the role of a frozen reference without a separately trained reward model.",
-        "The scalar reference-relative loss is relevant; add completion logprob aggregation, masks, data, and actual training."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/dpo.mdx",
-          "anchor": "implement-it",
-          "finding": "The scalar reference-relative loss is relevant; add completion logprob aggregation, masks, data, and actual training."
+          "anchor": "theory-how-it-works",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -13171,12 +13218,12 @@
         {
           "conceptId": "dpo",
           "path": "src/content/docs/concepts/dpo.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "theory-how-it-works",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -13211,14 +13258,14 @@
         "exercises": "not-applicable"
       },
       "gaps": [
-        "Train and evaluate a real policy with preference data and reference-relative log probabilities.",
-        "The scalar reference-relative loss is relevant; add completion logprob aggregation, masks, data, and actual training."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/dpo.mdx",
-          "anchor": "implement-it",
-          "finding": "The scalar reference-relative loss is relevant; add completion logprob aggregation, masks, data, and actual training."
+          "anchor": "theory-how-it-works",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -13246,11 +13293,16 @@
       "scope": "core",
       "kind": "workflow",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": [
-        "preference-data-templating"
+      "mappings": [
+        {
+          "conceptId": "dpo",
+          "path": "src/content/docs/concepts/dpo.mdx",
+          "anchor": "preference-data-templating",
+          "role": "author-implemented-explanation"
+        }
       ],
-      "mappingStatus": "unmapped",
+      "plannedDestinations": [],
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -13270,24 +13322,31 @@
       },
       "notApplicableReasons": {},
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
-        "implementation": "missing",
-        "evaluation": "missing",
-        "exercises": "missing"
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
+        "implementation": "partial",
+        "evaluation": "partial",
+        "exercises": "partial"
       },
       "gaps": [
-        "Separate prompt, chosen, and rejected sequences and validate boundaries, masks, and truncation.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/dpo.mdx",
+          "anchor": "preference-data-templating",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 408
-      }
+      },
+      "executionRecord": "examples/verification/records/preference-adaptation.json"
     },
     {
       "id": "book-ch12-dpo-quantization",
@@ -13311,18 +13370,12 @@
         {
           "conceptId": "qlora",
           "path": "src/content/docs/concepts/qlora.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
-        },
-        {
-          "conceptId": "dpo",
-          "path": "src/content/docs/concepts/dpo.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "theory-how-it-works",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -13345,32 +13398,28 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Load the intended SFT starting point with supported quantization and adapter semantics.",
-        "The reused low-rank update never quantizes base weights or demonstrates their precision/memory behavior."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/qlora.mdx",
-          "anchor": "implement-it",
-          "finding": "The reused low-rank update never quantizes base weights or demonstrates their precision/memory behavior."
-        },
-        {
-          "path": "src/content/docs/concepts/dpo.mdx",
-          "anchor": "implement-it",
-          "finding": "The scalar reference-relative loss is relevant; add completion logprob aggregation, masks, data, and actual training."
+          "anchor": "theory-how-it-works",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 408
-      }
+      },
+      "executionRecord": "examples/verification/records/preference-adaptation.json"
     },
     {
       "id": "book-ch12-dpo-config",
@@ -13394,12 +13443,12 @@
         {
           "conceptId": "dpo",
           "path": "src/content/docs/concepts/dpo.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "theory-how-it-works",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -13422,27 +13471,28 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Explain beta, reference behavior, batching, prompt lengths, and trainer configuration.",
-        "The scalar reference-relative loss is relevant; add completion logprob aggregation, masks, data, and actual training."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/dpo.mdx",
-          "anchor": "implement-it",
-          "finding": "The scalar reference-relative loss is relevant; add completion logprob aggregation, masks, data, and actual training."
+          "anchor": "theory-how-it-works",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 409
-      }
+      },
+      "executionRecord": "examples/verification/records/preference-adaptation.json"
     },
     {
       "id": "book-ch12-dpo-training",
@@ -13466,12 +13516,12 @@
         {
           "conceptId": "dpo",
           "path": "src/content/docs/concepts/dpo.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "theory-how-it-works",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -13494,27 +13544,28 @@
         "explanation": "partial",
         "workedExample": "partial",
         "visual": "partial",
-        "implementation": "missing",
-        "evaluation": "missing",
+        "implementation": "partial",
+        "evaluation": "partial",
         "exercises": "partial"
       },
       "gaps": [
-        "Run preference training, save/reload correctly, and compare base/SFT/DPO behavior.",
-        "The scalar reference-relative loss is relevant; add completion logprob aggregation, masks, data, and actual training."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/dpo.mdx",
-          "anchor": "implement-it",
-          "finding": "The scalar reference-relative loss is relevant; add completion logprob aggregation, masks, data, and actual training."
+          "anchor": "theory-how-it-works",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 410
-      }
+      },
+      "executionRecord": "examples/verification/records/preference-adaptation.json"
     },
     {
       "id": "book-ch01-recurrent-context",
@@ -17485,12 +17536,12 @@
         {
           "conceptId": "peft",
           "path": "src/content/docs/concepts/peft.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "adapter-modules-and-task-switching",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -17521,14 +17572,14 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Trace added trainable modules and distinguish adapter methods from low-rank updates.",
-        "A matrix update illustrates LoRA only; distinguish adapter families and actual frozen/trainable parameter groups."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/peft.mdx",
-          "anchor": "implement-it",
-          "finding": "A matrix update illustrates LoRA only; distinguish adapter families and actual frozen/trainable parameter groups."
+          "anchor": "adapter-modules-and-task-switching",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -17556,12 +17607,12 @@
         {
           "conceptId": "lora",
           "path": "src/content/docs/concepts/lora.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "low-rank-and-initialization",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -17592,13 +17643,14 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Reference implementation and author technical checks delivered in E2; independent editorial/beginner review remains pending. Broader chapter requirements are tracked in later phases."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/lora.mdx",
-          "anchor": "implement-it",
-          "finding": "E2 resolves the A/B orientation mismatch and adds standard scaling, parameter counts, initialization/gradient trace, controlled training, a real pretrained adapter, held-out losses, reload, and precision-aware merge checks. Broader E8 workflows and independent review remain pending."
+          "anchor": "low-rank-and-initialization",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -17625,20 +17677,20 @@
       "coverageUnit": true,
       "mappings": [
         {
-          "conceptId": "quantization",
-          "path": "src/content/docs/concepts/quantization.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
-        },
-        {
           "conceptId": "qlora",
           "path": "src/content/docs/concepts/qlora.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "nf4-and-blockwise-quantization",
+          "role": "author-implemented-explanation"
+        },
+        {
+          "conceptId": "quantization",
+          "path": "src/content/docs/concepts/quantization.mdx",
+          "anchor": "theory-how-it-works",
+          "role": "author-implemented-quantization-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -17669,19 +17721,14 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Calculate approximation/scaling and explain distribution-aware codebooks and storage precision.",
-        "A scalar round/dequantize example is relevant but omits blockwise scaling, codebooks, clipping, and actual model validation."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
-          "path": "src/content/docs/concepts/quantization.mdx",
-          "anchor": "implement-it",
-          "finding": "A scalar round/dequantize example is relevant but omits blockwise scaling, codebooks, clipping, and actual model validation."
-        },
-        {
           "path": "src/content/docs/concepts/qlora.mdx",
-          "anchor": "implement-it",
-          "finding": "The reused low-rank update never quantizes base weights or demonstrates their precision/memory behavior."
+          "anchor": "nf4-and-blockwise-quantization",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -17705,11 +17752,16 @@
       "scope": "context",
       "kind": "context",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": [
-        "qlora-memory"
+      "mappings": [
+        {
+          "conceptId": "qlora",
+          "path": "src/content/docs/concepts/qlora.mdx",
+          "anchor": "qlora-memory",
+          "role": "author-implemented-explanation"
+        }
       ],
-      "mappingStatus": "unmapped",
+      "plannedDestinations": [],
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -17732,18 +17784,24 @@
         "evaluation": "Contextual decision/discussion objective; a model execution or benchmark is not required."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Explain these brief book pointers and separate them from adapter parameter savings.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/qlora.mdx",
+          "anchor": "qlora-memory",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified"
     },
@@ -17765,11 +17823,16 @@
       "scope": "core",
       "kind": "concept",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": [
-        "generation-evaluation-metrics"
+      "mappings": [
+        {
+          "conceptId": "generative-evaluation",
+          "path": "src/content/docs/concepts/generative-evaluation.mdx",
+          "anchor": "generation-evaluation-metrics",
+          "role": "author-implemented-explanation"
+        }
       ],
-      "mappingStatus": "unmapped",
+      "plannedDestinations": [],
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -17792,18 +17855,24 @@
         "evaluation": "A numerical or reasoning self-check suffices for this mechanism; full task evaluation belongs to its workflow."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Relate average token log likelihood to perplexity and explain tokenization dependence.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/generative-evaluation.mdx",
+          "anchor": "generation-evaluation-metrics",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified"
     },
@@ -17825,11 +17894,16 @@
       "scope": "core",
       "kind": "concept",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": [
-        "generation-evaluation-metrics"
+      "mappings": [
+        {
+          "conceptId": "generative-evaluation",
+          "path": "src/content/docs/concepts/generative-evaluation.mdx",
+          "anchor": "generation-evaluation-metrics",
+          "role": "author-implemented-explanation"
+        }
       ],
-      "mappingStatus": "unmapped",
+      "plannedDestinations": [],
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -17852,18 +17926,24 @@
         "evaluation": "A numerical or reasoning self-check suffices for this mechanism; full task evaluation belongs to its workflow."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Distinguish lexical overlap from embedding-based similarity using a paraphrase counterexample.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/generative-evaluation.mdx",
+          "anchor": "generation-evaluation-metrics",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified"
     },
@@ -17889,12 +17969,12 @@
         {
           "conceptId": "reward-models",
           "path": "src/content/docs/concepts/reward-models.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "preference-pair-construction",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P0",
@@ -17925,14 +18005,14 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Distinguish relative preference from absolute correctness and retain prompt/response boundaries.",
-        "The code uses policy/reference log probabilities and beta: it is a DPO loss, not reward-model training."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/reward-models.mdx",
-          "anchor": "implement-it",
-          "finding": "The code uses policy/reference log probabilities and beta: it is a DPO loss, not reward-model training."
+          "anchor": "preference-pair-construction",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -17960,12 +18040,12 @@
         {
           "conceptId": "reward-models",
           "path": "src/content/docs/concepts/reward-models.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "theory-how-it-works",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P0",
@@ -17996,14 +18076,14 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Compute chosen/rejected scalar rewards and the reward-model learning signal.",
-        "The code uses policy/reference log probabilities and beta: it is a DPO loss, not reward-model training."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/reward-models.mdx",
-          "anchor": "implement-it",
-          "finding": "The code uses policy/reference log probabilities and beta: it is a DPO loss, not reward-model training."
+          "anchor": "theory-how-it-works",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
@@ -18027,11 +18107,16 @@
       "scope": "context",
       "kind": "context",
       "coverageUnit": true,
-      "mappings": [],
-      "plannedDestinations": [
-        "ppo-for-rlhf"
+      "mappings": [
+        {
+          "conceptId": "rlhf",
+          "path": "src/content/docs/concepts/rlhf.mdx",
+          "anchor": "ppo-for-rlhf",
+          "role": "author-implemented-explanation"
+        }
       ],
-      "mappingStatus": "unmapped",
+      "plannedDestinations": [],
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P1",
@@ -18054,18 +18139,24 @@
         "evaluation": "Contextual decision/discussion objective; a model execution or benchmark is not required."
       },
       "coverage": {
-        "explanation": "missing",
-        "workedExample": "missing",
-        "visual": "missing",
+        "explanation": "partial",
+        "workedExample": "partial",
+        "visual": "partial",
         "implementation": "not-applicable",
         "evaluation": "not-applicable",
-        "exercises": "missing"
+        "exercises": "partial"
       },
       "gaps": [
-        "Explain policy, reward, reference, and optimization roles at the depth of the book's conceptual discussion.",
-        "No dedicated explanation or executable workflow for this source objective was found in the atlas."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "path": "src/content/docs/concepts/rlhf.mdx",
+          "anchor": "ppo-for-rlhf",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
+        }
+      ],
       "reviewRecord": "e0-static-audit-2026-11-19",
       "realModelExecution": "not-verified"
     },
@@ -18091,12 +18182,12 @@
         {
           "conceptId": "dpo",
           "path": "src/content/docs/concepts/dpo.mdx",
-          "anchor": "the-important-distinction",
-          "role": "partial-explanation"
+          "anchor": "completion-log-probabilities",
+          "role": "author-implemented-explanation"
         }
       ],
       "plannedDestinations": [],
-      "mappingStatus": "partial",
+      "mappingStatus": "mapped",
       "reviewStatus": "changes-required",
       "auditStatus": "assessed",
       "priority": "P2",
@@ -18127,14 +18218,14 @@
         "exercises": "partial"
       },
       "gaps": [
-        "Trace completion log probabilities under policy and reference with the prompt masked consistently.",
-        "The scalar reference-relative loss is relevant; add completion logprob aggregation, masks, data, and actual training."
+        "Independent technical/editorial review and beginner feedback remain pending.",
+        "GPU/book-scale QLoRA and paged optimizer profile remain unverified; full E8 acceptance gate stays open."
       ],
       "evidence": [
         {
           "path": "src/content/docs/concepts/dpo.mdx",
-          "anchor": "implement-it",
-          "finding": "The scalar reference-relative loss is relevant; add completion logprob aggregation, masks, data, and actual training."
+          "anchor": "completion-log-probabilities",
+          "finding": "E8 original detailed explanation, worked example, interactive mechanism and connected actual CPU training/evaluation; see author review for scope."
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",

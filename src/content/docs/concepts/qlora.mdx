@@ -1,98 +1,124 @@
 ---
-title: QLoRA
-description: QLoRA combines a low-bit frozen base model with LoRA adapters so fine-tuning uses less memory.
-kind: concept
+title: "QLoRA and quantized adapter training"
+description: "QLoRA trains high-precision low-rank adapters through a frozen quantized base model. The original method combines four-bit NormalFloat (NF4), double quantization and paged optimizers to reduce memory. A four-bit inference file without adapter optimization is not a QLoRA training run."
+kind: "concept"
 conceptId: qlora
 chapter: 12
-part: training
-summary: QLoRA combines a low-bit frozen base model with LoRA adapters so fine-tuning uses less memory.
-parent: peft
-prerequisites: [lora]
-related: [lora, quantization]
-level: advanced
-tags: [training, chapter-12]
+part: "training"
+summary: "QLoRA trains high-precision low-rank adapters through a frozen quantized base model. The original method combines four-bit NormalFloat (NF4), double quantization and paged optimizers to reduce memory. A four-bit inference file without adapter optimization is not a QLoRA training run."
+parent: "chapter-12"
+prerequisites: ["lora", "quantization"]
+related: ["peft", "generative-evaluation"]
+level: "advanced"
+tags: ["training", "chapter-12"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-24"
+reviewRecord: e8-generation-author-review-2026-11-24
+aliases: ["NF4", "double quantization", "paged optimizer"]
+learningObjectives: ["Distinguish NF4 codes, block scales, compute precision and floating adapters.", "Explain double quantization and paged optimizers as separate mechanisms.", "Separate Linux CPU evidence from unverified CUDA and book-scale claims."]
+bookSections: ["book-ch12-instruction-qlora", "book-ch12-sft-quantization", "book-ch12-dpo-quantization", "book-ch12-blockwise-quantization", "book-ch12-double-quantization"]
+exampleIds: ["e8-qlora", "instruction-adaptation", "preference-adaptation", "generation-evaluation"]
+relationshipReasons: {"peft": "Floating adapters remain the trainable subset in quantized-base PEFT.", "generative-evaluation": "Quantization and dequantized merging must preserve task behavior within evaluated limits."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { AdapterLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import { RankMemory } from '../../../components/simulations/GenerationLabs';
 
 <ConceptPrimer id="qlora" />
 
+<ReferenceBrief objectives={["Distinguish NF4 codes, block scales, compute precision and floating adapters.", "Explain double quantization and paged optimizers as separate mechanisms.", "Separate Linux CPU evidence from unverified CUDA and book-scale claims."]} prerequisites="lora, quantization" scope="Original explanations and calculations plus actual small CPU training. Independent review and GPU QLoRA certification remain pending." />
+
 ## Definition and intuition
 
-QLoRA combines a low-bit frozen base model with LoRA adapters so fine-tuning uses less memory.
-
-Chapter 12 distinguishes pretraining, instruction tuning, and preference optimization. Efficient adapters change a subset of parameters; evaluation still decides whether behavior improved.
+QLoRA trains high-precision low-rank adapters through a frozen quantized base model. The original method combines four-bit NormalFloat (NF4), double quantization and paged optimizers to reduce memory. A four-bit inference file without adapter optimization is not a QLoRA training run.
 
 ## Before you start
 
-Read [LoRA](/llm-concept-atlas/concepts/lora/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **QLoRA** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+Read [lora](/llm-concept-atlas/concepts/lora/), [quantization](/llm-concept-atlas/concepts/quantization/). Open the [generation training path](/llm-concept-atlas/paths/from-instructions-to-preferences/) if these prerequisites are unfamiliar. Distinguish a token distribution, a trainable parameter, and a task score before tracing this mechanism.
 
 ## Theory: how it works
 
-1. **Prepare:** Quantize the base weights with a supported low-bit format
-2. **Transform:** Attach and train LoRA adapters while keeping the base frozen
-3. **Inspect:** Evaluate quality, memory, and inference compatibility.
+### NF4 and blockwise quantization
+
+Four bits index sixteen representable values. NF4 uses a nonuniform codebook motivated by normally distributed weights, with more resolution near common values. Blocks have their own scaling metadata so one outlier does not force one global range across the whole model. During multiplication, kernels reconstruct an approximation at the chosen compute precision; integer storage and arithmetic dtype are different contracts.
+
+Not every tensor becomes four-bit. Embeddings, normalization, output heads, quantization constants, padding/alignment and temporary workspaces add memory. Trainable adapters need their own weights, gradients and optimizer state. Base weights remain frozen: gradients flow through the effective quantized linear operation into adapter parameters, rather than performing ordinary full-gradient updates to four-bit codes.
+
+### QLoRA memory
+
+Double quantization compresses some block-scale metadata with another quantizer; it is not “quantize the same weights twice until they are two-bit.” Paged optimizers use managed memory to handle some memory spikes. They are not activation checkpointing, and they do not make unlimited context lengths fit. Exact backend support, precision, batch size and sequence length need real verification.
+
+The optional E8 entrypoint uses bitsandbytes 0.48.2 on supported Linux CPU, NF4 with nested quantization, float32 compute and float32 adapters. It inspects actual Linear4bit quantization state, verifies frozen bytes and nonzero updates, selects among trained checkpoints using validation completion loss, and saves/reloads the adapter. It uses ordinary torch AdamW, so it does not certify paged CUDA optimization or the book's TinyLlama/UltraChat scale. macOS/MPS is explicitly rejected by that entrypoint. A supported GPU run remains an open E8 completion requirement.
+
+### Merging a quantized adaptation
+
+An adapter trained against an NF4 approximation has learned around that effective base. Dequantizing reconstructs those approximations in floating point; it does not restore the original checkpoint values. The optional profile dequantizes a fresh quantized base before attaching the trained adapter and merging, then compares logits and reloads the saved floating model. Attaching the same adapter to the original unquantized base is a different function. Requantizing a merged model adds another approximation and needs new evaluation.
 
 ### The important distinction
 
-QLoRA commonly keeps a quantized base frozen while gradients flow into higher-precision LoRA adapters. Low-bit storage reduces base-weight memory, but activations and optimizer state still consume resources. Compatibility of quantization kernels, adapter merge, and deployment format must be tested on the target hardware.
+Read the mechanism and the actual workflow together. A small calculation checks arithmetic; the connected training record checks optimization and artifacts; heldout task results check a separate quality claim.
 
 ## Worked example
 
-A base model that cannot fit for full fine-tuning may fit in 4-bit form while the small adapter remains trainable. The hardware and kernels must support the chosen setup. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+Suppose1,024 weights use four-bit codes: idealized payload is 512 bytes. If sixteen blocks each keep a float32 scale, scales add64 bytes before codebook/other overhead. Double quantization might compress these scales, but its own metadata must also be counted. The example below is storage arithmetic, not an NF4 implementation and not a measured device peak.
 
-<LessonFlow steps={["Quantize the base weights with a supported low-bit format", "Attach and train LoRA adapters while keeping the base frozen", "Evaluate quality, memory, and inference compatibility."]} caption="A teaching diagram for QLoRA. Read the three labeled stages from left to right; each stage is described in the text above." />
+The browser lets you vary base precision independently of rank and activation estimates. Ask which bar changes. Adapter precision does not automatically become four-bit when the base dropdown changes. Real allocation and kernels must be measured in the supported runtime.
 
 ## Try the interactive lab
 
-<AdapterLab client:visible />
+<RankMemory client:visible />
 
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+Predict a change before touching a control. The browser calculates explicit arithmetic or displays recorded model results; it performs no training or model requests. Reset restores the initial view, and tables preserve the exact numbers.
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+This standalone Python 3 calculation uses only the standard library. It does not download or train a model. The [complete generation labs](/llm-concept-atlas/labs/generation-adaptation/) provide the pinned environments, actual training entrypoints, staged notebooks, raw results and artifact checks.
+
+{/* example:e8-qlora:start */}
 
 ```python
-base = [[1.0, 0.0], [0.0, 1.0]]
-a = [[0.1], [0.2]]
-b = [[0.3, -0.1]]
-adapted = [[round(base[i][j] + a[i][0]*b[0][j], 3) for j in range(2)] for i in range(2)]
-print(adapted)
+weights, block_size = 1024, 64
+payload = weights * 4 // 8
+blocks = (weights + block_size - 1) // block_size
+scales = blocks * 4
+print("ideal four-bit weight bytes:", payload)
+print("uncompressed float32 block-scale bytes:", scales)
+print("subtotal:", payload + scales)
+print("This arithmetic does not execute NF4, gradients, or a paged optimizer.")
 ```
 
-**Expected output:**
+{/* example:e8-qlora:end */}
 
-```text
-[[1.03, -0.01], [0.06, 0.98]]
-```
-
-**What the code shows:** The nested list comprehension adds a rank-one outer product to a frozen 2-by-2 matrix. For wider matrices, the small inner rank is what saves trainable parameters. The [official chapter 12 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter12) develops the corresponding model-based implementation.
+Read the shared source from the lab: completion IDs and causal loss are in `common.py`; actual updates and saving are in `sft.py`/`preferences.py`; evaluation and the offline judgment import are separate. A runnable arithmetic snippet is a mechanism check, not a substitute for those model runs.
 
 ## When to use it
 
-Use it to fine-tune larger models on constrained hardware when quality remains acceptable. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+Use quantized adapter training when frozen-base storage is a bottleneck and the selected backend supports the needed kernels and gradients. Start with a reproducible small profile, keep reference outputs and quantify quality changes. Avoid applying CUDA installation recipes to MPS or promising a model fits from parameter bits alone.
 
 ## Limits and common mistakes
 
-- Quantization and adapter settings add complexity, and speed gains are not guaranteed.
-- **Failure to look for:** Training fits in memory but inference fails because the deployment stack cannot load the same quantized format.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+The evaluated instruction subset has32 training,8 validation and8 test source contexts. Pretraining overlap is unknown. Repeated views of these test outputs are not a new independent benchmark. Preserve failed and length-limited answers, exact base/tokenizer identity and data provenance when transferring the workflow. The book's larger TinyLlama/CUDA settings require their own supported hardware execution; the small profiles do not certify them.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First quantize the base weights with a supported low-bit format Then attach and train LoRA adapters while keeping the base frozen Finally evaluate quality, memory, and inference compatibility.</p></details>
+<details>
+<summary>Does dequantization recover the original pretrained weight exactly?</summary>
 
-<details><summary>What would make the result misleading?</summary><p>Training fits in memory but inference fails because the deployment stack cannot load the same quantized format.</p></details>
+No. It reconstructs the quantized approximation at a higher storage precision. Lost information is not recovered merely by changing dtype.
+
+</details>
+
+<details>
+<summary>What does the Linux CPU NF4 run establish about CUDA paged training?</summary>
+
+It establishes only its recorded NF4/adapter/backend configuration. CUDA, paged optimizer behavior, large-model memory and GPU throughput remain separately unverified.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 12 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 12 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter12). Continue through the linked prerequisites and nearby concepts below.
-
 <ConceptConnections id="qlora" />
+
+This original lesson follows Chapter 12, printed 355–389, of *Hands-On Large Language Models*. Its small-model/data configurations are deliberate teaching adaptations. Consult [Transformers chat templates](https://huggingface.co/docs/transformers/v4.57.1/en/chat_templating), [PEFT LoRA](https://huggingface.co/docs/peft/v0.17.0/en/developer_guides/lora), [bitsandbytes installation](https://huggingface.co/docs/bitsandbytes/v0.48.2/en/installation), and [TRL sigmoid DPO](https://huggingface.co/docs/trl/v0.23.1/en/dpo_trainer) for the versioned source contracts used here. Complete the [instruction adaptation project](/llm-concept-atlas/use-cases/instruction-preference-adaptation/) to test the full reasoning chain.

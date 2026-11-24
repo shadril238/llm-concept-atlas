@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e8-quantization",
+  "status": "passed",
+  "date": "2026-11-24T14:34:25.344764+00:00",
+  "gitCommit": "3192d0816993191203ec5bbd1d81f1deee8fb895",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e8/quantization.py"
+  ],
+  "sourceSha256": "7c69f78afd1ca98f0ae59bf02006dbe453d6f139ab38d5a18495c1eb9594589c",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "56c58a90d13637121a74fe1705613df3973fbfc62b9fcfdcc51ebaaa815bd093",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.008,
+  "peakMemoryMiB": 21.3,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "local range: ([1, 3, 7], [0.143, 0.429, 1.0])\noutlier-scaled range: ([0, 0, 1], [0.0, 0.0, 1.0])\nUniform signed grid demonstration; not the NF4 codebook.\n",
+  "stderr": "",
+  "error": null
+}

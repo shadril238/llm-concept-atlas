@@ -6,7 +6,7 @@ Generated from the E0 inventory dated 2026-11-19; latest enhancement update 2026
 
 The inventory records **231 source entries** (170 contents entries and 61 embedded concepts). It counts **160 leaf objectives**; 71 parent containers are excluded from the denominator. This inventory is a reviewed edition-specific work list, not a universal count of all AI terms.
 
-Of the leaf objectives, **101 have partial atlas mappings** and **12 have no direct atlas mapping**. **0 have passed enhancement acceptance**. Planned destinations are not published lessons.
+Of the leaf objectives, **86 have partial atlas mappings** and **0 have no direct atlas mapping**. **0 have passed enhancement acceptance**. Planned destinations are not published lessons.
 
 ## Read this report
 
@@ -32,26 +32,26 @@ Of the leaf objectives, **101 have partial atlas mappings** and **12 have no dir
 | 9. Multimodal Large Language Models | 14 | 8 | 0 | 0 | 0 | 0 | E6 |
 | 10. Creating Text Embedding Models | 21 | 14 | 0 | 0 | 0 | 0 | E7 |
 | 11. Fine-Tuning Representation Models for Classification | 13 | 8 | 0 | 0 | 0 | 0 | E7 |
-| 12. Fine-Tuning Generation Models | 37 | 23 | 4 | 15 | 12 | 0 | E8 |
+| 12. Fine-Tuning Generation Models | 37 | 23 | 4 | 0 | 0 | 0 | E8 |
 
 ## Required dimensions
 
 | Dimension | Required leaf objectives | Missing | Partial | Sufficient |
 | --- | ---: | ---: | ---: | ---: |
-| explanation | 160 | 12 | 148 | 0 |
-| workedExample | 160 | 12 | 148 | 0 |
-| visual | 160 | 12 | 148 | 0 |
-| implementation | 51 | 9 | 42 | 0 |
-| evaluation | 51 | 9 | 42 | 0 |
-| exercises | 160 | 12 | 148 | 0 |
+| explanation | 160 | 0 | 160 | 0 |
+| workedExample | 160 | 0 | 160 | 0 |
+| visual | 160 | 0 | 160 | 0 |
+| implementation | 51 | 0 | 51 | 0 |
+| evaluation | 51 | 0 | 51 | 0 |
+| exercises | 160 | 0 | 160 | 0 |
 
 ## Priority corrections
 
 | Existing lesson | Evidence and correction | Next phase |
 | --- | --- | --- |
 | [constrained-sampling](../../src/content/docs/concepts/constrained-sampling.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | E5 |
-| [reward-models](../../src/content/docs/concepts/reward-models.mdx#implement-it) | The code uses policy/reference log probabilities and beta: it is a DPO loss, not reward-model training. | E8 |
-| [rlhf](../../src/content/docs/concepts/rlhf.mdx#implement-it) | A DPO scalar loss does not show the reward-model and policy-optimization stages described in the lesson. | E8 |
+| [reward-models](../../src/content/docs/concepts/reward-models.mdx#implement-it) | E8 author implementation: detailed definitions/theory, exact masks/shapes/objectives, worked calculations, actual CPU training and fixed generation evaluation, interactives and exercises. Independent review and supported GPU QLoRA remain pending. | E8 |
+| [rlhf](../../src/content/docs/concepts/rlhf.mdx#implement-it) | E8 author implementation: detailed definitions/theory, exact masks/shapes/objectives, worked calculations, actual CPU training and fixed generation evaluation, interactives and exercises. Independent review and supported GPU QLoRA remain pending. | E8 |
 | [self-consistency](../../src/content/docs/concepts/self-consistency.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | E5 |
 | [summarized-memory](../../src/content/docs/concepts/summarized-memory.mdx#implement-it) | E5 author implementation: detailed theory, worked example, actual local-model evidence, interactive traces, strict contracts, and unique exercises. Independent teaching review remains pending. | E5 |
 
@@ -61,16 +61,6 @@ The placement decision avoids creating a separate page for every subsection. IDs
 
 | Proposed ID | Placement | Existing parent | Aliases | Source references |
 | --- | --- | --- | --- | --- |
-| full-fine-tuning | subsection | pretraining-and-sft | full parameter fine-tuning | book-ch12-full-fine-tuning |
-| instruction-data-templating | subsection | pretraining-and-sft | chat template, loss mask | book-ch12-instruction-template |
-| generation-training-configuration | subsection | generative-evaluation | — | book-ch12-sft-config |
-| instruction-training-workflow | subsection | generative-evaluation | — | book-ch12-sft-training |
-| adapter-merging | subsection | lora | merge weights, merge_and_unload | book-ch12-merge |
-| generation-benchmarks | subsection | generative-evaluation | — | book-ch12-benchmarks, book-ch12-leaderboards |
-| preference-data-templating | subsection | dpo | chosen rejected pairs | book-ch12-alignment-template |
-| qlora-memory | subsection | qlora | NF4, double quantization, paged optimizer | book-ch12-double-quantization |
-| generation-evaluation-metrics | subsection | generative-evaluation | perplexity, BLEU, ROUGE, BERTScore | book-ch12-perplexity, book-ch12-overlap-metrics |
-| ppo-for-rlhf | subsection | rlhf | PPO, proximal policy optimization | book-ch12-ppo |
 
 ## Chapter 1: An Introduction to Large Language Models
 
@@ -349,43 +339,43 @@ Printed pages 355–389; PDF pages 377–411. [Pinned official notebook](https:/
 
 | Source ID / location | Objective and remaining work | Existing destination | Status / priority |
 | --- | --- | --- | --- |
-| **book-ch12-training-stages**<br>The Three LLM Training Steps: Pretraining, Supervised Fine-Tuning, and Preference Tuning; pp. 355–357 (contents) | Compare the data, objective, and expected behavior of the three stages. | [pretraining-and-sft](../../src/content/docs/concepts/pretraining-and-sft.mdx#the-important-distinction), [rlhf](../../src/content/docs/concepts/rlhf.mdx#the-important-distinction) | partial; P0; E8 |
-| **book-ch12-sft**<br>Supervised Fine-Tuning (SFT); pp. 357–367 (contents; container, not counted) | Explain instruction-conditioned language modeling and which positions contribute to loss. | [pretraining-and-sft](../../src/content/docs/concepts/pretraining-and-sft.mdx#the-important-distinction) | partial; P2; E8 |
-| **book-ch12-full-fine-tuning**<br>Full Fine-Tuning; pp. 357–359 (contents) | Show which model weights change and compare resource and evaluation implications. | Proposed: full-fine-tuning | unmapped; P1; E8 |
-| **book-ch12-peft**<br>Parameter-Efficient Fine-Tuning (PEFT); pp. 359–367 (contents; container, not counted) | Distinguish added adapters, low-rank updates, and quantized base storage. | [peft](../../src/content/docs/concepts/peft.mdx#the-important-distinction), [lora](../../src/content/docs/concepts/lora.mdx#the-important-distinction), [qlora](../../src/content/docs/concepts/qlora.mdx#the-important-distinction) | partial; P2; E8 |
-| **book-ch12-instruction-qlora**<br>Instruction Tuning with QLoRA; pp. 367–373 (contents; container, not counted) | Execute data preparation, quantization, adapters, training, saving, and inference as one supported workflow. | [qlora](../../src/content/docs/concepts/qlora.mdx#the-important-distinction) | partial; P2; E8 |
-| **book-ch12-instruction-template**<br>Templating Instruction Data; pp. 367–369 (contents) | Render chat records with correct roles, boundary tokens, labels, and training masks. | Proposed: instruction-data-templating | unmapped; P1; E8 |
-| **book-ch12-sft-quantization**<br>Model Quantization; pp. 369–370 (contents) | Inspect quantized loading and separate storage precision from compute and adapter precision. | [quantization](../../src/content/docs/concepts/quantization.mdx#the-important-distinction), [qlora](../../src/content/docs/concepts/qlora.mdx#the-important-distinction) | partial; P1; E8 |
-| **book-ch12-lora-config**<br>LoRA Configuration; pp. 370–371 (contents) | Explain rank, alpha scaling, target modules, dropout, initialization, and trainable counts. | [lora](../../src/content/docs/concepts/lora.mdx#the-important-distinction) | partial; P2; E2 |
-| **book-ch12-sft-config**<br>Training Configuration; pp. 371–372 (contents) | Explain batch/accumulation, scheduling, precision, checkpointing, and validation settings. | Proposed: generation-training-configuration | unmapped; P1; E8 |
-| **book-ch12-sft-training**<br>Training; pp. 372–373 (contents) | Run SFT, inspect progress, save the adapter, and evaluate held-out behavior. | Proposed: instruction-training-workflow | unmapped; P1; E8 |
-| **book-ch12-merge**<br>Merge Weights; pp. 373–373 (contents) | Merge supported adapters into the correct base and verify reload and output equivalence. | Proposed: adapter-merging | unmapped; P1; E8 |
-| **book-ch12-evaluation**<br>Evaluating Generative Models; pp. 373–378 (contents; container, not counted) | Select complementary metrics and explain disagreements and blind spots. | [generative-evaluation](../../src/content/docs/concepts/generative-evaluation.mdx#the-important-distinction) | partial; P2; E8 |
-| **book-ch12-word-metrics**<br>Word-Level Metrics; pp. 374–374 (contents; container, not counted) | Distinguish perplexity, lexical overlap, and embedding-based metrics with worked counterexamples. | [generative-evaluation](../../src/content/docs/concepts/generative-evaluation.mdx#the-important-distinction) | partial; P2; E8 |
-| **book-ch12-benchmarks**<br>Benchmarks; pp. 374–376 (contents) | Explain benchmark task coverage, contamination, and what a score does not measure. | Proposed: generation-benchmarks | unmapped; P1; E8 |
-| **book-ch12-leaderboards**<br>Leaderboards; pp. 376–376 (contents) | Interpret dated leaderboard results, evaluation settings, and comparison limits. | Proposed: generation-benchmarks | unmapped; P1; E8 |
-| **book-ch12-automated-evaluation**<br>Automated Evaluation; pp. 376–376 (contents) | Use a defined automated grading rubric with calibration and bias checks. | [generative-evaluation](../../src/content/docs/concepts/generative-evaluation.mdx#the-important-distinction) | partial; P2; E8 |
-| **book-ch12-human-evaluation**<br>Human Evaluation; pp. 376–378 (contents) | Apply a blinded rubric, record disagreements, and distinguish preference from factual correctness. | [generative-evaluation](../../src/content/docs/concepts/generative-evaluation.mdx#the-important-distinction) | partial; P2; E8 |
-| **book-ch12-alignment**<br>Preference-Tuning / Alignment / RLHF; pp. 378–385 (contents; container, not counted) | Explain preference labels, policy optimization, and reference constraints. | [rlhf](../../src/content/docs/concepts/rlhf.mdx#the-important-distinction) | partial; P0; E8 |
-| **book-ch12-reward-models**<br>Automating Preference Evaluation Using Reward Models; pp. 379–385 (contents; container, not counted) | Explain replacing the language-model head with a scalar scoring head. | [reward-models](../../src/content/docs/concepts/reward-models.mdx#the-important-distinction) | partial; P0; E8 |
-| **book-ch12-reward-io**<br>The Inputs and Outputs of a Reward Model; pp. 380–380 (contents) | Score prompt-response pairs and distinguish reward scores from policy log probabilities. | [reward-models](../../src/content/docs/concepts/reward-models.mdx#the-important-distinction) | partial; P0; E8 |
-| **book-ch12-reward-training**<br>Training a Reward Model; pp. 380–384 (contents; container, not counted) | Construct preference pairs and optimize a reward-ranking objective, not a DPO policy loss. | [reward-models](../../src/content/docs/concepts/reward-models.mdx#the-important-distinction) | partial; P0; E8 |
-| **book-ch12-no-reward-model**<br>Training No Reward Model; pp. 384–385 (contents; container, not counted) | Explain direct preference optimization and the role of a frozen reference without a separately trained reward model. | [dpo](../../src/content/docs/concepts/dpo.mdx#the-important-distinction) | partial; P2; E8 |
-| **book-ch12-dpo-workflow**<br>Preference Tuning with DPO; pp. 385–389 (contents; container, not counted) | Train and evaluate a real policy with preference data and reference-relative log probabilities. | [dpo](../../src/content/docs/concepts/dpo.mdx#the-important-distinction) | partial; P2; E8 |
-| **book-ch12-alignment-template**<br>Templating Alignment Data; pp. 386–386 (contents) | Separate prompt, chosen, and rejected sequences and validate boundaries, masks, and truncation. | Proposed: preference-data-templating | unmapped; P1; E8 |
-| **book-ch12-dpo-quantization**<br>Model Quantization; pp. 386–387 (contents) | Load the intended SFT starting point with supported quantization and adapter semantics. | [qlora](../../src/content/docs/concepts/qlora.mdx#the-important-distinction), [dpo](../../src/content/docs/concepts/dpo.mdx#the-important-distinction) | partial; P1; E8 |
-| **book-ch12-dpo-config**<br>Training Configuration; pp. 387–388 (contents) | Explain beta, reference behavior, batching, prompt lengths, and trainer configuration. | [dpo](../../src/content/docs/concepts/dpo.mdx#the-important-distinction) | partial; P1; E8 |
-| **book-ch12-dpo-training**<br>Training; pp. 388–389 (contents) | Run preference training, save/reload correctly, and compare base/SFT/DPO behavior. | [dpo](../../src/content/docs/concepts/dpo.mdx#the-important-distinction) | partial; P1; E8 |
-| **book-ch12-adapters**<br>Adapter modules and task switching; pp. 359–361 (body-concept) | Trace added trainable modules and distinguish adapter methods from low-rank updates. | [peft](../../src/content/docs/concepts/peft.mdx#the-important-distinction) | partial; P2; E8 |
-| **book-ch12-low-rank**<br>Low-rank adaptation matrices; pp. 361–364 (body-concept) | Use consistent A/B shapes, rank, alpha scaling, and a real update with frozen base weights. | [lora](../../src/content/docs/concepts/lora.mdx#the-important-distinction) | partial; P2; E2 |
-| **book-ch12-blockwise-quantization**<br>Blockwise quantization and NormalFloat; pp. 364–367 (body-concept) | Calculate approximation/scaling and explain distribution-aware codebooks and storage precision. | [quantization](../../src/content/docs/concepts/quantization.mdx#the-important-distinction), [qlora](../../src/content/docs/concepts/qlora.mdx#the-important-distinction) | partial; P2; E8 |
-| **book-ch12-double-quantization**<br>Double quantization and paged optimizers; pp. 367–367 (body-concept) | Explain these brief book pointers and separate them from adapter parameter savings. | Proposed: qlora-memory | unmapped; P1; E8 |
-| **book-ch12-perplexity**<br>Perplexity; pp. 374–374 (body-concept) | Relate average token log likelihood to perplexity and explain tokenization dependence. | Proposed: generation-evaluation-metrics | unmapped; P1; E8 |
-| **book-ch12-overlap-metrics**<br>BLEU, ROUGE, and BERTScore; pp. 374–374 (body-concept) | Distinguish lexical overlap from embedding-based similarity using a paraphrase counterexample. | Proposed: generation-evaluation-metrics | unmapped; P1; E8 |
-| **book-ch12-preference-pairs**<br>Preference pair construction; pp. 380–381 (body-concept) | Distinguish relative preference from absolute correctness and retain prompt/response boundaries. | [reward-models](../../src/content/docs/concepts/reward-models.mdx#the-important-distinction) | partial; P0; E8 |
-| **book-ch12-reward-loss**<br>Pairwise reward ranking objective; pp. 382–383 (body-concept) | Compute chosen/rejected scalar rewards and the reward-model learning signal. | [reward-models](../../src/content/docs/concepts/reward-models.mdx#the-important-distinction) | partial; P0; E8 |
-| **book-ch12-ppo**<br>PPO in RLHF; pp. 383–383 (body-concept) | Explain policy, reward, reference, and optimization roles at the depth of the book's conceptual discussion. | Proposed: ppo-for-rlhf | unmapped; P1; E8 |
-| **book-ch12-dpo-logprobs**<br>Token log probabilities in DPO; pp. 384–385 (body-concept) | Trace completion log probabilities under policy and reference with the prompt masked consistently. | [dpo](../../src/content/docs/concepts/dpo.mdx#the-important-distinction) | partial; P2; E8 |
+| **book-ch12-training-stages**<br>The Three LLM Training Steps: Pretraining, Supervised Fine-Tuning, and Preference Tuning; pp. 355–357 (contents) | Compare the data, objective, and expected behavior of the three stages. | [pretraining-and-sft](../../src/content/docs/concepts/pretraining-and-sft.mdx#theory-how-it-works) | mapped; P0; E8 |
+| **book-ch12-sft**<br>Supervised Fine-Tuning (SFT); pp. 357–367 (contents; container, not counted) | Explain instruction-conditioned language modeling and which positions contribute to loss. | [pretraining-and-sft](../../src/content/docs/concepts/pretraining-and-sft.mdx#theory-how-it-works) | mapped; P2; E8 |
+| **book-ch12-full-fine-tuning**<br>Full Fine-Tuning; pp. 357–359 (contents) | Show which model weights change and compare resource and evaluation implications. | [pretraining-and-sft](../../src/content/docs/concepts/pretraining-and-sft.mdx#full-fine-tuning) | mapped; P1; E8 |
+| **book-ch12-peft**<br>Parameter-Efficient Fine-Tuning (PEFT); pp. 359–367 (contents; container, not counted) | Distinguish added adapters, low-rank updates, and quantized base storage. | [peft](../../src/content/docs/concepts/peft.mdx#theory-how-it-works) | mapped; P2; E8 |
+| **book-ch12-instruction-qlora**<br>Instruction Tuning with QLoRA; pp. 367–373 (contents; container, not counted) | Execute data preparation, quantization, adapters, training, saving, and inference as one supported workflow. | [qlora](../../src/content/docs/concepts/qlora.mdx#theory-how-it-works) | mapped; P2; E8 |
+| **book-ch12-instruction-template**<br>Templating Instruction Data; pp. 367–369 (contents) | Render chat records with correct roles, boundary tokens, labels, and training masks. | [pretraining-and-sft](../../src/content/docs/concepts/pretraining-and-sft.mdx#instruction-data-templating) | mapped; P1; E8 |
+| **book-ch12-sft-quantization**<br>Model Quantization; pp. 369–370 (contents) | Inspect quantized loading and separate storage precision from compute and adapter precision. | [qlora](../../src/content/docs/concepts/qlora.mdx#theory-how-it-works), [quantization](../../src/content/docs/concepts/quantization.mdx#theory-how-it-works) | mapped; P1; E8 |
+| **book-ch12-lora-config**<br>LoRA Configuration; pp. 370–371 (contents) | Explain rank, alpha scaling, target modules, dropout, initialization, and trainable counts. | [lora](../../src/content/docs/concepts/lora.mdx#theory-how-it-works) | mapped; P2; E2 |
+| **book-ch12-sft-config**<br>Training Configuration; pp. 371–372 (contents) | Explain batch/accumulation, scheduling, precision, checkpointing, and validation settings. | [generative-evaluation](../../src/content/docs/concepts/generative-evaluation.mdx#training-configuration) | mapped; P1; E8 |
+| **book-ch12-sft-training**<br>Training; pp. 372–373 (contents) | Run SFT, inspect progress, save the adapter, and evaluate held-out behavior. | [generative-evaluation](../../src/content/docs/concepts/generative-evaluation.mdx#instruction-training-workflow) | mapped; P1; E8 |
+| **book-ch12-merge**<br>Merge Weights; pp. 373–373 (contents) | Merge supported adapters into the correct base and verify reload and output equivalence. | [lora](../../src/content/docs/concepts/lora.mdx#adapter-merging) | mapped; P1; E8 |
+| **book-ch12-evaluation**<br>Evaluating Generative Models; pp. 373–378 (contents; container, not counted) | Select complementary metrics and explain disagreements and blind spots. | [generative-evaluation](../../src/content/docs/concepts/generative-evaluation.mdx#theory-how-it-works) | mapped; P2; E8 |
+| **book-ch12-word-metrics**<br>Word-Level Metrics; pp. 374–374 (contents; container, not counted) | Distinguish perplexity, lexical overlap, and embedding-based metrics with worked counterexamples. | [generative-evaluation](../../src/content/docs/concepts/generative-evaluation.mdx#theory-how-it-works) | mapped; P2; E8 |
+| **book-ch12-benchmarks**<br>Benchmarks; pp. 374–376 (contents) | Explain benchmark task coverage, contamination, and what a score does not measure. | [generative-evaluation](../../src/content/docs/concepts/generative-evaluation.mdx#generation-benchmarks) | mapped; P1; E8 |
+| **book-ch12-leaderboards**<br>Leaderboards; pp. 376–376 (contents) | Interpret dated leaderboard results, evaluation settings, and comparison limits. | [generative-evaluation](../../src/content/docs/concepts/generative-evaluation.mdx#generation-benchmarks) | mapped; P1; E8 |
+| **book-ch12-automated-evaluation**<br>Automated Evaluation; pp. 376–376 (contents) | Use a defined automated grading rubric with calibration and bias checks. | [generative-evaluation](../../src/content/docs/concepts/generative-evaluation.mdx#theory-how-it-works) | mapped; P2; E8 |
+| **book-ch12-human-evaluation**<br>Human Evaluation; pp. 376–378 (contents) | Apply a blinded rubric, record disagreements, and distinguish preference from factual correctness. | [generative-evaluation](../../src/content/docs/concepts/generative-evaluation.mdx#theory-how-it-works) | mapped; P2; E8 |
+| **book-ch12-alignment**<br>Preference-Tuning / Alignment / RLHF; pp. 378–385 (contents; container, not counted) | Explain preference labels, policy optimization, and reference constraints. | [rlhf](../../src/content/docs/concepts/rlhf.mdx#theory-how-it-works) | mapped; P0; E8 |
+| **book-ch12-reward-models**<br>Automating Preference Evaluation Using Reward Models; pp. 379–385 (contents; container, not counted) | Explain replacing the language-model head with a scalar scoring head. | [reward-models](../../src/content/docs/concepts/reward-models.mdx#theory-how-it-works) | mapped; P0; E8 |
+| **book-ch12-reward-io**<br>The Inputs and Outputs of a Reward Model; pp. 380–380 (contents) | Score prompt-response pairs and distinguish reward scores from policy log probabilities. | [reward-models](../../src/content/docs/concepts/reward-models.mdx#inputs-and-scalar-outputs) | mapped; P0; E8 |
+| **book-ch12-reward-training**<br>Training a Reward Model; pp. 380–384 (contents; container, not counted) | Construct preference pairs and optimize a reward-ranking objective, not a DPO policy loss. | [reward-models](../../src/content/docs/concepts/reward-models.mdx#preference-pair-construction) | mapped; P0; E8 |
+| **book-ch12-no-reward-model**<br>Training No Reward Model; pp. 384–385 (contents; container, not counted) | Explain direct preference optimization and the role of a frozen reference without a separately trained reward model. | [dpo](../../src/content/docs/concepts/dpo.mdx#theory-how-it-works) | mapped; P2; E8 |
+| **book-ch12-dpo-workflow**<br>Preference Tuning with DPO; pp. 385–389 (contents; container, not counted) | Train and evaluate a real policy with preference data and reference-relative log probabilities. | [dpo](../../src/content/docs/concepts/dpo.mdx#theory-how-it-works) | mapped; P2; E8 |
+| **book-ch12-alignment-template**<br>Templating Alignment Data; pp. 386–386 (contents) | Separate prompt, chosen, and rejected sequences and validate boundaries, masks, and truncation. | [dpo](../../src/content/docs/concepts/dpo.mdx#preference-data-templating) | mapped; P1; E8 |
+| **book-ch12-dpo-quantization**<br>Model Quantization; pp. 386–387 (contents) | Load the intended SFT starting point with supported quantization and adapter semantics. | [qlora](../../src/content/docs/concepts/qlora.mdx#theory-how-it-works) | mapped; P1; E8 |
+| **book-ch12-dpo-config**<br>Training Configuration; pp. 387–388 (contents) | Explain beta, reference behavior, batching, prompt lengths, and trainer configuration. | [dpo](../../src/content/docs/concepts/dpo.mdx#theory-how-it-works) | mapped; P1; E8 |
+| **book-ch12-dpo-training**<br>Training; pp. 388–389 (contents) | Run preference training, save/reload correctly, and compare base/SFT/DPO behavior. | [dpo](../../src/content/docs/concepts/dpo.mdx#theory-how-it-works) | mapped; P1; E8 |
+| **book-ch12-adapters**<br>Adapter modules and task switching; pp. 359–361 (body-concept) | Trace added trainable modules and distinguish adapter methods from low-rank updates. | [peft](../../src/content/docs/concepts/peft.mdx#adapter-modules-and-task-switching) | mapped; P2; E8 |
+| **book-ch12-low-rank**<br>Low-rank adaptation matrices; pp. 361–364 (body-concept) | Use consistent A/B shapes, rank, alpha scaling, and a real update with frozen base weights. | [lora](../../src/content/docs/concepts/lora.mdx#low-rank-and-initialization) | mapped; P2; E2 |
+| **book-ch12-blockwise-quantization**<br>Blockwise quantization and NormalFloat; pp. 364–367 (body-concept) | Calculate approximation/scaling and explain distribution-aware codebooks and storage precision. | [qlora](../../src/content/docs/concepts/qlora.mdx#nf4-and-blockwise-quantization), [quantization](../../src/content/docs/concepts/quantization.mdx#theory-how-it-works) | mapped; P2; E8 |
+| **book-ch12-double-quantization**<br>Double quantization and paged optimizers; pp. 367–367 (body-concept) | Explain these brief book pointers and separate them from adapter parameter savings. | [qlora](../../src/content/docs/concepts/qlora.mdx#qlora-memory) | mapped; P1; E8 |
+| **book-ch12-perplexity**<br>Perplexity; pp. 374–374 (body-concept) | Relate average token log likelihood to perplexity and explain tokenization dependence. | [generative-evaluation](../../src/content/docs/concepts/generative-evaluation.mdx#generation-evaluation-metrics) | mapped; P1; E8 |
+| **book-ch12-overlap-metrics**<br>BLEU, ROUGE, and BERTScore; pp. 374–374 (body-concept) | Distinguish lexical overlap from embedding-based similarity using a paraphrase counterexample. | [generative-evaluation](../../src/content/docs/concepts/generative-evaluation.mdx#generation-evaluation-metrics) | mapped; P1; E8 |
+| **book-ch12-preference-pairs**<br>Preference pair construction; pp. 380–381 (body-concept) | Distinguish relative preference from absolute correctness and retain prompt/response boundaries. | [reward-models](../../src/content/docs/concepts/reward-models.mdx#preference-pair-construction) | mapped; P0; E8 |
+| **book-ch12-reward-loss**<br>Pairwise reward ranking objective; pp. 382–383 (body-concept) | Compute chosen/rejected scalar rewards and the reward-model learning signal. | [reward-models](../../src/content/docs/concepts/reward-models.mdx#theory-how-it-works) | mapped; P0; E8 |
+| **book-ch12-ppo**<br>PPO in RLHF; pp. 383–383 (body-concept) | Explain policy, reward, reference, and optimization roles at the depth of the book's conceptual discussion. | [rlhf](../../src/content/docs/concepts/rlhf.mdx#ppo-for-rlhf) | mapped; P1; E8 |
+| **book-ch12-dpo-logprobs**<br>Token log probabilities in DPO; pp. 384–385 (body-concept) | Trace completion log probabilities under policy and reference with the prompt masked consistently. | [dpo](../../src/content/docs/concepts/dpo.mdx#completion-log-probabilities) | mapped; P2; E8 |
 
 ## Source-review cautions
 

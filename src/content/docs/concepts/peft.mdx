@@ -1,98 +1,115 @@
 ---
-title: PEFT
-description: Parameter-efficient fine-tuning adapts a pretrained model by training a small subset of parameters or added modules.
-kind: concept
+title: "Parameter-efficient fine-tuning"
+description: "Parameter-efficient fine-tuning (PEFT) adapts a pretrained model by optimizing a limited set of parameters, often newly added modules, while preserving most backbone weights. It is a family of update strategies, not a single loss function or a guarantee of low total memory."
+kind: "concept"
 conceptId: peft
 chapter: 12
-part: training
-summary: Parameter-efficient fine-tuning adapts a pretrained model by training a small subset of parameters or added modules.
-parent: chapter-12
-prerequisites: [pretraining-and-sft]
-related: [pretraining-and-sft, lora]
-level: advanced
-tags: [training, chapter-12]
+part: "training"
+summary: "Parameter-efficient fine-tuning (PEFT) adapts a pretrained model by optimizing a limited set of parameters, often newly added modules, while preserving most backbone weights. It is a family of update strategies, not a single loss function or a guarantee of low total memory."
+parent: "chapter-12"
+prerequisites: ["pretraining-and-sft"]
+related: ["lora", "qlora", "frozen-layers"]
+level: "advanced"
+tags: ["training", "chapter-12"]
 lessonStatus: full
-lastReviewed: 2026-11-13
+lastReviewed: "2026-11-24"
+reviewRecord: e8-generation-author-review-2026-11-24
+aliases: ["Parameter-efficient fine-tuning", "PEFT"]
+learningObjectives: ["Separate parameter efficiency from sample efficiency.", "Account for frozen base, trainable tensors, gradients, moments and activations.", "Preserve base and adapter identity when switching tasks."]
+bookSections: ["book-ch12-peft", "book-ch12-adapters"]
+exampleIds: ["e8-peft", "instruction-adaptation", "preference-adaptation", "generation-evaluation"]
+relationshipReasons: {"lora": "LoRA is one PEFT method that factorizes additive weight updates.", "qlora": "QLoRA additionally compresses the frozen base while retaining trainable adapters.", "frozen-layers": "Selective freezing is another way to restrict updated parameters; its activations still consume memory."}
 ---
 
 import ConceptPrimer from '../../../components/ConceptPrimer.astro';
 import ConceptConnections from '../../../components/ConceptConnections.astro';
-import LessonFlow from '../../../components/LessonFlow.astro';
-import { AdapterLab } from '../../../components/simulations/PhaseFiveLabs';
+import ReferenceBrief from '../../../components/ReferenceBrief.astro';
+import { RankMemory } from '../../../components/simulations/GenerationLabs';
 
 <ConceptPrimer id="peft" />
 
+<ReferenceBrief objectives={["Separate parameter efficiency from sample efficiency.", "Account for frozen base, trainable tensors, gradients, moments and activations.", "Preserve base and adapter identity when switching tasks."]} prerequisites="pretraining-and-sft" scope="Original explanations and calculations plus actual small CPU training. Independent review and GPU QLoRA certification remain pending." />
+
 ## Definition and intuition
 
-**PEFT**: Parameter-efficient fine-tuning adapts a pretrained model by training a small subset of parameters or added modules.
-
-Chapter 12 distinguishes pretraining, instruction tuning, and preference optimization. Efficient adapters change a subset of parameters; evaluation still decides whether behavior improved.
+Parameter-efficient fine-tuning (PEFT) adapts a pretrained model by optimizing a limited set of parameters, often newly added modules, while preserving most backbone weights. It is a family of update strategies, not a single loss function or a guarantee of low total memory.
 
 ## Before you start
 
-Read [Pretraining and SFT](/llm-concept-atlas/concepts/pretraining-and-sft/) first. You should be able to explain what information its output carries. Then return here and ask what extra problem **PEFT** solves. This sequence matters because a plausible output can hide a missing prerequisite or a weak input representation.
+Read [pretraining and sft](/llm-concept-atlas/concepts/pretraining-and-sft/). Open the [generation training path](/llm-concept-atlas/paths/from-instructions-to-preferences/) if these prerequisites are unfamiliar. Distinguish a token distribution, a trainable parameter, and a task score before tracing this mechanism.
 
 ## Theory: how it works
 
-1. **Prepare:** Choose a frozen backbone and a compact trainable adaptation
-2. **Transform:** Train the adapter on task examples
-3. **Inspect:** Compare quality, memory, and portability with a baseline.
+### Adapter modules and task switching
+
+A bottleneck adapter inserts a small down-projection, nonlinearity and up-projection into a network. LoRA instead adds a low-rank linear weight update. Soft prompt tuning learns input embeddings; selective layer freezing trains existing subsets. They differ in expressiveness, inference cost and where gradients flow. Keep these mechanisms separate even when a library exposes them through one interface.
+
+A frozen parameter has no optimizer update. Its forward computation can still be needed, and intermediate activations can still be retained for backpropagation into adapters. Removing backbone gradients and Adam moments therefore does not remove backbone storage or activation memory. The browser memory view separates idealized weights, adapter storage, gradients, moments and a user-supplied activation estimate. Measured process peak is a separate execution-record field.
+
+Each adapter depends on a specific base architecture, checkpoint revision, module names, rank/scaling and tokenizer/template contract. Sharing a base across multiple adapters can save disk space, but loading the wrong base changes the function. An adapter is not an independent miniature model that can recover missing backbone knowledge by itself. Some selective methods save changed embedding/head modules too; a “small adapter file” is not universally just two matrices.
 
 ### The important distinction
 
-PEFT is a family that includes adapters, LoRA, prompt tuning, and other selective updates. The base checkpoint remains large even when the trainable fraction is small. Report trainable parameter count, total memory during training, and the quality change relative to a frozen baseline.
+Parameter efficiency and sample efficiency are different. Learning twelve thousand parameters from thirty-two examples still permits overfitting; creating many epochs does not create new labels. A small trainable percentage also does not establish an equal quality comparison when different models, steps, token budgets or target modules are used. L21 holds the base and data fixed, but uses explicit method-specific learning rates and step budgets, so the comparison is an educational configuration comparison rather than an isolated causal ranking of methods.
 
 ## Worked example
 
-Instead of changing every weight in a large generator, a team trains adapters for customer-support style. Several adapters may share one base checkpoint. Walk through the three stages above with that input: identify what is prepared, what changes, and which observation would show success. Then change one condition in the example. If the conclusion changes, the method is sensitive to that choice; if it does not, ask whether the example actually tests the mechanism.
+The actual fused QKV LoRA configuration has six layers, input width128, output width384, rank 4 and alpha 8. Each layer adds `4×128 + 384×4 = 2,048` parameters, totaling 12,288. The original model has14,067,712 parameters. The trainable fraction is about 0.087%; the entire base still participates in every forward pass.
 
-<LessonFlow steps={["Choose a frozen backbone and a compact trainable adaptation", "Train the adapter on task examples", "Compare quality, memory, and portability with a baseline."]} caption="A teaching diagram for PEFT. Read the three labeled stages from left to right; each stage is described in the text above." />
+At float32, one trainable parameter commonly adds four bytes of gradient plus eight bytes for Adam's two moments, besides its own storage. Base-weight storage remains tens of megabytes in this tiny example. A larger activation footprint can dominate the adapter state; sequence length, batch size and checkpointing matter independently.
 
 ## Try the interactive lab
 
-<AdapterLab client:visible />
+<RankMemory client:visible />
 
-Change one control, predict the effect, and compare your prediction with the output. The lab uses invented teaching data; the chapter notebook shows how to run a model on real data.
+Predict a change before touching a control. The browser calculates explicit arithmetic or displays recorded model results; it performs no training or model requests. Reset restores the initial view, and tables preserve the exact numbers.
 
 ## Implement it
 
-**Setup:** Python 3; no packages or API key are needed. Save the following as `example.py` and run `python3 example.py`. It is a small deterministic illustration of the relevant calculation or data flow. It does not download a trained model.
+This standalone Python 3 calculation uses only the standard library. It does not download or train a model. The [complete generation labs](/llm-concept-atlas/labs/generation-adaptation/) provide the pinned environments, actual training entrypoints, staged notebooks, raw results and artifact checks.
+
+{/* example:e8-peft:start */}
 
 ```python
-base = [[1.0, 0.0], [0.0, 1.0]]
-a = [[0.1], [0.2]]
-b = [[0.3, -0.1]]
-adapted = [[round(base[i][j] + a[i][0]*b[0][j], 3) for j in range(2)] for i in range(2)]
-print(adapted)
+layers, d_in, d_out, rank = 6, 128, 384, 4
+base_parameters = 14_067_712
+trainable = layers * rank * (d_in + d_out)
+print("trainable:", trainable)
+print("fraction:", round(trainable / (base_parameters + trainable), 6))
+print("adapter gradients + Adam bytes:", trainable * (4 + 8))
+print("Frozen backbone and activations still occupy memory.")
 ```
 
-**Expected output:**
+{/* example:e8-peft:end */}
 
-```text
-[[1.03, -0.01], [0.06, 0.98]]
-```
-
-**What the code shows:** The nested list comprehension adds a rank-one outer product to a frozen 2-by-2 matrix. For wider matrices, the small inner rank is what saves trainable parameters. The [official chapter 12 notebook](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter12) develops the corresponding model-based implementation.
+Read the shared source from the lab: completion IDs and causal loss are in `common.py`; actual updates and saving are in `sft.py`/`preferences.py`; evaluation and the offline judgment import are separate. A runnable arithmetic snippet is a mechanism check, not a substitute for those model runs.
 
 ## When to use it
 
-Use it when full fine-tuning is too costly or multiple task variants must be stored. Choose it when the input and output in your application match those assumptions. Compare the simplest useful baseline first, then measure whether the additional complexity improves the metric that matters to readers or users. Record the model, data version, and decision threshold when applicable so results can be reproduced.
+PEFT is useful when serving several domain/style variants on a shared pretrained model, comparing adaptations with limited optimizer memory, or distributing compact task updates. Prefer a fully frozen baseline when adapting does not improve the task. Validate adapter switching and deployment identity before treating shared storage as operational simplicity.
 
 ## Limits and common mistakes
 
-- Small trainable capacity can limit adaptation and still overfit poor data.
-- **Failure to look for:** An adapter fits the training prompts but fails on new phrasing because examples were narrow.
-
-A teaching demo usually holds data and model behavior fixed so one mechanism is visible. Real systems face noisy inputs, changing distributions, and edge cases. Test examples that should fail as well as examples that should succeed, and inspect the intermediate stage that causes the error.
+The evaluated instruction subset has32 training,8 validation and8 test source contexts. Pretraining overlap is unknown. Repeated views of these test outputs are not a new independent benchmark. Preserve failed and length-limited answers, exact base/tokenizer identity and data provenance when transferring the workflow. The book's larger TinyLlama/CUDA settings require their own supported hardware execution; the small profiles do not certify them.
 
 ## Check your understanding
 
-<details><summary>What are the three stages in this example?</summary><p>First choose a frozen backbone and a compact trainable adaptation Then train the adapter on task examples Finally compare quality, memory, and portability with a baseline.</p></details>
+<details>
+<summary>A frozen backbone has zero optimizer moments. Is its training memory zero?</summary>
 
-<details><summary>What would make the result misleading?</summary><p>An adapter fits the training prompts but fails on new phrasing because examples were narrow.</p></details>
+No. The weights, forward computations, activations and temporary buffers still exist. Only specified parameter-gradient/optimizer storage is removed.
+
+</details>
+
+<details>
+<summary>Can a task adapter be attached to any checkpoint with the same hidden width?</summary>
+
+No. Exact base revision, module layout, tokenizer, serialization and saved configuration are part of the learned function. Matching width alone is insufficient.
+
+</details>
 
 ## Connections and sources
 
-This independent lesson follows the topic order of chapter 12 of *Hands-On Large Language Models*. Its explanation, worked example, diagram, and teaching code are original. For the book's models and datasets, follow the [authors' official chapter 12 code](https://github.com/HandsOnLLM/Hands-On-Large-Language-Models/tree/main/chapter12). Continue through the linked prerequisites and nearby concepts below.
-
 <ConceptConnections id="peft" />
+
+This original lesson follows Chapter 12, printed 355–389, of *Hands-On Large Language Models*. Its small-model/data configurations are deliberate teaching adaptations. Consult [Transformers chat templates](https://huggingface.co/docs/transformers/v4.57.1/en/chat_templating), [PEFT LoRA](https://huggingface.co/docs/peft/v0.17.0/en/developer_guides/lora), [bitsandbytes installation](https://huggingface.co/docs/bitsandbytes/v0.48.2/en/installation), and [TRL sigmoid DPO](https://huggingface.co/docs/trl/v0.23.1/en/dpo_trainer) for the versioned source contracts used here. Complete the [instruction adaptation project](/llm-concept-atlas/use-cases/instruction-preference-adaptation/) to test the full reasoning chain.

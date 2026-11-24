@@ -1,0 +1,96 @@
+---
+title: "Generation adaptation · L21–L23"
+description: "Inspect instruction masks, train full/LoRA policies and a reward model, run DPO, and evaluate actual heldout generations."
+---
+
+import VerifiedRun from '../../../components/VerifiedRun.astro';
+import { InstructionMask, AdaptationResults, RankMemory, PreferenceExplorer, GenerationEvaluation, QuantizedResults } from '../../../components/simulations/GenerationLabs';
+
+Follow **data → tokens/masks → objective → real updates → validation selection → heldout behavior → saved artifact**. These labs follow Chapter 12 (printed 355–389). The book uses larger TinyLlama/chat datasets and CUDA; our pinned small CPU profiles make each mechanism inspectable. Read the [generation path](/llm-concept-atlas/paths/from-instructions-to-preferences/) and [adaptation project](/llm-concept-atlas/use-cases/instruction-preference-adaptation/).
+
+## Setup and execution order
+
+Use Python 3.11 and uv. From the repository root:
+
+```sh
+uv sync --locked --project examples/training/generation
+python3 scripts/run-examples.py --id instruction-adaptation --allow-network
+python3 scripts/run-examples.py --id preference-adaptation --offline
+python3 scripts/run-examples.py --id generation-evaluation --offline
+```
+
+Pythia14m weights are about 54 MB; tiny BERT about 18 MB. Packages, optimizer state and artifacts add memory. CPU/float32/one-thread is deliberate; no paid provider or API key is used. Source files are pinned and checksummed in `models.json`. Later cached execution uses `--offline`. The [execution guide](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/generation/README.md) records dependencies, commands, resources, failure recovery and verification boundaries.
+
+Three staged notebooks import the same implementation as the CLI. Their order is **instruction-adaptation → preference-adaptation → generation-evaluation**. Each starts a fresh actual kernel, inspects data, asks for a prediction, executes shared source, analyzes results and reloads an artifact. Run notebooks before final CLI `--record` commands because they overwrite the same model/result artifacts. A notebook that merely imports successfully is not considered training evidence.
+
+## Data and model contracts
+
+The evaluated fixture is the first48 unique-context Dolly-15k information-extraction rows satisfying fixed context/answer-length filters:32 training,8 validation,8 test. Exact source row, prompt and context are disjoint; the filters/splits were fixed before training. This small deterministic subset is neither random nor representative. The dataset's original references can contain style differences or annotation errors; independent correctness review remains pending. Pretraining overlap is unknown.
+
+Dolly-15k was authored by Databricks employees. This filtered subset and the derived preference fixture retain **CC BY-SA3.0**, with attribution, immutable upstream revision, source-file SHA and explicit changes in their manifests. They are separate from the repository's MIT code. No book text, PDF or artwork is redistributed. The two-row original MIT mask-inspection fixture is separate from the evaluated data.
+
+The base model is pinned `EleutherAI/pythia-14m`. It has no native chat template. We define ordinary-text instruction/context/response delimiters and explicit token boundaries, not fake chat control tokens. A real chat model must use its own tokenizer contract, with duplicate specials checked. Candidate labels are completion-only, include actual EOS and exclude prompt/padding positions. Overlength inputs fail rather than silently removing a completion. The causal next-token shift is applied once.
+
+## L21 instruction adaptation
+
+Full fine-tuning and rank 4/alpha 8 LoRA start from the same checkpoint and use the same split/format. Full trains 14,067,712 parameters for 40 steps at LR0.0002; LoRA trains 12,288 parameters for 60 steps at LR0.003, targeting six fused QKV projections. Each update accumulates two microbatches of two. These are declared configuration comparisons, not equal-budget proof that one method is universally better. AdamW uses no weight decay or warmup and gradient norm clipping at 1.
+
+Validation completion NLL is checked every ten steps and selects among **trained** checkpoints. The untouched baseline remains visible even if better. Test loss is token-weighted over completion/EOS labels; fixed greedy generations preserve empty/repeated/24-token-limit outputs. All intended trainable parameters must update; frozen parameter bytes must remain unchanged where applicable.
+
+<InstructionMask client:visible />
+<AdaptationResults client:visible />
+<RankMemory client:visible />
+
+The author run selected step 10 for both routes. Baseline heldout completion NLL was3.098; full3.210; LoRA 2.721. These are reference-likelihood results, not proof that answers improved. The fixed eight-case generated exact-match score was0/8 for every route, including DPO. Inspect actual answers in L22 rather than treating a lower loss as learner success.
+
+The float32 LoRA merge has a recorded maximum logit difference of about 0.00788 at global logit magnitude31.95. The declared bound is 0.001 times max(1, global magnitude), and a separate float64 comparison verifies the algebra to below 1e-8. These are numerical tolerances, not bitwise equivalence. Both ordinary/adapter reload and saved merged-model reload are checked against the same inputs. Save tokenizer and exact base identity; a same-shaped but wrong checkpoint is not a valid substitute.
+
+<VerifiedRun id="instruction-adaptation" />
+
+**Exercise:** Identify the first supervised target after shifting. Explain why masking every ID0 would remove the EOS target. Then find a heldout case whose LoRA answer is still wrong despite lower aggregate NLL. The complete source is [sft.py](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/generation/src/atlas_generation/sft.py) with shared masks/training in [common.py](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/generation/src/atlas_generation/common.py).
+
+### Optional NF4 profile
+
+The separate Linux environment runs actual bitsandbytes NF4 with nested quantization and floating adapters. Use `uv sync --locked --project examples/training/quantized`, then `python3 scripts/run-examples.py --id nf4-adaptation --allow-network`. The entrypoint rejects macOS/MPS rather than silently substituting a floating base. GitHub's opt-in `e8_nf4` workflow executes this profile and returns verification artifacts.
+
+This profile uses float32 CPU compute and ordinary torch AdamW, **not CUDA paged optimization**. It inspects real Linear4bit state, verifies gradients/frozen bytes and adapter reload, then dequantizes a fresh NF4 base before attaching/merging the adapter. A dequantized approximation differs from the original high-precision checkpoint. GPU/book-scale QLoRA remains unverified, so the full E8 completion gate stays open until that evidence exists. See the [QLoRA lesson](/llm-concept-atlas/concepts/qlora/) for metadata, precision and memory distinctions.
+
+<QuantizedResults client:visible />
+
+<VerifiedRun id="nf4-adaptation" />
+
+## L23 reward modeling and DPO
+
+Preference rows retain one prompt and separate chosen/rejected completions. The original Dolly answer is chosen over four explicit authored defect types: unsupported abstention, irrelevant addition, swapped answer and unwarranted refusal. These are rule-authored teaching pairs, not independent human preference annotations or current-policy samples. Candidate emptiness/equality, overlength, duplicate IDs and cross-split contexts fail validation.
+
+A tiny pretrained BERT encoder with a new scalar head is actually trained for 60 AdamW steps, batch 4, LR0.0003. Reward loss is −log sigmoid(chosen_reward−rejected_reward). Heldout ranking includes ties, lengths, a shorter-answer baseline and per-error-type rows. The saved scalar model is reloaded and its scores compared. Author heldout ranking rose from 3/8 to 6/8; eight examples and easy authored defects do not establish broad reward quality.
+
+Separately, DPO initializes a new LoRA policy and frozen reference from the selected **merged SFT** checkpoint. The scalar reward model is never queried. Policy/reference token IDs, causal shift and completion/EOS masks match exactly. Identical initial policies give zero relative margins and log2 loss, which is checked before optimization. Forty steps, batch 2, LR0.001 and beta 0.1 optimize original sigmoid DPO using summed completion log probabilities. Validation pair loss selects among trained checkpoints; reference and frozen-base hashes must stay unchanged.
+
+<PreferenceExplorer client:visible />
+
+Raw chosen-likelihood accuracy and reference-relative accuracy are both reported, with ties explicit. Actual base/SFT/DPO generations receive the same independent L22 task evaluation. The author DPO route increases preference margins while worsening reference completion perplexity; the training objective is not task success. A fresh adapter reload against the exact selected SFT base must reproduce pair scores.
+
+<VerifiedRun id="preference-adaptation" />
+
+**Exercise:** Replace a pair with identical candidates and explain why the contract rejects it. Then inspect a positive DPO margin and ask whether its greedy answer is correct. PPO remains a conceptual explanation in the [RLHF lesson](/llm-concept-atlas/concepts/rlhf/); this lab does not pretend to execute PPO. Read [preferences.py](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/generation/src/atlas_generation/preferences.py).
+
+## L22 fixed generation evaluation
+
+Use the same eight heldout prompts, one declared reference per task and fixed greedy24-token generation cap for base/full/LoRA/DPO. Report normalized exact match, corpus BLEU with its signature, mean ROUGE-L F1, actual BERTScore and completion-only perplexity. Invalid/empty/length-limited outputs remain in the denominator. A reference mismatch is a diagnostic, not a human factuality label.
+
+BERTScore uses a pinned tiny two-layer BERT encoder, no IDF and no baseline rescaling. It executes real contextual token matching but is not the usual RoBERTa-large configuration. Compare only identical encoder/settings. BLEU/ROUGE measure lexical similarity; BERTScore semantic similarity; perplexity reference likelihood. None alone validates the source fact.
+
+<GenerationEvaluation client:visible />
+
+The authored Monday/paraphrase/Tuesday probes show lexical and semantic disagreement separately from actual generated test results. A candidate can retain nearly every reference word and change the one fact that matters. Benchmarks and leaderboards require their own tasks, protocols, contamination controls and data; this suite is not a general benchmark.
+
+<VerifiedRun id="generation-evaluation" />
+
+### Human rubric and optional judge import
+
+Blind model identities and randomize presentation, with AB/BA order controls for paired judging. Rate grounding, instruction adherence and clarity from 0–2 under rubric `atlas-e8-v1`; retain ties, unsupported/ambiguous cases, annotator identity and adjudication. Human ratings are currently absent and displayed as missing. Do not fill them with reference scores or simulated reviewers.
+
+Hosted judging is an optional documented workflow only. Record judge model/revision, full prompt/rubric version, candidate order and exact output SHA; calibrate on independently adjudicated examples, inspect AB/BA disagreement and report agreement/error slices. Imported labels are rejected if duplicate, unknown, stale or out of range. See `import_judgments.py` and its sample schema. No key or network call occurs in the importer.
+
+**Exercise:** Explain why a correct paraphrase may lose exact match, why a wrong-day response can score high on overlap, and why beta is not the DPO learning rate. Design a fresh heldout dataset before trying to improve these already-published eight cases. Read [evaluate.py](https://github.com/shadril238/llm-concept-atlas/blob/main/examples/training/generation/src/atlas_generation/evaluate.py).

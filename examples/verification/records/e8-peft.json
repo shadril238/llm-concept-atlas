@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "exampleId": "e8-peft",
+  "status": "passed",
+  "date": "2026-11-24T14:34:25.107340+00:00",
+  "gitCommit": "3192d0816993191203ec5bbd1d81f1deee8fb895",
+  "workingTreeDirty": true,
+  "command": [
+    "<environment-python>",
+    "examples/foundations/src/atlas_foundations/e8/peft.py"
+  ],
+  "sourceSha256": "af19d70b02164430fff2bd9c3cab7b841ebecc9d6df80e600bd8f416296f9f51",
+  "lockSha256": "66035a4138227cad4fb7ddbfbe44db3c3abc8d44c0eaf2739fffeffe720813a0",
+  "contractSha256": "96f1e86c20ddf3343a40c728a7032bc1ae53a37d296832261346029cd5585089",
+  "fixtureSha256": null,
+  "models": [],
+  "python": "3.11.18",
+  "packages": {},
+  "platform": "Darwin 27.2.0 arm64",
+  "device": "cpu",
+  "durationSeconds": 0.009,
+  "peakMemoryMiB": 21.2,
+  "memoryMeasurement": "RUSAGE_CHILDREN cumulative peak; includes environment probes",
+  "networkMode": "offline-cache",
+  "stdout": "trainable: 12288\nfraction: 0.000873\nadapter gradients + Adam bytes: 147456\nFrozen backbone and activations still occupy memory.\n",
+  "stderr": "",
+  "error": null
+}

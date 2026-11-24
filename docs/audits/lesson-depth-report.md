@@ -2,7 +2,7 @@
 
 Initial review 2026-11-19; latest lesson update 2026-11-24. Covers **113 concepts**. Source hashes detect stale findings. Independent pedagogical acceptance remains pending; execution claims below refer only to linked workflow evidence.
 
-The 113 concept snippets contain **110 distinct Python implementations**. Shared code is not automatically wrong; the finding records whether it demonstrates this lesson's mechanism.
+The 113 concept snippets contain **113 distinct Python implementations**. Shared code is not automatically wrong; the finding records whether it demonstrates this lesson's mechanism.
 
 ## Useful existing work
 
@@ -173,15 +173,15 @@ The site has explanations, labeled illustrative examples, relationship navigatio
 
 | Lesson | Current implementation finding | Priority / next phase |
 | --- | --- | --- |
-| [dpo](../../src/content/docs/concepts/dpo.mdx#implement-it) | The scalar reference-relative loss is relevant; add completion logprob aggregation, masks, data, and actual training. | P1 / E8 |
-| [generative-evaluation](../../src/content/docs/concepts/generative-evaluation.mdx#implement-it) | Exact-label accuracy does not demonstrate generation metrics, benchmarks, or rubric-based evaluation. | P1 / E8 |
-| [lora](../../src/content/docs/concepts/lora.mdx#implement-it) | E2 resolves the A/B orientation mismatch and adds standard scaling, parameter counts, initialization/gradient trace, controlled training, a real pretrained adapter, held-out losses, reload, and precision-aware merge checks. Broader E8 workflows and independent review remain pending. | P2 / E2 |
-| [peft](../../src/content/docs/concepts/peft.mdx#implement-it) | A matrix update illustrates LoRA only; distinguish adapter families and actual frozen/trainable parameter groups. | P1 / E8 |
-| [pretraining-and-sft](../../src/content/docs/concepts/pretraining-and-sft.mdx#implement-it) | The same scalar update does not distinguish causal pretraining from instruction-conditioned SFT. | P1 / E8 |
-| [qlora](../../src/content/docs/concepts/qlora.mdx#implement-it) | The reused low-rank update never quantizes base weights or demonstrates their precision/memory behavior. | P1 / E8 |
-| [quantization](../../src/content/docs/concepts/quantization.mdx#implement-it) | A scalar round/dequantize example is relevant but omits blockwise scaling, codebooks, clipping, and actual model validation. | P1 / E8 |
-| [reward-models](../../src/content/docs/concepts/reward-models.mdx#implement-it) | The code uses policy/reference log probabilities and beta: it is a DPO loss, not reward-model training. | P0 / E8 |
-| [rlhf](../../src/content/docs/concepts/rlhf.mdx#implement-it) | A DPO scalar loss does not show the reward-model and policy-optimization stages described in the lesson. | P0 / E8 |
+| [dpo](../../src/content/docs/concepts/dpo.mdx#implement-it) | E8 author implementation: detailed definitions/theory, exact masks/shapes/objectives, worked calculations, actual CPU training and fixed generation evaluation, interactives and exercises. Independent review and supported GPU QLoRA remain pending. | P1 / E8 |
+| [generative-evaluation](../../src/content/docs/concepts/generative-evaluation.mdx#implement-it) | E8 author implementation: detailed definitions/theory, exact masks/shapes/objectives, worked calculations, actual CPU training and fixed generation evaluation, interactives and exercises. Independent review and supported GPU QLoRA remain pending. | P1 / E8 |
+| [lora](../../src/content/docs/concepts/lora.mdx#implement-it) | E8 author implementation: detailed definitions/theory, exact masks/shapes/objectives, worked calculations, actual CPU training and fixed generation evaluation, interactives and exercises. Independent review and supported GPU QLoRA remain pending. | P2 / E8 |
+| [peft](../../src/content/docs/concepts/peft.mdx#implement-it) | E8 author implementation: detailed definitions/theory, exact masks/shapes/objectives, worked calculations, actual CPU training and fixed generation evaluation, interactives and exercises. Independent review and supported GPU QLoRA remain pending. | P1 / E8 |
+| [pretraining-and-sft](../../src/content/docs/concepts/pretraining-and-sft.mdx#implement-it) | E8 author implementation: detailed definitions/theory, exact masks/shapes/objectives, worked calculations, actual CPU training and fixed generation evaluation, interactives and exercises. Independent review and supported GPU QLoRA remain pending. | P1 / E8 |
+| [qlora](../../src/content/docs/concepts/qlora.mdx#implement-it) | E8 author implementation: detailed definitions/theory, exact masks/shapes/objectives, worked calculations, actual CPU training and fixed generation evaluation, interactives and exercises. Independent review and supported GPU QLoRA remain pending. | P1 / E8 |
+| [quantization](../../src/content/docs/concepts/quantization.mdx#implement-it) | E8 author implementation: detailed definitions/theory, exact masks/shapes/objectives, worked calculations, actual CPU training and fixed generation evaluation, interactives and exercises. Independent review and supported GPU QLoRA remain pending. | P1 / E8 |
+| [reward-models](../../src/content/docs/concepts/reward-models.mdx#implement-it) | E8 author implementation: detailed definitions/theory, exact masks/shapes/objectives, worked calculations, actual CPU training and fixed generation evaluation, interactives and exercises. Independent review and supported GPU QLoRA remain pending. | P0 / E8 |
+| [rlhf](../../src/content/docs/concepts/rlhf.mdx#implement-it) | E8 author implementation: detailed definitions/theory, exact masks/shapes/objectives, worked calculations, actual CPU training and fixed generation evaluation, interactives and exercises. Independent review and supported GPU QLoRA remain pending. | P0 / E8 |
 
 ## Real-model use-case sketches
 
@@ -190,6 +190,7 @@ The site has explanations, labeled illustrative examples, relationship navigatio
 - [fitted-topic-pipeline-with-controlled-representation-and-density-comparisons](../../src/content/docs/use-cases/research-collection-explorer.mdx#2-run-the-actual-topic-model): Independent reader review and a realistic licensed external research collection remain pending.
 - [actual-openclip-retrieval-preprocessing-and-patch-projection](../../src/content/docs/use-cases/image-text-collection-search.mdx#1-declare-the-collection-and-representation): Independent review and fresh licensed evaluation images remain pending.
 - [actual-encoder-teacher-denoising-comparisons-and-reusable-artifacts](../../src/content/docs/use-cases/service-search-adaptation.mdx#2-train-a-controlled-baseline-comparison): Independent review and fresh realistic external collection remain pending.
+- [actual-full-lora-reward-dpo-and-nf4-training-with-fixed-evaluation](../../src/content/docs/use-cases/instruction-preference-adaptation.mdx#implement-the-adaptation-chain): Independent review, fresh realistic task data and supported GPU QLoRA/paged optimization remain pending.
 
 ## How to act on a finding
 
