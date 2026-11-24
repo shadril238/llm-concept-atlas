@@ -65,3 +65,10 @@ Keep canonical concept IDs/URLs stable. Add true alternate names or explicit tas
 Map chapter objectives in `src/data/book-sections.json`, not the archived topic map. Mapped pages, independent teaching acceptance and recorded execution are different states. Every new concept must receive an acyclic prerequisite route and a chapter learning route with valid lab/path/project links. Existing relationship reasons are retained; missing pairs need a specific explanation in `relationship-notes.json`, not a generic “these concepts are related” sentence.
 
 Run `npm run release:build`. The gate includes query/route checks, safe local progress migration tests, source audit checks and production payload budgets. Update performance measurements with `node scripts/check-performance.mjs dist --write` after a reviewed build; measurements include recursively reachable lazy JavaScript and state their limits. Preserve the original v1 browser progress key when changing schemas, reject unknown IDs from counts, and never treat a reading checkbox as proof of understanding.
+
+
+## Independent review and release evidence
+
+Use the [E10 review packet](./docs/reviews/e10-review-packet.md) and [blank review record](./docs/templates/e10-review-record.md) for technical/editorial review or learner trials. Record the reviewed commit, objective IDs, observed findings, reviewer role and follow-up results. General feedback and passing automation do not supply missing independent acceptance or device-specific execution. Preserve original record dates and scope.
+
+After changing source mappings, review records or the example manifest, run `npm run coverage:report` and `npm run evidence:report`, inspect the generated changes, then run `npm run release:build`. The evidence inventory lists direct records separately from inherited author summaries; source/lock/contract/artifact validation remains the responsibility of the existing example checks. Update [candidate notes](./docs/releases/release-candidate.md) with actual release evidence before creating a reviewed release.

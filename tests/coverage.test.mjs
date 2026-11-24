@@ -79,6 +79,8 @@ test("unsupported acceptance and unexplained not-applicable dimensions fail", ()
       (s) => s.kind === "workflow" && s.coverageUnit,
     );
     section.reviewStatus = "accepted";
+    // Construct the missing-evidence case explicitly as real run coverage grows.
+    delete section.executionRecord;
     const context = inventory.sections.find(
       (s) => s.scope === "context" && s.coverageUnit,
     );

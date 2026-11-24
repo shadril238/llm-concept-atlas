@@ -2,7 +2,7 @@
 
 **Prepared:** 2026-11-18  
 **Last updated:** 2026-11-25\
-**Status:** E0 source inventory and initial lesson audit, and E1 infrastructure implemented; E2–E7 implementation delivered, independent review pending; E8 CPU implementation delivered with GPU/review gates open; E9 implementation delivered; independent acceptance remains for E10. See the [gap report](./docs/audits/book-gap-report.md) and [audit guide](./docs/audits/README.md).
+**Status:** E0 source inventory and initial lesson audit, and E1 infrastructure implemented; E2–E7 implementation delivered, independent review pending; E8 CPU implementation delivered with GPU/review gates open; E9 implementation delivered; E10 evidence reconciliation/review preparation in progress, independent acceptance pending. See the [gap report](./docs/audits/book-gap-report.md) and [audit guide](./docs/audits/README.md).
 **Baseline:** Repository commit `a6b3ec4`, following the original Phases 1–5 in [plan.md](./plan.md).  
 **Source edition:** _Hands-On Large Language Models_, Jay Alammar and Maarten Grootendorst, first edition, September 2024.  
 **Primary goal:** A learner can explain, trace, implement, evaluate, and apply the book's ideas without depending on unexplained terminology or disconnected code snippets.
@@ -934,6 +934,8 @@ Use enhancement phase IDs **E0–E10** to distinguish this work from the origina
 
 **Depends on:** E0–E9 gates.
 
+**Preparation in progress (2026-11-25):** [Review packet](./docs/reviews/e10-review-packet.md), [reproducible evidence inventory](./docs/reviews/e10-evidence-audit.json), [review/learner template](./docs/templates/e10-review-record.md), and [candidate notes](./docs/releases/release-candidate.md) are available. Eight stale foundation execution statuses were reconciled against existing records (49/51 practical objectives now recorded); no independent acceptance or GPU execution was inferred. The original checklist below remains open wherever its full requirement has not been met.
+
 - [ ] Reconcile every core/context inventory entry with its destination and review record; resolve all required partial/missing items.
 - [ ] Re-run affected examples from clean documented environments; check every published verification badge against its record.
 - [ ] Perform technical review of equations, objectives, preprocessing, evaluation, masks, and artifact handling.
@@ -1068,6 +1070,6 @@ These references support the implementation direction, not a claim that all prop
 | E7: embedding/representation training | Implemented; review pending | 15 detailed lessons; six actual CPU training workflows/notebooks, gradient/freeze/mask checks, held-out task results and reusable artifacts.                                                  |
 | E8: generation adaptation | CPU implementation delivered; GPU/review gates open | Nine detailed lessons, L21–L23 actual CPU workflows/notebooks and Linux NF4 evidence; supported GPU QLoRA and independent acceptance remain pending. |
 | E9: integrated learner experience | Implemented; independent review pending | Shared search and query regressions, complete practice routes/reasons, audited coverage, local progress migration and responsive/performance checks. |
-| E10: review and release               | Not started | Reconciled coverage, execution evidence, learner feedback, and release report.                  |
+| E10: review and release | Preparation in progress; acceptance pending | Evidence reconciliation, reproducible inventory, reviewer/learner packet and candidate notes delivered; independent reviews, learner records, GPU and final release checks remain open. |
 
 **Next:** E10 independent technical/editorial review, learner pilots and evidence-backed release. Reconcile the remaining unverified practical objectives and supported GPU QLoRA requirement; implementation and mapping do not replace acceptance. Full enhancement acceptance remains tied to the documented review gates.

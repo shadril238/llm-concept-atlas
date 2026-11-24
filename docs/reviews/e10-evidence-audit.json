@@ -1,0 +1,297 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Evidence inventory only. Passing automation and mapped pages do not establish independent teaching acceptance or supported GPU execution.",
+  "inputs": [
+    {
+      "path": "src/data/book-sections.json",
+      "sha256": "293167db8dc44970cd47e478d2a04c6f9f67c492dad82188a05e11fb40dd294b"
+    },
+    {
+      "path": "src/data/review-records.json",
+      "sha256": "9b098da6ef0a8e4915eb6877893e6fd9be770229d9e223b03079f6c10a4c3808"
+    },
+    {
+      "path": "src/data/book-notebooks.json",
+      "sha256": "f9ea61508ab5cf7e0781fbd2cc287ab34f26d2027fb1bfb7d1cf0728d080dc00"
+    },
+    {
+      "path": "examples/manifest.json",
+      "sha256": "5ee83bc442cba0b165a4ef6e304546ece10e0cf7403ebdeeb311999aadbd67ca"
+    }
+  ],
+  "coverage": {
+    "total": 160,
+    "mapped": 160,
+    "accepted": 0,
+    "practical": 51,
+    "executed": 49
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "title": "An Introduction to Large Language Models",
+      "total": 18,
+      "mapped": 18,
+      "accepted": 0,
+      "practical": 1,
+      "executed": 1
+    },
+    {
+      "number": 2,
+      "title": "Tokens and Embeddings",
+      "total": 14,
+      "mapped": 14,
+      "accepted": 0,
+      "practical": 5,
+      "executed": 5
+    },
+    {
+      "number": 3,
+      "title": "Looking Inside Large Language Models",
+      "total": 16,
+      "mapped": 16,
+      "accepted": 0,
+      "practical": 2,
+      "executed": 2
+    },
+    {
+      "number": 4,
+      "title": "Text Classification",
+      "total": 7,
+      "mapped": 7,
+      "accepted": 0,
+      "practical": 3,
+      "executed": 2
+    },
+    {
+      "number": 5,
+      "title": "Text Clustering and Topic Modeling",
+      "total": 10,
+      "mapped": 10,
+      "accepted": 0,
+      "practical": 4,
+      "executed": 4
+    },
+    {
+      "number": 6,
+      "title": "Prompt Engineering",
+      "total": 13,
+      "mapped": 13,
+      "accepted": 0,
+      "practical": 7,
+      "executed": 7
+    },
+    {
+      "number": 7,
+      "title": "Advanced Text Generation Techniques and Tools",
+      "total": 8,
+      "mapped": 8,
+      "accepted": 0,
+      "practical": 5,
+      "executed": 5
+    },
+    {
+      "number": 8,
+      "title": "Semantic Search and Retrieval-Augmented Generation",
+      "total": 17,
+      "mapped": 17,
+      "accepted": 0,
+      "practical": 3,
+      "executed": 2
+    },
+    {
+      "number": 9,
+      "title": "Multimodal Large Language Models",
+      "total": 8,
+      "mapped": 8,
+      "accepted": 0,
+      "practical": 3,
+      "executed": 3
+    },
+    {
+      "number": 10,
+      "title": "Creating Text Embedding Models",
+      "total": 14,
+      "mapped": 14,
+      "accepted": 0,
+      "practical": 4,
+      "executed": 4
+    },
+    {
+      "number": 11,
+      "title": "Fine-Tuning Representation Models for Classification",
+      "total": 8,
+      "mapped": 8,
+      "accepted": 0,
+      "practical": 4,
+      "executed": 4
+    },
+    {
+      "number": 12,
+      "title": "Fine-Tuning Generation Models",
+      "total": 27,
+      "mapped": 27,
+      "accepted": 0,
+      "practical": 10,
+      "executed": 10
+    }
+  ],
+  "reviews": {
+    "recorded": 7,
+    "independent": 0,
+    "independentlyAccepted": 0
+  },
+  "examples": {
+    "registered": 239,
+    "withPassingRecords": 236,
+    "unverified": [
+      "legacy-tokenization",
+      "legacy-rag-question-answering",
+      "legacy-text-classification"
+    ]
+  },
+  "officialNotebookExecution": "not-run",
+  "unverifiedPracticalObjectives": [
+    {
+      "id": "book-ch04-chatgpt",
+      "objective": "Implement bounded optional hosted classification with label validation and a shared evaluation set.",
+      "gaps": [
+        "E4 author implementation and CPU workflow evidence are available; independent technical/editorial acceptance and beginner feedback remain pending. Optional hosted comparison has an offline importer and documented collection contract; no live provider execution is claimed."
+      ]
+    },
+    {
+      "id": "book-ch08-api-rag",
+      "objective": "Implement optional hosted grounding with real source and citation objects.",
+      "gaps": [
+        "Independent technical/editorial review and beginner pilot remain pending.",
+        "Hosted provider execution remains unverified; E6 documents an offline results importer and comparison protocol only."
+      ]
+    }
+  ],
+  "practicalObjectivesWithIndirectEvidence": [
+    "book-ch06-model-loading",
+    "book-ch06-output-controls",
+    "book-ch06-instruction-prompting",
+    "book-ch06-in-context",
+    "book-ch06-chain-prompting",
+    "book-ch06-self-consistency",
+    "book-ch06-constrained-sampling",
+    "book-ch07-multi-prompt",
+    "book-ch07-buffer",
+    "book-ch07-window",
+    "book-ch07-summary",
+    "book-ch07-react-langchain"
+  ],
+  "executionEvidenceReferences": [
+    {
+      "path": "docs/reviews/e5-workflows.md",
+      "sha256": "42982f86215356eee06a268b25306fd4ec3eea540c06c485e68700f82e1d5cfe",
+      "type": "indirect-author-summary"
+    },
+    {
+      "path": "examples/verification/records/augmented-sbert-training.json",
+      "sha256": "4e0de4d59e58e68d162bfa11bfa4269f2f04e9d665de01cd71e41372a8166673",
+      "type": "execution-record"
+    },
+    {
+      "path": "examples/verification/records/blip2-captioning.json",
+      "sha256": "22db0ec692413a513aaf9e641d13486e5cceb14f0ff80122c5741c0e4e1bbee6",
+      "type": "execution-record"
+    },
+    {
+      "path": "examples/verification/records/cache-equivalence.json",
+      "sha256": "85ebb6d1235ace4a55c9636f3a1931c041ecad6c1d595d426e120464180fb043",
+      "type": "execution-record"
+    },
+    {
+      "path": "examples/verification/records/classification-comparison.json",
+      "sha256": "87847decdb7a66ce909f1220386871eb0db06836c0d67ce547493004feaac020",
+      "type": "execution-record"
+    },
+    {
+      "path": "examples/verification/records/continued-pretraining.json",
+      "sha256": "2ff7439796b313f5e551411d87312ff2b8bee7e9ba00f23384dc950988f0aa3b",
+      "type": "execution-record"
+    },
+    {
+      "path": "examples/verification/records/embedding-training.json",
+      "sha256": "9c5eb1974d48786f732ba3531d91eeb65cb4888f3b26236f931f350b337e1f08",
+      "type": "execution-record"
+    },
+    {
+      "path": "examples/verification/records/first-generation.json",
+      "sha256": "65a4043b9929ef0b53fd625550f714509115858c24ce4a6b4f9d202ca876eecc",
+      "type": "execution-record"
+    },
+    {
+      "path": "examples/verification/records/grounded-retrieval.json",
+      "sha256": "c23dc2b28e52a478cafee025c04c214cd43ea0816dca85279f07432401e5eb55",
+      "type": "execution-record"
+    },
+    {
+      "path": "examples/verification/records/instruction-adaptation.json",
+      "sha256": "d3c0241c94af69878b0d1e90baf141bda792e783aa808fa2060c40511a8ddc83",
+      "type": "execution-record"
+    },
+    {
+      "path": "examples/verification/records/modular-bertopic.json",
+      "sha256": "318eb11d1e1fe44c602947572a2003abf594046cccfbee5600c19c2fd1b8a4c2",
+      "type": "execution-record"
+    },
+    {
+      "path": "examples/verification/records/multimodal-chat.json",
+      "sha256": "1a731d339c253f1b55e1ac2f5e175f3e0dad2b7651b9dcca61a046b00e8f0e63",
+      "type": "execution-record"
+    },
+    {
+      "path": "examples/verification/records/ner-complete.json",
+      "sha256": "42c61e0266170fcb09f8feda96399e4d92c1123eb6205713bd5cebf60d56e3fb",
+      "type": "execution-record"
+    },
+    {
+      "path": "examples/verification/records/openclip-retrieval.json",
+      "sha256": "eddf8e4981199d1d84bb56449ad8418e6be8717acb5d07215e552d3d3516913d",
+      "type": "execution-record"
+    },
+    {
+      "path": "examples/verification/records/playlist-embeddings.json",
+      "sha256": "1618db156b481bb9ac1875e3c211c2e77bd88744c7be88fa6879efe7a821b264",
+      "type": "execution-record"
+    },
+    {
+      "path": "examples/verification/records/preference-adaptation.json",
+      "sha256": "2fcab7740c615b5a2d782d0a46df0576925569f6282b2f462ff93d8a9ca88956",
+      "type": "execution-record"
+    },
+    {
+      "path": "examples/verification/records/representation-classification.json",
+      "sha256": "b97b3bea3b8190f351fac8641ebc6b1b8246fbcc50fbd5cbe6087ff49fd14600",
+      "type": "execution-record"
+    },
+    {
+      "path": "examples/verification/records/representation-inspection.json",
+      "sha256": "cf6448542e6218109dac960e2d57ea32d64ea0097225c1073a49792deac7aed0",
+      "type": "execution-record"
+    },
+    {
+      "path": "examples/verification/records/retrieval-benchmark.json",
+      "sha256": "d7abd0eb6b09d6364a44a1a6b397dc962425c12b2d863d43751b284cb9ef256e",
+      "type": "execution-record"
+    },
+    {
+      "path": "examples/verification/records/tokenizer-comparison.json",
+      "sha256": "4ca8b70bab5d168c68b3dc8409c2f8b7b24b5265d4c3941b4be23c25ebc2b137",
+      "type": "execution-record"
+    },
+    {
+      "path": "examples/verification/records/topic-label-generation.json",
+      "sha256": "7d921a4631ea7fe93f354f63908a987488fa2b6dc956a48c1e171fe4b7509912",
+      "type": "execution-record"
+    },
+    {
+      "path": "examples/verification/records/tsdae-adaptation.json",
+      "sha256": "e05917ee992b067570958a74d319d776490903e9c7e4004a0bc6b6ba1f898a5c",
+      "type": "execution-record"
+    }
+  ]
+}

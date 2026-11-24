@@ -1870,12 +1870,14 @@
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 54
       },
-      "enhancementReview": "e3-foundations-author-review-2026-11-20"
+      "enhancementReview": "e3-foundations-author-review-2026-11-20",
+      "executionRecord": "examples/verification/records/first-generation.json",
+      "executionScope": "CPU Pythia-14m: matching tokenizer/model, fixed generation settings, prompt/continuation IDs and shapes; not general generation quality."
     },
     {
       "id": "book-ch02-tokenization",
@@ -2117,12 +2119,14 @@
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 61
       },
-      "enhancementReview": "e3-foundations-author-review-2026-11-20"
+      "enhancementReview": "e3-foundations-author-review-2026-11-20",
+      "executionRecord": "examples/verification/records/first-generation.json",
+      "executionScope": "CPU Pythia-14m tokenization and generation with pinned matching assets; larger models/devices need separate runs."
     },
     {
       "id": "book-ch02-segmentation",
@@ -2349,12 +2353,14 @@
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 68
       },
-      "enhancementReview": "e3-foundations-author-review-2026-11-20"
+      "enhancementReview": "e3-foundations-author-review-2026-11-20",
+      "executionRecord": "examples/verification/records/tokenizer-comparison.json",
+      "executionScope": "Two pinned real tokenizers on four identical inputs, including Korean/emoji and code containing whitespace and the numeral 2; not comprehensive multilingual or numerical coverage."
     },
     {
       "id": "book-ch02-tokenizer-properties",
@@ -2904,12 +2910,14 @@
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 85
       },
-      "enhancementReview": "e3-foundations-author-review-2026-11-20"
+      "enhancementReview": "e3-foundations-author-review-2026-11-20",
+      "executionRecord": "examples/verification/records/representation-inspection.json",
+      "executionScope": "Checksum-verified pretrained 400,000-by-50 GloVe vectors and original-space neighbors; the word2vec lesson explains why contextual similarity is not synonymy. PCA is visualization only."
     },
     {
       "id": "book-ch02-word2vec-training",
@@ -3144,12 +3152,14 @@
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 89
       },
-      "enhancementReview": "e3-foundations-author-review-2026-11-20"
+      "enhancementReview": "e3-foundations-author-review-2026-11-20",
+      "executionRecord": "examples/verification/records/playlist-embeddings.json",
+      "executionScope": "Original small playlist/catalog fixture, learned item-vector rankings versus train-only popularity, held-out metrics; not full Last.fm data or real-user validation."
     },
     {
       "id": "book-ch02-song-training",
@@ -3215,12 +3225,14 @@
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 91
       },
-      "enhancementReview": "e3-foundations-author-review-2026-11-20"
+      "enhancementReview": "e3-foundations-author-review-2026-11-20",
+      "executionRecord": "examples/verification/records/playlist-embeddings.json",
+      "executionScope": "CPU skip-gram optimization on training playlists only, disjoint held-out session evaluation, cold-item exclusion and artifact reload; synthetic themes limit external validity."
     },
     {
       "id": "book-ch03-transformer-overview",
@@ -3364,12 +3376,14 @@
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 96
       },
-      "enhancementReview": "e3-foundations-author-review-2026-11-20"
+      "enhancementReview": "e3-foundations-author-review-2026-11-20",
+      "executionRecord": "examples/verification/records/first-generation.json",
+      "executionScope": "Pinned CPU causal model: actual input IDs, final hidden state, LM-head/logit equality and newly generated IDs."
     },
     {
       "id": "book-ch03-forward-pass",
@@ -3679,12 +3693,14 @@
         }
       ],
       "reviewRecord": "e0-static-audit-2026-11-19",
-      "realModelExecution": "not-verified",
+      "realModelExecution": "verified",
       "sourceLocationCheck": {
         "method": "normalized-heading-match-in-source-page",
         "pdfPage": 105
       },
-      "enhancementReview": "e3-foundations-author-review-2026-11-20"
+      "enhancementReview": "e3-foundations-author-review-2026-11-20",
+      "executionRecord": "examples/verification/records/cache-equivalence.json",
+      "executionScope": "Pinned CPU model with float64 cached/uncached logit agreement, same-token timing and actual cache tensor bytes; not GPU throughput or total-process memory."
     },
     {
       "id": "book-ch03-block",
@@ -8507,18 +8523,6 @@
       "kind": "workflow",
       "coverageUnit": true,
       "mappings": [
-        {
-          "path": "src/content/docs/concepts/grounded-generation.mdx",
-          "anchor": "how-it-works",
-          "conceptId": "grounded-generation",
-          "role": "author-implemented-pending-review"
-        },
-        {
-          "path": "src/content/docs/concepts/grounded-generation.mdx",
-          "anchor": "how-it-works",
-          "conceptId": "grounded-generation",
-          "role": "author-implemented-pending-review"
-        },
         {
           "path": "src/content/docs/concepts/grounded-generation.mdx",
           "anchor": "how-it-works",
@@ -18232,5 +18236,5 @@
       "realModelExecution": "not-verified"
     }
   ],
-  "lastUpdated": "2026-11-24"
+  "lastUpdated": "2026-11-25"
 }
