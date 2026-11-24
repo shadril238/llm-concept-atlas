@@ -6,11 +6,18 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+sys.path.insert(
+    0, str(Path(__file__).resolve().parents[5] / "examples/foundations/src")
+)
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from download_models import SPECS
+
+from peft import PeftModel
+
 from atlas_generation.common import (
     MODEL,
     ROOT,
-    SPECS,
-    PeftModel,
     adapter,
     artifacts,
     base,

@@ -8,12 +8,19 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+sys.path.insert(
+    0, str(Path(__file__).resolve().parents[5] / "examples/foundations/src")
+)
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from download_models import SPECS
+
+from peft import PeftModel
+
 from atlas_generation.common import (
     MODEL,
     ROOT,
-    SPECS,
     F,
-    PeftModel,
     adapter,
     artifacts,
     base,
@@ -51,6 +58,10 @@ def reward_eval(model, tok, rows):
             out.append(
                 dict(
                     id=r["id"],
+                    instruction=r["instruction"],
+                    context=r["context"],
+                    chosen_text=r["chosen"],
+                    rejected_text=r["rejected"],
                     chosen=c,
                     rejected=d,
                     correct=c > d,
@@ -91,6 +102,10 @@ def preference_eval(policy, reference, tok, rows):
             out.append(
                 dict(
                     id=r["id"],
+                    instruction=r["instruction"],
+                    context=r["context"],
+                    chosen_text=r["chosen"],
+                    rejected_text=r["rejected"],
                     policy_chosen=pc,
                     policy_rejected=pd,
                     reference_chosen=rc,

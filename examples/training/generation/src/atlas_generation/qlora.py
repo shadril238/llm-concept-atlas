@@ -10,11 +10,16 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+sys.path.insert(
+    0, str(Path(__file__).resolve().parents[5] / "examples/foundations/src")
+)
+from peft import PeftModel
+
 from atlas_generation.common import (
     MODEL,
     ROOT,
     AutoModelForCausalLM,
-    PeftModel,
     adapter,
     artifacts,
     base,

@@ -2,6 +2,7 @@
 
 import hashlib
 import math
+import re
 
 TEMPLATE = "### Instruction:\n{instruction}\n### Context:\n{context}\n### Response:\n"
 
@@ -91,6 +92,10 @@ def validate_judgments(evaluation, imported):
             for k in ("grounding", "instruction", "clarity")
         ):
             raise ValueError("Invalid order or rubric score")
+        if not r.get("judge_prompt_version", "").strip() or not re.fullmatch(
+            r"[a-f0-9]{64}", r.get("judge_prompt_sha256", "")
+        ):
+            raise ValueError("Judge prompt/rubric fingerprint missing")
         seen.add(key)
     return {
         "imported": len(seen),

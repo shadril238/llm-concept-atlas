@@ -151,6 +151,7 @@ def generate(model, tok, rows):
                     prediction=prediction,
                     reference=r["response"],
                     context=r["context"],
+                    instruction=r["instruction"],
                     generated_tokens=len(completion),
                     hit_limit=bool(
                         len(completion) == 24 and completion[-1] != tok.eos_token_id
@@ -176,7 +177,7 @@ def artifacts(p):
             sha256=hashlib.sha256(f.read_bytes()).hexdigest(),
         )
         for f in sorted(p.rglob("*"))
-        if f.is_file()
+        if f.is_file() and f.name != "results.json"
     ]
 
 

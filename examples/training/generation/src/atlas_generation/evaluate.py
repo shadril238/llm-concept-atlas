@@ -8,8 +8,13 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+sys.path.insert(
+    0, str(Path(__file__).resolve().parents[5] / "examples/foundations/src")
+)
 from atlas_foundations.e8.contracts import output_hash, validate_judgments
-from atlas_generation.common import ROOT, SPECS, download, save
+from atlas_generation.common import ROOT, download, save
+from download_models import SPECS
 from bert_score import BERTScorer
 from rouge_score.rouge_scorer import RougeScorer
 from sacrebleu.metrics import BLEU
