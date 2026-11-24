@@ -181,6 +181,16 @@ def artifacts(p):
     ]
 
 
+def logical_parameters(parameter):
+    # Packed Params4bit.numel() counts storage elements, not logical model weights.
+    state = getattr(parameter, "quant_state", None)
+    if state is not None:
+        import math
+
+        return math.prod(state.shape)
+    return parameter.numel()
+
+
 def fit_sft(model, tok, rows, steps, lr):
     train = [r for r in rows if r["split"] == "train"]
     valid = [r for r in rows if r["split"] == "validation"]
@@ -243,7 +253,8 @@ def fit_sft(model, tok, rows, steps, lr):
         changed=True,
         frozen_unchanged=frozen == digest(model, True),
         trainable=sum(p.numel() for p in model.parameters() if p.requires_grad),
-        total=sum(p.numel() for p in model.parameters()),
+        total=sum(logical_parameters(p) for p in model.parameters()),
+        stored_elements=sum(p.numel() for p in model.parameters()),
         steps=steps,
         learning_rate=lr,
         microbatch=2,
