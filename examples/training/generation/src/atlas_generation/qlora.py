@@ -88,6 +88,7 @@ def main():
     fresh = PeftModel.from_pretrained(
         prepare_model_for_kbit_training(quantized(), use_gradient_checkpointing=False),
         path,
+        torch_device="cpu",
     ).eval()
     with torch.no_grad():
         reload_error = float((expected - fresh(**b).logits).abs().max())
@@ -96,7 +97,7 @@ def main():
     # the quantized approximation; it does not recover original pretrained weights.
     floating = quantized()
     floating.dequantize()
-    floating = PeftModel.from_pretrained(floating, path).eval()
+    floating = PeftModel.from_pretrained(floating, path, torch_device="cpu").eval()
     with torch.no_grad():
         dequant_error = float((expected - floating(**b).logits).abs().max())
         dequant_logits = floating(**b).logits

@@ -252,7 +252,7 @@ def main():
     path = folder / "dpo"
     policy.save_pretrained(path)
     tok.save_pretrained(path)
-    fresh = PeftModel.from_pretrained(base(sft), path).eval()
+    fresh = PeftModel.from_pretrained(base(sft), path, torch_device="cpu").eval()
     assert preference_eval(fresh, reference, tok, test) == evaluated
     generation = generate(policy, tok, test)
     original = base()

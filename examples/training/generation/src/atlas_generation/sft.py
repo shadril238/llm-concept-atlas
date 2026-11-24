@@ -69,7 +69,7 @@ def main():
         reloaded = (
             base(path)
             if kind == "full"
-            else PeftModel.from_pretrained(base(), path).eval()
+            else PeftModel.from_pretrained(base(), path, torch_device="cpu").eval()
         )
         with torch.no_grad():
             actual = reloaded(**probe).logits
@@ -83,7 +83,7 @@ def main():
                 scale = float(expected.abs().max())
             # Pythia's small normalization layers amplify float32 summation differences.
             # Verify exact algebra separately in float64 and bound runtime drift.
-            algebra = PeftModel.from_pretrained(base().double(), path).double().eval()
+            algebra = PeftModel.from_pretrained(base().double(), path, torch_device="cpu").double().eval()
             with torch.no_grad():
                 double_expected = algebra(**probe).logits.clone()
             algebra = algebra.merge_and_unload().eval()
