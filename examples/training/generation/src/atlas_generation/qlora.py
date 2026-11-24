@@ -5,6 +5,7 @@ The separate quantized environment contains bitsandbytes; the Mac environment do
 """
 
 import json
+import copy
 import platform
 import sys
 from pathlib import Path
@@ -101,10 +102,33 @@ def main():
     with torch.no_grad():
         dequant_error = float((expected - floating(**b).logits).abs().max())
         dequant_logits = floating(**b).logits
+    algebra = copy.deepcopy(floating).double().eval()
+    with torch.no_grad():
+        algebra_expected = algebra(**b).logits.clone()
+    algebra = algebra.merge_and_unload().eval()
+    with torch.no_grad():
+        float64_error = float((algebra_expected - algebra(**b).logits).abs().max())
+    assert float64_error < 1e-8
     merged = floating.merge_and_unload().eval()
     with torch.no_grad():
         merge_error = float((dequant_logits - merged(**b).logits).abs().max())
-    assert dequant_error < 0.01 and merge_error < 0.01
+    scale = float(expected.abs().max())
+    tolerance = 0.001 * max(1.0, scale)
+    # Floating summation through this tiny normalized model can amplify rounding.
+    # Bound observed runtime drift separately from the independent double algebra.
+    print(
+        json.dumps(
+            dict(
+                dequant_error=dequant_error,
+                merge_error=merge_error,
+                scale=scale,
+                tolerance=tolerance,
+                float64_error=float64_error,
+            )
+        ),
+        file=sys.stderr,
+    )
+    assert dequant_error < tolerance and merge_error < tolerance
     merged_path = folder / "merged-dequantized"
     merged.save_pretrained(merged_path)
     tok.save_pretrained(merged_path)
@@ -129,6 +153,9 @@ def main():
         reload_max_abs_error=reload_error,
         dequant_max_abs_error=dequant_error,
         merge_max_abs_error=merge_error,
+        float32_global_logit_scale=scale,
+        float32_relative_tolerance=0.001,
+        float64_merge_max_abs_error=float64_error,
         merged_reload_max_abs_error=merged_reload_error,
         merge_scope="Dequantized NF4 base + adapter; original high-precision base is a different model. No requantized merge claim.",
         artifacts=artifacts(folder),
